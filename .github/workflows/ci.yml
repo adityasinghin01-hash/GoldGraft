@@ -1,0 +1,54 @@
+# GoldGraft plug pack checks. Private repo = 2,000 free Actions minutes/month: keep it lean.
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+
+jobs:
+  plug-pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: uv python install 3.12
+      - run: uv sync --frozen
+      - run: npm ci
+      - name: Lint
+        run: uv run ruff check .
+      - name: Formats, ledger, tracker, stand-ins, sample data
+        run: uv run pytest -q
+      - name: Formats still match the design (01_DATA.md)
+        run: uv run python scripts/check_spec_coverage.py
+      - name: Generated schemas / TypeScript / OpenAPI are current
+        run: scripts/check_generated.sh
+      - name: TypeScript types compile
+        run: npm run check:types
+
+  example-shop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: fixtures/shops/legacy-php-shop
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the legacy shop (unmodified) in Docker
+        run: docker compose up -d --wait
+      - name: Shop answers
+        run: curl -fsS http://localhost:8081/index.php | grep -q "paypal-button"
+      - name: Stop
+        if: always()
+        run: docker compose down -v
