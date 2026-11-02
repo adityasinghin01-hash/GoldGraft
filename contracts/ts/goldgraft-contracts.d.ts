@@ -752,8 +752,18 @@ export type Repo2 = string;
 export type Start = ComposeStart | CommandStart;
 export type ComposeFile = string;
 export type Command = string;
-export type ExpiresAt = string;
+export type Name2 = string;
+export type Attempt1 = number;
+export type EvidenceRefs4 = string[];
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "StageName".
+ */
+export type StageName = Stage | ("LANE_NO_CODE" | "LANE_NO_RUNTIME" | "LANE_MAP_ONLY");
 export type GraftId17 = string;
+export type Reason2 = string;
+export type ExpiresAt = string;
+export type GraftId18 = string;
 export type OriginRules = string[];
 export type Signature4 = string;
 export type StagePct1 = 0 | 1 | 10 | 50 | 100;
@@ -789,10 +799,10 @@ export type TargetExperience1 =
   "V6" | "ORDERS_V2" | "WEBHOOKS" | "VAULT" | "PAY_LATER_MSG" | "PLACEMENT" | "AGENT_READY_CHECK";
 export type TargetExperience = TargetExperience1[];
 export type CreatedAt10 = string;
-export type GraftId18 = string;
+export type GraftId19 = string;
 export type Id21 = string;
 export type MutantIds1 = string[];
-export type Reason2 = string;
+export type Reason3 = string;
 export type RuleId = string;
 export type ScenarioIds1 = string[];
 export type DeltasApplied = string[];
@@ -846,6 +856,7 @@ export interface GoldGraftContracts {
   ScenarioV1: ScenarioV1;
   ScenarioSetV1: ScenarioSetV1;
   ShopPackV1: ShopPackV1;
+  StageChangeV1: StageChangeV1;
   SwitchConfigV1: SwitchConfigV1;
   TargetPlanV1: TargetPlanV1;
   TriangleRequestV1: TriangleRequestV1;
@@ -1814,11 +1825,32 @@ export interface CommandStart {
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "StageChangeV1".
+ */
+export interface StageChangeV1 {
+  actor: StageActor;
+  attempt: Attempt1;
+  evidence_refs: EvidenceRefs4;
+  from_stage: StageName | null;
+  graft_id: GraftId17;
+  reason: Reason2;
+  to_stage: StageName;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "StageActor".
+ */
+export interface StageActor {
+  kind: ProducerKind;
+  name: Name2;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "SwitchConfigV1".
  */
 export interface SwitchConfigV1 {
   expires_at: ExpiresAt;
-  graft_id: GraftId17;
+  graft_id: GraftId18;
   origin_rules: OriginRules;
   signature: Signature4;
   stage_pct: StagePct1;
@@ -1865,11 +1897,11 @@ export interface PlanItem {
  */
 export interface TriangleRequestV1 {
   created_at: CreatedAt10;
-  graft_id: GraftId18;
+  graft_id: GraftId19;
   id: Id21;
   mutant_ids: MutantIds1;
   producer: Producer;
-  reason: Reason2;
+  reason: Reason3;
   rule_id: RuleId;
   scenario_ids: ScenarioIds1;
 }

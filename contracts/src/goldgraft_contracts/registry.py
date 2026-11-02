@@ -2,11 +2,12 @@
 
 from typing import Any
 
-from . import agents, delivery, ledger, money, proof, runner, survey
+from . import agents, delivery, ledger, money, proof, runner, stages, survey
 from .common import Format
 
 _BOUNDARIES: dict[str, type[Format]] = {
     "LedgerEntry": ledger.LedgerEntry,
+    "StageChange": stages.StageChange,
     "RootMap": survey.RootMap,
     "CMEL": money.MoneyEvent,
     "Money": money.Money,

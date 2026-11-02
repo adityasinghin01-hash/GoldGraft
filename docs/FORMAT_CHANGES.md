@@ -125,3 +125,32 @@ examples, fixtures, and fakes in the same change.
     Existing correct untracked outputs are allowed in this bootstrap checkout.
 27. Added jsonschema and TypeScript as dev dependencies to validate every schema
     example and compile the generated declarations. Tests remain offline.
+
+## C2 — StageChange/1, 2 November 2026 (requested by Aditya in brief C2)
+
+New boundary; no existing v1 format is changed. `StageChange/1` records graft_id,
+required nullable from_stage (null only at creation, enforced by the tracker),
+to_stage, positive integer attempt, nonempty reason, actor {kind: agent|service,
+name}, and evidence_refs. Attempt is the destination stage's visit number,
+including re-entry after repair/cutback; transport retries keep the same attempt.
+C1's Stage enum remains unchanged. StageChange alone also accepts LANE_NO_CODE,
+LANE_NO_RUNTIME, LANE_MAP_ONLY; this avoids silently widening existing v1 formats.
+The example, standalone JSON Schema and generated TypeScript accompany the model.
+The demo JSONL under fixtures/events/ exercises this new format; C4 owns all
+other fixtures and there are no existing StageChange fakes to update.
+
+C2 ledger decisions: canonical JSON allows finite floats (Python's shortest
+round-trip repr; NaN/Infinity rejected), because probabilities, confidences and
+USD usage costs are fractional. Money stays integer-only: the formats reject
+float money before anything is stored. (Corrected by Claude on 2 Nov: the first
+version rejected every float, which would have blocked HealDecision and
+BudgetRecord entries.)
+Step-tracker lane arrows (Claude, 2 Nov): SURVEYED → LANE_NO_RUNTIME (Builder
+cannot run the shop) and BUILT → LANE_NO_RUNTIME (built but cannot be driven);
+LANE_NO_RUNTIME → PARTIAL → PR_OPEN; LANE_MAP_ONLY → DELIVERED (map + plan are
+the delivery); LANE_NO_CODE → LINKS_PROVEN → DELIVERED. Any stage → FAILED with
+a reason (dead letter).
+The required entry_hash formula is unchanged; an internal full-envelope checksum
+also detects edits to ts/schema/inputs/graft_id/payload_ref, which that formula
+omits. Hashes can collide across grafts with identical content at identical seq:
+get(hash) raises AmbiguousHash in that case; get(hash, graft_id=...) disambiguates.

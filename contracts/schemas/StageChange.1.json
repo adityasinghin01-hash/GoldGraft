@@ -1,0 +1,132 @@
+{
+  "$defs": {
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    },
+    "Stage": {
+      "enum": [
+        "CREATED",
+        "GATED",
+        "SURVEYED",
+        "BUILT",
+        "LINKS_PROVEN",
+        "DELIVERED",
+        "RECORDED",
+        "CONTRACTED",
+        "ATTACK_PLANNED",
+        "GRAFTED",
+        "PROVING",
+        "REPAIRING",
+        "CERTIFIED",
+        "PARTIAL",
+        "FAILED",
+        "PR_OPEN",
+        "MERGED",
+        "SHADOW",
+        "HEAL_1",
+        "HEAL_10",
+        "HEAL_50",
+        "LIVE_100",
+        "CLEANUP_PR",
+        "DONE",
+        "CUTBACK"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "StageActor": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ],
+      "title": "StageActor",
+      "type": "object"
+    },
+    "StageName": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Stage"
+        },
+        {
+          "enum": [
+            "LANE_NO_CODE",
+            "LANE_NO_RUNTIME",
+            "LANE_MAP_ONLY"
+          ],
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/StageChange.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "$ref": "#/$defs/StageActor"
+    },
+    "attempt": {
+      "exclusiveMinimum": 0,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "evidence_refs": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "from_stage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StageName"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "reason": {
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "to_stage": {
+      "$ref": "#/$defs/StageName"
+    }
+  },
+  "required": [
+    "graft_id",
+    "from_stage",
+    "to_stage",
+    "attempt",
+    "reason",
+    "actor",
+    "evidence_refs"
+  ],
+  "title": "StageChangeV1",
+  "type": "object"
+}

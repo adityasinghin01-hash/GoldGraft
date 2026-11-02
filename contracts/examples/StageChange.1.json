@@ -1,0 +1,9 @@
+{
+  "graft_id": "graft-1",
+  "from_stage": "CREATED",
+  "to_stage": "GATED",
+  "attempt": 1,
+  "reason": "Gate checks complete",
+  "actor": {"kind": "service", "name": "tracker"},
+  "evidence_refs": []
+}

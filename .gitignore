@@ -16,3 +16,4 @@ build/
 .uv-cache/
 .npm-cache/
 .hypothesis/
+.goldgraft/
