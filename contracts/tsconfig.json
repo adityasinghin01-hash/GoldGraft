@@ -9,5 +9,5 @@
     "skipLibCheck": false,
     "types": []
   },
-  "include": ["ts/goldgraft-contracts.d.ts", "tests/types.test.ts"]
+  "include": ["ts/goldgraft-contracts.d.ts", "ts/goldgraft-api.d.ts", "tests/types.test.ts"]
 }

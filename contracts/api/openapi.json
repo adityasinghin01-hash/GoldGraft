@@ -1,0 +1,4582 @@
+{
+  "components": {
+    "schemas": {
+      "AccountLocation": {
+        "additionalProperties": false,
+        "properties": {
+          "tcode": {
+            "minLength": 1,
+            "title": "Tcode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tcode"
+        ],
+        "title": "AccountLocation",
+        "type": "object"
+      },
+      "Ack": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted": {
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "deduplicated": {
+            "default": false,
+            "title": "Deduplicated",
+            "type": "boolean"
+          },
+          "ledger_seq": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ledger Seq"
+          }
+        },
+        "required": [
+          "accepted"
+        ],
+        "title": "Ack",
+        "type": "object"
+      },
+      "Alert": {
+        "additionalProperties": false,
+        "description": "minimal v1, owner Aditya may extend",
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "evidence_refs": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Refs",
+            "type": "array"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "halted_agent": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Halted Agent"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "message": {
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "producer": {
+            "$ref": "#/components/schemas/Producer"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/Severity"
+          }
+        },
+        "required": [
+          "id",
+          "graft_id",
+          "producer",
+          "created_at",
+          "severity",
+          "message",
+          "evidence_refs"
+        ],
+        "title": "Alert",
+        "type": "object"
+      },
+      "ApiStep": {
+        "additionalProperties": false,
+        "properties": {
+          "api_step": {
+            "minLength": 1,
+            "title": "Api Step",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_step"
+        ],
+        "title": "ApiStep",
+        "type": "object"
+      },
+      "ArmName": {
+        "enum": [
+          "HAND",
+          "PAYPAL_AI_TOOLKIT",
+          "PLAIN_CLAUDE_CODE",
+          "GOLDGRAFT"
+        ],
+        "title": "ArmName",
+        "type": "string"
+      },
+      "Assured": {
+        "additionalProperties": false,
+        "properties": {
+          "flake_free_runs": {
+            "minimum": 0.0,
+            "title": "Flake Free Runs",
+            "type": "integer"
+          },
+          "passes_on_old": {
+            "title": "Passes On Old",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "passes_on_old",
+          "flake_free_runs"
+        ],
+        "title": "Assured",
+        "type": "object"
+      },
+      "Certificate": {
+        "additionalProperties": false,
+        "properties": {
+          "branch": {
+            "minLength": 1,
+            "title": "Branch",
+            "type": "string"
+          },
+          "cert_id": {
+            "minLength": 1,
+            "title": "Cert Id",
+            "type": "string"
+          },
+          "commit_new": {
+            "minLength": 1,
+            "title": "Commit New",
+            "type": "string"
+          },
+          "commit_old": {
+            "minLength": 1,
+            "title": "Commit Old",
+            "type": "string"
+          },
+          "cost": {
+            "$ref": "#/components/schemas/CertificateCost"
+          },
+          "issued_at": {
+            "format": "date-time",
+            "title": "Issued At",
+            "type": "string"
+          },
+          "ledger_root": {
+            "minLength": 1,
+            "title": "Ledger Root",
+            "type": "string"
+          },
+          "ots_proof": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ots Proof"
+          },
+          "paypal_evidence": {
+            "items": {
+              "$ref": "#/components/schemas/PayPalEvidence"
+            },
+            "title": "Paypal Evidence",
+            "type": "array"
+          },
+          "proof_strength": {
+            "$ref": "#/components/schemas/CertificateStrength"
+          },
+          "rekor_entry": {
+            "minLength": 1,
+            "title": "Rekor Entry",
+            "type": "string"
+          },
+          "repo": {
+            "minLength": 1,
+            "title": "Repo",
+            "type": "string"
+          },
+          "results": {
+            "$ref": "#/components/schemas/CertificateResults"
+          },
+          "runner_identity": {
+            "$ref": "#/components/schemas/RunnerIdentity"
+          },
+          "security": {
+            "$ref": "#/components/schemas/CertificateSecurity"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "signature": {
+            "minLength": 1,
+            "title": "Signature",
+            "type": "string"
+          },
+          "survey": {
+            "$ref": "#/components/schemas/CertificateSurvey"
+          },
+          "time": {
+            "additionalProperties": {
+              "minimum": 0.0,
+              "type": "number"
+            },
+            "title": "Time",
+            "type": "object"
+          }
+        },
+        "required": [
+          "cert_id",
+          "shop_id",
+          "repo",
+          "commit_old",
+          "commit_new",
+          "branch",
+          "issued_at",
+          "results",
+          "proof_strength",
+          "survey",
+          "security",
+          "paypal_evidence",
+          "cost",
+          "time",
+          "ledger_root",
+          "runner_identity",
+          "signature",
+          "rekor_entry"
+        ],
+        "title": "Certificate",
+        "type": "object"
+      },
+      "CertificateCost": {
+        "additionalProperties": false,
+        "properties": {
+          "tokens": {
+            "minimum": 0.0,
+            "title": "Tokens",
+            "type": "integer"
+          },
+          "usd": {
+            "minimum": 0.0,
+            "title": "Usd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "usd",
+          "tokens"
+        ],
+        "title": "CertificateCost",
+        "type": "object"
+      },
+      "CertificateResults": {
+        "additionalProperties": false,
+        "properties": {
+          "n_a": {
+            "minimum": 0.0,
+            "title": "N A",
+            "type": "integer"
+          },
+          "pass": {
+            "minimum": 0.0,
+            "title": "Pass",
+            "type": "integer"
+          },
+          "pass_fixed": {
+            "minimum": 0.0,
+            "title": "Pass Fixed",
+            "type": "integer"
+          },
+          "problem": {
+            "maximum": 0.0,
+            "minimum": 0.0,
+            "title": "Problem",
+            "type": "integer"
+          },
+          "scenarios": {
+            "minimum": 0.0,
+            "title": "Scenarios",
+            "type": "integer"
+          },
+          "unverified": {
+            "minimum": 0.0,
+            "title": "Unverified",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scenarios",
+          "pass",
+          "pass_fixed",
+          "problem",
+          "unverified",
+          "n_a"
+        ],
+        "title": "CertificateResults",
+        "type": "object"
+      },
+      "CertificateSecurity": {
+        "additionalProperties": false,
+        "properties": {
+          "deps_blocked": {
+            "minimum": 0.0,
+            "title": "Deps Blocked",
+            "type": "integer"
+          },
+          "injection_attempts_blocked": {
+            "minimum": 0.0,
+            "title": "Injection Attempts Blocked",
+            "type": "integer"
+          },
+          "secrets_found": {
+            "maximum": 0.0,
+            "minimum": 0.0,
+            "title": "Secrets Found",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "secrets_found",
+          "injection_attempts_blocked",
+          "deps_blocked"
+        ],
+        "title": "CertificateSecurity",
+        "type": "object"
+      },
+      "CertificateStrength": {
+        "additionalProperties": false,
+        "properties": {
+          "equivalent_dropped": {
+            "minimum": 0.0,
+            "title": "Equivalent Dropped",
+            "type": "integer"
+          },
+          "killed": {
+            "minimum": 0.0,
+            "title": "Killed",
+            "type": "integer"
+          },
+          "mutants_total": {
+            "minimum": 0.0,
+            "title": "Mutants Total",
+            "type": "integer"
+          },
+          "score": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Score",
+            "type": "number"
+          }
+        },
+        "required": [
+          "mutants_total",
+          "equivalent_dropped",
+          "killed",
+          "score"
+        ],
+        "title": "CertificateStrength",
+        "type": "object"
+      },
+      "CertificateSurvey": {
+        "additionalProperties": false,
+        "properties": {
+          "misses_learned": {
+            "minimum": 0.0,
+            "title": "Misses Learned",
+            "type": "integer"
+          },
+          "precision": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Precision",
+            "type": "number"
+          },
+          "recall": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Recall",
+            "type": "number"
+          }
+        },
+        "required": [
+          "recall",
+          "precision",
+          "misses_learned"
+        ],
+        "title": "CertificateSurvey",
+        "type": "object"
+      },
+      "CertificateVerifyResult": {
+        "additionalProperties": false,
+        "properties": {
+          "cert_id": {
+            "minLength": 1,
+            "title": "Cert Id",
+            "type": "string"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/VerifyCheck"
+            },
+            "title": "Checks",
+            "type": "array"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "cert_id",
+          "ok",
+          "checks"
+        ],
+        "title": "CertificateVerifyResult",
+        "type": "object"
+      },
+      "CmelView": {
+        "additionalProperties": false,
+        "properties": {
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "new": {
+            "items": {
+              "$ref": "#/components/schemas/MoneyEvent"
+            },
+            "title": "New",
+            "type": "array"
+          },
+          "old": {
+            "items": {
+              "$ref": "#/components/schemas/MoneyEvent"
+            },
+            "title": "Old",
+            "type": "array"
+          },
+          "old_twin": {
+            "items": {
+              "$ref": "#/components/schemas/MoneyEvent"
+            },
+            "title": "Old Twin",
+            "type": "array"
+          },
+          "scenario_id": {
+            "minLength": 1,
+            "title": "Scenario Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "graft_id",
+          "scenario_id",
+          "old",
+          "old_twin",
+          "new"
+        ],
+        "title": "CmelView",
+        "type": "object"
+      },
+      "Comparison": {
+        "additionalProperties": false,
+        "properties": {
+          "arms": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonArm"
+            },
+            "title": "Arms",
+            "type": "array"
+          },
+          "label": {
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "shop_id",
+          "arms",
+          "label"
+        ],
+        "title": "Comparison",
+        "type": "object"
+      },
+      "ComparisonArm": {
+        "additionalProperties": false,
+        "properties": {
+          "arm": {
+            "$ref": "#/components/schemas/ArmName"
+          },
+          "minutes": {
+            "minimum": 0.0,
+            "title": "Minutes",
+            "type": "number"
+          },
+          "money_bugs_left": {
+            "minimum": 0.0,
+            "title": "Money Bugs Left",
+            "type": "integer"
+          },
+          "pieces_missed": {
+            "minimum": 0.0,
+            "title": "Pieces Missed",
+            "type": "integer"
+          },
+          "usd": {
+            "minimum": 0.0,
+            "title": "Usd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "arm",
+          "minutes",
+          "usd",
+          "pieces_missed",
+          "money_bugs_left"
+        ],
+        "title": "ComparisonArm",
+        "type": "object"
+      },
+      "ConnectRequest": {
+        "additionalProperties": false,
+        "description": "Secrets travel once, straight to the vault. Never echoed, logged or stored here.",
+        "properties": {
+          "nvp_password": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nvp Password"
+          },
+          "nvp_signature": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nvp Signature"
+          },
+          "nvp_user": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nvp User"
+          },
+          "paypal_client_id": {
+            "minLength": 1,
+            "title": "Paypal Client Id",
+            "type": "string"
+          },
+          "paypal_client_secret": {
+            "minLength": 1,
+            "title": "Paypal Client Secret",
+            "type": "string"
+          },
+          "webhook_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Webhook Id"
+          }
+        },
+        "required": [
+          "paypal_client_id",
+          "paypal_client_secret"
+        ],
+        "title": "ConnectRequest",
+        "type": "object"
+      },
+      "Connection": {
+        "additionalProperties": false,
+        "properties": {
+          "checks": {
+            "$ref": "#/components/schemas/ConnectionChecks"
+          },
+          "repo": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Repo"
+          },
+          "secrets_ref": {
+            "pattern": "^doppler://\\S+$",
+            "title": "Secrets Ref",
+            "type": "string"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "site": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Site"
+          }
+        },
+        "required": [
+          "shop_id",
+          "repo",
+          "site",
+          "secrets_ref",
+          "checks"
+        ],
+        "title": "Connection",
+        "type": "object"
+      },
+      "ConnectionChecks": {
+        "additionalProperties": false,
+        "properties": {
+          "nvp_ok": {
+            "title": "Nvp Ok",
+            "type": "boolean"
+          },
+          "rest_ok": {
+            "title": "Rest Ok",
+            "type": "boolean"
+          },
+          "version_match": {
+            "title": "Version Match",
+            "type": "boolean"
+          },
+          "webhook_ok": {
+            "title": "Webhook Ok",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "rest_ok",
+          "nvp_ok",
+          "webhook_ok",
+          "version_match"
+        ],
+        "title": "ConnectionChecks",
+        "type": "object"
+      },
+      "DashboardSpec": {
+        "additionalProperties": false,
+        "description": "minimal v1, owner Aditya may extend",
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "evidence_refs": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence Refs",
+            "type": "array"
+          },
+          "filters": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Filters",
+            "type": "object"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "group_by": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Group By",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "metrics": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Metrics",
+            "type": "array"
+          },
+          "producer": {
+            "$ref": "#/components/schemas/Producer"
+          },
+          "question": {
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "graft_id",
+          "producer",
+          "created_at",
+          "question",
+          "title",
+          "metrics",
+          "group_by",
+          "filters",
+          "evidence_refs"
+        ],
+        "title": "DashboardSpec",
+        "type": "object"
+      },
+      "DriverStep": {
+        "additionalProperties": false,
+        "properties": {
+          "driver_step": {
+            "minLength": 1,
+            "title": "Driver Step",
+            "type": "string"
+          }
+        },
+        "required": [
+          "driver_step"
+        ],
+        "title": "DriverStep",
+        "type": "object"
+      },
+      "EntryType": {
+        "enum": [
+          "STAGE",
+          "ARTIFACT",
+          "MESSAGE",
+          "VERDICT",
+          "SWITCH",
+          "ALERT",
+          "COST"
+        ],
+        "title": "EntryType",
+        "type": "string"
+      },
+      "Family": {
+        "enum": [
+          "WPS",
+          "EC_NVP",
+          "EC_SOAP",
+          "DIRECT_PAYMENT",
+          "RECURRING_NVP",
+          "BILLING_AGREEMENT",
+          "IPN",
+          "PDT",
+          "CHECKOUT_JS_V4",
+          "JS_V5",
+          "REST_V1",
+          "SERVER_SDK_OLD",
+          "PAYFLOW",
+          "BUTTON_HOSTED"
+        ],
+        "title": "Family",
+        "type": "string"
+      },
+      "FileLocation": {
+        "additionalProperties": false,
+        "properties": {
+          "file": {
+            "minLength": 1,
+            "title": "File",
+            "type": "string"
+          },
+          "line": {
+            "exclusiveMinimum": 0.0,
+            "title": "Line",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "file",
+          "line"
+        ],
+        "title": "FileLocation",
+        "type": "object"
+      },
+      "Fingerprint": {
+        "additionalProperties": false,
+        "properties": {
+          "ast_shape_hash": {
+            "minLength": 1,
+            "title": "Ast Shape Hash",
+            "type": "string"
+          },
+          "family": {
+            "$ref": "#/components/schemas/Family"
+          },
+          "framework": {
+            "minLength": 1,
+            "title": "Framework",
+            "type": "string"
+          },
+          "lang": {
+            "minLength": 1,
+            "title": "Lang",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lang",
+          "framework",
+          "family",
+          "ast_shape_hash"
+        ],
+        "title": "Fingerprint",
+        "type": "object"
+      },
+      "FleetRow": {
+        "additionalProperties": false,
+        "properties": {
+          "deadline_risk": {
+            "minLength": 1,
+            "title": "Deadline Risk",
+            "type": "string"
+          },
+          "old_families": {
+            "items": {
+              "$ref": "#/components/schemas/Family"
+            },
+            "title": "Old Families",
+            "type": "array"
+          },
+          "paypal_only_items": {
+            "minimum": 0.0,
+            "title": "Paypal Only Items",
+            "type": "integer"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "stage": {
+            "minLength": 1,
+            "title": "Stage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "shop_id",
+          "stage",
+          "old_families",
+          "deadline_risk",
+          "paypal_only_items"
+        ],
+        "title": "FleetRow",
+        "type": "object"
+      },
+      "GauntletAttempt": {
+        "additionalProperties": false,
+        "properties": {
+          "attempt_id": {
+            "minLength": 1,
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "blocked": {
+            "title": "Blocked",
+            "type": "boolean"
+          },
+          "blocked_by": {
+            "minLength": 1,
+            "title": "Blocked By",
+            "type": "string"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "summary": {
+            "minLength": 1,
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "source",
+          "summary",
+          "blocked_by",
+          "blocked"
+        ],
+        "title": "GauntletAttempt",
+        "type": "object"
+      },
+      "GauntletRun": {
+        "additionalProperties": false,
+        "properties": {
+          "alerts": {
+            "items": {
+              "$ref": "#/components/schemas/Alert"
+            },
+            "title": "Alerts",
+            "type": "array"
+          },
+          "attempts": {
+            "items": {
+              "$ref": "#/components/schemas/GauntletAttempt"
+            },
+            "title": "Attempts",
+            "type": "array"
+          },
+          "run_id": {
+            "minLength": 1,
+            "title": "Run Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "attempts",
+          "alerts"
+        ],
+        "title": "GauntletRun",
+        "type": "object"
+      },
+      "Grade": {
+        "enum": [
+          "PROBLEM",
+          "UNVERIFIED",
+          "PASS",
+          "PASS_FIXED",
+          "N/A"
+        ],
+        "title": "Grade",
+        "type": "string"
+      },
+      "Graft": {
+        "additionalProperties": false,
+        "properties": {
+          "card": {
+            "$ref": "#/components/schemas/GraftCard"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "lane": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lane"
+          },
+          "ledger_root": {
+            "minLength": 1,
+            "title": "Ledger Root",
+            "type": "string"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "stage": {
+            "minLength": 1,
+            "title": "Stage",
+            "type": "string"
+          },
+          "stages": {
+            "items": {
+              "$ref": "#/components/schemas/StageTiming"
+            },
+            "title": "Stages",
+            "type": "array"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "graft_id",
+          "shop_id",
+          "stage",
+          "started_at",
+          "stages",
+          "card",
+          "ledger_root"
+        ],
+        "title": "Graft",
+        "type": "object"
+      },
+      "GraftCard": {
+        "additionalProperties": false,
+        "description": "Every number is copied from the ledger; each has a plain 'what this means' note.",
+        "properties": {
+          "cost_usd": {
+            "minimum": 0.0,
+            "title": "Cost Usd",
+            "type": "number"
+          },
+          "minutes": {
+            "minimum": 0.0,
+            "title": "Minutes",
+            "type": "number"
+          },
+          "notes": {
+            "additionalProperties": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Notes",
+            "type": "object"
+          },
+          "old_pieces_found": {
+            "minimum": 0.0,
+            "title": "Old Pieces Found",
+            "type": "integer"
+          },
+          "pieces_upgraded": {
+            "minimum": 0.0,
+            "title": "Pieces Upgraded",
+            "type": "integer"
+          },
+          "problems": {
+            "minimum": 0.0,
+            "title": "Problems",
+            "type": "integer"
+          },
+          "proof_strength_score": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Proof Strength Score"
+          },
+          "scenarios_pass": {
+            "minimum": 0.0,
+            "title": "Scenarios Pass",
+            "type": "integer"
+          },
+          "scenarios_total": {
+            "minimum": 0.0,
+            "title": "Scenarios Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "old_pieces_found",
+          "pieces_upgraded",
+          "scenarios_total",
+          "scenarios_pass",
+          "problems",
+          "cost_usd",
+          "minutes",
+          "notes"
+        ],
+        "title": "GraftCard",
+        "type": "object"
+      },
+      "GuardEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/GuardEventKind"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "latency_ms": {
+            "minimum": 0.0,
+            "title": "Latency Ms",
+            "type": "integer"
+          },
+          "lib_version": {
+            "minLength": 1,
+            "title": "Lib Version",
+            "type": "string"
+          },
+          "money": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "order_ref": {
+            "minLength": 1,
+            "title": "Order Ref",
+            "type": "string"
+          },
+          "path": {
+            "$ref": "#/components/schemas/Side"
+          },
+          "paypal_ids": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PayPalRefs"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "signature": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Signature"
+          },
+          "ts": {
+            "format": "date-time",
+            "title": "Ts",
+            "type": "string"
+          }
+        },
+        "required": [
+          "graft_id",
+          "shop_id",
+          "path",
+          "event",
+          "order_ref",
+          "latency_ms",
+          "ts",
+          "lib_version"
+        ],
+        "title": "GuardEvent",
+        "type": "object"
+      },
+      "GuardEventKind": {
+        "enum": [
+          "ATTEMPT",
+          "APPROVED",
+          "CAPTURED",
+          "DECLINED",
+          "ERROR",
+          "REFUNDED"
+        ],
+        "title": "GuardEventKind",
+        "type": "string"
+      },
+      "HealAction": {
+        "enum": [
+          "HOLD",
+          "STEP_UP",
+          "CUTBACK"
+        ],
+        "title": "HealAction",
+        "type": "string"
+      },
+      "HealDecision": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/HealAction"
+          },
+          "from_stage_pct": {
+            "enum": [
+              0,
+              1,
+              10,
+              50,
+              100
+            ],
+            "title": "From Stage Pct",
+            "type": "integer"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "hard_stop": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hard Stop"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/HealStats"
+          },
+          "to_stage_pct": {
+            "enum": [
+              0,
+              1,
+              10,
+              50,
+              100
+            ],
+            "title": "To Stage Pct",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "graft_id",
+          "from_stage_pct",
+          "action",
+          "to_stage_pct",
+          "reason",
+          "stats"
+        ],
+        "title": "HealDecision",
+        "type": "object"
+      },
+      "HealState": {
+        "additionalProperties": false,
+        "properties": {
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "guard": {
+            "minLength": 1,
+            "title": "Guard",
+            "type": "string"
+          },
+          "label": {
+            "default": "PayPal sandbox · simulated buyers",
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "last_decision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HealDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recent": {
+            "items": {
+              "$ref": "#/components/schemas/GuardEvent"
+            },
+            "title": "Recent",
+            "type": "array"
+          },
+          "stage": {
+            "$ref": "#/components/schemas/Stage"
+          },
+          "stage_pct": {
+            "enum": [
+              0,
+              1,
+              10,
+              50,
+              100
+            ],
+            "title": "Stage Pct",
+            "type": "integer"
+          },
+          "switch_config": {
+            "$ref": "#/components/schemas/SwitchConfig"
+          }
+        },
+        "required": [
+          "graft_id",
+          "stage",
+          "stage_pct",
+          "guard",
+          "switch_config",
+          "recent"
+        ],
+        "title": "HealState",
+        "type": "object"
+      },
+      "HealStats": {
+        "additionalProperties": false,
+        "properties": {
+          "n_new": {
+            "minimum": 0.0,
+            "title": "N New",
+            "type": "integer"
+          },
+          "n_old": {
+            "minimum": 0.0,
+            "title": "N Old",
+            "type": "integer"
+          },
+          "prob_new_not_worse": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Prob New Not Worse",
+            "type": "number"
+          },
+          "success_new": {
+            "minimum": 0.0,
+            "title": "Success New",
+            "type": "integer"
+          },
+          "success_old": {
+            "minimum": 0.0,
+            "title": "Success Old",
+            "type": "integer"
+          },
+          "threshold": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Threshold",
+            "type": "number"
+          }
+        },
+        "required": [
+          "n_old",
+          "n_new",
+          "success_old",
+          "success_new",
+          "prob_new_not_worse",
+          "threshold"
+        ],
+        "title": "HealStats",
+        "type": "object"
+      },
+      "InjectFaultRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "mutant_op": {
+            "pattern": "^M(0?[1-9]|1[0-2])$",
+            "title": "Mutant Op",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mutant_op"
+        ],
+        "title": "InjectFaultRequest",
+        "type": "object"
+      },
+      "InjectFaultResult": {
+        "additionalProperties": false,
+        "properties": {
+          "accepted": {
+            "title": "Accepted",
+            "type": "boolean"
+          },
+          "label": {
+            "default": "DEMO ONLY · PayPal sandbox · simulated buyers",
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "accepted"
+        ],
+        "title": "InjectFaultResult",
+        "type": "object"
+      },
+      "JsonValue": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "items": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "array"
+          },
+          {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "Kind": {
+        "enum": [
+          "INTENT",
+          "APPROVE",
+          "AUTHORIZE",
+          "CAPTURE",
+          "VOID",
+          "SHOP_PAID",
+          "SHOP_PENDING",
+          "SHOP_UNPAID",
+          "NOTIFY",
+          "NOTIFY_VERIFIED",
+          "NOTIFY_REJECTED",
+          "REFUND",
+          "RECUR_SETUP",
+          "RECUR_CHARGE",
+          "ERROR"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "LearningCurve": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "points": {
+            "items": {
+              "$ref": "#/components/schemas/LearningPoint"
+            },
+            "title": "Points",
+            "type": "array"
+          }
+        },
+        "required": [
+          "points",
+          "label"
+        ],
+        "title": "LearningCurve",
+        "type": "object"
+      },
+      "LearningPoint": {
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "minimum": 0.0,
+            "title": "Minutes",
+            "type": "number"
+          },
+          "recipe_used": {
+            "title": "Recipe Used",
+            "type": "boolean"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "usd": {
+            "minimum": 0.0,
+            "title": "Usd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "shop_id",
+          "recipe_used",
+          "minutes",
+          "usd"
+        ],
+        "title": "LearningPoint",
+        "type": "object"
+      },
+      "LedgerEntry": {
+        "additionalProperties": false,
+        "oneOf": [
+          {
+            "not": {
+              "required": [
+                "payload_ref"
+              ]
+            },
+            "required": [
+              "payload"
+            ]
+          },
+          {
+            "not": {
+              "required": [
+                "payload"
+              ]
+            },
+            "properties": {
+              "payload_ref": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "payload_ref"
+            ]
+          }
+        ],
+        "properties": {
+          "entry_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Entry Hash",
+            "type": "string"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "inputs": {
+            "items": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "title": "Inputs",
+            "type": "array"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/JsonValue"
+          },
+          "payload_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Payload Hash",
+            "type": "string"
+          },
+          "payload_ref": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload Ref"
+          },
+          "prev_hash": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Prev Hash",
+            "type": "string"
+          },
+          "producer": {
+            "$ref": "#/components/schemas/Producer"
+          },
+          "schema": {
+            "pattern": "^[A-Za-z][A-Za-z0-9]*/[1-9][0-9]*$",
+            "title": "Schema",
+            "type": "string"
+          },
+          "seq": {
+            "minimum": 0.0,
+            "title": "Seq",
+            "type": "integer"
+          },
+          "ts": {
+            "format": "date-time",
+            "title": "Ts",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/EntryType"
+          }
+        },
+        "required": [
+          "seq",
+          "graft_id",
+          "ts",
+          "type",
+          "producer",
+          "inputs",
+          "payload_hash",
+          "schema",
+          "prev_hash",
+          "entry_hash"
+        ],
+        "title": "LedgerEntry",
+        "type": "object"
+      },
+      "Lens": {
+        "enum": [
+          "code",
+          "runtime",
+          "site",
+          "account"
+        ],
+        "title": "Lens",
+        "type": "string"
+      },
+      "MockStep": {
+        "additionalProperties": false,
+        "properties": {
+          "paypal_mock_response_code": {
+            "minLength": 1,
+            "title": "Paypal Mock Response Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "paypal_mock_response_code"
+        ],
+        "title": "MockStep",
+        "type": "object"
+      },
+      "Money": {
+        "additionalProperties": false,
+        "properties": {
+          "currency": {
+            "enum": [
+              "AUD",
+              "BRL",
+              "CAD",
+              "CHF",
+              "CNY",
+              "CZK",
+              "DKK",
+              "EUR",
+              "GBP",
+              "HKD",
+              "HUF",
+              "ILS",
+              "JPY",
+              "MXN",
+              "MYR",
+              "NOK",
+              "NZD",
+              "PHP",
+              "PLN",
+              "RUB",
+              "SEK",
+              "SGD",
+              "THB",
+              "TWD",
+              "USD"
+            ],
+            "pattern": "^[A-Z]{3}$",
+            "title": "Currency",
+            "type": "string"
+          },
+          "minor": {
+            "title": "Minor",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "minor",
+          "currency"
+        ],
+        "title": "Money",
+        "type": "object"
+      },
+      "MoneyEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "items_hash": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Items Hash"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/Kind"
+          },
+          "money": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "noise": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Noise",
+            "type": "array"
+          },
+          "order_ref": {
+            "minLength": 1,
+            "title": "Order Ref",
+            "type": "string"
+          },
+          "pp": {
+            "$ref": "#/components/schemas/PayPalRefs"
+          },
+          "raw_ref": {
+            "minLength": 1,
+            "title": "Raw Ref",
+            "type": "string"
+          },
+          "run_id": {
+            "minLength": 1,
+            "title": "Run Id",
+            "type": "string"
+          },
+          "scenario_id": {
+            "minLength": 1,
+            "title": "Scenario Id",
+            "type": "string"
+          },
+          "seq": {
+            "minimum": 0.0,
+            "title": "Seq",
+            "type": "integer"
+          },
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "status_norm": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StatusNorm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "t_ms": {
+            "minimum": 0.0,
+            "title": "T Ms",
+            "type": "integer"
+          },
+          "variant": {
+            "$ref": "#/components/schemas/Variant"
+          }
+        },
+        "required": [
+          "graft_id",
+          "run_id",
+          "variant",
+          "scenario_id",
+          "seq",
+          "t_ms",
+          "source",
+          "kind",
+          "order_ref",
+          "pp",
+          "raw_ref",
+          "noise"
+        ],
+        "title": "MoneyEvent",
+        "type": "object"
+      },
+      "MoneyFlow": {
+        "additionalProperties": false,
+        "properties": {
+          "approve": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Approve",
+            "type": "array"
+          },
+          "capture": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Capture",
+            "type": "array"
+          },
+          "create": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Create",
+            "type": "array"
+          },
+          "mark_paid": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Mark Paid",
+            "type": "array"
+          },
+          "notify": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Notify",
+            "type": "array"
+          },
+          "recurring": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Recurring",
+            "type": "array"
+          },
+          "refund": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/FileLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/SiteLocation"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountLocation"
+                }
+              ]
+            },
+            "title": "Refund",
+            "type": "array"
+          }
+        },
+        "required": [
+          "create",
+          "approve",
+          "capture",
+          "mark_paid",
+          "refund",
+          "notify",
+          "recurring"
+        ],
+        "title": "MoneyFlow",
+        "type": "object"
+      },
+      "Mutant": {
+        "additionalProperties": false,
+        "properties": {
+          "equivalent_suspect": {
+            "title": "Equivalent Suspect",
+            "type": "boolean"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "killed_by": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Killed By",
+            "type": "array"
+          },
+          "location": {
+            "$ref": "#/components/schemas/FileLocation"
+          },
+          "op": {
+            "$ref": "#/components/schemas/MutantOp"
+          },
+          "patch": {
+            "minLength": 1,
+            "title": "Patch",
+            "type": "string"
+          },
+          "rule": {
+            "minLength": 1,
+            "title": "Rule",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "location",
+          "patch",
+          "rule",
+          "equivalent_suspect",
+          "killed_by"
+        ],
+        "title": "Mutant",
+        "type": "object"
+      },
+      "MutantOp": {
+        "enum": [
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M5",
+          "M6",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M12"
+        ],
+        "title": "MutantOp",
+        "type": "string"
+      },
+      "OrchardAnswer": {
+        "additionalProperties": false,
+        "properties": {
+          "answer": {
+            "minLength": 1,
+            "title": "Answer",
+            "type": "string"
+          },
+          "dashboard": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DashboardSpec"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "question": {
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question",
+          "answer"
+        ],
+        "title": "OrchardAnswer",
+        "type": "object"
+      },
+      "OrchardAsk": {
+        "additionalProperties": false,
+        "properties": {
+          "question": {
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "OrchardAsk",
+        "type": "object"
+      },
+      "OrchardView": {
+        "additionalProperties": false,
+        "properties": {
+          "dashboards": {
+            "items": {
+              "$ref": "#/components/schemas/DashboardSpec"
+            },
+            "title": "Dashboards",
+            "type": "array"
+          },
+          "label": {
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "shops": {
+            "items": {
+              "$ref": "#/components/schemas/FleetRow"
+            },
+            "title": "Shops",
+            "type": "array"
+          }
+        },
+        "required": [
+          "shops",
+          "dashboards",
+          "label"
+        ],
+        "title": "OrchardView",
+        "type": "object"
+      },
+      "PayPalEvidence": {
+        "additionalProperties": false,
+        "properties": {
+          "capture_id": {
+            "minLength": 1,
+            "title": "Capture Id",
+            "type": "string"
+          },
+          "debug_id": {
+            "minLength": 1,
+            "title": "Debug Id",
+            "type": "string"
+          },
+          "order_id": {
+            "minLength": 1,
+            "title": "Order Id",
+            "type": "string"
+          },
+          "scenario": {
+            "minLength": 1,
+            "title": "Scenario",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario",
+          "order_id",
+          "capture_id",
+          "debug_id"
+        ],
+        "title": "PayPalEvidence",
+        "type": "object"
+      },
+      "PayPalRefs": {
+        "additionalProperties": false,
+        "properties": {
+          "capture_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capture Id"
+          },
+          "debug_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Debug Id"
+          },
+          "legacy_token": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legacy Token"
+          },
+          "order_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Order Id"
+          },
+          "profile_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Id"
+          },
+          "refund_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Refund Id"
+          },
+          "txn_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Txn Id"
+          }
+        },
+        "title": "PayPalRefs",
+        "type": "object"
+      },
+      "ProbeRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "minLength": 1,
+            "pattern": "^https?://\\S+$",
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "title": "ProbeRequest",
+        "type": "object"
+      },
+      "ProbeResult": {
+        "additionalProperties": false,
+        "properties": {
+          "deadline_notes": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Deadline Notes",
+            "type": "array"
+          },
+          "families_found": {
+            "items": {
+              "$ref": "#/components/schemas/Family"
+            },
+            "title": "Families Found",
+            "type": "array"
+          },
+          "files_or_pages": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Files Or Pages",
+            "type": "array"
+          },
+          "next_step": {
+            "minLength": 1,
+            "title": "Next Step",
+            "type": "string"
+          },
+          "official_modern_module_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Official Modern Module Available"
+          }
+        },
+        "required": [
+          "families_found",
+          "files_or_pages",
+          "deadline_notes",
+          "next_step"
+        ],
+        "title": "ProbeResult",
+        "type": "object"
+      },
+      "Producer": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/ProducerKind"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "name": {
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "version": {
+            "minLength": 1,
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "name",
+          "version"
+        ],
+        "title": "Producer",
+        "type": "object"
+      },
+      "ProducerKind": {
+        "enum": [
+          "agent",
+          "service"
+        ],
+        "title": "ProducerKind",
+        "type": "string"
+      },
+      "ProofStrength": {
+        "additionalProperties": false,
+        "properties": {
+          "equivalent_dropped": {
+            "minimum": 0.0,
+            "title": "Equivalent Dropped",
+            "type": "integer"
+          },
+          "killed": {
+            "minimum": 0.0,
+            "title": "Killed",
+            "type": "integer"
+          },
+          "score": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Score",
+            "type": "number"
+          },
+          "total": {
+            "minimum": 0.0,
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "equivalent_dropped",
+          "killed",
+          "score"
+        ],
+        "title": "ProofStrength",
+        "type": "object"
+      },
+      "ProofView": {
+        "additionalProperties": false,
+        "properties": {
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "mutants": {
+            "items": {
+              "$ref": "#/components/schemas/Mutant"
+            },
+            "title": "Mutants",
+            "type": "array"
+          },
+          "proof_strength": {
+            "$ref": "#/components/schemas/ProofStrength"
+          },
+          "triangle": {
+            "items": {
+              "$ref": "#/components/schemas/TriangleRow"
+            },
+            "title": "Triangle",
+            "type": "array"
+          }
+        },
+        "required": [
+          "graft_id",
+          "proof_strength",
+          "mutants",
+          "triangle"
+        ],
+        "title": "ProofView",
+        "type": "object"
+      },
+      "RecallEvidence": {
+        "additionalProperties": false,
+        "properties": {
+          "matched_by_static": {
+            "minimum": 0.0,
+            "title": "Matched By Static",
+            "type": "integer"
+          },
+          "misses": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Misses",
+            "type": "array"
+          },
+          "runtime_calls_total": {
+            "minimum": 0.0,
+            "title": "Runtime Calls Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "runtime_calls_total",
+          "matched_by_static",
+          "misses"
+        ],
+        "title": "RecallEvidence",
+        "type": "object"
+      },
+      "Recipe": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "env": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecipeEnv"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fingerprint": {
+            "$ref": "#/components/schemas/Fingerprint"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "provenance": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Provenance",
+            "type": "array"
+          },
+          "scenarios": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Scenarios",
+            "type": "array"
+          },
+          "signature": {
+            "minLength": 1,
+            "title": "Signature",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/RecipeStatus"
+          },
+          "transform": {
+            "minLength": 1,
+            "title": "Transform",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "fingerprint",
+          "transform",
+          "scenarios",
+          "provenance",
+          "confidence",
+          "status",
+          "signature"
+        ],
+        "title": "Recipe",
+        "type": "object"
+      },
+      "RecipeEnv": {
+        "additionalProperties": false,
+        "properties": {
+          "compose": {
+            "minLength": 1,
+            "title": "Compose",
+            "type": "string"
+          },
+          "dockerfile": {
+            "minLength": 1,
+            "title": "Dockerfile",
+            "type": "string"
+          },
+          "driver_template": {
+            "minLength": 1,
+            "title": "Driver Template",
+            "type": "string"
+          },
+          "seed": {
+            "minLength": 1,
+            "title": "Seed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dockerfile",
+          "compose",
+          "seed",
+          "driver_template"
+        ],
+        "title": "RecipeEnv",
+        "type": "object"
+      },
+      "RecipeList": {
+        "additionalProperties": false,
+        "properties": {
+          "recipes": {
+            "items": {
+              "$ref": "#/components/schemas/Recipe"
+            },
+            "title": "Recipes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "recipes"
+        ],
+        "title": "RecipeList",
+        "type": "object"
+      },
+      "RecipeStatus": {
+        "enum": [
+          "QUARANTINE",
+          "ACTIVE",
+          "RETIRED"
+        ],
+        "title": "RecipeStatus",
+        "type": "string"
+      },
+      "RootMap": {
+        "additionalProperties": false,
+        "properties": {
+          "lenses_run": {
+            "items": {
+              "$ref": "#/components/schemas/Lens"
+            },
+            "title": "Lenses Run",
+            "type": "array"
+          },
+          "money_flow": {
+            "$ref": "#/components/schemas/MoneyFlow"
+          },
+          "recall_evidence": {
+            "$ref": "#/components/schemas/RecallEvidence"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "stack": {
+            "$ref": "#/components/schemas/Stack"
+          },
+          "touchpoints": {
+            "items": {
+              "$ref": "#/components/schemas/Touchpoint"
+            },
+            "title": "Touchpoints",
+            "type": "array"
+          }
+        },
+        "required": [
+          "shop_id",
+          "stack",
+          "lenses_run",
+          "touchpoints",
+          "money_flow",
+          "recall_evidence"
+        ],
+        "title": "RootMap",
+        "type": "object"
+      },
+      "RuleHit": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "rule": {
+            "minLength": 1,
+            "title": "Rule",
+            "type": "string"
+          },
+          "side": {
+            "$ref": "#/components/schemas/Side"
+          }
+        },
+        "required": [
+          "rule",
+          "side",
+          "evidence"
+        ],
+        "title": "RuleHit",
+        "type": "object"
+      },
+      "RunnerIdentity": {
+        "additionalProperties": false,
+        "properties": {
+          "sha": {
+            "minLength": 1,
+            "title": "Sha",
+            "type": "string"
+          },
+          "workflow": {
+            "minLength": 1,
+            "title": "Workflow",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflow",
+          "sha"
+        ],
+        "title": "RunnerIdentity",
+        "type": "object"
+      },
+      "Scenario": {
+        "additionalProperties": false,
+        "properties": {
+          "assured": {
+            "$ref": "#/components/schemas/Assured"
+          },
+          "cart": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Cart",
+            "type": "object"
+          },
+          "expect": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Expect",
+            "type": "object"
+          },
+          "family": {
+            "$ref": "#/components/schemas/ScenarioFamily"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "rules": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Rules",
+            "type": "array"
+          },
+          "steps": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/DriverStep"
+                },
+                {
+                  "$ref": "#/components/schemas/ApiStep"
+                },
+                {
+                  "$ref": "#/components/schemas/MockStep"
+                }
+              ]
+            },
+            "title": "Steps",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "family",
+          "cart",
+          "steps",
+          "rules",
+          "expect",
+          "assured"
+        ],
+        "title": "Scenario",
+        "type": "object"
+      },
+      "ScenarioFamily": {
+        "enum": [
+          "HAPPY",
+          "CANCEL",
+          "DECLINE",
+          "PAYER_ACTION",
+          "DOUBLE",
+          "LOST_RESPONSE",
+          "TAMPER",
+          "PENDING",
+          "REFUND",
+          "REFUND_TWICE",
+          "NOTIFY_FORGED",
+          "NOTIFY_DUP",
+          "RESTART",
+          "RENEWAL",
+          "EDGE_CURRENCY",
+          "PROPERTY"
+        ],
+        "title": "ScenarioFamily",
+        "type": "string"
+      },
+      "ScenarioList": {
+        "additionalProperties": false,
+        "properties": {
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "scenarios": {
+            "items": {
+              "$ref": "#/components/schemas/ScenarioRow"
+            },
+            "title": "Scenarios",
+            "type": "array"
+          }
+        },
+        "required": [
+          "graft_id",
+          "scenarios"
+        ],
+        "title": "ScenarioList",
+        "type": "object"
+      },
+      "ScenarioRow": {
+        "additionalProperties": false,
+        "properties": {
+          "scenario": {
+            "$ref": "#/components/schemas/Scenario"
+          },
+          "verdict": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Verdict"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "scenario"
+        ],
+        "title": "ScenarioRow",
+        "type": "object"
+      },
+      "Severity": {
+        "enum": [
+          "CRITICAL",
+          "MAJOR",
+          "MINOR"
+        ],
+        "title": "Severity",
+        "type": "string"
+      },
+      "Shop": {
+        "additionalProperties": false,
+        "properties": {
+          "connection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Connection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "repo": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Repo"
+          },
+          "shop_id": {
+            "minLength": 1,
+            "title": "Shop Id",
+            "type": "string"
+          },
+          "site": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Site"
+          }
+        },
+        "required": [
+          "shop_id",
+          "created_at"
+        ],
+        "title": "Shop",
+        "type": "object"
+      },
+      "ShopCreate": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "repo": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "^https?://\\S+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Repo"
+          },
+          "site": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "pattern": "^https?://\\S+$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Site"
+          }
+        },
+        "title": "ShopCreate",
+        "type": "object"
+      },
+      "Side": {
+        "enum": [
+          "OLD",
+          "NEW"
+        ],
+        "title": "Side",
+        "type": "string"
+      },
+      "SiteLocation": {
+        "additionalProperties": false,
+        "properties": {
+          "selector": {
+            "minLength": 1,
+            "title": "Selector",
+            "type": "string"
+          },
+          "url": {
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "selector"
+        ],
+        "title": "SiteLocation",
+        "type": "object"
+      },
+      "Source": {
+        "enum": [
+          "SHOP_HTTP",
+          "SHOP_DB",
+          "PAYPAL_CALL",
+          "PAYPAL_LEDGER",
+          "NOTIFICATION"
+        ],
+        "title": "Source",
+        "type": "string"
+      },
+      "Stack": {
+        "additionalProperties": false,
+        "properties": {
+          "db": {
+            "minLength": 1,
+            "title": "Db",
+            "type": "string"
+          },
+          "framework": {
+            "minLength": 1,
+            "title": "Framework",
+            "type": "string"
+          },
+          "lang": {
+            "minLength": 1,
+            "title": "Lang",
+            "type": "string"
+          },
+          "versions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Versions",
+            "type": "object"
+          }
+        },
+        "required": [
+          "lang",
+          "framework",
+          "versions",
+          "db"
+        ],
+        "title": "Stack",
+        "type": "object"
+      },
+      "Stage": {
+        "enum": [
+          "CREATED",
+          "GATED",
+          "SURVEYED",
+          "BUILT",
+          "LINKS_PROVEN",
+          "DELIVERED",
+          "RECORDED",
+          "CONTRACTED",
+          "ATTACK_PLANNED",
+          "GRAFTED",
+          "PROVING",
+          "REPAIRING",
+          "CERTIFIED",
+          "PARTIAL",
+          "FAILED",
+          "PR_OPEN",
+          "MERGED",
+          "SHADOW",
+          "HEAL_1",
+          "HEAL_10",
+          "HEAL_50",
+          "LIVE_100",
+          "CLEANUP_PR",
+          "DONE",
+          "CUTBACK"
+        ],
+        "title": "Stage",
+        "type": "string"
+      },
+      "StageTiming": {
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "minimum": 0.0,
+            "title": "Minutes",
+            "type": "number"
+          },
+          "stage": {
+            "minLength": 1,
+            "title": "Stage",
+            "type": "string"
+          },
+          "usd": {
+            "minimum": 0.0,
+            "title": "Usd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "stage",
+          "minutes",
+          "usd"
+        ],
+        "title": "StageTiming",
+        "type": "object"
+      },
+      "StartGraftRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "note": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "title": "StartGraftRequest",
+        "type": "object"
+      },
+      "StatusNorm": {
+        "enum": [
+          "COMPLETED",
+          "PENDING",
+          "DECLINED",
+          "REFUNDED",
+          "FAILED"
+        ],
+        "title": "StatusNorm",
+        "type": "string"
+      },
+      "SwitchConfig": {
+        "additionalProperties": false,
+        "properties": {
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "graft_id": {
+            "minLength": 1,
+            "title": "Graft Id",
+            "type": "string"
+          },
+          "origin_rules": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Origin Rules",
+            "type": "array"
+          },
+          "signature": {
+            "minLength": 1,
+            "title": "Signature",
+            "type": "string"
+          },
+          "stage_pct": {
+            "enum": [
+              0,
+              1,
+              10,
+              50,
+              100
+            ],
+            "title": "Stage Pct",
+            "type": "integer"
+          },
+          "version": {
+            "exclusiveMinimum": 0.0,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "graft_id",
+          "stage_pct",
+          "version",
+          "expires_at",
+          "origin_rules",
+          "signature"
+        ],
+        "title": "SwitchConfig",
+        "type": "object"
+      },
+      "Touchpoint": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "family": {
+            "$ref": "#/components/schemas/Family"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "lenses": {
+            "items": {
+              "$ref": "#/components/schemas/Lens"
+            },
+            "title": "Lenses",
+            "type": "array"
+          },
+          "live": {
+            "title": "Live",
+            "type": "boolean"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FileLocation"
+              },
+              {
+                "$ref": "#/components/schemas/SiteLocation"
+              },
+              {
+                "$ref": "#/components/schemas/AccountLocation"
+              }
+            ],
+            "title": "Location"
+          },
+          "money_30d": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Money"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "operation": {
+            "minLength": 1,
+            "title": "Operation",
+            "type": "string"
+          },
+          "paypal_only": {
+            "title": "Paypal Only",
+            "type": "boolean"
+          },
+          "target": {
+            "$ref": "#/components/schemas/TouchpointTarget"
+          }
+        },
+        "required": [
+          "id",
+          "family",
+          "operation",
+          "location",
+          "lenses",
+          "confidence",
+          "live",
+          "target",
+          "paypal_only"
+        ],
+        "title": "Touchpoint",
+        "type": "object"
+      },
+      "TouchpointTarget": {
+        "additionalProperties": false,
+        "properties": {
+          "paypal_mapping_id": {
+            "minLength": 1,
+            "title": "Paypal Mapping Id",
+            "type": "string"
+          },
+          "rest_op": {
+            "minLength": 1,
+            "title": "Rest Op",
+            "type": "string"
+          }
+        },
+        "required": [
+          "paypal_mapping_id",
+          "rest_op"
+        ],
+        "title": "TouchpointTarget",
+        "type": "object"
+      },
+      "TriangleRow": {
+        "additionalProperties": false,
+        "properties": {
+          "killed": {
+            "title": "Killed",
+            "type": "boolean"
+          },
+          "mutant_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Mutant Ids",
+            "type": "array"
+          },
+          "rule_id": {
+            "minLength": 1,
+            "title": "Rule Id",
+            "type": "string"
+          },
+          "scenario_ids": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Scenario Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule_id",
+          "scenario_ids",
+          "mutant_ids",
+          "killed"
+        ],
+        "title": "TriangleRow",
+        "type": "object"
+      },
+      "Variant": {
+        "enum": [
+          "OLD",
+          "OLD_TWIN",
+          "NEW"
+        ],
+        "title": "Variant",
+        "type": "string"
+      },
+      "Verdict": {
+        "additionalProperties": false,
+        "properties": {
+          "deltas_applied": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Deltas Applied",
+            "type": "array"
+          },
+          "grade": {
+            "$ref": "#/components/schemas/Grade"
+          },
+          "noise_masked": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Noise Masked",
+            "type": "array"
+          },
+          "parity_diff": {
+            "items": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Parity Diff",
+            "type": "array"
+          },
+          "rule_hits": {
+            "items": {
+              "$ref": "#/components/schemas/RuleHit"
+            },
+            "title": "Rule Hits",
+            "type": "array"
+          },
+          "scenario_id": {
+            "minLength": 1,
+            "title": "Scenario Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scenario_id",
+          "grade",
+          "rule_hits",
+          "parity_diff",
+          "noise_masked",
+          "deltas_applied"
+        ],
+        "title": "Verdict",
+        "type": "object"
+      },
+      "VerifyCheck": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "minLength": 1,
+            "title": "Detail",
+            "type": "string"
+          },
+          "name": {
+            "$ref": "#/components/schemas/VerifyCheckName"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "ok",
+          "detail"
+        ],
+        "title": "VerifyCheck",
+        "type": "object"
+      },
+      "VerifyCheckName": {
+        "enum": [
+          "SIGNATURE",
+          "REKOR",
+          "LEDGER_CHAIN",
+          "PAYPAL_REFETCH"
+        ],
+        "title": "VerifyCheckName",
+        "type": "string"
+      }
+    }
+  },
+  "info": {
+    "description": "Contract for the real backend and the stand-in. Source of truth: contracts/src/goldgraft_contracts/api_routes.py. Errors are RFC 7807 problem+json; writes need an Idempotency-Key header.",
+    "title": "GoldGraft control-plane API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/certificates/{cert_id}": {
+      "get": {
+        "operationId": "get_certificate_certificates__cert_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cert_id",
+            "required": true,
+            "schema": {
+              "title": "Cert Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Certificate"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Public Graft Certificate",
+        "tags": [
+          "S6"
+        ]
+      }
+    },
+    "/certificates/{cert_id}/verify": {
+      "post": {
+        "operationId": "verify_certificate_certificates__cert_id__verify_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cert_id",
+            "required": true,
+            "schema": {
+              "title": "Cert Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CertificateVerifyResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Re-verify signature, Rekor entry, ledger chain and PayPal evidence",
+        "tags": [
+          "S6"
+        ]
+      }
+    },
+    "/comparison": {
+      "get": {
+        "operationId": "get_comparison_comparison_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comparison"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Four-arm comparison",
+        "tags": [
+          "S11"
+        ]
+      }
+    },
+    "/gh/webhook": {
+      "post": {
+        "operationId": "github_webhook_gh_webhook_post",
+        "parameters": [
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "X-Hub-Signature-256",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "X-Hub-Signature-256"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "X-GitHub-Event",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "X-Github-Event"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "X-GitHub-Delivery",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "X-Github-Delivery"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ack"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "GitHub App webhook receiver",
+        "tags": [
+          "shop-libs"
+        ]
+      }
+    },
+    "/grafts/{graft_id}": {
+      "get": {
+        "operationId": "get_graft_grafts__graft_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Graft"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Graft state + Graft Card",
+        "tags": [
+          "S2"
+        ]
+      }
+    },
+    "/grafts/{graft_id}/cmel": {
+      "get": {
+        "operationId": "get_cmel_grafts__graft_id__cmel_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "scenario",
+            "required": true,
+            "schema": {
+              "title": "Scenario",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CmelView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Money events OLD / OLD_TWIN / NEW for one scenario",
+        "tags": [
+          "S4"
+        ]
+      }
+    },
+    "/grafts/{graft_id}/events": {
+      "get": {
+        "operationId": "graft_events_grafts__graft_id__events_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "events per second; 0 = no delay",
+            "in": "query",
+            "name": "speed",
+            "required": false,
+            "schema": {
+              "default": 10.0,
+              "description": "events per second; 0 = no delay",
+              "title": "Speed",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerEntry"
+                }
+              },
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Live ledger feed for one graft (SSE)",
+        "tags": [
+          "S2"
+        ]
+      }
+    },
+    "/grafts/{graft_id}/proof": {
+      "get": {
+        "operationId": "get_proof_grafts__graft_id__proof_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProofView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Proof strength + triangle",
+        "tags": [
+          "S5"
+        ]
+      }
+    },
+    "/grafts/{graft_id}/rootmap": {
+      "get": {
+        "operationId": "get_rootmap_grafts__graft_id__rootmap_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RootMap"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Root Map",
+        "tags": [
+          "S3"
+        ]
+      }
+    },
+    "/grafts/{graft_id}/scenarios": {
+      "get": {
+        "operationId": "get_scenarios_grafts__graft_id__scenarios_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScenarioList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Scenarios + verdicts",
+        "tags": [
+          "S4"
+        ]
+      }
+    },
+    "/guard/event": {
+      "post": {
+        "operationId": "guard_event_guard_event_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuardEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ack"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Money event from a shop switch library",
+        "tags": [
+          "shop-libs"
+        ]
+      }
+    },
+    "/heal/{graft_id}": {
+      "get": {
+        "operationId": "get_heal_heal__graft_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "events per second; 0 = no delay",
+            "in": "query",
+            "name": "speed",
+            "required": false,
+            "schema": {
+              "default": 10.0,
+              "description": "events per second; 0 = no delay",
+              "title": "Speed",
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealState"
+                }
+              },
+              "text/event-stream": {}
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Go-live state (JSON) or live go-live feed (SSE)",
+        "tags": [
+          "S7"
+        ]
+      }
+    },
+    "/heal/{graft_id}/inject-fault": {
+      "post": {
+        "operationId": "inject_fault_heal__graft_id__inject_fault_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InjectFaultRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InjectFaultResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Demo only: flip one planted bug on the NEW path",
+        "tags": [
+          "S7"
+        ]
+      }
+    },
+    "/learning-curve": {
+      "get": {
+        "operationId": "learning_curve_learning_curve_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearningCurve"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Minutes + $ per shop over time",
+        "tags": [
+          "S8"
+        ]
+      }
+    },
+    "/orchard": {
+      "get": {
+        "operationId": "get_orchard_orchard_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrchardView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "PayPal-team fleet view",
+        "tags": [
+          "S9"
+        ]
+      }
+    },
+    "/orchard/ask": {
+      "post": {
+        "operationId": "orchard_ask_orchard_ask_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrchardAsk"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrchardAnswer"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Ask the Orchard Analyst a fleet question",
+        "tags": [
+          "S9"
+        ]
+      }
+    },
+    "/pp/webhook/{graft_id}": {
+      "post": {
+        "operationId": "paypal_webhook_pp_webhook__graft_id__post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "PAYPAL-TRANSMISSION-ID",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "Paypal-Transmission-Id"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "PAYPAL-TRANSMISSION-TIME",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "Paypal-Transmission-Time"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "PAYPAL-TRANSMISSION-SIG",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "Paypal-Transmission-Sig"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "PAYPAL-CERT-URL",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "Paypal-Cert-Url"
+            }
+          },
+          {
+            "description": "required; verified + de-duplicated",
+            "in": "header",
+            "name": "PAYPAL-AUTH-ALGO",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "required; verified + de-duplicated",
+              "title": "Paypal-Auth-Algo"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ack"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "PayPal webhook receiver",
+        "tags": [
+          "shop-libs"
+        ]
+      }
+    },
+    "/probe": {
+      "post": {
+        "operationId": "probe_probe_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProbeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProbeResult"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Quick scan of a repo or site URL (no keys)",
+        "tags": [
+          "S0"
+        ]
+      }
+    },
+    "/recipes": {
+      "get": {
+        "operationId": "list_recipes_recipes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeList"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Scion Bank recipes",
+        "tags": [
+          "S8"
+        ]
+      }
+    },
+    "/security/gauntlet/{run_id}": {
+      "get": {
+        "operationId": "get_gauntlet_security_gauntlet__run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "title": "Run Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GauntletRun"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Injection Gauntlet replay",
+        "tags": [
+          "S10"
+        ]
+      }
+    },
+    "/shops": {
+      "post": {
+        "operationId": "create_shop_shops_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShopCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shop"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Create a shop",
+        "tags": [
+          "S1"
+        ]
+      }
+    },
+    "/shops/{shop_id}/connect": {
+      "post": {
+        "operationId": "connect_shop_shops__shop_id__connect_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shop_id",
+            "required": true,
+            "schema": {
+              "title": "Shop Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConnectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connection"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Store sandbox keys in the vault and run connection checks",
+        "tags": [
+          "S1"
+        ]
+      }
+    },
+    "/shops/{shop_id}/graft": {
+      "post": {
+        "operationId": "start_graft_shops__shop_id__graft_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "shop_id",
+            "required": true,
+            "schema": {
+              "title": "Shop Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "minLength": 1,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartGraftRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Graft"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Start the Graft Cycle",
+        "tags": [
+          "S1",
+          "S2"
+        ]
+      }
+    },
+    "/switch/config/{graft_id}": {
+      "get": {
+        "operationId": "get_switch_config_switch_config__graft_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graft_id",
+            "required": true,
+            "schema": {
+              "title": "Graft Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SwitchConfig"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "4XX": {
+            "content": {
+              "application/problem+json": {}
+            },
+            "description": "RFC 7807 problem"
+          }
+        },
+        "summary": "Signed SwitchConfig for shop switch libraries",
+        "tags": [
+          "shop-libs"
+        ]
+      }
+    }
+  }
+}
