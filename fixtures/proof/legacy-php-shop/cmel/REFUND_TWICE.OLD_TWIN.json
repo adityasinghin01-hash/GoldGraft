@@ -1,0 +1,381 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 0,
+    "t_ms": 1020,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "debug_id": "acbacc96c726c"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 1,
+    "t_ms": 1040,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/4",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 2,
+    "t_ms": 1080,
+    "source": "PAYPAL_CALL",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F",
+      "debug_id": "acbacc96c726c"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 3,
+    "t_ms": 1090,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/9",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 4,
+    "t_ms": 1110,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY_VERIFIED",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/11",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 5,
+    "t_ms": 1120,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {},
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/12",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 6,
+    "t_ms": 1140,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F",
+      "debug_id": "acbacc96c726c"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/14",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 7,
+    "t_ms": 1160,
+    "source": "PAYPAL_CALL",
+    "kind": "REFUND",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F",
+      "refund_id": "7F8BA891334466BFD",
+      "debug_id": "acbacc96c726c"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/16",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 8,
+    "t_ms": 1170,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {},
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/17",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 9,
+    "t_ms": 1200,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {},
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/20",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 10,
+    "t_ms": 1220,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F",
+      "debug_id": "acbacc96c726c"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/22",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND_TWICE.OLD_TWIN",
+    "variant": "OLD_TWIN",
+    "scenario_id": "REFUND_TWICE",
+    "seq": 11,
+    "t_ms": 1240,
+    "source": "PAYPAL_LEDGER",
+    "kind": "REFUND",
+    "order_ref": "SHOP-REFUND_TWICE",
+    "pp": {
+      "legacy_token": "EC-5FBA8C1019CCF7A99",
+      "txn_id": "99E5473148A32DF4F",
+      "refund_id": "7F8BA891334466BFD",
+      "debug_id": "acbacc96c726c"
+    },
+    "raw_ref": "raw/REFUND_TWICE.OLD_TWIN.json#/exchanges/24",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  }
+]

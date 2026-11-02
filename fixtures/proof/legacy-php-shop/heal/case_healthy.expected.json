@@ -1,0 +1,16 @@
+{
+  "graft_id": "synthetic-c4",
+  "from_stage_pct": 10,
+  "action": "STEP_UP",
+  "to_stage_pct": 50,
+  "reason": "Enough safe NEW trials",
+  "stats": {
+    "n_old": 100,
+    "n_new": 100,
+    "success_old": 90,
+    "success_new": 99,
+    "prob_new_not_worse": 0.9996168340159018,
+    "threshold": 0.95
+  },
+  "hard_stop": null
+}

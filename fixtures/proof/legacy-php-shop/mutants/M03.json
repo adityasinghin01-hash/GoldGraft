@@ -1,0 +1,12 @@
+{
+  "id": "M03",
+  "op": "M3",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 27
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -24,7 +24,7 @@\n         $order = $store->get($ref);\n         if (isset($order['capture_id'])) return $order; // cached replay\n         $remote = $http('GET', '/v2/checkout/orders/' . $order['order_id'], [], []);\n-        if ($remote['status'] !== 'APPROVED') throw new RuntimeException('unapproved'); // M3\n+        if (false) throw new RuntimeException('unapproved'); // M3\n         $store->saveApproval($ref, $remote); // M11: durable before capture\n         $requestId = $ref . ':capture'; // M5: stable across response loss\n         $result = $http('POST', '/v2/checkout/orders/' . $order['order_id'] . '/capture', [],\n",
+  "rule": "R06",
+  "equivalent_suspect": true,
+  "killed_by": []
+}

@@ -1,0 +1,285 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067",
+      "debug_id": "ad1419de304c3"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 2,
+    "t_ms": 70,
+    "source": "PAYPAL_CALL",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067",
+      "capture_id": "6BAC049A9CEA548FD",
+      "debug_id": "ad1419de304c3"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/7",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 3,
+    "t_ms": 80,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067",
+      "capture_id": "6BAC049A9CEA548FD"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 4,
+    "t_ms": 100,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY_VERIFIED",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067",
+      "capture_id": "6BAC049A9CEA548FD"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/10",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 5,
+    "t_ms": 110,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {},
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/11",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 6,
+    "t_ms": 130,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067",
+      "capture_id": "6BAC049A9CEA548FD",
+      "debug_id": "ad1419de304c3"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/13",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 7,
+    "t_ms": 150,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-PARITY_EXTRA",
+    "pp": {
+      "order_id": "336B1DE7A62C46067",
+      "capture_id": "6BAC049A9CEA548FD",
+      "debug_id": "ad1419de304c3"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/15",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PARITY_EXTRA.NEW",
+    "variant": "NEW",
+    "scenario_id": "PARITY_EXTRA",
+    "seq": 8,
+    "t_ms": 180,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-PARITY_EXTRA-EXTRA",
+    "pp": {
+      "order_id": "EXTRA336B1DE7A62C",
+      "debug_id": "ad1419de304c3"
+    },
+    "raw_ref": "raw/PARITY_EXTRA.NEW.json#/exchanges/18",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 1250,
+      "currency": "USD"
+    }
+  }
+]

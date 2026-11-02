@@ -1,0 +1,12 @@
+{
+  "id": "M04",
+  "op": "M4",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 23
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -20,7 +20,7 @@\n     return $result;\n }\n function captureOrder($http, $store, string $ref): array {\n-    return $store->locked($ref, function () use ($http, $store, $ref) { // M4\n+    return (function () use ($http, $store, $ref) { // M4 removes lock\n         $order = $store->get($ref);\n         if (isset($order['capture_id'])) return $order; // cached replay\n         $remote = $http('GET', '/v2/checkout/orders/' . $order['order_id'], [], []);\n@@ -39,7 +39,7 @@\n         }\n         $store->setPaid($ref, $capture['id']);\n         return $result;\n-    });\n+    })();\n }\n function refundOrder($http, $store, string $ref): array {\n     return $store->locked($ref, function () use ($http, $store, $ref) {\n",
+  "rule": "R05",
+  "equivalent_suspect": true,
+  "killed_by": []
+}

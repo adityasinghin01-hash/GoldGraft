@@ -1,0 +1,12 @@
+{
+  "id": "M09",
+  "op": "M9",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 68
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -65,7 +65,7 @@\n     if ($verification['verification_status'] !== 'SUCCESS') return; // M8\n     if ($event['event_type'] !== 'PAYMENT.CAPTURE.COMPLETED') return;\n     $resource = $event['resource'];\n-    $orderId = $resource['supplementary_data']['related_ids']['order_id']; // M9\n+    $orderId = $resource['related_resources']['order_id']; // M9 wrong path\n     // The transaction atomically claims the event ID and checks the trusted resource\n     // amount/currency against the local order and its durable approval before paid.\n     // A resource is trusted ONLY after SUCCESS; M8 deliberately violates that premise.\n",
+  "rule": "R01",
+  "equivalent_suspect": false,
+  "killed_by": []
+}

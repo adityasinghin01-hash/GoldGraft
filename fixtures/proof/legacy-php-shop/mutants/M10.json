@@ -1,0 +1,12 @@
+{
+  "id": "M10",
+  "op": "M10",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 57
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -54,7 +54,7 @@\n     });\n }\n function webhook($http, $store, array $headers, array $event, string $webhookId): void {\n-    $headers = array_change_key_case($headers, CASE_LOWER); // M10\n+    $headers = $headers; // M10 case-sensitive lookup\n     $verification = $http('POST', '/v1/notifications/verify-webhook-signature', [\n         'auth_algo' => $headers['paypal-auth-algo'], 'cert_url' => $headers['paypal-cert-url'],\n         'transmission_id' => $headers['paypal-transmission-id'],\n",
+  "rule": "R08",
+  "equivalent_suspect": false,
+  "killed_by": []
+}

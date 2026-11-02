@@ -1,0 +1,12 @@
+{
+  "id": "M01",
+  "op": "M1",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 34
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -31,7 +31,7 @@\n                         ['PayPal-Request-Id' => $requestId]);\n         $capture = $result['purchase_units'][0]['payments']['captures'][0];\n         $amountMatches = $capture['amount']['value'] === decimalUSD($order['minor']); // M6\n-        $currencyMatches = $capture['amount']['currency_code'] === $order['currency']; // M1\n+    $currencyMatches = true; // M1 ignores currency\n         if (!$amountMatches || !$currencyMatches) throw new RuntimeException('money mismatch');\n         if ($capture['status'] !== 'COMPLETED') { // M2\n             $store->setPending($ref, $capture['id']);\n",
+  "rule": "R03",
+  "equivalent_suspect": false,
+  "killed_by": []
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DECLINE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DECLINE",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-DECLINE",
+    "pp": {
+      "order_id": "230B45C8E35DC5D04",
+      "debug_id": "a1580375b21ed"
+    },
+    "raw_ref": "raw/DECLINE.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DECLINE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DECLINE",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-DECLINE",
+    "pp": {
+      "order_id": "230B45C8E35DC5D04"
+    },
+    "raw_ref": "raw/DECLINE.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DECLINE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DECLINE",
+    "seq": 2,
+    "t_ms": 80,
+    "source": "SHOP_DB",
+    "kind": "SHOP_UNPAID",
+    "order_ref": "SHOP-DECLINE",
+    "pp": {},
+    "raw_ref": "raw/DECLINE.NEW.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  }
+]

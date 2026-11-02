@@ -1,0 +1,631 @@
+{
+  "graft_id": "synthetic-c4",
+  "run_id": "REFUND.NEW",
+  "variant": "NEW",
+  "scenario_id": "REFUND",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 0,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/create",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND"
+      },
+      "body_json": {
+        "cart": {
+          "tee": 1
+        },
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 10,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "SHOP-REFUND:create",
+        "Prefer": "return=representation"
+      },
+      "body_json": {
+        "intent": "CAPTURE",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-REFUND",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "seq": 2,
+      "t_ms": 20,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "ABC06EAD43E91BB51",
+        "intent": "CAPTURE",
+        "status": "CREATED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-REFUND",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 201
+    },
+    {
+      "seq": 3,
+      "t_ms": 30,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/approve",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND"
+      },
+      "body_json": {
+        "orderId": "ABC06EAD43E91BB51"
+      }
+    },
+    {
+      "seq": 4,
+      "t_ms": 40,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 5,
+      "t_ms": 50,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "ABC06EAD43E91BB51",
+        "intent": "CAPTURE",
+        "status": "APPROVED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-REFUND",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 200
+    },
+    {
+      "seq": 6,
+      "t_ms": 60,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51/capture",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "SHOP-REFUND:capture",
+        "Prefer": "return=representation"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 7,
+      "t_ms": 70,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51/capture",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "ABC06EAD43E91BB51",
+        "intent": "CAPTURE",
+        "status": "COMPLETED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-REFUND",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "670173519854307E1",
+                  "status": "COMPLETED",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "25.00"
+                  },
+                  "final_capture": true,
+                  "create_time": "2026-11-02T10:00:00Z",
+                  "update_time": "2026-11-02T10:00:00Z"
+                }
+              ]
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 201
+    },
+    {
+      "seq": 8,
+      "t_ms": 80,
+      "direction": "PAYPAL_NOTIFY_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/pp/webhook",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "PAYPAL-AUTH-ALGO": "SHA256withRSA",
+        "PAYPAL-CERT-URL": "https://api.sandbox.paypal.com/v1/notifications/certs/FAKE",
+        "PAYPAL-TRANSMISSION-ID": "FAKE-TRANSMISSION-REFUND",
+        "PAYPAL-TRANSMISSION-SIG": "FAKE-SIGNATURE-FOR-TESTS",
+        "PAYPAL-TRANSMISSION-TIME": "2026-11-02T10:00:00Z"
+      },
+      "body_json": {
+        "id": "WH-FAKE-REFUND",
+        "create_time": "2026-11-02T10:00:00Z",
+        "resource_type": "capture",
+        "event_type": "PAYMENT.CAPTURE.COMPLETED",
+        "resource_version": "2.0",
+        "event_version": "1.0",
+        "resource": {
+          "id": "670173519854307E1",
+          "status": "COMPLETED",
+          "amount": {
+            "currency_code": "USD",
+            "value": "25.00"
+          },
+          "final_capture": true,
+          "create_time": "2026-11-02T10:00:00Z",
+          "update_time": "2026-11-02T10:00:00Z",
+          "supplementary_data": {
+            "related_ids": {
+              "order_id": "ABC06EAD43E91BB51"
+            }
+          }
+        }
+      }
+    },
+    {
+      "seq": 9,
+      "t_ms": 90,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v1/notifications/verify-webhook-signature",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": {
+        "auth_algo": "SHA256withRSA",
+        "cert_url": "https://api.sandbox.paypal.com/v1/notifications/certs/FAKE",
+        "transmission_id": "FAKE-TRANSMISSION-REFUND",
+        "transmission_sig": "FAKE-SIGNATURE-FOR-TESTS",
+        "transmission_time": "2026-11-02T10:00:00Z",
+        "webhook_id": "FAKEWEBHOOKID",
+        "webhook_event": {
+          "id": "WH-FAKE-REFUND",
+          "create_time": "2026-11-02T10:00:00Z",
+          "resource_type": "capture",
+          "event_type": "PAYMENT.CAPTURE.COMPLETED",
+          "resource_version": "2.0",
+          "event_version": "1.0",
+          "resource": {
+            "id": "670173519854307E1",
+            "status": "COMPLETED",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            },
+            "final_capture": true,
+            "create_time": "2026-11-02T10:00:00Z",
+            "update_time": "2026-11-02T10:00:00Z",
+            "supplementary_data": {
+              "related_ids": {
+                "order_id": "ABC06EAD43E91BB51"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "t_ms": 100,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v1/notifications/verify-webhook-signature",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "verification_status": "SUCCESS"
+      },
+      "status": 200
+    },
+    {
+      "seq": 11,
+      "t_ms": 110,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-REFUND"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 12,
+      "t_ms": 120,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "order",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 13,
+      "t_ms": 130,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "order",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "ABC06EAD43E91BB51",
+        "intent": "CAPTURE",
+        "status": "COMPLETED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-REFUND",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "670173519854307E1",
+                  "status": "COMPLETED",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "25.00"
+                  },
+                  "final_capture": true,
+                  "create_time": "2026-11-02T10:00:00Z",
+                  "update_time": "2026-11-02T10:00:00Z"
+                }
+              ]
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 200
+    },
+    {
+      "seq": 14,
+      "t_ms": 140,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/captures/670173519854307E1",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "capture",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 15,
+      "t_ms": 150,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/captures/670173519854307E1",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "capture",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "670173519854307E1",
+        "status": "COMPLETED",
+        "amount": {
+          "currency_code": "USD",
+          "value": "25.00"
+        },
+        "final_capture": true,
+        "create_time": "2026-11-02T10:00:00Z",
+        "update_time": "2026-11-02T10:00:00Z",
+        "supplementary_data": {
+          "related_ids": {
+            "order_id": "ABC06EAD43E91BB51"
+          }
+        }
+      },
+      "status": 200
+    },
+    {
+      "seq": 16,
+      "t_ms": 160,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/captures/670173519854307E1/refund",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Parent-Capture": "670173519854307E1",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "SHOP-REFUND:refund:first",
+        "Prefer": "return=representation"
+      },
+      "body_json": {
+        "amount": {
+          "currency_code": "USD",
+          "value": "25.00"
+        }
+      }
+    },
+    {
+      "seq": 17,
+      "t_ms": 170,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/captures/670173519854307E1/refund",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Parent-Capture": "670173519854307E1",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "72EA009B1E6B9D05D",
+        "status": "COMPLETED",
+        "amount": {
+          "currency_code": "USD",
+          "value": "25.00"
+        }
+      },
+      "status": 201
+    },
+    {
+      "seq": 18,
+      "t_ms": 180,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-REFUND"
+        },
+        "before": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 2500
+        }
+      }
+    },
+    {
+      "seq": 19,
+      "t_ms": 190,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "order",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 20,
+      "t_ms": 200,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/ABC06EAD43E91BB51",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "order",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "ABC06EAD43E91BB51",
+        "intent": "CAPTURE",
+        "status": "COMPLETED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-REFUND",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "670173519854307E1",
+                  "status": "REFUNDED",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "25.00"
+                  },
+                  "final_capture": true,
+                  "create_time": "2026-11-02T10:00:00Z",
+                  "update_time": "2026-11-02T10:00:00Z"
+                }
+              ]
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 200
+    },
+    {
+      "seq": 21,
+      "t_ms": 210,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/captures/670173519854307E1",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "capture",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 22,
+      "t_ms": 220,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/captures/670173519854307E1",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "capture",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "670173519854307E1",
+        "status": "REFUNDED",
+        "amount": {
+          "currency_code": "USD",
+          "value": "25.00"
+        },
+        "final_capture": true,
+        "create_time": "2026-11-02T10:00:00Z",
+        "update_time": "2026-11-02T10:00:00Z",
+        "supplementary_data": {
+          "related_ids": {
+            "order_id": "ABC06EAD43E91BB51"
+          }
+        }
+      },
+      "status": 200
+    },
+    {
+      "seq": 23,
+      "t_ms": 230,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/refunds/72EA009B1E6B9D05D",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "refund",
+        "X-GoldGraft-Parent-Capture": "670173519854307E1",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 24,
+      "t_ms": 240,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/payments/refunds/72EA009B1E6B9D05D",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "refund",
+        "X-GoldGraft-Parent-Capture": "670173519854307E1",
+        "PayPal-Debug-Id": "8a73f2020ca79"
+      },
+      "body_json": {
+        "id": "72EA009B1E6B9D05D",
+        "status": "COMPLETED",
+        "amount": {
+          "currency_code": "USD",
+          "value": "25.00"
+        }
+      },
+      "status": 200
+    }
+  ]
+}

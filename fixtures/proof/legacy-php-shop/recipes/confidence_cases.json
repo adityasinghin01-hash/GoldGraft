@@ -1,0 +1,62 @@
+{
+  "_label": "SYNTHETIC — hand-made from PayPal docs; not a recording and not a claim about the real shop",
+  "_source": [
+    "https://developer.paypal.com/api/nvp-soap/set-express-checkout-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-express-checkout-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/do-express-checkout-payment-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/refund-transaction-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-transaction-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/IPNandPDTVariables/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/ht-ipn/",
+    "https://developer.paypal.com/api/nvp-soap/errors/",
+    "https://developer.paypal.com/api/payments/v2/schema.json",
+    "https://developer.paypal.com/api/orders/v2/",
+    "https://developer.paypal.com/api/payments/v2/",
+    "https://developer.paypal.com/api/webhooks/v1/",
+    "https://developer.paypal.com/sdk/js/reference/"
+  ],
+  "cases": [
+    {
+      "passes": 0,
+      "fails": 0,
+      "posterior_alpha": 1,
+      "posterior_beta": 1,
+      "expected_mean": 0.5
+    },
+    {
+      "passes": 1,
+      "fails": 0,
+      "posterior_alpha": 2,
+      "posterior_beta": 1,
+      "expected_mean": 0.6666666666666666
+    },
+    {
+      "passes": 0,
+      "fails": 1,
+      "posterior_alpha": 1,
+      "posterior_beta": 2,
+      "expected_mean": 0.3333333333333333
+    },
+    {
+      "passes": 3,
+      "fails": 2,
+      "posterior_alpha": 4,
+      "posterior_beta": 3,
+      "expected_mean": 0.5714285714285714
+    },
+    {
+      "passes": 10,
+      "fails": 0,
+      "posterior_alpha": 11,
+      "posterior_beta": 1,
+      "expected_mean": 0.9166666666666666
+    },
+    {
+      "passes": 20,
+      "fails": 5,
+      "posterior_alpha": 21,
+      "posterior_beta": 6,
+      "expected_mean": 0.7777777777777778
+    }
+  ]
+}

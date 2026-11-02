@@ -1,0 +1,16 @@
+{
+  "graft_id": "synthetic-c4",
+  "from_stage_pct": 10,
+  "action": "HOLD",
+  "to_stage_pct": 10,
+  "reason": "Thin data",
+  "stats": {
+    "n_old": 10,
+    "n_new": 10,
+    "success_old": 0,
+    "success_new": 10,
+    "prob_new_not_worse": 0.9999990910949658,
+    "threshold": 0.95
+  },
+  "hard_stop": null
+}

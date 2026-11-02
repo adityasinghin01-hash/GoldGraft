@@ -1,0 +1,16 @@
+{
+  "graft_id": "synthetic-c4",
+  "from_stage_pct": 10,
+  "action": "HOLD",
+  "to_stage_pct": 10,
+  "reason": "Posterior inconclusive",
+  "stats": {
+    "n_old": 100,
+    "n_new": 100,
+    "success_old": 80,
+    "success_new": 77,
+    "prob_new_not_worse": 0.43503434164607474,
+    "threshold": 0.95
+  },
+  "hard_stop": null
+}

@@ -1,0 +1,47 @@
+{
+  "scenario_id": "PENDING",
+  "grade": "PROBLEM",
+  "rule_hits": [
+    {
+      "rule": "R01",
+      "side": "NEW",
+      "evidence": [
+        "cmel/PENDING.NEW.json#/3",
+        "cmel/PENDING.NEW.json#/4"
+      ]
+    },
+    {
+      "rule": "R07",
+      "side": "NEW",
+      "evidence": [
+        "cmel/PENDING.NEW.json#/3",
+        "cmel/PENDING.NEW.json#/4"
+      ]
+    }
+  ],
+  "parity_diff": [
+    {
+      "type": "status_kind_mismatch",
+      "expected": "SHOP_PENDING",
+      "actual": "SHOP_PAID",
+      "event": "cmel/PENDING.NEW.json#/3"
+    }
+  ],
+  "noise_masked": [
+    "run_id",
+    "variant",
+    "raw_ref",
+    "t_ms",
+    "pp.legacy_token",
+    "pp.txn_id",
+    "pp.debug_id",
+    "pp.order_id",
+    "pp.capture_id"
+  ],
+  "deltas_applied": [
+    "D_TOKEN_ORDER",
+    "D_APPROVE",
+    "D_TXN_CAPTURE",
+    "D_LEDGER_READ"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "_label": "SYNTHETIC — hand-made from PayPal docs; not a recording and not a claim about the real shop",
+  "_source": [
+    "https://api.github.com/repos/jeretc/cutover/git/trees/aedc11dde1a8793285665ca2188aff62ab5aab65?recursive=1"
+  ],
+  "repo": "https://github.com/jeretc/cutover",
+  "commit": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+  "algorithm": "git-blob-sha1",
+  "files": {
+    "LICENSE.cutover": "e74c9e96609d62a91b445c76b46d24a40a7613d0",
+    "src/api/create-payment.php": "e37f64eb7e8622c5fc2754ad437918dceeb14501",
+    "src/api/execute-payment.php": "eae5a43e6ad33817385103a3b8c51bc009df89c7",
+    "src/api/orders.php": "1daebafcad1a0becc923d931c63826441d4d2fdd",
+    "src/api/refund.php": "7f2df35896981fc0d7b37dee1290062ff62cb981",
+    "src/assets/mug.svg": "faaa3cc550f1c9009699c8520e016b7b020d0a81",
+    "src/assets/poster.svg": "fce6697aaeff18b7f42df5ba51fa61c3890c0f19",
+    "src/assets/shop.css": "126cf3dc6c870b9f665b11628b269b28e9ef9041",
+    "src/assets/tee.svg": "ee0cfee99f9ceef2868dab72d2549707644e19c6",
+    "src/cancel.php": "0f1aa1dc1aee1f2ce5889ec9106bd42f0b424714",
+    "src/config.php": "64a2d28f6057deb5330c6fb2aac7b44fcb531f91",
+    "src/index.php": "ae311ef5b66bafe630eb65d92b821fd9680e712b",
+    "src/ipn.php": "224e8587c128b234604090c57131ed3bcee391ed",
+    "src/lib/orders_store.php": "0c2a2f5d054216d0ad305f6aafc595920eaaf152",
+    "src/lib/paypal_nvp.php": "2eba11c21dc2bb238e2de4cfb8ea389ab33d5651",
+    "src/success.php": "140acadf3dc6aac72f358c2b946e6985852203f7"
+  }
+}

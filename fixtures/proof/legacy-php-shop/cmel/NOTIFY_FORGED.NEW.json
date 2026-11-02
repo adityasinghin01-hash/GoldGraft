@@ -1,0 +1,151 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "NOTIFY_FORGED.NEW",
+    "variant": "NEW",
+    "scenario_id": "NOTIFY_FORGED",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-NOTIFY_FORGED",
+    "pp": {
+      "order_id": "67B9A16FDC0288929",
+      "debug_id": "c65778c34efc8"
+    },
+    "raw_ref": "raw/NOTIFY_FORGED.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "NOTIFY_FORGED.NEW",
+    "variant": "NEW",
+    "scenario_id": "NOTIFY_FORGED",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-NOTIFY_FORGED",
+    "pp": {
+      "order_id": "67B9A16FDC0288929"
+    },
+    "raw_ref": "raw/NOTIFY_FORGED.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "NOTIFY_FORGED.NEW",
+    "variant": "NEW",
+    "scenario_id": "NOTIFY_FORGED",
+    "seq": 2,
+    "t_ms": 40,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY",
+    "order_ref": "SHOP-NOTIFY_FORGED",
+    "pp": {
+      "order_id": "67B9A16FDC0288929",
+      "capture_id": "F77FE11C96ABC2DD0"
+    },
+    "raw_ref": "raw/NOTIFY_FORGED.NEW.json#/exchanges/4",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "NOTIFY_FORGED.NEW",
+    "variant": "NEW",
+    "scenario_id": "NOTIFY_FORGED",
+    "seq": 3,
+    "t_ms": 60,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY_REJECTED",
+    "order_ref": "SHOP-NOTIFY_FORGED",
+    "pp": {
+      "order_id": "67B9A16FDC0288929",
+      "capture_id": "F77FE11C96ABC2DD0"
+    },
+    "raw_ref": "raw/NOTIFY_FORGED.NEW.json#/exchanges/6",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "NOTIFY_FORGED.NEW",
+    "variant": "NEW",
+    "scenario_id": "NOTIFY_FORGED",
+    "seq": 4,
+    "t_ms": 70,
+    "source": "SHOP_DB",
+    "kind": "SHOP_UNPAID",
+    "order_ref": "SHOP-NOTIFY_FORGED",
+    "pp": {},
+    "raw_ref": "raw/NOTIFY_FORGED.NEW.json#/exchanges/7",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  }
+]

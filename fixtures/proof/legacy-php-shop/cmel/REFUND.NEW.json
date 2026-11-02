@@ -1,0 +1,420 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 2,
+    "t_ms": 70,
+    "source": "PAYPAL_CALL",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/7",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 3,
+    "t_ms": 80,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 4,
+    "t_ms": 100,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY_VERIFIED",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/10",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 5,
+    "t_ms": 110,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-REFUND",
+    "pp": {},
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/11",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 6,
+    "t_ms": 130,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/13",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 7,
+    "t_ms": 150,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/15",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 8,
+    "t_ms": 170,
+    "source": "PAYPAL_CALL",
+    "kind": "REFUND",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "refund_id": "72EA009B1E6B9D05D",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/17",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 9,
+    "t_ms": 180,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-REFUND",
+    "pp": {},
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/18",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 10,
+    "t_ms": 200,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/20",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 11,
+    "t_ms": 220,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/22",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "REFUND.NEW",
+    "variant": "NEW",
+    "scenario_id": "REFUND",
+    "seq": 12,
+    "t_ms": 240,
+    "source": "PAYPAL_LEDGER",
+    "kind": "REFUND",
+    "order_ref": "SHOP-REFUND",
+    "pp": {
+      "order_id": "ABC06EAD43E91BB51",
+      "capture_id": "670173519854307E1",
+      "refund_id": "72EA009B1E6B9D05D",
+      "debug_id": "8a73f2020ca79"
+    },
+    "raw_ref": "raw/REFUND.NEW.json#/exchanges/24",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "REFUNDED"
+  }
+]

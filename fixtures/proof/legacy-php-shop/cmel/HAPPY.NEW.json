@@ -1,0 +1,253 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696",
+      "debug_id": "94cbf8c15cb27"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 2,
+    "t_ms": 70,
+    "source": "PAYPAL_CALL",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696",
+      "capture_id": "493494BF7707943F3",
+      "debug_id": "94cbf8c15cb27"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/7",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 3,
+    "t_ms": 80,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696",
+      "capture_id": "493494BF7707943F3"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 4,
+    "t_ms": 100,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY_VERIFIED",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696",
+      "capture_id": "493494BF7707943F3"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/10",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 5,
+    "t_ms": 110,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {},
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/11",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 6,
+    "t_ms": 130,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696",
+      "capture_id": "493494BF7707943F3",
+      "debug_id": "94cbf8c15cb27"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/13",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "HAPPY.NEW",
+    "variant": "NEW",
+    "scenario_id": "HAPPY",
+    "seq": 7,
+    "t_ms": 150,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-HAPPY",
+    "pp": {
+      "order_id": "960F3B75A78257696",
+      "capture_id": "493494BF7707943F3",
+      "debug_id": "94cbf8c15cb27"
+    },
+    "raw_ref": "raw/HAPPY.NEW.json#/exchanges/15",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  }
+]

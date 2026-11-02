@@ -1,0 +1,63 @@
+{
+  "id": "DECLINE",
+  "family": "DECLINE",
+  "cart": {
+    "items": [
+      {
+        "sku": "tee",
+        "qty": 1,
+        "unit_minor": 2500
+      }
+    ],
+    "total": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "browser_quote": {
+      "minor": 1,
+      "currency": "EUR"
+    }
+  },
+  "steps": [
+    {
+      "driver_step": "Post tee=1 cart with untrusted browser minor=1,currency=EUR; server uses catalogue 2500 USD"
+    },
+    {
+      "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+    },
+    {
+      "api_step": "Create PayPal order, approve through checkout callback, follow scenario raw exchanges in order"
+    },
+    {
+      "api_step": "Read PayPal ledger after run; preserve failures as evidence"
+    }
+  ],
+  "rules": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R14",
+    "R15",
+    "R16",
+    "R17"
+  ],
+  "expect": {
+    "grade": "PASS",
+    "synthetic_only": true,
+    "description": "Both capture calls fail; no transaction exists and no paid state. Successful absence lookup is not missing evidence."
+  },
+  "assured": {
+    "passes_on_old": true,
+    "flake_free_runs": 0
+  }
+}

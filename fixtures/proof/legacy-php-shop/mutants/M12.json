@@ -1,0 +1,12 @@
+{
+  "id": "M12",
+  "op": "M12",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 47
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -44,7 +44,7 @@\n function refundOrder($http, $store, string $ref): array {\n     return $store->locked($ref, function () use ($http, $store, $ref) {\n         $order = $store->get($ref);\n-        if ($order['refunded_minor'] >= $order['minor']) throw new RuntimeException('already refunded'); // M12\n+        if (false) throw new RuntimeException('already refunded'); // M12\n         $result = $http('POST', '/v2/payments/captures/' . $order['capture_id'] . '/refund', [\n             'amount' => ['currency_code' => $order['currency'], 'value' => decimalUSD($order['minor'])]\n         ], ['PayPal-Request-Id' => $ref . ':refund']);\n",
+  "rule": "R11",
+  "equivalent_suspect": true,
+  "killed_by": []
+}

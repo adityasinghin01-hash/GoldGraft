@@ -1,0 +1,54 @@
+{
+  "_label": "SYNTHETIC — hand-made from PayPal docs; not a recording and not a claim about the real shop",
+  "_source": [
+    "https://developer.paypal.com/api/nvp-soap/set-express-checkout-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-express-checkout-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/do-express-checkout-payment-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/refund-transaction-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-transaction-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/IPNandPDTVariables/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/ht-ipn/",
+    "https://developer.paypal.com/api/nvp-soap/errors/",
+    "https://developer.paypal.com/api/payments/v2/schema.json",
+    "https://developer.paypal.com/api/orders/v2/",
+    "https://developer.paypal.com/api/payments/v2/",
+    "https://developer.paypal.com/api/webhooks/v1/",
+    "https://developer.paypal.com/sdk/js/reference/"
+  ],
+  "canonicalization": "UTF-8 sorted keys, compact JSON; omit signature, rekor_entry, ots_proof",
+  "trusted_payload_sha256": "199a54e76a2181fd2fefea44d1bd784afa9c6cab42b7d2fbbcef50446b1798fb",
+  "covered_scenarios": [
+    "HAPPY",
+    "REFUND",
+    "REFUND_TWICE",
+    "DOUBLE",
+    "DECLINE",
+    "NOTIFY_FORGED",
+    "NOTIFY_DUP"
+  ],
+  "excluded_scenarios": [
+    "PENDING",
+    "PARITY_EXTRA"
+  ],
+  "valid": {
+    "schema_valid": true,
+    "payload_hash_matches": true,
+    "signature_verified": false,
+    "eligible": false
+  },
+  "tampered": {
+    "schema_valid": true,
+    "payload_hash_matches": false,
+    "failed_check": "payload_hash_mismatch",
+    "changed_pointer": "/cost/tokens",
+    "signature_verified": false
+  },
+  "gate_failures": [
+    "Two full-shop scenarios are PROBLEM",
+    "Mutation strength is below 0.95",
+    "Runs are synthetic and have zero proven flake-free repetitions",
+    "UNVERIFIED critical ledger evidence",
+    "Fake signature, Rekor, runner identity and ledger root"
+  ],
+  "note": "valid means schema/hash-consistent test vector only. Certificate/1 cannot encode two PROBLEM results or PARTIAL status; it cannot represent the full corpus. No actual cryptographic signature verification is claimed."
+}

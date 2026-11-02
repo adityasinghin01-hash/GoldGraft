@@ -1,0 +1,182 @@
+{
+  "graft_id": "synthetic-c4",
+  "run_id": "PENDING.OLD",
+  "variant": "OLD",
+  "scenario_id": "PENDING",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 0,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/create",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING"
+      },
+      "body_json": {
+        "cart": {
+          "tee": 1
+        },
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 10,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=SetExpressCheckout&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&PAYMENTREQUEST_0_PAYMENTACTION=Sale&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_ITEMAMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD&PAYMENTREQUEST_0_INVNUM=SHOP-PENDING&L_PAYMENTREQUEST_0_NAME0=Cutover+Tee&L_PAYMENTREQUEST_0_AMT0=25.00&L_PAYMENTREQUEST_0_QTY0=1&RETURNURL=https%3A%2F%2Fshop.example%2Fsuccess.php&CANCELURL=https%3A%2F%2Fshop.example%2Fcancel.php"
+    },
+    {
+      "seq": 2,
+      "t_ms": 20,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A00%3A00Z&CORRELATIONID=4afc04f6d1d50&TOKEN=EC-7D421734C4E1255B6",
+      "status": 200
+    },
+    {
+      "seq": 3,
+      "t_ms": 30,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "GET",
+      "url": "https://shop.example/checkout",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Location": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-7D421734C4E1255B6"
+      },
+      "body_text": "",
+      "status": 302
+    },
+    {
+      "seq": 4,
+      "t_ms": 40,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/execute-payment.php",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING"
+      },
+      "body_json": {
+        "token": "EC-7D421734C4E1255B6",
+        "payerID": "FAKEPAYER0001"
+      }
+    },
+    {
+      "seq": 5,
+      "t_ms": 50,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=GetExpressCheckoutDetails&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TOKEN=EC-7D421734C4E1255B6"
+    },
+    {
+      "seq": 6,
+      "t_ms": 60,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A00%3A00Z&CORRELATIONID=4afc04f6d1d50&TOKEN=EC-7D421734C4E1255B6&PAYERID=FAKEPAYER0001&EMAIL=buyer%40example.invalid&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD",
+      "status": 200
+    },
+    {
+      "seq": 7,
+      "t_ms": 70,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=DoExpressCheckoutPayment&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TOKEN=EC-7D421734C4E1255B6&PAYERID=FAKEPAYER0001&PAYMENTREQUEST_0_PAYMENTACTION=Sale&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD"
+    },
+    {
+      "seq": 8,
+      "t_ms": 80,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A00%3A00Z&CORRELATIONID=4afc04f6d1d50&PAYMENTINFO_0_TRANSACTIONID=712556847AB129C5E&PAYMENTINFO_0_AMT=25.00&PAYMENTINFO_0_CURRENCYCODE=USD&PAYMENTINFO_0_PAYMENTSTATUS=Pending&PAYMENTINFO_0_PENDINGREASON=echeck",
+      "status": 200
+    },
+    {
+      "seq": 9,
+      "t_ms": 90,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-PENDING"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "pending",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "t_ms": 100,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture"
+      },
+      "body_text": "METHOD=GetTransactionDetails&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TRANSACTIONID=712556847AB129C5E"
+    },
+    {
+      "seq": 11,
+      "t_ms": 110,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-PENDING",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A00%3A00Z&CORRELATIONID=4afc04f6d1d50&TRANSACTIONID=712556847AB129C5E&AMT=25.00&CURRENCYCODE=USD&PAYMENTSTATUS=Pending&PENDINGREASON=echeck",
+      "status": 200
+    }
+  ]
+}

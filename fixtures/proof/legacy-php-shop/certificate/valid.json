@@ -1,0 +1,55 @@
+{
+  "cert_id": "SYNTHETIC-SUBSET-FIXTURE-ONLY",
+  "shop_id": "legacy-php-shop",
+  "repo": "https://github.com/jeretc/cutover",
+  "commit_old": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+  "commit_new": "FAKE-NEW-COMMIT-FOR-TESTS",
+  "branch": "goldgraft/synthetic-c4",
+  "issued_at": "2026-11-02T10:00:00Z",
+  "results": {
+    "scenarios": 7,
+    "pass": 5,
+    "pass_fixed": 1,
+    "problem": 0,
+    "unverified": 1,
+    "n_a": 0
+  },
+  "proof_strength": {
+    "mutants_total": 12,
+    "equivalent_dropped": 1,
+    "killed": 4,
+    "score": 0.36363636363636365
+  },
+  "survey": {
+    "recall": 0.9583333333333334,
+    "precision": 0.9583333333333334,
+    "misses_learned": 0
+  },
+  "security": {
+    "secrets_found": 0,
+    "injection_attempts_blocked": 0,
+    "deps_blocked": 0
+  },
+  "paypal_evidence": [
+    {
+      "scenario": "HAPPY",
+      "order_id": "960F3B75A78257696",
+      "capture_id": "493494BF7707943F3",
+      "debug_id": "94cbf8c15cb27"
+    }
+  ],
+  "cost": {
+    "usd": 0,
+    "tokens": 0
+  },
+  "time": {
+    "PROVING": 0
+  },
+  "ledger_root": "0000000000000000000000000000000000000000000000000000000000000000",
+  "runner_identity": {
+    "workflow": "FAKE-WORKFLOW-FOR-TESTS",
+    "sha": "FAKE-SHA-FOR-TESTS"
+  },
+  "signature": "FAKE-SIGNATURE-FOR-TESTS",
+  "rekor_entry": "FAKE-REKOR-ENTRY-FOR-TESTS"
+}

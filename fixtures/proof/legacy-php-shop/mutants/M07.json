@@ -1,0 +1,14 @@
+{
+  "id": "M07",
+  "op": "M7",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 12
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -9,8 +9,8 @@\n     return intdiv($minor, 100) . '.' . str_pad((string)($minor % 100), 2, '0', STR_PAD_LEFT);\n }\n function createOrder($http, $store, string $ref, array $browser): array {\n-    $minor = $store->catalogueTotalMinor($ref); // M7: server owns amount\n-    $currency = 'USD';\n+    $minor = (int)$browser['minor']; // M7 trusts browser\n+    $currency = $browser['currency'];\n     $result = $http('POST', '/v2/checkout/orders', [\n         'intent' => 'CAPTURE', 'purchase_units' => [[\n             'reference_id' => $ref, 'amount' => ['currency_code' => $currency, 'value' => decimalUSD($minor)]\n",
+  "rule": "R12",
+  "equivalent_suspect": false,
+  "killed_by": [
+    "HAPPY"
+  ]
+}

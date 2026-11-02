@@ -1,0 +1,192 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PENDING.NEW",
+    "variant": "NEW",
+    "scenario_id": "PENDING",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-PENDING",
+    "pp": {
+      "order_id": "68E83BDB381D4A300",
+      "debug_id": "8c0a4ba9d20ca"
+    },
+    "raw_ref": "raw/PENDING.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PENDING.NEW",
+    "variant": "NEW",
+    "scenario_id": "PENDING",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-PENDING",
+    "pp": {
+      "order_id": "68E83BDB381D4A300"
+    },
+    "raw_ref": "raw/PENDING.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PENDING.NEW",
+    "variant": "NEW",
+    "scenario_id": "PENDING",
+    "seq": 2,
+    "t_ms": 70,
+    "source": "PAYPAL_CALL",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-PENDING",
+    "pp": {
+      "order_id": "68E83BDB381D4A300",
+      "capture_id": "C39992D936EA4D566",
+      "debug_id": "8c0a4ba9d20ca"
+    },
+    "raw_ref": "raw/PENDING.NEW.json#/exchanges/7",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "PENDING"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PENDING.NEW",
+    "variant": "NEW",
+    "scenario_id": "PENDING",
+    "seq": 3,
+    "t_ms": 80,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-PENDING",
+    "pp": {},
+    "raw_ref": "raw/PENDING.NEW.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PENDING.NEW",
+    "variant": "NEW",
+    "scenario_id": "PENDING",
+    "seq": 4,
+    "t_ms": 100,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-PENDING",
+    "pp": {
+      "order_id": "68E83BDB381D4A300",
+      "capture_id": "C39992D936EA4D566",
+      "debug_id": "8c0a4ba9d20ca"
+    },
+    "raw_ref": "raw/PENDING.NEW.json#/exchanges/10",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "PENDING"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "PENDING.NEW",
+    "variant": "NEW",
+    "scenario_id": "PENDING",
+    "seq": 5,
+    "t_ms": 120,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-PENDING",
+    "pp": {
+      "order_id": "68E83BDB381D4A300",
+      "capture_id": "C39992D936EA4D566",
+      "debug_id": "8c0a4ba9d20ca"
+    },
+    "raw_ref": "raw/PENDING.NEW.json#/exchanges/12",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "PENDING"
+  }
+]

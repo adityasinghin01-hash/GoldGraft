@@ -1,0 +1,33 @@
+{
+  "_label": "SYNTHETIC — hand-made from PayPal docs; not a recording and not a claim about the real shop",
+  "_source": [
+    "https://developer.paypal.com/api/nvp-soap/set-express-checkout-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-express-checkout-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/do-express-checkout-payment-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/refund-transaction-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-transaction-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/IPNandPDTVariables/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/ht-ipn/",
+    "https://developer.paypal.com/api/nvp-soap/errors/",
+    "https://developer.paypal.com/api/payments/v2/schema.json",
+    "https://developer.paypal.com/api/orders/v2/",
+    "https://developer.paypal.com/api/payments/v2/",
+    "https://developer.paypal.com/api/webhooks/v1/",
+    "https://developer.paypal.com/sdk/js/reference/"
+  ],
+  "matching_key": [
+    "family",
+    "operation",
+    "location.file",
+    "location.line"
+  ],
+  "answer_key_count": 24,
+  "reported_count": 24,
+  "true_positive": 23,
+  "false_negative": 1,
+  "false_positive": 1,
+  "recall": 0.9583333333333334,
+  "precision": 0.9583333333333334,
+  "missing_touchpoint": "TP24",
+  "false_positive_touchpoint": "FP01"
+}

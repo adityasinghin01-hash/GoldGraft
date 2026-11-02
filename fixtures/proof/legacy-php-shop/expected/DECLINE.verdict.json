@@ -1,0 +1,19 @@
+{
+  "scenario_id": "DECLINE",
+  "grade": "PASS",
+  "rule_hits": [],
+  "parity_diff": [],
+  "noise_masked": [
+    "run_id",
+    "variant",
+    "raw_ref",
+    "t_ms",
+    "pp.legacy_token",
+    "pp.debug_id",
+    "pp.order_id"
+  ],
+  "deltas_applied": [
+    "D_TOKEN_ORDER",
+    "D_APPROVE"
+  ]
+}

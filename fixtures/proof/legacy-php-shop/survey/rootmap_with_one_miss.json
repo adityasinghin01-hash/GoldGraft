@@ -1,0 +1,566 @@
+{
+  "shop_id": "legacy-php-shop",
+  "stack": {
+    "lang": "PHP",
+    "framework": "plain PHP",
+    "versions": {},
+    "db": "flat JSON file"
+  },
+  "lenses_run": [
+    "code"
+  ],
+  "touchpoints": [
+    {
+      "id": "TP01",
+      "family": "EC_NVP",
+      "operation": "NVP endpoint definition",
+      "location": {
+        "file": "src/config.php",
+        "line": 7
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "POST /v2/checkout/orders"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP02",
+      "family": "EC_NVP",
+      "operation": "NVP client wrapper",
+      "location": {
+        "file": "src/lib/paypal_nvp.php",
+        "line": 5
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "REST HTTP client"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP03",
+      "family": "EC_NVP",
+      "operation": "NVP endpoint transport",
+      "location": {
+        "file": "src/lib/paypal_nvp.php",
+        "line": 14
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "REST HTTP client"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP04",
+      "family": "EC_NVP",
+      "operation": "SetExpressCheckout",
+      "location": {
+        "file": "src/api/create-payment.php",
+        "line": 20
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "POST /v2/checkout/orders"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP05",
+      "family": "EC_NVP",
+      "operation": "RETURNURL",
+      "location": {
+        "file": "src/api/create-payment.php",
+        "line": 25
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 onApprove"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP06",
+      "family": "EC_NVP",
+      "operation": "CANCELURL",
+      "location": {
+        "file": "src/api/create-payment.php",
+        "line": 26
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 onCancel"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP07",
+      "family": "EC_NVP",
+      "operation": "GetExpressCheckoutDetails",
+      "location": {
+        "file": "src/api/execute-payment.php",
+        "line": 12
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "GET /v2/checkout/orders/{id}"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP08",
+      "family": "EC_NVP",
+      "operation": "DoExpressCheckoutPayment",
+      "location": {
+        "file": "src/api/execute-payment.php",
+        "line": 15
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "POST /v2/checkout/orders/{id}/capture"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP09",
+      "family": "EC_NVP",
+      "operation": "RefundTransaction",
+      "location": {
+        "file": "src/api/refund.php",
+        "line": 11
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/payments/v2/",
+        "rest_op": "POST /v2/payments/captures/{id}/refund"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP10",
+      "family": "IPN",
+      "operation": "IPN verification endpoint definition",
+      "location": {
+        "file": "src/config.php",
+        "line": 9
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+        "rest_op": "POST /v1/notifications/verify-webhook-signature"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP11",
+      "family": "IPN",
+      "operation": "IPN input handler",
+      "location": {
+        "file": "src/ipn.php",
+        "line": 6
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+        "rest_op": "webhook input handler"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP12",
+      "family": "IPN",
+      "operation": "IPN verification transport",
+      "location": {
+        "file": "src/ipn.php",
+        "line": 7
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+        "rest_op": "POST /v1/notifications/verify-webhook-signature"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP13",
+      "family": "IPN",
+      "operation": "_notify-validate",
+      "location": {
+        "file": "src/ipn.php",
+        "line": 9
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+        "rest_op": "POST /v1/notifications/verify-webhook-signature"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP14",
+      "family": "IPN",
+      "operation": "VERIFIED / Completed gate",
+      "location": {
+        "file": "src/ipn.php",
+        "line": 15
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+        "rest_op": "SUCCESS / PAYMENT.CAPTURE.COMPLETED gate"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP15",
+      "family": "IPN",
+      "operation": "IPN accepted-payment log",
+      "location": {
+        "file": "src/ipn.php",
+        "line": 16
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+        "rest_op": "deduplicated webhook persistence"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP16",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "checkout.js script",
+      "location": {
+        "file": "src/index.php",
+        "line": 31
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 core script"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP17",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "PayPal button mount",
+      "location": {
+        "file": "src/index.php",
+        "line": 24
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 paypal-button"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP18",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "paypal.Button.render",
+      "location": {
+        "file": "src/index.php",
+        "line": 38
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 createPayPalOneTimePaymentSession"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP19",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "payment / create callback",
+      "location": {
+        "file": "src/index.php",
+        "line": 43
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "server create order / session start"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP20",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "onAuthorize",
+      "location": {
+        "file": "src/index.php",
+        "line": 45
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 onApprove"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP21",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "approved confirmation POST",
+      "location": {
+        "file": "src/index.php",
+        "line": 46
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "server capture from v6 onApprove"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP22",
+      "family": "CHECKOUT_JS_V4",
+      "operation": "onCancel",
+      "location": {
+        "file": "src/index.php",
+        "line": 51
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 onCancel"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "TP23",
+      "family": "EC_NVP",
+      "operation": "return page",
+      "location": {
+        "file": "src/success.php",
+        "line": 1
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 1,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+        "rest_op": "v6 onApprove result UI"
+      },
+      "paypal_only": false
+    },
+    {
+      "id": "FP01",
+      "family": "DIRECT_PAYMENT",
+      "operation": "DoDirectPayment",
+      "location": {
+        "file": "src/index.php",
+        "line": 34
+      },
+      "lenses": [
+        "code"
+      ],
+      "confidence": 0.3,
+      "live": false,
+      "target": {
+        "paypal_mapping_id": "https://developer.paypal.com/api/orders/v2/",
+        "rest_op": "POST /v2/checkout/orders"
+      },
+      "paypal_only": false
+    }
+  ],
+  "money_flow": {
+    "create": [
+      {
+        "file": "src/api/create-payment.php",
+        "line": 10
+      },
+      {
+        "file": "src/api/create-payment.php",
+        "line": 20
+      },
+      {
+        "file": "src/api/create-payment.php",
+        "line": 32
+      }
+    ],
+    "approve": [
+      {
+        "file": "src/index.php",
+        "line": 45
+      },
+      {
+        "file": "src/index.php",
+        "line": 46
+      },
+      {
+        "file": "src/api/execute-payment.php",
+        "line": 8
+      }
+    ],
+    "capture": [
+      {
+        "file": "src/api/execute-payment.php",
+        "line": 12
+      },
+      {
+        "file": "src/api/execute-payment.php",
+        "line": 15
+      }
+    ],
+    "mark_paid": [
+      {
+        "file": "src/api/execute-payment.php",
+        "line": 23
+      },
+      {
+        "file": "src/api/execute-payment.php",
+        "line": 27
+      },
+      {
+        "file": "src/lib/orders_store.php",
+        "line": 11
+      }
+    ],
+    "refund": [
+      {
+        "file": "src/api/refund.php",
+        "line": 9
+      },
+      {
+        "file": "src/api/refund.php",
+        "line": 11
+      },
+      {
+        "file": "src/api/refund.php",
+        "line": 13
+      },
+      {
+        "file": "src/api/refund.php",
+        "line": 14
+      }
+    ],
+    "notify": [
+      {
+        "file": "src/ipn.php",
+        "line": 6
+      },
+      {
+        "file": "src/ipn.php",
+        "line": 9
+      },
+      {
+        "file": "src/ipn.php",
+        "line": 15
+      },
+      {
+        "file": "src/ipn.php",
+        "line": 16
+      }
+    ],
+    "recurring": []
+  },
+  "recall_evidence": {
+    "runtime_calls_total": 0,
+    "matched_by_static": 0,
+    "misses": []
+  }
+}

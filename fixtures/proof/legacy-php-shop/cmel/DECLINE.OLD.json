@@ -1,0 +1,90 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DECLINE.OLD",
+    "variant": "OLD",
+    "scenario_id": "DECLINE",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-DECLINE",
+    "pp": {
+      "legacy_token": "EC-6BA70A855431E0F4B",
+      "debug_id": "a5bdfa563acd5"
+    },
+    "raw_ref": "raw/DECLINE.OLD.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DECLINE.OLD",
+    "variant": "OLD",
+    "scenario_id": "DECLINE",
+    "seq": 1,
+    "t_ms": 40,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-DECLINE",
+    "pp": {
+      "legacy_token": "EC-6BA70A855431E0F4B"
+    },
+    "raw_ref": "raw/DECLINE.OLD.json#/exchanges/4",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DECLINE.OLD",
+    "variant": "OLD",
+    "scenario_id": "DECLINE",
+    "seq": 2,
+    "t_ms": 90,
+    "source": "SHOP_DB",
+    "kind": "SHOP_UNPAID",
+    "order_ref": "SHOP-DECLINE",
+    "pp": {},
+    "raw_ref": "raw/DECLINE.OLD.json#/exchanges/9",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  }
+]

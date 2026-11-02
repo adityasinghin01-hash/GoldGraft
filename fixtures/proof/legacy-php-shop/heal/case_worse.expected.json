@@ -1,0 +1,16 @@
+{
+  "graft_id": "synthetic-c4",
+  "from_stage_pct": 10,
+  "action": "CUTBACK",
+  "to_stage_pct": 0,
+  "reason": "Posterior probability of worse exceeds 0.95",
+  "stats": {
+    "n_old": 100,
+    "n_new": 100,
+    "success_old": 100,
+    "success_new": 20,
+    "prob_new_not_worse": 2.750509624550952e-36,
+    "threshold": 0.95
+  },
+  "hard_stop": null
+}

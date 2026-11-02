@@ -1,0 +1,379 @@
+{
+  "graft_id": "synthetic-c4",
+  "run_id": "REFUND_TWICE.OLD_TWIN",
+  "variant": "OLD_TWIN",
+  "scenario_id": "REFUND_TWICE",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 1000,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/create",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "body_json": {
+        "cart": {
+          "tee": 1
+        },
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 1010,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=SetExpressCheckout&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&PAYMENTREQUEST_0_PAYMENTACTION=Sale&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_ITEMAMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD&PAYMENTREQUEST_0_INVNUM=SHOP-REFUND_TWICE&L_PAYMENTREQUEST_0_NAME0=Cutover+Tee&L_PAYMENTREQUEST_0_AMT0=25.00&L_PAYMENTREQUEST_0_QTY0=1&RETURNURL=https%3A%2F%2Fshop.example%2Fsuccess.php&CANCELURL=https%3A%2F%2Fshop.example%2Fcancel.php"
+    },
+    {
+      "seq": 2,
+      "t_ms": 1020,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&TOKEN=EC-5FBA8C1019CCF7A99",
+      "status": 200
+    },
+    {
+      "seq": 3,
+      "t_ms": 1030,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "GET",
+      "url": "https://shop.example/checkout",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Location": "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-5FBA8C1019CCF7A99"
+      },
+      "body_text": "",
+      "status": 302
+    },
+    {
+      "seq": 4,
+      "t_ms": 1040,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/execute-payment.php",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "body_json": {
+        "token": "EC-5FBA8C1019CCF7A99",
+        "payerID": "FAKEPAYER0001"
+      }
+    },
+    {
+      "seq": 5,
+      "t_ms": 1050,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=GetExpressCheckoutDetails&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TOKEN=EC-5FBA8C1019CCF7A99"
+    },
+    {
+      "seq": 6,
+      "t_ms": 1060,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&TOKEN=EC-5FBA8C1019CCF7A99&PAYERID=FAKEPAYER0001&EMAIL=buyer%40example.invalid&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD",
+      "status": 200
+    },
+    {
+      "seq": 7,
+      "t_ms": 1070,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=DoExpressCheckoutPayment&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TOKEN=EC-5FBA8C1019CCF7A99&PAYERID=FAKEPAYER0001&PAYMENTREQUEST_0_PAYMENTACTION=Sale&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD"
+    },
+    {
+      "seq": 8,
+      "t_ms": 1080,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&PAYMENTINFO_0_TRANSACTIONID=99E5473148A32DF4F&PAYMENTINFO_0_AMT=25.00&PAYMENTINFO_0_CURRENCYCODE=USD&PAYMENTINFO_0_PAYMENTSTATUS=Completed",
+      "status": 200
+    },
+    {
+      "seq": 9,
+      "t_ms": 1090,
+      "direction": "PAYPAL_NOTIFY_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/ipn.php",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "txn_type=express_checkout&payment_status=Completed&mc_gross=25.00&mc_currency=USD&txn_id=99E5473148A32DF4F&invoice=SHOP-REFUND_TWICE&receiver_email=merchant%40example.invalid&payment_date=02%3A01%3A00+Nov+02%2C+2026+PST"
+    },
+    {
+      "seq": 10,
+      "t_ms": 1100,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "body_text": "cmd=_notify-validate&txn_type=express_checkout&payment_status=Completed&mc_gross=25.00&mc_currency=USD&txn_id=99E5473148A32DF4F&invoice=SHOP-REFUND_TWICE&receiver_email=merchant%40example.invalid&payment_date=02%3A01%3A00+Nov+02%2C+2026+PST"
+    },
+    {
+      "seq": 11,
+      "t_ms": 1110,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "body_text": "VERIFIED",
+      "status": 200
+    },
+    {
+      "seq": 12,
+      "t_ms": 1120,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-REFUND_TWICE"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 13,
+      "t_ms": 1130,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture"
+      },
+      "body_text": "METHOD=GetTransactionDetails&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TRANSACTIONID=99E5473148A32DF4F"
+    },
+    {
+      "seq": 14,
+      "t_ms": 1140,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&TRANSACTIONID=99E5473148A32DF4F&AMT=25.00&CURRENCYCODE=USD&PAYMENTSTATUS=Completed",
+      "status": 200
+    },
+    {
+      "seq": 15,
+      "t_ms": 1150,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=RefundTransaction&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TRANSACTIONID=99E5473148A32DF4F&REFUNDTYPE=Full"
+    },
+    {
+      "seq": 16,
+      "t_ms": 1160,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&REFUNDTRANSACTIONID=7F8BA891334466BFD&GROSSREFUNDAMT=25.00&CURRENCYCODE=USD&REFUNDSTATUS=instant",
+      "status": 200
+    },
+    {
+      "seq": 17,
+      "t_ms": 1170,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-REFUND_TWICE"
+        },
+        "before": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 2500
+        }
+      }
+    },
+    {
+      "seq": 18,
+      "t_ms": 1180,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "METHOD=RefundTransaction&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TRANSACTIONID=99E5473148A32DF4F&REFUNDTYPE=Full"
+    },
+    {
+      "seq": 19,
+      "t_ms": 1190,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "body_text": "ACK=Failure&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&L_ERRORCODE0=10009&L_SHORTMESSAGE0=Transaction+refused&L_LONGMESSAGE0=This+transaction+has+already+been+fully+refunded.&L_SEVERITYCODE0=Error",
+      "status": 200
+    },
+    {
+      "seq": 20,
+      "t_ms": 1200,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-REFUND_TWICE"
+        },
+        "before": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 2500
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 5000
+        }
+      }
+    },
+    {
+      "seq": 21,
+      "t_ms": 1210,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture"
+      },
+      "body_text": "METHOD=GetTransactionDetails&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TRANSACTIONID=99E5473148A32DF4F"
+    },
+    {
+      "seq": 22,
+      "t_ms": 1220,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&TRANSACTIONID=99E5473148A32DF4F&AMT=25.00&CURRENCYCODE=USD&PAYMENTSTATUS=Refunded",
+      "status": 200
+    },
+    {
+      "seq": 23,
+      "t_ms": 1230,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "refund",
+        "X-GoldGraft-Parent-Capture": "99E5473148A32DF4F"
+      },
+      "body_text": "METHOD=GetTransactionDetails&VERSION=204.0&USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&TRANSACTIONID=7F8BA891334466BFD"
+    },
+    {
+      "seq": 24,
+      "t_ms": 1240,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-3t.sandbox.paypal.com/nvp",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-REFUND_TWICE",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "refund",
+        "X-GoldGraft-Parent-Capture": "99E5473148A32DF4F"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&TIMESTAMP=2026-11-02T10%3A01%3A00Z&CORRELATIONID=acbacc96c726c&TRANSACTIONID=7F8BA891334466BFD&AMT=-25.00&CURRENCYCODE=USD&PAYMENTSTATUS=Completed",
+      "status": 200
+    }
+  ]
+}

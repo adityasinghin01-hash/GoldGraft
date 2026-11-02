@@ -1,0 +1,14 @@
+{
+  "id": "M08",
+  "op": "M8",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 58
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -55,13 +55,7 @@\n }\n function webhook($http, $store, array $headers, array $event, string $webhookId): void {\n     $headers = array_change_key_case($headers, CASE_LOWER); // M10\n-    $verification = $http('POST', '/v1/notifications/verify-webhook-signature', [\n-        'auth_algo' => $headers['paypal-auth-algo'], 'cert_url' => $headers['paypal-cert-url'],\n-        'transmission_id' => $headers['paypal-transmission-id'],\n-        'transmission_sig' => $headers['paypal-transmission-sig'],\n-        'transmission_time' => $headers['paypal-transmission-time'],\n-        'webhook_id' => $webhookId, 'webhook_event' => $event\n-    ], []);\n+    $verification = ['verification_status' => 'SUCCESS']; // M8 bypass\n     if ($verification['verification_status'] !== 'SUCCESS') return; // M8\n     if ($event['event_type'] !== 'PAYMENT.CAPTURE.COMPLETED') return;\n     $resource = $event['resource'];\n",
+  "rule": "R08",
+  "equivalent_suspect": false,
+  "killed_by": [
+    "NOTIFY_FORGED"
+  ]
+}

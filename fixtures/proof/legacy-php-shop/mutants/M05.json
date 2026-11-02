@@ -1,0 +1,12 @@
+{
+  "id": "M05",
+  "op": "M5",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 29
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -26,7 +26,7 @@\n         $remote = $http('GET', '/v2/checkout/orders/' . $order['order_id'], [], []);\n         if ($remote['status'] !== 'APPROVED') throw new RuntimeException('unapproved'); // M3\n         $store->saveApproval($ref, $remote); // M11: durable before capture\n-        $requestId = $ref . ':capture'; // M5: stable across response loss\n+        $requestId = bin2hex(random_bytes(12)); // M5 changes on retry\n         $result = $http('POST', '/v2/checkout/orders/' . $order['order_id'] . '/capture', [],\n                         ['PayPal-Request-Id' => $requestId]);\n         $capture = $result['purchase_units'][0]['payments']['captures'][0];\n",
+  "rule": "R10",
+  "equivalent_suspect": false,
+  "killed_by": []
+}

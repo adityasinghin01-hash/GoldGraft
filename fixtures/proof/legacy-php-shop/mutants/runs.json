@@ -1,0 +1,240 @@
+{
+  "_label": "SYNTHETIC — hand-made from PayPal docs; not a recording and not a claim about the real shop",
+  "_source": [
+    "https://developer.paypal.com/api/nvp-soap/set-express-checkout-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-express-checkout-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/do-express-checkout-payment-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/refund-transaction-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/get-transaction-details-nvp/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/IPNandPDTVariables/",
+    "https://developer.paypal.com/api/nvp-soap/ipn/ht-ipn/",
+    "https://developer.paypal.com/api/nvp-soap/errors/",
+    "https://developer.paypal.com/api/payments/v2/schema.json",
+    "https://developer.paypal.com/api/orders/v2/",
+    "https://developer.paypal.com/api/payments/v2/",
+    "https://developer.paypal.com/api/webhooks/v1/",
+    "https://developer.paypal.com/sdk/js/reference/"
+  ],
+  "execution": "SYNTHETIC expected run outcomes, not executed PHP/sandbox measurements",
+  "baseline": "Independent correct new_sample/payments.php, not the intentionally broken NEW PENDING trace. Static R12/R16 checks participate in rule evaluation.",
+  "stand_in_setup": {
+    "DOUBLE": "Two approvals are queued, then confirmation handlers run sequentially. The second reads the first committed capture. This does not cover an overlapping confirmation critical section.",
+    "NOTIFY_FORGED": "Pause after durable approval and before capture. The approved local row exists, but PayPal has no completed capture. M08 can trust the forged completion only by bypassing signature verification."
+  },
+  "equivalence_scope": "Conditional on the explicit HTTP/storage stand-ins in new_sample/README.md; reviewed expected equivalents, not automatic drops of all suspects. Only M03 is dropped; M04 and M12 remain in the denominator because full CMEL equivalence is not established.",
+  "runs": [
+    {
+      "mutant": "M01",
+      "rule": "R03",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "HAPPY"
+      ],
+      "baseline_grades": {
+        "HAPPY": "PASS"
+      },
+      "grades": {
+        "HAPPY": "PASS"
+      },
+      "killed": false,
+      "reason": "Survives: no cross-currency response in the linked HAPPY run."
+    },
+    {
+      "mutant": "M02",
+      "rule": "R01",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "PENDING"
+      ],
+      "baseline_grades": {
+        "PENDING": "PASS"
+      },
+      "grades": {
+        "PENDING": "PROBLEM"
+      },
+      "killed": true,
+      "reason": "Killed in the correct sample's pending baseline: skipped status guard creates paid on pending (R01/R07)."
+    },
+    {
+      "mutant": "M03",
+      "rule": "R06",
+      "equivalence": "DROPPED",
+      "equivalence_reason": "Removing the local approval precheck cannot make PayPal capture an unapproved order: PayPal's capture endpoint rejects it, and the completion guard remains. Conditional equivalence for this one-order CAPTURE sample.",
+      "linked_scenarios": [
+        "NOTIFY_FORGED"
+      ],
+      "baseline_grades": {
+        "NOTIFY_FORGED": "PASS"
+      },
+      "grades": {
+        "NOTIFY_FORGED": "PASS"
+      },
+      "killed": false,
+      "reason": "Removing the local approval precheck cannot make PayPal capture an unapproved order: PayPal's capture endpoint rejects it, and the completion guard remains. Conditional equivalence for this one-order CAPTURE sample."
+    },
+    {
+      "mutant": "M04",
+      "rule": "R05",
+      "equivalence": "RETAINED",
+      "equivalence_reason": "Two calls use the same PayPal order and stable request ID; the store upserts the same capture ID. With this stand-in's atomic upserts, removing this lock changes no economic CMEL fact. Not a general claim that locks are unnecessary.",
+      "linked_scenarios": [
+        "DOUBLE"
+      ],
+      "baseline_grades": {
+        "DOUBLE": "PASS"
+      },
+      "grades": {
+        "DOUBLE": "PASS"
+      },
+      "killed": false,
+      "reason": "Survives: DOUBLE queues two approvals but invokes confirmation handlers sequentially, so the cached replay hides the removed lock. Retained: overlapping handlers can change API observations; full CMEL equivalence has not been established."
+    },
+    {
+      "mutant": "M05",
+      "rule": "R10",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "DOUBLE"
+      ],
+      "baseline_grades": {
+        "DOUBLE": "PASS"
+      },
+      "grades": {
+        "DOUBLE": "PASS"
+      },
+      "killed": false,
+      "reason": "Survives: DOUBLE covers two tabs, not a lost capture response; cached replay hides the random request ID."
+    },
+    {
+      "mutant": "M06",
+      "rule": "R16",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "HAPPY"
+      ],
+      "baseline_grades": {
+        "HAPPY": "PASS"
+      },
+      "grades": {
+        "HAPPY": "PROBLEM"
+      },
+      "killed": true,
+      "reason": "Killed by the static R16 guard for float money operations, even if this particular 25.00 converts exactly."
+    },
+    {
+      "mutant": "M07",
+      "rule": "R12",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "HAPPY"
+      ],
+      "baseline_grades": {
+        "HAPPY": "PASS"
+      },
+      "grades": {
+        "HAPPY": "PROBLEM"
+      },
+      "killed": true,
+      "reason": "Killed: browser minor=1,currency=EUR replaces the server's 2500 USD (R12/R17)."
+    },
+    {
+      "mutant": "M08",
+      "rule": "R08",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "NOTIFY_FORGED"
+      ],
+      "baseline_grades": {
+        "NOTIFY_FORGED": "PASS"
+      },
+      "grades": {
+        "NOTIFY_FORGED": "PROBLEM"
+      },
+      "killed": true,
+      "reason": "Killed: unverified forged completion is trusted and can cause paid without a ledger capture (R01/R08)."
+    },
+    {
+      "mutant": "M09",
+      "rule": "R01",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "HAPPY"
+      ],
+      "baseline_grades": {
+        "HAPPY": "PASS"
+      },
+      "grades": {
+        "HAPPY": "UNVERIFIED"
+      },
+      "killed": false,
+      "reason": "Survives the mutation score: bad resource path aborts the webhook run, yielding UNVERIFIED, not PROBLEM. A fail-closed run is not a kill under U3."
+    },
+    {
+      "mutant": "M10",
+      "rule": "R08",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "NOTIFY_FORGED"
+      ],
+      "baseline_grades": {
+        "NOTIFY_FORGED": "PASS"
+      },
+      "grades": {
+        "NOTIFY_FORGED": "PASS"
+      },
+      "killed": false,
+      "reason": "Survives: forged notification remains rejected when header lookup fails; a valid mixed-case notification test is absent."
+    },
+    {
+      "mutant": "M11",
+      "rule": "R14",
+      "equivalence": "RETAINED",
+      "equivalence_reason": null,
+      "linked_scenarios": [
+        "HAPPY"
+      ],
+      "baseline_grades": {
+        "HAPPY": "PASS"
+      },
+      "grades": {
+        "HAPPY": "PASS"
+      },
+      "killed": false,
+      "reason": "Survives: no restart occurs in HAPPY; a RESTART case would exercise the lost durable approval."
+    },
+    {
+      "mutant": "M12",
+      "rule": "R11",
+      "equivalence": "RETAINED",
+      "equivalence_reason": "PayPal rejects an independent second full refund; idempotent retries replay the first refund ID. The injected store deduplicates refund IDs and only records COMPLETED responses. Removing this local guard changes no refund sum with those explicit stand-in guarantees.",
+      "linked_scenarios": [
+        "REFUND_TWICE"
+      ],
+      "baseline_grades": {
+        "REFUND_TWICE": "PASS_FIXED"
+      },
+      "grades": {
+        "REFUND_TWICE": "PASS_FIXED"
+      },
+      "killed": false,
+      "reason": "Survives as PASS_FIXED: the OLD R11 bug remains reported, while the idempotent PayPal refund ID and store dedupe prevent a second DB refund. Retained: removing the guard can change API REFUND observations, so equal money totals do not prove full CMEL equivalence."
+    }
+  ],
+  "surviving": [
+    "M01",
+    "M04",
+    "M05",
+    "M09",
+    "M10",
+    "M11",
+    "M12"
+  ]
+}

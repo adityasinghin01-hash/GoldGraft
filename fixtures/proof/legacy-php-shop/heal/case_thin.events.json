@@ -1,0 +1,982 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-000",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:00+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-000",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:01+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-000",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:02+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-001",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:03+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-001",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:04+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-001",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:05+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-002",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:06+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-002",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:07+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-002",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:08+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-003",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:09+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-003",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:10+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-003",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:11+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-004",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:12+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-004",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:13+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-004",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:14+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-005",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:15+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-005",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:16+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-005",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:17+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-006",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:18+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-006",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:19+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-006",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:20+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-007",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:21+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-007",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:22+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-007",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:23+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-008",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:24+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-008",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:25+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-008",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:26+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "ATTEMPT",
+    "order_ref": "thin-OLD-009",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:27+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "APPROVED",
+    "order_ref": "thin-OLD-009",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:28+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "OLD",
+    "event": "DECLINED",
+    "order_ref": "thin-OLD-009",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:29+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-000",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:30+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-000",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:31+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-000",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-000"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:32+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-001",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:33+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-001",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:34+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-001",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-001"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:35+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-002",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:36+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-002",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:37+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-002",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-002"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:38+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-003",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:39+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-003",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:40+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-003",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-003"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:41+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-004",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:42+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-004",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:43+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-004",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-004"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:44+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-005",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:45+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-005",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:46+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-005",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-005"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:47+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-006",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:48+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-006",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:49+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-006",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-006"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:50+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-007",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:51+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-007",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:52+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-007",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-007"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:53+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-008",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:54+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-008",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:55+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-008",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-008"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:56+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "ATTEMPT",
+    "order_ref": "thin-NEW-009",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:57+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "APPROVED",
+    "order_ref": "thin-NEW-009",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {},
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:58+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "shop_id": "legacy-php-shop",
+    "path": "NEW",
+    "event": "CAPTURED",
+    "order_ref": "thin-NEW-009",
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "paypal_ids": {
+      "capture_id": "FAKE-NEW-009"
+    },
+    "latency_ms": 100,
+    "ts": "2026-11-02T10:00:59+00:00",
+    "lib_version": "synthetic-c4/1",
+    "signature": "FAKE-SIGNATURE-FOR-TESTS"
+  }
+]

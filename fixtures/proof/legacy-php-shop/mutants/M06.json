@@ -1,0 +1,14 @@
+{
+  "id": "M06",
+  "op": "M6",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 33
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -30,7 +30,7 @@\n         $result = $http('POST', '/v2/checkout/orders/' . $order['order_id'] . '/capture', [],\n                         ['PayPal-Request-Id' => $requestId]);\n         $capture = $result['purchase_units'][0]['payments']['captures'][0];\n-        $amountMatches = $capture['amount']['value'] === decimalUSD($order['minor']); // M6\n+        $amountMatches = (float)$capture['amount']['value'] === (float)$order['minor'] / 100; // M6\n         $currencyMatches = $capture['amount']['currency_code'] === $order['currency']; // M1\n         if (!$amountMatches || !$currencyMatches) throw new RuntimeException('money mismatch');\n         if ($capture['status'] !== 'COMPLETED') { // M2\n",
+  "rule": "R16",
+  "equivalent_suspect": false,
+  "killed_by": [
+    "HAPPY"
+  ]
+}

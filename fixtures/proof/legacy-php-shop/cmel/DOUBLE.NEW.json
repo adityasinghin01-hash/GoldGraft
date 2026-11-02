@@ -1,0 +1,280 @@
+[
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 0,
+    "t_ms": 20,
+    "source": "PAYPAL_CALL",
+    "kind": "INTENT",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4",
+      "debug_id": "cec5e60818e55"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/2",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 1,
+    "t_ms": 30,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/3",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 2,
+    "t_ms": 40,
+    "source": "SHOP_HTTP",
+    "kind": "APPROVE",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/4",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 3,
+    "t_ms": 80,
+    "source": "PAYPAL_CALL",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4",
+      "capture_id": "92F3B668D3999D688",
+      "debug_id": "cec5e60818e55"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/8",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 4,
+    "t_ms": 90,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4",
+      "capture_id": "92F3B668D3999D688"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/9",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 5,
+    "t_ms": 110,
+    "source": "NOTIFICATION",
+    "kind": "NOTIFY_VERIFIED",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4",
+      "capture_id": "92F3B668D3999D688"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/11",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ]
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 6,
+    "t_ms": 120,
+    "source": "SHOP_DB",
+    "kind": "SHOP_PAID",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {},
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/12",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    }
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 7,
+    "t_ms": 160,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4",
+      "capture_id": "92F3B668D3999D688",
+      "debug_id": "cec5e60818e55"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/16",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  },
+  {
+    "graft_id": "synthetic-c4",
+    "run_id": "DOUBLE.NEW",
+    "variant": "NEW",
+    "scenario_id": "DOUBLE",
+    "seq": 8,
+    "t_ms": 180,
+    "source": "PAYPAL_LEDGER",
+    "kind": "CAPTURE",
+    "order_ref": "SHOP-DOUBLE",
+    "pp": {
+      "order_id": "CA79698CA088CB9D4",
+      "capture_id": "92F3B668D3999D688",
+      "debug_id": "cec5e60818e55"
+    },
+    "raw_ref": "raw/DOUBLE.NEW.json#/exchanges/18",
+    "noise": [
+      "run_id",
+      "variant",
+      "raw_ref",
+      "t_ms",
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "pp.refund_id",
+      "pp.debug_id"
+    ],
+    "money": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "status_norm": "COMPLETED"
+  }
+]

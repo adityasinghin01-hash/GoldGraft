@@ -1,0 +1,14 @@
+{
+  "id": "M02",
+  "op": "M2",
+  "location": {
+    "file": "new_sample/payments.php",
+    "line": 36
+  },
+  "patch": "--- a/payments.php\n+++ b/payments.php\n@@ -33,7 +33,7 @@\n         $amountMatches = $capture['amount']['value'] === decimalUSD($order['minor']); // M6\n         $currencyMatches = $capture['amount']['currency_code'] === $order['currency']; // M1\n         if (!$amountMatches || !$currencyMatches) throw new RuntimeException('money mismatch');\n-        if ($capture['status'] !== 'COMPLETED') { // M2\n+    if (false) { // M2 treats pending as paid\n             $store->setPending($ref, $capture['id']);\n             return $result;\n         }\n",
+  "rule": "R01",
+  "equivalent_suspect": false,
+  "killed_by": [
+    "PENDING"
+  ]
+}

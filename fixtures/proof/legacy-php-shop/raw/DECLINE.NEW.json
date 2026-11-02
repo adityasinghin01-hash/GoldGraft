@@ -1,0 +1,243 @@
+{
+  "graft_id": "synthetic-c4",
+  "run_id": "DECLINE.NEW",
+  "variant": "NEW",
+  "scenario_id": "DECLINE",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 0,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/create",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "cart": {
+          "tee": 1
+        },
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 10,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "SHOP-DECLINE:create",
+        "Prefer": "return=representation"
+      },
+      "body_json": {
+        "intent": "CAPTURE",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-DECLINE",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "seq": 2,
+      "t_ms": 20,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "a1580375b21ed"
+      },
+      "body_json": {
+        "id": "230B45C8E35DC5D04",
+        "intent": "CAPTURE",
+        "status": "CREATED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-DECLINE",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 201
+    },
+    {
+      "seq": 3,
+      "t_ms": 30,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "https://shop.example/api/approve",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "orderId": "230B45C8E35DC5D04"
+      }
+    },
+    {
+      "seq": 4,
+      "t_ms": 40,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/230B45C8E35DC5D04",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 5,
+      "t_ms": 50,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/230B45C8E35DC5D04",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "a1580375b21ed"
+      },
+      "body_json": {
+        "id": "230B45C8E35DC5D04",
+        "intent": "CAPTURE",
+        "status": "APPROVED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-DECLINE",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 200
+    },
+    {
+      "seq": 6,
+      "t_ms": 60,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/230B45C8E35DC5D04/capture",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "SHOP-DECLINE:capture",
+        "Prefer": "return=representation"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 7,
+      "t_ms": 70,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/230B45C8E35DC5D04/capture",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "a1580375b21ed"
+      },
+      "body_json": {
+        "name": "UNPROCESSABLE_ENTITY",
+        "message": "The requested action could not be performed.",
+        "debug_id": "a1580375b21ed",
+        "details": [
+          {
+            "issue": "INSTRUMENT_DECLINED",
+            "description": "The instrument was declined."
+          }
+        ]
+      },
+      "status": 422
+    },
+    {
+      "seq": 8,
+      "t_ms": 80,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://synthetic/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-DECLINE"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 9,
+      "t_ms": 90,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/230B45C8E35DC5D04",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "absence",
+        "Authorization": "[REDACTED]"
+      },
+      "body_json": null
+    },
+    {
+      "seq": 10,
+      "t_ms": 100,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "https://api-m.sandbox.paypal.com/v2/checkout/orders/230B45C8E35DC5D04",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Ledger": "absence",
+        "PayPal-Debug-Id": "a1580375b21ed"
+      },
+      "body_json": {
+        "id": "230B45C8E35DC5D04",
+        "intent": "CAPTURE",
+        "status": "APPROVED",
+        "purchase_units": [
+          {
+            "reference_id": "SHOP-DECLINE",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            }
+          }
+        ],
+        "create_time": "2026-11-02T10:00:00Z"
+      },
+      "status": 200
+    }
+  ]
+}

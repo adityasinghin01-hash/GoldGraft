@@ -1,0 +1,24 @@
+{
+  "scenario_id": "HAPPY",
+  "grade": "PASS",
+  "rule_hits": [],
+  "parity_diff": [],
+  "noise_masked": [
+    "run_id",
+    "variant",
+    "raw_ref",
+    "t_ms",
+    "pp.legacy_token",
+    "pp.txn_id",
+    "pp.debug_id",
+    "pp.order_id",
+    "pp.capture_id"
+  ],
+  "deltas_applied": [
+    "D_TOKEN_ORDER",
+    "D_APPROVE",
+    "D_TXN_CAPTURE",
+    "D_LEDGER_READ",
+    "D_NOTIFY"
+  ]
+}
