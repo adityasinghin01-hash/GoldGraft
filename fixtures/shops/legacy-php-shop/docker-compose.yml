@@ -5,7 +5,7 @@
 # Without them the shop still starts (health check passes) but PayPal calls fail.
 services:
   shop:
-    image: php:8.3-apache
+    build: .
     ports:
       - "8081:80"
     environment:
@@ -15,7 +15,6 @@ services:
       SHOP_RECEIVER_EMAIL: ${SHOP_RECEIVER_EMAIL:-}
       SHOP_BASE_URL: ${SHOP_BASE_URL:-http://localhost:8081}
     volumes:
-      - ./src:/var/www/html:ro
       - shop-data:/var/www/html/data   # orders.json lives here (flat-file "database")
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
