@@ -19,7 +19,8 @@ Build the **12 screens** and the **13 AI agents**, and on 7–8 Nov plug all fou
 |---|---|
 | Fake API `uv run python -m goldgraft_fakes.api --port 8700` | every screen's data, incl. the live ledger feed (`/grafts/demo-1/events`) and go-live feed (`/heal/demo-1`) |
 | TypeScript types | `contracts/ts/goldgraft-api.d.ts` (API) and `contracts/ts/goldgraft-contracts.d.ts` (formats) |
-| Agent tools | `contracts/.../tools.py` (which agent may call what) + stand-in tools (`goldgraft_fakes.tools`, coming) |
+| Agent tools | `contracts/.../tools.py` (which agent may call what) + `goldgraft_fakes.tools.FakeToolbox` (refuses disallowed calls, keeps an audit log) |
+| Calling convention | `contracts/.../interfaces.py` → `AgentRunner.run(agent, inputs, tools)` returns `[(schema, payload)]`; stand-in: `goldgraft_fakes.agents` |
 
 ## Plug-in tests
 ```bash

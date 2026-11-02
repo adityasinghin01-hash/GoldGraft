@@ -23,9 +23,9 @@ Nobody waits for anybody. Each person builds their piece against **stand-ins** (
 |---|---|
 | `contracts/` | The exact shape of every piece of data that passes between pieces (Python models → JSON Schema + TypeScript types), the API contract (`contracts/api/openapi.json`), the plug-in interfaces (`interfaces.py`) and the agent tool list (`tools.py`). |
 | `foundation/` | The shared ledger (an append-only log where every step is recorded and any edit is detectable) and the step tracker (moves a shop through the upgrade stages). |
-| `fakes/` | Stand-ins: a fake API server, a fake PayPal sandbox (works offline), and (coming) a fake runner, fake proof and fake agent tools. |
+| `fakes/` | Stand-ins: fake API server, fake PayPal sandbox (works offline), fake runner, fake proof (answer-key lookup), fake agent tools (with permission checks + audit log), stand-in agents, and the reference switch-library behaviour. |
 | `fixtures/` | Sample data with answer keys, built on one real old shop (Cutover's MIT `legacy-php-shop`). See `fixtures/INDEX.md`. Every file says whether it is REAL or SYNTHETIC. |
-| `plugtests/` | (coming) One plug-in test set per piece. |
+| `plugtests/` | One plug-in test set per piece. Each runs against the stand-ins until you point its environment variable at your real code (commands in your START file). |
 | `docs/design/` | The full design (00 system … 09 demo). `01_DATA.md` is the law for data formats. |
 | `docs/FORMAT_CHANGES.md` | Every change to a data format, with the reason. |
 | `AGENTS.md` | Rules for AI coding tools (Codex, Antigravity, Claude) working in this repo. Humans: read it too — it's short. |
