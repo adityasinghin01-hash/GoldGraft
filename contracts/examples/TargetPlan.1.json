@@ -1,0 +1,35 @@
+{
+  "deltas": [
+    {
+      "description": "legacy token becomes order id",
+      "id": "delta-1",
+      "mapping_id": "mapping-1"
+    }
+  ],
+  "handoff": [],
+  "items": [
+    {
+      "delta_ids": [
+        "delta-1"
+      ],
+      "mapping_id": "mapping-1",
+      "paypal_only": false,
+      "target_op": "capture",
+      "touchpoint": "tp-1"
+    }
+  ],
+  "order": [
+    "READ_BOTH",
+    "NEW_FLOWS_BEHIND_SWITCH",
+    "CLEANUP"
+  ],
+  "origin_rules": [
+    "legacy refunds stay OLD"
+  ],
+  "path": "REWRITE",
+  "target_experience": [
+    "V6",
+    "ORDERS_V2",
+    "WEBHOOKS"
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "$defs": {
+    "IntentDelta": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "mapping_id": {
+          "minLength": 1,
+          "title": "Mapping Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "mapping_id",
+        "description"
+      ],
+      "title": "IntentDelta",
+      "type": "object"
+    },
+    "PlanItem": {
+      "additionalProperties": false,
+      "properties": {
+        "delta_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Delta Ids",
+          "type": "array"
+        },
+        "mapping_id": {
+          "minLength": 1,
+          "title": "Mapping Id",
+          "type": "string"
+        },
+        "paypal_only": {
+          "title": "Paypal Only",
+          "type": "boolean"
+        },
+        "target_op": {
+          "minLength": 1,
+          "title": "Target Op",
+          "type": "string"
+        },
+        "touchpoint": {
+          "minLength": 1,
+          "title": "Touchpoint",
+          "type": "string"
+        }
+      },
+      "required": [
+        "touchpoint",
+        "target_op",
+        "mapping_id",
+        "delta_ids",
+        "paypal_only"
+      ],
+      "title": "PlanItem",
+      "type": "object"
+    },
+    "PlanOrder": {
+      "enum": [
+        "READ_BOTH",
+        "NEW_FLOWS_BEHIND_SWITCH",
+        "CLEANUP"
+      ],
+      "title": "PlanOrder",
+      "type": "string"
+    },
+    "PlanPath": {
+      "enum": [
+        "OFFICIAL_MODULE",
+        "REWRITE",
+        "LINKS"
+      ],
+      "title": "PlanPath",
+      "type": "string"
+    },
+    "TargetExperience": {
+      "enum": [
+        "V6",
+        "ORDERS_V2",
+        "WEBHOOKS",
+        "VAULT",
+        "PAY_LATER_MSG",
+        "PLACEMENT",
+        "AGENT_READY_CHECK"
+      ],
+      "title": "TargetExperience",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/TargetPlan.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deltas": {
+      "items": {
+        "$ref": "#/$defs/IntentDelta"
+      },
+      "title": "Deltas",
+      "type": "array"
+    },
+    "handoff": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Handoff",
+      "type": "array"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/PlanItem"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "order": {
+      "items": {
+        "$ref": "#/$defs/PlanOrder"
+      },
+      "title": "Order",
+      "type": "array"
+    },
+    "origin_rules": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Origin Rules",
+      "type": "array"
+    },
+    "path": {
+      "$ref": "#/$defs/PlanPath"
+    },
+    "target_experience": {
+      "items": {
+        "$ref": "#/$defs/TargetExperience"
+      },
+      "title": "Target Experience",
+      "type": "array"
+    }
+  },
+  "required": [
+    "path",
+    "items",
+    "target_experience",
+    "origin_rules",
+    "order",
+    "handoff"
+  ],
+  "title": "TargetPlanV1",
+  "type": "object"
+}

@@ -1,0 +1,20 @@
+{
+  "exchanges": [
+    {
+      "body_text": "",
+      "direction": "BROWSER_TO_SHOP",
+      "headers": {
+        "Cookie": "[REDACTED]"
+      },
+      "method": "GET",
+      "seq": 0,
+      "status": 200,
+      "t_ms": 0,
+      "url": "https://shop.example.test/cart"
+    }
+  ],
+  "graft_id": "graft-1",
+  "run_id": "run-1",
+  "scenario_id": "happy",
+  "variant": "OLD"
+}

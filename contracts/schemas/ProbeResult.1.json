@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Family": {
+      "enum": [
+        "WPS",
+        "EC_NVP",
+        "EC_SOAP",
+        "DIRECT_PAYMENT",
+        "RECURRING_NVP",
+        "BILLING_AGREEMENT",
+        "IPN",
+        "PDT",
+        "CHECKOUT_JS_V4",
+        "JS_V5",
+        "REST_V1",
+        "SERVER_SDK_OLD",
+        "PAYFLOW",
+        "BUTTON_HOSTED"
+      ],
+      "title": "Family",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ProbeResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deadline_notes": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Deadline Notes",
+      "type": "array"
+    },
+    "families_found": {
+      "items": {
+        "$ref": "#/$defs/Family"
+      },
+      "title": "Families Found",
+      "type": "array"
+    },
+    "files_or_pages": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Files Or Pages",
+      "type": "array"
+    },
+    "next_step": {
+      "minLength": 1,
+      "title": "Next Step",
+      "type": "string"
+    },
+    "official_modern_module_available": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Official Modern Module Available"
+    }
+  },
+  "required": [
+    "families_found",
+    "files_or_pages",
+    "deadline_notes",
+    "next_step"
+  ],
+  "title": "ProbeResultV1",
+  "type": "object"
+}

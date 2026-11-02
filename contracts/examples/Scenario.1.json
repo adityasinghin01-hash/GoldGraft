@@ -1,0 +1,31 @@
+{
+  "assured": {
+    "flake_free_runs": 3,
+    "passes_on_old": true
+  },
+  "cart": {
+    "total": {
+      "currency": "USD",
+      "minor": 1999
+    }
+  },
+  "expect": {
+    "paid": true
+  },
+  "family": "HAPPY",
+  "id": "happy",
+  "rules": [
+    "R01"
+  ],
+  "steps": [
+    {
+      "driver_step": "checkout"
+    },
+    {
+      "api_step": "read ledger"
+    },
+    {
+      "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+    }
+  ]
+}

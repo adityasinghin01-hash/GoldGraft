@@ -1,0 +1,61 @@
+{
+  "answer_key": {
+    "money_flow": {
+      "approve": [],
+      "capture": [
+        {
+          "file": "checkout.php",
+          "line": 12
+        }
+      ],
+      "create": [],
+      "mark_paid": [],
+      "notify": [],
+      "recurring": [],
+      "refund": []
+    },
+    "touchpoints": [
+      {
+        "confidence": 1.0,
+        "family": "EC_NVP",
+        "id": "tp-1",
+        "lenses": [
+          "code",
+          "runtime"
+        ],
+        "live": true,
+        "location": {
+          "file": "checkout.php",
+          "line": 12
+        },
+        "operation": "DoExpressCheckoutPayment",
+        "paypal_only": false,
+        "target": {
+          "paypal_mapping_id": "mapping-1",
+          "rest_op": "capture"
+        }
+      }
+    ]
+  },
+  "buyer_script": "buyers/checkout.py",
+  "env_needed": [
+    "PAYPAL_CLIENT_ID"
+  ],
+  "framework": "custom",
+  "health_url": "http://localhost:8080/",
+  "language": "php",
+  "licence": "MIT",
+  "name": "Synthetic shop",
+  "port": 8080,
+  "scenarios_supported": [
+    "happy"
+  ],
+  "shop_id": "shop-1",
+  "source": {
+    "commit": "fixture-sha",
+    "repo": "https://example.com/shop"
+  },
+  "start": {
+    "compose_file": "compose.yml"
+  }
+}

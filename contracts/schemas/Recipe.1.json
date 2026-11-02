@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "Family": {
+      "enum": [
+        "WPS",
+        "EC_NVP",
+        "EC_SOAP",
+        "DIRECT_PAYMENT",
+        "RECURRING_NVP",
+        "BILLING_AGREEMENT",
+        "IPN",
+        "PDT",
+        "CHECKOUT_JS_V4",
+        "JS_V5",
+        "REST_V1",
+        "SERVER_SDK_OLD",
+        "PAYFLOW",
+        "BUTTON_HOSTED"
+      ],
+      "title": "Family",
+      "type": "string"
+    },
+    "Fingerprint": {
+      "additionalProperties": false,
+      "properties": {
+        "ast_shape_hash": {
+          "minLength": 1,
+          "title": "Ast Shape Hash",
+          "type": "string"
+        },
+        "family": {
+          "$ref": "#/$defs/Family"
+        },
+        "framework": {
+          "minLength": 1,
+          "title": "Framework",
+          "type": "string"
+        },
+        "lang": {
+          "minLength": 1,
+          "title": "Lang",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lang",
+        "framework",
+        "family",
+        "ast_shape_hash"
+      ],
+      "title": "Fingerprint",
+      "type": "object"
+    },
+    "RecipeEnv": {
+      "additionalProperties": false,
+      "properties": {
+        "compose": {
+          "minLength": 1,
+          "title": "Compose",
+          "type": "string"
+        },
+        "dockerfile": {
+          "minLength": 1,
+          "title": "Dockerfile",
+          "type": "string"
+        },
+        "driver_template": {
+          "minLength": 1,
+          "title": "Driver Template",
+          "type": "string"
+        },
+        "seed": {
+          "minLength": 1,
+          "title": "Seed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dockerfile",
+        "compose",
+        "seed",
+        "driver_template"
+      ],
+      "title": "RecipeEnv",
+      "type": "object"
+    },
+    "RecipeStatus": {
+      "enum": [
+        "QUARANTINE",
+        "ACTIVE",
+        "RETIRED"
+      ],
+      "title": "RecipeStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Recipe.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "env": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RecipeEnv"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "fingerprint": {
+      "$ref": "#/$defs/Fingerprint"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "provenance": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Provenance",
+      "type": "array"
+    },
+    "scenarios": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Scenarios",
+      "type": "array"
+    },
+    "signature": {
+      "minLength": 1,
+      "title": "Signature",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/RecipeStatus"
+    },
+    "transform": {
+      "minLength": 1,
+      "title": "Transform",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "fingerprint",
+    "transform",
+    "scenarios",
+    "provenance",
+    "confidence",
+    "status",
+    "signature"
+  ],
+  "title": "RecipeV1",
+  "type": "object"
+}

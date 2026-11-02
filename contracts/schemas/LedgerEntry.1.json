@@ -1,0 +1,206 @@
+{
+  "$defs": {
+    "EntryType": {
+      "enum": [
+        "STAGE",
+        "ARTIFACT",
+        "MESSAGE",
+        "VERDICT",
+        "SWITCH",
+        "ALERT",
+        "COST"
+      ],
+      "title": "EntryType",
+      "type": "string"
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "Producer": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "title": "Producer",
+      "type": "object"
+    },
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/LedgerEntry.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "not": {
+        "required": [
+          "payload_ref"
+        ]
+      },
+      "required": [
+        "payload"
+      ]
+    },
+    {
+      "not": {
+        "required": [
+          "payload"
+        ]
+      },
+      "properties": {
+        "payload_ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "payload_ref"
+      ]
+    }
+  ],
+  "properties": {
+    "entry_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Entry Hash",
+      "type": "string"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "payload": {
+      "$ref": "#/$defs/JsonValue",
+      "default": null
+    },
+    "payload_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Payload Hash",
+      "type": "string"
+    },
+    "payload_ref": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Payload Ref"
+    },
+    "prev_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Prev Hash",
+      "type": "string"
+    },
+    "producer": {
+      "$ref": "#/$defs/Producer"
+    },
+    "schema": {
+      "pattern": "^[A-Za-z][A-Za-z0-9]*/[1-9][0-9]*$",
+      "title": "Schema",
+      "type": "string"
+    },
+    "seq": {
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "ts": {
+      "format": "date-time",
+      "title": "Ts",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/EntryType"
+    }
+  },
+  "required": [
+    "seq",
+    "graft_id",
+    "ts",
+    "type",
+    "producer",
+    "inputs",
+    "payload_hash",
+    "schema",
+    "prev_hash",
+    "entry_hash"
+  ],
+  "title": "LedgerEntryV1",
+  "type": "object"
+}

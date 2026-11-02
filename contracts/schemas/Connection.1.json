@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "ConnectionChecks": {
+      "additionalProperties": false,
+      "properties": {
+        "nvp_ok": {
+          "title": "Nvp Ok",
+          "type": "boolean"
+        },
+        "rest_ok": {
+          "title": "Rest Ok",
+          "type": "boolean"
+        },
+        "version_match": {
+          "title": "Version Match",
+          "type": "boolean"
+        },
+        "webhook_ok": {
+          "title": "Webhook Ok",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "rest_ok",
+        "nvp_ok",
+        "webhook_ok",
+        "version_match"
+      ],
+      "title": "ConnectionChecks",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Connection.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "$ref": "#/$defs/ConnectionChecks"
+    },
+    "repo": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Repo"
+    },
+    "secrets_ref": {
+      "pattern": "^doppler://\\S+$",
+      "title": "Secrets Ref",
+      "type": "string"
+    },
+    "shop_id": {
+      "minLength": 1,
+      "title": "Shop Id",
+      "type": "string"
+    },
+    "site": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Site"
+    }
+  },
+  "required": [
+    "shop_id",
+    "repo",
+    "site",
+    "secrets_ref",
+    "checks"
+  ],
+  "title": "ConnectionV1",
+  "type": "object"
+}

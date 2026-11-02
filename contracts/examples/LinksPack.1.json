@@ -1,0 +1,23 @@
+{
+  "buttons": [
+    {
+      "new_link_url": "https://example.test/link",
+      "old_form_fields": {
+        "cmd": "_xclick"
+      },
+      "page": "https://shop.example.test/buy",
+      "snippet_html": "<a href=\"/link\">Buy</a>"
+    }
+  ],
+  "proofs": [
+    {
+      "capture_id": "fixture-capture",
+      "link": "https://example.test/link",
+      "order_id": "fixture-order"
+    }
+  ],
+  "untouched": [
+    "Donate",
+    "Subscribe"
+  ]
+}

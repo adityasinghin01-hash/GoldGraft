@@ -1,0 +1,13 @@
+{
+  "base_url": "https://shop.example.test",
+  "compose": "compose.yml",
+  "health": {
+    "cart": true,
+    "home": true,
+    "product": true
+  },
+  "image_digests": {
+    "shop": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "seed": "seed.sql"
+}

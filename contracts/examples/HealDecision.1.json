@@ -1,0 +1,15 @@
+{
+  "action": "STEP_UP",
+  "from_stage_pct": 1,
+  "graft_id": "graft-1",
+  "reason": "Enough successful samples",
+  "stats": {
+    "n_new": 100,
+    "n_old": 100,
+    "prob_new_not_worse": 0.99,
+    "success_new": 100,
+    "success_old": 100,
+    "threshold": 0.95
+  },
+  "to_stage_pct": 10
+}

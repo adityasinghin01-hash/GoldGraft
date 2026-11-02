@@ -1,0 +1,49 @@
+{
+  "$id": "https://goldgraft.dev/schemas/Money.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "currency": {
+      "enum": [
+        "AUD",
+        "BRL",
+        "CAD",
+        "CHF",
+        "CNY",
+        "CZK",
+        "DKK",
+        "EUR",
+        "GBP",
+        "HKD",
+        "HUF",
+        "ILS",
+        "JPY",
+        "MXN",
+        "MYR",
+        "NOK",
+        "NZD",
+        "PHP",
+        "PLN",
+        "RUB",
+        "SEK",
+        "SGD",
+        "THB",
+        "TWD",
+        "USD"
+      ],
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string"
+    },
+    "minor": {
+      "title": "Minor",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "minor",
+    "currency"
+  ],
+  "title": "MoneyV1",
+  "type": "object"
+}

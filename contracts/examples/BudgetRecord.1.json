@@ -1,0 +1,10 @@
+{
+  "agent": "Surveyor",
+  "cap_usd": 0.23,
+  "graft_id": "graft-1",
+  "model": "fixture",
+  "tokens_cached": 10,
+  "tokens_in": 20,
+  "tokens_out": 5,
+  "usd": 0.01
+}

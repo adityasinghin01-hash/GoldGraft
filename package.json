@@ -1,0 +1,15 @@
+{
+  "name": "goldgraft-plug-pack",
+  "private": true,
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "15.0.4",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "generate": "node scripts/gen_ts.mjs",
+    "check:types": "tsc --project contracts/tsconfig.json"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Producer": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "title": "Producer",
+      "type": "object"
+    },
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/HealNote.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "minimal v1, owner Aditya may extend",
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "cutback_requested": {
+      "title": "Cutback Requested",
+      "type": "boolean"
+    },
+    "evidence_refs": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "pause_requested": {
+      "title": "Pause Requested",
+      "type": "boolean"
+    },
+    "producer": {
+      "$ref": "#/$defs/Producer"
+    },
+    "stage_pct": {
+      "enum": [
+        0,
+        1,
+        10,
+        50,
+        100
+      ],
+      "title": "Stage Pct",
+      "type": "integer"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "graft_id",
+    "producer",
+    "created_at",
+    "stage_pct",
+    "text",
+    "pause_requested",
+    "cutback_requested",
+    "evidence_refs"
+  ],
+  "title": "HealNoteV1",
+  "type": "object"
+}

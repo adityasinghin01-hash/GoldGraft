@@ -1,0 +1,19 @@
+{
+  "artifacts": [
+    "r2://artifacts/cmel-1"
+  ],
+  "finished": "2026-11-02T09:00:00Z",
+  "job_id": "job-1",
+  "logs_ref": "r2://logs/run-1",
+  "rate_limit_pauses": 0,
+  "raw_capture_refs": [
+    "r2://captures/run-1"
+  ],
+  "runner_identity": {
+    "run_id": "run-1",
+    "sha": "fixture-sha",
+    "workflow": "proof.yml"
+  },
+  "started": "2026-11-02T09:00:00Z",
+  "status": "OK"
+}

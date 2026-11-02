@@ -1,0 +1,12 @@
+{
+  "deltas_applied": [
+    "delta-1"
+  ],
+  "grade": "PASS",
+  "noise_masked": [
+    "pp.txn_id"
+  ],
+  "parity_diff": [],
+  "rule_hits": [],
+  "scenario_id": "happy"
+}

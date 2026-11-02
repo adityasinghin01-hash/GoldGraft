@@ -1,0 +1,11 @@
+{
+  "proven_runs": 3,
+  "selectors": {
+    "pay": "#pay"
+  },
+  "steps": [
+    {
+      "driver_step": "checkout"
+    }
+  ]
+}

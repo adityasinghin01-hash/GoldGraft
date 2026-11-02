@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "FileLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "line": {
+          "exclusiveMinimum": 0,
+          "title": "Line",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file",
+        "line"
+      ],
+      "title": "FileLocation",
+      "type": "object"
+    },
+    "MutantOp": {
+      "enum": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "title": "MutantOp",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Mutant.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "equivalent_suspect": {
+      "title": "Equivalent Suspect",
+      "type": "boolean"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "killed_by": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Killed By",
+      "type": "array"
+    },
+    "location": {
+      "$ref": "#/$defs/FileLocation"
+    },
+    "op": {
+      "$ref": "#/$defs/MutantOp"
+    },
+    "patch": {
+      "minLength": 1,
+      "title": "Patch",
+      "type": "string"
+    },
+    "rule": {
+      "minLength": 1,
+      "title": "Rule",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "op",
+    "location",
+    "patch",
+    "rule",
+    "equivalent_suspect",
+    "killed_by"
+  ],
+  "title": "MutantV1",
+  "type": "object"
+}

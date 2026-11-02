@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "Agreement": {
+      "enum": [
+        "BOTH",
+        "CODE_ONLY",
+        "TRACE_ONLY"
+      ],
+      "title": "Agreement",
+      "type": "string"
+    },
+    "RuleSources": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Code",
+          "type": "array"
+        },
+        "traces": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Traces",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "traces"
+      ],
+      "title": "RuleSources",
+      "type": "object"
+    },
+    "Severity": {
+      "enum": [
+        "CRITICAL",
+        "MAJOR",
+        "MINOR"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "Triangle": {
+      "additionalProperties": false,
+      "properties": {
+        "killed": {
+          "title": "Killed",
+          "type": "boolean"
+        },
+        "mutants": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Mutants",
+          "type": "array"
+        },
+        "scenarios": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Scenarios",
+          "type": "array"
+        }
+      },
+      "required": [
+        "scenarios",
+        "mutants",
+        "killed"
+      ],
+      "title": "Triangle",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Rule.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agreement": {
+      "$ref": "#/$defs/Agreement"
+    },
+    "correct_flow": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Correct Flow",
+      "type": "array"
+    },
+    "counter_examples": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Counter Examples",
+      "type": "array"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "predicate": {
+      "minLength": 1,
+      "title": "Predicate",
+      "type": "string"
+    },
+    "severity": {
+      "$ref": "#/$defs/Severity"
+    },
+    "sources": {
+      "$ref": "#/$defs/RuleSources"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "triangle": {
+      "$ref": "#/$defs/Triangle"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "correct_flow",
+    "counter_examples",
+    "predicate",
+    "sources",
+    "agreement",
+    "triangle",
+    "severity"
+  ],
+  "title": "RuleV1",
+  "type": "object"
+}

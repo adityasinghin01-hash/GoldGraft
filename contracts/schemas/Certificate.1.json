@@ -1,0 +1,339 @@
+{
+  "$defs": {
+    "CertificateCost": {
+      "additionalProperties": false,
+      "properties": {
+        "tokens": {
+          "minimum": 0,
+          "title": "Tokens",
+          "type": "integer"
+        },
+        "usd": {
+          "minimum": 0,
+          "title": "Usd",
+          "type": "number"
+        }
+      },
+      "required": [
+        "usd",
+        "tokens"
+      ],
+      "title": "CertificateCost",
+      "type": "object"
+    },
+    "CertificateResults": {
+      "additionalProperties": false,
+      "properties": {
+        "n_a": {
+          "minimum": 0,
+          "title": "N A",
+          "type": "integer"
+        },
+        "pass": {
+          "minimum": 0,
+          "title": "Pass",
+          "type": "integer"
+        },
+        "pass_fixed": {
+          "minimum": 0,
+          "title": "Pass Fixed",
+          "type": "integer"
+        },
+        "problem": {
+          "maximum": 0,
+          "minimum": 0,
+          "title": "Problem",
+          "type": "integer"
+        },
+        "scenarios": {
+          "minimum": 0,
+          "title": "Scenarios",
+          "type": "integer"
+        },
+        "unverified": {
+          "minimum": 0,
+          "title": "Unverified",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "scenarios",
+        "pass",
+        "pass_fixed",
+        "problem",
+        "unverified",
+        "n_a"
+      ],
+      "title": "CertificateResults",
+      "type": "object"
+    },
+    "CertificateSecurity": {
+      "additionalProperties": false,
+      "properties": {
+        "deps_blocked": {
+          "minimum": 0,
+          "title": "Deps Blocked",
+          "type": "integer"
+        },
+        "injection_attempts_blocked": {
+          "minimum": 0,
+          "title": "Injection Attempts Blocked",
+          "type": "integer"
+        },
+        "secrets_found": {
+          "maximum": 0,
+          "minimum": 0,
+          "title": "Secrets Found",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "secrets_found",
+        "injection_attempts_blocked",
+        "deps_blocked"
+      ],
+      "title": "CertificateSecurity",
+      "type": "object"
+    },
+    "CertificateStrength": {
+      "additionalProperties": false,
+      "properties": {
+        "equivalent_dropped": {
+          "minimum": 0,
+          "title": "Equivalent Dropped",
+          "type": "integer"
+        },
+        "killed": {
+          "minimum": 0,
+          "title": "Killed",
+          "type": "integer"
+        },
+        "mutants_total": {
+          "minimum": 0,
+          "title": "Mutants Total",
+          "type": "integer"
+        },
+        "score": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "mutants_total",
+        "equivalent_dropped",
+        "killed",
+        "score"
+      ],
+      "title": "CertificateStrength",
+      "type": "object"
+    },
+    "CertificateSurvey": {
+      "additionalProperties": false,
+      "properties": {
+        "misses_learned": {
+          "minimum": 0,
+          "title": "Misses Learned",
+          "type": "integer"
+        },
+        "precision": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Precision",
+          "type": "number"
+        },
+        "recall": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Recall",
+          "type": "number"
+        }
+      },
+      "required": [
+        "recall",
+        "precision",
+        "misses_learned"
+      ],
+      "title": "CertificateSurvey",
+      "type": "object"
+    },
+    "PayPalEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "minLength": 1,
+          "title": "Capture Id",
+          "type": "string"
+        },
+        "debug_id": {
+          "minLength": 1,
+          "title": "Debug Id",
+          "type": "string"
+        },
+        "order_id": {
+          "minLength": 1,
+          "title": "Order Id",
+          "type": "string"
+        },
+        "scenario": {
+          "minLength": 1,
+          "title": "Scenario",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scenario",
+        "order_id",
+        "capture_id",
+        "debug_id"
+      ],
+      "title": "PayPalEvidence",
+      "type": "object"
+    },
+    "RunnerIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "sha": {
+          "minLength": 1,
+          "title": "Sha",
+          "type": "string"
+        },
+        "workflow": {
+          "minLength": 1,
+          "title": "Workflow",
+          "type": "string"
+        }
+      },
+      "required": [
+        "workflow",
+        "sha"
+      ],
+      "title": "RunnerIdentity",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Certificate.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "branch": {
+      "minLength": 1,
+      "title": "Branch",
+      "type": "string"
+    },
+    "cert_id": {
+      "minLength": 1,
+      "title": "Cert Id",
+      "type": "string"
+    },
+    "commit_new": {
+      "minLength": 1,
+      "title": "Commit New",
+      "type": "string"
+    },
+    "commit_old": {
+      "minLength": 1,
+      "title": "Commit Old",
+      "type": "string"
+    },
+    "cost": {
+      "$ref": "#/$defs/CertificateCost"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "ledger_root": {
+      "minLength": 1,
+      "title": "Ledger Root",
+      "type": "string"
+    },
+    "ots_proof": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ots Proof"
+    },
+    "paypal_evidence": {
+      "items": {
+        "$ref": "#/$defs/PayPalEvidence"
+      },
+      "title": "Paypal Evidence",
+      "type": "array"
+    },
+    "proof_strength": {
+      "$ref": "#/$defs/CertificateStrength"
+    },
+    "rekor_entry": {
+      "minLength": 1,
+      "title": "Rekor Entry",
+      "type": "string"
+    },
+    "repo": {
+      "minLength": 1,
+      "title": "Repo",
+      "type": "string"
+    },
+    "results": {
+      "$ref": "#/$defs/CertificateResults"
+    },
+    "runner_identity": {
+      "$ref": "#/$defs/RunnerIdentity"
+    },
+    "security": {
+      "$ref": "#/$defs/CertificateSecurity"
+    },
+    "shop_id": {
+      "minLength": 1,
+      "title": "Shop Id",
+      "type": "string"
+    },
+    "signature": {
+      "minLength": 1,
+      "title": "Signature",
+      "type": "string"
+    },
+    "survey": {
+      "$ref": "#/$defs/CertificateSurvey"
+    },
+    "time": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "title": "Time",
+      "type": "object"
+    }
+  },
+  "required": [
+    "cert_id",
+    "shop_id",
+    "repo",
+    "commit_old",
+    "commit_new",
+    "branch",
+    "issued_at",
+    "results",
+    "proof_strength",
+    "survey",
+    "security",
+    "paypal_evidence",
+    "cost",
+    "time",
+    "ledger_root",
+    "runner_identity",
+    "signature",
+    "rekor_entry"
+  ],
+  "title": "CertificateV1",
+  "type": "object"
+}

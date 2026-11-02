@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "JobKind": {
+      "enum": [
+        "BUILD",
+        "RECORD",
+        "PROVE",
+        "MUTANT_RUN",
+        "SHADOW",
+        "GAUNTLET"
+      ],
+      "title": "JobKind",
+      "type": "string"
+    },
+    "JobTimeouts": {
+      "additionalProperties": false,
+      "properties": {
+        "build_s": {
+          "exclusiveMinimum": 0,
+          "title": "Build S",
+          "type": "integer"
+        },
+        "run_s": {
+          "exclusiveMinimum": 0,
+          "title": "Run S",
+          "type": "integer"
+        },
+        "total_s": {
+          "exclusiveMinimum": 0,
+          "title": "Total S",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "build_s",
+        "run_s",
+        "total_s"
+      ],
+      "title": "JobTimeouts",
+      "type": "object"
+    },
+    "Stage": {
+      "enum": [
+        "CREATED",
+        "GATED",
+        "SURVEYED",
+        "BUILT",
+        "LINKS_PROVEN",
+        "DELIVERED",
+        "RECORDED",
+        "CONTRACTED",
+        "ATTACK_PLANNED",
+        "GRAFTED",
+        "PROVING",
+        "REPAIRING",
+        "CERTIFIED",
+        "PARTIAL",
+        "FAILED",
+        "PR_OPEN",
+        "MERGED",
+        "SHADOW",
+        "HEAL_1",
+        "HEAL_10",
+        "HEAL_50",
+        "LIVE_100",
+        "CLEANUP_PR",
+        "DONE",
+        "CUTBACK"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "Variant": {
+      "enum": [
+        "OLD",
+        "OLD_TWIN",
+        "NEW"
+      ],
+      "title": "Variant",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/JobSpec.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "job_id": {
+      "minLength": 1,
+      "title": "Job Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/JobKind"
+    },
+    "mutant_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Mutant Ids",
+      "type": "array"
+    },
+    "scenario_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Scenario Ids",
+      "type": "array"
+    },
+    "secrets_ref": {
+      "pattern": "^(doppler|vault|secret)://\\S+$",
+      "title": "Secrets Ref",
+      "type": "string"
+    },
+    "shop_pack_ref": {
+      "minLength": 1,
+      "title": "Shop Pack Ref",
+      "type": "string"
+    },
+    "signature": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Signature"
+    },
+    "stage": {
+      "$ref": "#/$defs/Stage"
+    },
+    "timeouts": {
+      "$ref": "#/$defs/JobTimeouts"
+    },
+    "variants": {
+      "items": {
+        "$ref": "#/$defs/Variant"
+      },
+      "minItems": 1,
+      "title": "Variants",
+      "type": "array"
+    }
+  },
+  "required": [
+    "job_id",
+    "graft_id",
+    "stage",
+    "kind",
+    "shop_pack_ref",
+    "variants",
+    "scenario_ids",
+    "mutant_ids",
+    "timeouts",
+    "secrets_ref",
+    "signature"
+  ],
+  "title": "JobSpecV1",
+  "type": "object"
+}

@@ -1,0 +1,106 @@
+{
+  "$defs": {
+    "HandoffType": {
+      "enum": [
+        "BILLING_AGREEMENT",
+        "RECURRING_PROFILE"
+      ],
+      "title": "HandoffType",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/HandoffRecord.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "amount": {
+      "title": "Amount",
+      "type": "integer"
+    },
+    "currency": {
+      "enum": [
+        "AUD",
+        "BRL",
+        "CAD",
+        "CHF",
+        "CNY",
+        "CZK",
+        "DKK",
+        "EUR",
+        "GBP",
+        "HKD",
+        "HUF",
+        "ILS",
+        "JPY",
+        "MXN",
+        "MYR",
+        "NOK",
+        "NZD",
+        "PHP",
+        "PLN",
+        "RUB",
+        "SEK",
+        "SGD",
+        "THB",
+        "TWD",
+        "USD"
+      ],
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string"
+    },
+    "customer_ref": {
+      "minLength": 1,
+      "title": "Customer Ref",
+      "type": "string"
+    },
+    "cycle": {
+      "minLength": 1,
+      "title": "Cycle",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "next_billing": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next Billing"
+    },
+    "source": {
+      "minLength": 1,
+      "title": "Source",
+      "type": "string"
+    },
+    "status": {
+      "minLength": 1,
+      "title": "Status",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/HandoffType"
+    }
+  },
+  "required": [
+    "type",
+    "id",
+    "customer_ref",
+    "amount",
+    "currency",
+    "cycle",
+    "next_billing",
+    "status",
+    "source"
+  ],
+  "title": "HandoffRecordV1",
+  "type": "object"
+}

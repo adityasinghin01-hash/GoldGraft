@@ -1,0 +1,22 @@
+{
+  "graft_id": "graft-1",
+  "job_id": "job-1",
+  "kind": "RECORD",
+  "mutant_ids": [],
+  "scenario_ids": [
+    "happy"
+  ],
+  "secrets_ref": "doppler://goldgraft/sandbox/shop-1",
+  "shop_pack_ref": "r2://shops/shop-1",
+  "signature": null,
+  "stage": "RECORDED",
+  "timeouts": {
+    "build_s": 300,
+    "run_s": 300,
+    "total_s": 600
+  },
+  "variants": [
+    "OLD",
+    "OLD_TWIN"
+  ]
+}

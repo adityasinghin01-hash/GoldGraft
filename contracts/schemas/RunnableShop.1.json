@@ -1,0 +1,46 @@
+{
+  "$id": "https://goldgraft.dev/schemas/RunnableShop.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "base_url": {
+      "minLength": 1,
+      "title": "Base Url",
+      "type": "string"
+    },
+    "compose": {
+      "minLength": 1,
+      "title": "Compose",
+      "type": "string"
+    },
+    "health": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "title": "Health",
+      "type": "object"
+    },
+    "image_digests": {
+      "additionalProperties": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Image Digests",
+      "type": "object"
+    },
+    "seed": {
+      "minLength": 1,
+      "title": "Seed",
+      "type": "string"
+    }
+  },
+  "required": [
+    "compose",
+    "image_digests",
+    "seed",
+    "base_url",
+    "health"
+  ],
+  "title": "RunnableShopV1",
+  "type": "object"
+}

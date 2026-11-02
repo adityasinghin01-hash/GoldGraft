@@ -1,0 +1,14 @@
+{
+  "event": "ATTEMPT",
+  "graft_id": "graft-1",
+  "latency_ms": 10,
+  "lib_version": "1.0.0",
+  "money": {
+    "currency": "USD",
+    "minor": 1999
+  },
+  "order_ref": "order-1",
+  "path": "OLD",
+  "shop_id": "shop-1",
+  "ts": "2026-11-02T09:00:00Z"
+}

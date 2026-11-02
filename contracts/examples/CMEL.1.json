@@ -1,0 +1,18 @@
+{
+  "graft_id": "graft-1",
+  "kind": "INTENT",
+  "money": {
+    "currency": "USD",
+    "minor": 1999
+  },
+  "noise": [],
+  "order_ref": "order-1",
+  "pp": {},
+  "raw_ref": "r2://captures/run-1",
+  "run_id": "run-1",
+  "scenario_id": "happy",
+  "seq": 0,
+  "source": "SHOP_HTTP",
+  "t_ms": 0,
+  "variant": "OLD"
+}

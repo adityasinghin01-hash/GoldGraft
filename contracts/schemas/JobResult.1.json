@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "JobRunnerIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "sha": {
+          "minLength": 1,
+          "title": "Sha",
+          "type": "string"
+        },
+        "workflow": {
+          "minLength": 1,
+          "title": "Workflow",
+          "type": "string"
+        }
+      },
+      "required": [
+        "workflow",
+        "sha",
+        "run_id"
+      ],
+      "title": "JobRunnerIdentity",
+      "type": "object"
+    },
+    "JobStatus": {
+      "enum": [
+        "OK",
+        "FAILED",
+        "TIMEOUT",
+        "BLOCKED"
+      ],
+      "title": "JobStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/JobResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "finished": {
+      "format": "date-time",
+      "title": "Finished",
+      "type": "string"
+    },
+    "job_id": {
+      "minLength": 1,
+      "title": "Job Id",
+      "type": "string"
+    },
+    "logs_ref": {
+      "minLength": 1,
+      "title": "Logs Ref",
+      "type": "string"
+    },
+    "rate_limit_pauses": {
+      "minimum": 0,
+      "title": "Rate Limit Pauses",
+      "type": "integer"
+    },
+    "raw_capture_refs": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Raw Capture Refs",
+      "type": "array"
+    },
+    "runner_identity": {
+      "$ref": "#/$defs/JobRunnerIdentity"
+    },
+    "started": {
+      "format": "date-time",
+      "title": "Started",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/JobStatus"
+    }
+  },
+  "required": [
+    "job_id",
+    "status",
+    "started",
+    "finished",
+    "raw_capture_refs",
+    "artifacts",
+    "logs_ref",
+    "runner_identity",
+    "rate_limit_pauses"
+  ],
+  "title": "JobResultV1",
+  "type": "object"
+}

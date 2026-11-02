@@ -1,0 +1,283 @@
+{
+  "$defs": {
+    "ApiStep": {
+      "additionalProperties": false,
+      "properties": {
+        "api_step": {
+          "minLength": 1,
+          "title": "Api Step",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_step"
+      ],
+      "title": "ApiStep",
+      "type": "object"
+    },
+    "Assured": {
+      "additionalProperties": false,
+      "properties": {
+        "flake_free_runs": {
+          "minimum": 0,
+          "title": "Flake Free Runs",
+          "type": "integer"
+        },
+        "passes_on_old": {
+          "title": "Passes On Old",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "passes_on_old",
+        "flake_free_runs"
+      ],
+      "title": "Assured",
+      "type": "object"
+    },
+    "DriverStep": {
+      "additionalProperties": false,
+      "properties": {
+        "driver_step": {
+          "minLength": 1,
+          "title": "Driver Step",
+          "type": "string"
+        }
+      },
+      "required": [
+        "driver_step"
+      ],
+      "title": "DriverStep",
+      "type": "object"
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "MockStep": {
+      "additionalProperties": false,
+      "properties": {
+        "paypal_mock_response_code": {
+          "minLength": 1,
+          "title": "Paypal Mock Response Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paypal_mock_response_code"
+      ],
+      "title": "MockStep",
+      "type": "object"
+    },
+    "Producer": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "title": "Producer",
+      "type": "object"
+    },
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    },
+    "Scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "assured": {
+          "$ref": "#/$defs/Assured"
+        },
+        "cart": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Cart",
+          "type": "object"
+        },
+        "expect": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Expect",
+          "type": "object"
+        },
+        "family": {
+          "$ref": "#/$defs/ScenarioFamily"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "rules": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Rules",
+          "type": "array"
+        },
+        "steps": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/DriverStep"
+              },
+              {
+                "$ref": "#/$defs/ApiStep"
+              },
+              {
+                "$ref": "#/$defs/MockStep"
+              }
+            ]
+          },
+          "title": "Steps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "family",
+        "cart",
+        "steps",
+        "rules",
+        "expect",
+        "assured"
+      ],
+      "title": "Scenario",
+      "type": "object"
+    },
+    "ScenarioFamily": {
+      "enum": [
+        "HAPPY",
+        "CANCEL",
+        "DECLINE",
+        "PAYER_ACTION",
+        "DOUBLE",
+        "LOST_RESPONSE",
+        "TAMPER",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE",
+        "NOTIFY_FORGED",
+        "NOTIFY_DUP",
+        "RESTART",
+        "RENEWAL",
+        "EDGE_CURRENCY",
+        "PROPERTY"
+      ],
+      "title": "ScenarioFamily",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ScenarioSet.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "minimal v1, owner Aditya may extend",
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "producer": {
+      "$ref": "#/$defs/Producer"
+    },
+    "scenarios": {
+      "items": {
+        "$ref": "#/$defs/Scenario"
+      },
+      "title": "Scenarios",
+      "type": "array"
+    },
+    "unguarded_rule_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Unguarded Rule Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "graft_id",
+    "producer",
+    "created_at",
+    "scenarios",
+    "unguarded_rule_ids"
+  ],
+  "title": "ScenarioSetV1",
+  "type": "object"
+}

@@ -1,0 +1,30 @@
+{
+  "agreement": "BOTH",
+  "correct_flow": [
+    "paid only if PayPal shows one COMPLETED capture for this order"
+  ],
+  "counter_examples": [
+    "shop marks paid without a completed capture"
+  ],
+  "id": "R01",
+  "predicate": "SHOP_PAID(o) \u21d2 \u2203! LEDGER CAPTURE(o, COMPLETED)",
+  "severity": "CRITICAL",
+  "sources": {
+    "code": [
+      "checkout.php:12"
+    ],
+    "traces": [
+      "run-1"
+    ]
+  },
+  "title": "paid only if PayPal shows one COMPLETED capture for this order",
+  "triangle": {
+    "killed": true,
+    "mutants": [
+      "mutant-1"
+    ],
+    "scenarios": [
+      "happy"
+    ]
+  }
+}

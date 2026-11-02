@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "Kind": {
+      "enum": [
+        "INTENT",
+        "APPROVE",
+        "AUTHORIZE",
+        "CAPTURE",
+        "VOID",
+        "SHOP_PAID",
+        "SHOP_PENDING",
+        "SHOP_UNPAID",
+        "NOTIFY",
+        "NOTIFY_VERIFIED",
+        "NOTIFY_REJECTED",
+        "REFUND",
+        "RECUR_SETUP",
+        "RECUR_CHARGE",
+        "ERROR"
+      ],
+      "title": "Kind",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/MappingRow.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cmel_kind": {
+      "$ref": "#/$defs/Kind"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "signal_fields": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Signal Fields",
+      "type": "array"
+    },
+    "source": {
+      "minLength": 1,
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "signal_fields",
+    "cmel_kind",
+    "notes"
+  ],
+  "title": "MappingRowV1",
+  "type": "object"
+}

@@ -1,0 +1,12 @@
+{
+  "cmel_kind": "INTENT",
+  "notes": "",
+  "signal_fields": [
+    "amount",
+    "amount_n",
+    "currency_code",
+    "invoice",
+    "custom"
+  ],
+  "source": "WPS form POST to cgi-bin/webscr"
+}

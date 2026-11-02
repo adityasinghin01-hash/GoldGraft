@@ -1,0 +1,50 @@
+{
+  "$defs": {
+    "MutantOp": {
+      "enum": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "title": "MutantOp",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/MutationOperator.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "fault": {
+      "minLength": 1,
+      "title": "Fault",
+      "type": "string"
+    },
+    "op": {
+      "$ref": "#/$defs/MutantOp"
+    },
+    "rules_broken": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Rules Broken",
+      "type": "array"
+    }
+  },
+  "required": [
+    "op",
+    "fault",
+    "rules_broken"
+  ],
+  "title": "MutationOperatorV1",
+  "type": "object"
+}

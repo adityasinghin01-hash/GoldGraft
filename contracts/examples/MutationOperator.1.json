@@ -1,0 +1,7 @@
+{
+  "fault": "ignore currency in the amount check",
+  "op": "M1",
+  "rules_broken": [
+    "R03"
+  ]
+}

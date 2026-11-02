@@ -1,0 +1,257 @@
+{
+  "$defs": {
+    "GuardEventKind": {
+      "enum": [
+        "ATTEMPT",
+        "APPROVED",
+        "CAPTURED",
+        "DECLINED",
+        "ERROR",
+        "REFUNDED"
+      ],
+      "title": "GuardEventKind",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "enum": [
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CNY",
+            "CZK",
+            "DKK",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "ILS",
+            "JPY",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PHP",
+            "PLN",
+            "RUB",
+            "SEK",
+            "SGD",
+            "THB",
+            "TWD",
+            "USD"
+          ],
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "minor": {
+          "title": "Minor",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minor",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "PayPalRefs": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capture Id"
+        },
+        "debug_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Debug Id"
+        },
+        "legacy_token": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legacy Token"
+        },
+        "order_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Order Id"
+        },
+        "profile_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Profile Id"
+        },
+        "refund_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Refund Id"
+        },
+        "txn_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Txn Id"
+        }
+      },
+      "title": "PayPalRefs",
+      "type": "object"
+    },
+    "Side": {
+      "enum": [
+        "OLD",
+        "NEW"
+      ],
+      "title": "Side",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/GuardEvent.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "event": {
+      "$ref": "#/$defs/GuardEventKind"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "latency_ms": {
+      "minimum": 0,
+      "title": "Latency Ms",
+      "type": "integer"
+    },
+    "lib_version": {
+      "minLength": 1,
+      "title": "Lib Version",
+      "type": "string"
+    },
+    "money": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Money"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "order_ref": {
+      "minLength": 1,
+      "title": "Order Ref",
+      "type": "string"
+    },
+    "path": {
+      "$ref": "#/$defs/Side"
+    },
+    "paypal_ids": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PayPalRefs"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "shop_id": {
+      "minLength": 1,
+      "title": "Shop Id",
+      "type": "string"
+    },
+    "signature": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Signature"
+    },
+    "ts": {
+      "format": "date-time",
+      "title": "Ts",
+      "type": "string"
+    }
+  },
+  "required": [
+    "graft_id",
+    "shop_id",
+    "path",
+    "event",
+    "order_ref",
+    "latency_ms",
+    "ts",
+    "lib_version"
+  ],
+  "title": "GuardEventV1",
+  "type": "object"
+}

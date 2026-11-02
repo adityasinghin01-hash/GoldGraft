@@ -1,0 +1,59 @@
+{
+  "$id": "https://goldgraft.dev/schemas/BudgetRecord.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "agent": {
+      "minLength": 1,
+      "title": "Agent",
+      "type": "string"
+    },
+    "cap_usd": {
+      "minimum": 0,
+      "title": "Cap Usd",
+      "type": "number"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "model": {
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "tokens_cached": {
+      "minimum": 0,
+      "title": "Tokens Cached",
+      "type": "integer"
+    },
+    "tokens_in": {
+      "minimum": 0,
+      "title": "Tokens In",
+      "type": "integer"
+    },
+    "tokens_out": {
+      "minimum": 0,
+      "title": "Tokens Out",
+      "type": "integer"
+    },
+    "usd": {
+      "minimum": 0,
+      "title": "Usd",
+      "type": "number"
+    }
+  },
+  "required": [
+    "graft_id",
+    "agent",
+    "model",
+    "tokens_in",
+    "tokens_cached",
+    "tokens_out",
+    "usd",
+    "cap_usd"
+  ],
+  "title": "BudgetRecordV1",
+  "type": "object"
+}

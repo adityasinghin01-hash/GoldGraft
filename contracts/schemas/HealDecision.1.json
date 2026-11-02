@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "HealAction": {
+      "enum": [
+        "HOLD",
+        "STEP_UP",
+        "CUTBACK"
+      ],
+      "title": "HealAction",
+      "type": "string"
+    },
+    "HealStats": {
+      "additionalProperties": false,
+      "properties": {
+        "n_new": {
+          "minimum": 0,
+          "title": "N New",
+          "type": "integer"
+        },
+        "n_old": {
+          "minimum": 0,
+          "title": "N Old",
+          "type": "integer"
+        },
+        "prob_new_not_worse": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Prob New Not Worse",
+          "type": "number"
+        },
+        "success_new": {
+          "minimum": 0,
+          "title": "Success New",
+          "type": "integer"
+        },
+        "success_old": {
+          "minimum": 0,
+          "title": "Success Old",
+          "type": "integer"
+        },
+        "threshold": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Threshold",
+          "type": "number"
+        }
+      },
+      "required": [
+        "n_old",
+        "n_new",
+        "success_old",
+        "success_new",
+        "prob_new_not_worse",
+        "threshold"
+      ],
+      "title": "HealStats",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/HealDecision.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "$ref": "#/$defs/HealAction"
+    },
+    "from_stage_pct": {
+      "enum": [
+        0,
+        1,
+        10,
+        50,
+        100
+      ],
+      "title": "From Stage Pct",
+      "type": "integer"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "hard_stop": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hard Stop"
+    },
+    "reason": {
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "stats": {
+      "$ref": "#/$defs/HealStats"
+    },
+    "to_stage_pct": {
+      "enum": [
+        0,
+        1,
+        10,
+        50,
+        100
+      ],
+      "title": "To Stage Pct",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "graft_id",
+    "from_stage_pct",
+    "action",
+    "to_stage_pct",
+    "reason",
+    "stats"
+  ],
+  "title": "HealDecisionV1",
+  "type": "object"
+}

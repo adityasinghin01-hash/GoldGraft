@@ -1,0 +1,29 @@
+{
+  "freeze_window_advice": "Do not edit profiles during conversion",
+  "records": [
+    {
+      "amount": 1999,
+      "currency": "USD",
+      "customer_ref": "customer-1",
+      "cycle": "monthly",
+      "id": "profile-1",
+      "next_billing": null,
+      "source": "NVP",
+      "status": "active",
+      "type": "RECURRING_PROFILE"
+    }
+  ],
+  "validation_summary": {
+    "counts": {
+      "RECURRING_PROFILE": 1
+    },
+    "duplicates": [],
+    "inactive": 0,
+    "totals_per_currency": [
+      {
+        "currency": "USD",
+        "minor": 1999
+      }
+    ]
+  }
+}

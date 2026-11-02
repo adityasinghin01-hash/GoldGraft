@@ -1,0 +1,56 @@
+{
+  "$id": "https://goldgraft.dev/schemas/SwitchConfig.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "origin_rules": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Origin Rules",
+      "type": "array"
+    },
+    "signature": {
+      "minLength": 1,
+      "title": "Signature",
+      "type": "string"
+    },
+    "stage_pct": {
+      "enum": [
+        0,
+        1,
+        10,
+        50,
+        100
+      ],
+      "title": "Stage Pct",
+      "type": "integer"
+    },
+    "version": {
+      "exclusiveMinimum": 0,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "graft_id",
+    "stage_pct",
+    "version",
+    "expires_at",
+    "origin_rules",
+    "signature"
+  ],
+  "title": "SwitchConfigV1",
+  "type": "object"
+}

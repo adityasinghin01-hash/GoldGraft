@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-11-02T09:00:00Z",
+  "evidence_refs": [
+    "r2://captures/run-1"
+  ],
+  "graft_id": "graft-1",
+  "id": "artifact-1",
+  "language": "php",
+  "operation": "DoExpressCheckoutPayment",
+  "pattern": "DoExpressCheckoutPayment($$$)",
+  "producer": {
+    "kind": "agent",
+    "model": "fixture",
+    "name": "Surveyor",
+    "version": "1"
+  }
+}

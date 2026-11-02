@@ -1,0 +1,312 @@
+{
+  "$defs": {
+    "Kind": {
+      "enum": [
+        "INTENT",
+        "APPROVE",
+        "AUTHORIZE",
+        "CAPTURE",
+        "VOID",
+        "SHOP_PAID",
+        "SHOP_PENDING",
+        "SHOP_UNPAID",
+        "NOTIFY",
+        "NOTIFY_VERIFIED",
+        "NOTIFY_REJECTED",
+        "REFUND",
+        "RECUR_SETUP",
+        "RECUR_CHARGE",
+        "ERROR"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "enum": [
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CNY",
+            "CZK",
+            "DKK",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "ILS",
+            "JPY",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PHP",
+            "PLN",
+            "RUB",
+            "SEK",
+            "SGD",
+            "THB",
+            "TWD",
+            "USD"
+          ],
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "minor": {
+          "title": "Minor",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minor",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "PayPalRefs": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capture Id"
+        },
+        "debug_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Debug Id"
+        },
+        "legacy_token": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legacy Token"
+        },
+        "order_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Order Id"
+        },
+        "profile_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Profile Id"
+        },
+        "refund_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Refund Id"
+        },
+        "txn_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Txn Id"
+        }
+      },
+      "title": "PayPalRefs",
+      "type": "object"
+    },
+    "Source": {
+      "enum": [
+        "SHOP_HTTP",
+        "SHOP_DB",
+        "PAYPAL_CALL",
+        "PAYPAL_LEDGER",
+        "NOTIFICATION"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "StatusNorm": {
+      "enum": [
+        "COMPLETED",
+        "PENDING",
+        "DECLINED",
+        "REFUNDED",
+        "FAILED"
+      ],
+      "title": "StatusNorm",
+      "type": "string"
+    },
+    "Variant": {
+      "enum": [
+        "OLD",
+        "OLD_TWIN",
+        "NEW"
+      ],
+      "title": "Variant",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/CMEL.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "items_hash": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Items Hash"
+    },
+    "kind": {
+      "$ref": "#/$defs/Kind"
+    },
+    "money": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Money"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "noise": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Noise",
+      "type": "array"
+    },
+    "order_ref": {
+      "minLength": 1,
+      "title": "Order Ref",
+      "type": "string"
+    },
+    "pp": {
+      "$ref": "#/$defs/PayPalRefs"
+    },
+    "raw_ref": {
+      "minLength": 1,
+      "title": "Raw Ref",
+      "type": "string"
+    },
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scenario_id": {
+      "minLength": 1,
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "seq": {
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "status_norm": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StatusNorm"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "t_ms": {
+      "minimum": 0,
+      "title": "T Ms",
+      "type": "integer"
+    },
+    "variant": {
+      "$ref": "#/$defs/Variant"
+    }
+  },
+  "required": [
+    "graft_id",
+    "run_id",
+    "variant",
+    "scenario_id",
+    "seq",
+    "t_ms",
+    "source",
+    "kind",
+    "order_ref",
+    "pp",
+    "raw_ref",
+    "noise"
+  ],
+  "title": "CMELV1",
+  "type": "object"
+}

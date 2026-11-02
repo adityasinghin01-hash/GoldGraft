@@ -1,0 +1,542 @@
+{
+  "$defs": {
+    "AccountLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "tcode": {
+          "minLength": 1,
+          "title": "Tcode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tcode"
+      ],
+      "title": "AccountLocation",
+      "type": "object"
+    },
+    "AnswerKey": {
+      "additionalProperties": false,
+      "properties": {
+        "money_flow": {
+          "$ref": "#/$defs/MoneyFlow"
+        },
+        "touchpoints": {
+          "items": {
+            "$ref": "#/$defs/Touchpoint"
+          },
+          "title": "Touchpoints",
+          "type": "array"
+        }
+      },
+      "required": [
+        "touchpoints",
+        "money_flow"
+      ],
+      "title": "AnswerKey",
+      "type": "object"
+    },
+    "CommandStart": {
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "minLength": 1,
+          "title": "Command",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "title": "CommandStart",
+      "type": "object"
+    },
+    "ComposeStart": {
+      "additionalProperties": false,
+      "properties": {
+        "compose_file": {
+          "minLength": 1,
+          "title": "Compose File",
+          "type": "string"
+        }
+      },
+      "required": [
+        "compose_file"
+      ],
+      "title": "ComposeStart",
+      "type": "object"
+    },
+    "Family": {
+      "enum": [
+        "WPS",
+        "EC_NVP",
+        "EC_SOAP",
+        "DIRECT_PAYMENT",
+        "RECURRING_NVP",
+        "BILLING_AGREEMENT",
+        "IPN",
+        "PDT",
+        "CHECKOUT_JS_V4",
+        "JS_V5",
+        "REST_V1",
+        "SERVER_SDK_OLD",
+        "PAYFLOW",
+        "BUTTON_HOSTED"
+      ],
+      "title": "Family",
+      "type": "string"
+    },
+    "FileLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "line": {
+          "exclusiveMinimum": 0,
+          "title": "Line",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file",
+        "line"
+      ],
+      "title": "FileLocation",
+      "type": "object"
+    },
+    "Lens": {
+      "enum": [
+        "code",
+        "runtime",
+        "site",
+        "account"
+      ],
+      "title": "Lens",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "enum": [
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CNY",
+            "CZK",
+            "DKK",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "ILS",
+            "JPY",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PHP",
+            "PLN",
+            "RUB",
+            "SEK",
+            "SGD",
+            "THB",
+            "TWD",
+            "USD"
+          ],
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "minor": {
+          "title": "Minor",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minor",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "MoneyFlow": {
+      "additionalProperties": false,
+      "properties": {
+        "approve": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Approve",
+          "type": "array"
+        },
+        "capture": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Capture",
+          "type": "array"
+        },
+        "create": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Create",
+          "type": "array"
+        },
+        "mark_paid": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Mark Paid",
+          "type": "array"
+        },
+        "notify": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Notify",
+          "type": "array"
+        },
+        "recurring": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Recurring",
+          "type": "array"
+        },
+        "refund": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Refund",
+          "type": "array"
+        }
+      },
+      "required": [
+        "create",
+        "approve",
+        "capture",
+        "mark_paid",
+        "refund",
+        "notify",
+        "recurring"
+      ],
+      "title": "MoneyFlow",
+      "type": "object"
+    },
+    "ShopSource": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "minLength": 1,
+          "title": "Commit",
+          "type": "string"
+        },
+        "repo": {
+          "minLength": 1,
+          "title": "Repo",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repo",
+        "commit"
+      ],
+      "title": "ShopSource",
+      "type": "object"
+    },
+    "SiteLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "selector": {
+          "minLength": 1,
+          "title": "Selector",
+          "type": "string"
+        },
+        "url": {
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "selector"
+      ],
+      "title": "SiteLocation",
+      "type": "object"
+    },
+    "Touchpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "family": {
+          "$ref": "#/$defs/Family"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "lenses": {
+          "items": {
+            "$ref": "#/$defs/Lens"
+          },
+          "title": "Lenses",
+          "type": "array"
+        },
+        "live": {
+          "title": "Live",
+          "type": "boolean"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileLocation"
+            },
+            {
+              "$ref": "#/$defs/SiteLocation"
+            },
+            {
+              "$ref": "#/$defs/AccountLocation"
+            }
+          ],
+          "title": "Location"
+        },
+        "money_30d": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "operation": {
+          "minLength": 1,
+          "title": "Operation",
+          "type": "string"
+        },
+        "paypal_only": {
+          "title": "Paypal Only",
+          "type": "boolean"
+        },
+        "target": {
+          "$ref": "#/$defs/TouchpointTarget"
+        }
+      },
+      "required": [
+        "id",
+        "family",
+        "operation",
+        "location",
+        "lenses",
+        "confidence",
+        "live",
+        "target",
+        "paypal_only"
+      ],
+      "title": "Touchpoint",
+      "type": "object"
+    },
+    "TouchpointTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "paypal_mapping_id": {
+          "minLength": 1,
+          "title": "Paypal Mapping Id",
+          "type": "string"
+        },
+        "rest_op": {
+          "minLength": 1,
+          "title": "Rest Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paypal_mapping_id",
+        "rest_op"
+      ],
+      "title": "TouchpointTarget",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ShopPack.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "answer_key": {
+      "$ref": "#/$defs/AnswerKey"
+    },
+    "buyer_script": {
+      "minLength": 1,
+      "title": "Buyer Script",
+      "type": "string"
+    },
+    "env_needed": {
+      "items": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+        "type": "string"
+      },
+      "title": "Env Needed",
+      "type": "array"
+    },
+    "framework": {
+      "minLength": 1,
+      "title": "Framework",
+      "type": "string"
+    },
+    "health_url": {
+      "minLength": 1,
+      "title": "Health Url",
+      "type": "string"
+    },
+    "language": {
+      "minLength": 1,
+      "title": "Language",
+      "type": "string"
+    },
+    "licence": {
+      "minLength": 1,
+      "title": "Licence",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "port": {
+      "maximum": 65535,
+      "minimum": 1,
+      "title": "Port",
+      "type": "integer"
+    },
+    "scenarios_supported": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Scenarios Supported",
+      "type": "array"
+    },
+    "shop_id": {
+      "minLength": 1,
+      "title": "Shop Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/ShopSource"
+    },
+    "start": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ComposeStart"
+        },
+        {
+          "$ref": "#/$defs/CommandStart"
+        }
+      ],
+      "title": "Start"
+    }
+  },
+  "required": [
+    "shop_id",
+    "name",
+    "language",
+    "framework",
+    "licence",
+    "source",
+    "start",
+    "port",
+    "health_url",
+    "buyer_script",
+    "scenarios_supported",
+    "answer_key",
+    "env_needed"
+  ],
+  "title": "ShopPackV1",
+  "type": "object"
+}

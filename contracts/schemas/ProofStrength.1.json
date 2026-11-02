@@ -1,0 +1,36 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ProofStrength.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "equivalent_dropped": {
+      "minimum": 0,
+      "title": "Equivalent Dropped",
+      "type": "integer"
+    },
+    "killed": {
+      "minimum": 0,
+      "title": "Killed",
+      "type": "integer"
+    },
+    "score": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Score",
+      "type": "number"
+    },
+    "total": {
+      "minimum": 0,
+      "title": "Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "total",
+    "equivalent_dropped",
+    "killed",
+    "score"
+  ],
+  "title": "ProofStrengthV1",
+  "type": "object"
+}

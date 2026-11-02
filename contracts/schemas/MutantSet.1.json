@@ -1,0 +1,187 @@
+{
+  "$defs": {
+    "FileLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "line": {
+          "exclusiveMinimum": 0,
+          "title": "Line",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file",
+        "line"
+      ],
+      "title": "FileLocation",
+      "type": "object"
+    },
+    "Mutant": {
+      "additionalProperties": false,
+      "properties": {
+        "equivalent_suspect": {
+          "title": "Equivalent Suspect",
+          "type": "boolean"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "killed_by": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Killed By",
+          "type": "array"
+        },
+        "location": {
+          "$ref": "#/$defs/FileLocation"
+        },
+        "op": {
+          "$ref": "#/$defs/MutantOp"
+        },
+        "patch": {
+          "minLength": 1,
+          "title": "Patch",
+          "type": "string"
+        },
+        "rule": {
+          "minLength": 1,
+          "title": "Rule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "location",
+        "patch",
+        "rule",
+        "equivalent_suspect",
+        "killed_by"
+      ],
+      "title": "Mutant",
+      "type": "object"
+    },
+    "MutantOp": {
+      "enum": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M7",
+        "M8",
+        "M9",
+        "M10",
+        "M11",
+        "M12"
+      ],
+      "title": "MutantOp",
+      "type": "string"
+    },
+    "Producer": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "title": "Producer",
+      "type": "object"
+    },
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/MutantSet.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "minimal v1, owner Aditya may extend",
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "mutants": {
+      "items": {
+        "$ref": "#/$defs/Mutant"
+      },
+      "title": "Mutants",
+      "type": "array"
+    },
+    "producer": {
+      "$ref": "#/$defs/Producer"
+    },
+    "unguarded_rule_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Unguarded Rule Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "graft_id",
+    "producer",
+    "created_at",
+    "mutants",
+    "unguarded_rule_ids"
+  ],
+  "title": "MutantSetV1",
+  "type": "object"
+}

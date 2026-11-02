@@ -1,0 +1,221 @@
+{
+  "$defs": {
+    "HandoffRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "integer"
+        },
+        "currency": {
+          "enum": [
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CNY",
+            "CZK",
+            "DKK",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "ILS",
+            "JPY",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PHP",
+            "PLN",
+            "RUB",
+            "SEK",
+            "SGD",
+            "THB",
+            "TWD",
+            "USD"
+          ],
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "customer_ref": {
+          "minLength": 1,
+          "title": "Customer Ref",
+          "type": "string"
+        },
+        "cycle": {
+          "minLength": 1,
+          "title": "Cycle",
+          "type": "string"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "next_billing": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Next Billing"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "status": {
+          "minLength": 1,
+          "title": "Status",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/HandoffType"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "customer_ref",
+        "amount",
+        "currency",
+        "cycle",
+        "next_billing",
+        "status",
+        "source"
+      ],
+      "title": "HandoffRecord",
+      "type": "object"
+    },
+    "HandoffSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "counts": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Counts",
+          "type": "object"
+        },
+        "duplicates": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Duplicates",
+          "type": "array"
+        },
+        "inactive": {
+          "minimum": 0,
+          "title": "Inactive",
+          "type": "integer"
+        },
+        "totals_per_currency": {
+          "items": {
+            "$ref": "#/$defs/Money"
+          },
+          "title": "Totals Per Currency",
+          "type": "array"
+        }
+      },
+      "required": [
+        "counts",
+        "totals_per_currency",
+        "duplicates",
+        "inactive"
+      ],
+      "title": "HandoffSummary",
+      "type": "object"
+    },
+    "HandoffType": {
+      "enum": [
+        "BILLING_AGREEMENT",
+        "RECURRING_PROFILE"
+      ],
+      "title": "HandoffType",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "enum": [
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CNY",
+            "CZK",
+            "DKK",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "ILS",
+            "JPY",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PHP",
+            "PLN",
+            "RUB",
+            "SEK",
+            "SGD",
+            "THB",
+            "TWD",
+            "USD"
+          ],
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "minor": {
+          "title": "Minor",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minor",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/HandoffPack.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "freeze_window_advice": {
+      "minLength": 1,
+      "title": "Freeze Window Advice",
+      "type": "string"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/HandoffRecord"
+      },
+      "title": "Records",
+      "type": "array"
+    },
+    "validation_summary": {
+      "$ref": "#/$defs/HandoffSummary"
+    }
+  },
+  "required": [
+    "records",
+    "validation_summary",
+    "freeze_window_advice"
+  ],
+  "title": "HandoffPackV1",
+  "type": "object"
+}

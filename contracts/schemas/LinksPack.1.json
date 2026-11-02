@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "LinkButton": {
+      "additionalProperties": false,
+      "properties": {
+        "hosted_button_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hosted Button Id"
+        },
+        "new_link_url": {
+          "minLength": 1,
+          "title": "New Link Url",
+          "type": "string"
+        },
+        "old_form_fields": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Old Form Fields"
+        },
+        "page": {
+          "minLength": 1,
+          "title": "Page",
+          "type": "string"
+        },
+        "snippet_html": {
+          "minLength": 1,
+          "title": "Snippet Html",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "new_link_url",
+        "snippet_html"
+      ],
+      "title": "LinkButton",
+      "type": "object"
+    },
+    "LinkProof": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "minLength": 1,
+          "title": "Capture Id",
+          "type": "string"
+        },
+        "link": {
+          "minLength": 1,
+          "title": "Link",
+          "type": "string"
+        },
+        "order_id": {
+          "minLength": 1,
+          "title": "Order Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "link",
+        "order_id",
+        "capture_id"
+      ],
+      "title": "LinkProof",
+      "type": "object"
+    },
+    "UntouchedKind": {
+      "enum": [
+        "Donate",
+        "Subscribe"
+      ],
+      "title": "UntouchedKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/LinksPack.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "buttons": {
+      "items": {
+        "$ref": "#/$defs/LinkButton"
+      },
+      "title": "Buttons",
+      "type": "array"
+    },
+    "proofs": {
+      "items": {
+        "$ref": "#/$defs/LinkProof"
+      },
+      "title": "Proofs",
+      "type": "array"
+    },
+    "untouched": {
+      "items": {
+        "$ref": "#/$defs/UntouchedKind"
+      },
+      "title": "Untouched",
+      "type": "array"
+    }
+  },
+  "required": [
+    "buttons",
+    "proofs",
+    "untouched"
+  ],
+  "title": "LinksPackV1",
+  "type": "object"
+}

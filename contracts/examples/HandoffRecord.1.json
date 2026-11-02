@@ -1,0 +1,11 @@
+{
+  "amount": 1999,
+  "currency": "USD",
+  "customer_ref": "customer-1",
+  "cycle": "monthly",
+  "id": "profile-1",
+  "next_billing": null,
+  "source": "NVP",
+  "status": "active",
+  "type": "RECURRING_PROFILE"
+}

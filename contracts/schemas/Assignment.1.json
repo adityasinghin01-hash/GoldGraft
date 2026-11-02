@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "Producer": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "title": "Producer",
+      "type": "object"
+    },
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    },
+    "Stage": {
+      "enum": [
+        "CREATED",
+        "GATED",
+        "SURVEYED",
+        "BUILT",
+        "LINKS_PROVEN",
+        "DELIVERED",
+        "RECORDED",
+        "CONTRACTED",
+        "ATTACK_PLANNED",
+        "GRAFTED",
+        "PROVING",
+        "REPAIRING",
+        "CERTIFIED",
+        "PARTIAL",
+        "FAILED",
+        "PR_OPEN",
+        "MERGED",
+        "SHADOW",
+        "HEAL_1",
+        "HEAL_10",
+        "HEAL_50",
+        "LIVE_100",
+        "CLEANUP_PR",
+        "DONE",
+        "CUTBACK"
+      ],
+      "title": "Stage",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Assignment.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "minimal v1, owner Aditya may extend",
+  "properties": {
+    "assignee": {
+      "minLength": 1,
+      "title": "Assignee",
+      "type": "string"
+    },
+    "attempt": {
+      "minimum": 0,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "input_refs": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "producer": {
+      "$ref": "#/$defs/Producer"
+    },
+    "stage": {
+      "$ref": "#/$defs/Stage"
+    }
+  },
+  "required": [
+    "id",
+    "graft_id",
+    "producer",
+    "created_at",
+    "stage",
+    "assignee",
+    "input_refs",
+    "attempt"
+  ],
+  "title": "AssignmentV1",
+  "type": "object"
+}

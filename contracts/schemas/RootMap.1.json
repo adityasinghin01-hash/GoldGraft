@@ -1,0 +1,482 @@
+{
+  "$defs": {
+    "AccountLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "tcode": {
+          "minLength": 1,
+          "title": "Tcode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tcode"
+      ],
+      "title": "AccountLocation",
+      "type": "object"
+    },
+    "Family": {
+      "enum": [
+        "WPS",
+        "EC_NVP",
+        "EC_SOAP",
+        "DIRECT_PAYMENT",
+        "RECURRING_NVP",
+        "BILLING_AGREEMENT",
+        "IPN",
+        "PDT",
+        "CHECKOUT_JS_V4",
+        "JS_V5",
+        "REST_V1",
+        "SERVER_SDK_OLD",
+        "PAYFLOW",
+        "BUTTON_HOSTED"
+      ],
+      "title": "Family",
+      "type": "string"
+    },
+    "FileLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "minLength": 1,
+          "title": "File",
+          "type": "string"
+        },
+        "line": {
+          "exclusiveMinimum": 0,
+          "title": "Line",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file",
+        "line"
+      ],
+      "title": "FileLocation",
+      "type": "object"
+    },
+    "Lens": {
+      "enum": [
+        "code",
+        "runtime",
+        "site",
+        "account"
+      ],
+      "title": "Lens",
+      "type": "string"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "enum": [
+            "AUD",
+            "BRL",
+            "CAD",
+            "CHF",
+            "CNY",
+            "CZK",
+            "DKK",
+            "EUR",
+            "GBP",
+            "HKD",
+            "HUF",
+            "ILS",
+            "JPY",
+            "MXN",
+            "MYR",
+            "NOK",
+            "NZD",
+            "PHP",
+            "PLN",
+            "RUB",
+            "SEK",
+            "SGD",
+            "THB",
+            "TWD",
+            "USD"
+          ],
+          "pattern": "^[A-Z]{3}$",
+          "title": "Currency",
+          "type": "string"
+        },
+        "minor": {
+          "title": "Minor",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minor",
+        "currency"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "MoneyFlow": {
+      "additionalProperties": false,
+      "properties": {
+        "approve": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Approve",
+          "type": "array"
+        },
+        "capture": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Capture",
+          "type": "array"
+        },
+        "create": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Create",
+          "type": "array"
+        },
+        "mark_paid": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Mark Paid",
+          "type": "array"
+        },
+        "notify": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Notify",
+          "type": "array"
+        },
+        "recurring": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Recurring",
+          "type": "array"
+        },
+        "refund": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/FileLocation"
+              },
+              {
+                "$ref": "#/$defs/SiteLocation"
+              },
+              {
+                "$ref": "#/$defs/AccountLocation"
+              }
+            ]
+          },
+          "title": "Refund",
+          "type": "array"
+        }
+      },
+      "required": [
+        "create",
+        "approve",
+        "capture",
+        "mark_paid",
+        "refund",
+        "notify",
+        "recurring"
+      ],
+      "title": "MoneyFlow",
+      "type": "object"
+    },
+    "RecallEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "matched_by_static": {
+          "minimum": 0,
+          "title": "Matched By Static",
+          "type": "integer"
+        },
+        "misses": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Misses",
+          "type": "array"
+        },
+        "runtime_calls_total": {
+          "minimum": 0,
+          "title": "Runtime Calls Total",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runtime_calls_total",
+        "matched_by_static",
+        "misses"
+      ],
+      "title": "RecallEvidence",
+      "type": "object"
+    },
+    "SiteLocation": {
+      "additionalProperties": false,
+      "properties": {
+        "selector": {
+          "minLength": 1,
+          "title": "Selector",
+          "type": "string"
+        },
+        "url": {
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "selector"
+      ],
+      "title": "SiteLocation",
+      "type": "object"
+    },
+    "Stack": {
+      "additionalProperties": false,
+      "properties": {
+        "db": {
+          "minLength": 1,
+          "title": "Db",
+          "type": "string"
+        },
+        "framework": {
+          "minLength": 1,
+          "title": "Framework",
+          "type": "string"
+        },
+        "lang": {
+          "minLength": 1,
+          "title": "Lang",
+          "type": "string"
+        },
+        "versions": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Versions",
+          "type": "object"
+        }
+      },
+      "required": [
+        "lang",
+        "framework",
+        "versions",
+        "db"
+      ],
+      "title": "Stack",
+      "type": "object"
+    },
+    "Touchpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "family": {
+          "$ref": "#/$defs/Family"
+        },
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "lenses": {
+          "items": {
+            "$ref": "#/$defs/Lens"
+          },
+          "title": "Lenses",
+          "type": "array"
+        },
+        "live": {
+          "title": "Live",
+          "type": "boolean"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileLocation"
+            },
+            {
+              "$ref": "#/$defs/SiteLocation"
+            },
+            {
+              "$ref": "#/$defs/AccountLocation"
+            }
+          ],
+          "title": "Location"
+        },
+        "money_30d": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "operation": {
+          "minLength": 1,
+          "title": "Operation",
+          "type": "string"
+        },
+        "paypal_only": {
+          "title": "Paypal Only",
+          "type": "boolean"
+        },
+        "target": {
+          "$ref": "#/$defs/TouchpointTarget"
+        }
+      },
+      "required": [
+        "id",
+        "family",
+        "operation",
+        "location",
+        "lenses",
+        "confidence",
+        "live",
+        "target",
+        "paypal_only"
+      ],
+      "title": "Touchpoint",
+      "type": "object"
+    },
+    "TouchpointTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "paypal_mapping_id": {
+          "minLength": 1,
+          "title": "Paypal Mapping Id",
+          "type": "string"
+        },
+        "rest_op": {
+          "minLength": 1,
+          "title": "Rest Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paypal_mapping_id",
+        "rest_op"
+      ],
+      "title": "TouchpointTarget",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/RootMap.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "lenses_run": {
+      "items": {
+        "$ref": "#/$defs/Lens"
+      },
+      "title": "Lenses Run",
+      "type": "array"
+    },
+    "money_flow": {
+      "$ref": "#/$defs/MoneyFlow"
+    },
+    "recall_evidence": {
+      "$ref": "#/$defs/RecallEvidence"
+    },
+    "shop_id": {
+      "minLength": 1,
+      "title": "Shop Id",
+      "type": "string"
+    },
+    "stack": {
+      "$ref": "#/$defs/Stack"
+    },
+    "touchpoints": {
+      "items": {
+        "$ref": "#/$defs/Touchpoint"
+      },
+      "title": "Touchpoints",
+      "type": "array"
+    }
+  },
+  "required": [
+    "shop_id",
+    "stack",
+    "lenses_run",
+    "touchpoints",
+    "money_flow",
+    "recall_evidence"
+  ],
+  "title": "RootMapV1",
+  "type": "object"
+}

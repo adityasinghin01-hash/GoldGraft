@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "Grade": {
+      "enum": [
+        "PROBLEM",
+        "UNVERIFIED",
+        "PASS",
+        "PASS_FIXED",
+        "N/A"
+      ],
+      "title": "Grade",
+      "type": "string"
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "RuleHit": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "rule": {
+          "minLength": 1,
+          "title": "Rule",
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/$defs/Side"
+        }
+      },
+      "required": [
+        "rule",
+        "side",
+        "evidence"
+      ],
+      "title": "RuleHit",
+      "type": "object"
+    },
+    "Side": {
+      "enum": [
+        "OLD",
+        "NEW"
+      ],
+      "title": "Side",
+      "type": "string"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Verdict.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "deltas_applied": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Deltas Applied",
+      "type": "array"
+    },
+    "grade": {
+      "$ref": "#/$defs/Grade"
+    },
+    "noise_masked": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Noise Masked",
+      "type": "array"
+    },
+    "parity_diff": {
+      "items": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Parity Diff",
+      "type": "array"
+    },
+    "rule_hits": {
+      "items": {
+        "$ref": "#/$defs/RuleHit"
+      },
+      "title": "Rule Hits",
+      "type": "array"
+    },
+    "scenario_id": {
+      "minLength": 1,
+      "title": "Scenario Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "grade",
+    "rule_hits",
+    "parity_diff",
+    "noise_masked",
+    "deltas_applied"
+  ],
+  "title": "VerdictV1",
+  "type": "object"
+}

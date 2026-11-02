@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "ApiStep": {
+      "additionalProperties": false,
+      "properties": {
+        "api_step": {
+          "minLength": 1,
+          "title": "Api Step",
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_step"
+      ],
+      "title": "ApiStep",
+      "type": "object"
+    },
+    "DriverStep": {
+      "additionalProperties": false,
+      "properties": {
+        "driver_step": {
+          "minLength": 1,
+          "title": "Driver Step",
+          "type": "string"
+        }
+      },
+      "required": [
+        "driver_step"
+      ],
+      "title": "DriverStep",
+      "type": "object"
+    },
+    "MockStep": {
+      "additionalProperties": false,
+      "properties": {
+        "paypal_mock_response_code": {
+          "minLength": 1,
+          "title": "Paypal Mock Response Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "paypal_mock_response_code"
+      ],
+      "title": "MockStep",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Driver.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "proven_runs": {
+      "minimum": 0,
+      "title": "Proven Runs",
+      "type": "integer"
+    },
+    "selectors": {
+      "additionalProperties": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Selectors",
+      "type": "object"
+    },
+    "steps": {
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/DriverStep"
+          },
+          {
+            "$ref": "#/$defs/ApiStep"
+          },
+          {
+            "$ref": "#/$defs/MockStep"
+          }
+        ]
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "steps",
+    "selectors",
+    "proven_runs"
+  ],
+  "title": "DriverV1",
+  "type": "object"
+}

@@ -1,0 +1,14 @@
+{
+  "equivalent_suspect": false,
+  "id": "mutant-1",
+  "killed_by": [
+    "happy"
+  ],
+  "location": {
+    "file": "checkout.php",
+    "line": 12
+  },
+  "op": "M2",
+  "patch": "skip capture status check",
+  "rule": "R01"
+}

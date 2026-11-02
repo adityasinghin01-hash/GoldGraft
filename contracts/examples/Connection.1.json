@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "nvp_ok": true,
+    "rest_ok": true,
+    "version_match": true,
+    "webhook_ok": true
+  },
+  "repo": "https://example.com/shop",
+  "secrets_ref": "doppler://goldgraft/sandbox/shop-1",
+  "shop_id": "shop-1",
+  "site": null
+}

@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-11-02T09:00:00Z",
+  "graft_id": "graft-1",
+  "id": "artifact-1",
+  "mutants": [
+    {
+      "equivalent_suspect": false,
+      "id": "mutant-1",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M2",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    }
+  ],
+  "producer": {
+    "kind": "agent",
+    "model": "fixture",
+    "name": "Surveyor",
+    "version": "1"
+  },
+  "unguarded_rule_ids": []
+}
