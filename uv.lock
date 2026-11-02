@@ -226,6 +226,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "goldgraft-contracts" },
     { name = "goldgraft-foundation" },
+    { name = "jsonschema" },
     { name = "uvicorn" },
 ]
 
@@ -235,6 +236,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115,<1" },
     { name = "goldgraft-contracts", editable = "contracts" },
     { name = "goldgraft-foundation", editable = "foundation" },
+    { name = "jsonschema", specifier = ">=4" },
     { name = "uvicorn", specifier = ">=0.30,<1" },
 ]
 

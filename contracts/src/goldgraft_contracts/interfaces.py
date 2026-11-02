@@ -19,6 +19,25 @@ MutantRuns = Mapping[str, Mapping[str, Grade]]
 
 
 @runtime_checkable
+class ToolCaller(Protocol):
+    """Agent tools enforce their allowlists and schemas before dispatch."""
+
+    def call(self, agent: str, tool: str, args: dict) -> dict: ...
+
+
+@runtime_checkable
+class AgentRunner(Protocol):
+    """Registry of the thirteen design-06 agents.
+
+    Returns (versioned schema name, payload) pairs for ledger validation. Attribution
+    belongs in LedgerEntry/1; AgentArtifact payloads also carry their own producer.
+    """
+
+    def run(self, agent: str, inputs: Mapping[str, object],
+            tools: ToolCaller) -> list[tuple[str, dict]]: ...
+
+
+@runtime_checkable
 class Runner(Protocol):
     """Runs shop jobs in the locked box (GitHub Actions VM + gVisor in the real piece)."""
 
