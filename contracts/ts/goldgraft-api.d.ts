@@ -904,9 +904,8 @@ export interface components {
              */
             label: string;
         };
-        JsonValue: boolean | number | string | components["schemas"]["JsonValue"][] | {
-            [key: string]: components["schemas"]["JsonValue"];
-        } | null;
+        /** @description Any JSON value (opaque content) */
+        JsonValue: unknown;
         /**
          * Kind
          * @enum {string}

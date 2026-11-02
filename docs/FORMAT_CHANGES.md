@@ -154,3 +154,24 @@ The required entry_hash formula is unchanged; an internal full-envelope checksum
 also detects edits to ts/schema/inputs/graft_id/payload_ref, which that formula
 omits. Hashes can collide across grafts with identical content at identical seq:
 get(hash) raises AmbiguousHash in that case; get(hash, graft_id=...) disambiguates.
+
+## C3 — API contract, 2 November 2026 (built by Claude)
+
+- `contracts/src/goldgraft_contracts/api.py`: API-only view models (request/response
+  shapes for the 12 screens): Problem (RFC 7807), ProbeRequest, ShopCreate, Shop,
+  ConnectRequest, StartGraftRequest, Graft + GraftCard (every number has a plain
+  note), ScenarioList, CmelView, ProofView, CertificateVerifyResult, HealState,
+  InjectFaultRequest/Result, Ack, RecipeList, LearningCurve, OrchardView,
+  OrchardAsk/Answer, GauntletRun, Comparison. Boundary formats are reused unchanged.
+- `contracts/src/goldgraft_contracts/api_routes.py`: the 24 endpoints of design 07 as
+  DATA. The stand-in and the real backend both register routes from this table.
+- Generated: `contracts/api/openapi.json` (scripts/export_openapi.py) and
+  `contracts/ts/goldgraft-api.d.ts` (openapi-typescript 7.13.0, MIT), both covered by
+  `scripts/check_generated.sh` and the TypeScript check.
+- Decisions: `GET /heal/{graft_id}` returns JSON, or SSE when `Accept:
+  text/event-stream`; `POST /certificates/{id}/verify` needs no Idempotency-Key (it
+  changes nothing); webhooks are not keyed — they are de-duplicated by
+  PAYPAL-TRANSMISSION-ID / X-GitHub-Delivery and need their signature headers;
+  `GET /learning-curve` added (named on screen S8, missing from 07's API table);
+  in the OpenAPI file the recursive JsonValue type is "any JSON value" (TypeScript
+  cannot express the recursion there).

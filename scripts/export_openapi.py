@@ -15,6 +15,11 @@ def main():
         "Contract for the real backend and the stand-in. Source of truth: "
         "contracts/src/goldgraft_contracts/api_routes.py. Errors are RFC 7807 problem+json; "
         "writes need an Idempotency-Key header.")
+    # The recursive JsonValue union breaks TypeScript (TS2502) once openapi-typescript
+    # inlines it; for API consumers "any JSON value" is the same contract.
+    schemas = spec.get("components", {}).get("schemas", {})
+    if "JsonValue" in schemas:
+        schemas["JsonValue"] = {"description": "Any JSON value (opaque content)"}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(spec, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
     print(f"Exported OpenAPI with {len(spec['paths'])} paths")
