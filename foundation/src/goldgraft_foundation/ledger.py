@@ -253,6 +253,15 @@ class Ledger:
         return entry.payload
 
     def verify_chain(self, graft_id) -> ChainCheck:
+        return self._verify_chain(graft_id)
+
+    def verified_payloads(self, graft_id, through_hash, schema):
+        """Return validated payloads from the nonempty prefix ending at a signed root."""
+        payloads = []
+        check = self._verify_chain(graft_id, through_hash, schema, payloads)
+        return check, payloads if check.ok else []
+
+    def _verify_chain(self, graft_id, through_hash=None, schema=None, payloads=None):
         with self.engine.connect() as conn:
             rows = conn.execute(select(entries).where(entries.c.graft_id == graft_id)
                                 .order_by(entries.c.seq)).mappings().all()
@@ -276,13 +285,19 @@ class Ledger:
                 if entry_digest(prev, body["payload_hash"], body["type"], body["producer"],
                                 expected_seq) != body["entry_hash"]:
                     raise ValueError("entry hash mismatch")
-                validate(body["schema"], payload, context=context)
+                validated = validate(body["schema"], payload, context=context)
                 LedgerEntry.model_validate(body, context=context)
+                if payloads is not None and body["schema"] == schema:
+                    payloads.append(validated)
                 prev = body["entry_hash"]
                 context["ledger_entries"][prev] = body
+                if through_hash is not None and prev == through_hash:
+                    return ChainCheck(True)
             except (ValueError, TypeError, OSError, KeyError) as exc:
                 reason = type(exc).__name__ + ": integrity check failed"
                 return ChainCheck(False, expected_seq, reason)
+        if through_hash is not None:
+            return ChainCheck(False, reason="signed root not found in this graft")
         return ChainCheck(True)
 
     async def subscribe(self, graft_id, after_seq=0) -> AsyncIterator[LedgerEntry]:

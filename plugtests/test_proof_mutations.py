@@ -111,3 +111,22 @@ def test_proof_strength_requires_outcomes_and_verified_equivalence():
     assert proof.proof_strength([mutant], inconclusive).score == 0
     with pytest.raises(ValueError, match="verified passing outcomes"):
         proof.proof_strength([mutant], inconclusive, reviewed_equivalent={mutant.id})
+
+
+def test_coverage_only_counts_kills_from_linked_scenarios():
+    from pieces.proof.mutation import mutation_coverage
+
+    contract = validate("Contract/1", json.loads((FIXTURE / "contract.json").read_text()))
+    scenario = validate("Scenario/1", json.loads((FIXTURE / "scenarios/PENDING.json").read_text()))
+    mutant = validate("Mutant/1", json.loads((FIXTURE / "mutants/M02.json").read_text()))
+    for outcomes, killed in (
+        ({"unlinked": Grade.PROBLEM, scenario.id: Grade.PASS}, False),
+        ({scenario.id: Grade.PROBLEM}, True),
+    ):
+        rows = mutation_coverage(contract, [scenario], [mutant], {mutant.id: outcomes})
+        row = next(row for row in rows if row.rule_id == mutant.rule)
+        assert (row.scenario_ids, row.mutant_ids, row.killed) == (
+            [scenario.id],
+            [mutant.id],
+            killed,
+        )

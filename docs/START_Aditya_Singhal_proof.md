@@ -46,3 +46,20 @@ Without the variable it runs against the stand-in (which just looks answers up).
 
 ## Ask Aditya when
 an answer key looks wrong to you (tell him which file and why — answer keys can have mistakes), or you need a format change.
+
+## Certificate runner integration
+
+Persist normalized money events as `CMEL/1` ledger entries under the graft before
+issuance. Call `issue_certificate_from_ledger` in `pieces.proof.evidence` with the
+final contract, scenarios, verdicts, four passing smoke verdicts and measured proof strength. It derives the
+ledger root and PayPal references from the audited graft, then calls the supplied
+signer after the certificate gates pass. Supply `pieces.proof.sigstore.sign_payload`
+from a GitHub Actions job with Cosign and `id-token: write`.
+
+For the certificate API, call `verify_certificate_evidence` with the stored
+graft ID, the shop's sandbox client and the trusted workflow identity and SHA
+from runner configuration. It checks the Cosign bundle before reading payment
+evidence. A valid ledger prefix remains verifiable after later graft events are
+appended. PayPal re-fetch compares each signed capture to its archived amount
+and currency. The recorded debug ID identifies the original observation and is
+not expected to recur on a fresh request.

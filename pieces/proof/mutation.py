@@ -3,7 +3,9 @@
 import re
 from collections.abc import Callable, Mapping, Sequence
 
-from goldgraft_contracts.proof import Grade, Mutant
+from goldgraft_contracts.api import TriangleRow
+from goldgraft_contracts.interfaces import MutantRuns
+from goldgraft_contracts.proof import Grade, MoneyContract, Mutant, Scenario
 
 HUNK = re.compile(r"@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@(?: .*)?")
 type ScenarioRunner = Callable[[Mutant, str, str], Grade]
@@ -73,3 +75,30 @@ def run_mutants(
             for scenario in dict.fromkeys(scenarios)
         }
     return results
+
+
+def mutation_coverage(
+    contract: MoneyContract,
+    scenarios: Sequence[Scenario],
+    mutants: Sequence[Mutant],
+    runs: MutantRuns,
+) -> list[TriangleRow]:
+    """Report guard coverage from linked scenarios and observed mutant verdicts."""
+    result = []
+    for rule in contract.rules:
+        linked = {scenario.id for scenario in scenarios if rule.id in scenario.rules}
+        planted = [mutant for mutant in mutants if mutant.rule == rule.id]
+        killed = any(
+            runs.get(mutant.id, {}).get(scenario) == Grade.PROBLEM
+            for mutant in planted
+            for scenario in linked
+        )
+        result.append(
+            TriangleRow(
+                rule_id=rule.id,
+                scenario_ids=sorted(linked),
+                mutant_ids=sorted(mutant.id for mutant in planted),
+                killed=killed,
+            )
+        )
+    return result

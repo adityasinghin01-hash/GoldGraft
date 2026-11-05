@@ -141,3 +141,123 @@ def test_cosign_adapter_requires_runner_and_pins_workflow(monkeypatch):
     assert not verify(certificate.runner_identity.sha).ok
     assert len(verification_calls) == 2
     assert witness_calls == ["ledger", "paypal", "ledger", "paypal"]
+
+
+def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
+    issuance, monkeypatch, tmp_path
+):
+    from goldgraft_foundation.blobs import LocalBlobStore
+    from goldgraft_foundation.ledger import Ledger
+
+    from pieces.proof.evidence import issue_certificate_from_ledger, verify_certificate_evidence
+
+    row = read("certificate/valid.json")["paypal_evidence"][0]
+    event = next(
+        item
+        for item in read("cmel/HAPPY.NEW.json")
+        if item["source"] == "PAYPAL_LEDGER" and item["pp"]["capture_id"] == row["capture_id"]
+    )
+    ledger = Ledger("sqlite://", blob_store=LocalBlobStore(tmp_path))
+    producer = {"kind": "service", "name": "proof", "version": "1"}
+    graft = event["graft_id"]
+    entry = ledger.append(graft, "ARTIFACT", producer, "CMEL/1", payload=event)
+    for name in ("DECLINE", "NOTIFY_FORGED", "REFUND_TWICE"):
+        issuance["scenarios"].append(validate("Scenario/1", read(f"scenarios/{name}.json")))
+        issuance["verdicts"].append(validate("Verdict/1", read(f"expected/{name}.verdict.json")))
+
+    def unexpected_sign(_):
+        pytest.fail("An incomplete smoke round must not call the signer")
+
+    with pytest.raises(ValueError, match="passing smoke proof"):
+        issue_certificate_from_ledger(
+            read("certificate/valid.json"),
+            ledger=ledger,
+            graft_id=graft,
+            smoke_verdicts=issuance["verdicts"][:1],
+            signer=unexpected_sign,
+            **issuance,
+        )
+
+    certificate = issue_certificate_from_ledger(
+        read("certificate/valid.json"),
+        ledger=ledger,
+        graft_id=graft,
+        smoke_verdicts=issuance["verdicts"],
+        signer=lambda _: ("test-signature", "test-rekor"),
+        **issuance,
+    )
+    assert certificate.ledger_root == entry.entry_hash
+    assert [item.model_dump() for item in certificate.paypal_evidence] == [row]
+
+    ledger.append(graft, "ARTIFACT", producer, "Money/1", payload=event["money"])
+    monkeypatch.setattr("pieces.proof.sigstore.verify_bundle", lambda *_, **__: True)
+
+    class PayPal:
+        value = "25.00"
+        calls = []
+
+        def rest(self, method, path):
+            assert method == "GET"
+            self.calls.append(path)
+            capture = {
+                "id": row["capture_id"],
+                "status": "COMPLETED",
+                "amount": {"value": self.value, "currency_code": "USD"},
+                "supplementary_data": {"related_ids": {"order_id": row["order_id"]}},
+            }
+            if path == f"/v2/checkout/orders/{row['order_id']}":
+                return 200, {
+                    "id": row["order_id"],
+                    "purchase_units": [{"payments": {"captures": [capture]}}],
+                }
+            assert path == f"/v2/payments/captures/{row['capture_id']}"
+            return 200, capture
+
+    paypal = PayPal()
+
+    def verify(graft_id=graft):
+        return verify_certificate_evidence(
+            certificate,
+            ledger=ledger,
+            graft_id=graft_id,
+            paypal=paypal,
+            workflow_identity="test",
+            workflow_sha=certificate.runner_identity.sha,
+        )
+
+    assert verify().ok
+    assert len(paypal.calls) == 2
+    paypal.value = "25.01"
+    assert not verify().ok
+    assert len(paypal.calls) == 4
+    assert not verify("another-graft").ok
+    assert len(paypal.calls) == 4
+
+    table = ledger.entries
+    with ledger.engine.begin() as connection:
+        connection.execute(table.update().where(table.c.seq == 1).values(envelope_hash="0" * 64))
+    assert not verify().ok
+    assert len(paypal.calls) == 4
+
+
+@pytest.mark.parametrize(
+    "gate", ["missing_verdict", "recall", "secrets", "missing_payment", "shop"]
+)
+def test_additional_issuance_gates_prevent_signing(issuance, gate):
+    metadata = read("certificate/valid.json")
+    if gate == "missing_verdict":
+        issuance["verdicts"] = []
+    elif gate == "recall":
+        metadata["survey"]["recall"] = 0.94
+    elif gate == "secrets":
+        metadata["security"]["secrets_found"] = 1
+    elif gate == "missing_payment":
+        metadata["paypal_evidence"] = []
+    else:
+        metadata["shop_id"] = "another-shop"
+
+    def sign(_):
+        pytest.fail("Signing must follow all evidence checks")
+
+    with pytest.raises(ValueError):
+        issue_certificate(metadata, signer=sign, **issuance)
