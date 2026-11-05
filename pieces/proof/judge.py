@@ -11,6 +11,8 @@ from goldgraft_contracts.proof import MoneyContract, RuleHit, Verdict
 from goldgraft_contracts.runner import RawCapture
 from goldgraft_contracts.survey import TargetPlan
 
+from .lifecycle import LifecycleEvidence, lifecycle_hits
+
 
 def identity(event):
     pp = event["pp"]
@@ -285,6 +287,8 @@ def judge(
     *,
     old_capture: RawCapture | None = None,
     new_capture: RawCapture | None = None,
+    old_lifecycle: LifecycleEvidence | None = None,
+    new_lifecycle: LifecycleEvidence | None = None,
 ) -> Verdict:
     streams = [old, old_twin, new]
     ids = {event.scenario_id for stream in streams for event in stream}
@@ -348,6 +352,17 @@ def judge(
     rules = {rule.id for rule in contract.rules}
     old_hits = rule_hits(baseline, old_capture)
     new_hits = rule_hits(candidate, new_capture)
+    for stream, evidence, found in (
+        (old, old_lifecycle, old_hits),
+        (new, new_lifecycle, new_hits),
+    ):
+        if evidence is None:
+            continue
+        observed, incomplete = lifecycle_hits(stream, evidence)
+        if incomplete & rules:
+            return verdict("UNVERIFIED")
+        for rule, references in observed.items():
+            found[rule].update(references)
     hits = [
         RuleHit(rule=rule, side=side, evidence=sorted(found[rule]))
         for side, found in (("NEW", new_hits), ("OLD", old_hits))

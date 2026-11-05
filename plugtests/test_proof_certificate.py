@@ -72,3 +72,62 @@ def test_failed_certificate_gate_never_calls_the_signer(issuance, failure):
 
     with pytest.raises(ValueError, match="Certificate requires"):
         issue_certificate(read("certificate/valid.json"), signer=sign, **issuance)
+
+
+def test_cosign_adapter_requires_runner_and_pins_workflow(monkeypatch):
+    from pathlib import Path
+    from subprocess import CompletedProcess
+
+    from pieces.proof.sigstore import sign_payload, verify_signed_certificate
+
+    monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
+    with pytest.raises(RuntimeError, match="GitHub Actions"):
+        sign_payload(b"payload")
+
+    for name, value in (
+        ("GITHUB_ACTIONS", "true"),
+        ("ACTIONS_ID_TOKEN_REQUEST_URL", "fixture-url"),
+        ("ACTIONS_ID_TOKEN_REQUEST_TOKEN", "fixture-token"),
+    ):
+        monkeypatch.setenv(name, value)
+    certificate = validate("Certificate/1", read("certificate/valid.json"))
+    expected = certificate_payload(certificate)
+    workflow = "https://github.com/example/repo/.github/workflows/proof.yml@refs/heads/main"
+    bundle = json.dumps(
+        {"verificationMaterial": {"tlogEntries": [{"logIndex": "42", "logId": {"keyId": "log"}}]}}
+    )
+    verification_calls = []
+
+    def run(args, **kwargs):
+        assert Path(args[-1]).read_bytes() == expected
+        bundle_file = Path(args[args.index("--bundle") + 1])
+        if args[1] == "sign-blob":
+            bundle_file.write_text(bundle)
+        else:
+            verification_calls.append(args)
+            assert bundle_file.read_text() == bundle
+            assert args[args.index("--certificate-identity") + 1] == workflow
+            assert args[args.index("--certificate-github-workflow-sha") + 1] == (
+                certificate.runner_identity.sha
+            )
+        return CompletedProcess(args, 0)
+
+    monkeypatch.setattr("pieces.proof.sigstore.subprocess.run", run)
+    certificate.signature, certificate.rekor_entry = sign_payload(expected)
+    assert certificate.rekor_entry == "log:42"
+
+    def verify(sha, ledger_ok=True):
+        return verify_signed_certificate(
+            certificate,
+            workflow_identity=workflow,
+            workflow_sha=sha,
+            ledger_check=lambda *_: ledger_ok,
+            paypal_check=lambda *_: True,
+        )
+
+    assert verify(certificate.runner_identity.sha).ok
+    assert not verify(certificate.runner_identity.sha, ledger_ok=False).ok
+    assert not verify("another-workflow-sha").ok
+    certificate.rekor_entry = "log:43"
+    assert not verify(certificate.runner_identity.sha).ok
+    assert len(verification_calls) == 2

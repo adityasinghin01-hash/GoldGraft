@@ -20,6 +20,7 @@ from goldgraft_contracts.survey import TargetPlan
 from .certificate import CertificateCheck, verify_certificate
 from .cmel import to_cmel
 from .judge import judge
+from .lifecycle import LifecycleEvidence
 from .posterior import probabilities
 
 STAGES = (0, 1, 10, 50, 100)
@@ -40,6 +41,8 @@ class Proof:
         *,
         old_capture: RawCapture | None = None,
         new_capture: RawCapture | None = None,
+        old_lifecycle: LifecycleEvidence | None = None,
+        new_lifecycle: LifecycleEvidence | None = None,
     ) -> Verdict:
         return judge(
             old,
@@ -49,6 +52,8 @@ class Proof:
             target_plan,
             old_capture=old_capture,
             new_capture=new_capture,
+            old_lifecycle=old_lifecycle,
+            new_lifecycle=new_lifecycle,
         )
 
     def proof_strength(

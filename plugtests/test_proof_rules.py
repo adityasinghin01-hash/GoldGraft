@@ -95,3 +95,50 @@ def test_pending_capture_can_resolve_to_paid():
     for index, event in enumerate(events):
         event["seq"] = index
     assert "R07" not in rule_hits(events, None)
+
+
+def test_callback_deadline_and_restart_evidence():
+    from pieces.proof.lifecycle import CallbackWatch, LifecycleEvidence, RestartWatch
+
+    old, twin, new, contract, plan, _ = judge_inputs()
+    order = new[0].order_ref
+    first_capture = next(event for event in new if event.kind == "CAPTURE")
+    last_approval = max(event.t_ms for event in new if event.kind == "APPROVE")
+    assert last_approval < first_capture.t_ms
+    restart = RestartWatch(order, first_capture.t_ms - 1, "runner/restart")
+    watch = CallbackWatch(order, last_approval, first_capture.t_ms, (), "runner/callback")
+    evidence = LifecycleEvidence(new[0].run_id, callbacks=(watch,), restarts=(restart,))
+    result = judge(old, twin, new, contract, plan, new_lifecycle=evidence)
+    assert {(hit.rule, hit.side) for hit in result.rule_hits} == {("R13", "NEW")}
+
+    short = CallbackWatch(order, last_approval, last_approval - 1, (), "runner/callback")
+    evidence = LifecycleEvidence(new[0].run_id, callbacks=(short,))
+    assert judge(old, twin, new, contract, plan, new_lifecycle=evidence).grade == "UNVERIFIED"
+
+
+def test_restart_failure_and_legacy_refund_route():
+    from pieces.proof.lifecycle import LifecycleEvidence, RefundRoute, RestartWatch, lifecycle_hits
+
+    _, _, new, _, _, _ = judge_inputs()
+    order = new[0].order_ref
+    after_approval = max(event.t_ms for event in new if event.kind == "APPROVE") + 1
+    restart = RestartWatch(order, after_approval, "runner/restart")
+    interrupted = [event for event in new if event.kind in {"APPROVE", "INTENT"}]
+    hits, incomplete = lifecycle_hits(
+        interrupted, LifecycleEvidence(new[0].run_id, restarts=(restart,))
+    )
+    assert hits == {"R14": {"runner/restart"}}
+    assert not incomplete
+
+    raw = json.loads((CMEL / "REFUND.NEW.json").read_text())
+    events = [validate("CMEL/1", item) for item in raw]
+    refund = next(event for event in events if event.kind == "REFUND")
+    for mapping in (None, "runner/verified-legacy-equivalence"):
+        route = RefundRoute(
+            refund.order_ref, refund.pp.refund_id, "LEGACY", "REST", mapping, "runner/refund"
+        )
+        hits, incomplete = lifecycle_hits(
+            events, LifecycleEvidence(refund.run_id, refunds=(route,))
+        )
+        assert bool(hits.get("R15")) == (mapping is None)
+        assert not incomplete
