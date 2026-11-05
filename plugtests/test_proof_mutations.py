@@ -49,13 +49,13 @@ def test_php_checkout_mutation_outcomes(tmp_path):
     cases = (
         ("WRONG_CURRENCY", Grade.PROBLEM),
         ("PENDING", Grade.PROBLEM),
-        ("UNAPPROVED", Grade.PASS),
+        ("UNAPPROVED", Grade.PROBLEM),
         ("LOCKED_CAPTURE", Grade.PROBLEM),
         ("LOST_RESPONSE", Grade.PROBLEM),
         ("EXACT_AMOUNT", Grade.PROBLEM),
         ("BROWSER_QUOTE", Grade.PROBLEM),
         ("FORGED_WEBHOOK", Grade.PROBLEM),
-        ("VALID_WEBHOOK", Grade.UNVERIFIED),
+        ("VALID_WEBHOOK", Grade.PROBLEM),
         ("MIXED_CASE_WEBHOOK", Grade.PROBLEM),
         ("DURABLE_APPROVAL", Grade.PROBLEM),
         ("REFUND_TWICE", Grade.PROBLEM),
@@ -94,7 +94,8 @@ def test_php_checkout_mutation_outcomes(tmp_path):
     for mutant, (scenario, expected) in zip(mutants, cases, strict=True):
         assert results[mutant.id][scenario] == expected, mutant.id
     strength = Proof().proof_strength(mutants, results)
-    assert (strength.killed, strength.total) == (10, 12)
+    assert (strength.killed, strength.total, strength.equivalent_dropped) == (12, 12, 0)
+    assert strength.score == 1.0
 
 
 def test_proof_strength_requires_outcomes_and_verified_equivalence():

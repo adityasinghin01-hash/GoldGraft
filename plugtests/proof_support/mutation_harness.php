@@ -120,7 +120,8 @@ function runScenario(string $scenario): bool {
             $capture();
             return ($store->row['status'] ?? null) === 'pending';
         case 'UNAPPROVED':
-            return rejected($capture, 'unapproved') && !isset($store->row['capture_id']);
+            return rejected($capture, 'unapproved')
+                && $captureRequests === [] && !isset($store->row['capture_id']);
         case 'LOCKED_CAPTURE':
             $capture();
             $capture();
@@ -171,5 +172,12 @@ try {
     echo runScenario($argv[2]) ? 'PASS' : 'PROBLEM';
 } catch (TypeError $error) {
     fwrite(STDERR, $error->getMessage() . PHP_EOL);
-    echo 'UNVERIFIED';
+    $frame = $error->getTrace()[0] ?? [];
+    // A known-valid webhook failing at the order-ID boundary is a checkout regression.
+    $invalidOrderId = $argv[2] === 'VALID_WEBHOOK'
+        && ($frame['class'] ?? null) === Store::class
+        && ($frame['function'] ?? null) === 'verifiedNotification'
+        && str_contains($error->getMessage(), 'Argument #2 ($orderId)')
+        && str_contains($error->getMessage(), 'null given');
+    echo $invalidOrderId ? 'PROBLEM' : 'UNVERIFIED';
 }
