@@ -4,6 +4,7 @@ import json
 from collections import defaultdict
 from collections.abc import Sequence
 from itertools import zip_longest
+from urllib.parse import parse_qsl, urlsplit
 
 from goldgraft_contracts.money import MoneyEvent
 from goldgraft_contracts.proof import MoneyContract, RuleHit, Verdict
@@ -16,6 +17,65 @@ def identity(event):
     return (
         pp.get("refund_id") if event["kind"] == "REFUND" else pp.get("capture_id", pp.get("txn_id"))
     )
+
+
+def raw_ref(capture: RawCapture, index: int) -> str:
+    return f"raw/{capture.scenario_id}.{capture.variant}.json#/exchanges/{index}"
+
+
+def confirmation_results(capture: RawCapture):
+    for index, exchange in enumerate(capture.exchanges):
+        if (
+            exchange.direction != "BROWSER_TO_SHOP"
+            or urlsplit(exchange.url).path != "/api/confirmation-result"
+        ):
+            continue
+        headers = {name.lower(): value for name, value in exchange.headers.items()}
+        order = headers.get("x-goldgraft-order-ref")
+        if order and exchange.status is not None:
+            yield order, raw_ref(capture, index), exchange
+
+
+def ledger_failed(capture: RawCapture | None) -> bool:
+    if capture is None:
+        return False
+    for exchange in capture.exchanges:
+        if exchange.direction != "PAYPAL_TO_SHOP" or not any(
+            name.lower() == "x-goldgraft-ledger" and value
+            for name, value in exchange.headers.items()
+        ):
+            continue
+        if exchange.status is None or not 200 <= exchange.status < 300:
+            return True
+        ack = dict(parse_qsl(exchange.body_text or "")).get("ACK")
+        if ack is not None and ack not in {"Success", "SuccessWithWarning"}:
+            return True
+    return False
+
+
+def sufficient_evidence(events) -> bool:
+    if not events:
+        return False
+    required = set()
+    witnessed = set()
+    for event in events:
+        kind = event["kind"]
+        if kind not in {"CAPTURE", "REFUND"}:
+            if kind == "INTENT" and "money" not in event:
+                return False
+            continue
+        transaction = identity(event)
+        if transaction is None or "money" not in event or "status_norm" not in event:
+            return False
+        key = (event["order_ref"], kind, transaction)
+        if event["source"] == "PAYPAL_LEDGER":
+            witnessed.add(key)
+        else:
+            required.add(key)
+    paid_orders = {
+        event["order_ref"] for event in events if event["kind"] in {"SHOP_PAID", "SHOP_PENDING"}
+    }
+    return required <= witnessed and paid_orders <= {order for order, _, _ in witnessed}
 
 
 def rule_hits(events, capture: RawCapture | None):
@@ -32,6 +92,25 @@ def rule_hits(events, capture: RawCapture | None):
             ref = headers.get("x-goldgraft-order-ref")
             after = exchange.db_change.after or {}
             db_writes[ref].append((index, after.get("refunded_minor")))
+
+        replies = defaultdict(list)
+        for order, reference, exchange in confirmation_results(capture):
+            replies[order].append((reference, exchange))
+        for observations in replies.values():
+            if len(observations) < 2:
+                continue
+            results = defaultdict(list)
+            for reference, exchange in observations:
+                if exchange.status >= 500:
+                    hits["R05"].add(reference)
+                if not 200 <= exchange.status < 300 or not isinstance(exchange.body_json, dict):
+                    continue
+                body = exchange.body_json
+                transaction = body.get("capture_id") or body.get("transaction_id")
+                if isinstance(transaction, str) and transaction:
+                    results[transaction].append(reference)
+            if len(results) > 1:
+                hits["R10"].update(reference for refs in results.values() for reference in refs)
 
     for order, items in by_order.items():
 
@@ -57,9 +136,26 @@ def rule_hits(events, capture: RawCapture | None):
         for paid_event in paid:
             if not any(e["kind"] == "APPROVE" and e["seq"] < paid_event["seq"] for e in items):
                 hit("R06")
-        if any(e.get("status_norm") == "PENDING" for e in captures):
-            if paid or not any(e["kind"] == "SHOP_PENDING" for e in items):
+        pending = [e for e in captures if e.get("status_norm") == "PENDING"]
+        if pending:
+            if not completed and not any(e["kind"] == "SHOP_PENDING" for e in items):
                 hit("R07")
+            verified_completion = False
+            completed_notification = False
+            for event in items:
+                kind = event["kind"]
+                if kind == "NOTIFY":
+                    completed_notification = event.get("status_norm") == "COMPLETED"
+                elif kind == "NOTIFY_VERIFIED" and completed_notification:
+                    verified_completion = True
+                elif kind == "NOTIFY_REJECTED":
+                    completed_notification = False
+                elif (
+                    kind == "SHOP_PAID"
+                    and not verified_completion
+                    and not any(observed["seq"] < event["seq"] for observed in completed)
+                ):
+                    hit("R07")
         for paid_event in paid:
             previous = [e for e in items if e["seq"] < paid_event["seq"]]
             notify_indices = [i for i, e in enumerate(previous) if e["kind"] == "NOTIFY"]
@@ -101,21 +197,40 @@ def rule_hits(events, capture: RawCapture | None):
                     previous = capture_by_confirmation.setdefault(confirmation, transaction)
                     if previous != transaction:
                         hit("R10")
-        # Refund totals are checked per independent witness, not API+ledger copies.
-        captured_total = sum({identity(e): e["money"]["minor"] for e in completed}.values())
+        # Keep currencies, capture IDs and independent refund witnesses separate.
+        captured = {(identity(e), e["money"]["currency"]): e["money"]["minor"] for e in completed}
+        order_totals = defaultdict(int)
+        for (_, currency), minor in captured.items():
+            order_totals[currency] += minor
         for source in ("PAYPAL_CALL", "PAYPAL_LEDGER"):
             refunds = {
-                identity(e): e["money"]["minor"]
+                identity(e): e
                 for e in items
-                if e["kind"] == "REFUND" and e["source"] == source
+                if e["kind"] == "REFUND"
+                and e["source"] == source
+                and e.get("status_norm") == "REFUNDED"
             }
-            if sum(refunds.values()) > captured_total:
+            per_capture = defaultdict(int)
+            per_currency = defaultdict(int)
+            for refund in refunds.values():
+                refs = refund["pp"]
+                parent = refs.get("capture_id") or refs.get("txn_id")
+                amount = refund["money"]
+                currency = amount["currency"]
+                per_currency[currency] += amount["minor"]
+                if parent is not None:
+                    per_capture[parent, currency] += amount["minor"]
+            if any(total > order_totals[currency] for currency, total in per_currency.items()):
+                hit("R11")
+            if any(total > captured.get(key, 0) for key, total in per_capture.items()):
                 hit("R11")
         for index, refunded in db_writes[order]:
-            if type(refunded) is int and refunded > captured_total:
-                hits["R11"].add(
-                    f"raw/{capture.scenario_id}.{capture.variant}.json#/exchanges/{index}"
-                )
+            if (
+                type(refunded) is int
+                and len(order_totals) == 1
+                and refunded > next(iter(order_totals.values()))
+            ):
+                hits["R11"].add(raw_ref(capture, index))
     return hits
 
 
@@ -138,9 +253,10 @@ def projection(events, *, noise, old, deltas):
         # CMEL DB rows observe status even when only refund bookkeeping changed.
         if event["source"] == "SHOP_DB":
             key = event["order_ref"]
-            if shop_state.get(key) == event["kind"]:
+            state = event["kind"], event.get("money")
+            if shop_state.get(key) == state:
                 continue
-            shop_state[key] = event["kind"]
+            shop_state[key] = state
         data = {k: event[k] for k in ("kind", "source", "order_ref", "pp")}
         data["pp"] = event["pp"].copy()
         for key in ("money", "status_norm", "items_hash"):
@@ -213,19 +329,6 @@ def judge(
             deltas_applied=sorted(deltas),
         )
 
-    def has_required_evidence(events):
-        witnessed = {event["order_ref"] for event in events if event["source"] == "PAYPAL_LEDGER"}
-        required = {
-            event["order_ref"]
-            for event in events
-            if event["kind"] in {"CAPTURE", "REFUND", "SHOP_PAID", "SHOP_PENDING"}
-        }
-        return bool(events) and required <= witnessed
-
-    if not all(has_required_evidence(events) for events in (baseline, twin, candidate)):
-        return verdict("UNVERIFIED")
-
-    rules = {rule.id for rule in contract.rules}
     for stream, capture in ((old, old_capture), (new, new_capture)):
         if capture is not None and any(
             (event.scenario_id, event.run_id, event.graft_id, event.variant)
@@ -233,6 +336,16 @@ def judge(
             for event in stream
         ):
             raise ValueError("Raw evidence does not match the canonical event stream")
+    if not all(sufficient_evidence(events) for events in (baseline, twin, candidate)) or any(
+        ledger_failed(capture) for capture in (old_capture, new_capture)
+    ):
+        return verdict("UNVERIFIED")
+    if projection(baseline, noise=noise, old=False, deltas=deltas) != projection(
+        twin, noise=noise, old=False, deltas=deltas
+    ):
+        return verdict("UNVERIFIED")
+
+    rules = {rule.id for rule in contract.rules}
     old_hits = rule_hits(baseline, old_capture)
     new_hits = rule_hits(candidate, new_capture)
     hits = [
