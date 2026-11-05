@@ -67,11 +67,19 @@ class Proof:
     ) -> ProofStrength:
         ids = {mutant.id for mutant in mutants}
         dropped = set(reviewed_equivalent)
-        if len(ids) != len(mutants) or dropped - ids or ids - runs.keys():
+        if len(ids) != len(mutants) or dropped - ids or ids != runs.keys():
             raise ValueError("Mutant IDs, run outcomes, and equivalence review must agree")
-        killed_ids = {mutant_id for mutant_id in ids if Grade.PROBLEM in runs[mutant_id].values()}
-        if dropped & killed_ids:
-            raise ValueError("A killed mutant cannot be reviewed as equivalent")
+        outcomes = {
+            mutant_id: {Grade(grade) for grade in scenarios.values()}
+            for mutant_id, scenarios in runs.items()
+        }
+        if any(not grades for grades in outcomes.values()):
+            raise ValueError("Every mutant requires at least one scenario outcome")
+        killed_ids = {
+            mutant_id for mutant_id, grades in outcomes.items() if Grade.PROBLEM in grades
+        }
+        if any(not outcomes[mutant_id] <= {Grade.PASS, Grade.PASS_FIXED} for mutant_id in dropped):
+            raise ValueError("Reviewed equivalents require verified passing outcomes")
         total, killed = len(ids), len(killed_ids)
         retained = total - len(dropped)
         return ProofStrength(

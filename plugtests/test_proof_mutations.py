@@ -95,3 +95,18 @@ def test_php_checkout_mutation_outcomes(tmp_path):
         assert results[mutant.id][scenario] == expected, mutant.id
     strength = Proof().proof_strength(mutants, results)
     assert (strength.killed, strength.total) == (10, 12)
+
+
+def test_proof_strength_requires_outcomes_and_verified_equivalence():
+    mutant = validate("Mutant/1", json.loads((FIXTURE / "mutants/M03.json").read_text()))
+    proof = Proof()
+
+    with pytest.raises(ValueError, match="at least one scenario"):
+        proof.proof_strength([mutant], {mutant.id: {}})
+    with pytest.raises(ValueError, match="must agree"):
+        proof.proof_strength([mutant], {mutant.id: {"example": Grade.PASS}, "extra": {}})
+
+    inconclusive = {mutant.id: {"example": Grade.UNVERIFIED}}
+    assert proof.proof_strength([mutant], inconclusive).score == 0
+    with pytest.raises(ValueError, match="verified passing outcomes"):
+        proof.proof_strength([mutant], inconclusive, reviewed_equivalent={mutant.id})
