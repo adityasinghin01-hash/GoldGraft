@@ -93,6 +93,9 @@ def rule_hits(events, capture: RawCapture | None):
             headers = {key.lower(): value for key, value in exchange.headers.items()}
             ref = headers.get("x-goldgraft-order-ref")
             after = exchange.db_change.after or {}
+            for field in ("total_minor", "refunded_minor"):
+                if field in after and type(after[field]) is not int:
+                    hits["R16"].add(raw_ref(capture, index))
             db_writes[ref].append((index, after.get("refunded_minor")))
 
         replies = defaultdict(list)
@@ -289,6 +292,7 @@ def judge(
     new_capture: RawCapture | None = None,
     old_lifecycle: LifecycleEvidence | None = None,
     new_lifecycle: LifecycleEvidence | None = None,
+    not_applicable_reason: str | None = None,
 ) -> Verdict:
     streams = [old, old_twin, new]
     ids = {event.scenario_id for stream in streams for event in stream}
@@ -344,6 +348,10 @@ def judge(
         ledger_failed(capture) for capture in (old_capture, new_capture)
     ):
         return verdict("UNVERIFIED")
+    if not_applicable_reason is not None:
+        if not not_applicable_reason.strip():
+            raise ValueError("A non-applicable scenario needs a reason")
+        return verdict("N/A")
     if projection(baseline, noise=noise, old=False, deltas=deltas) != projection(
         twin, noise=noise, old=False, deltas=deltas
     ):

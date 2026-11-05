@@ -142,3 +142,37 @@ def test_restart_failure_and_legacy_refund_route():
         )
         assert bool(hits.get("R15")) == (mapping is None)
         assert not incomplete
+
+
+def test_trusted_catalogue_quote_rejects_browser_amount():
+    from goldgraft_contracts.money import Money
+
+    from pieces.proof.lifecycle import CatalogueQuote, LifecycleEvidence
+
+    old, twin, new, contract, plan, raw = judge_inputs()
+    order = new[0].order_ref
+    quote = CatalogueQuote(order, Money(minor=2500, currency="USD"), "catalogue/tee")
+    evidence = LifecycleEvidence(new[0].run_id, quotes=(quote,))
+    assert judge(old, twin, new, contract, plan, new_lifecycle=evidence).grade == "PASS"
+
+    intent = next(event for event in new if event.kind == "INTENT")
+    intent.money = Money(minor=1, currency="EUR")
+    result = judge(old, twin, new, contract, plan, new_lifecycle=evidence)
+    assert {"R12", "R17"} <= {hit.rule for hit in result.rule_hits}
+    assert result.grade == "PROBLEM"
+
+    write = next(exchange for exchange in raw.exchanges if exchange.db_change is not None)
+    write.db_change.after["total_minor"] = 2500.5
+    result = judge(old, twin, new, contract, plan, new_capture=raw)
+    assert "R16" in {hit.rule for hit in result.rule_hits}
+
+
+def test_not_applicable_is_explicit_and_preserves_unverified_precedence():
+    old, twin, new, contract, plan, raw = judge_inputs()
+    reason = "Refunds are unsupported by this shop"
+    assert judge(old, twin, new, contract, plan, not_applicable_reason=reason).grade == "N/A"
+    raw.exchanges[-1].status = 503
+    assert (
+        judge(old, twin, new, contract, plan, new_capture=raw, not_applicable_reason=reason).grade
+        == "UNVERIFIED"
+    )

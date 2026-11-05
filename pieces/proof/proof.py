@@ -43,6 +43,7 @@ class Proof:
         new_capture: RawCapture | None = None,
         old_lifecycle: LifecycleEvidence | None = None,
         new_lifecycle: LifecycleEvidence | None = None,
+        not_applicable_reason: str | None = None,
     ) -> Verdict:
         return judge(
             old,
@@ -54,6 +55,7 @@ class Proof:
             new_capture=new_capture,
             old_lifecycle=old_lifecycle,
             new_lifecycle=new_lifecycle,
+            not_applicable_reason=not_applicable_reason,
         )
 
     def proof_strength(

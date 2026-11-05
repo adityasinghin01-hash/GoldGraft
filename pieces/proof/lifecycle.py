@@ -4,7 +4,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from typing import Literal
 
-from goldgraft_contracts.money import MoneyEvent
+from goldgraft_contracts.money import Money, MoneyEvent
 
 
 @dataclass(frozen=True)
@@ -34,11 +34,19 @@ class RefundRoute:
 
 
 @dataclass(frozen=True)
+class CatalogueQuote:
+    order_ref: str
+    money: Money
+    reference: str
+
+
+@dataclass(frozen=True)
 class LifecycleEvidence:
     run_id: str
     callbacks: tuple[CallbackWatch, ...] = field(default_factory=tuple)
     restarts: tuple[RestartWatch, ...] = field(default_factory=tuple)
     refunds: tuple[RefundRoute, ...] = field(default_factory=tuple)
+    quotes: tuple[CatalogueQuote, ...] = field(default_factory=tuple)
 
 
 def lifecycle_hits(
@@ -103,5 +111,20 @@ def lifecycle_hits(
             incomplete.add("R15")
         elif route.origin == "LEGACY" and route.route == "REST" and not route.equivalence_ref:
             hit("R15", route.reference)
+
+    for quote in evidence.quotes:
+        intents = [
+            event
+            for event in events
+            if event.order_ref == quote.order_ref and event.kind == "INTENT"
+        ]
+        if not intents or any(event.money is None for event in intents):
+            incomplete.update(("R12", "R17"))
+            continue
+        for intent in intents:
+            if intent.money != quote.money:
+                for rule in ("R12", "R17"):
+                    hit(rule, quote.reference)
+                    hit(rule, intent.raw_ref)
 
     return hits, incomplete
