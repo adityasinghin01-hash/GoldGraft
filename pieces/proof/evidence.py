@@ -19,7 +19,7 @@ from goldgraft_contracts.proof import (
 )
 from goldgraft_foundation.ledger import Ledger
 
-from .certificate import RunnerSigner, issue_certificate
+from .certificate import RunnerSigner, issue_certificate, verdict_counts
 from .cmel import money
 from .sigstore import verify_signed_certificate
 
@@ -85,6 +85,17 @@ def refetch_capture(client: PayPalClient, row: PayPalEvidence, event: MoneyEvent
         return False
 
 
+def archived_evidence(ledger: Ledger, graft_id: str, root: str):
+    check, payloads = ledger.verified_payloads(graft_id, root, ("CMEL/1", "Verdict/1"))
+    events = [payload for payload in payloads if isinstance(payload, MoneyEvent)]
+    verdicts = {
+        payload.scenario_id: payload for payload in payloads if isinstance(payload, Verdict)
+    }
+    if not check.ok or any(event.graft_id != graft_id for event in events):
+        raise ValueError("Certificate requires an intact evidence ledger")
+    return events, verdicts
+
+
 def verify_certificate_evidence(
     certificate: Certificate,
     *,
@@ -99,13 +110,17 @@ def verify_certificate_evidence(
 
     def check_ledger(cert: Certificate, _payload: bytes) -> bool:
         nonlocal archive
-        check, events = ledger.verified_payloads(graft_id, cert.ledger_root, "CMEL/1")
-        if not check.ok:
+        try:
+            events, verdicts = archived_evidence(ledger, graft_id, cert.ledger_root)
+        except ValueError:
+            return False
+        if cert.results.model_dump(by_alias=True) != verdict_counts(list(verdicts.values())):
             return False
         archived = {}
         for event in events:
-            if event.graft_id != graft_id:
-                return False
+            verdict = verdicts.get(event.scenario_id)
+            if verdict is None or verdict.grade not in {Grade.PASS, Grade.PASS_FIXED}:
+                continue
             for row in capture_evidence((event,)):
                 key = row.scenario, row.order_id, row.capture_id, row.debug_id
                 if key in archived and archived[key].money != event.money:
@@ -159,9 +174,9 @@ def issue_certificate_from_ledger(
     ):
         raise ValueError("Certificate requires passing smoke proof for HAPPY and three other cases")
     root = ledger.root_hash(graft_id)
-    check, events = ledger.verified_payloads(graft_id, root, "CMEL/1")
-    if not check.ok or any(event.graft_id != graft_id for event in events):
-        raise ValueError("Certificate requires an intact evidence ledger")
+    events, archived_verdicts = archived_evidence(ledger, graft_id, root)
+    if archived_verdicts != {verdict.scenario_id: verdict for verdict in verdicts}:
+        raise ValueError("Certificate verdicts must match the audited ledger")
     passing = {
         verdict.scenario_id
         for verdict in verdicts

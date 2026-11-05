@@ -49,7 +49,7 @@ an answer key looks wrong to you (tell him which file and why — answer keys ca
 
 ## Certificate runner integration
 
-Persist normalized money events as `CMEL/1` ledger entries under the graft before
+Persist normalized money events as `CMEL/1` and final scenario verdicts as `Verdict/1` entries under the graft before
 issuance. Call `issue_certificate_from_ledger` in `pieces.proof.evidence` with the
 final contract, scenarios, verdicts, four passing smoke verdicts and measured proof strength. It derives the
 ledger root and PayPal references from the audited graft, then calls the supplied

@@ -67,6 +67,18 @@ def verify_certificate(
 type RunnerSigner = Callable[[bytes], tuple[str, str]]
 
 
+def verdict_counts(verdicts: Sequence[Verdict]) -> dict[str, int]:
+    counts = Counter(verdict.grade for verdict in verdicts)
+    return {
+        "scenarios": len(verdicts),
+        "pass": counts[Grade.PASS],
+        "pass_fixed": counts[Grade.PASS_FIXED],
+        "problem": counts[Grade.PROBLEM],
+        "unverified": counts[Grade.UNVERIFIED],
+        "n_a": counts[Grade.NOT_APPLICABLE],
+    }
+
+
 def issue_certificate(
     metadata: Mapping[str, object],
     *,
@@ -118,18 +130,10 @@ def issue_certificate(
     ):
         raise ValueError("Certificate requires consistent proof strength of at least 0.95")
 
-    counts = Counter(grades.values())
     draft = Certificate.model_validate(
         {
             **metadata,
-            "results": {
-                "scenarios": len(grades),
-                "pass": counts[Grade.PASS],
-                "pass_fixed": counts[Grade.PASS_FIXED],
-                "problem": counts[Grade.PROBLEM],
-                "unverified": counts[Grade.UNVERIFIED],
-                "n_a": counts[Grade.NOT_APPLICABLE],
-            },
+            "results": verdict_counts(verdicts),
             "proof_strength": {
                 "mutants_total": strength.total,
                 "equivalent_dropped": strength.equivalent_dropped,

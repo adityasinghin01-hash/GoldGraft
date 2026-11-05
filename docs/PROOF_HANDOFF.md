@@ -43,7 +43,7 @@ The certificate fixture has no authentic signature.
 ## Integration and live checks
 
 Follow [the proof START guide](START_Aditya_Singhal_proof.md#certificate-runner-integration).
-Store the recorder's normalized events as `CMEL/1` entries under the graft.
+Store normalized events as `CMEL/1` and final scenario verdicts as `Verdict/1` entries under the graft.
 Use `mutation_coverage` with the final scenario plan and executed outcomes to
 report rule guards. The 12/12 offline run does not establish coverage of every
 critical rule on a live merchant. Populate the contract's triangle using that

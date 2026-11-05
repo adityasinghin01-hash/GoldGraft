@@ -255,13 +255,13 @@ class Ledger:
     def verify_chain(self, graft_id) -> ChainCheck:
         return self._verify_chain(graft_id)
 
-    def verified_payloads(self, graft_id, through_hash, schema):
+    def verified_payloads(self, graft_id, through_hash, schemas):
         """Return validated payloads from the nonempty prefix ending at a signed root."""
         payloads = []
-        check = self._verify_chain(graft_id, through_hash, schema, payloads)
+        check = self._verify_chain(graft_id, through_hash, schemas, payloads)
         return check, payloads if check.ok else []
 
-    def _verify_chain(self, graft_id, through_hash=None, schema=None, payloads=None):
+    def _verify_chain(self, graft_id, through_hash=None, schemas=(), payloads=None):
         with self.engine.connect() as conn:
             rows = conn.execute(select(entries).where(entries.c.graft_id == graft_id)
                                 .order_by(entries.c.seq)).mappings().all()
@@ -287,7 +287,7 @@ class Ledger:
                     raise ValueError("entry hash mismatch")
                 validated = validate(body["schema"], payload, context=context)
                 LedgerEntry.model_validate(body, context=context)
-                if payloads is not None and body["schema"] == schema:
+                if payloads is not None and body["schema"] in schemas:
                     payloads.append(validated)
                 prev = body["entry_hash"]
                 context["ledger_entries"][prev] = body

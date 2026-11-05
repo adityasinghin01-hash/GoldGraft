@@ -160,7 +160,7 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
     ledger = Ledger("sqlite://", blob_store=LocalBlobStore(tmp_path))
     producer = {"kind": "service", "name": "proof", "version": "1"}
     graft = event["graft_id"]
-    entry = ledger.append(graft, "ARTIFACT", producer, "CMEL/1", payload=event)
+    ledger.append(graft, "ARTIFACT", producer, "CMEL/1", payload=event)
     for name in ("DECLINE", "NOTIFY_FORGED", "REFUND_TWICE"):
         issuance["scenarios"].append(validate("Scenario/1", read(f"scenarios/{name}.json")))
         issuance["verdicts"].append(validate("Verdict/1", read(f"expected/{name}.verdict.json")))
@@ -176,6 +176,25 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
             smoke_verdicts=issuance["verdicts"][:1],
             signer=unexpected_sign,
             **issuance,
+        )
+
+    with pytest.raises(ValueError, match="verdicts must match"):
+        issue_certificate_from_ledger(
+            read("certificate/valid.json"),
+            ledger=ledger,
+            graft_id=graft,
+            smoke_verdicts=issuance["verdicts"],
+            signer=unexpected_sign,
+            **issuance,
+        )
+
+    for verdict in issuance["verdicts"]:
+        entry = ledger.append(
+            graft,
+            "VERDICT",
+            producer,
+            "Verdict/1",
+            payload=verdict.model_dump(mode="json"),
         )
 
     certificate = issue_certificate_from_ledger(
@@ -227,6 +246,10 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
 
     assert verify().ok
     assert len(paypal.calls) == 2
+    certificate.results.pass_ -= 1
+    assert not verify().ok
+    assert len(paypal.calls) == 2
+    certificate.results.pass_ += 1
     paypal.value = "25.01"
     assert not verify().ok
     assert len(paypal.calls) == 4
