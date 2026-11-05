@@ -73,6 +73,34 @@ def rule_hits(events, capture: RawCapture | None):
                 ]
                 if not results or results[-1] != "NOTIFY_VERIFIED":
                     hit("R08")
+        seen_notifications = set()
+        duplicate_notification = False
+        shop_state = None
+        confirmation = None
+        capture_by_confirmation = {}
+        for event in items:
+            kind = event["kind"]
+            if kind == "NOTIFY":
+                notification = (identity(event), event.get("status_norm"))
+                duplicate_notification = notification[0] is not None and (
+                    notification in seen_notifications
+                )
+                seen_notifications.add(notification)
+            elif kind == "APPROVE":
+                confirmation = event["pp"].get("order_id") or event["pp"].get("legacy_token")
+                duplicate_notification = False
+            elif event["source"] == "SHOP_DB":
+                state = kind, event.get("money")
+                if duplicate_notification and shop_state is not None and state != shop_state:
+                    hit("R09")
+                shop_state = state
+                duplicate_notification = False
+            elif kind == "CAPTURE" and event["source"] == "PAYPAL_CALL":
+                transaction = identity(event)
+                if confirmation is not None and transaction is not None:
+                    previous = capture_by_confirmation.setdefault(confirmation, transaction)
+                    if previous != transaction:
+                        hit("R10")
         # Refund totals are checked per independent witness, not API+ledger copies.
         captured_total = sum({identity(e): e["money"]["minor"] for e in completed}.values())
         for source in ("PAYPAL_CALL", "PAYPAL_LEDGER"):
