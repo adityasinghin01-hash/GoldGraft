@@ -2,7 +2,7 @@
 name: ci
 on:
   push:
-    branches: [main]
+    branches: [main, proof-library]
   pull_request:
 concurrency:
   group: ci-${{ github.ref }}
@@ -30,6 +30,13 @@ jobs:
         run: uv run ruff check .
       - name: Formats, ledger, tracker, stand-ins, sample data
         run: uv run pytest -q
+      - name: Real proof library and PHP checkout mutations
+        env:
+          GOLDGRAFT_PROOF: pieces.proof.proof:Proof
+          GOLDGRAFT_PHP: php
+        run: |
+          php --version
+          uv run pytest -q plugtests/test_proof*.py
       - name: Formats still match the design (01_DATA.md)
         run: uv run python scripts/check_spec_coverage.py
       - name: Generated schemas / TypeScript / OpenAPI are current

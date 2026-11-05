@@ -116,13 +116,22 @@ def test_cosign_adapter_requires_runner_and_pins_workflow(monkeypatch):
     certificate.signature, certificate.rekor_entry = sign_payload(expected)
     assert certificate.rekor_entry == "log:42"
 
+    witness_calls = []
+
+    def witness(name, ok):
+        def check(*_):
+            witness_calls.append(name)
+            return ok
+
+        return check
+
     def verify(sha, ledger_ok=True):
         return verify_signed_certificate(
             certificate,
             workflow_identity=workflow,
             workflow_sha=sha,
-            ledger_check=lambda *_: ledger_ok,
-            paypal_check=lambda *_: True,
+            ledger_check=witness("ledger", ledger_ok),
+            paypal_check=witness("paypal", True),
         )
 
     assert verify(certificate.runner_identity.sha).ok
@@ -131,3 +140,4 @@ def test_cosign_adapter_requires_runner_and_pins_workflow(monkeypatch):
     certificate.rekor_entry = "log:43"
     assert not verify(certificate.runner_identity.sha).ok
     assert len(verification_calls) == 2
+    assert witness_calls == ["ledger", "paypal", "ledger", "paypal"]

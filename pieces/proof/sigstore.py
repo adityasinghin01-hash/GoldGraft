@@ -109,12 +109,11 @@ def verify_signed_certificate(
     def checked_bundle(_certificate: Certificate, _payload: bytes) -> bool:
         return verified
 
-    return verify_certificate(
-        certificate,
-        {
-            VerifyCheckName.SIGNATURE: checked_bundle,
-            VerifyCheckName.REKOR: checked_bundle,
-            VerifyCheckName.LEDGER_CHAIN: ledger_check,
-            VerifyCheckName.PAYPAL_REFETCH: paypal_check,
-        },
-    )
+    checks = {
+        VerifyCheckName.SIGNATURE: checked_bundle,
+        VerifyCheckName.REKOR: checked_bundle,
+    }
+    if verified:
+        checks[VerifyCheckName.LEDGER_CHAIN] = ledger_check
+        checks[VerifyCheckName.PAYPAL_REFETCH] = paypal_check
+    return verify_certificate(certificate, checks)
