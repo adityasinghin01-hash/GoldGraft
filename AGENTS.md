@@ -1,16 +1,19 @@
-# Rules for coding agents working in this repo (Codex, Antigravity, Claude)
+# Rules for coding agents working in GoldGraft
 
-GoldGraft upgrades a shop's old PayPal checkout to PayPal's newest one and proves the money still behaves the same.
-The full design is in `docs/design/` (00–09). The data formats are in `docs/design/01_DATA.md`. They are the law.
+Read [docs/engineering/START_HERE.md](docs/engineering/START_HERE.md) and the relevant shared START guide before implementation. The reviewed target is a browser connector service with fixed saved-case journey, variable sources/hosts, genuinely read-only initial access, isolated work and separately authorised complete working-site delivery/recovery/exit. Render is first reference, not universal host support.
 
-## Team pieces (each one is built alone, against stand-ins)
-| Folder | Owner | What |
-|---|---|---|
-| `pieces/web`, `pieces/agents` | Aditya | 12 screens; 13 agents |
-| `pieces/backend`, `pieces/runner` | backend teammate | real API, database, GitHub Actions runner, locked box, traffic capture, tunnel |
-| `pieces/proof` | ML teammate | money language mapping, Union Judge, 12 bug types + proof strength, go-live maths, recipe confidence, certificate |
-| `pieces/shops`, `pieces/switch-libs` | all-rounder teammate | 11 test shops, PayPal sandbox tests, switch libraries, simulated buyers |
-Shared (the "plug pack"): `contracts/`, `fixtures/`, `foundation/`, `fakes/`, `plugtests/`, `scripts/`, `docs/`.
+Current Python models under `contracts/src/goldgraft_contracts/` own actual wire support. New records/routes in reviewed engineering Markdown are **PROPOSED**, not existing APIs. Original `docs/design/` has historical bodies; use its supersession notices. Do not silently widen current formats, fill fake Git/workflow certificate fields, or create a second `pieces/connector` package from superseded sketches.
+
+| Owner | Boundary |
+|---|---|
+| Singh | `pieces/web`, `pieces/agents`, approved shared-format bootstrap; future own Plan5 and integration Plan6. Agent internals deferred until explicitly started. |
+| Gupta | `pieces/backend/connection`, `pieces/backend/lifecycle`, `pieces/runner` proposed mechanisms; inspect and preserve actual existing work. |
+| Singhal | `pieces/proof`; reuse inspected proof PR1 and adapt verified evidence gaps. |
+| Vijay | `pieces/shops`, `pieces/switch-libs`; first qualified runtime/payment/state/origin/finalisation/exit domain recipes. |
+
+Shared `contracts/`, `foundation/`, `fixtures/`, `fakes/`, `plugtests/`, `scripts/`, `docs/` remain common boundaries. New shared shapes require Singh's bootstrap before dependent consumers; unchanged boundaries may proceed independently.
+
+Paper Plans1/3/4 completion and Plan2 docs do not authorise product jobs, Plans5/6, installs, account/grant changes, private source/model transfers, live payments, publishing or deployment. Preserve dirty work/secrets/personal READMEs/Desktop reference. Initial Reader grant must stay read-only; publication/registry/host/data/financial authority is separate. Missing required permission, unknown effect or unsupported state-transfer/exit capability causes a hold, never a bypass or fabricated success.
 
 ## Hard rules
 1. A piece imports ONLY `contracts/` (and `foundation/` for the ledger + step tracker). Never another piece's code.
@@ -23,3 +26,10 @@ Shared (the "plug pack"): `contracts/`, `fixtures/`, `foundation/`, `fakes/`, `p
 8. Do not run `git commit` or `git push`. The driver (Claude) runs the full checks and commits.
 9. Python 3.12, managed by `uv`; lint with `ruff`; test with `pytest`. Node 22 for TypeScript tooling.
 10. When something in the design is ambiguous, choose the simplest reading, write it down in your final report under "Decisions", and keep going.
+
+
+## Reviewed qualification rules
+
+- Where a simplified design reading conflicts with current authority, money/state safety or a normative held profile, use the explicit reviewed protocol and record/hold the missing prerequisite; rule10 does not authorise guessing a provider capability.
+- Claim/document audits, mock conformance, actual component tests, actual provider/isolation/payment behaviour and working-site exit separately. Old31 abstract tests and green plugtests do not close release gates.
+- Do not redesign agent internals in paper work. Future component tests remain meaningful negative/fault checks attached to AC/LC cases; no network in ordinary tests.

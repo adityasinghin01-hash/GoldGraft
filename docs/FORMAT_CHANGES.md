@@ -175,3 +175,16 @@ get(hash) raises AmbiguousHash in that case; get(hash, graft_id=...) disambiguat
   `GET /learning-curve` added (named on screen S8, missing from 07's API table);
   in the OpenAPI file the recursive JsonValue type is "any JSON value" (TypeScript
   cannot express the recursion there).
+
+
+## C-P1 — connection-control proposal, 6 November 2026 — NOT IMPLEMENTED
+
+[Canonical connection proposal](engineering/connection/CONNECTION_CONTROL_PROPOSAL.md), subject to [review addendum](engineering/review/CONNECTION_REVIEW_ADDENDUM.md), covers saved cases/current controller authority/provider callbacks, source snapshots/resource graph/complete WorkPackage, static readiness, immutable Start acceptance/current status, generation-fenced cancellation and real operation evidence. Existing Idempotency-Key/SSE resume remain current features. Connection booleans and started_at are not sufficient new semantics.
+
+Owner Singh, future SI01 bootstrap. Implement strict Python models/typed references and registry/route versions, current compatibility or explicit old-path denial, then generate schema/TS/OpenAPI with examples/fakes/fixtures/negative validation in one approved change. No code or generated files changed here. Do not guess field availability from these names.
+
+## C-P3 — lifecycle and reviewed atomic supplements, 6 November 2026 — NOT IMPLEMENTED
+
+[Lifecycle proposal](engineering/lifecycle/LIFECYCLE_INTERFACE_PROPOSALS.md) and normative [atomic protocols](engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md) define exact artifact/provenance/private review, separate ApplyAuthority/ActionPlan/ApprovalSet, cross-case TargetReservation/resource epochs, per-effect slots/unknown reconciliation, StateCutover and independent ExitCheckPlan evidence. Protected Git and direct-artifact routes differ; Git fields nullable on the latter. Existing Certificate Git/workflow assumptions cannot encode these new profiles by invented values or expose private review data publicly.
+
+LC-A1 protected apply is a separately approved future policy, not granted by Start or initial Reader access. Shared bootstrap must align models/routes/registry/generated types/examples/fakes/fixtures/tests and compatibility. Downstream lifecycle consumers cannot implement incompatible Markdown guesses. Actual provider permissions/financial/state/isolation/exit qualification remains open.

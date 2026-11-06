@@ -1,3 +1,7 @@
+> **Status update — 6 November 2026.** The original body below is historical reference and is superseded for current target behaviour by reviewed engineering documents. Zen Cart trace is historical; the first qualification reference is the bounded plain-PHP shop, not all eleven shops. Read [engineering baseline](../engineering/START_HERE.md), [current/proposed boundary](../engineering/CURRENT_VS_PROPOSED.md) and [atomic lifecycle protocols](../engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md). Paper only; no implementation or live qualification. Earlier schedules/coverage/Done claims in the retained body are not current status.
+
+---
+
 # P12 · 08 — Zen Cart traced through every piece (on paper)
 Shop: zencart/zencart (PHP, pushed 31 Oct 2026). Our fork, sandbox only. Facts from its code (read via GitHub API 1 Nov): legacy modules `paypal.php` (WPS), `paypalwpp.php` + `paypal/paypal_curl.php` (Express Checkout over NVP, `api-3t.sandbox.paypal.com/nvp`), `paypaldp.php` (Direct Payment), `ipn_main_handler.php` (IPN postback, duplicate check on txn_id + payment_status); official REST plugin `zc_plugins/PayPalRestful/v2.1.1` (combines paypaldp + paypalwpp on REST, webhook handlers for capture completed/pending/declined/refunded/reversed).
 

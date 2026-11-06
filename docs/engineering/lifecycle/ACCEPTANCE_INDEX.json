@@ -1,0 +1,673 @@
+[
+  {
+    "id": "LC01",
+    "title": "Package/source mismatch",
+    "stage": "BASELINE_VERIFY",
+    "controls": [
+      "S01",
+      "S03",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG12",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC02",
+    "title": "Baseline isolation",
+    "stage": "BASELINE_RUN",
+    "controls": [
+      "S06",
+      "S09",
+      "S10",
+      "S12",
+      "S13"
+    ],
+    "gaps": [
+      "CG08"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC03",
+    "title": "Old bug and noise",
+    "stage": "VALIDATING",
+    "controls": [
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG05",
+      "CG11"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC04",
+    "title": "Required baseline unverified",
+    "stage": "BASELINE_RUN",
+    "controls": [
+      "S10",
+      "S18"
+    ],
+    "gaps": [
+      "CG05",
+      "CG11",
+      "CG12"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC05",
+    "title": "Candidate drift/repair",
+    "stage": "VALIDATING",
+    "controls": [
+      "S03",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG10",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC06",
+    "title": "Untrusted evidence",
+    "stage": "VALIDATING",
+    "controls": [
+      "S11",
+      "S18",
+      "S22"
+    ],
+    "gaps": [
+      "CG08",
+      "CG11",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC07",
+    "title": "Critical partial report",
+    "stage": "REVIEW_READY",
+    "controls": [
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG05",
+      "CG11"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC08",
+    "title": "Private/public projection",
+    "stage": "REVIEW_READY",
+    "controls": [
+      "S01",
+      "S17",
+      "S22",
+      "S24"
+    ],
+    "gaps": [
+      "CG06",
+      "CG07",
+      "CG11"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC09",
+    "title": "Provider consent versus action approval",
+    "stage": "AWAITING_APPLY",
+    "controls": [
+      "S02",
+      "S03",
+      "S19"
+    ],
+    "gaps": [
+      "CG04",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC10",
+    "title": "Publication side effects",
+    "stage": "PUBLISHING",
+    "controls": [
+      "S02",
+      "S09",
+      "S10",
+      "S19",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG08",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC11",
+    "title": "Unknown publication outcome",
+    "stage": "PUBLISHING",
+    "controls": [
+      "S03",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG09"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC12",
+    "title": "Protected merge race",
+    "stage": "MERGING",
+    "controls": [
+      "S03",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG04",
+      "CG10",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC13",
+    "title": "Deploy authority and identity",
+    "stage": "DEPLOYING",
+    "controls": [
+      "S01",
+      "S02",
+      "S03",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC14",
+    "title": "Image tag/health illusion",
+    "stage": "OBSERVING",
+    "controls": [
+      "S18",
+      "S19",
+      "S20"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG09"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC15",
+    "title": "Deployment response loss",
+    "stage": "DEPLOYING",
+    "controls": [
+      "S03",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC16",
+    "title": "Stop versus irreversible effect",
+    "stage": "HELD",
+    "controls": [
+      "S03",
+      "S08",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC17",
+    "title": "Refund/charge unknown",
+    "stage": "INCIDENT_UNKNOWN",
+    "controls": [
+      "S03",
+      "S10",
+      "S20"
+    ],
+    "gaps": [
+      "CG05",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC18",
+    "title": "Notifications out of order",
+    "stage": "OBSERVING",
+    "controls": [
+      "S06",
+      "S07",
+      "S18",
+      "S20"
+    ],
+    "gaps": [
+      "CG05",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC19",
+    "title": "Callback outage",
+    "stage": "HELD",
+    "controls": [
+      "S07",
+      "S18",
+      "S20"
+    ],
+    "gaps": [
+      "CG05",
+      "CG09"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC20",
+    "title": "Persistent state and cutover",
+    "stage": "DEPLOY_PREPARED",
+    "controls": [
+      "S10",
+      "S18",
+      "S19",
+      "S20"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG05"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC21",
+    "title": "Retired legacy rollback",
+    "stage": "HELD",
+    "controls": [
+      "S03",
+      "S18",
+      "S19",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG05",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC22",
+    "title": "Historical obligations",
+    "stage": "FINALISING",
+    "controls": [
+      "S02",
+      "S03",
+      "S18",
+      "S21"
+    ],
+    "gaps": [
+      "CG05",
+      "CG12"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC23",
+    "title": "Final switch expiry",
+    "stage": "EXITING",
+    "controls": [
+      "S08",
+      "S18",
+      "S21"
+    ],
+    "gaps": [
+      "CG04",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC24",
+    "title": "Registry/credential dependency",
+    "stage": "EXITING",
+    "controls": [
+      "S03",
+      "S06",
+      "S08",
+      "S21"
+    ],
+    "gaps": [
+      "CG04",
+      "CG05",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC25",
+    "title": "Cleanup unknown and deletion",
+    "stage": "EXITING",
+    "controls": [
+      "S08",
+      "S17",
+      "S21",
+      "S23",
+      "S24"
+    ],
+    "gaps": [
+      "CG06",
+      "CG07",
+      "CG09"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC26",
+    "title": "Actual successful exit",
+    "stage": "COMPLETE",
+    "controls": [
+      "S03",
+      "S08",
+      "S18",
+      "S21"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG05",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC27",
+    "title": "No route to full delivery",
+    "stage": "AWAITING_APPLY",
+    "controls": [
+      "S02",
+      "S03",
+      "S19"
+    ],
+    "gaps": [
+      "CG04",
+      "CG12",
+      "CG13"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC28",
+    "title": "Return and evidence expiry",
+    "stage": "HELD",
+    "controls": [
+      "S01",
+      "S03",
+      "S08",
+      "S20",
+      "S23"
+    ],
+    "gaps": [
+      "CG02",
+      "CG07",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC29",
+    "title": "Production test identity",
+    "stage": "OBSERVING",
+    "controls": [
+      "S02",
+      "S06",
+      "S10",
+      "S18"
+    ],
+    "gaps": [
+      "CG05",
+      "CG10",
+      "CG12"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC30",
+    "title": "In-flight origin routing",
+    "stage": "HELD",
+    "controls": [
+      "S03",
+      "S07",
+      "S18",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG05",
+      "CG09"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC31",
+    "title": "Thin rollout evidence",
+    "stage": "OBSERVING",
+    "controls": [
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG05",
+      "CG11",
+      "CG13"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC32",
+    "title": "Contract compatibility",
+    "stage": "REVIEW_READY",
+    "controls": [
+      "S18",
+      "S22"
+    ],
+    "gaps": [
+      "CG11",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC33",
+    "title": "Non-Git source and direct-artifact delivery",
+    "stage": "PUBLISHING",
+    "controls": [
+      "S01",
+      "S02",
+      "S03",
+      "S17",
+      "S18",
+      "S19",
+      "S21"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG06",
+      "CG10",
+      "CG12",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC34",
+    "title": "First prerequisite migration loses ephemeral state",
+    "stage": "review-correction",
+    "controls": [
+      "S01",
+      "S03",
+      "S07",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG05",
+      "CG09"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC35",
+    "title": "Overlapping cases and shared grant cleanup",
+    "stage": "review-correction",
+    "controls": [
+      "S01",
+      "S03",
+      "S07",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG04",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC36",
+    "title": "Source tests versus actual image and registry rights",
+    "stage": "review-correction",
+    "controls": [
+      "S01",
+      "S03",
+      "S07",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG06",
+      "CG08",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC37",
+    "title": "IPN verification outage before acknowledgement",
+    "stage": "review-correction",
+    "controls": [
+      "S01",
+      "S03",
+      "S07",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG05",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC38",
+    "title": "Split controllers and effect slot reuse",
+    "stage": "review-correction",
+    "controls": [
+      "S01",
+      "S03",
+      "S07",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG04",
+      "CG09",
+      "CG10",
+      "CG14"
+    ],
+    "status": "specified; not executed in product"
+  },
+  {
+    "id": "LC39",
+    "title": "Post-denial exit executor unavailable",
+    "stage": "review-correction",
+    "controls": [
+      "S01",
+      "S03",
+      "S07",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG07",
+      "CG09",
+      "CG10"
+    ],
+    "status": "specified; not executed in product"
+  }
+]

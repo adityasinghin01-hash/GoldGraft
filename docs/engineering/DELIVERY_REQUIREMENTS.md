@@ -1,0 +1,45 @@
+# GoldGraft — obtain the whole required system and return a working site
+
+Latest product requirement, 6 November 2026. Current plan ownership/order is governed by [REVISED_PROGRAMME_AND_TEAM_WORK.md](PROGRAMME.md); former Plan5 docs/Plan6 paper-handoff meanings are superseded. This refines the six-plan programme; it does not authorise executing Plans2–6, product implementation or account changes. Existing document snapshots were preserved before these planning amendments.
+
+## Service promise and necessary boundary
+GoldGraft takes responsibility for the technical job: obtain the required code/connections, prove the shop correspondence, establish a reproducible baseline, work on an isolated copy, validate changes, perform authorised publication/deployment, verify the live result and hand back a website that keeps working after GoldGraft stops. A patch, downloadable project, PR, preview or temporary sandbox is not the end product.
+
+The merchant supplies necessary identity/authority and decisions; GoldGraft handles supported technical work. Do not promise zero further human interaction if provider MFA, resource-controller consent, mandated review or exact-result approval is required. Such requirements are surfaced in the saved case and handled by the responsible controller; avoid leaving the merchant to merge, wire credentials, deploy, reconnect callbacks or repair the site manually as an unstated finishing task. Automating a protected merge/deployment requires explicit separately granted authority and an approved design; initial read-only access never implies it.
+
+“Every provider” and “most merchants” are coverage targets, not validated reach. Source can be Git, local folder, cloud files or qualified host export; hosting can be split across providers. Render is the selected first reference and possibly GoldGraft service host, not proof of merchant universality. Provider-native checks remain necessary.
+
+## Concrete stages and plan ownership
+| Stage | Required output and responsible plan |
+|---|---|
+| 1. Obtain required source and connections | Plan1: actual controllers, immutable source snapshots and complete declared component/dependency graph, omissions and authority; same case for missing maintainer inputs. No forcing GitHub or ZIP. |
+| 2. Match it to this running website | Plan1: verified/bounded source-to-artifact-to-deployment-to-domain/backend/config evidence for each required component; wrong/stale/incomplete evidence holds full scope. |
+| 3. Prepare isolated copy | Plan1: build-ready work-package contract and durable Start/worker handoff. Plan3: after Start, materialise isolated BASELINE and WORKING copies, synthetic data and constrained brokers. Original source/production untouched during experiments. |
+| 4. Prove unchanged baseline works | Plan3: actually build/run the unmodified baseline and required checkout/refund/notification/order-state flows before modifying it. Static readiness or first baseline read does not prove this. Existing bugs and unverified paths are recorded rather than learned as correct behaviour. |
+| 5. Upgrade and test | Plan3: change only working copy, compare to qualified baseline/requirements, test intended differences plus regression/security/state behaviour, obtain required independent review. Agent internal methods remain deferred to Aditya. |
+| 6. Deliver the live upgrade | Plan3: authorised version-bound publication and deployment, existing protections, state/callback/credential continuity, actual public-domain/runtime/payment evidence. No PR-as-delivery. |
+| 7. Return the keys and disengage | Plan3: merchant-controlled durable runtime/config/access/operational ownership; clean temporary GoldGraft resources while site and required payments keep operating. Evidence of post-disconnect/restart continuity. |
+| 8. Review, allocate, build and integrate | Current order: Plan3 lifecycle engineering → Plan4 paper review → Plan2 reviewed team docs/all-four work allocation → Plan5 Singh own build/component tests → Plan6 Singh integration/system qualification and separately authorised operational work. No build is authorised by planning updates. |
+
+## Honest admission and supported completion
+Before presenting an end-to-end scope as feasible, map source rights, host/runtime access, dependencies and later delivery route. Detect missing deploy permission, protected reviews, state migration, unsupported runtime or platform-owned payment logic early. GoldGraft should recover missing technical inputs automatically within existing authority; otherwise show the exact missing contribution, responsible controller, preserved progress and next action. Do not accept a whole-site delivery promise then silently finish at a PR.
+
+Pre-Start delivery-feasibility record is a read-only inventory/constraint check, not future publication permission or a guarantee against later drift. Work may start only under explicitly displayed supported scope. If full delivery is not supportable, clearly explain that before accepting that scope; optional analysis-only work must be a separately named product outcome, never counted as the requested completed upgrade.
+
+## Render findings that all later plans must carry
+- Scoped API keys are early access; existing account does not establish entitlement. Request minimum workspace reads and separate secret/write/Deploy Run capabilities. No classic write-capable key represented as read-only.
+- Workspace scope can expose more than one service. Disclose actual provider breadth, enforce selected-service broker limits and require controller relationship/recipient approval. Verify provider user/current role; key possession alone is insufficient.
+- Render services/deployments and GitHub source are different resources. Git-backed commit identity alone does not prove current runtime bytes; image-backed actual deployment digest, qualified provenance/config/runtime evidence remain first-path requirements. A running image does not necessarily contain full editable source/build context.
+- Image-backed services do not automatically redeploy merely because a registry tag changes. Plan3 must define the actual authorised deploy action/receipt and subsequent current-runtime verification; never promise “push code and it is done”.
+- Git-backed pushes, preview branches and CI/host automation can trigger deploys. Inspect before any future publication write, not only merge. Separately scoped publication/deployment authority must not broaden the original Reader grant.
+- Render filesystems are ephemeral unless persistent storage is configured. The sample's flat-file orders/IPN state cannot be lost on redeploy/restart or stored only in a temporary GoldGraft VM. Persistence and migration require explicit design and evidence.
+- Persistent disks affect deployment/downtime behaviour. Do not promise automatic zero downtime on every Render setup. Plan3 must choose a state-safe delivery/maintenance route and disclose unavoidable impact before consequential action.
+- Runtime credentials, registry pull access, domain routing and required callbacks must remain merchant-operational after GoldGraft revokes its own temporary access. Removing our access must not delete the live integration.
+
+Primary Render evidence: [scoped permissions](https://render.com/docs/scoped-api-keys), [deployment behaviour](https://render.com/docs/deploys), [image deployments](https://render.com/docs/deploying-an-image), [persistent disks/filesystem](https://render.com/docs/disks). These are documented provider constraints; this account/shop has not been tested.
+
+## Publication convenience conflict to resolve in Plan3
+The earlier design gives final protected merge to the current controller; it does not give the Reader or Start automatic merge rights. The house-key experience means no unexplained manual technical finishing for the merchant, not bypassing that boundary. Plan3 must specify either a controller approval inside the managed case with an authorised integration completing technical steps, or a clearly named unavoidable provider/controller action. Any move from controller merge to automated merge is a labelled authority/contract change proposal, never assumed granted. Unsupported automated delivery cannot be sold as unattended end-to-end completion. Preserve existing authority until the new mechanism is explicitly accepted and implemented.
+
+## Completion evidence requirement
+Required outcome bundle: original and upgraded source/artifact identities; supported scope and exceptions; baseline and changed-system results; exact approved revision/environment/action; deployment receipt plus actual live runtime evidence; order/payment/callback continuity; state-safe recovery capability; persistent ownership/configuration; temporary-resource/access cleanup acknowledgements; final check that GoldGraft shutdown does not stop the site. Observations have freshness/limits; signatures and sandbox tests alone do not prove every future payment or zero maintenance forever.

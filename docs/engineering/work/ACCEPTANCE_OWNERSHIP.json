@@ -1,0 +1,862 @@
+{
+  "future_cases": 85,
+  "future_packages": 17,
+  "rows": [
+    {
+      "id": "AC01",
+      "title": "Origin and URL",
+      "packages": [
+        "SI02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC02",
+      "title": "Draft claim",
+      "packages": [
+        "SI02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC03",
+      "title": "Session expiry",
+      "packages": [
+        "SI02",
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC04",
+      "title": "Invite recipient binding",
+      "packages": [
+        "SI02",
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC05",
+      "title": "Role boundaries",
+      "packages": [
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC06",
+      "title": "Provider callback",
+      "packages": [
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC07",
+      "title": "Reader least authority",
+      "packages": [
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC08",
+      "title": "Render grant and controller",
+      "packages": [
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC09",
+      "title": "Render side effects",
+      "packages": [
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC10",
+      "title": "Event current authority",
+      "packages": [
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC11",
+      "title": "Archive handling",
+      "packages": [
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC12",
+      "title": "Exclusion/custody",
+      "packages": [
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC13",
+      "title": "Unsupported source",
+      "packages": [
+        "GU02",
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC14",
+      "title": "Image correspondence",
+      "packages": [
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC15",
+      "title": "Runtime/config correspondence",
+      "packages": [
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC16",
+      "title": "Static boundary",
+      "packages": [
+        "SI04",
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC17",
+      "title": "Processing policy",
+      "packages": [
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC18",
+      "title": "Isolation/egress",
+      "packages": [
+        "SI04",
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC19",
+      "title": "Credential/payment semantics",
+      "packages": [
+        "SI04",
+        "GU02",
+        "VJ02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC20",
+      "title": "Readiness invalidation",
+      "packages": [
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC21",
+      "title": "Start before commit crash",
+      "packages": [
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC22",
+      "title": "Commit lost response",
+      "packages": [
+        "SI03",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC23",
+      "title": "Concurrent Starts",
+      "packages": [
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC24",
+      "title": "Outbox/lease crash",
+      "packages": [
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC25",
+      "title": "Stop before receipt",
+      "packages": [
+        "SI03",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC26",
+      "title": "Claim without operation",
+      "packages": [
+        "SI03",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC27",
+      "title": "Verified first operation",
+      "packages": [
+        "SI03",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC28",
+      "title": "Stop/revoke external unknown",
+      "packages": [
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC29",
+      "title": "Replay/private projection",
+      "packages": [
+        "SI03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC30",
+      "title": "Retention/quotas",
+      "packages": [
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC31",
+      "title": "Legacy compatibility",
+      "packages": [
+        "SI01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC32",
+      "title": "Publication tripwire",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC33",
+      "title": "Usability and recovery",
+      "packages": [
+        "SI02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC34",
+      "title": "Reference payment scope",
+      "packages": [
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC35",
+      "title": "Adapter replacement",
+      "packages": [
+        "SI02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC36",
+      "title": "Split-provider graph and live claim boundary",
+      "packages": [
+        "SI02",
+        "GU01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC37",
+      "title": "Local-folder safe capture",
+      "packages": [
+        "SI02",
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC38",
+      "title": "Resumable non-Git snapshot",
+      "packages": [
+        "SI02",
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC39",
+      "title": "Cloud permission and completeness",
+      "packages": [
+        "GU02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC40",
+      "title": "Owner-no-code and stale candidate",
+      "packages": [
+        "SI02",
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC41",
+      "title": "Complete required source/context inventory",
+      "packages": [
+        "GU02",
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC42",
+      "title": "Source identity versus runnable baseline",
+      "packages": [
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC43",
+      "title": "Isolated baseline and working copy",
+      "packages": [
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC44",
+      "title": "Working site after service handover",
+      "packages": [
+        "GU05",
+        "VJ04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC45",
+      "title": "Final common-contract conformance",
+      "packages": [
+        "SI01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "AC46",
+      "title": "Pre-accept cancellation and immutable receipt",
+      "packages": [
+        "SI01",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC01",
+      "title": "Package/source mismatch",
+      "packages": [
+        "GU02",
+        "SH02",
+        "VJ01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC02",
+      "title": "Baseline isolation",
+      "packages": [
+        "SI04",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC03",
+      "title": "Old bug and noise",
+      "packages": [
+        "SH01",
+        "SH02",
+        "VJ02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC04",
+      "title": "Required baseline unverified",
+      "packages": [
+        "GU03",
+        "SH01",
+        "SH02",
+        "VJ01",
+        "VJ02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC05",
+      "title": "Candidate drift/repair",
+      "packages": [
+        "SI04",
+        "SH01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC06",
+      "title": "Untrusted evidence",
+      "packages": [
+        "SI04",
+        "GU03",
+        "SH02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC07",
+      "title": "Critical partial report",
+      "packages": [
+        "SH01",
+        "SH02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC08",
+      "title": "Private/public projection",
+      "packages": [
+        "SI03",
+        "SH03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC09",
+      "title": "Provider consent versus action approval",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC10",
+      "title": "Publication side effects",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC11",
+      "title": "Unknown publication outcome",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC12",
+      "title": "Protected merge race",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC13",
+      "title": "Deploy authority and identity",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC14",
+      "title": "Image tag/health illusion",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC15",
+      "title": "Deployment response loss",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC16",
+      "title": "Stop versus irreversible effect",
+      "packages": [
+        "SI03",
+        "GU03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC17",
+      "title": "Refund/charge unknown",
+      "packages": [
+        "GU05",
+        "SH02",
+        "VJ02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC18",
+      "title": "Notifications out of order",
+      "packages": [
+        "GU05",
+        "SH02",
+        "VJ02",
+        "VJ03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC19",
+      "title": "Callback outage",
+      "packages": [
+        "GU05",
+        "VJ02",
+        "VJ03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC20",
+      "title": "Persistent state and cutover",
+      "packages": [
+        "GU05",
+        "SH03",
+        "VJ01",
+        "VJ03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC21",
+      "title": "Retired legacy rollback",
+      "packages": [
+        "GU05",
+        "SH03",
+        "VJ03",
+        "VJ04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC22",
+      "title": "Historical obligations",
+      "packages": [
+        "GU05",
+        "SH02",
+        "VJ02",
+        "VJ03",
+        "VJ04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC23",
+      "title": "Final switch expiry",
+      "packages": [
+        "GU05",
+        "SH03",
+        "VJ04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC24",
+      "title": "Registry/credential dependency",
+      "packages": [
+        "GU05",
+        "VJ04",
+        "VJ05"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC25",
+      "title": "Cleanup unknown and deletion",
+      "packages": [
+        "GU05",
+        "SH03",
+        "VJ05"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC26",
+      "title": "Actual successful exit",
+      "packages": [
+        "SI03",
+        "GU05",
+        "SH03",
+        "VJ04",
+        "VJ05"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC27",
+      "title": "No route to full delivery",
+      "packages": [
+        "SI03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC28",
+      "title": "Return and evidence expiry",
+      "packages": [
+        "GU05"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC29",
+      "title": "Production test identity",
+      "packages": [
+        "VJ02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC30",
+      "title": "In-flight origin routing",
+      "packages": [
+        "GU05",
+        "VJ02",
+        "VJ03",
+        "VJ04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC31",
+      "title": "Thin rollout evidence",
+      "packages": [
+        "SH01"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC32",
+      "title": "Contract compatibility",
+      "packages": [
+        "SI01",
+        "SH02",
+        "SH03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC33",
+      "title": "Non-Git source and direct-artifact delivery",
+      "packages": [
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC34",
+      "title": "First prerequisite migration loses ephemeral state",
+      "packages": [
+        "GU05",
+        "SH03",
+        "VJ03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC35",
+      "title": "Overlapping cases and shared grant cleanup",
+      "packages": [
+        "SI01",
+        "GU04",
+        "GU05"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC36",
+      "title": "Source tests versus actual image and registry rights",
+      "packages": [
+        "GU04",
+        "SH02"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC37",
+      "title": "IPN verification outage before acknowledgement",
+      "packages": [
+        "GU05",
+        "VJ03"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC38",
+      "title": "Split controllers and effect slot reuse",
+      "packages": [
+        "SI01",
+        "SI03",
+        "GU04"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    },
+    {
+      "id": "LC39",
+      "title": "Post-denial exit executor unavailable",
+      "packages": [
+        "SI03",
+        "GU05",
+        "SH03",
+        "VJ05"
+      ],
+      "integration_owner": "Singh (future Plan6)",
+      "status": "future acceptance specification, not executed"
+    }
+  ],
+  "research_case_namespaces": {
+    "PAY-P01..PAY-P14": {
+      "domain": "VJ02/VJ03/VJ04/VJ05 as applicable",
+      "mechanism": "GU03/GU05",
+      "evidence": "SH02/SH03",
+      "source": "lifecycle/research/PAYMENT_CONSTRAINTS.md"
+    },
+    "REN-R01..REN-R18": {
+      "mechanism": "GU04/GU05",
+      "domain": "VJ01/VJ03/VJ04/VJ05",
+      "evidence": "SH02/SH03",
+      "source": "lifecycle/research/RENDER_CONSTRAINTS.md"
+    }
+  },
+  "note": "Namespace PAY-/REN- avoids collision with inherited Pxx problems and Rxx money rules. Context-specific live/subscription/history obligations may be held/outside first supported profile; recording tests does not prove service coverage."
+}

@@ -1,3 +1,7 @@
+> **Status update — 6 November 2026.** The original body below is historical reference and is superseded for current target behaviour by reviewed engineering documents. Old automatic cutback/switch-expiry/cleanup rules cannot override current-state money safety, atomic migration or merchant-independent exit. Read [engineering baseline](../engineering/START_HERE.md), [current/proposed boundary](../engineering/CURRENT_VS_PROPOSED.md) and [atomic lifecycle protocols](../engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md). Paper only; no implementation or live qualification. Earlier schedules/coverage/Done claims in the retained body are not current status.
+
+---
+
 # P12 · 05 — Heal, Handoff, Fleet, cross-cutting pieces, built by hand
 
 ---
