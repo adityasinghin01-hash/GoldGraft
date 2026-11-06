@@ -42,7 +42,11 @@ The certificate fixture has no authentic signature.
 
 ## Integration and live checks
 
-Follow [the proof START guide](START_Aditya_Singhal_proof.md#certificate-runner-integration).
+The [reviewed START guide](START_Aditya_Singhal_proof.md) defines SH01–SH03.
+This handoff covers the current Proof/Certificate interfaces. Exact deployment
+image, package, runtime, state and authority binding, and private/public
+projections await Singh's shared interface bootstrap (SI01) and actual evidence
+from Gupta and Vijay. The current certificate does not close those gates.
 Store normalized events as `CMEL/1` and final scenario verdicts as `Verdict/1` entries under the graft.
 Use `mutation_coverage` with the final scenario plan and executed outcomes to
 report rule guards. The 12/12 offline run does not establish coverage of every

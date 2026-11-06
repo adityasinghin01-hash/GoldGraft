@@ -30,6 +30,7 @@ SETTLED = {"COMPLETED", "PARTIALLY_REFUNDED", "REFUNDED"}
 def capture_evidence(events: Sequence[MoneyEvent]) -> list[PayPalEvidence]:
     """Use independently read NEW captures with traceable PayPal IDs."""
     rows = {}
+    observed = {}
     for event in events:
         refs = event.pp
         if (
@@ -44,6 +45,9 @@ def capture_evidence(events: Sequence[MoneyEvent]) -> list[PayPalEvidence]:
             and PAYPAL_ID.fullmatch(refs.order_id)
             and PAYPAL_ID.fullmatch(refs.capture_id)
         ):
+            subject = refs.order_id, event.money.minor, event.money.currency
+            if observed.setdefault(refs.capture_id, subject) != subject:
+                raise ValueError("Conflicting PayPal ledger observations for the same capture")
             key = event.scenario_id, refs.order_id, refs.capture_id
             rows[key] = PayPalEvidence(
                 scenario=event.scenario_id,
@@ -116,6 +120,10 @@ def verify_certificate_evidence(
             return False
         if cert.results.model_dump(by_alias=True) != verdict_counts(list(verdicts.values())):
             return False
+        try:
+            capture_evidence(events)
+        except ValueError:
+            return False
         archived = {}
         for event in events:
             verdict = verdicts.get(event.scenario_id)
@@ -177,6 +185,7 @@ def issue_certificate_from_ledger(
     events, archived_verdicts = archived_evidence(ledger, graft_id, root)
     if archived_verdicts != {verdict.scenario_id: verdict for verdict in verdicts}:
         raise ValueError("Certificate verdicts must match the audited ledger")
+    capture_evidence(events)
     passing = {
         verdict.scenario_id
         for verdict in verdicts

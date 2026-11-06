@@ -284,3 +284,20 @@ def test_additional_issuance_gates_prevent_signing(issuance, gate):
 
     with pytest.raises(ValueError):
         issue_certificate(metadata, signer=sign, **issuance)
+
+
+def test_conflicting_paypal_capture_observations_cannot_be_selected_by_debug_id():
+    from pieces.proof.evidence import capture_evidence
+
+    raw = next(
+        event
+        for event in read("cmel/HAPPY.NEW.json")
+        if event["source"] == "PAYPAL_LEDGER" and event["kind"] == "CAPTURE"
+    )
+    first = validate("CMEL/1", raw)
+    repeated = first.model_copy(deep=True)
+    repeated.pp.debug_id = "another-observation"
+    assert len(capture_evidence([first, repeated])) == 1
+    repeated.money.minor += 1
+    with pytest.raises(ValueError, match="Conflicting PayPal ledger observations"):
+        capture_evidence([first, repeated])
