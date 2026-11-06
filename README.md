@@ -1,72 +1,53 @@
-# GoldGraft — "Don't cut the tree. Graft."
+# GoldGraft — “Don't cut the tree. Graft.”
 
-GoldGraft is an AI system that upgrades a shop's **old PayPal checkout** (old Buy Now buttons, old Express Checkout code, old payment notifications) to **PayPal's newest checkout**, end to end. It proves in PayPal's test sandbox that every kind of payment still behaves the same, then moves buyers over a few at a time and switches them back automatically if a payment looks wrong.
+GoldGraft is being designed as a browser connector service that upgrades a shop's older PayPal integration and leaves the approved upgraded shop running under the merchant's control. The service obtains authorised code/context, verifies the actual shop, reproduces an unchanged baseline, tests an isolated upgrade, obtains separate publication/deployment approval and verifies handover/recovery/exit. A PR or sandbox pass alone is not completion.
 
-Built for the PayPal AI Hackathon 2026 (deadline 13 Nov 2026, 01:30 IST). Licence: MIT.
+**Current status:** reviewed paper engineering and shared team build instructions; the complete service is not built or operationally qualified. [Start with the engineering baseline](docs/engineering/START_HERE.md), [inspected current support](docs/engineering/BASELINE_AND_STATUS.md) and [current versus proposed contracts](docs/engineering/CURRENT_VS_PROPOSED.md). MIT licence.
 
----
+## Fixed journey, variable connections
 
-## How the team works: four pieces, built alone, plugged in at the end
+Enter shop → Sign in → obtain the actual maintainer/controller's permission → Connect code (GitHub by default, with separately qualified local/cloud/host alternatives) → connect required running components → automatic static preparation → review and Start → truthful durable progress → isolated work/proof → separate approved apply → verified merchant-owned operation.
 
-Nobody waits for anybody. Each person builds their piece against **stand-ins** (fake versions of the other three pieces) that already exist in this repo. Every piece has a **plug-in test**. When your plug-in test passes against the stand-ins, your piece will plug into the real system. Aditya plugs everything together on 7–8 Nov.
+Render is the first reference adapter, selected by Aditya. It is not mandatory merchant hosting or demonstrated universal support. First engineering reference is the pinned licensed plain-PHP legacy shop, not a qualified live merchant migration; unsupported/missing dependencies produce explicit holds. Provider consent/MFA and actual controller decisions cannot be bypassed. Initial Reader permissions stay genuinely read-only; later writes and deployment require independent exact authority.
 
-| Person | Piece | Folder | Start here |
-|---|---|---|---|
-| Aditya | Screens (frontend) + the 13 AI agents | `pieces/web`, `pieces/agents` | [docs/START_Aditya_frontend_agents.md](docs/START_Aditya_frontend_agents.md) |
-| Aditya Gupta | Backend + Runner (server API, database, the machines that run shops) | `pieces/backend`, `pieces/runner` | [docs/START_Aditya_Gupta_backend.md](docs/START_Aditya_Gupta_backend.md) |
-| Aditya Singhal | Proof + maths (money comparison, bug score, go-live maths, certificate) | `pieces/proof` | [docs/START_Aditya_Singhal_proof.md](docs/START_Aditya_Singhal_proof.md) |
-| Aditya Vijay | PayPal + test shops (sandbox, 11 shops, switch libraries, demo) | `pieces/shops`, `pieces/switch-libs` | [docs/START_Aditya_Vijay_paypal_shops.md](docs/START_Aditya_Vijay_paypal_shops.md) |
+## Team responsibilities
 
-## What is already here (the "plug pack")
-
-| Folder | What it is |
+| Person | Shared build guide |
 |---|---|
-| `contracts/` | The exact shape of every piece of data that passes between pieces (Python models → JSON Schema + TypeScript types), the API contract (`contracts/api/openapi.json`), the plug-in interfaces (`interfaces.py`) and the agent tool list (`tools.py`). |
-| `foundation/` | The shared ledger (an append-only log where every step is recorded and any edit is detectable) and the step tracker (moves a shop through the upgrade stages). |
-| `fakes/` | Stand-ins: fake API server, fake PayPal sandbox (works offline), fake runner, fake proof (answer-key lookup), fake agent tools (with permission checks + audit log), stand-in agents, and the reference switch-library behaviour. |
-| `fixtures/` | Sample data with answer keys, built on one real old shop (Cutover's MIT `legacy-php-shop`). See `fixtures/INDEX.md`. Every file says whether it is REAL or SYNTHETIC. |
-| `plugtests/` | One plug-in test set per piece. Each runs against the stand-ins until you point its environment variable at your real code (commands in your START file). |
-| `docs/design/` | The full design (00 system … 09 demo). `01_DATA.md` is the law for data formats. |
-| `docs/FORMAT_CHANGES.md` | Every change to a data format, with the reason. |
-| `AGENTS.md` | Rules for AI coding tools (Codex, Antigravity, Claude) working in this repo. Humans: read it too — it's short. |
+| Aditya Singh | [Shared formats, saved-case UI, own agents later, integration](docs/START_Aditya_frontend_agents.md) |
+| Aditya Gupta | [Backend, runner, custody/brokers and lifecycle mechanisms](docs/START_Aditya_Gupta_backend.md) |
+| Aditya Singhal | [Retain proof contribution; evidence/completeness deltas](docs/START_Aditya_Singhal_proof.md) |
+| Aditya Vijay | [Reference shop/runtime, payment/state/callback/exit recipes](docs/START_Aditya_Vijay_paypal_shops.md) |
 
-The idea, research and evidence pack (problem, rivals, every number with its source) is on the team Google Drive in **"PayPal AI Hackathon - Team Pack / 00 GoldGraft - FINAL IDEA (1 Nov)"**: https://drive.google.com/drive/folders/10NZ56zh6UlveQTsi7rIrUA9K4GY8uv7a
+[Seventeen work packages](docs/engineering/work/PER_PERSON_WORK_PACKAGES.md) give inputs/outputs, proposed paths, dependencies and acceptance evidence. Inspect each person's current contribution before adapting it. Unchanged boundaries can proceed independently; new interfaces wait for Singh's approved shared bootstrap. No contribution is called complete from a placeholder or stand-in test. No revised completion dates are invented.
 
-## Set up (once)
+## Repository map
 
-You need: Python 3.12 via [uv](https://docs.astral.sh/uv/), Node 22, git.
+| Folder | Authority / purpose |
+|---|---|
+| `contracts/` | Current Python wire models and generated schemas/types/OpenAPI; proposals are not existing fields. |
+| `foundation/` | Shared ledger and step tracker; new lifecycle semantics still require implementation. |
+| `fakes/`, `fixtures/`, `plugtests/` | Offline stand-ins, labelled examples and compatibility checks. These do not prove real account/payment/isolation flows. |
+| `pieces/` | Independent team implementations; never import another piece's code. |
+| `docs/engineering/` | Reviewed proposed target build, controls, lifecycle, acceptance and all-four work baseline. |
+| `docs/design/` | Historical original design, with supersession notices; compatible data descriptions interpreted against current Python. |
+| `docs/FORMAT_CHANGES.md` | Existing coded format history and explicitly unimplemented proposal records. |
 
-```bash
-git clone https://github.com/adityasinghin01-hash/GoldGraft.git
-cd GoldGraft
-uv sync          # installs Python packages into .venv
-npm ci           # installs the TypeScript tools
-uv run pytest -q # everything should pass
-```
+## Future local development
 
-Run the stand-in API (the 12 screens can talk to this today):
+Existing setup uses Python3.12/uv, Node22 and git. Commands below are reference instructions, not work performed or authorised by this documentation update:
 
 ```bash
+uv sync
+npm ci
+uv run pytest -q
 uv run python -m goldgraft_fakes.api --port 8700
-# open http://127.0.0.1:8700/docs for every endpoint, with examples
 ```
 
-## Rules everyone follows
+Ordinary tests stay offline. No secrets in code/logs/docs/fixtures. Payment amounts are integer minor units plus currency. Follow [AGENTS.md](AGENTS.md). Only approved versioned shared changes regenerate contracts alongside examples/fakes/fixtures/tests.
 
-1. **Only import `contracts/` (and `foundation/`)**. Never import another person's piece. That is what keeps the pieces independent.
-2. **Data formats change only through Aditya.** If you need a new field, ask; the change goes into `docs/FORMAT_CHANGES.md` with a new version (`RootMap/1` → `RootMap/2`), and the stand-ins and sample data are updated the same day.
-3. **Money is always a whole number of the smallest unit + a currency code** (19.99 USD = `{"minor": 1999, "currency": "USD"}`). Never decimals.
-4. **No secrets in the repo** — no keys, passwords or tokens in code, sample data, logs or docs. Use a local `.env` file (it is ignored by git).
-5. **Tests never call the internet.** Anything that talks to the real PayPal sandbox goes in a script whose name starts with `live_`.
-6. **Push small and often** to your own branch (`<your-name>/<topic>`), open a pull request into `main`; CI must be green before it is merged.
+## Publication and external sources
 
-## Dates
+This documentation-only publication contains the reviewed engineering baseline and all four people’s work plans. GitHub is the shared engineering authority. Team Drive remains idea/research/pitch context; its current contents have not yet been fetched or updated in this publication session, so Drive synchronisation remains pending. No team messages were sent. [Known historical Drive folder](https://drive.google.com/drive/folders/10NZ56zh6UlveQTsi7rIrUA9K4GY8uv7a) is a lead, not verified current content. Do not claim all sources synchronised.
 
-| Date | What |
-|---|---|
-| 2–3 Nov | Plug pack (this repo) finished |
-| 3–6 Nov | Everyone builds their piece alone, against the stand-ins |
-| 6 Nov night | Every piece's plug-in test is green |
-| 7–8 Nov | Aditya plugs everything together and runs it end to end on Zen Cart |
-| 8 Nov | Feature freeze |
-| 9–12 Nov | Polish, demo video (recorded twice), submit by 12 Nov 23:30 IST |
+Programme order: 1 → 3 → 4 → 2 → 5 → 6. Paper Plans1/3/4 are closed; Plan2 publishes the shared engineering docs; required Drive synchronisation remains pending. Plans5/6 are Singh's future build/tests and integration/qualification, requiring explicit start. Agent internals, production deployment and merchant financial actions are not authorised by these docs.

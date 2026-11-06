@@ -1,0 +1,696 @@
+[
+  {
+    "id": "AC01",
+    "title": "Origin and URL",
+    "controls": [
+      "S12",
+      "S15"
+    ],
+    "gaps": [
+      "CG01",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC02",
+    "title": "Draft claim",
+    "controls": [
+      "S01",
+      "S04"
+    ],
+    "gaps": [
+      "CG02"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC03",
+    "title": "Session expiry",
+    "controls": [
+      "S01",
+      "S04",
+      "S05"
+    ],
+    "gaps": [
+      "CG02"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC04",
+    "title": "Invite recipient binding",
+    "controls": [
+      "S01",
+      "S04",
+      "S17",
+      "S22"
+    ],
+    "gaps": [
+      "CG02",
+      "CG06",
+      "CG11"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC05",
+    "title": "Role boundaries",
+    "controls": [
+      "S02",
+      "S03",
+      "S19"
+    ],
+    "gaps": [
+      "CG02",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC06",
+    "title": "Provider callback",
+    "controls": [
+      "S04",
+      "S05",
+      "S07"
+    ],
+    "gaps": [
+      "CG02"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC07",
+    "title": "Reader least authority",
+    "controls": [
+      "S03",
+      "S06"
+    ],
+    "gaps": [
+      "CG02",
+      "CG04"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC08",
+    "title": "Render grant and controller",
+    "controls": [
+      "S01",
+      "S03",
+      "S06",
+      "S17"
+    ],
+    "gaps": [
+      "CG02",
+      "CG03",
+      "CG12"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC09",
+    "title": "Render side effects",
+    "controls": [
+      "S02",
+      "S06",
+      "S12",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC10",
+    "title": "Event current authority",
+    "controls": [
+      "S03",
+      "S07",
+      "S08"
+    ],
+    "gaps": [
+      "CG02",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC11",
+    "title": "Archive handling",
+    "controls": [
+      "S13",
+      "S16"
+    ],
+    "gaps": [
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC12",
+    "title": "Exclusion/custody",
+    "controls": [
+      "S06",
+      "S17",
+      "S24"
+    ],
+    "gaps": [
+      "CG06",
+      "CG07",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC13",
+    "title": "Unsupported source",
+    "controls": [
+      "S03",
+      "S10",
+      "S13"
+    ],
+    "gaps": [
+      "CG03",
+      "CG12"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC14",
+    "title": "Image correspondence",
+    "controls": [
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC15",
+    "title": "Runtime/config correspondence",
+    "controls": [
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC16",
+    "title": "Static boundary",
+    "controls": [
+      "S09",
+      "S10",
+      "S11"
+    ],
+    "gaps": [
+      "CG05",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC17",
+    "title": "Processing policy",
+    "controls": [
+      "S17",
+      "S19",
+      "S23"
+    ],
+    "gaps": [
+      "CG06",
+      "CG07"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC18",
+    "title": "Isolation/egress",
+    "controls": [
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S14",
+      "S15"
+    ],
+    "gaps": [
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC19",
+    "title": "Credential/payment semantics",
+    "controls": [
+      "S03",
+      "S06",
+      "S10"
+    ],
+    "gaps": [
+      "CG05",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC20",
+    "title": "Readiness invalidation",
+    "controls": [
+      "S03",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG05",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC21",
+    "title": "Start before commit crash",
+    "controls": [
+      "S20"
+    ],
+    "gaps": [
+      "CG09"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC22",
+    "title": "Commit lost response",
+    "controls": [
+      "S01",
+      "S20"
+    ],
+    "gaps": [
+      "CG09",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC23",
+    "title": "Concurrent Starts",
+    "controls": [
+      "S02",
+      "S20"
+    ],
+    "gaps": [
+      "CG09",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC24",
+    "title": "Outbox/lease crash",
+    "controls": [
+      "S03",
+      "S16",
+      "S20"
+    ],
+    "gaps": [
+      "CG08",
+      "CG09"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC25",
+    "title": "Stop before receipt",
+    "controls": [
+      "S03",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG09",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC26",
+    "title": "Claim without operation",
+    "controls": [
+      "S03",
+      "S18",
+      "S20"
+    ],
+    "gaps": [
+      "CG08",
+      "CG09",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC27",
+    "title": "Verified first operation",
+    "controls": [
+      "S03",
+      "S18",
+      "S20"
+    ],
+    "gaps": [
+      "CG08",
+      "CG09",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC28",
+    "title": "Stop/revoke external unknown",
+    "controls": [
+      "S03",
+      "S08",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG09",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC29",
+    "title": "Replay/private projection",
+    "controls": [
+      "S01",
+      "S18",
+      "S20",
+      "S22"
+    ],
+    "gaps": [
+      "CG09",
+      "CG11",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC30",
+    "title": "Retention/quotas",
+    "controls": [
+      "S16",
+      "S17",
+      "S21",
+      "S23",
+      "S24"
+    ],
+    "gaps": [
+      "CG07",
+      "CG08"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC31",
+    "title": "Legacy compatibility",
+    "controls": [
+      "S01",
+      "S02",
+      "S19"
+    ],
+    "gaps": [
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC32",
+    "title": "Publication tripwire",
+    "controls": [
+      "S02",
+      "S09",
+      "S10",
+      "S19",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG08",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC33",
+    "title": "Usability and recovery",
+    "controls": [
+      "S01",
+      "S04",
+      "S17"
+    ],
+    "gaps": [
+      "CG12",
+      "CG13"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC34",
+    "title": "Reference payment scope",
+    "controls": [
+      "S02",
+      "S10",
+      "S18"
+    ],
+    "gaps": [
+      "CG05",
+      "CG11",
+      "CG12"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC35",
+    "title": "Adapter replacement",
+    "controls": [
+      "S01",
+      "S02",
+      "S03",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG12",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC36",
+    "title": "Split-provider graph and live claim boundary",
+    "controls": [
+      "S01",
+      "S03",
+      "S17",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG02",
+      "CG03",
+      "CG12",
+      "CG13",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC37",
+    "title": "Local-folder safe capture",
+    "controls": [
+      "S01",
+      "S06",
+      "S13",
+      "S17"
+    ],
+    "gaps": [
+      "CG02",
+      "CG06",
+      "CG08",
+      "CG12",
+      "CG13",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC38",
+    "title": "Resumable non-Git snapshot",
+    "controls": [
+      "S01",
+      "S03",
+      "S16",
+      "S20",
+      "S24"
+    ],
+    "gaps": [
+      "CG07",
+      "CG09",
+      "CG12",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC39",
+    "title": "Cloud permission and completeness",
+    "controls": [
+      "S03",
+      "S06",
+      "S17",
+      "S19"
+    ],
+    "gaps": [
+      "CG02",
+      "CG03",
+      "CG06",
+      "CG12",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC40",
+    "title": "Owner-no-code and stale candidate",
+    "controls": [
+      "S01",
+      "S03",
+      "S17",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG02",
+      "CG03",
+      "CG12",
+      "CG13"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC41",
+    "title": "Complete required source/context inventory",
+    "controls": [
+      "S01",
+      "S03",
+      "S10",
+      "S17",
+      "S19"
+    ],
+    "gaps": [
+      "CG02",
+      "CG03",
+      "CG05",
+      "CG12",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC42",
+    "title": "Source identity versus runnable baseline",
+    "controls": [
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG05",
+      "CG08",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC43",
+    "title": "Isolated baseline and working copy",
+    "controls": [
+      "S02",
+      "S06",
+      "S09",
+      "S10",
+      "S20"
+    ],
+    "gaps": [
+      "CG04",
+      "CG08",
+      "CG10"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC44",
+    "title": "Working site after service handover",
+    "controls": [
+      "S02",
+      "S03",
+      "S08",
+      "S18",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG03",
+      "CG04",
+      "CG05",
+      "CG07",
+      "CG09",
+      "CG10",
+      "CG12"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC45",
+    "title": "Final common-contract conformance",
+    "controls": [
+      "S01",
+      "S03",
+      "S18",
+      "S19"
+    ],
+    "gaps": [
+      "CG03",
+      "CG12",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  },
+  {
+    "id": "AC46",
+    "title": "Pre-accept cancellation and immutable receipt",
+    "controls": [
+      "S01",
+      "S03",
+      "S20",
+      "S21"
+    ],
+    "gaps": [
+      "CG09",
+      "CG10",
+      "CG14"
+    ],
+    "execution_status": "not executed in product"
+  }
+]

@@ -1,0 +1,22 @@
+> Reviewed team baseline, 6 November 2026: this connection proposal is subject to the review addendum, implementation bridge and lifecycle atomic protocols linked from [engineering START](../START_HERE.md). Earlier programme status/owner restrictions in this frozen source are historical. No current API/implemented capability is created by this text.
+
+# Preparation and readiness predicate
+
+Status: paper engineering specification, 6 November 2026. Nothing here is a deployed feature or current API unless explicitly labelled CURRENT. Proposed components/interfaces require later implementation and contract approval. Plan 1 ends at verified first sandbox operation; agent internals and Plans 2–6 remain outside scope.
+
+Decision T10: deterministic static preparation under read/acquisition permission; no model/shop execution before Start. Browser shows one continuous progress area, no per-check consent popups. Trusted parsers are constrained and input-limited; static does not mean zero parser attack surface.
+
+Allowed before Start: normalise/display URL; establish identity/controller binding; trusted source acquisition/exclusion; static PHP/config/manifest inspection; host read correspondence; verify prebuilt fixture/runtime catalogue, image signatures, quotas and policy/account entitlement. Forbidden: dependency install scripts, shop/container start, model calls (including cheerful probe summaries), checkout/capture/refund/account transaction reads, provider mutations and runtime callback tests. Qualifying GoldGraft's own prebuilt environment is a separately authorised implementation prerequisite, not live work hidden in intake.
+
+Readiness predicate (all required): active case membership and Start delegation; source+host controller/recipient binding; usable Reader and host scoped grants with current epoch; complete sanitised source manifest; supported required flow scope; current correspondence with explicit assumptions; qualified runtime/broker/fixture versions; known synthetic identities/callback gateway; processor/storage/region/retention evidence meets disclosure; capacity/budget; current policy. Missing/unsupported/unknown/failed/stale are distinct; none passes by default.
+
+Readiness record: proposed immutable object binding source/environment/config/policy/runtime/fixture versions, actor/action/resource and evidence references, issuance/expiry and limitations. Five-minute freshness initial policy; hard revision or grant/policy change invalidates immediately. No operational guarantee of payment correctness. CURRENT four Connection checks remain old sandbox-key checks; cannot carry this predicate.
+
+Preparation dependency order: case/auth → controller approvals → source/host scopes → quarantine and static inventory → correspondence → scope and fixture capability → runtime/processing/capacity gates → Ready. Independent metadata checks may run concurrently, but private source cannot arrive before authority/custody terms. Error recovery repeats only affected check and its dependents; preserve prior safe evidence with age labels.
+
+Pre-Start scope review shows shop URL, exact source/host environment, pinned source revision, one-time sandbox flow scope, exclusions, who can see code/evidence, named processing providers/regions/retention, and “Start permits sandbox work. Your live shop will not be changed.” Underlying broker must enforce it. Optional Details contains check/evidence list. Broad processing/recipient change requires new consent; routine refresh with same scope does not add another Accept popup.
+
+Unknown dynamic dependency after Start -> hold with exact cause; no production-ready/full-proof badge. A runtime/fixture simulation is not genuine sandbox authentication. Existing NVP credentials/account readiness and historical live continuity remain separate. Under this paper baseline every actual live release gate is open, so product must not currently show Ready.
+
+## Complete required context and separate proof gates
+[CODE_AND_ENVIRONMENT_HANDOFF.md](CODE_AND_ENVIRONMENT_HANDOFF.md) is the concrete required-source/dependency/config/state package contract. Receiving code, proving current website correspondence and reproducing the unchanged site are separate. Static preflight cannot claim the last; executable baseline reproduction and upgrade/delivery occur after Start under the updated Plan3 requirements. Missing required components remain managed case dependencies, not silently excluded paths.

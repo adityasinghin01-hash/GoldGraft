@@ -1,3 +1,7 @@
+> **Status update — 6 November 2026.** The original body below is historical reference and is superseded for current target behaviour by reviewed engineering documents. Read [engineering baseline](../engineering/START_HERE.md), [current/proposed boundary](../engineering/CURRENT_VS_PROPOSED.md) and [atomic lifecycle protocols](../engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md). Paper only; no implementation or live qualification. Earlier schedules/coverage/Done claims in the retained body are not current status.
+
+---
+
 # P12 · 07 — Frontend screens + API (Aditya builds the frontend + agent system)
 Look: GoldGraft's own identity (gold + living green, botanical "graft" motifs) — never PayPal's look or logo style; built later with skyward-atelier + astral-codex. Rule from his workflow: every number on screen has a plain "what this means" note.
 
