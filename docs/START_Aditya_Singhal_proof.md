@@ -1,65 +1,70 @@
-# START HERE — Aditya Singhal · Proof + maths
+# Shared START guide — Aditya Singhal
 
-## Your job in one line
-Build the **proof library**: the code that decides — with maths, never with AI — whether the new PayPal code handles money exactly as well as the old code, how strong that proof is, when it is safe to move more buyers, and the tamper-proof certificate at the end.
+Reviewed planning update, 6 November 2026. Preserve existing deterministic proof work; add only evidence/completeness/private projection and lifecycle gaps.
 
-## GoldGraft in two lines
-Old online shops use old PayPal code that PayPal is retiring. GoldGraft's AI agents rewrite it to PayPal's newest version; **your library is the judge** that proves the rewrite is safe. Full picture: [README](../README.md), [docs/design/00_SYSTEM.md](design/00_SYSTEM.md).
+Read [engineering baseline](engineering/START_HERE.md), [current versus proposed](engineering/CURRENT_VS_PROPOSED.md), [all-four deltas](engineering/work/TEAM_WORK_DELTA.md), [dependencies](engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md) and [completion evidence](engineering/work/DONE_AND_TEST_MATRIX.md) first. These are documented work packages, not a claim of implementation, task delivery or messages sent.
 
-## What you own
-| Part | In plain words | Design |
-|---|---|---|
-| Money language mapper (`to_cmel`) | turns a recorded run (old or new PayPal messages) into one common list of money events (INTENT, CAPTURE, REFUND, SHOP_PAID …) | [01_DATA.md §3](design/01_DATA.md) — the mapping table |
-| Union Judge (`judge`) | compares old shop, old shop run twice (to learn what is just "noise" like random IDs), new shop, and PayPal's own records → a verdict: PASS, PASS_FIXED (old shop had a bug, new one fixed it), PROBLEM, UNVERIFIED, N/A | [04_UNION_PROOF.md U2](design/04_UNION_PROOF.md) |
-| Money rules R01–R16 | e.g. "a shop marks an order paid only if PayPal shows one completed capture" | [01_DATA.md §4](design/01_DATA.md), `contracts/.../base_rules.py` |
-| Proof strength (`proof_strength`) | we plant 12 kinds of money bugs in the new code; score = bugs caught ÷ bugs planted | [01_DATA.md §5](design/01_DATA.md) (MMO-12), [04 U3](design/04_UNION_PROOF.md) |
-| Go-live maths (`heal_decide`) | Beta-Binomial: move buyers 1% → 10% → 50% → 100% only when P(new success rate ≥ old − 2%) ≥ 0.95 with ≥ 30 new payments; switch back at once on any money-rule break | [05 H2](design/05_HEAL_HANDOFF_FLEET.md) |
-| Recipe confidence (`recipe_confidence`) | mean of Beta(passes+1, fails+1) | [05 B1](design/05_HEAL_HANDOFF_FLEET.md) |
-| Certificate (`verify_certificate` + signing) | a public, re-checkable record; changing one byte must make it fail | [01_DATA.md §6](design/01_DATA.md) |
+Inspect your actual branch/local contribution before changing it; preserve valid work. The inspected main cannot show unpushed work. Singh owns new shared contract/fixture/fake bootstrap. Existing unchanged boundaries may continue independently; new boundaries require approved versions and fixtures. All pieces exchange contracts/foundation only.
 
-## Your folder
-`pieces/proof/`. Pure Python, no servers, no internet, no AI. Import only from `contracts/`.
+Existing [proof PR1](https://github.com/adityasinghin01-hash/GoldGraft/pull/1) inspected at `571393c563522dfd2e4d49afcfa080987e33b695`; unmerged, reported offline/synthetic evidence preserved. No default rewrite or claim that real signing/refetch is done.
 
-## The exact functions you implement
-They are written down in `contracts/src/goldgraft_contracts/interfaces.py` (class `Proof`). Your class must have the same method names and argument types — that is what makes it plug in.
+## SH01 — Singhal: Inspect/reuse existing deterministic proof
 
-## What you test against: answer keys (no other piece needed)
-All in `fixtures/proof/legacy-php-shop/` (see `fixtures/INDEX.md`; every file is labelled SYNTHETIC or REAL):
-| Folder | Input → expected output |
-|---|---|
-| `raw/` → `cmel/` | recorded runs → the money events your mapper must produce |
-| `cmel/` + `contract.json` + `target_plan.json` → `expected/*.verdict.json` | the verdict your judge must give for each scenario (9 scenarios, every grade appears at least once) |
-| `mutants/` → `expected/proof_strength.json` | planted bugs + which tests caught them → the score |
-| `heal/case_*.events.json` → `heal/case_*.expected.json` | payment streams → go-live decision (probabilities included; `fixtures/tools/heal_reference.py` is an exact reference) |
-| `certificate/` | a valid certificate and a tampered one |
+Keep/adapt/add: inspect existing contribution, preserve correct code and add only verified gap.
 
-The real recordings from the PayPal sandbox will be added by Aditya Vijay; your tests should then pass on those too.
+Proposed paths: pieces/proof/ PR1; existing plugtests/test_proof*.py.
 
-## Your plug-in test (your "done")
+Consumes: Existing mapper/judge/posterior/mutation/certificate/evidence helpers and synthetic index.
+
+Produces: Evidence-backed keep/adapt gap report and unchanged APIs where sufficient.
+
+Dependencies: PR1 inspect/review not auto merge; SI01 for changed wire; no rewrite of existing maths.
+
+Acceptance IDs: LC03 LC04 LC05 LC07 LC31. Completion evidence: Preserve normative-rule precedence/old defects; no score-only/fixture-only/live safety claim; reported tests not rerun by planning.
+
+Tests: named component unit/contract/negative fixtures with own actual component, then real counterpart boundary and separately authorised external qualification; mocks/real/source-inspected evidence labelled. Failure outcome: preserve current merchant assets/effects, deny affected action and give exact missing prerequisite/owner. No release claim from stand-in success.
+
+
+## SH02 — Singhal: Bind evidence completeness and exact tested subject
+
+Keep/adapt/add: inspect existing contribution, preserve correct code and add only verified gap.
+
+Proposed paths: pieces/proof/evidence.py; proposed lifecycle_evidence.py.
+
+Consumes: Baseline/candidate exact image/package/config/domain/runtime/origin/fence results.
+
+Produces: Deterministic ready/partial/hold decisions with required evidence/flow exclusions and missing reason.
+
+Dependencies: SI01; GU03/GU04 recorders; VJ02/03 fixtures.
+
+Acceptance IDs: LC01 LC03 LC04 LC06 LC07 LC17 LC18 LC22 LC32 LC36. Completion evidence: Wrong/missing image/scope/generation, unsupported paths, unknown provider read and old-origin mismatch cannot certify full outcome.
+
+Tests: named component unit/contract/negative fixtures with own actual component, then real counterpart boundary and separately authorised external qualification; mocks/real/source-inspected evidence labelled. Failure outcome: preserve current merchant assets/effects, deny affected action and give exact missing prerequisite/owner. No release claim from stand-in success.
+
+
+## SH03 — Singhal: Private review/public-safe projection and lifecycle negatives
+
+Keep/adapt/add: inspect existing contribution, preserve correct code and add only verified gap.
+
+Proposed paths: pieces/proof/certificate.py; proposed review_projection.py; plugtests/test_lifecycle_evidence.py.
+
+Consumes: Current cert and new private ReviewBundle/StateCutover/ExitCheck evidence.
+
+Produces: Scoped private report/public projection proposal and strong regression/unknown/tamper/privacy cases.
+
+Dependencies: SI01; GU05 actual evidence; Singh recipient/UI integration.
+
+Acceptance IDs: LC08 LC20 LC21 LC23 LC25 LC26 LC32 LC34 LC39. Completion evidence: No fake Git/workflow fields for local/E2B, no private capture/customer/transaction details public, signature not behavioural/operational proof.
+
+Tests: named component unit/contract/negative fixtures with own actual component, then real counterpart boundary and separately authorised external qualification; mocks/real/source-inspected evidence labelled. Failure outcome: preserve current merchant assets/effects, deny affected action and give exact missing prerequisite/owner. No release claim from stand-in success.
+
+
+## Existing offline regression commands — future execution only
+
+These commands reference existing plugtests and proposed real implementations. They were not run during this docs update. Passing them is one compatibility check, not live account/isolation/payment/working-site proof.
+
 ```bash
 GOLDGRAFT_PROOF=pieces.proof.proof:Proof uv run pytest plugtests/test_proof.py
 ```
-Without the variable it runs against the stand-in (which just looks answers up). When it passes with your class, your piece plugs in.
 
-## Dates
-3–6 Nov build · **6 Nov night: plug-in test green** · 7–8 Nov Aditya plugs in · 8 Nov freeze.
-
-## Ask Aditya when
-an answer key looks wrong to you (tell him which file and why — answer keys can have mistakes), or you need a format change.
-
-## Certificate runner integration
-
-Persist normalized money events as `CMEL/1` and final scenario verdicts as `Verdict/1` entries under the graft before
-issuance. Call `issue_certificate_from_ledger` in `pieces.proof.evidence` with the
-final contract, scenarios, verdicts, four passing smoke verdicts and measured proof strength. It derives the
-ledger root and PayPal references from the audited graft, then calls the supplied
-signer after the certificate gates pass. Supply `pieces.proof.sigstore.sign_payload`
-from a GitHub Actions job with Cosign and `id-token: write`.
-
-For the certificate API, call `verify_certificate_evidence` with the stored
-graft ID, the shop's sandbox client and the trusted workflow identity and SHA
-from runner configuration. It checks the Cosign bundle before reading payment
-evidence. A valid ledger prefix remains verifiable after later graft events are
-appended. PayPal re-fetch compares each signed capture to its archived amount
-and currency. The recorded debug ID identifies the original observation and is
-not expected to recur on a fresh request.
+Use the AC/LC cases attached to each package to add meaningful actual component and boundary failure checks after implementation starts. Any real account/live check is separately scoped and marked `live_`; ordinary tests stay offline. Do not install/provision/change accounts or run live jobs because a guide describes future work. No commit/push/merge by an agent. Personal READMEs/reference and generated files remain protected until an expressly authorised shared-format implementation.

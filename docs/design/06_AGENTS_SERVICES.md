@@ -1,3 +1,7 @@
+> **Status update — 6 November 2026.** The original body below is historical reference and is superseded for current target behaviour by reviewed engineering documents. Agent internals below are deferred historical ideas, not an adopted internal design; Singh decides them only when own work starts. Read [engineering baseline](../engineering/START_HERE.md), [current/proposed boundary](../engineering/CURRENT_VS_PROPOSED.md) and [atomic lifecycle protocols](../engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md). Paper only; no implementation or live qualification. Earlier schedules/coverage/Done claims in the retained body are not current status.
+
+---
+
 # P12 · 06 — Agent cards + service cards (built by hand)
 Every agent = Claude Agent SDK agent with: system prompt (role + red lines), allowed tools, input artifact schemas, output artifact schema, budget, stop conditions. Outputs that fail their schema are rejected by the ledger.
 

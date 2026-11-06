@@ -1,0 +1,19 @@
+> Reviewed team baseline, 6 November 2026: this connection proposal is subject to the review addendum, implementation bridge and lifecycle atomic protocols linked from [engineering START](../START_HERE.md). Earlier programme status/owner restrictions in this frozen source are historical. No current API/implemented capability is created by this text.
+
+# Source Reader and provider return
+
+Status: paper engineering specification, 6 November 2026. Nothing here is a deployed feature or current API unless explicitly labelled CURRENT. Proposed components/interfaces require later implementation and contract approval. Plan 1 ends at verified first sandbox operation; agent internals and Plans 2–6 remain outside scope.
+
+Decision T05: separate GitHub Reader App, selected repositories only, Metadata/Contents/Deployments read. No Contents/PR/Actions/Workflows/Administration write. Deployments read is legacy linkage evidence, not runtime proof. Broker uses repository_id restriction when minting short-lived installation tokens and minimum permissions; never requests all installation repos by default.
+
+CURRENT provider operations: GET /user to identify authenticated GitHub controller, GET /user/installations and per-installation repositories where suitable for user/resource linkage, GET /repos/{owner}/{repo} to establish immutable ID, GET /repos/{owner}/{repo}/commits/{ref} to resolve full commit, GET /repos/{owner}/{repo}/tarball/{commit} for source archive. POST /app/installations/{id}/access_tokens mints a token; it is not permission to mutate repository content. Credentials opaque; never assume fixed token length. Endpoint/role availability must be qualified with real organisation SSO/owner approval. Installation selection alone is not controller identity or requester-recipient approval.
+
+Flow: signed-in contributor → disclosure/binding intent → server creates GitHub state → official login/install → verify return and App/installation IDs server-side → controller identity/current resource administration check → display exact resource/requester/recipients → atomic binding approval → mint scoped Reader token → trusted acquisition. No private source attachment while approval pending. Resource names from provider selection remain only in controller's private view until binding.
+
+Archive URL redirects only to exact GitHub-issued acquisition hosts, HTTPS, no credential forwarding to a changed origin; validate redirect count/content limits. Repository URLs are display input, never arbitrary API hosts. Support github.com only initially; enterprise/custom hosts unsupported. Secret key material encrypted in dedicated vault; untrusted work/model gets no App/user/installation tokens.
+
+Webhook POST /gh/webhook CURRENT name: verify raw-body HMAC and delivery ID, event type and size; map immutable repo/installation to bound case; re-fetch authority before privileged effects; dedupe; revoke locally before asynchronous remote reconciliation. A correctly signed wrong-resource/stale event does not grant rights. Do not add webhook/event data directly into prompts or tool policy.
+
+Future denied operations: remote branch/content/PR writes, workflow dispatch or edits, repository creation/delete/admin, cross-repo read, broad installation listing exposed to requester. Dedicated Publisher App later remains outside Start. Before any future branch/PR push, inspect Render auto-deploy/previews and all CI triggers (NX01); no remote writes are part of Plan 1.
+
+Sources: [token restriction](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app), [archive acquisition](https://docs.github.com/en/rest/repos/contents). These document provider capabilities; no App is registered or installed by this paper.

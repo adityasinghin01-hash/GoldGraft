@@ -1,0 +1,396 @@
+{
+  "created_utc": "2026-11-06T08:33:52.860587+00:00",
+  "kind": "Curated documentation export; no raw backups/private inventory or product/generated source",
+  "files": [
+    {
+      "source": "outputs/plan_1/CORRESPONDENCE_SPEC.md",
+      "source_sha256": "08003c93b691ac0588074a08bb00e2910147f76de902a193d7717b574ed3d8ed",
+      "destination": "docs/engineering/connection/CORRESPONDENCE_SPEC.md",
+      "destination_sha256": "dae4ccc156fe9a073a10ee878f2827659d36256cc22a4672a58789bcf82f82fa"
+    },
+    {
+      "source": "outputs/plan_1/OPEN_GATES.md",
+      "source_sha256": "415a63a194aa107e3a098a3e382faec54cd0aad1ee280d0c0ac00a75a2cbc45b",
+      "destination": "docs/engineering/connection/OPEN_GATES.md",
+      "destination_sha256": "9dc53f8290c0295ecec97826f8fdbfefffdf7c56ef34e5ebdc957cf2d20556ea"
+    },
+    {
+      "source": "outputs/plan_1/ACCEPTANCE_CASES.md",
+      "source_sha256": "54992cc9f99e8221f1ec6f69911d7826ca7efb913a88186b6428d77226934817",
+      "destination": "docs/engineering/connection/ACCEPTANCE_CASES.md",
+      "destination_sha256": "d4d7888034f43536278939600bd2890d0de6f9bbafecbc44124ed075098fc7b2"
+    },
+    {
+      "source": "outputs/plan_1/CONNECTOR_EXTENSIBILITY_SPEC.md",
+      "source_sha256": "1a7f555256c31766626344c608693b6bef39819bb223a14af69ee32feaedd3a7",
+      "destination": "docs/engineering/connection/CONNECTOR_EXTENSIBILITY_SPEC.md",
+      "destination_sha256": "901d906073d8397c17f6ba478e69260ee308645f187d06cb9d0ff9413b9bbac4"
+    },
+    {
+      "source": "outputs/plan_1/SOURCE_REGISTER.md",
+      "source_sha256": "946865ed4dafaa51335cbff3dba51afc0a610c82cac2c4979e53472af42e4a87",
+      "destination": "docs/engineering/connection/SOURCE_REGISTER.md",
+      "destination_sha256": "3a65a886ae5760ef21543557bd7ea9a1f98a73d041d71cd61881f975b9aee065"
+    },
+    {
+      "source": "outputs/plan_1/CONNECTION_BUILD_SPEC.md",
+      "source_sha256": "2021afe122b4c2486c921419e46c49d4e3333d87f07fe3ec9aead2e9af23e907",
+      "destination": "docs/engineering/connection/CONNECTION_BUILD_SPEC.md",
+      "destination_sha256": "07a2d3fb9832e5b247e7044db8573d0e245db405d3a54bcd0d499e9106b35876"
+    },
+    {
+      "source": "outputs/plan_1/CONNECTION_CONTROL_PROPOSAL.md",
+      "source_sha256": "43ce4026f842dead7b6d775c3a1844aa9d6673bef4f3b5f8d5b561a4eeb9a66d",
+      "destination": "docs/engineering/connection/CONNECTION_CONTROL_PROPOSAL.md",
+      "destination_sha256": "17e9d491612393e1711ed65b0242db1f6c411b7fd640c36071bfa117671cceb1"
+    },
+    {
+      "source": "outputs/plan_1/PREFLIGHT_AND_READINESS.md",
+      "source_sha256": "f23dcf5cf741176e8488225a4233942cb5c6895481173add38e33d77df10934f",
+      "destination": "docs/engineering/connection/PREFLIGHT_AND_READINESS.md",
+      "destination_sha256": "b8728903c361cbab9c404595662080177dcc9267319cfbe5df3994f41468e73d"
+    },
+    {
+      "source": "outputs/plan_1/COMPONENT_AND_INTERFACE_MAP.md",
+      "source_sha256": "992d792fcf714db8ac4cb7df3a97657c2fc78cd3e51eeb1d3617508ccbdccb59",
+      "destination": "docs/engineering/connection/COMPONENT_AND_INTERFACE_MAP.md",
+      "destination_sha256": "fa9abe2c97213a8d115d31e171028af8affaf535e19f58e9af3c5ee66cdca76e"
+    },
+    {
+      "source": "outputs/plan_1/START_HERE.md",
+      "source_sha256": "bfd0994c9b10c5ff53e58fd4f7c830c9457673b8de11fdbfb0f66ca3f60b2c13",
+      "destination": "docs/engineering/connection/START_HERE.md",
+      "destination_sha256": "fd0219ca23c30568b3e2bcbca83425e4a60ad1a63597f30e98ea0742d143de25"
+    },
+    {
+      "source": "outputs/plan_1/HOST_ADAPTER_FEASIBILITY.md",
+      "source_sha256": "49d3ff0463e80858654c6750728ba6c705f6d98ed472990bc5897d4984c54194",
+      "destination": "docs/engineering/connection/HOST_ADAPTER_FEASIBILITY.md",
+      "destination_sha256": "16ffbe4645a78631cb626768e14c5aabfd217f7465b28fea530e6b4484739324"
+    },
+    {
+      "source": "outputs/plan_1/SOURCE_READER_SPEC.md",
+      "source_sha256": "9d451c48318b783b04f728a3fab0ca2c624f40b1ac749fb73b070577795273a3",
+      "destination": "docs/engineering/connection/SOURCE_READER_SPEC.md",
+      "destination_sha256": "222032555cb64d1ffc42943da379eb1ac1fa5be8ad343ca1667fccf6b708a9dc"
+    },
+    {
+      "source": "outputs/plan_1/PROCESSING_POLICY_SPEC.md",
+      "source_sha256": "0e04214888682d8248dc14d00f2d43ed2306bc583de84d0caea89e297553600d",
+      "destination": "docs/engineering/connection/PROCESSING_POLICY_SPEC.md",
+      "destination_sha256": "c8c1fb4226c282a37d8d7b4700efb010d06a9b7f5e57cb0ab9d278d5dcd6d114"
+    },
+    {
+      "source": "outputs/plan_1/CODE_AND_ENVIRONMENT_HANDOFF.md",
+      "source_sha256": "cbe14c2f57ed5cdc5b2e22a767fa38d1fb084bf212115c124516bead8153c189",
+      "destination": "docs/engineering/connection/CODE_AND_ENVIRONMENT_HANDOFF.md",
+      "destination_sha256": "7ace9df2ffb36a885b26adb0ae8b4c9aaa869944052c3f9e9bb0031d540c95c2"
+    },
+    {
+      "source": "outputs/plan_1/SERVICE_AND_STORAGE_SPEC.md",
+      "source_sha256": "84443563a9ef49230f191df311c53ab5d19b773ea249eca0cde50e8544a43a4c",
+      "destination": "docs/engineering/connection/SERVICE_AND_STORAGE_SPEC.md",
+      "destination_sha256": "e437b3b504f5ffd6f854146287f708f696f39b011b551a3ccf067bc37a1129c5"
+    },
+    {
+      "source": "outputs/plan_1/JOURNEY_AND_COPY_SPEC.md",
+      "source_sha256": "86f3639a3ef8e6286a0f8c35ff117da8b38b0789a97d1d9b87faf2ea5f58717a",
+      "destination": "docs/engineering/connection/JOURNEY_AND_COPY_SPEC.md",
+      "destination_sha256": "578d8f502b5ae459c42c0e8d7d54f544e8f2cf2ea0ddecc3eefce4fa59b53764"
+    },
+    {
+      "source": "outputs/plan_1/START_AND_OPERATION_EVIDENCE.md",
+      "source_sha256": "c92d279f60e734502e7c57879cb04a2de0841e623364348b19931f15bee4dbc6",
+      "destination": "docs/engineering/connection/START_AND_OPERATION_EVIDENCE.md",
+      "destination_sha256": "51ace3818a1a23722ef7c4b88a9c9d7ae2150a2a1e717d984b29f0ea2f51d8f2"
+    },
+    {
+      "source": "outputs/plan_1/FIXED_JOURNEY_AND_SOURCE_ROUTES.md",
+      "source_sha256": "9e7ed508e24b5469ef2ffc838160616873c7593511f7d0ba9dbf7996902963d0",
+      "destination": "docs/engineering/connection/FIXED_JOURNEY_AND_SOURCE_ROUTES.md",
+      "destination_sha256": "a620f25b18f4a8e2579bb99dadaf616c059bfdc1831c5dfee0da529b73856fe2"
+    },
+    {
+      "source": "outputs/plan_1/TECHNICAL_DECISIONS.md",
+      "source_sha256": "51de5ba1a78b102e1ed6955caba3776840734251dd45a230f3ac400e67d19edb",
+      "destination": "docs/engineering/connection/TECHNICAL_DECISIONS.md",
+      "destination_sha256": "120d077d81dbe3bf3fca37e6b5c51b58047c446236e594b7f4ac1d0b7211230e"
+    },
+    {
+      "source": "outputs/plan_1/IDENTITY_AND_CASE_AUTHORITY.md",
+      "source_sha256": "04ca024e7b487df3e903777b373f160a50b96d8d82a504ed83a902acacdafccd",
+      "destination": "docs/engineering/connection/IDENTITY_AND_CASE_AUTHORITY.md",
+      "destination_sha256": "4c3141d1efb325bbc7a36458afac35283032fe683f741b55fef6a17ef007aadf"
+    },
+    {
+      "source": "outputs/plan_1/ACQUISITION_AND_CUSTODY.md",
+      "source_sha256": "a33092cb5dea00dd2aa4cc89142a38b2a0bbceef9477c2fb4054ca80b2f5cf8b",
+      "destination": "docs/engineering/connection/ACQUISITION_AND_CUSTODY.md",
+      "destination_sha256": "2386673789a5bd265f8e34751ba7a47d8387f0853842e2ba92a016e090b0dbe7"
+    },
+    {
+      "source": "outputs/plan_1/RUNTIME_AND_BROKERS_SPEC.md",
+      "source_sha256": "32e7de6409ee0ede184013d0daac9ad09fd68165a3272bbf29e6d28528c58d19",
+      "destination": "docs/engineering/connection/RUNTIME_AND_BROKERS_SPEC.md",
+      "destination_sha256": "afd480ec111f6f8d9179efc78a7df4305996e0e3a15944273862bfb558a1c101"
+    },
+    {
+      "source": "outputs/plan_1/INTERFACE_CHANGE_PROPOSALS.md",
+      "source_sha256": "03fdd0e462cbb8d9f0825b9663e74fc310b712de772b3659af2ad4d84cc03321",
+      "destination": "docs/engineering/connection/INTERFACE_CHANGE_PROPOSALS.md",
+      "destination_sha256": "a5ccef794f8fa9b1e318dd84addb5f641597fa261db27681fc4babfa68da5a21"
+    },
+    {
+      "source": "outputs/plan_1/BUILD_SLICES.md",
+      "source_sha256": "b7fa74cce1b4032f455019202c748109111ed641a3ac508805c62d679927f535",
+      "destination": "docs/engineering/connection/BUILD_SLICES.md",
+      "destination_sha256": "82471d1e0b98810fde88d999753929438e9375daddc5839f5327ca7cb14347a7"
+    },
+    {
+      "source": "outputs/plan_1/SUPPORTED_FIRST_PATH.md",
+      "source_sha256": "820f91f8a097ca69399a792afb77470900a0be67b3d57fbc4dbb844fabd32925",
+      "destination": "docs/engineering/connection/SUPPORTED_FIRST_PATH.md",
+      "destination_sha256": "4d4abfc21b216c5b4d35493c705beadf646b87e40f8ab1e6035ed295c10300cd"
+    },
+    {
+      "source": "outputs/plan_1/fixtures_spec/README.md",
+      "source_sha256": "fb48a0a373a1403b305b771f86034c637a2a4fa47eac13f8180f70ecb5435264",
+      "destination": "docs/engineering/connection/fixtures_spec/README.md",
+      "destination_sha256": "fb48a0a373a1403b305b771f86034c637a2a4fa47eac13f8180f70ecb5435264"
+    },
+    {
+      "source": "outputs/plan_3/BASELINE_REPRODUCTION.md",
+      "source_sha256": "8f319a84ec47ac68b3b1210d9e10b40e5e216a5a20458ee61f59e5b9cb19e28e",
+      "destination": "docs/engineering/lifecycle/BASELINE_REPRODUCTION.md",
+      "destination_sha256": "8f319a84ec47ac68b3b1210d9e10b40e5e216a5a20458ee61f59e5b9cb19e28e"
+    },
+    {
+      "source": "outputs/plan_3/COMPONENT_RESPONSIBILITIES.md",
+      "source_sha256": "492ad28349379d03ca05cdce4b73c17878a6c0b00936527040d4c96a9267e7fa",
+      "destination": "docs/engineering/lifecycle/COMPONENT_RESPONSIBILITIES.md",
+      "destination_sha256": "492ad28349379d03ca05cdce4b73c17878a6c0b00936527040d4c96a9267e7fa"
+    },
+    {
+      "source": "outputs/plan_3/STATE_AND_EFFECT_TABLE.md",
+      "source_sha256": "50901fca64853211f14dbed1e751180ef3823faae0ca295ec568968bd3e0aa1a",
+      "destination": "docs/engineering/lifecycle/STATE_AND_EFFECT_TABLE.md",
+      "destination_sha256": "50901fca64853211f14dbed1e751180ef3823faae0ca295ec568968bd3e0aa1a"
+    },
+    {
+      "source": "outputs/plan_3/ACCEPTANCE_CASES.md",
+      "source_sha256": "e5192d7fea920407d614f23a14348c71cbf13d948d9ac083d6a02c3c95b87d86",
+      "destination": "docs/engineering/lifecycle/ACCEPTANCE_CASES.md",
+      "destination_sha256": "e5192d7fea920407d614f23a14348c71cbf13d948d9ac083d6a02c3c95b87d86"
+    },
+    {
+      "source": "outputs/plan_3/DELIVERY_AUTOMATION_AND_AUTHORITY.md",
+      "source_sha256": "44e83a4ce0ccb39544050e9a228b276f757e67997a9fdb6fe54270442e996aac",
+      "destination": "docs/engineering/lifecycle/DELIVERY_AUTOMATION_AND_AUTHORITY.md",
+      "destination_sha256": "44e83a4ce0ccb39544050e9a228b276f757e67997a9fdb6fe54270442e996aac"
+    },
+    {
+      "source": "outputs/plan_3/LIFECYCLE_INTERFACE_PROPOSALS.md",
+      "source_sha256": "99a8e35b309864d957323ac738d177d9bbbf9d29d5a3bef9616ee6b9e926f457",
+      "destination": "docs/engineering/lifecycle/LIFECYCLE_INTERFACE_PROPOSALS.md",
+      "destination_sha256": "99a8e35b309864d957323ac738d177d9bbbf9d29d5a3bef9616ee6b9e926f457"
+    },
+    {
+      "source": "outputs/plan_3/START_HERE.md",
+      "source_sha256": "bd1ee87d0abecb7da7b06beb391888c75930e58917dcf0ef707b3fcc85e01cc0",
+      "destination": "docs/engineering/lifecycle/START_HERE.md",
+      "destination_sha256": "bd1ee87d0abecb7da7b06beb391888c75930e58917dcf0ef707b3fcc85e01cc0"
+    },
+    {
+      "source": "outputs/plan_3/PLAN_3_CLOSURE.md",
+      "source_sha256": "b9a6c618b79bfc88578bb2263354a16574ec3af62a38948326eb7f3eba68751d",
+      "destination": "docs/engineering/lifecycle/PLAN_3_CLOSURE.md",
+      "destination_sha256": "b9a6c618b79bfc88578bb2263354a16574ec3af62a38948326eb7f3eba68751d"
+    },
+    {
+      "source": "outputs/plan_3/LIFECYCLE_BUILD_SPEC.md",
+      "source_sha256": "65f92e9d53391630970759c29ea80ef0d9d1845dabee34d0072dfcb590051580",
+      "destination": "docs/engineering/lifecycle/LIFECYCLE_BUILD_SPEC.md",
+      "destination_sha256": "65f92e9d53391630970759c29ea80ef0d9d1845dabee34d0072dfcb590051580"
+    },
+    {
+      "source": "outputs/plan_3/APPROVAL_AND_EVIDENCE.md",
+      "source_sha256": "2f55b94db4bff0c95c887a5fe713956e1d75d28b57f3714652c89e3dea522b32",
+      "destination": "docs/engineering/lifecycle/APPROVAL_AND_EVIDENCE.md",
+      "destination_sha256": "2f55b94db4bff0c95c887a5fe713956e1d75d28b57f3714652c89e3dea522b32"
+    },
+    {
+      "source": "outputs/plan_3/SUCCESSFUL_EXIT.md",
+      "source_sha256": "a341b99b23b577dff8f6ebcfb31ad0b984b64c950754f5f4f79b33f967456d1c",
+      "destination": "docs/engineering/lifecycle/SUCCESSFUL_EXIT.md",
+      "destination_sha256": "a341b99b23b577dff8f6ebcfb31ad0b984b64c950754f5f4f79b33f967456d1c"
+    },
+    {
+      "source": "outputs/plan_3/RENDER_DELIVERY_AND_STATE.md",
+      "source_sha256": "c95f6de483400156b39b08fd7f43e72f2940cac2f285cf4eafb8f0c146df55b8",
+      "destination": "docs/engineering/lifecycle/RENDER_DELIVERY_AND_STATE.md",
+      "destination_sha256": "c95f6de483400156b39b08fd7f43e72f2940cac2f285cf4eafb8f0c146df55b8"
+    },
+    {
+      "source": "outputs/plan_3/OPERATIONAL_GATES.md",
+      "source_sha256": "69fbfa15a0b50ffbeeb049a0138e262cc9f6242a7c9cae7d79907360719f96a4",
+      "destination": "docs/engineering/lifecycle/OPERATIONAL_GATES.md",
+      "destination_sha256": "69fbfa15a0b50ffbeeb049a0138e262cc9f6242a7c9cae7d79907360719f96a4"
+    },
+    {
+      "source": "outputs/plan_3/RECOVERY_AND_ROLLBACK.md",
+      "source_sha256": "9e5257b5217baf7286602730778bc24a168cab550e94af15ec034bea99580376",
+      "destination": "docs/engineering/lifecycle/RECOVERY_AND_ROLLBACK.md",
+      "destination_sha256": "9e5257b5217baf7286602730778bc24a168cab550e94af15ec034bea99580376"
+    },
+    {
+      "source": "outputs/plan_3/ATOMIC_DELIVERY_PROTOCOLS.md",
+      "source_sha256": "6e955c9ff683373764cd31820d4ea54f66c6a5cdddeb58b30178817fc816647a",
+      "destination": "docs/engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md",
+      "destination_sha256": "6e955c9ff683373764cd31820d4ea54f66c6a5cdddeb58b30178817fc816647a"
+    },
+    {
+      "source": "outputs/plan_3/WORKING_SITE_HANDOVER.md",
+      "source_sha256": "4790c740b45b546180c049ad92358f6b0ba88c1e5b5d1c7d753cde7baf379db1",
+      "destination": "docs/engineering/lifecycle/WORKING_SITE_HANDOVER.md",
+      "destination_sha256": "4790c740b45b546180c049ad92358f6b0ba88c1e5b5d1c7d753cde7baf379db1"
+    },
+    {
+      "source": "outputs/plan_3/BUILD_SLICES.md",
+      "source_sha256": "d6e8721da4954a75027b5e805cda2d04016015577d0416962404a8b0f5f84555",
+      "destination": "docs/engineering/lifecycle/BUILD_SLICES.md",
+      "destination_sha256": "d6e8721da4954a75027b5e805cda2d04016015577d0416962404a8b0f5f84555"
+    },
+    {
+      "source": "outputs/plan_3/research/PAYMENT_CONSTRAINTS.md",
+      "source_sha256": "7f5639a4964c1c1a1a02fba37143816ed7318ca1e6625578d981ea40c504e772",
+      "destination": "docs/engineering/lifecycle/research/PAYMENT_CONSTRAINTS.md",
+      "destination_sha256": "7f5639a4964c1c1a1a02fba37143816ed7318ca1e6625578d981ea40c504e772"
+    },
+    {
+      "source": "outputs/plan_3/research/RENDER_CONSTRAINTS.md",
+      "source_sha256": "80de7eef0247e0ff809f2a178dd3588030dbd9dc899f0b99b46337cc9bba3708",
+      "destination": "docs/engineering/lifecycle/research/RENDER_CONSTRAINTS.md",
+      "destination_sha256": "80de7eef0247e0ff809f2a178dd3588030dbd9dc899f0b99b46337cc9bba3708"
+    },
+    {
+      "source": "outputs/plan_4/INDEPENDENT_REVIEW.md",
+      "source_sha256": "8bf0df268b30a81dfea7bcd463fbc088eafb119cef4b3791314d670d69b06c0e",
+      "destination": "docs/engineering/review/INDEPENDENT_REVIEW.md",
+      "destination_sha256": "8bf0df268b30a81dfea7bcd463fbc088eafb119cef4b3791314d670d69b06c0e"
+    },
+    {
+      "source": "outputs/plan_4/CONTRACT_AND_IMPLEMENTATION_BRIDGE.md",
+      "source_sha256": "574aa00b16f515e3926a625eeec585d87a4e9d7d7b55dc9776f411f518db018a",
+      "destination": "docs/engineering/review/CONTRACT_AND_IMPLEMENTATION_BRIDGE.md",
+      "destination_sha256": "574aa00b16f515e3926a625eeec585d87a4e9d7d7b55dc9776f411f518db018a"
+    },
+    {
+      "source": "outputs/plan_4/PLAN_4_CLOSURE.md",
+      "source_sha256": "3e8b46e2448a97d7c02540db11ca142458dadc5342b9b9a84773300a46455c94",
+      "destination": "docs/engineering/review/PLAN_4_CLOSURE.md",
+      "destination_sha256": "8dbf8598b031101b6cc37854dabca3a861a982f4229fef4411d60a00ce0277c5"
+    },
+    {
+      "source": "outputs/plan_4/REVIEW_FINDINGS.md",
+      "source_sha256": "364d8c63ffd7a07a15e3c5c99c5c5e653cafbc436a5c40e8045c51cead40b85e",
+      "destination": "docs/engineering/review/REVIEW_FINDINGS.md",
+      "destination_sha256": "364d8c63ffd7a07a15e3c5c99c5c5e653cafbc436a5c40e8045c51cead40b85e"
+    },
+    {
+      "source": "outputs/plan_4/START_HERE.md",
+      "source_sha256": "0b379db2e1f726dbd7e275d3fb8faf417525afbf057ef97b9ddecf2e06ff0aa8",
+      "destination": "docs/engineering/review/START_HERE.md",
+      "destination_sha256": "0b379db2e1f726dbd7e275d3fb8faf417525afbf057ef97b9ddecf2e06ff0aa8"
+    },
+    {
+      "source": "outputs/plan_4/VALIDATION_AND_LIMITS.md",
+      "source_sha256": "bb2a8308cfc78a7067f984c0d8866a588ba59e2f6aba54cd1fd32bb2d9cff744",
+      "destination": "docs/engineering/review/VALIDATION_AND_LIMITS.md",
+      "destination_sha256": "bb2a8308cfc78a7067f984c0d8866a588ba59e2f6aba54cd1fd32bb2d9cff744"
+    },
+    {
+      "source": "outputs/plan_4/PERSONA_WALKTHROUGHS.md",
+      "source_sha256": "70c86c4f78aae3d0f3efb426225aa55f31a7ab8aba518c5c144cd090dd55fe5f",
+      "destination": "docs/engineering/review/PERSONA_WALKTHROUGHS.md",
+      "destination_sha256": "70c86c4f78aae3d0f3efb426225aa55f31a7ab8aba518c5c144cd090dd55fe5f"
+    },
+    {
+      "source": "outputs/plan_4/RESOLUTIONS.md",
+      "source_sha256": "905144062b00cebec6ff1597ff3bcc55b075d12ca9b7fc14e0741bf175275b8a",
+      "destination": "docs/engineering/review/RESOLUTIONS.md",
+      "destination_sha256": "905144062b00cebec6ff1597ff3bcc55b075d12ca9b7fc14e0741bf175275b8a"
+    },
+    {
+      "source": "outputs/plan_4/FOLLOWUP_REVIEW.md",
+      "source_sha256": "f67fe6c431ab23d07f3874938b45da1a179ed29f9cf70cf16b6729807da44bb5",
+      "destination": "docs/engineering/review/FOLLOWUP_REVIEW.md",
+      "destination_sha256": "f67fe6c431ab23d07f3874938b45da1a179ed29f9cf70cf16b6729807da44bb5"
+    },
+    {
+      "source": "outputs/plan_4/CONNECTION_REVIEW_ADDENDUM.md",
+      "source_sha256": "52180c2d38b917391543d1200064e43035f8858bde776f3d718af28e4c93c09d",
+      "destination": "docs/engineering/review/CONNECTION_REVIEW_ADDENDUM.md",
+      "destination_sha256": "52180c2d38b917391543d1200064e43035f8858bde776f3d718af28e4c93c09d"
+    },
+    {
+      "source": "outputs/plan_4/ROLE_AND_RESPONSIBILITY_REVIEW.md",
+      "source_sha256": "60882b674d643589a7321df3ad292500d8ba80e7fe729f90d4c598963518037e",
+      "destination": "docs/engineering/review/ROLE_AND_RESPONSIBILITY_REVIEW.md",
+      "destination_sha256": "60882b674d643589a7321df3ad292500d8ba80e7fe729f90d4c598963518037e"
+    },
+    {
+      "source": "outputs/plan_2/TEAM_WORK_DELTA.md",
+      "source_sha256": "ba28fe64dd52f1b6ee22049cd0e720db5552cab1d4f224eadc7537217472bad1",
+      "destination": "docs/engineering/work/TEAM_WORK_DELTA.md",
+      "destination_sha256": "ba28fe64dd52f1b6ee22049cd0e720db5552cab1d4f224eadc7537217472bad1"
+    },
+    {
+      "source": "outputs/plan_2/PER_PERSON_WORK_PACKAGES.md",
+      "source_sha256": "bb0cbaf35546ca031ef3e9cedebf6694d16bfc653597944e20bc93a16a145ef6",
+      "destination": "docs/engineering/work/PER_PERSON_WORK_PACKAGES.md",
+      "destination_sha256": "6f6758b1dd1267593c555ebcd11693b4fcace7ad9adec490f6444ab1716aa99f"
+    },
+    {
+      "source": "outputs/plan_2/SHARED_INTERFACES_AND_DEPENDENCIES.md",
+      "source_sha256": "1373c643f84e2b44be9e9f9684e46a98eeaae92523455b48e881fe6c6c4c0808",
+      "destination": "docs/engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md",
+      "destination_sha256": "1373c643f84e2b44be9e9f9684e46a98eeaae92523455b48e881fe6c6c4c0808"
+    },
+    {
+      "source": "outputs/plan_2/DONE_AND_TEST_MATRIX.md",
+      "source_sha256": "66ab2de6ba1b541c074318d08bf88cfa5973414e5a51da9c0f8b9630ed5f07a6",
+      "destination": "docs/engineering/work/DONE_AND_TEST_MATRIX.md",
+      "destination_sha256": "66ab2de6ba1b541c074318d08bf88cfa5973414e5a51da9c0f8b9630ed5f07a6"
+    },
+    {
+      "source": "outputs/plan_1/TRACEABILITY_MATRIX.json",
+      "source_sha256": "b8b1fd2932265410b90f294a05c9a63f3643540f014c67c36ed224b1470bdf5b",
+      "destination": "docs/engineering/connection/TRACEABILITY_MATRIX.json",
+      "destination_sha256": "13e6981d64f9b8dbe8129d8c05c7b7407e7d3880ea7f19779eb91931cf68aba4"
+    },
+    {
+      "source": "outputs/plan_1/ACCEPTANCE_INDEX.json",
+      "source_sha256": "4fa6b33920577fba979c10e667eecac8f8e272c7f817a40d49c5e37c8ff048ac",
+      "destination": "docs/engineering/connection/ACCEPTANCE_INDEX.json",
+      "destination_sha256": "4fa6b33920577fba979c10e667eecac8f8e272c7f817a40d49c5e37c8ff048ac"
+    },
+    {
+      "source": "outputs/plan_3/TRACEABILITY.json",
+      "source_sha256": "64bc695988967569b053f309a485cb11bfd223bdf17b88aa8d85e5b3ded668d3",
+      "destination": "docs/engineering/lifecycle/TRACEABILITY.json",
+      "destination_sha256": "61a05fd6a2595031cee60b0f38e4ef90575c8ea0ede138bba2ce159570bef59e"
+    },
+    {
+      "source": "outputs/plan_3/ACCEPTANCE_INDEX.json",
+      "source_sha256": "52a6a97dab08659ba0d70027e2a8993ea9b1c7a704044855d88e161bf79fc15d",
+      "destination": "docs/engineering/lifecycle/ACCEPTANCE_INDEX.json",
+      "destination_sha256": "52a6a97dab08659ba0d70027e2a8993ea9b1c7a704044855d88e161bf79fc15d"
+    },
+    {
+      "source": "outputs/plan_4/FULL_COVERAGE_MATRIX.json",
+      "source_sha256": "57beeb866869a79a57c2bfd22ed8e735fc863a48658ba2490efcac20f11ff69e",
+      "destination": "docs/engineering/review/FULL_COVERAGE_MATRIX.json",
+      "destination_sha256": "57beeb866869a79a57c2bfd22ed8e735fc863a48658ba2490efcac20f11ff69e"
+    }
+  ]
+}
