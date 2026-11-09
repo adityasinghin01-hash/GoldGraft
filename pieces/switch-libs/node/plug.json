@@ -1,0 +1,5 @@
+{
+  "language": "node",
+  "test": "node run_cases.mjs ../../../plugtests/switch_cases.json"
+}
+
