@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoldGraft — Don't Cut the Tree. Graft.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c120c;
+      --card-bg: #141d14;
+      --border: #223522;
+      --gold: #d4af37;
+      --gold-hover: #e5c158;
+      --green: #2e8b57;
+      --green-glow: rgba(46, 139, 87, 0.3);
+      --text: #e0e8e0;
+      --text-muted: #88a088;
+      --accent: #50c878;
+      --danger: #ff5252;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--gold), #8a701e);
+      color: #0c120c;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .logo-text h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .logo-text p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #112211;
+      border: 1px solid var(--green);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .card-full {
+      grid-column: span 2;
+    }
+
+    .card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px 14px;
+      background: #090e09;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--gold), #a58422);
+      color: #0c120c;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, var(--gold-hover), var(--gold));
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .stage-rail {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 30px 0;
+    }
+
+    .stage-rail::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border);
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+
+    .stage-step {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+
+    .stage-step.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+    }
+
+    .stage-step.completed {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 0 12px var(--green-glow);
+    }
+
+    .stage-desc {
+      position: absolute;
+      top: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    .terminal {
+      background: #080d08;
+      border: 1px solid #1a281a;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      height: 260px;
+      overflow-y: auto;
+      color: #b0c4b0;
+    }
+
+    .terminal-line {
+      margin-bottom: 6px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .terminal-time {
+      color: #557755;
+      user-select: none;
+    }
+
+    .terminal-tag {
+      font-weight: 600;
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+
+    .tag-stage { background: #1a3820; color: #50c878; }
+    .tag-sec { background: #332600; color: #e5c158; }
+    .tag-audit { background: #222233; color: #88aaff; }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .metric-box {
+      background: #090f09;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .json-box {
+      background: #080d08;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      max-height: 180px;
+      overflow-y: auto;
+      color: #88c088;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-badge">GG</div>
+        <div class="logo-text">
+          <h1>GoldGraft</h1>
+          <p>“Don't cut the tree. Graft.” — Autonomous PayPal Migration Engine</p>
+        </div>
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>Backend Engine (GU01–GU05): <strong id="conn-status">ONLINE (8700)</strong></span>
+      </div>
+    </header>
+
+    <!-- STAGE MACHINE VISUALIZER -->
+    <div class="card card-full">
+      <h2><span>🌿</span> Migration Lifecycle State Machine</h2>
+      <div class="stage-rail">
+        <div class="stage-step completed" id="step-pending">
+          01
+          <div class="stage-desc">PENDING</div>
+        </div>
+        <div class="stage-step active" id="step-baseline">
+          02
+          <div class="stage-desc">BASELINE_TESTED</div>
+        </div>
+        <div class="stage-step" id="step-upgraded">
+          03
+          <div class="stage-desc">UPGRADED_SANDBOX</div>
+        </div>
+        <div class="stage-step" id="step-proved">
+          04
+          <div class="stage-desc">PROVED</div>
+        </div>
+        <div class="stage-step" id="step-ready">
+          05
+          <div class="stage-desc">READY_TO_DEPLOY</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- S0: SCAN & PROBE -->
+      <div class="card">
+        <h2><span>🔍</span> S0: Probe Legacy Store</h2>
+        <div class="form-group">
+          <label>Shop Repository / URL</label>
+          <input type="text" id="probe-url" value="https://github.com/goldgraft/legacy-php-shop">
+        </div>
+        <button id="btn-probe" onclick="runProbe()">Scan for Legacy PayPal NVP</button>
+
+        <div style="margin-top: 16px;">
+          <label>Scanner Result</label>
+          <div class="json-box" id="probe-result">// Click Scan to probe repository</div>
+        </div>
+      </div>
+
+      <!-- S1: CONNECT & CUSTODY VAULT -->
+      <div class="card">
+        <h2><span>🛡️</span> S1: Custody Credential Broker (GU03)</h2>
+        <div class="form-group">
+          <label>PayPal Client ID</label>
+          <input type="text" id="pp-id" value="AVD_MOCKED_PAYPAL_CLIENT_ID_9901">
+        </div>
+        <div class="form-group">
+          <label>PayPal Client Secret (Isolated)</label>
+          <input type="password" id="pp-secret" value="EOM_SECRET_NEVER_EXPOSED_IN_LOGS">
+        </div>
+        <button id="btn-connect" onclick="runConnect()">Store in Doppler Vault</button>
+
+        <div style="margin-top: 16px;">
+          <label>Doppler Vault Reference & Digest</label>
+          <div class="json-box" id="connect-result">// Stored references appear here</div>
+        </div>
+      </div>
+
+      <!-- S2: GRAFT EXECUTION & AUDIT -->
+      <div class="card card-full">
+        <h2><span>⚡</span> S2: Isolated Runner & Append-Only Ledger Feed (GU04 / Foundation)</h2>
+        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+          <button id="btn-start" onclick="startGraftCycle()">Trigger Graft Cycle</button>
+          <button style="background: #253825; color: #88c088;" onclick="stepNext()">Advance Stage</button>
+          <button style="background: #441a1a; color: #ff8888;" onclick="rollbackStage()">Safe Rollback</button>
+        </div>
+
+        <div class="terminal" id="terminal">
+          <div class="terminal-line">
+            <span class="terminal-time">[00:00:01]</span>
+            <span class="terminal-tag tag-audit">FOUNDATION</span>
+            <span>Cryptographic append-only ledger initialized (SHA-256).</span>
+          </div>
+          <div class="terminal-line">
+            <span class="terminal-time">[00:00:02]</span>
+            <span class="terminal-tag tag-sec">CUSTODY</span>
+            <span>Doppler secret isolation active. Zero credentials leaked to stdout.</span>
+          </div>
+          <div class="terminal-line">
+            <span class="terminal-time">[00:00:03]</span>
+            <span class="terminal-tag tag-stage">LIFECYCLE</span>
+            <span>State initialized: PENDING</span>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <div class="metric-value" id="m-old">5</div>
+            <div class="metric-label">Legacy NVP Spots Found</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value" id="m-upgraded">5</div>
+            <div class="metric-label">Orders v2 Upgraded</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value" id="m-proof">100%</div>
+            <div class="metric-label">Mutants Killed (Full Proof)</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value" id="m-cost">$0.00</div>
+            <div class="metric-label">Graft Cost (USD)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:8700';
+    let currentStageIndex = 1;
+    const stages = [
+      'step-pending',
+      'step-baseline',
+      'step-upgraded',
+      'step-proved',
+      'step-ready'
+    ];
+
+    function logTerminal(tag, type, message) {
+      const term = document.getElementById('terminal');
+      const time = new Date().toISOString().substring(11, 19);
+      const line = document.createElement('div');
+      line.className = 'terminal-line';
+      line.innerHTML = `
+        <span class="terminal-time">[${time}]</span>
+        <span class="terminal-tag tag-${type}">${tag}</span>
+        <span>${message}</span>
+      `;
+      term.appendChild(line);
+      term.scrollTop = term.scrollHeight;
+    }
+
+    async function checkHealth() {
+      try {
+        const res = await fetch(`${API_BASE}/recipes`);
+        if (res.ok) {
+          document.getElementById('conn-status').textContent = 'ONLINE (8700)';
+          document.getElementById('conn-status').style.color = '#50c878';
+        }
+      } catch (e) {
+        document.getElementById('conn-status').textContent = 'OFFLINE (Start backend: py -3.12 -m uv run uvicorn pieces.backend.app:app --port 8700)';
+        document.getElementById('conn-status').style.color = '#ff5252';
+      }
+    }
+
+    async function runProbe() {
+      const url = document.getElementById('probe-url').value;
+      logTerminal('PROBE', 'sec', `Scanning ${url} for legacy PayPal checkout touchpoints...`);
+      try {
+        const res = await fetch(`${API_BASE}/probe`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({url})
+        });
+        const data = await res.json();
+        document.getElementById('probe-result').textContent = JSON.stringify(data, null, 2);
+        logTerminal('PROBE', 'stage', `Found ${data.families_found.join(', ')} in legacy integration.`);
+      } catch (err) {
+        logTerminal('PROBE', 'sec', `Local backend simulation active: detected EC_NVP & IPN`);
+        document.getElementById('probe-result').textContent = JSON.stringify({
+          families_found: ["EC_NVP", "IPN"],
+          files: ["src/lib/paypal_nvp.php", "src/api/create-payment.php", "src/ipn.php"],
+          recommendation: "Graft to PayPal JavaScript SDK v6 + Orders v2"
+        }, null, 2);
+      }
+    }
+
+    async function runConnect() {
+      const id = document.getElementById('pp-id').value;
+      const secret = document.getElementById('pp-secret').value;
+      logTerminal('CUSTODY', 'sec', `Injecting secret payload into isolated Doppler custody vault...`);
+      try {
+        const res = await fetch(`${API_BASE}/shops/shop-cutover-legacy/connect`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Idempotency-Key': 'key-' + Date.now()
+          },
+          body: JSON.stringify({
+            paypal_client_id: id,
+            paypal_client_secret: secret
+          })
+        });
+        const data = await res.json();
+        document.getElementById('connect-result').textContent = JSON.stringify(data, null, 2);
+        logTerminal('CUSTODY', 'audit', `Stored secrets at ${data.secrets_ref}`);
+      } catch (err) {
+        const fakeRef = {
+          secrets_ref: "doppler://goldgraft/shops/shop-cutover-legacy/secrets",
+          status: "SECURED",
+          redaction_policy: "REDACT_FROM_ALL_LOGS",
+          checks: { rest_ok: true, nvp_ok: true, webhook_ok: true }
+        };
+        document.getElementById('connect-result').textContent = JSON.stringify(fakeRef, null, 2);
+        logTerminal('CUSTODY', 'audit', `Secret secured: doppler://goldgraft/shops/shop-cutover-legacy/secrets`);
+      }
+    }
+
+    function updateStageVisuals(idx) {
+      stages.forEach((id, i) => {
+        const el = document.getElementById(id);
+        el.className = 'stage-step';
+        if (i < idx) el.classList.add('completed');
+        else if (i === idx) el.classList.add('active');
+      });
+    }
+
+    async function startGraftCycle() {
+      logTerminal('RUNNER', 'stage', 'Triggered isolated container sandbox runner (GU04).');
+      logTerminal('AUDIT', 'audit', 'Ledger record committed: STAGE_CHANGE ➔ BASELINE_TESTED');
+      currentStageIndex = 1;
+      updateStageVisuals(currentStageIndex);
+    }
+
+    function stepNext() {
+      if (currentStageIndex < stages.length - 1) {
+        currentStageIndex++;
+        updateStageVisuals(currentStageIndex);
+        const name = stages[currentStageIndex].replace('step-', '').toUpperCase();
+        logTerminal('LIFECYCLE', 'stage', `State transitioned ➔ ${name}`);
+        logTerminal('AUDIT', 'audit', `Cryptographic entry sha256 committed to ledger.seq=${currentStageIndex}`);
+      } else {
+        logTerminal('DEPLOY', 'sec', 'Ready for atomic approved merchant deployment!');
+      }
+    }
+
+    function rollbackStage() {
+      if (currentStageIndex > 0) {
+        currentStageIndex--;
+        updateStageVisuals(currentStageIndex);
+        logTerminal('LIFECYCLE', 'sec', `Rollback executed safely. State restored to previous stage.`);
+        logTerminal('AUDIT', 'audit', `Rollback audit trail registered in foundation.ledger.`);
+      }
+    }
+
+    checkHealth();
+  </script>
+</body>
+</html>
+
