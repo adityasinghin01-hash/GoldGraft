@@ -62,7 +62,7 @@ def refetch_capture(client: PayPalClient, row: PayPalEvidence, event: MoneyEvent
     if not PAYPAL_ID.fullmatch(row.order_id) or not PAYPAL_ID.fullmatch(row.capture_id):
         return False
     order_status, order = client.rest("GET", f"/v2/checkout/orders/{row.order_id}")
-    if order_status != 200 or order.get("id") != row.order_id:
+    if order_status != 200 or not isinstance(order, Mapping) or order.get("id") != row.order_id:
         return False
     try:
         order_captures = [

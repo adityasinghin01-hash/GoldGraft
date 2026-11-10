@@ -213,11 +213,14 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
 
     class PayPal:
         value = "25.00"
+        malformed_response = None
         calls = []
 
         def rest(self, method, path):
             assert method == "GET"
             self.calls.append(path)
+            if path == self.malformed_response:
+                return 200, []
             capture = {
                 "id": row["capture_id"],
                 "status": "COMPLETED",
@@ -256,11 +259,20 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
     assert not verify("another-graft").ok
     assert len(paypal.calls) == 4
 
+    paypal.value = "25.00"
+    for path in paypal.calls[:2]:
+        paypal.calls.clear()
+        paypal.malformed_response = path
+        assert not verify().ok
+        assert paypal.calls[-1] == path
+    paypal.calls.clear()
+    paypal.malformed_response = None
+
     table = ledger.entries
     with ledger.engine.begin() as connection:
         connection.execute(table.update().where(table.c.seq == 1).values(envelope_hash="0" * 64))
     assert not verify().ok
-    assert len(paypal.calls) == 4
+    assert not paypal.calls
 
 
 @pytest.mark.parametrize(
