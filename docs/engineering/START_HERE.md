@@ -1,5 +1,9 @@
 # GoldGraft reviewed engineering baseline — 6 November 2026
 
+> **Current team action, 10 November 2026:** follow [GitHub / Drive / team-chat coordination and owner setup duties](work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md). Owners research their own free/event/student access, configure only approved scopes and return actual commit-pinned results. See [Vijay's dependency reply](work/VIJAY_TEAM_INPUTS_REPLY.md) before real sandbox scenario dispatch. This supersedes the earlier exclusion of student-plan assessment from the owner assignment; it authorises no account claim or live action by the publisher.
+
+> **Sponsor ownership addendum, 10 November 2026:** all four owners must read the [team-wide sponsor utilisation and ownership register](work/SPONSOR_UTILISATION_AND_OWNERSHIP.md). Intended purposes, owners and acceptance evidence are finalised there; Astropods and Channel3 adoption remains conditional. Owners now assess applicable plans themselves; the publisher claims no entitlement. New vendor integrations remain proposals; this documentation update starts no account claim, product job or Plan6 work and changes no safety protocol.
+
 GoldGraft is a browser connector service: obtain authorised complete code/context, match the actual shop, prepare safely, accept Start durably, reproduce the unchanged baseline, upgrade an isolated copy, prove required behaviour, obtain separate exact apply authority, deploy and leave the merchant's upgraded shop operating independently.
 
 **This is a reviewed build specification. The service is not implemented or qualified by these docs.** Render is the first reference adapter; no universal host support or 70% coverage claimed. GitHub is the default source route, with local/cloud/host alternatives designed but independently qualified. Merchant approvals/MFA/controller permissions remain real; GoldGraft handles supported technical finishing.

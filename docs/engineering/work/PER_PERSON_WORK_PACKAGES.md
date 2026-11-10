@@ -1,5 +1,11 @@
 # Per-person work packages
 
+> **Current team action, 10 November 2026:** use [the three-channel workflow](TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md). Each owner researches applicable free/event/student options, configures their assigned sponsor tools under actual authority and supplies commit-pinned handoff/results. See [Vijay's integration dependencies](VIJAY_TEAM_INPUTS_REPLY.md). This later instruction supersedes the earlier student-offer exclusion below, not the package or safety boundaries.
+
+## Sponsor utilisation responsibility — 10 November 2026
+
+Read the [team-wide sponsor register](SPONSOR_UTILISATION_AND_OWNERSHIP.md) alongside these 17 packages. Each owner records the assigned partner's actual deliverable, permitted access and acceptance evidence, or a concrete held/not-justified disposition. The goal is maximum meaningful coverage, not mandatory adoption of an unqualified service. Student offers/programmes are not part of this assignment. Proposed vendor use does not add authority, replace a teammate's mechanism or start an account claim. Original package boundaries and acceptance IDs remain unchanged.
+
 Reviewed planning targets only; no source modules or tests created/run. These are deltas to inspect/implement, not proof all work missing or complete. Current contract support and actual contribution versions must be checked before changes. All four exchange shared contracts/foundation only; no other-piece code imports.
 
 ## SI01 — Singh: Shared contract/fixture/fake bootstrap

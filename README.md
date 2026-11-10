@@ -1,5 +1,7 @@
 # GoldGraft — “Don't cut the tree. Graft.”
 
+> **Team update, 10 November 2026:** read the [sponsor ownership register](docs/engineering/work/SPONSOR_UTILISATION_AND_OWNERSHIP.md), [GitHub / Drive / chat workflow](docs/engineering/work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md) and [Vijay integration reply](docs/engineering/work/VIJAY_TEAM_INPUTS_REPLY.md). Each owner researches/configures the assigned tools and applicable free/event/student access, records actual readiness and preserves all existing authority, privacy and qualification gates. This is documentation publication, not a product build or a real-payment PASS.
+
 GoldGraft is being designed as a browser connector service that upgrades a shop's older PayPal integration and leaves the approved upgraded shop running under the merchant's control. The service obtains authorised code/context, verifies the actual shop, reproduces an unchanged baseline, tests an isolated upgrade, obtains separate publication/deployment approval and verifies handover/recovery/exit. A PR or sandbox pass alone is not completion.
 
 **Current status:** reviewed paper engineering and shared team build instructions; the complete service is not built or operationally qualified. [Start with the engineering baseline](docs/engineering/START_HERE.md), [inspected current support](docs/engineering/BASELINE_AND_STATUS.md) and [current versus proposed contracts](docs/engineering/CURRENT_VS_PROPOSED.md). MIT licence.

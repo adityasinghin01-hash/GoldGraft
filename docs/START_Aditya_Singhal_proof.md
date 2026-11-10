@@ -1,5 +1,9 @@
 # Shared START guide — Aditya Singhal
 
+> **Current coordination action, 10 November 2026:** use [GitHub, Drive and team chat](engineering/work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md); research/configure your assigned tools and legitimate free/event/student access, then record actual approval, limits and results. Confirm [Vijay's proof revision/adapter invocation](engineering/work/VIJAY_TEAM_INPUTS_REPLY.md), retaining the independent deterministic boundary. This supersedes the earlier exclusion of owner student-plan assessment, not proof ownership or qualification.
+
+> **Sponsor ownership planning, 10 November 2026:** read the [team-wide utilisation and ownership register](engineering/work/SPONSOR_UTILISATION_AND_OWNERSHIP.md). Own exact-subject redacted Elastic evidence retrieval with Gupta; support Postman projection/negative-contract cases and trusted evidence inputs to AG Grid/Bryntum views. Search, dashboards, model critique and sponsor receipts never decide proof or substitute for completeness. Do not rebuild existing proof; new vendor work requires a qualified profile and records actual use or a precise hold. Owners now assess applicable plans themselves; the publisher claims no entitlement.
+
 Reviewed planning update, 6 November 2026. Preserve existing deterministic proof work; add only evidence/completeness/private projection and lifecycle gaps.
 
 Read [engineering baseline](engineering/START_HERE.md), [current versus proposed](engineering/CURRENT_VS_PROPOSED.md), [all-four deltas](engineering/work/TEAM_WORK_DELTA.md), [dependencies](engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md) and [completion evidence](engineering/work/DONE_AND_TEST_MATRIX.md) first. These are documented work packages, not a claim of implementation, task delivery or messages sent.

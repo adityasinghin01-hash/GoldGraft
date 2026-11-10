@@ -1,5 +1,9 @@
 # Shared START guide — Aditya Vijay
 
+> **Current coordination action, 10 November 2026:** use [GitHub, Drive and team chat](engineering/work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md); research/configure your assigned tools and legitimate free/event/student access, then record actual approval, limits and results. Read [the answer to TEAM_INPUTS_NEEDED](engineering/work/VIJAY_TEAM_INPUTS_REPLY.md) before your fourteen real scenarios. This supersedes the earlier exclusion of owner student-plan assessment, not domain/credential/runner boundaries.
+
+> **Sponsor ownership planning, 10 November 2026:** read the [team-wide utilisation and ownership register](engineering/work/SPONSOR_UTILISATION_AND_OWNERSHIP.md). Own APIMatic-grounded SDK recipes and Kernel browser scenarios with Gupta; support Postman sandbox/domain collections. Channel3-derived reference-catalog regressions are conditional on data rights and real additional test value. Never change a merchant catalog to create sponsor use; use identical pinned fixture inputs for OLD/OLD_TWIN/NEW. No live API/search/payment calls in ordinary tests or new account actions by implication. Student offers/programmes are outside this assignment; record actual use or a precise hold.
+
 Reviewed planning update, 6 November 2026. First complete shop/runtime/payment/state/notification/finalisation/exit domain recipes and qualified evidence.
 
 Read [engineering baseline](engineering/START_HERE.md), [current versus proposed](engineering/CURRENT_VS_PROPOSED.md), [all-four deltas](engineering/work/TEAM_WORK_DELTA.md), [dependencies](engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md) and [completion evidence](engineering/work/DONE_AND_TEST_MATRIX.md) first. These are documented work packages, not a claim of implementation, task delivery or messages sent.

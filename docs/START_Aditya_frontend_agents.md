@@ -1,5 +1,9 @@
 # Shared START guide — Aditya Singh
 
+> **Current coordination action, 10 November 2026:** use [GitHub, Drive and team chat](engineering/work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md); research/configure your own assigned tools and legitimate free/event/student access, then record actual approval, limits and results. See [Vijay's current dependency reply](engineering/work/VIJAY_TEAM_INPUTS_REPLY.md). This supersedes the earlier exclusion of owner student-plan assessment, not any authority or frontend ownership boundary.
+
+> **Sponsor ownership planning, 10 November 2026:** read the [team-wide utilisation and ownership register](engineering/work/SPONSOR_UTILISATION_AND_OWNERSHIP.md). Coordinate partner coverage and truthful evidence; own uses include AG Grid/Studio evidence/analytics views and Bryntum dependency views with Antigravity, APIMatic grounding and any separately approved Astropods model-broker evaluation with Gupta. No second scheduler, ambient fleet access or automatic provider switch. Owners now assess applicable plans themselves; the publisher claims no entitlement. New integrations remain proposals; record actual use or the precise hold.
+
 Reviewed planning update, 6 November 2026. Frontend/agent external boundaries and shared bootstrap; future own Plan5, whole integration Plan6.
 
 Read [engineering baseline](engineering/START_HERE.md), [current versus proposed](engineering/CURRENT_VS_PROPOSED.md), [all-four deltas](engineering/work/TEAM_WORK_DELTA.md), [dependencies](engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md) and [completion evidence](engineering/work/DONE_AND_TEST_MATRIX.md) first. These are documented work packages, not a claim of implementation, task delivery or messages sent.

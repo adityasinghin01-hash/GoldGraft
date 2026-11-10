@@ -1,5 +1,9 @@
 # Shared START guide — Aditya Gupta
 
+> **Current coordination action, 10 November 2026:** use [GitHub, Drive and team chat](engineering/work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md); research/configure your assigned tools and legitimate free/event/student access, then record actual approval, limits and results. Provide [Vijay's actual broker/runner/callback handoff](engineering/work/VIJAY_TEAM_INPUTS_REPLY.md), distinguishing fixture code from qualified sandbox execution. This supersedes the earlier exclusion of owner student-plan assessment, not GU authority boundaries.
+
+> **Sponsor ownership planning, 10 November 2026:** read the [team-wide utilisation and ownership register](engineering/work/SPONSOR_UTILISATION_AND_OWNERSHIP.md). Own the existing Render qualification and planned Postman contract checks, redacted Elastic diagnostics, opt-in Zapier event notifications, guarded Kernel browser integration with Vijay and any separately approved Astropods broker evaluation with Singh. Keep GU authority/state/effect ownership and E2B isolation; no new account, provider, message, inference or deployment action is authorised by this addendum. Owners now assess applicable plans themselves; the publisher claims no entitlement. Record actual use or the precise access/cost/security hold.
+
 Reviewed planning update, 6 November 2026. Backend/runner mechanisms and narrow authority, custody, evidence and lifecycle effects.
 
 Read [engineering baseline](engineering/START_HERE.md), [current versus proposed](engineering/CURRENT_VS_PROPOSED.md), [all-four deltas](engineering/work/TEAM_WORK_DELTA.md), [dependencies](engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md) and [completion evidence](engineering/work/DONE_AND_TEST_MATRIX.md) first. These are documented work packages, not a claim of implementation, task delivery or messages sent.
