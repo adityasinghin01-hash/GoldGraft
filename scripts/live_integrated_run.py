@@ -243,9 +243,27 @@ class Models:
 
 
 def run_store_a(directory, case, package, models, run_id, rows, outputs):
-    """Surveyor → Herald on one actual graph; a failed survey cannot admit Herald."""
+    """Surveyor → Herald; one bounded re-attempt when the model's map was refused for
+    incomplete reading (both attempts recorded, separate budget batches, nothing reset)."""
+    survey, payload = run_store_a_once(directory, case, package, models, run_id, rows, outputs, 0)
+    last = rows[-1] if rows and rows[-1].get("task") == "survey" else None
+    if (
+        not survey.get("accepted")
+        and last
+        and last.get("issue") == "MISSING_EVIDENCE"
+        and last.get("cost_micro_usd")
+    ):
+        last["superseded_by_retry"] = True
+        survey, payload = run_store_a_once(
+            directory, case, package, models, run_id, rows, outputs, 1
+        )
+    return survey, payload
+
+
+def run_store_a_once(directory, case, package, models, run_id, rows, outputs, attempt):
+    suffix = "" if attempt == 0 else f"-retry{attempt}"
     p = create_collaboration_profile(
-        directory / "a.sqlite",
+        directory / f"a{suffix}.sqlite",
         configuration=surveyor_configuration(),
         herald_configuration=herald_configuration(),
         renderer=deterministic_renderer,
@@ -253,7 +271,7 @@ def run_store_a(directory, case, package, models, run_id, rows, outputs):
         clock=lambda: datetime.now(UTC),
     )
     survey_profile = route_profile(case["files"])
-    sbatch = f"ag-int-{run_id}-surveyor"
+    sbatch = f"ag-int-{run_id}-surveyor{suffix}"
     artifacts = EvaluationArtifacts(p.artifacts, models.broker(survey_profile), sbatch)
     lease = p.control.claim("integrated-source", p.clock())
     result = run_task(lease, p.control, artifacts, BoundModel(artifacts), p.tools, now=p.clock())
@@ -262,6 +280,7 @@ def run_store_a(directory, case, package, models, run_id, rows, outputs):
     survey = {"accepted": False}
     row = {
         "task": "survey",
+        "attempt": attempt + 1,
         "role": "Surveyor",
         "store": "A",
         "model": survey_profile,
@@ -293,7 +312,7 @@ def run_store_a(directory, case, package, models, run_id, rows, outputs):
         return survey, None
     advance_surveyor_herald(RUN, p)
     lease = p.control.claim("integrated-herald", p.clock())
-    hbatch = f"ag-int-{run_id}-herald"
+    hbatch = f"ag-int-{run_id}-herald{suffix}"
     if lease is None or lease.task_id != "herald":
         rows.append(
             {
