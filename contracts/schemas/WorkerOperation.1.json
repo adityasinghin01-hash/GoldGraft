@@ -1,0 +1,130 @@
+{
+  "$id": "https://goldgraft.dev/schemas/WorkerOperation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assignment_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Assignment Digest",
+      "type": "string"
+    },
+    "authenticity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authenticity Ref",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "kind": {
+      "const": "BASELINE_READ",
+      "title": "Kind",
+      "type": "string"
+    },
+    "observed_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Observed Digest",
+      "type": "string"
+    },
+    "operation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "resource_graph_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resource Graph Digest",
+      "type": "string"
+    },
+    "result": {
+      "enum": [
+        "verified",
+        "failed"
+      ],
+      "title": "Result",
+      "type": "string"
+    },
+    "runtime_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Profile Digest",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "source_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Manifest Digest",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "work_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Work Id",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    },
+    "worker_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Worker Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "operation_id",
+    "work_id",
+    "generation",
+    "worker_id",
+    "kind",
+    "assignment_digest",
+    "work_package_digest",
+    "resource_graph_digest",
+    "source_manifest_digest",
+    "scope_digest",
+    "observed_digest",
+    "runtime_profile_digest",
+    "started_at",
+    "finished_at",
+    "result",
+    "evidence_refs",
+    "authenticity_ref"
+  ],
+  "title": "WorkerOperationV1",
+  "type": "object"
+}

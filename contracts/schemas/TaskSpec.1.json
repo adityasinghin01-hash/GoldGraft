@@ -1,0 +1,159 @@
+{
+  "$id": "https://goldgraft.dev/schemas/TaskSpec.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tool_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Allowed Tool Ids",
+      "type": "array"
+    },
+    "dependencies": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 32,
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "expected_schemas": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 16,
+      "minItems": 1,
+      "title": "Expected Schemas",
+      "type": "array"
+    },
+    "expected_subject": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Subject",
+      "type": "string"
+    },
+    "input_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "operation": {
+      "enum": [
+        "verify_package",
+        "survey",
+        "explain_status",
+        "audit",
+        "propose_plan",
+        "build_baseline",
+        "build_candidate",
+        "validate_driver",
+        "run_scenario",
+        "scribe_draft",
+        "scribe_final",
+        "architect",
+        "candidate_patch",
+        "run_mutant",
+        "derive_guards",
+        "diagnose",
+        "learn",
+        "selfcheck_recipe",
+        "aggregate"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "output_slot": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Output Slot",
+      "type": "string"
+    },
+    "output_subject_policy": {
+      "enum": [
+        "same_subject",
+        "candidate_child",
+        "build_from_source",
+        "derived_evidence"
+      ],
+      "title": "Output Subject Policy",
+      "type": "string"
+    },
+    "required": {
+      "title": "Required",
+      "type": "boolean"
+    },
+    "role": {
+      "enum": [
+        "Gardener",
+        "Surveyor",
+        "Builder",
+        "Explorer",
+        "Scribe",
+        "Architect",
+        "Grafter",
+        "Adversary",
+        "Healer",
+        "Librarian",
+        "Herald",
+        "Orchard Analyst",
+        "Sentinel"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "workspace_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Workspace Ref"
+    }
+  },
+  "required": [
+    "task_id",
+    "role",
+    "operation",
+    "dependencies",
+    "input_refs",
+    "expected_schemas",
+    "output_slot",
+    "workspace_ref",
+    "expected_subject",
+    "allowed_tool_ids",
+    "required",
+    "output_subject_policy"
+  ],
+  "title": "TaskSpecV1",
+  "type": "object"
+}

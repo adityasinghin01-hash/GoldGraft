@@ -1,0 +1,21 @@
+{
+  "assignment_digest": "dec17cca349d715f43d3faf6bf5587e588cb24565c2618fbcb1afc5f75ddeb98",
+  "authenticity_ref": "fixture:authenticity_ref",
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "finished_at": "2026-11-10T00:00:00Z",
+  "generation": 1,
+  "kind": "BASELINE_READ",
+  "observed_digest": "c25fb2fb7b40dc72b4997a50dab3d5f1c58b28804354a969c82d579f789c6aeb",
+  "operation_id": "fixture:operation_id",
+  "resource_graph_digest": "94efeebe58287d7aec4b884a01cf45565575def18c7b2d672071ec4d10c31286",
+  "result": "verified",
+  "runtime_profile_digest": "fbbf834c181d4f84eb11af613aea9cf5de466ede28a00437db397b2629d14cf3",
+  "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+  "source_manifest_digest": "c25fb2fb7b40dc72b4997a50dab3d5f1c58b28804354a969c82d579f789c6aeb",
+  "started_at": "2026-11-10T00:00:00Z",
+  "work_id": "fixture:work_id",
+  "work_package_digest": "d68547de5127174d8a98098cffb585076cd9534412b3d806de8337e6e52c449f",
+  "worker_id": "fixture:worker_id"
+}

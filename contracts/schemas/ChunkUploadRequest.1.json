@@ -1,0 +1,38 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ChunkUploadRequest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Multipart metadata only; binary data is a separate bounded part, never a ref.",
+  "properties": {
+    "file_path": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "File Path",
+      "type": "string"
+    },
+    "length": {
+      "exclusiveMinimum": 0,
+      "maximum": 4194304,
+      "title": "Length",
+      "type": "integer"
+    },
+    "offset": {
+      "minimum": 0,
+      "title": "Offset",
+      "type": "integer"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "file_path",
+    "offset",
+    "length",
+    "sha256"
+  ],
+  "title": "ChunkUploadRequestV1",
+  "type": "object"
+}

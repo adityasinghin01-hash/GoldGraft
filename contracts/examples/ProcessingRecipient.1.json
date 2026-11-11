@@ -1,0 +1,9 @@
+{
+  "name": "fixture:name",
+  "purpose": "fixture:purpose",
+  "region_text": "fixture:region_text",
+  "retention_text": "fixture:retention_text",
+  "terms_evidence_refs": [
+    "fixture:terms_evidence_ref"
+  ]
+}

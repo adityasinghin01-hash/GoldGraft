@@ -1,0 +1,29 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ResourceRecipient.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "principal_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Principal Id",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "requester",
+        "controller",
+        "reviewer"
+      ],
+      "title": "Role",
+      "type": "string"
+    }
+  },
+  "required": [
+    "principal_id",
+    "role"
+  ],
+  "title": "ResourceRecipientV1",
+  "type": "object"
+}

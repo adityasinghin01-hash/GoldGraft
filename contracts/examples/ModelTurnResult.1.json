@@ -1,0 +1,17 @@
+{
+  "calls": [
+    {
+      "arguments_digest": "66d649631b8143062e568549e4f46acbead6fc656b04e4e36df528f46ad019f5",
+      "arguments_ref": "fixture:arguments_ref",
+      "call_id": "fixture:call_id",
+      "tool": "fixture:tool"
+    }
+  ],
+  "final_artifact_ref": null,
+  "issue": null,
+  "kind": "tool_calls",
+  "provider_receipt_ref": null,
+  "task_id": "survey-demo",
+  "turn_id": "fixture:turn_id",
+  "usage_receipt_ref": "fixture:usage_receipt_ref"
+}

@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "kind": "public_value",
+      "name": "SYNTHETIC_PUBLIC_MODE",
+      "required": true,
+      "secret_ref": null,
+      "value": "fixture"
+    }
+  ]
+}

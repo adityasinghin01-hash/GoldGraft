@@ -1,0 +1,26 @@
+{
+  "allowed_restart_count": 1,
+  "authority_refs": [
+    "fixture:authority_ref"
+  ],
+  "budget_ref": "fixture:budget_ref",
+  "case_id": "case-demo",
+  "criteria_refs": [
+    "fixture:criteria_ref"
+  ],
+  "deadline": "2026-11-11T00:00:00Z",
+  "evidence_read_authority_ref": "fixture:evidence_read_authority_ref",
+  "executor_identity_ref": "fixture:executor_identity_ref",
+  "exit_plan_id": "fixture:exit_plan_id",
+  "failure_route_ref": "fixture:failure_route_ref",
+  "final_artifact_digest": "sha256:f66d0724e4659cf586472838e7e07aec10da8c4eb06ddc77c804ffba1ccfb388",
+  "final_config_digest": "6f35ae9927efd5782e3b625b11e48ccb0216b98687fba6a389755537d5208f87",
+  "generation": 1,
+  "plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "private_evidence_destination_ref": "fixture:private_evidence_destination_ref",
+  "recovery_plan_ref": "fixture:recovery_plan_ref",
+  "reservation_ref": "fixture:reservation_ref",
+  "run_id": "run-demo",
+  "state_digest": "4996382ae687c83afc2459b3e58703cb35b0f330b992bd85367ac94ded59f558",
+  "trusted_code_digest": "31b1700f1af1aedf3dba086647337bbac85bd78ab9bff3b1a0aef191e075dbd8"
+}

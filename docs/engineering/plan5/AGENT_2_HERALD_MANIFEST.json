@@ -1,0 +1,143 @@
+{
+  "phase": "B4 Herald supported offline completion",
+  "evidence_class": "component_offline",
+  "model_turns": "scripted/deterministic counterpart",
+  "model_api_calls": 0,
+  "model_spend_micro_usd": 0,
+  "notifications_sent": 0,
+  "real_model_evaluation": "NOT RUN",
+  "project_ceiling_micro_usd": 20000000,
+  "initial_checkpoint_micro_usd": 5000000,
+  "frontend_revision": 2,
+  "files": [
+    {
+      "path": "pieces/agents/herald.py",
+      "sha256": "2911d1fc988d7d0c2a8feafe9b959a73433769e796b5e29f54a8397e2fa18327"
+    },
+    {
+      "path": "pieces/agents/prompts/herald.md",
+      "sha256": "275579218211709b81fa6856950fde924a287d8401848df06731b3028d678032"
+    },
+    {
+      "path": "pieces/agents/graph.py",
+      "sha256": "9a5a3d5a787a6685ae1599083ff1d691a7374d106d1752201e55e458e26ab093"
+    },
+    {
+      "path": "pieces/agents/roles.py",
+      "sha256": "671544125bfdc01bc497cb2f85770372b61f87057202122215e95b442e9620da"
+    },
+    {
+      "path": "pieces/agents/runtime.py",
+      "sha256": "d18cbd3d40869fe407b4da533e39b9ef78f3de1c5395709a43410f74b7eecfbf"
+    },
+    {
+      "path": "pieces/agents/scheduler.py",
+      "sha256": "e175b038b77d7862d8492e1c668332b695754c6e6efbbcb60f8cbc9a4b210a99"
+    },
+    {
+      "path": "pieces/agents/cli.py",
+      "sha256": "fc1d94410b65da1a5587ced77e7a1048251b1eaf3c0eb78c5a3142dd362a8f04"
+    },
+    {
+      "path": "pieces/agents/tests/test_herald.py",
+      "sha256": "1c6ae54df69785f778266c5f6c5f863e152555b1c50f9529582927284f718b26"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/herald_profile.py",
+      "sha256": "6914516e2a433a7fd5994b19516090dac090455061baeecdce39ad7a695ce6f0"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/task_control.py",
+      "sha256": "97dea61223098525bbdb90780ea700dba397c67538369d32e14d638df9550477"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/offline_artifacts.py",
+      "sha256": "28975269b044ed8196f237f1f3768d04e5d4cbe063715e3ad0ba6bb61124e3c7"
+    },
+    {
+      "path": "foundation/src/goldgraft_foundation/offline_profile.py",
+      "sha256": "19a4ece1072990861810bd399a5c8918b297e0c5d1407c6409b77bf1e559818f"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/plan5_validation.py",
+      "sha256": "5694aba127c718bbfd95df3c76a9f9cc7c7f8884dcf2786284bc4c1228fc2340"
+    },
+    {
+      "path": "docs/FORMAT_CHANGES.md",
+      "sha256": "76796c5af44e6308fbe688eb7c7443d7910cce788cf212a8523641dde1c7bda6"
+    },
+    {
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "009f0dcfb85d9d1aede77b39cfd840221a0cb2398d22c214ef348278e45b7bb2"
+    },
+    {
+      "path": "docs/engineering/plan5/AGENT_2_HERALD_REPORT.md",
+      "sha256": "f2b678d2bb75f0ca403d29731345e43a8d74b3e21f75658a278a785de319de99"
+    },
+    {
+      "path": "docs/engineering/plan5/FRONTEND_READY.json",
+      "sha256": "3a508100a84afe31b83d398f08f6ea978fa02b22d266ebc6f9ea25c728845a1a"
+    }
+  ],
+  "checks": [
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/16-accepted-herald.json",
+      "sha256": "27117f376c008ae34eec9f22abbc2a20ab225f2b9393412cf236c0407dc7c762"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/17-accepted-full.json",
+      "sha256": "d3d7c316d1dcc624476846ed21c4f2a3c077eed68618208b49b4041756239d7d"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/18-accepted-lint.json",
+      "sha256": "2ac857d5d216e2399018d97d5926c0fed07f618abbabc0f039a5346e514267d2"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/12-final-types.json",
+      "sha256": "403f5ce46cb83e7a44447fb3bb6950ca07800b39bb1603fc5e815db4516cf91a"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/13-final-generated.json",
+      "sha256": "076af340c1d11b1111596fc483eb525a2d3958683b628a89efebef1bc6af5a12"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/14-final-diff.json",
+      "sha256": "66e429064869bf4420e2eef44e1e35bf005622e25cc0358c48289f846286ce16"
+    }
+  ],
+  "demo": [
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/notification-preview.json",
+      "sha256": "725aff302747ec9016d53b47d673334874b9cb03a5dfb1a951ecab8410006827"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/private_status-inspect.json",
+      "sha256": "dc734fca1393909f3ad4bcdc5d260d7a30e84c2be1c755c60b531cdf03de6ea5"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/private_status-resume.json",
+      "sha256": "14a267e6a608dafe691bc2c0b9e64168dcf69f62ddaa91787ff2463f850805a6"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/private_status-run.json",
+      "sha256": "14a267e6a608dafe691bc2c0b9e64168dcf69f62ddaa91787ff2463f850805a6"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/public_safe-inspect.json",
+      "sha256": "17d9781ebb9533ada6c40b3da8b8a3da2c08368c33222e4057b4af29620ab35d"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/public_safe-resume.json",
+      "sha256": "bffd1208b596b3d95bc4ccebcefcd48153b1b4164aca1fbe17db52a60c7af130"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/demo/public_safe-run.json",
+      "sha256": "bffd1208b596b3d95bc4ccebcefcd48153b1b4164aca1fbe17db52a60c7af130"
+    }
+  ],
+  "preservation": {
+    "path": "/Users/aditya/reports/goldgraft-b4-herald-20261110/preservation.json",
+    "sha256": "69226dcb64d7ccbdec5090babcd9ad89ca5b65f244ce16980d22e679332a2dbd"
+  },
+  "scheduler_backup_provenance": "Archived unchanged B3 scheduler, verified against B3 manifest before copying into phase backup."
+}

@@ -1,0 +1,44 @@
+{
+  "action_group_id": "fixture:action_group_id",
+  "action_plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "allowed_actions": [
+    "preserve_state"
+  ],
+  "approval_id": "fixture:approval_id",
+  "artifact_digest": "sha256:13b9b0cd17072d5e5ee9326e347ac55ba7515cad8820879ebd2684b742bff573",
+  "authority_binding_epochs": {
+    "binding-demo": 1
+  },
+  "authority_refs": [
+    "fixture:authority_ref"
+  ],
+  "baseline_digest": "a0ff468152efed5126381eaa8dec528e9901d4e3248a9fb27376610804b78be4",
+  "candidate_digest": "f11c24ce0283c84f24421f6dc363f079bb65a0eb49ac48458545453a19de0482",
+  "case_id": "case-demo",
+  "config_digest": "ddca3b84517126e7d8bec9aad8d541d762c09924d311b145f4266a7b2a9bdf12",
+  "controller_id": "controller-demo",
+  "delivery_route": "direct_artifact",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "generation": 1,
+  "graph_digest": "855e6250f7862585d04131e9d230e7a4a1bc47603e596f326ad62126c7fe8901",
+  "issued_at": "2026-11-10T00:00:00Z",
+  "patch_digest": "101954809cfb70625a90a069a4d95a84fc4d7b181989237552ec49eb4a24fc60",
+  "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+  "publication_destination_refs": [
+    "fixture:publication_destination_ref"
+  ],
+  "recovery_plan_digest": "cc1f3fd4f55108adc99330fac3aaf62a090942d669b412736f3147a58ea0327a",
+  "reviewed_bundle_digest": "f48e51c79a1bbccb4d9cd8342ad5bf414ad9be8b9ff1e771be06eaab3eead0d8",
+  "revoked_at": null,
+  "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+  "source_base": null,
+  "source_head": null,
+  "source_snapshot_digests": [
+    "378e2d33ed905a21610ca46d467165f21799f65f504f231d8f20b4619f87343c"
+  ],
+  "state_plan_digest": "455b013081184d960556438d8bc246120be07cce5c0a8ac36a032e1fb993dfce",
+  "target_resources": [
+    "fixture:target_resource"
+  ],
+  "trigger_chain_digest": "1b906e1e98ffa1271f2a2c02a76c2240d2c2a4390464abff1db1c33b9418c5b6"
+}

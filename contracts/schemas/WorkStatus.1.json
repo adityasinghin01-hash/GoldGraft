@@ -1,0 +1,218 @@
+{
+  "$id": "https://goldgraft.dev/schemas/WorkStatus.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "state": {
+          "enum": [
+            "submitting",
+            "held",
+            "unknown",
+            "cancellation_pending",
+            "cancelled",
+            "failed"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "state": {
+          "enum": [
+            "accepted",
+            "queued",
+            "provisioning"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "work_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        "state": {
+          "const": "operation_started",
+          "enum": [
+            "submitting",
+            "accepted",
+            "queued",
+            "provisioning",
+            "operation_started",
+            "held",
+            "unknown",
+            "cancellation_pending",
+            "cancelled",
+            "stopped",
+            "failed"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "work_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "state": {
+          "const": "stopped",
+          "enum": [
+            "submitting",
+            "accepted",
+            "queued",
+            "provisioning",
+            "operation_started",
+            "held",
+            "unknown",
+            "cancellation_pending",
+            "cancelled",
+            "stopped",
+            "failed"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "work_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "action_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "generation": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Generation"
+    },
+    "last_event_seq": {
+      "minimum": 0,
+      "title": "Last Event Seq",
+      "type": "integer"
+    },
+    "state": {
+      "enum": [
+        "submitting",
+        "accepted",
+        "queued",
+        "provisioning",
+        "operation_started",
+        "held",
+        "unknown",
+        "cancellation_pending",
+        "cancelled",
+        "stopped",
+        "failed"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "work_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Work Id"
+    }
+  },
+  "required": [
+    "action_id",
+    "case_id",
+    "work_id",
+    "state",
+    "generation",
+    "last_event_seq",
+    "checked_at",
+    "evidence_refs"
+  ],
+  "title": "WorkStatusV1",
+  "type": "object"
+}

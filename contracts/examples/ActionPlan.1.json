@@ -1,0 +1,45 @@
+{
+  "budget_ref": "fixture:budget_ref",
+  "case_id": "case-demo",
+  "exit_plan_ref": "fixture:exit_plan_ref",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "finalisation_plan_ref": "fixture:finalisation_plan_ref",
+  "generation": 1,
+  "graph_digest": "855e6250f7862585d04131e9d230e7a4a1bc47603e596f326ad62126c7fe8901",
+  "plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "plan_id": "fixture:plan_id",
+  "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+  "recovery_plan_ref": "fixture:recovery_plan_ref",
+  "review_bundle_digest": "f48e51c79a1bbccb4d9cd8342ad5bf414ad9be8b9ff1e771be06eaab3eead0d8",
+  "run_id": "run-demo",
+  "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+  "slots": [
+    {
+      "artifact_digest": null,
+      "cardinality": 1,
+      "config_digest": null,
+      "depends_on": [],
+      "effect_class": "E0",
+      "expected_version_ref": "fixture:expected_version_ref",
+      "operation": "preserve_state",
+      "recovery_branch_ref": null,
+      "required_authority_refs": [
+        "fixture:required_authority_ref"
+      ],
+      "required_controller_ids": [
+        "fixture:required_controller_id"
+      ],
+      "slot_id": "fixture:slot_id",
+      "state_plan_digest": null,
+      "target_key": {
+        "account_id": "synthetic-account",
+        "environment_id": "synthetic",
+        "provider_id": "local_folder",
+        "resource_id": "synthetic-resource",
+        "resource_kind": "fixture:resource_kind"
+      },
+      "trigger_digest": "5badd656953f04a4c644b31d55b25865b96c9acb5fc7f03168bc045dc9fbc872"
+    }
+  ],
+  "state_plan_ref": "fixture:state_plan_ref"
+}

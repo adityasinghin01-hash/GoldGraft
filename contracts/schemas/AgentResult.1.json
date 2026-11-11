@@ -1,0 +1,238 @@
+{
+  "$defs": {
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Ref"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "recovery": {
+          "enum": [
+            "retry_read",
+            "reconnect",
+            "supply_input",
+            "review_scope",
+            "reapprove",
+            "await_counterpart",
+            "reconcile",
+            "unsupported"
+          ],
+          "title": "Recovery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "input_ref",
+        "owner_role",
+        "recovery",
+        "evidence_refs"
+      ],
+      "title": "Issue",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/AgentResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "issue": {
+          "type": "null"
+        },
+        "outcome": {
+          "const": "completed",
+          "enum": [
+            "completed",
+            "blocked",
+            "failed",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "output_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Output Refs",
+          "type": "array"
+        }
+      }
+    },
+    {
+      "properties": {
+        "issue": {
+          "$ref": "#/$defs/Issue"
+        },
+        "outcome": {
+          "enum": [
+            "blocked",
+            "failed",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "authenticity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authenticity Ref",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Digest",
+      "type": "string"
+    },
+    "issue": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Issue"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lease_epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Lease Epoch",
+      "type": "integer"
+    },
+    "outcome": {
+      "enum": [
+        "completed",
+        "blocked",
+        "failed",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "output_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "request_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "request_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "lease_epoch",
+    "input_digest",
+    "outcome",
+    "output_refs",
+    "evidence_refs",
+    "issue",
+    "completed_at",
+    "authenticity_ref"
+  ],
+  "title": "AgentResultV1",
+  "type": "object"
+}

@@ -1,0 +1,992 @@
+{
+  "phase": "B4 supported offline role construction",
+  "date": "2026-11-10",
+  "supported_roles": 13,
+  "new_component_roles": [
+    {
+      "role": "Sentinel",
+      "offline_supported_scope": "completed",
+      "checks_passed": 17,
+      "operation": "audit",
+      "policy_digest": "25b8b5f72f4bc0a26f3bde0ad744bdb58cd4e98ddd6f904b18d7243da8fb2ca6",
+      "prompt_digest": "dddcf139d2e161b7c004b9f3bb76af95050a5cd064bfba2fd054ac8d76a7fbde",
+      "input_refs": [
+        "fake:input:sentinel:audit"
+      ],
+      "input_digest": "4027734001af202e3183b018be159e238b0eff858977d7d184a0525af6d8a059",
+      "expected_subject": "2ccd905d9610c3af67dcef6a9b7047b0db844ac39ce25cc609a7468243c75e66",
+      "output_descriptors": [
+        {
+          "byte_count": 370,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:09:18.493080Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "4027734001af202e3183b018be159e238b0eff858977d7d184a0525af6d8a059",
+          "payload_digest": "b023e06848b7397c18f151d00c9263229d7168941c1ce069376288b7f3a0590c",
+          "producer_identity_ref": "fake:role:Sentinel",
+          "ref": "fake:artifact:a489d8465a0dbb02ec8472a469cf92d4fb053b218ee50cfe67b1121eb62f6563",
+          "run_id": "run-demo",
+          "schema": "Alert/1",
+          "subject_digest": "2ccd905d9610c3af67dcef6a9b7047b0db844ac39ce25cc609a7468243c75e66",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:7c960ef4f3ea28af16b259a4b1b56d141647677ccd69ab5750edf9b491b6aa1b",
+        "fake:blob:ea422b05fba9a7e0a846926d92ebf60f380fc404a60b8cddb7ca7e4b5f55e4de"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Sentinel.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Sentinel-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Sentinel-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Gardener",
+      "offline_supported_scope": "completed",
+      "checks_passed": 19,
+      "operation": "propose_plan",
+      "policy_digest": "dcc03afa08d43d8840550b94609d4d5d2314fff9e5986ba146694a8c818f9e8b",
+      "prompt_digest": "2e7934ea837a4ce00a35727316ce6a3c293fbde4f35738011f38d8b204b7ae12",
+      "input_refs": [
+        "fake:input:gardener:propose_plan"
+      ],
+      "input_digest": "4e4f72cc69ddae54918d105f613c618e0f97e8511c7e9fb3bd508a1485cc9a27",
+      "expected_subject": "e9dd2eba01f4abdd0a268b6a124db37a3d039167ea2ea4256d6a7466359cf846",
+      "output_descriptors": [
+        {
+          "byte_count": 576,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:13:21.421989Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "4e4f72cc69ddae54918d105f613c618e0f97e8511c7e9fb3bd508a1485cc9a27",
+          "payload_digest": "5e1c2839f0e486cd90ee8c873f960735c0b020ae900ea1f54daf1c309ac86771",
+          "producer_identity_ref": "fake:role:Gardener",
+          "ref": "fake:artifact:d719fedf746e07baa425badad23be6b802478c8f4d88c84a958cfd87e1cc9e30",
+          "run_id": "run-demo",
+          "schema": "PlanProposal/1",
+          "subject_digest": "e9dd2eba01f4abdd0a268b6a124db37a3d039167ea2ea4256d6a7466359cf846",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:034d3fa806a3574caf6ed89115fcb87e3f407e5c93a9d1a71d746e1323d2741e"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Gardener.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Gardener-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Gardener-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Builder",
+      "offline_supported_scope": "completed",
+      "checks_passed": 20,
+      "operation": "build_baseline",
+      "policy_digest": "68996c11f8de9f54e46dd2e33d01f370e7a0e272fe9c396b1d6ea801a8a77ef4",
+      "prompt_digest": "b4801b3641e23c5b61d4d0c165a572446e91d5ae06efd1cb7db9641213e2851e",
+      "input_refs": [
+        "fake:input:builder:build_baseline"
+      ],
+      "input_digest": "6361e9ba51b812adf991e7cb75fae7083569ca9f1b9a6e084efef4e470cd7ddf",
+      "expected_subject": "9ae2082f3454af4364c8bb982ff4ea1b1a6a7a7614837ae9cde604f1d9a7f7d2",
+      "output_descriptors": [
+        {
+          "byte_count": 367,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:18:26.698781Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "6361e9ba51b812adf991e7cb75fae7083569ca9f1b9a6e084efef4e470cd7ddf",
+          "payload_digest": "755e7de2babb891c0439ad580979b8e6cd96f05a2f4d71c0d318ae20a47eea67",
+          "producer_identity_ref": "fake:role:Builder",
+          "ref": "fake:artifact:a31cb65129aeab7a268c6aec9104549dd3c69be04ae49c82d58f22d3f94b1768",
+          "run_id": "run-demo",
+          "schema": "ExecutionProposal/1",
+          "subject_digest": "9ae2082f3454af4364c8bb982ff4ea1b1a6a7a7614837ae9cde604f1d9a7f7d2",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:6d2bd513d632c1fd7078905d1ba35d8be38e2a08064cfb7117876dbb49f46a4b",
+        "fake:blob:989f2dfbd4eb7b0f13ae71a08610ecfb26a2807dec4900282237189f244a8b8f",
+        "fake:blob:9a4b06a764bc674a07888bb0c987f4f83add498afec9e4a6ae11f4e6ac615696",
+        "fake:blob:82c03461ef29947f0be65c4a0944a01f4299db949a15a1df2b0d837ab4bfa3ff"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Builder.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Builder-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Builder-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Explorer",
+      "offline_supported_scope": "completed",
+      "checks_passed": 23,
+      "operation": "run_scenario",
+      "policy_digest": "52c18e75d47d97fa0440dd6bb0b488470f956074329a2a1e7f2985f75019b481",
+      "prompt_digest": "87a48079f8c724b7309457d25eef4e55a09ee48b81e911fa07885dbe63578bdd",
+      "input_refs": [
+        "fake:input:explorer:run_scenario"
+      ],
+      "input_digest": "87a6a9946b1c748bda72d5ff676b4c53c4ad25baaa04fbce7d1868156e323c16",
+      "expected_subject": "0e035d9db375e3247ee925277ad30fb7e8f6836d08e6f32859ecf31ab3700acd",
+      "output_descriptors": [
+        {
+          "byte_count": 366,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:19:28.968060Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "87a6a9946b1c748bda72d5ff676b4c53c4ad25baaa04fbce7d1868156e323c16",
+          "payload_digest": "cff62d9d75f803a57810d8420b1d056dd1cb80b80a2838d0f98f728140f2c497",
+          "producer_identity_ref": "fake:role:Explorer",
+          "ref": "fake:artifact:2f9790eaf13dcfedd9c1fcd9033a56e859f1f298dad3d4c95d684a041a216b11",
+          "run_id": "run-demo",
+          "schema": "ExecutionProposal/1",
+          "subject_digest": "0e035d9db375e3247ee925277ad30fb7e8f6836d08e6f32859ecf31ab3700acd",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:6c8919a3c58af5bbe341af85e6372b78ee86502bf551ce4c0733f043b44c61d2",
+        "fake:blob:50eab8cb158442c316d0ac8e35a2975e37bd24139603368ee7ccd8b2c5157a3c"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Explorer.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Explorer-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Explorer-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Scribe",
+      "offline_supported_scope": "completed",
+      "checks_passed": 22,
+      "operation": "scribe_draft",
+      "policy_digest": "79f04cbaa1bf12a6b732926c77bf4d35fd3eb0a5b9c5ceda106333007b59ea5f",
+      "prompt_digest": "2b49bfa70ef28e4fab271c70a8df0349d97fe0d9471028ebb2f32b49b8a202c6",
+      "input_refs": [
+        "fake:input:scribe:scribe_draft"
+      ],
+      "input_digest": "df86d1e05b2dd4d817f16a18edffbbb15f708ef8a7df98aa64f759a07f576592",
+      "expected_subject": "e87c803da2553323a9ab8f8bc48f164cbc6996db2d54131fbaf792d2b59e6e3f",
+      "output_descriptors": [
+        {
+          "byte_count": 418,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:20:22.623037Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "df86d1e05b2dd4d817f16a18edffbbb15f708ef8a7df98aa64f759a07f576592",
+          "payload_digest": "23361cb9b9935c62a39cd5134f966265c5682004ef00f49e2796cbc8d1ac6bfa",
+          "producer_identity_ref": "fake:role:Scribe",
+          "ref": "fake:artifact:1f3869ca2bb9234662130e4079f9e3fd7102430162396e043808a15cd3e47dc1",
+          "run_id": "run-demo",
+          "schema": "Contract/1",
+          "subject_digest": "e87c803da2553323a9ab8f8bc48f164cbc6996db2d54131fbaf792d2b59e6e3f",
+          "trust": "model_proposal"
+        },
+        {
+          "byte_count": 362,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:20:22.624913Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "df86d1e05b2dd4d817f16a18edffbbb15f708ef8a7df98aa64f759a07f576592",
+          "payload_digest": "3333203e16405fbb010db31dbcbdf79a2da2bcc7ef3b1c4586dfcf740ad88ef8",
+          "producer_identity_ref": "fake:role:Scribe",
+          "ref": "fake:artifact:0b625dc54e10f0592e8f0209d7dce4c6bf88a12f01990af8b33535ffdd0f64b1",
+          "run_id": "run-demo",
+          "schema": "TriangleRequest/1",
+          "subject_digest": "e87c803da2553323a9ab8f8bc48f164cbc6996db2d54131fbaf792d2b59e6e3f",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:889e70081bffe8013efa0412354a882f15e1a562363c797d6efb9c6d429a0ffa"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Scribe.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Scribe-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Scribe-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Architect",
+      "offline_supported_scope": "completed",
+      "checks_passed": 21,
+      "operation": "architect",
+      "policy_digest": "2dd44a2bcd394439f514900fd10084233cda047253153af6f9ac32650f9db37b",
+      "prompt_digest": "49aa98c9021ac96ae1fb315ebee92843ce5d5a82fde20e6c9bc2a8b115ac9224",
+      "input_refs": [
+        "fake:input:architect:architect"
+      ],
+      "input_digest": "1b0d69896439d4c0e936b7fa7e32d49d257d7154c4fa7c383697b5a57f1f98df",
+      "expected_subject": "04d02302c944301a8e2cf299399c19c5864a364509b9538f7c6c8478a876e3e2",
+      "output_descriptors": [
+        {
+          "byte_count": 374,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:20:47.324393Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "1b0d69896439d4c0e936b7fa7e32d49d257d7154c4fa7c383697b5a57f1f98df",
+          "payload_digest": "8ffeb11d980f9e479520b793097409471d2b642ae2ec7dbdae4aab6d30c8521f",
+          "producer_identity_ref": "fake:role:Architect",
+          "ref": "fake:artifact:aa76576b7667cd9a6650635e27515bbae5a7dc4f22270e11766d8857eeb2335f",
+          "run_id": "run-demo",
+          "schema": "TargetPlan/1",
+          "subject_digest": "04d02302c944301a8e2cf299399c19c5864a364509b9538f7c6c8478a876e3e2",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:bd019ff0f7b93d35c2883cf329f3185d896352622a5defa9c622f85c3bb201d1",
+        "fake:blob:707b534e4e957ac7d1b499cc26fb727b588a634e588fe09343404fe003de7d19",
+        "fake:blob:ffba12b2fd3d11142fa483745c42f8c0e5e6824b13c09a0a70b121fae3ebc4d5"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Architect.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Architect-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Architect-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Grafter",
+      "offline_supported_scope": "completed",
+      "checks_passed": 23,
+      "operation": "candidate_patch",
+      "policy_digest": "e0fd69bdff44e5915391c7358bcc1bce929f90a4ca16514d12911d2363bad457",
+      "prompt_digest": "33fa1d2c06146f1431cacf68038aeca913eb90ae7512f16d0c7afb312d8b2a03",
+      "input_refs": [
+        "fake:input:grafter:candidate_patch"
+      ],
+      "input_digest": "38d17b6791c7cc413915d3576022872a542780ed6793bdb09dcbc35520fd4c17",
+      "expected_subject": "db7b57d107b4e41cf3f912eb98ff793e9da5095016153f292f47ebf71302a8b9",
+      "output_descriptors": [
+        {
+          "byte_count": 619,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:23:31.860314Z",
+          "derivation_ref": "fake:blob:9f6b66fcf9c077df3c5986517b971e2a41222f58c80a56ec6df4e0a4feaf86bb",
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "38d17b6791c7cc413915d3576022872a542780ed6793bdb09dcbc35520fd4c17",
+          "payload_digest": "3018bf0248957797c23fb0a6b48dadbdda0ab656dc54267abc91438c0ef9b106",
+          "producer_identity_ref": "fake:role:Grafter",
+          "ref": "fake:artifact:b08e53f61d635df14bbd0ff21b0a3884d4470e170ad1899c5c37e44212892ccd",
+          "run_id": "run-demo",
+          "schema": "ChangeList/2",
+          "subject_digest": "a0e4a4651b4d4a20265b0b6ed5dcea854deabe1115698ba4dd73c9eb9554780b",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:6a0a643ecdc2a953ddb9c4727d9fd8f6511cd5abb80c01778326edd90acf6858",
+        "fake:blob:6b31500cd1e7325e874d936b891446ae3d5fa68b6349853a14c6ab87352a928b",
+        "fake:blob:015c48134ded2817ccc6ad9c52170d44edf0e8c6f90656bd7b6d12e32c387828"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Grafter.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Grafter-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Grafter-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Adversary",
+      "offline_supported_scope": "completed",
+      "checks_passed": 22,
+      "operation": "derive_guards",
+      "policy_digest": "f2d3069170caef07340699e51f2790297c17832065958794fa757b57ec332003",
+      "prompt_digest": "9e372bfa0723376061a83a33e859336fbc7baf86b6e0cfa9a3eaefcdc4100903",
+      "input_refs": [
+        "fake:input:adversary:derive_guards"
+      ],
+      "input_digest": "0b074385d6012d9e3cad7ab935d154263d18fb9ceb23c691a36b6218619a8dca",
+      "expected_subject": "a70ca53e6b84cb248529a6a4ca40bb5c17b7c6fa7d7db4d9280601b982780fa6",
+      "output_descriptors": [
+        {
+          "byte_count": 508,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:26:28.680027Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "0b074385d6012d9e3cad7ab935d154263d18fb9ceb23c691a36b6218619a8dca",
+          "payload_digest": "87d37196a0990dea84b1be34dace5a45b8bc2ae6058d86912a9bd29cf54b5112",
+          "producer_identity_ref": "fake:role:Adversary",
+          "ref": "fake:artifact:92c3e7b15d6a45105175e833e942f3e55e35fc83540ba98449e9ecf7cfcce56d",
+          "run_id": "run-demo",
+          "schema": "ScenarioSet/1",
+          "subject_digest": "a70ca53e6b84cb248529a6a4ca40bb5c17b7c6fa7d7db4d9280601b982780fa6",
+          "trust": "model_proposal"
+        },
+        {
+          "byte_count": 458,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:26:28.682569Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "0b074385d6012d9e3cad7ab935d154263d18fb9ceb23c691a36b6218619a8dca",
+          "payload_digest": "d569de0cd8289e2a5ba47f7b96956e7a41218a2377835af471ca15d03aaddc00",
+          "producer_identity_ref": "fake:role:Adversary",
+          "ref": "fake:artifact:c0a1a5616651dc018e6504700cdc9d468996e79b88a6d36b9a61878d0d27987d",
+          "run_id": "run-demo",
+          "schema": "MutantSet/1",
+          "subject_digest": "a70ca53e6b84cb248529a6a4ca40bb5c17b7c6fa7d7db4d9280601b982780fa6",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:9dd371df06b8208009ad147e01de0b2dd2ed991eb22b0c0ab1117fe34ae211d0",
+        "fake:blob:cb683c56e24ac1f7d18d7b9924d41de23cb32ac905ae2c11ef5e5604d44ef9bb"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Adversary.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Adversary-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Adversary-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Healer",
+      "offline_supported_scope": "completed",
+      "checks_passed": 20,
+      "operation": "diagnose",
+      "policy_digest": "210741b4420d19fd923d063d933038fe4ce85706ae110c5d5c283c0b8a4a5403",
+      "prompt_digest": "5e628a464f11aa91586ebb6b0e0c9509dafbf5d675841be7963499882f0d142c",
+      "input_refs": [
+        "fake:input:healer:diagnose"
+      ],
+      "input_digest": "1496a24180321ff26bebef6a82126264fdb264d0cc7ce5e8f273481759154511",
+      "expected_subject": "05c5c187b737b9bad85cc76ef35ae695cf34391d75304020a49149b36164aed3",
+      "output_descriptors": [
+        {
+          "byte_count": 493,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:27:32.284309Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "1496a24180321ff26bebef6a82126264fdb264d0cc7ce5e8f273481759154511",
+          "payload_digest": "a374707b809e23c18a4910365972168504f634f3fc683abbbd9509356f1761f4",
+          "producer_identity_ref": "fake:role:Healer",
+          "ref": "fake:artifact:07be5e6a6568d2aa2e93bca03254147485a14ec11831cf3c988fdbfe151fd4fe",
+          "run_id": "run-demo",
+          "schema": "HealNote/1",
+          "subject_digest": "05c5c187b737b9bad85cc76ef35ae695cf34391d75304020a49149b36164aed3",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:2eb9e73de7d084a730bd32aca581b0f63d7b70fb4efcc6f521d64ce5fd5cd07f",
+        "fake:blob:8c0e8cf421114a492695aff7b3986245a6cbd1e764f276abd273fafc643756c1",
+        "fake:blob:4e05eff1f2b07b24722d07ee492b4ec1a13ffad0457fd5c8edc5e5c9098cc756"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Healer.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Healer-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Healer-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Librarian",
+      "offline_supported_scope": "completed",
+      "checks_passed": 24,
+      "operation": "learn",
+      "policy_digest": "d82b4003f2d89d4cae001026dda4dbd564e8dff7f8564ec7d96cad5a954f9914",
+      "prompt_digest": "f9dfcbc730faf4d1d340480dbd6ea63b8a724062f5187355439f9c54be45a93f",
+      "input_refs": [
+        "fake:input:librarian:learn"
+      ],
+      "input_digest": "559f08987e485b443bcd954aa82f26816acde0757e74a43296d09f322e449c22",
+      "expected_subject": "237d08edabfbac72921160cd4d58beb12d1bdc763fc8b37e26a5d8d89436584e",
+      "output_descriptors": [
+        {
+          "byte_count": 415,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:28:28.693095Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "559f08987e485b443bcd954aa82f26816acde0757e74a43296d09f322e449c22",
+          "payload_digest": "19fa4753beb227330981eaa5436b0e3743780c4a32885d77bf53c3918da156a0",
+          "producer_identity_ref": "fake:role:Librarian",
+          "ref": "fake:artifact:5b7510c886223cbb4a2bd254910efbf28e0aa9118b1f36f8d022c343754f6f7c",
+          "run_id": "run-demo",
+          "schema": "Recipe/1",
+          "subject_digest": "237d08edabfbac72921160cd4d58beb12d1bdc763fc8b37e26a5d8d89436584e",
+          "trust": "model_proposal"
+        },
+        {
+          "byte_count": 315,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:28:28.695140Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "559f08987e485b443bcd954aa82f26816acde0757e74a43296d09f322e449c22",
+          "payload_digest": "80eb5f07605dcaa70ee5b813d78f640fc864b18d834e1a89b5fb317ab152faa5",
+          "producer_identity_ref": "fake:role:Librarian",
+          "ref": "fake:artifact:a4dd90172d5c6f0b622211349fd31a3eee080ae453aa46ced5ccbdc0eaee908c",
+          "run_id": "run-demo",
+          "schema": "DetectionRule/1",
+          "subject_digest": "237d08edabfbac72921160cd4d58beb12d1bdc763fc8b37e26a5d8d89436584e",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:bb1871eb2dc2306cee8e4d203a5d61fbb5619c87de04b10ef32859d3ba575b41"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Librarian.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Librarian-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Librarian-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    },
+    {
+      "role": "Orchard Analyst",
+      "offline_supported_scope": "completed",
+      "checks_passed": 22,
+      "operation": "aggregate",
+      "policy_digest": "ebc705fcd3dfb560f58b3e7e73063c8314a95f24938dda9a9737c038572d9c01",
+      "prompt_digest": "117756992e30ef01eb40a7b1d478015a36d92ba132617d3a4fcd1833eb29a7bf",
+      "input_refs": [
+        "fake:input:orchard_analyst:aggregate"
+      ],
+      "input_digest": "1c9807816de9e4c0cdc2ac6828bb768ba01b5ac1e65ab3adc992914962254e17",
+      "expected_subject": "13322f2d9d72100dc00fe1f5a9d3d95d9262fa5f570adde28b8cfa186f6762fb",
+      "output_descriptors": [
+        {
+          "byte_count": 451,
+          "case_id": "case-demo",
+          "created_at": "2026-11-10T17:29:38.216715Z",
+          "derivation_ref": null,
+          "evidence_class": "scripted",
+          "expires_at": null,
+          "generation": 1,
+          "input_digest": "1c9807816de9e4c0cdc2ac6828bb768ba01b5ac1e65ab3adc992914962254e17",
+          "payload_digest": "d8b39efa9bb8c9f55641c0fd37f15ca456d531ce51cec1e10c33170c20246f25",
+          "producer_identity_ref": "fake:role:Orchard_Analyst",
+          "ref": "fake:artifact:72088799d759ab0644b97d00c07cd123f6b38fa498131888f8fe7547e4ee701a",
+          "run_id": "run-demo",
+          "schema": "DashboardSpec/1",
+          "subject_digest": "13322f2d9d72100dc00fe1f5a9d3d95d9262fa5f570adde28b8cfa186f6762fb",
+          "trust": "model_proposal"
+        }
+      ],
+      "tool_observation_refs": [
+        "fake:blob:1d55814209bafd0b2f992a8fcb92def8e627b149a1e4c861736fc76d96d23e41"
+      ],
+      "state_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Orchard_Analyst-verified.sqlite",
+      "run_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Orchard_Analyst-run.json",
+      "inspection_file": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Orchard_Analyst-inspect.json",
+      "model_api_calls": 0,
+      "real_model_evaluation": "NOT RUN"
+    }
+  ],
+  "existing_role_manifests": [
+    "AGENT_1_OFFLINE_MANIFEST.json",
+    "AGENT_2_HERALD_MANIFEST.json"
+  ],
+  "checks": [
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 90.411,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-agents.log"
+    },
+    {
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.048,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-diff.log"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 102.361,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-full.log"
+    },
+    {
+      "command": [
+        "sh",
+        "scripts/check_generated.sh"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.257,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-generated.log"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.07,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-lint.log"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "check:types"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.985,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-types.log"
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_workflow.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.914,
+      "evidence_class": "scripted",
+      "model_api_calls": 0,
+      "log": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/checks/final-workflow-format-recheck.log"
+    }
+  ],
+  "files": [
+    {
+      "path": "fakes/src/goldgraft_fakes/component_profile.py",
+      "sha256": "7ff77c49320fb84a9969509f943bec57b0661db76297c4b4b0f1c6cd68a26a41"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/task_control.py",
+      "sha256": "bacda0312ea0ad2575c290f7174e43f4beeb5a46e227652f469abb9a98ae0ba8"
+    },
+    {
+      "path": "foundation/src/goldgraft_foundation/offline_profile.py",
+      "sha256": "e6683115aa7a576acbc1a4d5c7376089503b6445b82c6896e0108cb42814d4fc"
+    },
+    {
+      "path": "pieces/agents/README.md",
+      "sha256": "4ce49bfe411d57b93ea7f5e9f6965e20049ae98c7cec5ffa264739eaa8d43327"
+    },
+    {
+      "path": "pieces/agents/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "pieces/agents/catalogs/surveyor_static.json",
+      "sha256": "02e310910bfa343d7d9423d0f0eaf96edf5f6a02413c2fb88e6eb78af183b894"
+    },
+    {
+      "path": "pieces/agents/cli.py",
+      "sha256": "fc1d94410b65da1a5587ced77e7a1048251b1eaf3c0eb78c5a3142dd362a8f04"
+    },
+    {
+      "path": "pieces/agents/component.py",
+      "sha256": "ec3f2126767ba1f828fdcedfc9734ff13d2950add2bbe70c73da6cfbe0f7ea12"
+    },
+    {
+      "path": "pieces/agents/component_agents/__init__.py",
+      "sha256": "8d76f0474fdee34e157c8b00b261ad329210a56accedb9af4b33596dd00b079e"
+    },
+    {
+      "path": "pieces/agents/component_agents/adversary.py",
+      "sha256": "7c19d5881043eccb2d93b990b868eb22c6bdc0b36dd5b95403e0f90f4fd54c5d"
+    },
+    {
+      "path": "pieces/agents/component_agents/architect.py",
+      "sha256": "8a7adcf7bd4039bf02ed1ae2ff4fe01a698434fc76cde4fdbfda7d8dcbe278f0"
+    },
+    {
+      "path": "pieces/agents/component_agents/builder.py",
+      "sha256": "efc51866205a0161b07a76828eddc2dc15c89bb46ce00653df30fecd4e3bd4ac"
+    },
+    {
+      "path": "pieces/agents/component_agents/execution.py",
+      "sha256": "ee5ffa790c8a57c96572dc816302d361c34644c5288f7b3337ba95fb7636a761"
+    },
+    {
+      "path": "pieces/agents/component_agents/explorer.py",
+      "sha256": "331bd9cf2359d6aca5ef8c841909e46ccd3530b2baa2f3eec478e4dfcba7946a"
+    },
+    {
+      "path": "pieces/agents/component_agents/gardener.py",
+      "sha256": "f4c0a060c1b7b4b6fb6016968fc1c5575deb699e464ed0a3a046a1b2c63cab7e"
+    },
+    {
+      "path": "pieces/agents/component_agents/grafter.py",
+      "sha256": "936ec15b4d836e3b0aecde669ca550a032dd47ed8c1eab564bb035c7ca60e593"
+    },
+    {
+      "path": "pieces/agents/component_agents/healer.py",
+      "sha256": "7699cb9aeb3846cd459ca6480b7f745b2a2dc1dd0102d9e805b192360d727642"
+    },
+    {
+      "path": "pieces/agents/component_agents/librarian.py",
+      "sha256": "e669a476a8df2ed28faf368337cb45f5c88758a0c6fc326608784b4a1a7a26e9"
+    },
+    {
+      "path": "pieces/agents/component_agents/orchard_analyst.py",
+      "sha256": "f7fa14d6df7d9f737e132f2e70118ae31430b1d04bc3dc6cc39a57047ffb9d28"
+    },
+    {
+      "path": "pieces/agents/component_agents/scribe.py",
+      "sha256": "088e6351c96ad2684acbd7f65fe854d91d6e2f13a104bc810e1ce4436a0d3fc6"
+    },
+    {
+      "path": "pieces/agents/component_agents/sentinel.py",
+      "sha256": "720c96b48fa563d5eead6a3ef7fc51394fa4e82b9e6029a5e522140092a9175c"
+    },
+    {
+      "path": "pieces/agents/component_cli.py",
+      "sha256": "d6ca0d1265d2e333353d29c35ec1451160c57fe78d440a0f09364bf47dfec3fb"
+    },
+    {
+      "path": "pieces/agents/context.py",
+      "sha256": "50b7d2a89a48b653b056ae5b3512d70df71cc5930aaff59f893e4977e7396a3d"
+    },
+    {
+      "path": "pieces/agents/evals/__init__.py",
+      "sha256": "d6c2b69906b13afe9f4a2c86dff3e9fcd0bc84026e9731bf964f5267c3ffaef7"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor.py",
+      "sha256": "ccdc05b9ce6ac6184b721b95350cd2d8c58f5fcc50c57865d034cda59689cf66"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor_cases.json",
+      "sha256": "4b48d05e2294eeb47f099955d993c20b419aec5ccae760aad0ea2428e973c414"
+    },
+    {
+      "path": "pieces/agents/graph.py",
+      "sha256": "9a5a3d5a787a6685ae1599083ff1d691a7374d106d1752201e55e458e26ab093"
+    },
+    {
+      "path": "pieces/agents/herald.py",
+      "sha256": "2911d1fc988d7d0c2a8feafe9b959a73433769e796b5e29f54a8397e2fa18327"
+    },
+    {
+      "path": "pieces/agents/model_readiness.py",
+      "sha256": "2e58ab6b2d4f49daf9c7c7aa00af8c7df0a6ae9ceb873e9cc235779557a2a5cd"
+    },
+    {
+      "path": "pieces/agents/policies/offline.yaml",
+      "sha256": "d88aca73b322085a01bc6833a6fbbfbb7573fd2586b4233f1325024ffbccd45e"
+    },
+    {
+      "path": "pieces/agents/ports.py",
+      "sha256": "b4115bc2780b524ee6851ab6211f1ced0eef1b95aaf2a4819157dbaab1388aa3"
+    },
+    {
+      "path": "pieces/agents/prompts/adversary.md",
+      "sha256": "dac452442e00018579d2be998dde2868cc19965f25d8675f20a78b1d70b5cda6"
+    },
+    {
+      "path": "pieces/agents/prompts/architect.md",
+      "sha256": "85cc7fe9a9dd83a0ad3ca5500c0798925a509569cab1b30c2a7e67d608f5c42e"
+    },
+    {
+      "path": "pieces/agents/prompts/builder.md",
+      "sha256": "e94eed373a0c53f7b2332eb3482df649a53adee4539af5f28b372029afde93aa"
+    },
+    {
+      "path": "pieces/agents/prompts/explorer.md",
+      "sha256": "72ea99fd48686c2eab854303707b42aa0ad95ab7c12ef68dcca5d5912c22ad6c"
+    },
+    {
+      "path": "pieces/agents/prompts/gardener.md",
+      "sha256": "8d3de55c5b394fa28944d5c72e491458f84b38f4e13a14bae627adb340ddb072"
+    },
+    {
+      "path": "pieces/agents/prompts/grafter.md",
+      "sha256": "4e934a722f05627c3abfe1e0bdeabb2cae931e92fd9194aa53a6af81b76991f2"
+    },
+    {
+      "path": "pieces/agents/prompts/healer.md",
+      "sha256": "3619a143c0e7c0d7e2df39944502924e8776e6c9698e1d2c8067da6106714b29"
+    },
+    {
+      "path": "pieces/agents/prompts/herald.md",
+      "sha256": "275579218211709b81fa6856950fde924a287d8401848df06731b3028d678032"
+    },
+    {
+      "path": "pieces/agents/prompts/librarian.md",
+      "sha256": "058528bc11f5f5b4753ef0c3b1bd812322e05a11ec2771c866c1d11dc24f7537"
+    },
+    {
+      "path": "pieces/agents/prompts/orchard_analyst.md",
+      "sha256": "248a0e0ff809c94a32fe88a3445b93aadb57a28000f092bbe6a2dabc8d6ab009"
+    },
+    {
+      "path": "pieces/agents/prompts/scribe.md",
+      "sha256": "d11a4741cef6e3789eace877d152d784fc5633adad9716c741ebd24875e38a2a"
+    },
+    {
+      "path": "pieces/agents/prompts/sentinel.md",
+      "sha256": "7318658b6f3ea4876d58911d19a0b399a79e2f306e489cf15db19db974b5acd6"
+    },
+    {
+      "path": "pieces/agents/prompts/surveyor.md",
+      "sha256": "7f335f18510d1e5166ff7e02c57b103178348a5fba2b0f7bc68f0215e8e7f426"
+    },
+    {
+      "path": "pieces/agents/proof_gate.py",
+      "sha256": "7af3aa9dc31d422b6b8993655619fa05ac661c580bcc468cbc923195c1407984"
+    },
+    {
+      "path": "pieces/agents/repair.py",
+      "sha256": "7faef9dfabeb660f173ec205c58f3523068d42e3ddde9409ef2107cacb99c17f"
+    },
+    {
+      "path": "pieces/agents/roles.py",
+      "sha256": "8cf9fbc99168912d3e54ec129c1bd3fe83820c23367201b8062b2a1bd8fee7b6"
+    },
+    {
+      "path": "pieces/agents/runtime.py",
+      "sha256": "fe514f170bcb78fce73a815ef9e7659d165f88c0059023d481ac6deeaa395824"
+    },
+    {
+      "path": "pieces/agents/scheduler.py",
+      "sha256": "f8efcb8fac43364db81533fc42b47625a4ee201f04c555cb9840deaac259ba56"
+    },
+    {
+      "path": "pieces/agents/source_inventory.py",
+      "sha256": "17aab0af1c3dabc28336b03d05b8abdc1a935a088b34b309fda9bb561da9e892"
+    },
+    {
+      "path": "pieces/agents/surveyor.py",
+      "sha256": "3e34acdcd9e877676e5f27d7829f1245b46d6e2f1496f80fcf597b7acaaacb1a"
+    },
+    {
+      "path": "pieces/agents/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "pieces/agents/tests/test_adversary.py",
+      "sha256": "b8d992cf7fbc2eb35c5f3dc2160799cd96a113bf539e49adce468d8d906f46bc"
+    },
+    {
+      "path": "pieces/agents/tests/test_architect.py",
+      "sha256": "7615cd467081add1de83e63af14feb7c25cfaf1cf735ddde62afbc1f9d019cbb"
+    },
+    {
+      "path": "pieces/agents/tests/test_builder.py",
+      "sha256": "764ca49a5810888054a9be7de900f37df371e26bc3473696fbb694dc5a27e4bf"
+    },
+    {
+      "path": "pieces/agents/tests/test_component_runtime.py",
+      "sha256": "13bab84cc4eca2676131c92c21d1c19117adfd71452c2ebbff72fe8bccd621f7"
+    },
+    {
+      "path": "pieces/agents/tests/test_context.py",
+      "sha256": "8411f628a9518f018bce1453e815476c2219c1003e78abd59dfec929bee0e744"
+    },
+    {
+      "path": "pieces/agents/tests/test_explorer.py",
+      "sha256": "1f76aee2176e0a7a4c1a5cdb5a237c88bd14ac3af50b07e1389d34d64998af1c"
+    },
+    {
+      "path": "pieces/agents/tests/test_gardener.py",
+      "sha256": "0d754cc955d96efecdaa04fe3d6fc13a1eddf283ebd0c71dab269d30bf8ad7d7"
+    },
+    {
+      "path": "pieces/agents/tests/test_grafter.py",
+      "sha256": "59b316058dc1a74a45e62423231d8da2b55691e32f8429887cd854704f80f883"
+    },
+    {
+      "path": "pieces/agents/tests/test_guards.py",
+      "sha256": "f5de85f61df002ba3b0a62d9afdf78c64b64abc1559ca0d39087f0aae786a06a"
+    },
+    {
+      "path": "pieces/agents/tests/test_healer.py",
+      "sha256": "00aeff9cef84fc489e4592c5493614d3223f81032989b121d4e7fffd69d95009"
+    },
+    {
+      "path": "pieces/agents/tests/test_herald.py",
+      "sha256": "1c6ae54df69785f778266c5f6c5f863e152555b1c50f9529582927284f718b26"
+    },
+    {
+      "path": "pieces/agents/tests/test_librarian.py",
+      "sha256": "0be1e01ae6526f9f49cf1b79621cb9e87c88bd4c30ec22dd321d2739d7867fb1"
+    },
+    {
+      "path": "pieces/agents/tests/test_model_readiness.py",
+      "sha256": "2a1c113290a5dbe42de16e5c5f262d62aa34b7d434d3329f8b1f58697bfc43ca"
+    },
+    {
+      "path": "pieces/agents/tests/test_orchard_analyst.py",
+      "sha256": "2fca870cac8b943b9ee72e9eb484ebed90ee7d51caae3dcd91ea9e8976fd7bc3"
+    },
+    {
+      "path": "pieces/agents/tests/test_proof_gate.py",
+      "sha256": "112745cab6358e49fc9a052288d8e9853101a2174b96e6de3f6426f2fa8579f7"
+    },
+    {
+      "path": "pieces/agents/tests/test_repair_policy.py",
+      "sha256": "d4530cc33975a738971e7ddd55bcccd66f116b6ae5ca29e3ac76342917c4b643"
+    },
+    {
+      "path": "pieces/agents/tests/test_restart.py",
+      "sha256": "412323fc6f26b5d946120319a6031b3e0de9608e8ecc88ae50b69a8673e6c7b4"
+    },
+    {
+      "path": "pieces/agents/tests/test_roles.py",
+      "sha256": "3eca360a45478c175134612bc5610bd79f7b35e401575e261f4a8beac3ddaeea"
+    },
+    {
+      "path": "pieces/agents/tests/test_runtime.py",
+      "sha256": "63b53c2317c50ecbcb5dac116c064aeae32e97987ca6a57ddab3395e6908a3f1"
+    },
+    {
+      "path": "pieces/agents/tests/test_scheduler.py",
+      "sha256": "c6d97b306802eaab56f3ab3b7cb55b1242bf93c373cab2935ce9dc08aad21497"
+    },
+    {
+      "path": "pieces/agents/tests/test_scribe.py",
+      "sha256": "7fb23337b6690186558f95f4fb3440948745ba4e02214d1660f30eb643d5109b"
+    },
+    {
+      "path": "pieces/agents/tests/test_sentinel.py",
+      "sha256": "6300580318b3e9114310f8e081f4c33dfe7770f9b5bc13079f37991cdb4ca2ad"
+    },
+    {
+      "path": "pieces/agents/tests/test_source_inventory.py",
+      "sha256": "391cf0e3bc05e5c9d62cc2875a6318a6c0177937b24fe311425c0d6b5939ade8"
+    },
+    {
+      "path": "pieces/agents/tests/test_surveyor.py",
+      "sha256": "89ff22cdb9ec0ebb2620ed13a3b8ce9bbad850da6c39f628b4f9e9e0a8a56811"
+    },
+    {
+      "path": "pieces/agents/tests/test_surveyor_eval.py",
+      "sha256": "40b10f566df50c3a4eb064067dfd01e1d6c0bb31319ca332e513241db7d7e725"
+    },
+    {
+      "path": "pieces/agents/tests/test_tools.py",
+      "sha256": "3bcf5ba854b7be0a3f3a7c77a3326f33e39f0d0e7a6d9413c254e33ac2f5ad5a"
+    },
+    {
+      "path": "pieces/agents/tests/test_workflow.py",
+      "sha256": "866d38dea38ed13b5c34e421de2da19c9e4055d62ec126d9307ab2c281bacdac"
+    },
+    {
+      "path": "pieces/agents/tools.py",
+      "sha256": "c4e680ba69cfad812983c3d804a17ee58adc4d13cf3ca3de995f65dd411d8054"
+    },
+    {
+      "path": "pieces/agents/workflow.py",
+      "sha256": "421d3d8aacfb1165e3ccc08a40a0f026465fc032bcc189f331926be1a0785108"
+    },
+    {
+      "path": "pieces/agents/workflow_cli.py",
+      "sha256": "1d6bd02af03c676fcb8dbc180d743d4d7338e73f2584a7f787a6c4c1be5bc65a"
+    }
+  ],
+  "preservation": {
+    "frontend_status": "ready",
+    "frontend_revision": 2,
+    "frozen_inputs_checked": 454,
+    "frozen_input_changes": [],
+    "original_files_checked": 327,
+    "original_file_changes": [],
+    "original_status_unchanged": true,
+    "original_head_unchanged": true,
+    "web_files": [
+      "pieces/web/.gitkeep"
+    ],
+    "api_key_present": false,
+    "anthropic_sdk_available": false,
+    "model_api_calls": 0,
+    "model_spend_usd": 0
+  },
+  "focused_agent_checks": 477,
+  "full_suite_tests": 2570,
+  "evidence_class": "scripted/component_offline",
+  "model_api_calls": 0,
+  "model_spend_micro_usd": 0,
+  "real_model_evaluation": "NOT RUN",
+  "project_total_ceiling_micro_usd": 20000000,
+  "target_micro_usd": 15000000,
+  "initial_checkpoint_micro_usd": 5000000,
+  "checkpoint_increases_require_review": true,
+  "connections": "MANUAL_CONNECTIONS_AND_GATES.md",
+  "workflow": {
+    "run": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Workflow-run.json",
+    "inspection": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Workflow-inspect.json",
+    "resume": "/Users/aditya/reports/goldgraft-b4-remaining-20261110/Workflow-resume.json",
+    "core_tasks": 12,
+    "with_two_repairs": 22,
+    "independent_proof": "injected synthetic counterpart; real SH proof NOT RUN"
+  },
+  "limitations": [
+    "Offline supported scopes only; not model competence or final B4 acceptance.",
+    "GU model/tool/control/runner/custody and budget qualification remains open.",
+    "VJ domain recipes/SDK grounding and SH mapping/proof remain external engineering gates.",
+    "No real provider, payment, merchant delivery or Plan6 checks performed."
+  ]
+}

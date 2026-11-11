@@ -1,0 +1,23 @@
+{
+  "budget_reservation_refs": [
+    "fixture:budget_reservation_ref"
+  ],
+  "committed_message_refs": [
+    "fixture:committed_message_ref"
+  ],
+  "context_digest": "0aa6836cc45e8fe210fa0e128cf4d22265e8ae697d3f5c9f992c6786a4bb3bef",
+  "created_at": "2026-11-10T00:00:00Z",
+  "generation": 1,
+  "invocation_refs": [
+    "fixture:invocation_ref"
+  ],
+  "lease_epoch": 1,
+  "next_step": "model_turn",
+  "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+  "staged_output_refs": [
+    "fixture:staged_output_ref"
+  ],
+  "task_id": "survey-demo",
+  "turn": 0,
+  "wake_condition_ref": null
+}

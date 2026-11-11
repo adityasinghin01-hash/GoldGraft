@@ -1,0 +1,272 @@
+{
+  "phase": "B3",
+  "evidence_class": "offline_component",
+  "created_at": "2026-11-10T13:59:53.301885+00:00",
+  "workspace": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "base_revision": "0365c5e1adcb1875a7f72c99dc7c63631501e131",
+  "frontend_ready_revision": 1,
+  "frontend_ready_sha256": "a33cf43923ba774739cc4df5e713c9b7dffb2943a7c00dc749df11e860e4775a",
+  "frozen_files_verified": {
+    "spec_files": 6,
+    "contract_files": 209,
+    "fixture_files": 239
+  },
+  "changed_since_before_b3": [
+    "docs/engineering/plan5/BUILD_STATUS.md",
+    "fakes/src/goldgraft_fakes/guarded_tools.py",
+    "fakes/src/goldgraft_fakes/model_broker.py",
+    "fakes/src/goldgraft_fakes/task_control.py",
+    "pieces/agents/context.py",
+    "pieces/agents/tests/test_context.py",
+    "pyproject.toml"
+  ],
+  "added_since_before_b3": [
+    "docs/engineering/plan5/B3_BUILD_REPORT.md",
+    "docs/engineering/plan5/CODEX_TWO_ANTIGRAVITY_FRONTEND_COORDINATOR_PROMPT.txt",
+    "docs/engineering/plan5/checks/B3_accepted_generated_nativegit.json",
+    "docs/engineering/plan5/checks/B3_accepted_generated_nativegit.log",
+    "docs/engineering/plan5/checks/B3_accepted_preservation.json",
+    "docs/engineering/plan5/checks/B3_accepted_preservation.log",
+    "docs/engineering/plan5/checks/B3_accepted_types.json",
+    "docs/engineering/plan5/checks/B3_accepted_types.log",
+    "docs/engineering/plan5/checks/B3_cli_doctor.json",
+    "docs/engineering/plan5/checks/B3_cli_doctor.log",
+    "docs/engineering/plan5/checks/B3_cli_run.json",
+    "docs/engineering/plan5/checks/B3_cli_run.log",
+    "docs/engineering/plan5/checks/B3_cli_status.json",
+    "docs/engineering/plan5/checks/B3_cli_status.log",
+    "docs/engineering/plan5/checks/B3_final_diff.json",
+    "docs/engineering/plan5/checks/B3_final_diff.log",
+    "docs/engineering/plan5/checks/B3_final_full.json",
+    "docs/engineering/plan5/checks/B3_final_full.log",
+    "docs/engineering/plan5/checks/B3_final_lint.json",
+    "docs/engineering/plan5/checks/B3_final_lint.log",
+    "fakes/src/goldgraft_fakes/plan5_profile.py",
+    "foundation/src/goldgraft_foundation/offline_profile.py",
+    "pieces/agents/cli.py",
+    "pieces/agents/policies/offline.yaml",
+    "pieces/agents/ports.py",
+    "pieces/agents/runtime.py",
+    "pieces/agents/scheduler.py",
+    "pieces/agents/tests/test_guards.py",
+    "pieces/agents/tests/test_restart.py",
+    "pieces/agents/tests/test_runtime.py",
+    "pieces/agents/tests/test_scheduler.py",
+    "pieces/agents/tests/test_tools.py",
+    "pieces/agents/tools.py"
+  ],
+  "checks": [
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_final_full.json",
+      "sha256": "428ea325bd9a011bb31bb39d5735fb4a2535097e013ac6c5d1a9aecc65fef52f",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_final_lint.json",
+      "sha256": "113609553855ff576e0bfccae0605c5d0b4f6d5d31660d653ca5da2c0960641e",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_accepted_types.json",
+      "sha256": "7479bf94686217a846ee3752938b95893b6a0600e46f9988c0ca646ed85889f6",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_accepted_generated_nativegit.json",
+      "sha256": "9ee726c81960f7726d8f954c05cf49fee774a570a147ad4c71269bb28100702d",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_accepted_preservation.json",
+      "sha256": "0ecda4be71c62b312fe7a6638276ea59a0d8994a856b63894055b9eeb36398b8",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_cli_doctor.json",
+      "sha256": "651cdf51c6e41dcee58cab069b66a4cce1b4c8d506f75f258556a95a60532d79",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_cli_run.json",
+      "sha256": "3bb568644abaad975856ca8122407564702512b7f07150342f7fdd37e4878f68",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_cli_status.json",
+      "sha256": "93244c7309205028ec86d6a9039b6f5d8dfb6be7770bce3e9f0d7ff616631810",
+      "exit_code": 0
+    },
+    {
+      "evidence_file": "docs/engineering/plan5/checks/B3_final_diff.json",
+      "sha256": "3868333c4daaf4bba3b0d4e27a574ed1bcd9186178fa58d180ba990ded831584",
+      "exit_code": 0
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/engineering/plan5/B3_BUILD_REPORT.md",
+      "sha256": "154655f38c0f0bd5edcefe194343c81f1ae4364338a5aea760ccb326366e12ef"
+    },
+    {
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "9359dfc46392be33c9ccfc302590567b0f8dc357848cecf40f2ecdffc150b89e"
+    },
+    {
+      "path": "docs/engineering/plan5/CODEX_TWO_ANTIGRAVITY_FRONTEND_COORDINATOR_PROMPT.txt",
+      "sha256": "785924ffeca3bb59750536b64e07905a25e0ae5a48993e6740d9f05d5aed3da1"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_accepted_generated_nativegit.json",
+      "sha256": "9ee726c81960f7726d8f954c05cf49fee774a570a147ad4c71269bb28100702d"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_accepted_generated_nativegit.log",
+      "sha256": "a7384611a621ff37922a29ec77d6db96b3105e2968cc26d5dd1705eab01ddc9b"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_accepted_preservation.json",
+      "sha256": "0ecda4be71c62b312fe7a6638276ea59a0d8994a856b63894055b9eeb36398b8"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_accepted_preservation.log",
+      "sha256": "bffcdf59719c1a0748533b890cf02115cc0667841d90f20d551500c35227fc4a"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_accepted_types.json",
+      "sha256": "7479bf94686217a846ee3752938b95893b6a0600e46f9988c0ca646ed85889f6"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_accepted_types.log",
+      "sha256": "a4661b2feee5d502a71e931a1963cac6c04fecdd30ced9e4eec443210c4a7605"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_cli_doctor.json",
+      "sha256": "651cdf51c6e41dcee58cab069b66a4cce1b4c8d506f75f258556a95a60532d79"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_cli_doctor.log",
+      "sha256": "e364698b47f86f0fcfb0ed619e26bec47c50b8e52b3159141f7a44b7718a8b9a"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_cli_run.json",
+      "sha256": "3bb568644abaad975856ca8122407564702512b7f07150342f7fdd37e4878f68"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_cli_run.log",
+      "sha256": "e8ae75f3eee58feb45dc41fdb4cd24ec26de680ebd0785250ae6754302231081"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_cli_status.json",
+      "sha256": "93244c7309205028ec86d6a9039b6f5d8dfb6be7770bce3e9f0d7ff616631810"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_cli_status.log",
+      "sha256": "e8ae75f3eee58feb45dc41fdb4cd24ec26de680ebd0785250ae6754302231081"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_final_diff.json",
+      "sha256": "3868333c4daaf4bba3b0d4e27a574ed1bcd9186178fa58d180ba990ded831584"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_final_diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_final_full.json",
+      "sha256": "428ea325bd9a011bb31bb39d5735fb4a2535097e013ac6c5d1a9aecc65fef52f"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_final_full.log",
+      "sha256": "031e7d1b7c190640c40774b9d83830922ce2079038850c5e6916e40e1a4eef58"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_final_lint.json",
+      "sha256": "113609553855ff576e0bfccae0605c5d0b4f6d5d31660d653ca5da2c0960641e"
+    },
+    {
+      "path": "docs/engineering/plan5/checks/B3_final_lint.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/guarded_tools.py",
+      "sha256": "ce57c3b3ecbb553d631eea790de227121961c9f0f4558c152f7ef26d6a88fec1"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/model_broker.py",
+      "sha256": "7d7244eddc7c9ab519679455608f6e0feb3d336c37c9650c9bb3846099d39cb1"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/plan5_profile.py",
+      "sha256": "d4b48377b87faa23891cc06d3874b0afdfdf262ba61d0b951b63bf4d545743ba"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/task_control.py",
+      "sha256": "1271ff1393b3d8b59c9faf893185f9164b4307cc1f2dba6d23cad6e50464ecb7"
+    },
+    {
+      "path": "foundation/src/goldgraft_foundation/offline_profile.py",
+      "sha256": "ea4d4e7dad9a71fe55f30a6f7a2c6cd6fe54ebbfe5ce54e485a75bcc0e38cce1"
+    },
+    {
+      "path": "pieces/agents/cli.py",
+      "sha256": "69528ce97a2b67e976b6af284ee2c1b3af403bea2d91364652b708e382a74c95"
+    },
+    {
+      "path": "pieces/agents/context.py",
+      "sha256": "0fd43dc42a778fe7cc59bcfbfbaba5cbd6ac5ac55b88aa36a35cad5b013d410c"
+    },
+    {
+      "path": "pieces/agents/policies/offline.yaml",
+      "sha256": "d88aca73b322085a01bc6833a6fbbfbb7573fd2586b4233f1325024ffbccd45e"
+    },
+    {
+      "path": "pieces/agents/ports.py",
+      "sha256": "379c2e2b3fecbd4a5889720554c49a71ed2df656c8e94ad18336acd8d4f08b01"
+    },
+    {
+      "path": "pieces/agents/runtime.py",
+      "sha256": "d01afb51531373e5ddf633fc1769127b93f52c8ec433c4c94a5fb24823dd68b4"
+    },
+    {
+      "path": "pieces/agents/scheduler.py",
+      "sha256": "1c463233f9a2e38ef97d5194e522b85dfd7bfd6afdcf8b2d7d2cc485cbc37495"
+    },
+    {
+      "path": "pieces/agents/tests/test_context.py",
+      "sha256": "8411f628a9518f018bce1453e815476c2219c1003e78abd59dfec929bee0e744"
+    },
+    {
+      "path": "pieces/agents/tests/test_guards.py",
+      "sha256": "f5de85f61df002ba3b0a62d9afdf78c64b64abc1559ca0d39087f0aae786a06a"
+    },
+    {
+      "path": "pieces/agents/tests/test_restart.py",
+      "sha256": "412323fc6f26b5d946120319a6031b3e0de9608e8ecc88ae50b69a8673e6c7b4"
+    },
+    {
+      "path": "pieces/agents/tests/test_runtime.py",
+      "sha256": "63b53c2317c50ecbcb5dac116c064aeae32e97987ca6a57ddab3395e6908a3f1"
+    },
+    {
+      "path": "pieces/agents/tests/test_scheduler.py",
+      "sha256": "c6d97b306802eaab56f3ab3b7cb55b1242bf93c373cab2935ce9dc08aad21497"
+    },
+    {
+      "path": "pieces/agents/tests/test_tools.py",
+      "sha256": "3bcf5ba854b7be0a3f3a7c77a3326f33e39f0d0e7a6d9413c254e33ac2f5ad5a"
+    },
+    {
+      "path": "pieces/agents/tools.py",
+      "sha256": "c4e680ba69cfad812983c3d804a17ee58adc4d13cf3ca3de995f65dd411d8054"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "c0031dd8aabd2b13c33a1ee4b21bf6632b1390a0a09851fdbe9a11c14663958e"
+    }
+  ],
+  "limits": [
+    "Scripted zero-budget runtime only; no real-model or service qualification.",
+    "No accepted output from an unqualified lease/intent rebinding.",
+    "B4/B5/B6/B7 and actual provider/isolation/merchant gates remain separate."
+  ]
+}

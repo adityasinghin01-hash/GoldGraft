@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "case_id": "case-demo",
+      "shop_url": "https://shop.example.test/",
+      "status": "draft",
+      "updated_at": "2026-11-10T00:00:00Z"
+    }
+  ],
+  "next_cursor": null
+}

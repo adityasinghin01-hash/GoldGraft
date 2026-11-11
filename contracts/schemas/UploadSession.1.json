@@ -1,0 +1,164 @@
+{
+  "$id": "https://goldgraft.dev/schemas/UploadSession.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "finalised_snapshot_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        "state": {
+          "const": "finalised",
+          "enum": [
+            "pending",
+            "receiving",
+            "finalised",
+            "cancelled",
+            "expired"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "finalised_snapshot_ref": {
+          "type": "null"
+        },
+        "state": {
+          "enum": [
+            "pending",
+            "receiving",
+            "cancelled",
+            "expired"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "binding_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Binding Epochs",
+      "type": "object"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "contributor_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Contributor Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "expected_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Manifest Digest",
+      "type": "string"
+    },
+    "expected_manifest_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Expected Manifest Ref",
+      "type": "string"
+    },
+    "expected_total_bytes": {
+      "maximum": 209715200,
+      "minimum": 0,
+      "title": "Expected Total Bytes",
+      "type": "integer"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "finalised_snapshot_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Finalised Snapshot Ref"
+    },
+    "received_chunk_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 100000,
+      "title": "Received Chunk Refs",
+      "type": "array"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "receiving",
+        "finalised",
+        "cancelled",
+        "expired"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "upload_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Upload Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "upload_id",
+    "case_id",
+    "contributor_id",
+    "binding_epochs",
+    "expected_manifest_ref",
+    "expected_manifest_digest",
+    "expected_total_bytes",
+    "received_chunk_refs",
+    "state",
+    "created_at",
+    "expires_at",
+    "finalised_snapshot_ref"
+  ],
+  "title": "UploadSessionV1",
+  "type": "object"
+}

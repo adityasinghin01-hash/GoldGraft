@@ -1,0 +1,277 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ApplyApproval.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_group_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Action Group Id",
+      "type": "string"
+    },
+    "action_plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Action Plan Digest",
+      "type": "string"
+    },
+    "allowed_actions": {
+      "items": {
+        "enum": [
+          "preserve_state",
+          "publish_artifact",
+          "publish_source",
+          "merge_protected",
+          "apply_configuration",
+          "deploy_exact",
+          "finalise",
+          "prepare_exit",
+          "run_exit",
+          "read_exit_evidence",
+          "revoke_exit_evidence",
+          "configure_ingress",
+          "restart_target",
+          "revoke_grant",
+          "delete_temporary",
+          "stop_worker",
+          "financial_compensation"
+        ],
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Allowed Actions",
+      "type": "array"
+    },
+    "approval_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Approval Id",
+      "type": "string"
+    },
+    "artifact_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Artifact Digest",
+      "type": "string"
+    },
+    "authority_binding_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Authority Binding Epochs",
+      "type": "object"
+    },
+    "authority_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Authority Refs",
+      "type": "array"
+    },
+    "baseline_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Baseline Digest",
+      "type": "string"
+    },
+    "candidate_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Candidate Digest",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "config_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Config Digest",
+      "type": "string"
+    },
+    "controller_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Controller Id",
+      "type": "string"
+    },
+    "delivery_route": {
+      "enum": [
+        "git_protected",
+        "direct_artifact"
+      ],
+      "title": "Delivery Route",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "graph_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Graph Digest",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "patch_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Patch Digest",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "publication_destination_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Publication Destination Refs",
+      "type": "array"
+    },
+    "recovery_plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recovery Plan Digest",
+      "type": "string"
+    },
+    "reviewed_bundle_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Reviewed Bundle Digest",
+      "type": "string"
+    },
+    "revoked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Revoked At"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "source_base": {
+      "anyOf": [
+        {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Base"
+    },
+    "source_head": {
+      "anyOf": [
+        {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Head"
+    },
+    "source_snapshot_digests": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Source Snapshot Digests",
+      "type": "array"
+    },
+    "state_plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "State Plan Digest",
+      "type": "string"
+    },
+    "target_resources": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Target Resources",
+      "type": "array"
+    },
+    "trigger_chain_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Trigger Chain Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "approval_id",
+    "case_id",
+    "controller_id",
+    "action_group_id",
+    "authority_binding_epochs",
+    "graph_digest",
+    "scope_digest",
+    "reviewed_bundle_digest",
+    "baseline_digest",
+    "candidate_digest",
+    "patch_digest",
+    "artifact_digest",
+    "config_digest",
+    "delivery_route",
+    "source_snapshot_digests",
+    "source_head",
+    "source_base",
+    "publication_destination_refs",
+    "trigger_chain_digest",
+    "target_resources",
+    "allowed_actions",
+    "state_plan_digest",
+    "recovery_plan_digest",
+    "policy_digest",
+    "issued_at",
+    "expires_at",
+    "generation",
+    "action_plan_digest",
+    "authority_refs",
+    "revoked_at"
+  ],
+  "title": "ApplyApprovalV1",
+  "type": "object"
+}

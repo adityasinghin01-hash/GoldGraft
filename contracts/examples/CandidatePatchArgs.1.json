@@ -1,0 +1,5 @@
+{
+  "expected_tree": "258171c5342705a174ff77a9d1553775b67ce38623acfc6a4d9a5be576e3af42",
+  "patch_ref": "fixture:patch_ref",
+  "workspace_ref": "fixture:workspace_ref"
+}

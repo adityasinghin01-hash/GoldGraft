@@ -1,0 +1,7 @@
+{
+  "accepted_at": "2026-11-10T00:00:00Z",
+  "generation": 1,
+  "operation_id": "fixture:operation_id",
+  "receipt_ref": "fixture:receipt_ref",
+  "work_id": "fixture:work_id"
+}

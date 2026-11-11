@@ -1,0 +1,19 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CancelWorkRequest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cancel_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Cancel Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cancel_id"
+  ],
+  "title": "CancelWorkRequestV1",
+  "type": "object"
+}

@@ -1,0 +1,20 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "fakes/tests/test_plan5_task_control.py",
+    "fakes/tests/test_plan5_brokers.py",
+    "fakes/tests/test_plan5_lifecycle.py",
+    "fakes/tests/test_plan5_views.py",
+    "fakes/tests/test_plan5_faults.py"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "evidence_class": "offline_component",
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B2_accepted_b2.log",
+  "output_sha256": "eab6c87435e123faa9546a00c1194639d3068dc47623c734ca978ac62c1baccc",
+  "seconds": 2.234,
+  "started_at": "2026-11-10T12:59:31.814839+00:00"
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/bin/ruff",
+    "check",
+    "."
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "evidence_class": "offline_component",
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B2_accepted_lint.log",
+  "output_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "seconds": 0.024,
+  "started_at": "2026-11-10T12:59:57.577001+00:00"
+}

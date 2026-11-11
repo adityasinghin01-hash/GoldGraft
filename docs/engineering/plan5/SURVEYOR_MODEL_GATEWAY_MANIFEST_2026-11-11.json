@@ -1,0 +1,2307 @@
+{
+  "status": "LOCAL_GATEWAY_WORKING; BOUNDED_API_PILOT_COMPLETE; FULL_ACCEPTANCE_HELD",
+  "active_agent": "Surveyor",
+  "sponsor_phase": "N/A",
+  "phases": {
+    "A": "PASS_LOCAL_PROFILE",
+    "B": "PASS_LOCAL_COMPONENT",
+    "C": "PASS_LOCAL_COMPONENT",
+    "D": "PASS_OFFLINE_595",
+    "E": "PASS_BOUNDED_API_PILOT; ORIGINAL_UNKNOWN_RETAINED",
+    "F": "PASS_OBSERVED_CORRECTIONS; FULL_MODEL_RELIABILITY_HELD"
+  },
+  "tests": {
+    "affected_passed": 595,
+    "offline_only": true,
+    "live_evidence_separate": true,
+    "net_test_count_increase_from_continuation02": 22
+  },
+  "inference_attempts": 27,
+  "successful_model_inventories": 7,
+  "ledger": {
+    "spent_micro_usd": 26663,
+    "reserved_micro_usd": 12672,
+    "unknown_micro_usd": 3168,
+    "outstanding_micro_usd": 9504,
+    "active_cap_micro_usd": 50000,
+    "hard_cap_micro_usd": 20000000,
+    "frozen": false,
+    "available_micro_usd": 10665
+  },
+  "report": {
+    "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/SURVEYOR_MODEL_GATEWAY_REPORT_2026-11-11.md",
+    "sha256": "b0a781e6706cf4f1bceb6aeb175873d38df02b6c22d73900d36f4bf35e0f6966"
+  },
+  "verification": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/FINAL_VERIFICATION.json",
+    "sha256": "296222d2b230c6c2a347fec108229e4d2d8a7314248a921f60d9ed69d18b41fb"
+  },
+  "qualification": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/qualification.json",
+    "sha256": "03b2d19e7fccd5ddf7c9179873d351777f4bbb7d0432fb2911828b12a076e5b1"
+  },
+  "baseline_result": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/live/surveyor-nvp-baseline-v1/result.json",
+    "sha256": "6bc26a1b5ef841ca594ffb3be2d0d759fb886d87419e2d9ad084a61e01726bb5"
+  },
+  "source_files": [
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/api/openapi.json",
+      "sha256": "ecac5d7ceddf720a82c8f09b57ac4d2797fcdb6fdb48e9fd5301e53747b065c6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ActionIntent.1.json",
+      "sha256": "251ddea3da0fc180b946c523873207f2d404b15288d2e322bdb4c885f724dea8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ActionPlan.1.json",
+      "sha256": "80583b7cc9edfb3cca9f574ab49b2bd6a67339e780819525b90a0026a23f682d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ActionStatusView.1.json",
+      "sha256": "a0967cfce9c16faeb125eb9374734e5655224727f6cee390687b99dd5d1a6bc7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AdapterCapabilities.1.json",
+      "sha256": "0b0f61cac12ebc0f0adea192720a0f40776928f78cb982fae6ddb3d17d4da38c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AdapterObservation.1.json",
+      "sha256": "9d77b5f1a7ec4c7abc7f81de9bf870b3afd390038e71660337396b9e04286c8d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AgentResult.1.json",
+      "sha256": "c3dccbda80372542a26e0cf53de71fe61eb8c13d5d9b952fb751e1dada682e5c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AgentTask.1.json",
+      "sha256": "2fbb7bd55c09f35922512c996fbd5c0621047d3e2af000fb1bc21e419274e4a9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AggregateReadArgs.1.json",
+      "sha256": "04aa9b0e2aedc4618348c54e870e6304ddc306d6ac6291d06afd8d41e8bce610"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Alert.1.json",
+      "sha256": "6d66a7583191529661cb32ab29895a1acc33076846ee1e014659ec6c230f4163"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AnalysisMatchesArgs.1.json",
+      "sha256": "1dc3a47361f37ec5380482bb438f48988ad398f0ab142d8670f1c30455d60be9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ApplyApproval.1.json",
+      "sha256": "aaa7b9c3b16030fd10738d70096df54be163fda1f54b12fddc8086f4c7df7703"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ApplyAuthority.1.json",
+      "sha256": "e076ae963320324b49d39eb9bcfc55da8dd5aefc861ed9ff806b1c9e1d3e429d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ApprovalSet.1.json",
+      "sha256": "0282a576d358474f178fff085b46763f07e616676e50fae4d74ae864cdd39deb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ArtifactBuild.1.json",
+      "sha256": "37ef5dd6c1cd88ce11b5c19278233ac134ded999ee0a84ba43b87a1bdc6d27d5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ArtifactDescriptor.1.json",
+      "sha256": "e83fd4c4f73dc780f4e0c3fed37564fc70964c36c902ffd88e87bb34365587ad"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Asset.1.json",
+      "sha256": "c463152cb0d20fcaae665734421bf208b88a3edcf93557916fafd3b117d3d2ef"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AssetManifest.1.json",
+      "sha256": "98aefdafa92cb8c7d2f4eea77dc2ea4610cb28aea3bbb5a11064a98767a2cbb4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Assignment.1.json",
+      "sha256": "be69532d8b1f3802d48ec23bd67f32059f579528b46ee128107242bdc18cc5ce"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/AuditSummaryArgs.1.json",
+      "sha256": "d0555207980f68f0dac4f9beb2b7f37f93d48da3488ad6e5dfe2cbc4e1c8c40b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/BaselineEvidence.1.json",
+      "sha256": "90869a517a09a0d38d09a4c679b8b20db06f2b779eea504e5e85f3dcc03bf8c9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/BudgetRecord.1.json",
+      "sha256": "bc5b036c0070114545e73a630648556a7a33d67bcba5e1a3237158609a0b7e9d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CMEL.1.json",
+      "sha256": "bf85c58e183de7f691dd955059ecdb59b203547cbdabc2025aa1b80a769d7fb2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CancelUploadRequest.1.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CancelWorkRequest.1.json",
+      "sha256": "9a8700b6bdb65f85a7882b8959c3920c325790f30cae9fbb21e8900ba6674c06"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CandidatePatchArgs.1.json",
+      "sha256": "cc333ee7c10eb8729c6ac41345a684c3f7fe309a3cf80e64acfe447048e94923"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CaseEvent.1.json",
+      "sha256": "5560fa71f3b2c5c83ad2bb8147d7ea9d4f3f05cc04728bfb226602f08ac25925"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CaseEventsQuery.1.json",
+      "sha256": "9267d4edeeda7d436bb687819e0d903b940a145fec69a4c7c2e74497c0578736"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CaseList.1.json",
+      "sha256": "639b3c04c8e018d1385fe219078f0d093788b608abba63977fc09f55bb722252"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CaseListQuery.1.json",
+      "sha256": "a99839d96910caf68167bc769bcce710e136f9bf32073f4d202f77e1c212dae0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CaseSummary.1.json",
+      "sha256": "a3cde9cf844aa18a8f18570b9d035927190fface451f0fd768574b7f2c8fe794"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CaseView.1.json",
+      "sha256": "6575160d3a5fb934d0fe66404044a89de8f4aa3a6deb5929f0d10350709f8d4b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Certificate.1.json",
+      "sha256": "74571cda205f325406840bd136f18fc6660bc7e7e65bff76d634095390ab9bb0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ChangeList.1.json",
+      "sha256": "0b473265cd8070ec72e3f1a9ed4f433e5bbd68c9df60dc7629eaba4a202d0778"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ChangeList.2.json",
+      "sha256": "1cf9c033918af525721608a00e540ea264d96c0518d1234644a6f8b53adeeb78"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CheckResult.1.json",
+      "sha256": "44739c14c222d2c16c76967a093de83ac5250edebc0330c203db6f1bbcea0c80"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Chunk.1.json",
+      "sha256": "e37514b611f78c897ab087741e2659fa97d4167deed24c97a416e13f5115132b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ChunkReceipt.1.json",
+      "sha256": "fc8630984f794b360011bb31da521d6d0d8afb8a9d8b9f697b3b6884fdc8a0cd"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ChunkUploadRequest.1.json",
+      "sha256": "102980deb2b57be672eb39116d0da0f2107429792303200e792cb3d52f74efd3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ClaimDraft.1.json",
+      "sha256": "d3e764008a094145e7d99cf2309a842ae984c8fbdb352632f4a40c96e25a4cfc"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CollectorAcceptance.1.json",
+      "sha256": "9ef511e7b065a535c63ac149ab7f874a67b48469a64e2cdd34b9ee5dcdb243e8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Component.1.json",
+      "sha256": "f944d132ff493a71463d8e4ae72dbb1dd1ebdb392da6d606c5080ab017641e26"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ComponentManifest.1.json",
+      "sha256": "bc83ce0c037810bf4f11b70ac1bb26d09e0c4a2490d3797b73744c5edfc53c59"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ConfigurationEntry.1.json",
+      "sha256": "c8d12b26a81c95f53eed952863d60ba9616c49d5f554a5927154f57b212ac97a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ConfigurationManifest.1.json",
+      "sha256": "413875688e7961cb66d682dfaf95abb27edbed4fadd28085d5b43c5782efde2f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Connection.1.json",
+      "sha256": "610b30adda782d75af4d9a7eb7c84fc603725d9baaf0ddbba347dc830dfcce85"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ConnectionCase.1.json",
+      "sha256": "d6e750bd34133a751ab33b527b506f318039bce90c028ef1f4903389d293fea2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ConnectionReadiness.1.json",
+      "sha256": "476b3d4be6d2be1d960ca02660dcc9bb3f76a06b91ac3b16a67a4993f99bb80e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Contract.1.json",
+      "sha256": "c9554aa46dbb6fee24f361fcb8666dbbad54b0f7a6f8e34cbdd3e1e1a2a1d646"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ControlError.1.json",
+      "sha256": "801bb9378da0ba59f54c2ba3cf2ad03a69a1a0a5372439a83c9efad15f7a708c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ControllerInvitation.1.json",
+      "sha256": "d5f509d2d96c34dbf68fa12d13724944968ee08e19fb24472d0fdc0fc2ebc629"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CreateActionIntent.1.json",
+      "sha256": "24b6edcef10014cdc83a057f7a0fd30149833888b5ff0a8f173a53b764a454ac"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CreateCase.1.json",
+      "sha256": "2719e08aa5b1a2368465b04903254b0e10f3c15ad0caec2d2d3e5e8d26b4cf6d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CreateDraft.1.json",
+      "sha256": "2719e08aa5b1a2368465b04903254b0e10f3c15ad0caec2d2d3e5e8d26b4cf6d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CreateInvitation.1.json",
+      "sha256": "a3dd4a5efa5801e48ee882c28130882a187b4f728d813c0ad00c968153c3a445"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CreateProviderIntent.1.json",
+      "sha256": "5f4c2cb3f99bb0be06e41264510f15416fac9c665043840c47e138d68203d5c0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/CreateUploadRequest.1.json",
+      "sha256": "998056b9f49cf05be05d44be6a26db59733b2aa2ef9684c2c7659a6bf6e35ec7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DashboardSpec.1.json",
+      "sha256": "5daec1a78ff7d20135287be63f118b40f1e4c71b57dd823c3864c26fbb9d8d88"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DeliveryDecision.1.json",
+      "sha256": "3310d4274e16e57cce0a18ca7b904e03404ef2ebb0461f5dba711ef808335d66"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Dependency.1.json",
+      "sha256": "973ac919b606929485c5b8593a9285e5af537c732c8d956b3bc95606314bb67c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DependencyInspectArgs.1.json",
+      "sha256": "1c2708711784e212f188b3cd82fc22f6575de76793e5b5d0329b8332e05af34f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DependencyManifest.1.json",
+      "sha256": "9736ab41765f59e54dd10c6fb56e8205ff8a8ed9e0ac01e5263fb611c7713f3b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DeploymentObservation.1.json",
+      "sha256": "db4bca6758d5ebdcebf965ead92b088f865ad2e857b2ae8c60d3286a50611a8c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DetectionRule.1.json",
+      "sha256": "7396417adba84b053263f59c13b2ecfdad60b5b9abb8971a2c7e4c32aa088c87"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DocsLookupArgs.1.json",
+      "sha256": "c25f70bf9537822d53c0599e2c9bf0f41f044ccad97cff25c34d4bc764a8cb81"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/DraftCase.1.json",
+      "sha256": "88dc09d45784a5bef66ab5cbccce4d18fcbe7b1b4c2e0f4bbecda8e68cd39657"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Driver.1.json",
+      "sha256": "b0e50820d856882eb7a1dc4421670783abe621e2f9e238ffd648db71ab3b4da6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/EffectIntent.1.json",
+      "sha256": "23dd9e5733036f6aa077df7265e30622a13c06c29fbdf004d49e71fc9531ecae"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/EffectSlot.1.json",
+      "sha256": "c8896a55fbff0b73de9ce294e0769eee262793f63075ce6b86282cc6e5ede25a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/EvidenceReadArgs.1.json",
+      "sha256": "204f90a7f1bbc134fa2546aa41c59a99665f2a602241d5ab60cb483e411a6787"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/EvidenceSummaryArgs.1.json",
+      "sha256": "d9cd31dc4539abfd9deb9dcd6ffe814772de21a0f89694a05325ac19b02e69ca"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ExecutionProposal.1.json",
+      "sha256": "af0eb99019d99011695a3660cbda0395aba533f4ff58e5e7123ad79ae1cecebb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ExecutionRequestArgs.1.json",
+      "sha256": "ba8ef3ada936cc56ca97041523954d0cacf19ea9ebcc30a2c3e02dd413f72dc2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ExecutionStatusArgs.1.json",
+      "sha256": "4ecd75ff14a5f2c76dce2bc1421371e82120a3bf5575fa5a6844eb7806ee8f09"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ExitCheckPlan.1.json",
+      "sha256": "51074770464b0e09b7531aaa26269fbb3652cf449af72846b02935ecb94df651"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ExitItem.1.json",
+      "sha256": "ba59503aa4c7379604c4faa6547c93ffa3be7097a3afdf50ea33ed82b12b0e48"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ExitManifest.1.json",
+      "sha256": "50be9de3dcb3ff6fbdb7568013210e495336ba2e7c6aebb3c844dc70aca05dea"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/FinalisationPlan.1.json",
+      "sha256": "bbe0f60107275845e5a649bdeed19cd5e58e7b27a96fa40af8173a0633ef5ad4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/FinaliseUploadRequest.1.json",
+      "sha256": "7e23fbf5a505acdc37cd5c05785f347c12d3e1347c8bd606d08912fcdd226e1b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/GuardEvent.1.json",
+      "sha256": "3dbd3f18f5aecd50c29173ab248fdd3b03297be3346730d9f47dfa9c2b10eaa7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/HandoffPack.1.json",
+      "sha256": "734a462189c4c242bd31a4e4e0ccdce5522fd696ef7563292f37aa39e35434e9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/HandoffRecord.1.json",
+      "sha256": "4b2648c0dc37680793dcdd47d2868696f521378fb68a73e34d7e081528528db2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/HealDecision.1.json",
+      "sha256": "7745cd05d1c150b1e7c82bb337e87aaccdc6f14050eab4d651541527269d73ad"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/HealNote.1.json",
+      "sha256": "09665b774cd24ac52dbca6faad3f56f6799d62c199568fe96720d41d623de45d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/HeraldText.1.json",
+      "sha256": "db6f6d24f472338c52e44637ca6e2178c47173d4612838c305c6c7688542dff8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Issue.1.json",
+      "sha256": "77b7910500304fb9b427756c1530a947ee5da2981e6d44d3882fa54a357510a9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/IssueApplyApproval.1.json",
+      "sha256": "bb625527b78c5d517f8a5fd37c1c374259e55dc6fabbe5c1d2eb80a74b77c820"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/JobResult.1.json",
+      "sha256": "bc2dac840b94e744b7e6d1a4e7ea703398a8c54509770bc2bb75801554c3b5e6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/JobSpec.1.json",
+      "sha256": "669496b82f7af18685d39100098b502688eb22cefcee66ab533b2edb42b756e8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LaneChange.1.json",
+      "sha256": "3cb016a52efaa5a4f4a93411fdfa0fc85505fb025c618b0bb905658e9e536575"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LedgerEntry.1.json",
+      "sha256": "d29af66e6580e0e3604d65db850123ea841b723a4daa6fb0dd9ecb055fc0b83e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LifecycleRun.1.json",
+      "sha256": "ee105edf79e91d5af0f6d41e8aa2fc33263ae45784ae889b89eb46dd086e6803"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LifecycleWorkRequest.1.json",
+      "sha256": "6fe283c4af7593d1aa42f267538541e0b2989fa8cc6901976ecdeb666009e038"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LifecycleWorkRequestReceipt.1.json",
+      "sha256": "d8f4dbd0048d0e7f4aa3293db00a6dd1d33dbcbffb920d5f5a52df386ba454c7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LifecycleWorkResult.1.json",
+      "sha256": "89123ebf5949bbafba6dfbf2cdc3cbbe740d672f9477a3e01bf42c09ad93d002"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/LinksPack.1.json",
+      "sha256": "0ef243bd6fdef8e8ae0edff4c0da566aba1a5bbb41d5398912489fbd6d699aec"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ManifestEntry.1.json",
+      "sha256": "f898afec011e0bd70823e1d96e4ccb3b59235a1059ff7ed04c1d565b438d626b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/MappingRow.1.json",
+      "sha256": "a64f614ec78e285f88eeb857e4038d80e11e27b81df3d3a4b60b4f76ef97f8f7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ModelBudget.1.json",
+      "sha256": "87ba8022c227fa70e262bd1794977ed1682376156100a1c0a8a7bc0bc6097a85"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ModelTurnRequest.1.json",
+      "sha256": "9a1ac32b96d8850eb15919a2a627d94dba32353464044605b08d749565d98e19"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ModelTurnResult.1.json",
+      "sha256": "7579af5164a3742c8b58d76c2ec3edd69da0b11ad220a7246ab3e6fc4c3632b4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ModelTurnStatus.1.json",
+      "sha256": "cd9d4c7c208d2353135b45351b885e843f23c6823171fad4077896ae49f92e9e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Money.1.json",
+      "sha256": "de24e929c2e029bd65017fd752de3d16c8b06507e1357a524811f33722d8a877"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Mutant.1.json",
+      "sha256": "c9d658cd70fe104f8d6470668dfc2db596fb85e9411fd31b3352eaf33b32da01"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/MutantSet.1.json",
+      "sha256": "de1a8d213b423b8504c4479ea32f35037a0296f517c50683c661d7a384b94b4e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/MutationOperator.1.json",
+      "sha256": "5e249186ba4ea4f6e42493dc1ead3e58dd624cf559784aebecaad74530d4772a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Omission.1.json",
+      "sha256": "de4b03c6aff682cc852828a24ffc227060fe7acd6e1499afdeb342348d7c7f51"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/OmissionManifest.1.json",
+      "sha256": "7bb59d9ab3902e9f187c823a8c17052848a6ee03cff3517945495ca4523ab877"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/P5Problem.1.json",
+      "sha256": "a7dc0d396b58b0fddd07365a9454eb474b6fd379fa09fdca856e7dc07c59e1bb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/PendingResult.1.json",
+      "sha256": "9cb62581723f88d869a11ba6e62e58d2afc13bc221dc0b82713960a7cace57c3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/PlanProposal.1.json",
+      "sha256": "56058ed33eb8e9b6e39c4ad1c66366303aea4866bb43f1ac4af50f0a0d43677b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/PredicateResult.1.json",
+      "sha256": "94e20deeb4c9f0305455e2736b2e58366f2def9f4529b9f660a06d2e7cbcf540"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/PrivateReviewView.1.json",
+      "sha256": "3d98a9426c649e93005801fde2aae5d7575213615c433d6c0fca4ce6338da577"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ProbeResult.1.json",
+      "sha256": "415bfbde82fd8ac43982511e36e289a1f69d28c507c92a12356f53e307593218"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ProcessingDisclosure.1.json",
+      "sha256": "2a623863952fab17dcb4a9a2bea2dd8bb764df2dd1d315875e023351d82a766a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ProcessingRecipient.1.json",
+      "sha256": "0b78d8fbf7aa677a366971345df999fc9af774177d80de5fdfbb7001ad9cf065"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ProofStrength.1.json",
+      "sha256": "3e58afc68013acc98770ec75cb1bd2616d620f3f131727c5d64eff1623a53b78"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ProviderIntent.1.json",
+      "sha256": "46ae67ad550ef79c649ee468a4b984e5708e170cd5d899dcd4b931438e4ae11b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ProviderRef.1.json",
+      "sha256": "f079b06b200fb90aa9faf6392807a6d6ced9b75233a7fc9eee6955993d9de06c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/PublicMetric.1.json",
+      "sha256": "3951650ecb6c2bb0ea8f087e6697fb4d16e92139336407ec53fa5dfde544d950"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/PublicProofView.1.json",
+      "sha256": "dd2bfc5122c1e58d6bcf7ecc6eaba23397fa6608ea46a9e306022c51f3dbd9ee"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RawCapture.1.json",
+      "sha256": "64e297c3834a8f34dbc89a1e2069359e31bac23899f8efe6a3178ddc9cf4d190"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Recipe.1.json",
+      "sha256": "f05d33674a9f680bd44b34f31024148c58850afface9ae7eff373fb4ce94255c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RecipeLookupArgs.1.json",
+      "sha256": "e5df6b2ee2ac1564142484209bbfd1c11567786e00d974c747ca72c47bffaf5e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RecipeStageArgs.1.json",
+      "sha256": "d33a5a66ec3e7db4d8a9ae67c111d68a9b1e7c62376f81cd37713aeddf03b0ef"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RecoveryPlan.1.json",
+      "sha256": "2b4a9275d1d31088ff607c9a6bcde1a298009c265e946f2a92abc65ef51b5f68"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RequiredAction.1.json",
+      "sha256": "59448e342e56c8f69f741c2508931a3a2c422e47093b18e23ee345645a29304c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RequiredFlow.1.json",
+      "sha256": "9094bfdb1a9ef24c67f19862534fd1488449d73af09f30e017914afdb2306e19"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RequiredFlowManifest.1.json",
+      "sha256": "897af1f72a20cb5ec1f44f1e4716f02152ee0d72f8b15bcb0e358e7d3447315c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResolvedDeliveryView.1.json",
+      "sha256": "46340ebf9fd241dc13c363e619f3c3880aeccc31b7e1c04764a9b6d36baa0b94"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResourceBinding.1.json",
+      "sha256": "1bdd169e4c3e761ef7365703283b5bdea0a363c9738f58e8a117c517635f1270"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResourceEdge.1.json",
+      "sha256": "c4e268995a3933590b95d348cbc1146a43ad79133482252cae6f38927410d47c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResourceGraph.1.json",
+      "sha256": "7a1e9cf353a3881506fe9240c4384ecdfe5ca485937b1a77c0da3ca9cefac3e4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResourceNode.1.json",
+      "sha256": "d5111727f7d665d5243b6b12caceda7e7b8e31b287064922ee1e27ed1346943e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResourceRecipient.1.json",
+      "sha256": "0d9f283555c9629eecb504259bca27ffc9d654701b8a72d7bcf4c26329157152"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResourceSummary.1.json",
+      "sha256": "75de64de677ca3ba85de679da5fd1fe28325e77c38015b338874a645cbdf79ce"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ResumeRunRequest.1.json",
+      "sha256": "89d487aa2109ed20f835cc1adc35614f91cc8751d0b14ae9b282c24531a5278d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ReviewBundle.1.json",
+      "sha256": "f4c667b78b8060da26036989d22642d6783dc957767e9bada3d0c566befb7705"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RootMap.1.json",
+      "sha256": "f8ef25a4dc3dbbd1be5fd99feab8eb6be8c7f2ab716949d737a38a524c8c39ca"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Rule.1.json",
+      "sha256": "fce33e6220c623b4eb9b0acbcde1e48ff21e6e27628321d618e1fd49dcee9c14"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RunTaskSnapshot.1.json",
+      "sha256": "ad978c84c3b26fc5c58dfcf97f65ddef9eeea257a1923b07da6a2ea2f016fbcb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/RunnableShop.1.json",
+      "sha256": "be541038d2b09bcf0e01e7d2c53f0c78ab4fce02ff383e081bce1919462343e9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SafetyRequestHoldArgs.1.json",
+      "sha256": "1ca29eed1beb2b3d82a0c5f0743f0eea109424dc1e6d6a957d81fd51e85be30a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Scenario.1.json",
+      "sha256": "93fc67f332b130806c6fd7830062d4051f8a01a79907f947b77b9089a79f7c84"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ScenarioSet.1.json",
+      "sha256": "ff8d7f87fbe8a5bb6bb2b13c6bcd2dff0afd3a008246dbea1ee7263bc8667095"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ScenarioStageArgs.1.json",
+      "sha256": "af2ddc21216a76783e1ba7eaa31a9688519c738d14e95aa0d43d70f6cfb854c7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ShopPack.1.json",
+      "sha256": "72b12158c5ecf94aa372e60ef27baa55b4b1346592061f2ab61eb8bfe5d735f5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SourceReadArgs.1.json",
+      "sha256": "dcaacd5ec45c30ee469c1085e5aad03e8560e50ea64284da85d3847b284a8f82"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SourceRevision.1.json",
+      "sha256": "d59cdc1fa08d23f063c199736fb7ae9dd1d37a8fcac2b66197952dfa02996272"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SourceSnapshot.1.json",
+      "sha256": "357ed44cd3d9a69b51891f74a7ca4ddbf3e30654bbb332d2bf2384c4d728b624"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/StageChange.1.json",
+      "sha256": "943f64e93ae7030c005e305578742307d7dc6d55532c3887c4981466ac3b396d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/StartWorkRequest.1.json",
+      "sha256": "ebeb1a131e1938ba40aeacec1573d3e81c55524ee22a27a087d37d2e44a0884c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/StateCutover.1.json",
+      "sha256": "b5bf2e227ec1d8748a512a5763d8d17d5c207eae9ba18b9ee86548b941a54fe8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/StatusReadArgs.1.json",
+      "sha256": "64b54840c65a5f6f20e273895f86b03f8352fba4180a3c1f292dd2845ff4707d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SubjectDerivation.1.json",
+      "sha256": "09fa3b7d91bdd53f539083894d1fa90b0bc01d69944fdbcbb939337dad3cff6a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SubjectManifest.1.json",
+      "sha256": "1da629503ecae94bb78a0ba5d02fa2fb27caf5b81f771559fbba413f5ebdd260"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/SwitchConfig.1.json",
+      "sha256": "b394ba61701f488901e8384afa645c27a968d9cca7d517e8f23d1588ecaa51ba"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TargetKey.1.json",
+      "sha256": "5bbd2514eb10fd4991aab6777c656e39e0e91cf46ca005bffdfd36274dc17eaa"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TargetPlan.1.json",
+      "sha256": "2ddd8e04e8dbda4a2c7a01af26de55fa29f323352bc38a68bdd74c24c34cab94"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TargetReservation.1.json",
+      "sha256": "2ec99f1ce5d64cd49adc599f79f80712e223751603d7ca1eedb64bdfed812ea3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TaskCheckpoint.1.json",
+      "sha256": "a52142df63a4ec2d2a8322c4a847e6e817b2b1ddac419c26a60f8831ec4b38f8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TaskContext.1.json",
+      "sha256": "60aa47ccf481055e2b400323ec61696cc572203d7c462d9b46cd5c502d744cec"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TaskEvent.1.json",
+      "sha256": "bb45bd0a81a4f7e1a476282aa16910a3885aafd1ad72faa6e9777df3c7d69362"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TaskLease.1.json",
+      "sha256": "14d7efa3bbcf73201044e380174c39ee62282d0a0066ae3c191baba13453bda1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TaskSpec.1.json",
+      "sha256": "c57cb64fef4d4732b58178d328005e743bea308a2e9aabb3f2e44f66110b0097"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ToolCall.1.json",
+      "sha256": "165a0fd22a1f2931d804f4587e9eb74875fb9d4554809fa5c4fd9f9ebcfda796"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/ToolInvocation.1.json",
+      "sha256": "1496aa804d5d55c27345344de963cb002aef71fe003036db88554affeb2c4f38"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/TriangleRequest.1.json",
+      "sha256": "4291bcc9194525201d49aa018ccfd218edb155eeb9705fca0f2fb21229cff2f0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/UnresolvedInputs.1.json",
+      "sha256": "fdd9a6d9ed004660077bceccb4f2a318113bc7ff26e18edf076a40a66a1205e2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/UploadSession.1.json",
+      "sha256": "e8aafb2bc7d889b752610e8e5afa31455138fa1f46d5cc2cd8d0d64b6ed2eca8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/Verdict.1.json",
+      "sha256": "665002e084ebf260904734b34da56dd1c448a49ac91a349d2302372b1794716e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/WakeCondition.1.json",
+      "sha256": "2229e2ab37f53ea9f827e15ae774b08dbb638b6726096fe607fd39aede7519b5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/WorkAcceptance.1.json",
+      "sha256": "f5320c67909ef15c1b400f87f7496b67eb0d6bf921184fe4a69d988a5c86ca90"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/WorkCancellation.1.json",
+      "sha256": "710d1db32d289337938b8056d8b8539e591a4c24873cd3a757251a24cbd1280d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/WorkPackage.1.json",
+      "sha256": "924d0b8aa8501dcad365cbbd2b228cd2bc7cfd6427a93b343931f173eb08101c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/WorkStatus.1.json",
+      "sha256": "2753270f801393f6e291707258ae079c13f31f7c5c4a020f5936fa5266f1b166"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/examples/WorkerOperation.1.json",
+      "sha256": "a4fdffdd753f194690d5b96a34ba0993db3c5b3816082cedbee358710d1b3c3e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ActionIntent.1.json",
+      "sha256": "a2dea285a5dc56b5fe0448e99a7bf5bd05a3b0855aa5741725414d290f10da85"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ActionPlan.1.json",
+      "sha256": "38009008a15aa5f9835486f7c8ff562cc79debd56bfc496bbe5ea13fe95e49cd"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ActionStatusView.1.json",
+      "sha256": "2e97f717fa0893f8b9b9e16b310d4020696575c936e54153b469f0cf3dbb76cf"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AdapterCapabilities.1.json",
+      "sha256": "e88139d791b3ddb7cfe37af1e5ea6706222bbc522df8f6b0f287d8b5baa05eac"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AdapterObservation.1.json",
+      "sha256": "14b6001ca934e333ab4ca7e6a262cc4bfc45515d08639254020578330c54a82d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AgentResult.1.json",
+      "sha256": "b224f3c110871f718dc3f232a53d7c6891385a01f6ba6cc84f304ffbb1662d0d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AgentTask.1.json",
+      "sha256": "75d5a8e6e44b8b54f8458a1c75bc7ebf67e1c2b48bb3e3e92166d842c593cac6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AggregateReadArgs.1.json",
+      "sha256": "16bc400a9287c7d996ecc6f021633a299704940f218ef4d5e00909f0dea0846e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Alert.1.json",
+      "sha256": "ec5f2ce9e1378440378003e3bd0a4985b03075b5f660c6b9e34822f6397f4743"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AnalysisMatchesArgs.1.json",
+      "sha256": "2b40547fdaceb0da1e5499ef501ac96f5801b3596f8c570f439499255257e49e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ApplyApproval.1.json",
+      "sha256": "eb84069159db866ee27dd427277ccf4694013cfd18fa486a57c5c13a4ad8d63f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ApplyAuthority.1.json",
+      "sha256": "4d99c23d70a53de81a843024cc25a40cca15da00b6296c3fc82a44771eb6c76f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ApprovalSet.1.json",
+      "sha256": "3284b3286c8981c321a20110c14b7006471a4464d9ad25074569a1408e898fd3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ArtifactBuild.1.json",
+      "sha256": "b01cade68d9b3110c1c6c35182d82188791b5c5bf73cdd6a2878f46e514176f2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ArtifactDescriptor.1.json",
+      "sha256": "4e4276f71b41e98dd500649a16b7c5dff2d9b11b5f70da0be8802251c8ff93e3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Asset.1.json",
+      "sha256": "0a0ebde248e7be5bf174e107b47c2c186e3251db44b7a67f1aa768a2d1758775"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AssetManifest.1.json",
+      "sha256": "75f3e959491efee0eadd43163d21ecc597561a6236e9aef3eaffb434c2b63029"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Assignment.1.json",
+      "sha256": "fb20377bfb413edbd8b16c9603eb3bdeda9b336113af78704d56f7053031692d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/AuditSummaryArgs.1.json",
+      "sha256": "001d78dcb747a4b711c225f91aa9518c9cb42a7185dc6f4b67c16fd3d1a7e376"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/BaselineEvidence.1.json",
+      "sha256": "200139fcb7ed98a78ba4d32182e4a2eb17e94af98b008890b63980f05e9ade9b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/BudgetRecord.1.json",
+      "sha256": "c559daee0e3a16213e61ac1ad2baa710573f23ecd1e25870aac57a1847342f00"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CMEL.1.json",
+      "sha256": "6244a58c061674f840c64c206a52bf3c5879ba0c588dacf07f36a8bdd4f5f068"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CancelUploadRequest.1.json",
+      "sha256": "3a0ade2bfe5d2c1747713e40857bb155847bda554ee6a14d2f1ae0936215c56a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CancelWorkRequest.1.json",
+      "sha256": "8f50e5dd20b2e3609e5de08627ec2f1b6eeeae3f7a572a7df2ee92c4dfc4e0ee"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CandidatePatchArgs.1.json",
+      "sha256": "c5689cf604e27f1eb8b2cf1f66d0df3be5e0ffeaef417554b1559d9a12551961"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CaseEvent.1.json",
+      "sha256": "53aa17b7c14de722af684e016e5b6e785c616c6f10ee8fa8d930d55aa05c9423"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CaseEventsQuery.1.json",
+      "sha256": "5ebfce55cd9a59decaf0ae1136a35d6686e6b52ecbcf2619deaeeb14b4d5a47a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CaseList.1.json",
+      "sha256": "c14a09d6c141616330fc4d8133125b1f8bd378b3ffcf1d507a30b46cb7e1f8e0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CaseListQuery.1.json",
+      "sha256": "ed45c2701cd3a425e2aa281d9bd3edf0b44f64ca30e3e3040a80ad9ab2abeb86"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CaseSummary.1.json",
+      "sha256": "cc9e8768d37bf9ba0bfa4c8511a9776ea9bee378fc182237bb4618c77b9edfe9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CaseView.1.json",
+      "sha256": "7afe52759a44e83080c68c182546ffaf301b237ed05a0be14a9c3227ed1d0319"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Certificate.1.json",
+      "sha256": "da177ae26df74ac8d8bed31e80344dfc6655ebcccf8843ac84ed30bee8953326"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ChangeList.1.json",
+      "sha256": "ba5ad3f8e22de6952b8009b5175b37e5c5fd6053758a7681fa26478125a5e8ae"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ChangeList.2.json",
+      "sha256": "5253f87271d481a972e4f8021ec0017a10042a668630298a47dcb0ab3cd5dfe4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CheckResult.1.json",
+      "sha256": "3759fb35b3a46108105268e2000e4c57d910fab7c7a9aa6f78afa58fc7a3d142"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Chunk.1.json",
+      "sha256": "ada13f2d041063fc04688c6a8d936f8692ea849eec64b98eea8c3015f3ac9e01"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ChunkReceipt.1.json",
+      "sha256": "390d09953aa8953f26a8cc3ae8463f4496eb19f93cb100dab6f745377de0fb89"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ChunkUploadRequest.1.json",
+      "sha256": "70777cca2e46ba8ee2a79c044529b87db83f19aaee31a2165853409930f7979d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ClaimDraft.1.json",
+      "sha256": "c4a868936392a434be263932d396dbc0d70b9c21b0156061d8765875194e1d3f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CollectorAcceptance.1.json",
+      "sha256": "0ff15fe30e960106c2f79f642936b47f99482cfba8a4fd188fb6f32a297a3272"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Component.1.json",
+      "sha256": "353811816ca13db8d24c8a1a06311f2cae8852dbfd358f13fa8079c2c56d3034"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ComponentManifest.1.json",
+      "sha256": "366c88c8a8eb23c90b6acc4f0bf8738526bf8260da5368432d7158a85b2d9e03"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ConfigurationEntry.1.json",
+      "sha256": "32c20f7e9f017e2b509d0d8f5e4d232a33a1cec0f1c03e74d56af28b043c2113"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ConfigurationManifest.1.json",
+      "sha256": "590d5d93801e61b0c708b87007092e2d92efe305a044f73daa3d9a415f31d7a1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Connection.1.json",
+      "sha256": "e26a1f6cd83e7b06174cb5c25d1013502898f2e7b51945ec725c1852ff5e18a5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ConnectionCase.1.json",
+      "sha256": "de69c2198c8e5f5e6f27a11117b64227c7f656afe0c5d0d131c22a60d71749a7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ConnectionReadiness.1.json",
+      "sha256": "faedf645e0c17f36bc5913f03ebaa42a0da9d21046f75785d8bd539a916d3555"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Contract.1.json",
+      "sha256": "438fdda2ddab0a5d90c2f45bbe95add7643dc32992d8a38489cdc703e0b0da40"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ControlError.1.json",
+      "sha256": "76ac9b491eec6350c68d0b57f069c5ead6fbfa468634b80f2b83221a2299c7f9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ControllerInvitation.1.json",
+      "sha256": "cf91f74c94a6726bd5c7e8e2512808a57b9d77228fd70cb7fc84046e1cf61981"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CreateActionIntent.1.json",
+      "sha256": "52738bf7c598520327c234f3ebc90ac66037794aede9f58034cee6fadb2bb663"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CreateCase.1.json",
+      "sha256": "107bbf07283abe53d59478609a4beb3712b90d6b5d2e7c73276ec0727c5571de"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CreateDraft.1.json",
+      "sha256": "229b605cd59923deffab4638e66ffc5556b2bfe5fb35610943ddd6f6fcbc2ee6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CreateInvitation.1.json",
+      "sha256": "db8ea98b1a5254f2217222918d16886835a8b479675f0c11df2ed18442c9501f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CreateProviderIntent.1.json",
+      "sha256": "e3212cd8a293fc3864b3ab2606eccc03e6abf8b67290462a62ac94362f0be2ee"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/CreateUploadRequest.1.json",
+      "sha256": "6188dba490b54a26bd3f8e8dee941886f27d3f73c84833a4324aa91448797a5c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DashboardSpec.1.json",
+      "sha256": "b961ff799b75ccc65f8006d03e4c6fa491728a25e86036eec15a82998424b284"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DeliveryDecision.1.json",
+      "sha256": "4d60de62cc27da032318691da050fe799e71345ce9f7719b5b8eca335d7a785f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DeliverySnapshot.1.json",
+      "sha256": "787675999da3ff163597225be6d0e400c08fcf08e508244a0234ed6790422b16"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Dependency.1.json",
+      "sha256": "96bc9121fbc1fb9ccfa1ba574bdddc1494287ef39d7253ef72b7abfc36ea3a03"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DependencyInspectArgs.1.json",
+      "sha256": "de5f7da154403bc1d970b7d348848f36a3a2271abb001a601a01ef6859502f13"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DependencyManifest.1.json",
+      "sha256": "cb1dc9055fc2cd299589139ef09746181241187e21bf958f221ab6ab819855a8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DeploymentObservation.1.json",
+      "sha256": "dcadc18672840403033512a4c4abfb8446fa1977501e0a18d0050ecfd13e3fff"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DetectionRule.1.json",
+      "sha256": "66ea648becd1d50c445f06e6d08ba1f9a69e2714dfe055adc76185146798b44a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DocsLookupArgs.1.json",
+      "sha256": "fa2bb0ca2d6f81b580505331500b9b89762cac9f269add33e448442ed1d1365d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/DraftCase.1.json",
+      "sha256": "e2f5248f98aea2a30cfe26244da9b3772a9380b5e9130d4abf8f7378b233bcad"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Driver.1.json",
+      "sha256": "3110aaeccf8811b207c968c21874c5276ac71b50d82e3ab55ef0b4779b88d21c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/EffectIntent.1.json",
+      "sha256": "61b96c7fa1bba3cfcc008d84e6e4f5dd1568fe570b672af47b6ff1f63401cdd9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/EffectSlot.1.json",
+      "sha256": "e1e0743445943559d781babc4c843ad5f9d675dddc743f49263e4ff480f4d0a0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/EvidenceReadArgs.1.json",
+      "sha256": "488a5d677d61e27020f7a5001ce6d175b743c62305e1059e40113744b1b1dfcd"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/EvidenceSummaryArgs.1.json",
+      "sha256": "d310d1d3da08eddff0ff21b976ac8b5d095b372827c5cb491cf9ab5a1e939a23"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ExecutionProposal.1.json",
+      "sha256": "4ca3021228aabe788897a672d5190738d8989d3501b3babedfb774168f5f3346"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ExecutionRequestArgs.1.json",
+      "sha256": "9d6145523e51c9992f738146e7754dad1c6bf16fa758897a575059535cc356e5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ExecutionStatusArgs.1.json",
+      "sha256": "a4814f1741d7f1b7ae9f4f34b48d1d76f1a1b22d3c8a7c4ac905f2481ac33ec9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ExitCheckPlan.1.json",
+      "sha256": "fe586cc7e3b4c5c61c83985e8ea2b361c67147d709b7e87dcdef458b69d0b743"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ExitItem.1.json",
+      "sha256": "3e1d1fe823afe6888f63cdf247863225db0ed5159c5113ad09236baa224ee440"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ExitManifest.1.json",
+      "sha256": "4a85ef6cf1b8faced0d637d26ad29aee6a31768a0c83cc40d97853acd06805d6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/FinalisationPlan.1.json",
+      "sha256": "e0454e15b35e40991dce2bdfdc4c911f3ce71cc59effe3f96f3ed6495022e780"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/FinaliseUploadRequest.1.json",
+      "sha256": "7ec16478c951517a09085fefb16911fa8402b5846cd5efde1b3b3836e2369ce8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/GuardEvent.1.json",
+      "sha256": "1d5bf569516f305e3cf92a03daef1c25a29ef291b3feb96762c7d8ff82ca7b1b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/HandoffPack.1.json",
+      "sha256": "4ac7e16e70905779d8e5fc67c77667391852fb5d2f045ae7a54bf8ed0f757115"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/HandoffRecord.1.json",
+      "sha256": "bc96f7a4b8b2f1a0f76fd91ccae9c577c89b92675eb5c63658ab6afe5fff1611"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/HealDecision.1.json",
+      "sha256": "e3f24c48975bb6e6c86f98eba4de49515bf0f5eb7c6c4e4db35dbe286f298a91"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/HealNote.1.json",
+      "sha256": "c68dcbee0383540336359ce9206fb60a6ba2118d4ed1acd1b94f59a004ab6416"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/HeraldText.1.json",
+      "sha256": "03991007e7576fa7e5df7cb0180722a35dc45449752e11474d020563a1931c49"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Issue.1.json",
+      "sha256": "bef7d3a4039f80ae592a83d4aa7a2f54c3d9fa41675a24602a0bc256a9844997"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/IssueApplyApproval.1.json",
+      "sha256": "8895c88d60720d5e37191380c8cc8b182ce3de261971fa27adf8618b4d82fddb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/JobResult.1.json",
+      "sha256": "9dbe03c61cc672b9a330dd9d0150b0530d80d60fa9334f9b50ba3592fe819151"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/JobSpec.1.json",
+      "sha256": "8e9d1f61ee64223369f4a482320af1812fe262cdb7f89c0082c33b39be214f02"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LaneChange.1.json",
+      "sha256": "dc380b30db619f4c8fd9a1ec9650381604115ca7837aca4ad08aa7ce8c26bb3d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LedgerEntry.1.json",
+      "sha256": "baf02bedeb70ae4224d525b356ef278330f28c28bcb0aa130f429e2700bc46f8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LifecycleRun.1.json",
+      "sha256": "3df9a63506abdf2ba0831fd2ebbe2f9a043793c28b75e1ee111b59820f39f03e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LifecycleWorkRequest.1.json",
+      "sha256": "5cb8bef93fbc0457aa0722211717e1ec5cf8eb0c8d7729497bdd564a4a0905b9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LifecycleWorkRequestReceipt.1.json",
+      "sha256": "6d7aff950be23c0fdc3cd906362542c4fc74fdcc777d34f0ae03575edce549eb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LifecycleWorkResult.1.json",
+      "sha256": "b8909468cc1e22fedb7b302c21b39152af6ceeb66bf70ed7d342feb5304e8509"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/LinksPack.1.json",
+      "sha256": "819437367088b21b61c165f1bd7493590426986dfb4e750e70f876d8a9f06a11"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ManifestEntry.1.json",
+      "sha256": "9a1397bbcb7bbb9f474d1f924d60649679d30796bfc9cc0da26bee0325516213"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/MappingRow.1.json",
+      "sha256": "f46ab343218240a44968d3a30584692c918ef38288c5ea74b2c7a885e65680de"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ModelBudget.1.json",
+      "sha256": "8b8488003355ed6014c8cdc09240f5d3181091cb9c56e6bd38cbc189d20c98c5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ModelTurnRequest.1.json",
+      "sha256": "9d7a4c18eff36373a25f21f0c8ab7be0089654e71f019be4336cdb83af3600e8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ModelTurnResult.1.json",
+      "sha256": "278b5f0a64458c2a943679a4bd5de8d7f2021bbcda2c06868dafd13ad455873c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ModelTurnStatus.1.json",
+      "sha256": "ed62907bc0384f5a26624d8ee8fc4ba064379690912d8ceb6bc8d308758b3ea8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Money.1.json",
+      "sha256": "868f35a84c8ef4d372bcdb6b180d2e2535d0fb48ab913a1d87696ce35de82ba1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Mutant.1.json",
+      "sha256": "cbe11eee53064a044c1688fefbe3b0ef942d126f5eafeb6fa6e7c4af32efcc34"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/MutantSet.1.json",
+      "sha256": "361fe9aff106cc1562eab78307d65b6355afb84b55fc730a8775b78186a74fbe"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/MutationOperator.1.json",
+      "sha256": "cfe6abae540f9b3697bc8a3ce5c9d608cdc1aff0c1bb7f24d8c747b530e5524c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Omission.1.json",
+      "sha256": "16d33acd374cb0842ddab271e6ef98d140a21a92b2a992d6e8b2805247a9a862"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/OmissionManifest.1.json",
+      "sha256": "f3ad9f154729b9cf749e82b91a907065c44549fc4714f26da8bef8d9395cc4dc"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/P5Problem.1.json",
+      "sha256": "b9192bc72eab604094aaf447fe54d68c9bd802551bc75bd34f35fae3341da265"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/PendingResult.1.json",
+      "sha256": "cadfcc0bb80bef15b873d382017b81857e2c88201b6f21971d12b5843923581c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/PlanProposal.1.json",
+      "sha256": "06b2f7c6b72622ee66dd82e910fb5dd0dbcaa5ec4ddf5b8bc190932f827e1e3d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/PredicateResult.1.json",
+      "sha256": "744e58833686a9b2529740944d660fbffc02b60ee0ced99147ee50f74e6584b5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/PrivateReviewView.1.json",
+      "sha256": "06561a98fca77362dd61877de805fb9eba0aa9366cf5abbb0a0b6b9ed4b01143"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ProbeResult.1.json",
+      "sha256": "12a8b261bd90b9ecbc453b2c9e91173b01c5ac18b94e4c5c40d7106cc549edd8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ProcessingDisclosure.1.json",
+      "sha256": "fb382c1ff94bc5d6e69a35deae1a7da8ba388cb0b90e766e38d80653103314c0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ProcessingRecipient.1.json",
+      "sha256": "83b197f1640ac9dc32500eb0855ce57ed24a7c1a96d644d1d6dd48db3427fc68"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ProofStrength.1.json",
+      "sha256": "6350be4baf8760900b6070570dd8794e36dc9cea05ba25cd377ce6db558ba5d2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ProviderIntent.1.json",
+      "sha256": "64e47d78923bcabcd790b5bdb1dc450e50a664ca0d2dfabce0b7d82ab368a795"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ProviderRef.1.json",
+      "sha256": "cb09d79e3937a340fc666a6c7d74a833a713b89578e5cfaf5ce827e01d3573f3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/PublicMetric.1.json",
+      "sha256": "8d5d57ab2354fc897dcaadc61e9fd7130029d073f062d146919a91ea917ba36f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/PublicProofView.1.json",
+      "sha256": "ba1bb86f3c938ad2203c403d6aae87eb94d60468e6626d826b81f475dc5418d7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RawCapture.1.json",
+      "sha256": "10be52d5a09dcf0a26814abfaa920d66c249cdab60e7ba0a409b1b23426569b9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Recipe.1.json",
+      "sha256": "118fdcc6022c3079d3a70cfa4182d3ffb38906514c1cbc9ac685485d873fb3ae"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RecipeLookupArgs.1.json",
+      "sha256": "2b19d17d73601932bb2ae87ab48242a5cb252bc21e26358976f7dac884180f50"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RecipeStageArgs.1.json",
+      "sha256": "74750e149b5ac56e8e9fbcd81372a58522a18ce7bac517fb7d61fe3dc494b002"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RecoveryPlan.1.json",
+      "sha256": "c431101edb09b518287e31f0e208149fc3d22a992488dfab327dce473b403647"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RequiredAction.1.json",
+      "sha256": "7bd9ed60da407feccdd9aebd900ddf0a893fec7d39c748c9537da6fcfe083950"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RequiredFlow.1.json",
+      "sha256": "624f60f89dd432707181787dab9df73c881445e009e39352f4cf574b46c30c6e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RequiredFlowManifest.1.json",
+      "sha256": "39a679391a070d6d6b412e6cc5ab502241e8cd7deb5966b6edf83d338c190ca7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResolvedDeliveryView.1.json",
+      "sha256": "3be27aac7fd392117320f8b6c5caa8997e47693c57e84068d9deba963f185487"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResourceBinding.1.json",
+      "sha256": "3e05edb08d03bf3f602953f45e21bbe5808d91226e2dba3e1b3398a291302cf2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResourceEdge.1.json",
+      "sha256": "ea24e4df55cb9384eff687e8634e4c051d42ae823e61a1bbb732260c1313a39b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResourceGraph.1.json",
+      "sha256": "127f6ec96e919aa89f755577c9981e94577a00c24718812c1b27c52d251e7216"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResourceNode.1.json",
+      "sha256": "413c7f25c57d1e64086c3822bebbd8bb063e84045d32a0fbb8091367c1ffb77f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResourceRecipient.1.json",
+      "sha256": "1c9b4bdb0f0a4f8e026a49ac471fb7756e6db600c170648751be2f81aec92b3d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResourceSummary.1.json",
+      "sha256": "079f8b55f9f745ce8dce03439574d47324aceeed7dfbbbd6c0423e4fcb562d8c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ResumeRunRequest.1.json",
+      "sha256": "33237b1a31097fc014141496a89f3ae059ffe8a90b4a7ce19d92afad08a696d0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ReviewBundle.1.json",
+      "sha256": "d3a3f18254b3eaf2e818aa57740ecb9fa068359d9c15b8a45501cdcc7bf1c1a6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RootMap.1.json",
+      "sha256": "3cb624fd11708d6c98610cca3f9cff3f202c921f16484c0d562c30307ff3c26b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Rule.1.json",
+      "sha256": "96b81a83e71488f021f03df0c12b5914da3c8430e2255aeb43c79f6fb22041fa"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RunTaskSnapshot.1.json",
+      "sha256": "97dc4bab1bddb38bc040f709022eb5d35b5884c637adb978f4ac63addaf21a58"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/RunnableShop.1.json",
+      "sha256": "0cb820c8462c0f8b59f7bfa7b1128a2bdc9b6ca65b29c2a1b89bb18e3b605763"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SafetyRequestHoldArgs.1.json",
+      "sha256": "559c7f48c8f45a584c69a8acf783f1c2ec09a708f00f30719a0e7c21844fc449"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Scenario.1.json",
+      "sha256": "3ef931cb013766ea5919d03ca40241c1c3c4c55e78af32e37a9a404601c32413"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ScenarioSet.1.json",
+      "sha256": "4cb6b0ef58bdba5be16e4894d21bdba4f1924fe29cb6761f714812bce6b2bb7f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ScenarioStageArgs.1.json",
+      "sha256": "3f02350aa30514950e71fc646a01104a562144c935841b51a05fd6ac6f80b266"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ShopPack.1.json",
+      "sha256": "5cd636f0dddb0cdfe0ebbb585c539cafd4a8b06a6bc8e25f2a1a5f2d551cb24b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SourceReadArgs.1.json",
+      "sha256": "810c717cf553823400aa894ff408017eb4e8f88b370dd62e842d5c73b40358db"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SourceRevision.1.json",
+      "sha256": "aacfaaaa7d5be9deed7bf14f604ca35a0d7ab76f06bdd9083352da2f3f97efda"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SourceSnapshot.1.json",
+      "sha256": "91085bb0564f0cdedc8da11943352016c3e55ecb6005ade720fa467a2e5e8e6f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/StageChange.1.json",
+      "sha256": "9521bab7eaa0532516da66c7bcf002d964bbe9ff872804185c1331e1bf841be7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/StartWorkRequest.1.json",
+      "sha256": "b0185979db1691237ec3df5116c352b8e6a8745f9172a1ec7dbddf6944682764"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/StateCutover.1.json",
+      "sha256": "0d972f46b5db4348906bf0c14f7ab10abfeff40c35fbb6e2d2293c2e99b78abf"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/StatusReadArgs.1.json",
+      "sha256": "81eb6c2acea4ae0afebdfeaf614cc21988cef9dff92c03560bdceb35509cf432"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SubjectDerivation.1.json",
+      "sha256": "21bf581241e4ceee66510dcf425534f14959bbd6dd330f00dd441baaca04840f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SubjectManifest.1.json",
+      "sha256": "446ac156b67d28a7201410cc0b5603585d390d7f8b62f6a005bf3adbcf4038ca"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/SwitchConfig.1.json",
+      "sha256": "5f9dcddec4f0ebc35dc29ddde731f12b18ea9c3d5d55be20bf75ee138bb7fb80"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TargetKey.1.json",
+      "sha256": "fa5de85db2474561b5944fcc3b0274b49fbe90601b1562a2afb42fd06b7d5648"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TargetPlan.1.json",
+      "sha256": "8c2df9ddca4decf68c32f28c82dee585e9551b0c3b35094e383d2a003fe3cf0d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TargetReservation.1.json",
+      "sha256": "557c7099db1041e6e5f6353eca08226bccdc1eb6013813e27c280ba543387545"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TaskCheckpoint.1.json",
+      "sha256": "4b32a47758e3cc75c6985b3044bfe375ec5bbeff6f42591fbef267cfdb6bccbf"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TaskContext.1.json",
+      "sha256": "f1d03bc8d94655bcab9376971191a64660cec47d6c7c1763c4473355a20fc52e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TaskEvent.1.json",
+      "sha256": "be167050181db4d1e723bb8704c2cdb74d78b35913f2d466ccc176dd09bb351f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TaskLease.1.json",
+      "sha256": "0e8ca4124870066332c3fabd99c7842dd44730b8f02b3b2d296d10ae817ac005"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TaskSpec.1.json",
+      "sha256": "df246943e883fc2ad31609fab2e9728e8c06d199dd7a3d4be61fde1ff7619617"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ToolCall.1.json",
+      "sha256": "1f9389b2fec460a0a071a71ce816b94d3594dff09c01f83ad38d0f8b3c6c116e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/ToolInvocation.1.json",
+      "sha256": "2dad201dc5db96b7919f92ed6afa12e102842237151f3358d1df9cda89e0712b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/TriangleRequest.1.json",
+      "sha256": "620e87e00f4ca79e8747990f6ba525400a092804c16e6a02272acc6499343dd5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/UnresolvedInputs.1.json",
+      "sha256": "f20663eb8a1a25a920aae8f85090f11d542328390ef77dd382107875499f6f38"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/UploadSession.1.json",
+      "sha256": "5365d16dc902328947fe0a4125de7213c40756c727ba9630df0253dbf7239c50"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/Verdict.1.json",
+      "sha256": "526a55ab060966418f38f4e36796276b455cd028cda98b7d5ba2cd47eed72561"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/WakeCondition.1.json",
+      "sha256": "24500cb45683f00781f8b684ffd6867f0be6597b25e129f37ba47ba6fbe8706a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/WorkAcceptance.1.json",
+      "sha256": "ef04515045189c8ccf92ce1c913841c392369e787d97131bc0c537fb8d67ae05"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/WorkCancellation.1.json",
+      "sha256": "378bc5d3bd35b676d0ba1f32c3b057e8f792eb1b1e84ee7be5949282b62ee09a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/WorkPackage.1.json",
+      "sha256": "9fd6f9b97ffadc8b3cfcc9eb332b0fe58737c3962a4d0593a4cf9caa2243ca85"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/WorkStatus.1.json",
+      "sha256": "a73781ca0c390e9baaba928c428fafbfe7d7e89d2ad2e1e1d17ed683601c9c1a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/schemas/WorkerOperation.1.json",
+      "sha256": "fd27a5b3e624e3175323f563c14c5f6ede3f6365cae728bc99718e715f6806e7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/__init__.py",
+      "sha256": "cddc546716a4727ca99ad48df2dcd8cd0dd2672258229826bd4317608b561e5c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/agent_runtime.py",
+      "sha256": "a6d8a7bd5758a95f8f8ad2b4674aa23111fe62853cf22802c442ca7e085b7d34"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/agents.py",
+      "sha256": "73bf023ddffc94c53aa6fb93eabc48663009a8578ce891e169f7dd0f823441ae"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/api.py",
+      "sha256": "8e5aca50c70a8838b1742c5c5633c459c7eb24020d6e75b12e903c08c02ce987"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/api_routes.py",
+      "sha256": "d6f5e73692ce42bb038d03100ae8fd7e356d78d081168384be31154ab7c00fb5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/base_rules.py",
+      "sha256": "12a4b8522984b8ffc902396a717ba21ced6f8162c66a1a5f4849b9c46e85ac0a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/cmel_mapping.py",
+      "sha256": "313001d39cc8fbe98b2b7f6b6d961f1b6ec3594dd27df10fc644d135c29ebdee"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/common.py",
+      "sha256": "2d978e12441a3d838356ff1401c9eb2ff5610dd353cf0a2bd128080920cb6b83"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/connection_control.py",
+      "sha256": "780e352e20f798152f384e7fd4ce19f181a8096fd2e4f57020cd776ad698f60f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/connector_adapters.py",
+      "sha256": "907f2b7fec077b1e39ea64190b24fc9bc64e9f64a169aa0b76ac3e0bc80c8edd"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/currencies.py",
+      "sha256": "bfb23a7b514c709c805d3f59d213b4d8a00c9684daf93261ba2ce9c5ddeb7306"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/delivery.py",
+      "sha256": "f5c3ea1ec8ee1817191d7c530e0f0053890ceffd578ad230980b9952ccc713e5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/interfaces.py",
+      "sha256": "1ea8188f0c721b55f19fd18124a21e36bf09b3cf830837760257ce67798e3ff3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/ledger.py",
+      "sha256": "70c8c552ac047ae88f1b39b06c35a8f539dbc8ee6818952cb2911b444160ed4c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/lifecycle.py",
+      "sha256": "e9d69da45e8cb77b4940bd31c42a2b4aa5bcc1e5464ce49c864415e8c28f7577"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/money.py",
+      "sha256": "1d9867eb834e03db4b25d6b27ae0879333c8d52f05a5b069c07062df1c9c4116"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/mutant_ops.py",
+      "sha256": "fd3254fe1a7b41e372421e0b19aee41a4df214a8050a6264ab6591b6db29f421"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/plan5_common.py",
+      "sha256": "7facad47b5c11cf385bc827f7904a3075edfe3f3847635a9de5a3948815ba3d6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/plan5_openapi.py",
+      "sha256": "b075f8e6426d6285b03d17dccc0f295755742c5879740979ff93647718a552a9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/plan5_schema.py",
+      "sha256": "400a53ab8fe4f52d8f502d3ec71fed7b6b5e8bd73096f1a490c2cf29820dc1b6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/plan5_tools.py",
+      "sha256": "8e514ea99a0cc435ec6d1b61a94f8c82446f4601cf50a2b64996a97240707fe1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/plan5_validation.py",
+      "sha256": "5694aba127c718bbfd95df3c76a9f9cc7c7f8884dcf2786284bc4c1228fc2340"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/proof.py",
+      "sha256": "dbe12578aff313c885dace4b3e06ea3cf1c72cae18afee28869d012dad8c50ab"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/registry.py",
+      "sha256": "35cd3c329e408199e5cf948884120313bdbbb3edf8b9258a85b1d7f36e6bd554"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/runner.py",
+      "sha256": "37262931f8df90eef8819cff11dbed13e63f5411ff19a24e057df86af3b44896"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/stages.py",
+      "sha256": "63e5df2abbd54f18b8a83f8096ded948f6e49af2227a6e6b4dfab1f77b2f8b66"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/survey.py",
+      "sha256": "098c7665ce1e495336e5fdfe9e64d96abc30d9e151580cba053b8eccc2c3201b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/tools.py",
+      "sha256": "bbf6feaf04994f46c5d9adee0cf9e66b733280017965b00847fe8e8b5e1222d3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/src/goldgraft_contracts/work_package.py",
+      "sha256": "6c0b81d47a8f746fe30ed68e0ee3b867012306d89480ee16707fed66dbe00786"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/ts/goldgraft-api.d.ts",
+      "sha256": "66f340162e508e5c279d825c32f3608b9fc1fbda46698734d34eea63f02a7649"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/contracts/ts/goldgraft-contracts.d.ts",
+      "sha256": "63ac74672f37538816699b9c1c2e08bcf55428933fa678374250bed9dc10b2a9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/ANTIGRAVITY_FRONTEND_START_PROMPT.txt",
+      "sha256": "c72eea4419a6c9f8a312eae7f7fe0e5a7e896f728fd407eec2624f52b86e3d73"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/ANTIGRAVITY_HANDOFF.md",
+      "sha256": "0149537eccdefb4d2078f731aa0c5afd96adbb08b54870df5c4fd7d4ad024052"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/COMPONENT_TEST_PLAN.md",
+      "sha256": "9e789834ac4a4a2e74f591f584c9fe30e6793e2b7ec6e8bd5075cd2c576a5892"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/FRONTEND_SPEC.md",
+      "sha256": "8066599590763cd73f35f462e21ae769431a31c1b26092b78cb11362db04bae6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/SHARED_BOOTSTRAP_PLAN.md",
+      "sha256": "55d43eb19a220b915be5017e51974e49705de659dbc72836244975fa8ae0bfe3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/TWO_TERMINAL_WORKFLOW.md",
+      "sha256": "392dd5e2473fb2f5d6b87f3ef7295cbcc36391174d8674a45371ebd02a3a708a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/apply_split_controllers/CaseView.1.json",
+      "sha256": "1f936a0cd68398723265f8d27e04d00b34dab43144c4dca0104bb91b8e205136"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/apply_split_controllers/PrivateReviewView.1.json",
+      "sha256": "4ac263dafdcebad76d4d67249aedcfd01d73228c83114a636ebd07eafd7d7c17"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/apply_split_controllers/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cancel_before_accept/CaseView.1.json",
+      "sha256": "5229a0f048722db4bbe7dffc7838e59c838f8e517977140bb37525079d4b861f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cancel_before_accept/WorkCancellation.1.json",
+      "sha256": "58f331c61d50516d6bd92a0c4ced22ccacd8eec12efabce8ddffdbb4baf2f770"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cancel_pending/CaseView.1.json",
+      "sha256": "d99ec9a0367a1b529f0900fde56f96e788ed2bc153dc468b7917ccc8781a20aa"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cancel_pending/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cancel_pending/WorkCancellation.1.json",
+      "sha256": "d9011eb71ef3faec7b50c62cb3b533996b6c36b70d70aa54eb252b1d2c65a5b7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/claimed_no_operation/CaseView.1.json",
+      "sha256": "b13680b377afe214144783490cb0ecc2c9bcd08b3add27effb60362113909761"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/claimed_no_operation/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cleanup_pending/CaseView.1.json",
+      "sha256": "ec6a3a440b4bf229aec329aacab2e03612732106afa1a221eda09ef7b9a8baf7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cleanup_pending/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cleanup_pending/ExitManifest.1.json",
+      "sha256": "cbf279e53d0fa05c560d7d17171e2d955052dc049969b0d85bcb5e8ba0948e72"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/cleanup_pending/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/controller_wait/CaseView.1.json",
+      "sha256": "4a1371f35bed71223efffc908a25b802c50aa0f659e87d87efdfd78a472b1c90"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/controller_wait/ControllerInvitation.1.json",
+      "sha256": "d5f509d2d96c34dbf68fa12d13724944968ee08e19fb24472d0fdc0fc2ebc629"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/deploy_unknown_no_id/CaseView.1.json",
+      "sha256": "591fed6b7104114ab3ce0e0d4b17259490f9451f816f1caf851fd233183ec69c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/deploy_unknown_no_id/DeliverySnapshot.1.json",
+      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/deploy_unknown_no_id/DeploymentObservation.1.json",
+      "sha256": "b72171c7c02361ec3297c0efde63a271e36a4ff6c2bf50684e43237e972315bd"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/deploy_unknown_no_id/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/event_gap/CaseEvent.1.json",
+      "sha256": "6b08141a33cc90e3fc7f7060ea4f07e48a68bf4f6ad18df35b9f2a09e6300396"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/event_gap/CaseView.1.json",
+      "sha256": "01fbb42903e967d8c79b563dbbe0314a77da9aa07d428bb4311630fb0186e828"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/event_gap/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/exit_executor_missing/CaseView.1.json",
+      "sha256": "3638b19a09f78b43a09fab7f83e4b99d0e4fadcaf0d33aaa99bf31be1fb7587e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/exit_executor_missing/DeliverySnapshot.1.json",
+      "sha256": "3502a0a0b4fe41f5c6431ea2d5d4f58e33ed99a15f035f9823f2aeb1bcc37276"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/exit_executor_missing/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/missing_source/CaseView.1.json",
+      "sha256": "a00392e5404bd0dd6c964ecd0665a8d71f13564ea3aa2a1c8e48e5b2781d32fa"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/persistent_config_mismatch/CaseView.1.json",
+      "sha256": "33f18e50bebde30141309d2dd65354f7b56ea678fea718db2ebf1807cc271fc5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/persistent_config_mismatch/DeliverySnapshot.1.json",
+      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/persistent_config_mismatch/DeploymentObservation.1.json",
+      "sha256": "c9292262fb201ca08d2b85693f7e138d3010b29ed5f881be2b8c1941763e76f1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/persistent_config_mismatch/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/proof_missing/CaseView.1.json",
+      "sha256": "e39c17a9bf27c7adac9f0d7b4a42fed9cba665692b680c68473bc482b2527d14"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/proof_missing/PrivateReviewView.1.json",
+      "sha256": "9a3b48c15c9c4087d880ff5678f7053da0ae3d5486fc6b3436b7abe1382f70aa"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/proof_missing/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/ready/CaseView.1.json",
+      "sha256": "3035bf9af0a2c4d9319dc665eb53cd63b4ca4ad7858c605e6c86e2634a4c9033"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/start_response_lost/CaseView.1.json",
+      "sha256": "74100664769b0a123034f38f152de862f143086364e8ecd529782ee0cba24bbc"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/start_response_lost/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/synthetic_complete/CaseView.1.json",
+      "sha256": "cec0146e4996a3cd14c8ee46fc9d58fb22d95a79df7e27ed11955640c397abe4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/synthetic_complete/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/synthetic_complete/ExitManifest.1.json",
+      "sha256": "d5d8166b503b371da8d59686011de992a3bf8a794e60c34d9d7777c1b0a0390e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/synthetic_complete/PublicProofView.1.json",
+      "sha256": "671596ef91236f9200b5ca709f3af7a38ac2504d7bf6cedb6eeb25ee350f12c6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/frontend/synthetic_complete/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/index.json",
+      "sha256": "5e81fd67d24e6508f95960fc880431ffedd68ebd10b068fbbfe8025d11eab21a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/absolute_path.json",
+      "sha256": "7a63b872405fc4a82c080c008e7d0891ac1ec4388cf175ba2af63273838336fd"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/bool_generation.json",
+      "sha256": "a583c33efc2b7bb61d486da25b360f1948c4c8d415f407114163e0407a0759cf"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/complete_with_deploy.json",
+      "sha256": "9c7f9c3754a15d2c09b32ca4952cb6c686e3724b7fc93716dcf34cb1dee54a42"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/empty_completed_output.json",
+      "sha256": "093ba99c5b423fcb2b6b980bcbd6907985fcf6c34514eb5e84ab41d7b5e0d39c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/extra_authority.json",
+      "sha256": "bb0ad7eaa13d0f156a4bd5927142ac1559b1bad07d11375f050545211c174998"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/fake_snapshot_git.json",
+      "sha256": "3cf470cc28d64b695e74978159f47272ca16ba854657fa87f12167c49fd4a25c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/float_generation.json",
+      "sha256": "1176bcb375a8e81a2d261f21872a88aa46fb7298a5b37e3babdc4c29158cb955"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/float_micro_cost.json",
+      "sha256": "f0dcab696fae5f49e3aec0bec021c33beae01fe648115cb93824d1038f50aa8a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/missing_changed_final_candidate.json",
+      "sha256": "8715268c25a01b5f8fc986a689b340fd5866dbf3f745766a3b55ed125015db1c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/mixed_model_form.json",
+      "sha256": "93bcc1dceea2e99e905a2ec3a8810983266286b5637279cb430a69cb24db984d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/multiple_exit_restarts.json",
+      "sha256": "86e3a5bb448b57cb7cddd8d58e077811b87bbe5dd3f8fef930e7da56a5666d20"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/naive_time.json",
+      "sha256": "a81b99fbd9d31da7b4e1b5c696fdf55b645234c74e37a5bb692df72ec2ade5c2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/non_utc_time.json",
+      "sha256": "17cad6c0c0df83fab6480707df335990f1ea3ee3d03567578ec580f08bca956a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/oci_is_not_tar.json",
+      "sha256": "5b0b5f7715902efbfb7d93b26bbeba79fe1f358db045ca9a97ce96b47e04c325"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/path_escape.json",
+      "sha256": "639c9d4df92a24acedbb87bfece0594cd1cd4a3ee4c445bb85ed749b6babec39"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/unknown_role.json",
+      "sha256": "8472586ae01180733721ca362b164859af950cf3c1c96bb997c3080c71712441"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/unknown_without_issue.json",
+      "sha256": "ac262512520832ca34051557372e80cc3fa15b641e75c35963deee876f7c60b5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/unreserved_micro_cost.json",
+      "sha256": "6a80269871fe009f66ce247d8856e6fb4118bdea62ce28ad3197a06060baad77"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fixtures/plan5/negative/unresolved_reservation_release.json",
+      "sha256": "6e6e2e023b3fafae99248c7e42a06ad637cd5d7680dc651c4335b6b5af6d6a71"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/README.md",
+      "sha256": "4ce49bfe411d57b93ea7f5e9f6965e20049ae98c7cec5ffa264739eaa8d43327"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/catalogs/surveyor_static.json",
+      "sha256": "02e310910bfa343d7d9423d0f0eaf96edf5f6a02413c2fb88e6eb78af183b894"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/cli.py",
+      "sha256": "633e66817735e09a040b58677fb275908d276d866a35a9c81bd19c43d3446c07"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component.py",
+      "sha256": "ec3f2126767ba1f828fdcedfc9734ff13d2950add2bbe70c73da6cfbe0f7ea12"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/__init__.py",
+      "sha256": "8d76f0474fdee34e157c8b00b261ad329210a56accedb9af4b33596dd00b079e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/adversary.py",
+      "sha256": "7c19d5881043eccb2d93b990b868eb22c6bdc0b36dd5b95403e0f90f4fd54c5d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/architect.py",
+      "sha256": "8a7adcf7bd4039bf02ed1ae2ff4fe01a698434fc76cde4fdbfda7d8dcbe278f0"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/builder.py",
+      "sha256": "efc51866205a0161b07a76828eddc2dc15c89bb46ce00653df30fecd4e3bd4ac"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/execution.py",
+      "sha256": "ee5ffa790c8a57c96572dc816302d361c34644c5288f7b3337ba95fb7636a761"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/explorer.py",
+      "sha256": "331bd9cf2359d6aca5ef8c841909e46ccd3530b2baa2f3eec478e4dfcba7946a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/gardener.py",
+      "sha256": "f4c0a060c1b7b4b6fb6016968fc1c5575deb699e464ed0a3a046a1b2c63cab7e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/grafter.py",
+      "sha256": "936ec15b4d836e3b0aecde669ca550a032dd47ed8c1eab564bb035c7ca60e593"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/healer.py",
+      "sha256": "7699cb9aeb3846cd459ca6480b7f745b2a2dc1dd0102d9e805b192360d727642"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/librarian.py",
+      "sha256": "e669a476a8df2ed28faf368337cb45f5c88758a0c6fc326608784b4a1a7a26e9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/orchard_analyst.py",
+      "sha256": "f7fa14d6df7d9f737e132f2e70118ae31430b1d04bc3dc6cc39a57047ffb9d28"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/scribe.py",
+      "sha256": "088e6351c96ad2684acbd7f65fe854d91d6e2f13a104bc810e1ce4436a0d3fc6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_agents/sentinel.py",
+      "sha256": "720c96b48fa563d5eead6a3ef7fc51394fa4e82b9e6029a5e522140092a9175c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/component_cli.py",
+      "sha256": "d6ca0d1265d2e333353d29c35ec1451160c57fe78d440a0f09364bf47dfec3fb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/context.py",
+      "sha256": "ebac3b5b17492423aeb5f1ff92f1d39b6ed513f2e6939469a23084cb6e611c68"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/evals/__init__.py",
+      "sha256": "d6c2b69906b13afe9f4a2c86dff3e9fcd0bc84026e9731bf964f5267c3ffaef7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/evals/surveyor.py",
+      "sha256": "cc74bdf6ac385241ba1919509eb3c3264b8eaffb5563eea28004b5b2c0cb2bea"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/evals/surveyor_cases.json",
+      "sha256": "4b48d05e2294eeb47f099955d993c20b419aec5ccae760aad0ea2428e973c414"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/evals/surveyor_readiness.py",
+      "sha256": "8198268785f5ad1074d5574274ecb8aa193607f9b3a3b6eeaa68b71882e854be"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/evals/surveyor_readiness_cases.json",
+      "sha256": "ee8c907e66bd9702a7c3388770acab4156bd69725cedfe66afbfa4481a2ebc61"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/graph.py",
+      "sha256": "9a5a3d5a787a6685ae1599083ff1d691a7374d106d1752201e55e458e26ab093"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/herald.py",
+      "sha256": "2911d1fc988d7d0c2a8feafe9b959a73433769e796b5e29f54a8397e2fa18327"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/model_readiness.py",
+      "sha256": "6b5718d5730c0143cd4b523ce7c31779b8393d7f95fae9a78d4ffd7ae8f5d599"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/policies/offline.yaml",
+      "sha256": "d88aca73b322085a01bc6833a6fbbfbb7573fd2586b4233f1325024ffbccd45e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/ports.py",
+      "sha256": "114ca1da3ad6f52c61bda0e2334d34f28dd06fd7d6cef00c31856ec30dc59e2b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/adversary.md",
+      "sha256": "dac452442e00018579d2be998dde2868cc19965f25d8675f20a78b1d70b5cda6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/architect.md",
+      "sha256": "85cc7fe9a9dd83a0ad3ca5500c0798925a509569cab1b30c2a7e67d608f5c42e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/builder.md",
+      "sha256": "e94eed373a0c53f7b2332eb3482df649a53adee4539af5f28b372029afde93aa"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/explorer.md",
+      "sha256": "72ea99fd48686c2eab854303707b42aa0ad95ab7c12ef68dcca5d5912c22ad6c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/gardener.md",
+      "sha256": "8d3de55c5b394fa28944d5c72e491458f84b38f4e13a14bae627adb340ddb072"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/grafter.md",
+      "sha256": "4e934a722f05627c3abfe1e0bdeabb2cae931e92fd9194aa53a6af81b76991f2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/healer.md",
+      "sha256": "3619a143c0e7c0d7e2df39944502924e8776e6c9698e1d2c8067da6106714b29"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/herald.md",
+      "sha256": "275579218211709b81fa6856950fde924a287d8401848df06731b3028d678032"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/librarian.md",
+      "sha256": "058528bc11f5f5b4753ef0c3b1bd812322e05a11ec2771c866c1d11dc24f7537"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/orchard_analyst.md",
+      "sha256": "248a0e0ff809c94a32fe88a3445b93aadb57a28000f092bbe6a2dabc8d6ab009"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/scribe.md",
+      "sha256": "d11a4741cef6e3789eace877d152d784fc5633adad9716c741ebd24875e38a2a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/sentinel.md",
+      "sha256": "7318658b6f3ea4876d58911d19a0b399a79e2f306e489cf15db19db974b5acd6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/surveyor.md",
+      "sha256": "7f335f18510d1e5166ff7e02c57b103178348a5fba2b0f7bc68f0215e8e7f426"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/proof_gate.py",
+      "sha256": "7af3aa9dc31d422b6b8993655619fa05ac661c580bcc468cbc923195c1407984"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/repair.py",
+      "sha256": "7faef9dfabeb660f173ec205c58f3523068d42e3ddde9409ef2107cacb99c17f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/roles.py",
+      "sha256": "8cf9fbc99168912d3e54ec129c1bd3fe83820c23367201b8062b2a1bd8fee7b6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/runtime.py",
+      "sha256": "502df54979762a5a5510b52ddcfec48c430fc903dbcf46216f29cb7dc33dc6ea"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/scheduler.py",
+      "sha256": "f8efcb8fac43364db81533fc42b47625a4ee201f04c555cb9840deaac259ba56"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/source_inventory.py",
+      "sha256": "9b9619d8f0294f85a891d686f2bea70383c45922731227cff243dce57f446f05"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/source_references.py",
+      "sha256": "59d866af635bd1ea85888ccb5c9243b8865727607e9c5b0ec20de44bf0787655"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/surveyor.py",
+      "sha256": "9c5d3e33183c87073f6563964926f0d11362d49d803e10cd976e565b31717664"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_adversary.py",
+      "sha256": "b8d992cf7fbc2eb35c5f3dc2160799cd96a113bf539e49adce468d8d906f46bc"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_architect.py",
+      "sha256": "7615cd467081add1de83e63af14feb7c25cfaf1cf735ddde62afbc1f9d019cbb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_builder.py",
+      "sha256": "764ca49a5810888054a9be7de900f37df371e26bc3473696fbb694dc5a27e4bf"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_component_runtime.py",
+      "sha256": "13bab84cc4eca2676131c92c21d1c19117adfd71452c2ebbff72fe8bccd621f7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_context.py",
+      "sha256": "8411f628a9518f018bce1453e815476c2219c1003e78abd59dfec929bee0e744"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_evaluation_gateway.py",
+      "sha256": "31d6063d4fabf2e18060447f5bbfc8506d956d57cc4ae544397dc7ce8a5c141c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_explorer.py",
+      "sha256": "1f76aee2176e0a7a4c1a5cdb5a237c88bd14ac3af50b07e1389d34d64998af1c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_gardener.py",
+      "sha256": "0d754cc955d96efecdaa04fe3d6fc13a1eddf283ebd0c71dab269d30bf8ad7d7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_grafter.py",
+      "sha256": "59b316058dc1a74a45e62423231d8da2b55691e32f8429887cd854704f80f883"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_guards.py",
+      "sha256": "f5de85f61df002ba3b0a62d9afdf78c64b64abc1559ca0d39087f0aae786a06a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_healer.py",
+      "sha256": "00aeff9cef84fc489e4592c5493614d3223f81032989b121d4e7fffd69d95009"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_herald.py",
+      "sha256": "1c6ae54df69785f778266c5f6c5f863e152555b1c50f9529582927284f718b26"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_librarian.py",
+      "sha256": "0be1e01ae6526f9f49cf1b79621cb9e87c88bd4c30ec22dd321d2739d7867fb1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_model_readiness.py",
+      "sha256": "e3b37c2e0deaaf460f0a89754228ec84f388962dbd49bcb45e195e9fcd908ba2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_orchard_analyst.py",
+      "sha256": "2fca870cac8b943b9ee72e9eb484ebed90ee7d51caae3dcd91ea9e8976fd7bc3"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_proof_gate.py",
+      "sha256": "112745cab6358e49fc9a052288d8e9853101a2174b96e6de3f6426f2fa8579f7"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_repair_policy.py",
+      "sha256": "d4530cc33975a738971e7ddd55bcccd66f116b6ae5ca29e3ac76342917c4b643"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_restart.py",
+      "sha256": "412323fc6f26b5d946120319a6031b3e0de9608e8ecc88ae50b69a8673e6c7b4"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_roles.py",
+      "sha256": "3eca360a45478c175134612bc5610bd79f7b35e401575e261f4a8beac3ddaeea"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_runtime.py",
+      "sha256": "63b53c2317c50ecbcb5dac116c064aeae32e97987ca6a57ddab3395e6908a3f1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_scheduler.py",
+      "sha256": "c6d97b306802eaab56f3ab3b7cb55b1242bf93c373cab2935ce9dc08aad21497"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_scribe.py",
+      "sha256": "7fb23337b6690186558f95f4fb3440948745ba4e02214d1660f30eb643d5109b"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_sentinel.py",
+      "sha256": "6300580318b3e9114310f8e081f4c33dfe7770f9b5bc13079f37991cdb4ca2ad"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_source_inventory.py",
+      "sha256": "65e1a1e1e64a85d6d91a324c019136f273ccb10e7079e5d7f1386dcb888540bb"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_source_references.py",
+      "sha256": "3cde91a455f32455de4853d274c255dff7476addcdc9987e08e1291262eef59d"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_surveyor.py",
+      "sha256": "89ff22cdb9ec0ebb2620ed13a3b8ce9bbad850da6c39f628b4f9e9e0a8a56811"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_surveyor_eval.py",
+      "sha256": "58f75d77ecde3c26a3e7a9f0dcd9bb553b9f1b8fbcbb53c0110d0802866ea7cc"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_surveyor_readiness.py",
+      "sha256": "505436d63b5e4ea2e819528b2dbeef0f6cb2094b44aea5c4728d801ce04ea6e6"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_tools.py",
+      "sha256": "3bcf5ba854b7be0a3f3a7c77a3326f33e39f0d0e7a6d9413c254e33ac2f5ad5a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_workflow.py",
+      "sha256": "866d38dea38ed13b5c34e421de2da19c9e4055d62ec126d9307ab2c281bacdac"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tools.py",
+      "sha256": "c4e680ba69cfad812983c3d804a17ee58adc4d13cf3ca3de995f65dd411d8054"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/workflow.py",
+      "sha256": "421d3d8aacfb1165e3ccc08a40a0f026465fc032bcc189f331926be1a0785108"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/workflow_cli.py",
+      "sha256": "1d6bd02af03c676fcb8dbc180d743d4d7338e73f2584a7f787a6c4c1be5bc65a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/__init__.py",
+      "sha256": "a4dcdbd8903dc901aac43ab54a6d819dfd31bd01c2932e87a96ee23c4f16960e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/broker.py",
+      "sha256": "c8a93b285874ac804c943e925e480e4c8e922155c288003659ff2ec7fa9a3e4e"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/independent_review.py",
+      "sha256": "366e434d8bd2cf9b2d5335a1421244d4bf389ae0afcff8b1943f5d4249e317b9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/ledger.py",
+      "sha256": "a2eae9c6d51b12380a7b8cfdaf073f8656fa5bffa012b3dd6469017bd7b7975a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/profile.py",
+      "sha256": "6d52d8bde661306473e44d13ce6eb3073b64915b8e3e6215ef784ca4c1991d13"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/provider.py",
+      "sha256": "f7cb3a9d855e28472b2778ba84a41565a05801316b231cfb25892cd8d7b6be45"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/qualification.py",
+      "sha256": "bcdc2750172a7107655b7ce242b8d90da75d1546984853a3db46dadf7e109be9"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/secrets.py",
+      "sha256": "5d02a3c22063b15cd487c6c9d2d30ffe258ba8bbb2590c929c8f2dc36083e71f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_broker.py",
+      "sha256": "95a2576cb572490ee6186880dc73981e70a90cd72e081aabe3c71ce1a68acf43"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_independent_review.py",
+      "sha256": "41905fd0ddb341e58ea9e39f4e90abe8d861dd59f0d797deda04943490cd4564"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_ledger.py",
+      "sha256": "71f2bd37841b23237a2b930cae602efa772e49c9b4b79b2e706c32d53fedde29"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_provider.py",
+      "sha256": "b2bba6331e247b93ef2a93daa01a0236064a51eff4ae64c2811fda0970101728"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_qualification.py",
+      "sha256": "2f9a6edbed22fb49485f46100efdae84bf09bcad7062454482cf2ffb252dd279"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/scripts/live_surveyor_model_eval.py",
+      "sha256": "60d0feb2799a823fec6a40bb686fd20f7c83e2f10c2f2156cfa634d544fd8a7c"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/evaluated-dependencies.json",
+      "sha256": "f7ce0ba2a166af27205784dcedf8551a4a79ab99450f416514416ed2e29e3b54"
+    }
+  ],
+  "remaining_gate": "No full batch fits unchanged $0.05 cumulative authority. Full reviewed model reliability/negative acceptance is pending an affordable reviewed design/budget; original unknown still needs attributable provider status/usage before its reserve can release. No Herald advancement or automatic reset.",
+  "revision": "continuation-03",
+  "continuation_report": {
+    "path": "/Users/aditya/dev/GoldGraft-plan5-build/docs/engineering/plan5/SURVEYOR_CONTINUATION_03_2026-11-11.md",
+    "sha256": "45331c7475d39ab11c73cd9d20886d7d47ecbe0f60841a461954b7d2dd452648"
+  },
+  "new_inference_attempts": 26,
+  "reconciliation_packet": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-01/reconciliation-packet.json",
+    "sha256": "337ed9104968fde6d4db0f57764170bd7ab43c699909f5e09afc175fe76503e6"
+  },
+  "spending_authority": {
+    "active_cumulative_micro_usd": 50000,
+    "surveyor_outer_ceiling_micro_usd": 500000,
+    "automatically_resets": false
+  },
+  "authority_and_access": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-03/MODEL1_COMPLETION_AUTHORITY.json",
+    "sha256": "87bd3dc2995d8168fe691afd2944ce83edb2b800d1635d036048e1df08b2cb27"
+  },
+  "distinct_accepted_model_cases": 4,
+  "observed_provider_responses": 24,
+  "unbilled_terminal_400": 2,
+  "unknown_original_requests": 1,
+  "limits": [
+    "Seven accepted outputs on four small cases; three observed quality/limit failures retained.",
+    "Final transport policy passed two cases; no final-policy repeat series or full20x3 trial.",
+    "Largest actual accepted scope: two files/two touchpoints; not offline thirteen-finding capacity.",
+    "Actual inference; control/source/tools/collector remain scripted synthetic counterparts.",
+    "No production GU/VJ/SH, merchant/payment, model2 or deployment qualification.",
+    "Original unknown request/reservation unchanged; no automatic spend reset."
+  ],
+  "transport_policy_sha256": "3c6ed4e12282bcc950ed682f963c1b9d81412c328637863ae726009508aa5fc9",
+  "actual_run_audit": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-03/ALL_RUNS_AUDIT.json",
+    "sha256": "ed74308d30f2ddf498324b055347f2bf015cea1064fbe15af7e0b359760938b6"
+  },
+  "accepted_output_audit": {
+    "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-03/ACCEPTED_OUTPUT_AND_RESTART_AUDIT.json",
+    "sha256": "d092285dc18b8b3badcb4d71c26ed4131ab7c37d1cc8bc3a00abaa945758675e"
+  },
+  "next_agent_advanced": false
+}

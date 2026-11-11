@@ -1,0 +1,19 @@
+{
+  "flows": [
+    {
+      "acceptance_rule_ids": [
+        "fixture:acceptance_rule_id"
+      ],
+      "flow_id": "fixture:flow_id",
+      "limitation": null,
+      "origin_routes": [
+        "fixture:origin_route"
+      ],
+      "payment_family": "fixture:payment_family",
+      "required": true,
+      "scenario_refs": [
+        "fixture:scenario_ref"
+      ]
+    }
+  ]
+}

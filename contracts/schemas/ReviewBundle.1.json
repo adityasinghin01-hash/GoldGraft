@@ -1,0 +1,171 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ReviewBundle.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Artifact Digest",
+      "type": "string"
+    },
+    "baseline_snapshot_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Baseline Snapshot Refs",
+      "type": "array"
+    },
+    "bundle_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Bundle Digest",
+      "type": "string"
+    },
+    "bundle_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Bundle Id",
+      "type": "string"
+    },
+    "candidate_snapshot_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Candidate Snapshot Refs",
+      "type": "array"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "domain_rule_result_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Domain Rule Result Refs",
+      "type": "array"
+    },
+    "effective_config_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Effective Config Digest",
+      "type": "string"
+    },
+    "missing_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Missing Evidence Refs",
+      "type": "array"
+    },
+    "patch_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Patch Digest",
+      "type": "string"
+    },
+    "proposed_apply_plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Proposed Apply Plan Ref",
+      "type": "string"
+    },
+    "recovery_plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Recovery Plan Ref",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scenario_result_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Scenario Result Refs",
+      "type": "array"
+    },
+    "security_result_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Security Result Refs",
+      "type": "array"
+    },
+    "unsupported_paths": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Unsupported Paths",
+      "type": "array"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "bundle_id",
+    "case_id",
+    "run_id",
+    "work_package_digest",
+    "baseline_snapshot_refs",
+    "candidate_snapshot_refs",
+    "patch_digest",
+    "artifact_digest",
+    "effective_config_digest",
+    "scenario_result_refs",
+    "domain_rule_result_refs",
+    "security_result_refs",
+    "unsupported_paths",
+    "missing_evidence_refs",
+    "recovery_plan_ref",
+    "proposed_apply_plan_ref",
+    "bundle_digest",
+    "created_at"
+  ],
+  "title": "ReviewBundleV1",
+  "type": "object"
+}

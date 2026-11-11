@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "ManifestEntry": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "file_type": {
+              "const": "file",
+              "enum": [
+                "file",
+                "directory"
+              ],
+              "title": "File Type",
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            }
+          }
+        },
+        {
+          "properties": {
+            "bytes": {
+              "const": 0
+            },
+            "file_type": {
+              "const": "directory",
+              "enum": [
+                "file",
+                "directory"
+              ],
+              "title": "File Type",
+              "type": "string"
+            },
+            "sha256": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "properties": {
+        "bytes": {
+          "maximum": 20971520,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "file_type": {
+          "enum": [
+            "file",
+            "directory"
+          ],
+          "title": "File Type",
+          "type": "string"
+        },
+        "relative_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Relative Path",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "relative_path",
+        "file_type",
+        "bytes",
+        "sha256"
+      ],
+      "title": "ManifestEntry",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/CreateUploadRequest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Binding Epochs",
+      "type": "object"
+    },
+    "expected_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Manifest Digest",
+      "type": "string"
+    },
+    "expected_total_bytes": {
+      "maximum": 209715200,
+      "minimum": 0,
+      "title": "Expected Total Bytes",
+      "type": "integer"
+    },
+    "manifest": {
+      "items": {
+        "$ref": "#/$defs/ManifestEntry"
+      },
+      "maxItems": 20000,
+      "minItems": 1,
+      "title": "Manifest",
+      "type": "array"
+    }
+  },
+  "required": [
+    "manifest",
+    "expected_manifest_digest",
+    "expected_total_bytes",
+    "binding_epochs"
+  ],
+  "title": "CreateUploadRequestV1",
+  "type": "object"
+}

@@ -1,0 +1,74 @@
+{
+  "$id": "https://goldgraft.dev/schemas/SubjectManifest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "config_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Config Digest"
+    },
+    "oci_manifest_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Oci Manifest Digest"
+    },
+    "runtime_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Profile Digest",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "source_snapshot_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Source Snapshot Refs",
+      "type": "array"
+    },
+    "source_tree_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Tree Digest"
+    }
+  },
+  "required": [
+    "source_snapshot_refs",
+    "source_tree_digest",
+    "oci_manifest_digest",
+    "config_digest",
+    "runtime_profile_digest",
+    "scope_digest"
+  ],
+  "title": "SubjectManifestV1",
+  "type": "object"
+}

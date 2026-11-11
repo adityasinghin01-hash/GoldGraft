@@ -1,0 +1,34 @@
+{
+  "$id": "https://goldgraft.dev/schemas/RecipeStageArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "detection_rule_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Detection Rule Ref"
+    },
+    "recipe_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Recipe Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recipe_ref",
+    "detection_rule_ref"
+  ],
+  "title": "RecipeStageArgsV1",
+  "type": "object"
+}

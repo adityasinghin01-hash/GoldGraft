@@ -1,0 +1,170 @@
+{
+  "phase": "B4 Surveyor only",
+  "evidence_class": "component_offline",
+  "model_responses": "scripted",
+  "workspace": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "model_api_calls": 0,
+  "model_spent_micro_usd": 0,
+  "paid_checks": "NOT RUN",
+  "initial_paid_checkpoint_micro_usd": 5000000,
+  "project_target_micro_usd": 15000000,
+  "project_hard_ceiling_micro_usd": 20000000,
+  "service_admission": "DISABLED",
+  "frontend_ready_revision": 1,
+  "files": [
+    {
+      "path": "pieces/agents/roles.py",
+      "sha256": "f4fb82d464052752bbcaa0d055249bc02d861378da3ece3e073cba2b34281665"
+    },
+    {
+      "path": "pieces/agents/surveyor.py",
+      "sha256": "3e34acdcd9e877676e5f27d7829f1245b46d6e2f1496f80fcf597b7acaaacb1a"
+    },
+    {
+      "path": "pieces/agents/prompts/surveyor.md",
+      "sha256": "7f335f18510d1e5166ff7e02c57b103178348a5fba2b0f7bc68f0215e8e7f426"
+    },
+    {
+      "path": "pieces/agents/context.py",
+      "sha256": "8d6ce105731649be9af5034746bd5db4a636508d1e56b5d1c1bd0bc60765edb7"
+    },
+    {
+      "path": "pieces/agents/runtime.py",
+      "sha256": "168adbf1d66d9117f15e530fda089b98210c1c20afefb09a4da1a4285e0fe3b9"
+    },
+    {
+      "path": "pieces/agents/ports.py",
+      "sha256": "b4115bc2780b524ee6851ab6211f1ced0eef1b95aaf2a4819157dbaab1388aa3"
+    },
+    {
+      "path": "pieces/agents/cli.py",
+      "sha256": "c9beff74a01be8411d3eb2c759c2dd544290da2b953b4234e3ea014a7a0175e0"
+    },
+    {
+      "path": "pieces/agents/tests/test_roles.py",
+      "sha256": "3eca360a45478c175134612bc5610bd79f7b35e401575e261f4a8beac3ddaeea"
+    },
+    {
+      "path": "pieces/agents/tests/test_surveyor.py",
+      "sha256": "89ff22cdb9ec0ebb2620ed13a3b8ce9bbad850da6c39f628b4f9e9e0a8a56811"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/plan5_profile.py",
+      "sha256": "4fa23973286192efc137a2894715aa1b0d61aee699fff4af96064a881825fb34"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/surveyor_profile.py",
+      "sha256": "1946bc2884dd97dafa24b888ce10bdb636bc5781b60868d249aa1b5aec89717e"
+    },
+    {
+      "path": "foundation/src/goldgraft_foundation/offline_profile.py",
+      "sha256": "c5c194b260a0632181db765dfd107df871ed6feb6be0ebb03cc5832cf8f1d96a"
+    },
+    {
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "9305d98cf48c5499e166f830ef6c547e584afd3642c7e0d917823aec668194a7"
+    },
+    {
+      "path": "docs/engineering/plan5/B4_SURVEYOR_REPORT.md",
+      "sha256": "51d259504bdb4fd8bc43a0aa7c32a7bed7a8e63a8cb7ce6016326179d15833a7"
+    }
+  ],
+  "checks": [
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/10-final-surveyor.json",
+      "sha256": "2409a3dfa07c88e46bc0ffe7802705646454903226c63b844dac08546d09a163",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_roles.py",
+        "pieces/agents/tests/test_surveyor.py"
+      ],
+      "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+      "exit_code": 0,
+      "seconds": 12.365,
+      "output": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/10-final-surveyor.log",
+      "output_sha256": "39a978ea85b0bebda2f9ef0554dc8847cef0f15cd56c82eb1a2151fcc8f4e04a"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/11-final-full.json",
+      "sha256": "94cbbd41f265aebeb1e6d14453657b98b9f2fc68a83b298cae082c16ca6efee9",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+      "exit_code": 0,
+      "seconds": 32.695,
+      "output": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/11-final-full.log",
+      "output_sha256": "42475e9f2999324b318196985677b3d15ae14a4656736179cb630e641dbb5400"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/12-final-lint.json",
+      "sha256": "830366c6744b4f5e13223da85caa05ddf558537abc0adaea4dcbe25b9e58c91b",
+      "command": [
+        "uv",
+        "run",
+        "--locked",
+        "--no-sync",
+        "ruff",
+        "check",
+        "."
+      ],
+      "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+      "exit_code": 0,
+      "seconds": 0.495,
+      "output": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/12-final-lint.log",
+      "output_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/13-final-types.json",
+      "sha256": "70528e866c90629d4ed0fd02f2eacc7df623e53258ad8382105c5115a9c7e07f",
+      "command": [
+        "npm",
+        "run",
+        "check:types"
+      ],
+      "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+      "exit_code": 0,
+      "seconds": 0.938,
+      "output": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/13-final-types.log",
+      "output_sha256": "a4661b2feee5d502a71e931a1963cac6c04fecdd30ced9e4eec443210c4a7605"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/14-final-diff.json",
+      "sha256": "3d4183b7ef275ad7e00fb902b73902b93539d0675d5addc81ad8ad87f8727874",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+      "exit_code": 0,
+      "seconds": 0.056,
+      "output": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/14-final-diff.log",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "artifact": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/08-demo-run.json",
+      "sha256": "7bd152b9052c20cb3607af0cc99c65627e84678334872d7d688d722fe88cd893"
+    },
+    {
+      "artifact": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/09-demo-inspect.json",
+      "sha256": "964d97f8fcddc59a7004ed9f90fd7758bc08d1911a41502baa2795d6635dd272"
+    }
+  ],
+  "preservation_file": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/preservation.json",
+  "preservation_sha256": "76ee0357db51c70184d87da717ed436459aa4d6618cd1b940971a04eafa4e822"
+}

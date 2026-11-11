@@ -1,0 +1,10 @@
+{
+  "case_id": "case-demo",
+  "event_id": "fixture:event_id",
+  "kind": "case_changed",
+  "occurred_at": "2026-11-10T00:00:00Z",
+  "payload_digest": "a31e99666786956f1a9d67be2b37dc097499df6188ed91d789ddd34f5b187f4f",
+  "payload_ref": "fixture:payload_ref",
+  "sequence": 1,
+  "state_version": 1
+}

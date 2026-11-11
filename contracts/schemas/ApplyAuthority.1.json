@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "TargetKey": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_kind": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "account_id",
+        "environment_id",
+        "resource_kind",
+        "resource_id"
+      ],
+      "title": "TargetKey",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ApplyAuthority.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actions": {
+      "items": {
+        "enum": [
+          "preserve_state",
+          "publish_artifact",
+          "publish_source",
+          "merge_protected",
+          "apply_configuration",
+          "deploy_exact",
+          "finalise",
+          "prepare_exit",
+          "run_exit",
+          "read_exit_evidence",
+          "revoke_exit_evidence",
+          "configure_ingress",
+          "restart_target",
+          "revoke_grant",
+          "delete_temporary",
+          "stop_worker",
+          "financial_compensation"
+        ],
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Actions",
+      "type": "array"
+    },
+    "authority_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "controller_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Controller Id",
+      "type": "string"
+    },
+    "delegate_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Delegate Id"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "grant_epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Grant Epoch",
+      "type": "integer"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "revoked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Revoked At"
+    },
+    "role_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Role Evidence Refs",
+      "type": "array"
+    },
+    "target_key": {
+      "$ref": "#/$defs/TargetKey"
+    }
+  },
+  "required": [
+    "authority_id",
+    "controller_id",
+    "delegate_id",
+    "target_key",
+    "actions",
+    "role_evidence_refs",
+    "grant_epoch",
+    "issued_at",
+    "expires_at",
+    "revoked_at"
+  ],
+  "title": "ApplyAuthorityV1",
+  "type": "object"
+}

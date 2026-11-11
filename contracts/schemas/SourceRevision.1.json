@@ -1,0 +1,29 @@
+{
+  "$id": "https://goldgraft.dev/schemas/SourceRevision.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "git_commit",
+        "provider_revision_set",
+        "capture"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "value": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Value",
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "value"
+  ],
+  "title": "SourceRevisionV1",
+  "type": "object"
+}

@@ -1,0 +1,31 @@
+{
+  "$id": "https://goldgraft.dev/schemas/PublicMetric.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "evidence_ref": {
+      "pattern": "^public:[A-Za-z0-9_-]+$",
+      "title": "Evidence Ref",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "value": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Value",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "value",
+    "evidence_ref"
+  ],
+  "title": "PublicMetricV1",
+  "type": "object"
+}

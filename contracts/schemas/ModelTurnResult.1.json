@@ -1,0 +1,293 @@
+{
+  "$defs": {
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Ref"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "recovery": {
+          "enum": [
+            "retry_read",
+            "reconnect",
+            "supply_input",
+            "review_scope",
+            "reapprove",
+            "await_counterpart",
+            "reconcile",
+            "unsupported"
+          ],
+          "title": "Recovery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "input_ref",
+        "owner_role",
+        "recovery",
+        "evidence_refs"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "ToolCall": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Arguments Digest",
+          "type": "string"
+        },
+        "arguments_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Arguments Ref",
+          "type": "string"
+        },
+        "call_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Call Id",
+          "type": "string"
+        },
+        "tool": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "call_id",
+        "tool",
+        "arguments_ref",
+        "arguments_digest"
+      ],
+      "title": "ToolCall",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ModelTurnResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "calls": {
+          "items": {
+            "$ref": "#/$defs/ToolCall"
+          },
+          "maxItems": 4,
+          "minItems": 1,
+          "title": "Calls",
+          "type": "array"
+        },
+        "final_artifact_ref": {
+          "type": "null"
+        },
+        "issue": {
+          "type": "null"
+        },
+        "kind": {
+          "const": "tool_calls",
+          "enum": [
+            "tool_calls",
+            "final",
+            "blocked"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "calls": {
+          "items": {
+            "$ref": "#/$defs/ToolCall"
+          },
+          "maxItems": 0,
+          "title": "Calls",
+          "type": "array"
+        },
+        "final_artifact_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        "issue": {
+          "type": "null"
+        },
+        "kind": {
+          "const": "final",
+          "enum": [
+            "tool_calls",
+            "final",
+            "blocked"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "calls": {
+          "items": {
+            "$ref": "#/$defs/ToolCall"
+          },
+          "maxItems": 0,
+          "title": "Calls",
+          "type": "array"
+        },
+        "final_artifact_ref": {
+          "type": "null"
+        },
+        "issue": {
+          "$ref": "#/$defs/Issue"
+        },
+        "kind": {
+          "const": "blocked",
+          "enum": [
+            "tool_calls",
+            "final",
+            "blocked"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "calls": {
+      "items": {
+        "$ref": "#/$defs/ToolCall"
+      },
+      "maxItems": 4,
+      "title": "Calls",
+      "type": "array"
+    },
+    "final_artifact_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Final Artifact Ref"
+    },
+    "issue": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Issue"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kind": {
+      "enum": [
+        "tool_calls",
+        "final",
+        "blocked"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "provider_receipt_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Provider Receipt Ref"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "turn_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Turn Id",
+      "type": "string"
+    },
+    "usage_receipt_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Usage Receipt Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "turn_id",
+    "task_id",
+    "kind",
+    "calls",
+    "final_artifact_ref",
+    "issue",
+    "usage_receipt_ref",
+    "provider_receipt_ref"
+  ],
+  "title": "ModelTurnResultV1",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+{
+  "case_id": "case-demo",
+  "existing_effect_ref": null,
+  "expected_state_version": 1,
+  "generation": 1,
+  "input_refs": [
+    "fixture:input"
+  ],
+  "kind": "request",
+  "next_wake_at": null,
+  "operation": "review_evaluate",
+  "reason_code": "fixture:reason_code",
+  "run_id": "run-demo",
+  "slot_id": null
+}

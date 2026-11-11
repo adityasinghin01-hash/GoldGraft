@@ -1,7 +1,7 @@
 """Minimal agent artifacts owned by Aditya (design 06)."""
 
 from enum import StrEnum
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import (
     Field,
@@ -13,6 +13,7 @@ from pydantic import (
 )
 
 from .common import Count, Format, Hash, JsonValue, Producer, Stage, StagePct, Text, Timestamp
+from .plan5_common import Digest, GitCommit, Ids, P5Record, Ref, Utc
 from .proof import Mutant, Scenario, Severity
 
 
@@ -57,6 +58,44 @@ class ChangeList(AgentArtifact):
     branch: Text
     changes: list[Change]
     open_item_ids: list[Text]
+
+
+# Additive v2; the Git-only v1 payload and its examples are untouched.
+
+
+class SnapshotChange(P5Record):
+    plan_item_ids: Ids
+    summary: Text
+    commit: GitCommit | None
+
+
+class ChangeListV2(P5Record):
+    id: Text
+    graft_id: Text
+    producer: Producer
+    created_at: Utc
+    provenance: Literal["git", "snapshot"]
+    branch: Text | None
+    baseline_snapshot_ref: Ref
+    candidate_snapshot_ref: Ref
+    patch_digest: Digest
+    changes: list[SnapshotChange]
+    open_item_ids: Ids
+
+    @model_validator(mode="after")
+    def route_provenance(self):
+        if self.provenance == "git":
+            if (
+                self.branch is None
+                or not self.changes
+                or any(c.commit is None for c in self.changes)
+            ):
+                raise ValueError("Git provenance requires branch and provider-validated commit IDs")
+        elif self.branch is not None or any(c.commit is not None for c in self.changes):
+            raise ValueError("snapshot provenance cannot invent Git branch or commits")
+        if self.producer.kind.value != "agent" or self.producer.name != "Grafter":
+            raise ValueError("ChangeList/2 belongs exclusively to Grafter")
+        return self
 
 
 class ScenarioSet(AgentArtifact):

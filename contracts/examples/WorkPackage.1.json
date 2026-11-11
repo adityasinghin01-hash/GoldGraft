@@ -1,0 +1,31 @@
+{
+  "acquisition_expires_at": "2026-11-11T00:00:00Z",
+  "baseline_manifest_digest": "ba15bb4d7f33f8cf6d32678930a491b5ce132061da78b6a111153b61fcb89e06",
+  "case_id": "case-demo",
+  "completeness": "sufficient_for_declared_static_scope",
+  "components_ref": "fixture:components_ref",
+  "custody_policy_digest": "d7cdaa67fbe7cf5254c9026d1c09fe114edae08d5817e8065243a67fc4b9e187",
+  "delivery_feasibility_ref": "fixture:delivery_feasibility_ref",
+  "external_dependencies_ref": "fixture:external_dependencies_ref",
+  "fixture_profile_digest": "af9eee8bddee016620966d77c48e3d9c03ad50288e6e7f87d75319bff91e4c06",
+  "omission_manifest_ref": "fixture:omission_manifest_ref",
+  "processing_policy_digest": "076547322af8b82dafc7d5905622f0ebdfc50e44daec18ce556f875385d5f226",
+  "required_flow_refs": [
+    "fixture:required_flow_ref"
+  ],
+  "resource_graph_digest": "94efeebe58287d7aec4b884a01cf45565575def18c7b2d672071ec4d10c31286",
+  "resource_graph_ref": "fixture:resource_graph_ref",
+  "runtime_profile_digest": "fbbf834c181d4f84eb11af613aea9cf5de466ede28a00437db397b2629d14cf3",
+  "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+  "source_snapshot_refs": [
+    "fixture:source_snapshot_ref"
+  ],
+  "state_recipe_refs": [
+    "fixture:state_recipe_ref"
+  ],
+  "synthetic_seed_refs": [
+    "fixture:synthetic_seed_ref"
+  ],
+  "unresolved_requirements_ref": "fixture:unresolved_requirements_ref",
+  "work_package_id": "fixture:work_package_id"
+}

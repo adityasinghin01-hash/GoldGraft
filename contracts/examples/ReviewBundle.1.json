@@ -1,0 +1,30 @@
+{
+  "artifact_digest": "sha256:13b9b0cd17072d5e5ee9326e347ac55ba7515cad8820879ebd2684b742bff573",
+  "baseline_snapshot_refs": [
+    "fixture:baseline_snapshot_ref"
+  ],
+  "bundle_digest": "f48e51c79a1bbccb4d9cd8342ad5bf414ad9be8b9ff1e771be06eaab3eead0d8",
+  "bundle_id": "fixture:bundle_id",
+  "candidate_snapshot_refs": [
+    "fixture:candidate_snapshot_ref"
+  ],
+  "case_id": "case-demo",
+  "created_at": "2026-11-10T00:00:00Z",
+  "domain_rule_result_refs": [
+    "fixture:domain_rule_result_ref"
+  ],
+  "effective_config_digest": "2f42cec7b164dcbea313d27bb3d598b256291d92fa37d2dda9034e2fec535ca1",
+  "missing_evidence_refs": [],
+  "patch_digest": "101954809cfb70625a90a069a4d95a84fc4d7b181989237552ec49eb4a24fc60",
+  "proposed_apply_plan_ref": "fixture:proposed_apply_plan_ref",
+  "recovery_plan_ref": "fixture:recovery_plan_ref",
+  "run_id": "run-demo",
+  "scenario_result_refs": [
+    "fixture:scenario_result_ref"
+  ],
+  "security_result_refs": [
+    "fixture:security_result_ref"
+  ],
+  "unsupported_paths": [],
+  "work_package_digest": "d68547de5127174d8a98098cffb585076cd9534412b3d806de8337e6e52c449f"
+}

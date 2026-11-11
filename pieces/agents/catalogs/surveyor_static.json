@@ -1,0 +1,12 @@
+{
+  "catalog_ref": "fake:survey-rules:1",
+  "qualification": "offline_literal_indicators_only",
+  "target_api_mapping": "unqualified",
+  "rules": [
+    {"rule_id": "nvp-create", "needle": "SetExpressCheckout", "family": "EC_NVP", "operation": "SetExpressCheckout", "flow": "create", "target_operation": "unqualified"},
+    {"rule_id": "nvp-capture", "needle": "DoExpressCheckoutPayment", "family": "EC_NVP", "operation": "DoExpressCheckoutPayment", "flow": "capture", "target_operation": "unqualified"},
+    {"rule_id": "nvp-refund", "needle": "RefundTransaction", "family": "EC_NVP", "operation": "RefundTransaction", "flow": "refund", "target_operation": "unqualified"},
+    {"rule_id": "ipn-notify", "needle": "cmd=_notify-validate", "family": "IPN", "operation": "IPN validation indicator", "flow": "notify", "target_operation": "unqualified"},
+    {"rule_id": "checkout-v4", "needle": "paypal.Button.render", "family": "CHECKOUT_JS_V4", "operation": "paypal.Button.render", "flow": "approve", "target_operation": "unqualified"}
+  ]
+}

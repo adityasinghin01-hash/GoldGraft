@@ -1,0 +1,31 @@
+{
+  "$id": "https://goldgraft.dev/schemas/IssueApplyApproval.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Plan Ref",
+      "type": "string"
+    },
+    "reviewed_bundle_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Reviewed Bundle Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "plan_ref",
+    "plan_digest",
+    "reviewed_bundle_digest"
+  ],
+  "title": "IssueApplyApprovalV1",
+  "type": "object"
+}

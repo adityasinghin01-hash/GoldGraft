@@ -1,0 +1,2181 @@
+{
+  "$defs": {
+    "ActionPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "budget_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Budget Ref",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "exit_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Exit Plan Ref",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "finalisation_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Finalisation Plan Ref",
+          "type": "string"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "graph_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Graph Digest",
+          "type": "string"
+        },
+        "plan_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Digest",
+          "type": "string"
+        },
+        "plan_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "policy_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Policy Digest",
+          "type": "string"
+        },
+        "recovery_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Recovery Plan Ref",
+          "type": "string"
+        },
+        "review_bundle_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Review Bundle Digest",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "scope_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Scope Digest",
+          "type": "string"
+        },
+        "slots": {
+          "items": {
+            "$ref": "#/$defs/EffectSlot"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Slots",
+          "type": "array"
+        },
+        "state_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "State Plan Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "plan_id",
+        "case_id",
+        "run_id",
+        "generation",
+        "graph_digest",
+        "scope_digest",
+        "review_bundle_digest",
+        "policy_digest",
+        "slots",
+        "recovery_plan_ref",
+        "state_plan_ref",
+        "finalisation_plan_ref",
+        "exit_plan_ref",
+        "budget_ref",
+        "expires_at",
+        "plan_digest"
+      ],
+      "title": "ActionPlan",
+      "type": "object"
+    },
+    "ApprovalSet": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Approval Refs",
+          "type": "array"
+        },
+        "approval_set_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Approval Set Id",
+          "type": "string"
+        },
+        "authority_epochs": {
+          "maxProperties": 256,
+          "patternProperties": {
+            "^\\S+$": {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            }
+          },
+          "propertyNames": {
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "title": "Authority Epochs",
+          "type": "object"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "plan_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Digest",
+          "type": "string"
+        },
+        "required_controller_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required Controller Ids",
+          "type": "array"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "complete",
+            "missing",
+            "stale",
+            "revoked"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approval_set_id",
+        "case_id",
+        "run_id",
+        "generation",
+        "plan_digest",
+        "required_controller_ids",
+        "approval_refs",
+        "authority_epochs",
+        "checked_at",
+        "state"
+      ],
+      "title": "ApprovalSet",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "active_reference_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Active Reference Refs",
+          "type": "array"
+        },
+        "asset_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "authority_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Authority Refs",
+          "type": "array"
+        },
+        "desired": {
+          "enum": [
+            "keep",
+            "deny_revoke",
+            "delete",
+            "retain_policy"
+          ],
+          "title": "Desired",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "source",
+            "image",
+            "registry",
+            "runtime",
+            "config",
+            "state",
+            "credential",
+            "callback",
+            "origin_handler",
+            "grant",
+            "worker",
+            "copy",
+            "record",
+            "exit_executor"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "ownership": {
+          "enum": [
+            "merchant",
+            "shared_service",
+            "exclusive_run"
+          ],
+          "title": "Ownership",
+          "type": "string"
+        },
+        "required_for_operation": {
+          "title": "Required For Operation",
+          "type": "boolean"
+        },
+        "target_key": {
+          "$ref": "#/$defs/TargetKey"
+        }
+      },
+      "required": [
+        "asset_id",
+        "kind",
+        "ownership",
+        "target_key",
+        "required_for_operation",
+        "active_reference_refs",
+        "desired",
+        "authority_refs",
+        "evidence_refs"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "AssetManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "maxItems": 256,
+          "title": "Assets",
+          "type": "array"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "final_artifact_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Final Artifact Digest",
+          "type": "string"
+        },
+        "final_config_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Final Config Digest",
+          "type": "string"
+        },
+        "legacy_obligations_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Legacy Obligations Ref",
+          "type": "string"
+        },
+        "manifest_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Manifest Digest",
+          "type": "string"
+        },
+        "manifest_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Manifest Id",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "manifest_id",
+        "case_id",
+        "run_id",
+        "assets",
+        "final_artifact_digest",
+        "final_config_digest",
+        "legacy_obligations_ref",
+        "manifest_digest"
+      ],
+      "title": "AssetManifest",
+      "type": "object"
+    },
+    "DeliverySnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "action_plan_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Action Plan Ref"
+        },
+        "approval_set_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Approval Set Ref"
+        },
+        "cancellation_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cancellation Ref"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "current_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Current Evidence Refs",
+          "type": "array"
+        },
+        "deployment_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Deployment Ref"
+        },
+        "exit_manifest_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exit Manifest Ref"
+        },
+        "exit_plan_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exit Plan Ref"
+        },
+        "final_asset_manifest_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Asset Manifest Ref"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "graph_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Graph Ref",
+          "type": "string"
+        },
+        "issue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Issue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lifecycle_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Lifecycle Ref",
+          "type": "string"
+        },
+        "pending_effect_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Pending Effect Refs",
+          "type": "array"
+        },
+        "reservation_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reservation Ref"
+        },
+        "review_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Review Ref"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "state_cutover_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "State Cutover Ref"
+        },
+        "state_version": {
+          "exclusiveMinimum": 0,
+          "title": "State Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "case_id",
+        "run_id",
+        "generation",
+        "state_version",
+        "lifecycle_ref",
+        "graph_ref",
+        "review_ref",
+        "action_plan_ref",
+        "approval_set_ref",
+        "reservation_ref",
+        "state_cutover_ref",
+        "deployment_ref",
+        "final_asset_manifest_ref",
+        "exit_plan_ref",
+        "exit_manifest_ref",
+        "current_evidence_refs",
+        "pending_effect_refs",
+        "cancellation_ref",
+        "issue",
+        "checked_at"
+      ],
+      "title": "DeliverySnapshot",
+      "type": "object"
+    },
+    "DeploymentObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "current_runtime_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Current Runtime Evidence Refs",
+          "type": "array"
+        },
+        "effect_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Effect Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "observed_artifact_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Artifact Digest"
+        },
+        "observed_config_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Config Digest"
+        },
+        "outcome": {
+          "enum": [
+            "pending",
+            "verified",
+            "failed",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "provider": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider",
+          "type": "string"
+        },
+        "provider_deploy_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Provider Deploy Id"
+        },
+        "provider_status": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Provider Status",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "submitted_artifact_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Submitted Artifact Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "effect_id",
+        "case_id",
+        "provider",
+        "resource_id",
+        "environment_id",
+        "submitted_artifact_digest",
+        "observed_artifact_digest",
+        "observed_config_digest",
+        "provider_deploy_id",
+        "provider_status",
+        "current_runtime_evidence_refs",
+        "checked_at",
+        "outcome"
+      ],
+      "title": "DeploymentObservation",
+      "type": "object"
+    },
+    "EffectSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Artifact Digest"
+        },
+        "cardinality": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Cardinality",
+          "type": "integer"
+        },
+        "config_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Config Digest"
+        },
+        "depends_on": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Depends On",
+          "type": "array"
+        },
+        "effect_class": {
+          "enum": [
+            "E0",
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "title": "Effect Class",
+          "type": "string"
+        },
+        "expected_version_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Expected Version Ref",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "preserve_state",
+            "publish_artifact",
+            "publish_source",
+            "merge_protected",
+            "apply_configuration",
+            "deploy_exact",
+            "finalise",
+            "prepare_exit",
+            "run_exit",
+            "read_exit_evidence",
+            "revoke_exit_evidence",
+            "configure_ingress",
+            "restart_target",
+            "revoke_grant",
+            "delete_temporary",
+            "stop_worker",
+            "financial_compensation"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "recovery_branch_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recovery Branch Ref"
+        },
+        "required_authority_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required Authority Refs",
+          "type": "array"
+        },
+        "required_controller_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required Controller Ids",
+          "type": "array"
+        },
+        "slot_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Slot Id",
+          "type": "string"
+        },
+        "state_plan_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "State Plan Digest"
+        },
+        "target_key": {
+          "$ref": "#/$defs/TargetKey"
+        },
+        "trigger_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Trigger Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slot_id",
+        "operation",
+        "target_key",
+        "effect_class",
+        "depends_on",
+        "artifact_digest",
+        "config_digest",
+        "state_plan_digest",
+        "trigger_digest",
+        "required_authority_refs",
+        "required_controller_ids",
+        "expected_version_ref",
+        "cardinality",
+        "recovery_branch_ref"
+      ],
+      "title": "EffectSlot",
+      "type": "object"
+    },
+    "ExitCheckPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_restart_count": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Allowed Restart Count",
+          "type": "integer"
+        },
+        "authority_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Authority Refs",
+          "type": "array"
+        },
+        "budget_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Budget Ref",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "criteria_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Criteria Refs",
+          "type": "array"
+        },
+        "deadline": {
+          "format": "date-time",
+          "title": "Deadline",
+          "type": "string"
+        },
+        "evidence_read_authority_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Evidence Read Authority Ref",
+          "type": "string"
+        },
+        "executor_identity_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Executor Identity Ref",
+          "type": "string"
+        },
+        "exit_plan_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Exit Plan Id",
+          "type": "string"
+        },
+        "failure_route_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Failure Route Ref",
+          "type": "string"
+        },
+        "final_artifact_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Final Artifact Digest",
+          "type": "string"
+        },
+        "final_config_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Final Config Digest",
+          "type": "string"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "plan_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Digest",
+          "type": "string"
+        },
+        "private_evidence_destination_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Private Evidence Destination Ref",
+          "type": "string"
+        },
+        "recovery_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Recovery Plan Ref",
+          "type": "string"
+        },
+        "reservation_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Reservation Ref",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "state_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "State Digest",
+          "type": "string"
+        },
+        "trusted_code_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Trusted Code Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exit_plan_id",
+        "case_id",
+        "run_id",
+        "generation",
+        "reservation_ref",
+        "executor_identity_ref",
+        "trusted_code_digest",
+        "final_artifact_digest",
+        "final_config_digest",
+        "state_digest",
+        "criteria_refs",
+        "allowed_restart_count",
+        "recovery_plan_ref",
+        "budget_ref",
+        "deadline",
+        "private_evidence_destination_ref",
+        "evidence_read_authority_ref",
+        "failure_route_ref",
+        "authority_refs",
+        "plan_digest"
+      ],
+      "title": "ExitCheckPlan",
+      "type": "object"
+    },
+    "ExitItem": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner",
+          "type": "string"
+        },
+        "required_for_exit": {
+          "title": "Required For Exit",
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "preserved",
+            "local_denied",
+            "termination_pending",
+            "revocation_pending",
+            "deleted_active",
+            "backup_pending",
+            "held",
+            "exported_unrecallable",
+            "confirmed",
+            "unknown"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "owner",
+        "required_for_exit",
+        "state",
+        "evidence_refs"
+      ],
+      "title": "ExitItem",
+      "type": "object"
+    },
+    "ExitManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "cleanup_items": {
+          "items": {
+            "$ref": "#/$defs/ExitItem"
+          },
+          "maxItems": 256,
+          "title": "Cleanup Items",
+          "type": "array"
+        },
+        "exit_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Exit Id",
+          "type": "string"
+        },
+        "legacy_obligations_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Legacy Obligations Ref",
+          "type": "string"
+        },
+        "merchant_assets_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Merchant Assets Ref",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "complete",
+            "pending",
+            "failed_safe",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "persistent_runtime_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Persistent Runtime Evidence Refs",
+          "type": "array"
+        },
+        "post_denial_observation_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Post Denial Observation Refs",
+          "type": "array"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "temporary_assets_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Temporary Assets Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "exit_id",
+        "case_id",
+        "run_id",
+        "merchant_assets_ref",
+        "temporary_assets_ref",
+        "legacy_obligations_ref",
+        "persistent_runtime_evidence_refs",
+        "post_denial_observation_refs",
+        "cleanup_items",
+        "outcome"
+      ],
+      "title": "ExitManifest",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Ref"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "recovery": {
+          "enum": [
+            "retry_read",
+            "reconnect",
+            "supply_input",
+            "review_scope",
+            "reapprove",
+            "await_counterpart",
+            "reconcile",
+            "unsupported"
+          ],
+          "title": "Recovery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "input_ref",
+        "owner_role",
+        "recovery",
+        "evidence_refs"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "LifecycleRun": {
+      "additionalProperties": false,
+      "properties": {
+        "active_effect_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Active Effect Refs",
+          "type": "array"
+        },
+        "attempt": {
+          "exclusiveMinimum": 0,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "resource_graph_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Resource Graph Digest",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "scope_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Scope Digest",
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "BASELINE_VERIFY",
+            "BASELINE_RUN",
+            "CANDIDATE_READY",
+            "VALIDATING",
+            "REVIEW_READY",
+            "AWAITING_APPLY",
+            "PUBLISHING",
+            "MERGING",
+            "DEPLOY_PREPARED",
+            "DEPLOYING",
+            "OBSERVING",
+            "FINALISING",
+            "EXITING",
+            "COMPLETE",
+            "HELD",
+            "FAILED_SAFE",
+            "INCIDENT_UNKNOWN"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        },
+        "work_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Work Id",
+          "type": "string"
+        },
+        "work_package_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Work Package Digest",
+          "type": "string"
+        },
+        "work_package_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Work Package Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "case_id",
+        "work_id",
+        "generation",
+        "work_package_ref",
+        "work_package_digest",
+        "resource_graph_digest",
+        "scope_digest",
+        "stage",
+        "attempt",
+        "evidence_refs",
+        "active_effect_refs",
+        "updated_at"
+      ],
+      "title": "LifecycleRun",
+      "type": "object"
+    },
+    "PredicateResult": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "predicate": {
+          "enum": [
+            "can_review",
+            "can_prepare_apply",
+            "can_submit_slot",
+            "upgrade_verified",
+            "exit_complete"
+          ],
+          "title": "Predicate",
+          "type": "string"
+        },
+        "slot_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Slot Id"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "missing",
+            "stale",
+            "failed",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "subject_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "predicate",
+        "slot_id",
+        "status",
+        "evidence_refs",
+        "subject_digest",
+        "checked_at"
+      ],
+      "title": "PredicateResult",
+      "type": "object"
+    },
+    "ReviewBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "baseline_snapshot_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Baseline Snapshot Refs",
+          "type": "array"
+        },
+        "bundle_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Bundle Digest",
+          "type": "string"
+        },
+        "bundle_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Bundle Id",
+          "type": "string"
+        },
+        "candidate_snapshot_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Candidate Snapshot Refs",
+          "type": "array"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "domain_rule_result_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Domain Rule Result Refs",
+          "type": "array"
+        },
+        "effective_config_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Effective Config Digest",
+          "type": "string"
+        },
+        "missing_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Missing Evidence Refs",
+          "type": "array"
+        },
+        "patch_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Patch Digest",
+          "type": "string"
+        },
+        "proposed_apply_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Proposed Apply Plan Ref",
+          "type": "string"
+        },
+        "recovery_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Recovery Plan Ref",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "scenario_result_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Scenario Result Refs",
+          "type": "array"
+        },
+        "security_result_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Security Result Refs",
+          "type": "array"
+        },
+        "unsupported_paths": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Unsupported Paths",
+          "type": "array"
+        },
+        "work_package_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Work Package Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bundle_id",
+        "case_id",
+        "run_id",
+        "work_package_digest",
+        "baseline_snapshot_refs",
+        "candidate_snapshot_refs",
+        "patch_digest",
+        "artifact_digest",
+        "effective_config_digest",
+        "scenario_result_refs",
+        "domain_rule_result_refs",
+        "security_result_refs",
+        "unsupported_paths",
+        "missing_evidence_refs",
+        "recovery_plan_ref",
+        "proposed_apply_plan_ref",
+        "bundle_digest",
+        "created_at"
+      ],
+      "title": "ReviewBundle",
+      "type": "object"
+    },
+    "StateCutover": {
+      "additionalProperties": false,
+      "properties": {
+        "admission_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Admission Ref",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "cutover_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Cutover Id",
+          "type": "string"
+        },
+        "drain_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Drain Evidence Refs",
+          "type": "array"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "export_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Export Manifest Ref",
+          "type": "string"
+        },
+        "fence_epochs": {
+          "maxProperties": 256,
+          "patternProperties": {
+            "^\\S+$": {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            }
+          },
+          "propertyNames": {
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "title": "Fence Epochs",
+          "type": "object"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "handler_inventory_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Handler Inventory Ref",
+          "type": "string"
+        },
+        "high_water_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "High Water Ref",
+          "type": "string"
+        },
+        "ingress_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Ingress Ref",
+          "type": "string"
+        },
+        "origin_route_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Origin Route Ref",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "prepared",
+            "fenced",
+            "exported",
+            "restored",
+            "replayed",
+            "verified",
+            "held",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "pending_external_effect_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Pending External Effect Refs",
+          "type": "array"
+        },
+        "replay_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Replay Manifest Ref",
+          "type": "string"
+        },
+        "restore_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Restore Manifest Ref",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Schema Digest",
+          "type": "string"
+        },
+        "state_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "State Digest",
+          "type": "string"
+        },
+        "writer_inventory_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Writer Inventory Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cutover_id",
+        "case_id",
+        "run_id",
+        "generation",
+        "writer_inventory_ref",
+        "handler_inventory_ref",
+        "ingress_ref",
+        "origin_route_ref",
+        "admission_ref",
+        "drain_evidence_refs",
+        "fence_epochs",
+        "high_water_ref",
+        "export_manifest_ref",
+        "restore_manifest_ref",
+        "replay_manifest_ref",
+        "state_digest",
+        "schema_digest",
+        "pending_external_effect_refs",
+        "evidence_refs",
+        "outcome"
+      ],
+      "title": "StateCutover",
+      "type": "object"
+    },
+    "TargetKey": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_kind": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "account_id",
+        "environment_id",
+        "resource_kind",
+        "resource_id"
+      ],
+      "title": "TargetKey",
+      "type": "object"
+    },
+    "TargetReservation": {
+      "additionalProperties": false,
+      "properties": {
+        "action_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Action Plan Ref",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "expected_version_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Expected Version Refs",
+          "type": "array"
+        },
+        "lease_until": {
+          "format": "date-time",
+          "title": "Lease Until",
+          "type": "string"
+        },
+        "reservation_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Reservation Id",
+          "type": "string"
+        },
+        "resource_epochs": {
+          "maxProperties": 256,
+          "patternProperties": {
+            "^\\S+$": {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            }
+          },
+          "propertyNames": {
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "title": "Resource Epochs",
+          "type": "object"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "held",
+            "reconciling",
+            "releasable",
+            "released"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "target_keys": {
+          "items": {
+            "$ref": "#/$defs/TargetKey"
+          },
+          "maxItems": 256,
+          "title": "Target Keys",
+          "type": "array"
+        },
+        "unresolved_effect_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Unresolved Effect Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "reservation_id",
+        "case_id",
+        "run_id",
+        "action_plan_ref",
+        "target_keys",
+        "resource_epochs",
+        "lease_until",
+        "expected_version_refs",
+        "unresolved_effect_refs",
+        "state"
+      ],
+      "title": "TargetReservation",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ResolvedDeliveryView.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approvals": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ApprovalSet"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "delivery_route": {
+      "enum": [
+        "git_protected",
+        "direct_artifact"
+      ],
+      "title": "Delivery Route",
+      "type": "string"
+    },
+    "deployment": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DeploymentObservation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "exit_manifest": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExitManifest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "exit_plan": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ExitCheckPlan"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "final_assets": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AssetManifest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/LifecycleRun"
+    },
+    "plan": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ActionPlan"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "predicate_results": {
+      "items": {
+        "$ref": "#/$defs/PredicateResult"
+      },
+      "maxItems": 256,
+      "title": "Predicate Results",
+      "type": "array"
+    },
+    "reservation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TargetReservation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "review": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ReviewBundle"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "snapshot": {
+      "$ref": "#/$defs/DeliverySnapshot"
+    },
+    "state_cutover": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StateCutover"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "snapshot",
+    "lifecycle",
+    "delivery_route",
+    "review",
+    "plan",
+    "approvals",
+    "reservation",
+    "state_cutover",
+    "deployment",
+    "final_assets",
+    "exit_plan",
+    "exit_manifest",
+    "predicate_results"
+  ],
+  "title": "ResolvedDeliveryViewV1",
+  "type": "object"
+}

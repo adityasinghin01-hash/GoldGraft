@@ -9,6 +9,7 @@ from typing import Annotated
 
 from pydantic import Field, StrictBool, StrictInt
 
+from . import connection_control as plan5
 from .agents import Alert, DashboardSpec
 from .common import Count, Format, NonNegative, Stage, StagePct, Text, Timestamp
 from .delivery import Recipe, SwitchConfig
@@ -248,11 +249,44 @@ class Comparison(Format):
 
 
 API_MODELS: tuple[type[Format], ...] = (
-    Problem, ProbeRequest, ShopCreate, Shop, ConnectRequest, StartGraftRequest, StageTiming,
-    GraftCard, Graft, ScenarioRow, ScenarioList, CmelView, TriangleRow, ProofView, VerifyCheck,
-    CertificateVerifyResult, HealState, InjectFaultRequest, InjectFaultResult, Ack, RecipeList,
-    LearningPoint, LearningCurve, FleetRow, OrchardView, OrchardAsk, OrchardAnswer,
-    GauntletAttempt, GauntletRun, ComparisonArm, Comparison,
+    Problem,
+    ProbeRequest,
+    ShopCreate,
+    Shop,
+    ConnectRequest,
+    StartGraftRequest,
+    StageTiming,
+    GraftCard,
+    Graft,
+    ScenarioRow,
+    ScenarioList,
+    CmelView,
+    TriangleRow,
+    ProofView,
+    VerifyCheck,
+    CertificateVerifyResult,
+    HealState,
+    InjectFaultRequest,
+    InjectFaultResult,
+    Ack,
+    RecipeList,
+    LearningPoint,
+    LearningCurve,
+    FleetRow,
+    OrchardView,
+    OrchardAsk,
+    OrchardAnswer,
+    GauntletAttempt,
+    GauntletRun,
+    ComparisonArm,
+    Comparison,
 )
 # Re-exported so route definitions only import from this module.
 __all__ = [m.__name__ for m in API_MODELS] + ["Certificate", "Url"]
+
+# v2 browser wire shapes are separate from legacy API_MODELS and handlers.
+PLAN5_API_MODELS = tuple(
+    model
+    for model in vars(plan5).values()
+    if isinstance(model, type) and issubclass(model, Format) and model.__module__ == plan5.__name__
+)

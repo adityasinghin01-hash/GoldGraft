@@ -1,0 +1,24 @@
+{
+  "action_plan_ref": "fixture:action_plan_ref",
+  "case_id": "case-demo",
+  "expected_version_refs": [
+    "fixture:expected_version_ref"
+  ],
+  "lease_until": "2026-11-11T00:00:00Z",
+  "reservation_id": "fixture:reservation_id",
+  "resource_epochs": {
+    "64f5452ccd94aa8a8e782c3e2bc50d8257e32f8ddf89d2c918c5cc1eb35187cf": 1
+  },
+  "run_id": "run-demo",
+  "state": "held",
+  "target_keys": [
+    {
+      "account_id": "synthetic-account",
+      "environment_id": "synthetic",
+      "provider_id": "local_folder",
+      "resource_id": "synthetic-resource",
+      "resource_kind": "fixture:resource_kind"
+    }
+  ],
+  "unresolved_effect_refs": []
+}

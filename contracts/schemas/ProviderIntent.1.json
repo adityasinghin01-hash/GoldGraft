@@ -1,0 +1,80 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ProviderIntent.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "continuation_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Continuation Ref",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "intent_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Intent Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "purpose": {
+      "enum": [
+        "read_connect",
+        "apply_connect"
+      ],
+      "title": "Purpose",
+      "type": "string"
+    },
+    "redirect_url": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Redirect Url",
+      "type": "string"
+    },
+    "resource_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Resource Id"
+    }
+  },
+  "required": [
+    "intent_id",
+    "case_id",
+    "provider_id",
+    "resource_id",
+    "purpose",
+    "continuation_ref",
+    "redirect_url",
+    "expires_at"
+  ],
+  "title": "ProviderIntentV1",
+  "type": "object"
+}

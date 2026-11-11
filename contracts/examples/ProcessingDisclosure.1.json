@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-11-10T00:00:00Z",
+  "copy_scope": "fixture:copy_scope",
+  "limits": [
+    "fixture:limit"
+  ],
+  "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+  "recipients": [
+    {
+      "name": "fixture:name",
+      "purpose": "fixture:purpose",
+      "region_text": "fixture:region_text",
+      "retention_text": "fixture:retention_text",
+      "terms_evidence_refs": [
+        "fixture:terms_evidence_ref"
+      ]
+    }
+  ],
+  "status": "qualified"
+}

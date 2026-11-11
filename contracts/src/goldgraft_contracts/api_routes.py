@@ -17,14 +17,18 @@ table, so neither can drift from the contract. Rules for every implementation:
 """
 
 from dataclasses import dataclass, field
+from typing import Literal
 
 from . import api
+from . import connection_control as p5
+from . import lifecycle as lc
 from .common import Format
 from .delivery import SwitchConfig
 from .ledger import LedgerEntry
 from .proof import Certificate
 from .runner import GuardEvent
 from .survey import Connection, ProbeResult, RootMap
+from .work_package import ChunkReceipt, UploadSession
 
 
 @dataclass(frozen=True)
@@ -119,3 +123,187 @@ def route(name: str) -> Route:
         if item.name == name:
             return item
     raise KeyError(name)
+
+
+# Additive v2 contract table. Legacy stand-in/backend handlers continue to consume
+# ROUTES only; declaring a v2 route does not install an implementation.
+
+
+@dataclass(frozen=True)
+class Plan5Route:
+    method: Literal["GET", "POST"]
+    path: str
+    name: str
+    response: tuple[type[Format], ...]
+    request: type[Format] | None = None
+    success_status: int = 200
+    auth: Literal["session", "draft", "session_and_draft", "service", "public_projection"] = (
+        "session"
+    )
+    request_media: Literal["application/json", "multipart/form-data"] = "application/json"
+    sse: bool = False
+    query: tuple[str, ...] = ()
+
+    @property
+    def csrf(self) -> bool:
+        return self.method == "POST" and self.auth != "service"
+
+    @property
+    def needs_idempotency_key(self) -> bool:
+        return self.method == "POST"
+
+
+C = "/v2/connection-cases"
+R = Plan5Route
+PLAN5_ROUTES = (
+    R(
+        "POST",
+        "/v2/connection-drafts",
+        "create_draft",
+        (p5.DraftCase,),
+        p5.CreateDraft,
+        201,
+        "draft",
+    ),
+    R(
+        "POST",
+        "/v2/connection-drafts/{draft_id}/claim",
+        "claim_draft",
+        (p5.ConnectionCase,),
+        p5.ClaimDraft,
+        200,
+        "session_and_draft",
+    ),
+    R("POST", C, "create_case", (p5.ConnectionCase,), p5.CreateCase, 201),
+    R("GET", C, "list_cases", (p5.CaseList,), query=("cursor", "limit")),
+    R("GET", C + "/{case_id}", "get_case", (p5.ConnectionCase,)),
+    R("GET", C + "/{case_id}/view", "case_view", (p5.CaseView,)),
+    R(
+        "POST",
+        C + "/{case_id}/provider-intents",
+        "provider_intent",
+        (p5.ProviderIntent,),
+        p5.CreateProviderIntent,
+        201,
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/invitations",
+        "controller_invitation",
+        (p5.ControllerInvitation,),
+        p5.CreateInvitation,
+        201,
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/source-uploads",
+        "create_upload",
+        (UploadSession,),
+        p5.CreateUploadRequest,
+        201,
+    ),
+    R("GET", C + "/{case_id}/source-uploads/{upload_id}", "upload_status", (UploadSession,)),
+    R(
+        "POST",
+        C + "/{case_id}/source-uploads/{upload_id}/chunks",
+        "upload_chunk",
+        (ChunkReceipt,),
+        p5.ChunkUploadRequest,
+        request_media="multipart/form-data",
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/source-uploads/{upload_id}/finalise",
+        "finalise_upload",
+        (UploadSession,),
+        p5.FinaliseUploadRequest,
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/source-uploads/{upload_id}/cancel",
+        "cancel_upload",
+        (UploadSession,),
+        p5.CancelUploadRequest,
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/action-intents",
+        "create_action_intent",
+        (p5.ActionIntent,),
+        p5.CreateActionIntent,
+        201,
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/actions",
+        "start_work",
+        (p5.WorkAcceptance, p5.WorkCancellation),
+        p5.StartWorkRequest,
+        202,
+    ),
+    R("GET", C + "/{case_id}/actions/{action_id}", "action_status", (p5.ActionStatusView,)),
+    R(
+        "POST",
+        C + "/{case_id}/actions/{action_id}/cancellation",
+        "cancel_work",
+        (p5.WorkCancellation,),
+        p5.CancelWorkRequest,
+        202,
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/lifecycle-runs/{run_id}/resume",
+        "resume_run",
+        (lc.LifecycleRun,),
+        p5.ResumeRunRequest,
+        202,
+    ),
+    R(
+        "GET",
+        C + "/{case_id}/review-bundles/{bundle_id}",
+        "private_review",
+        (p5.PrivateReviewView,),
+    ),
+    R(
+        "POST",
+        C + "/{case_id}/apply-approvals",
+        "issue_apply_approval",
+        (lc.ApplyApproval,),
+        p5.IssueApplyApproval,
+        201,
+    ),
+    R("GET", C + "/{case_id}/events", "case_events", (p5.CaseEvent,), sse=True, query=("after",)),
+    R(
+        "GET",
+        "/v2/public-proof/{public_id}",
+        "public_proof",
+        (p5.PublicProofView,),
+        auth="public_projection",
+    ),
+    R(
+        "POST",
+        "/v2/worker-operations",
+        "worker_operation",
+        (p5.CollectorAcceptance,),
+        p5.WorkerOperation,
+        201,
+        "service",
+    ),
+)
+
+
+def plan5_route(name: str) -> Plan5Route:
+    for item in PLAN5_ROUTES:
+        if item.name == name:
+            return item
+    raise KeyError(name)
+
+
+def service_route(name: str, *, mode: Literal["service", "legacy_demo"]) -> Route | Plan5Route:
+    if mode == "legacy_demo":
+        return route(name)
+    if mode != "service":
+        raise ValueError("unknown service mode")
+    if any(r.name == name for r in ROUTES):
+        raise ValueError("legacy demo route cannot enter v2 service")
+    return plan5_route(name)

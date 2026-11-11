@@ -1,0 +1,42 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ProviderRef.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Account Id"
+    },
+    "adapter_version": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Adapter Version",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Provider Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider_id",
+    "adapter_version",
+    "account_id"
+  ],
+  "title": "ProviderRefV1",
+  "type": "object"
+}

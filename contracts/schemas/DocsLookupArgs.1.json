@@ -1,0 +1,35 @@
+{
+  "$id": "https://goldgraft.dev/schemas/DocsLookupArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "catalog_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Catalog Ref",
+      "type": "string"
+    },
+    "topic": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Topic",
+      "type": "string"
+    },
+    "version": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "catalog_ref",
+    "topic",
+    "version"
+  ],
+  "title": "DocsLookupArgsV1",
+  "type": "object"
+}

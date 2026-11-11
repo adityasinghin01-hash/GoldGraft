@@ -1,0 +1,288 @@
+{
+  "$defs": {
+    "ProviderRef": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Id"
+        },
+        "adapter_version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "adapter_version",
+        "account_id"
+      ],
+      "title": "ProviderRef",
+      "type": "object"
+    },
+    "ResourceEdge": {
+      "additionalProperties": false,
+      "properties": {
+        "edge_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Edge Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "from_node": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "From Node",
+          "type": "string"
+        },
+        "relation": {
+          "enum": [
+            "builds_from",
+            "routes_to",
+            "stores_state_in",
+            "receives_callback_from",
+            "depends_on"
+          ],
+          "title": "Relation",
+          "type": "string"
+        },
+        "required_for_scope": {
+          "title": "Required For Scope",
+          "type": "boolean"
+        },
+        "to_node": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "To Node",
+          "type": "string"
+        }
+      },
+      "required": [
+        "edge_id",
+        "from_node",
+        "to_node",
+        "relation",
+        "required_for_scope",
+        "evidence_refs"
+      ],
+      "title": "ResourceEdge",
+      "type": "object"
+    },
+    "ResourceNode": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Binding Refs",
+          "type": "array"
+        },
+        "environment_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Environment Id"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "source",
+            "frontend",
+            "backend",
+            "datastore",
+            "callback",
+            "scheduled_job",
+            "external_service",
+            "artifact"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "node_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "provider": {
+          "$ref": "#/$defs/ProviderRef"
+        },
+        "provider_resource_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Provider Resource Id"
+        },
+        "required_for_scope": {
+          "title": "Required For Scope",
+          "type": "boolean"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceRevision"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "node_id",
+        "provider",
+        "kind",
+        "provider_resource_id",
+        "environment_id",
+        "revision",
+        "required_for_scope",
+        "binding_refs",
+        "evidence_refs"
+      ],
+      "title": "ResourceNode",
+      "type": "object"
+    },
+    "SourceRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "git_commit",
+            "provider_revision_set",
+            "capture"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "SourceRevision",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ResourceGraph.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/ResourceEdge"
+      },
+      "maxItems": 256,
+      "title": "Edges",
+      "type": "array"
+    },
+    "graph_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Graph Digest",
+      "type": "string"
+    },
+    "graph_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Graph Id",
+      "type": "string"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/ResourceNode"
+      },
+      "maxItems": 256,
+      "title": "Nodes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "graph_id",
+    "case_id",
+    "nodes",
+    "edges",
+    "graph_digest"
+  ],
+  "title": "ResourceGraphV1",
+  "type": "object"
+}

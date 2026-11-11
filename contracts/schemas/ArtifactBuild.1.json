@@ -1,0 +1,171 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ArtifactBuild.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authenticity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authenticity Ref",
+      "type": "string"
+    },
+    "build_config_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Build Config Digest",
+      "type": "string"
+    },
+    "build_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Build Id",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "collector_identity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Collector Identity Ref",
+      "type": "string"
+    },
+    "dependency_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Dependency Digest",
+      "type": "string"
+    },
+    "exact_image_test_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Exact Image Test Refs",
+      "type": "array"
+    },
+    "export_tar_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Export Tar Digest",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "layer_digests": {
+      "items": {
+        "pattern": "^sha256:[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Layer Digests",
+      "type": "array"
+    },
+    "leak_scan_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Leak Scan Refs",
+      "type": "array"
+    },
+    "oci_manifest_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Oci Manifest Digest",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "built",
+        "tested",
+        "held",
+        "failed",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "platform": {
+      "const": "linux/amd64",
+      "title": "Platform",
+      "type": "string"
+    },
+    "provenance_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Provenance Ref",
+      "type": "string"
+    },
+    "recipe_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recipe Digest",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "runtime_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Profile Digest",
+      "type": "string"
+    },
+    "source_snapshot_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Source Snapshot Refs",
+      "type": "array"
+    },
+    "source_tree_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Tree Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "build_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "source_snapshot_refs",
+    "source_tree_digest",
+    "recipe_digest",
+    "dependency_digest",
+    "build_config_digest",
+    "platform",
+    "oci_manifest_digest",
+    "export_tar_digest",
+    "layer_digests",
+    "runtime_profile_digest",
+    "exact_image_test_refs",
+    "leak_scan_refs",
+    "provenance_ref",
+    "collector_identity_ref",
+    "authenticity_ref",
+    "outcome"
+  ],
+  "title": "ArtifactBuildV1",
+  "type": "object"
+}

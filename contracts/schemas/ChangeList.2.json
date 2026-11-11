@@ -1,0 +1,260 @@
+{
+  "$defs": {
+    "Producer": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ProducerKind"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ],
+      "title": "Producer",
+      "type": "object"
+    },
+    "ProducerKind": {
+      "enum": [
+        "agent",
+        "service"
+      ],
+      "title": "ProducerKind",
+      "type": "string"
+    },
+    "SnapshotChange": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "anyOf": [
+            {
+              "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Commit"
+        },
+        "plan_item_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Plan Item Ids",
+          "type": "array"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "plan_item_ids",
+        "summary",
+        "commit"
+      ],
+      "title": "SnapshotChange",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ChangeList.2.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "branch": {
+          "type": "null"
+        },
+        "changes": {
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/SnapshotChange"
+              },
+              {
+                "properties": {
+                  "commit": {
+                    "type": "null"
+                  }
+                }
+              }
+            ]
+          },
+          "maxItems": 256,
+          "title": "Changes",
+          "type": "array"
+        },
+        "provenance": {
+          "const": "snapshot",
+          "enum": [
+            "git",
+            "snapshot"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "branch": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "changes": {
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/SnapshotChange"
+              },
+              {
+                "properties": {
+                  "commit": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Changes",
+          "type": "array"
+        },
+        "provenance": {
+          "const": "git",
+          "enum": [
+            "git",
+            "snapshot"
+          ],
+          "title": "Provenance",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "baseline_snapshot_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Baseline Snapshot Ref",
+      "type": "string"
+    },
+    "branch": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Branch"
+    },
+    "candidate_snapshot_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Candidate Snapshot Ref",
+      "type": "string"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/SnapshotChange"
+      },
+      "maxItems": 256,
+      "title": "Changes",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "graft_id": {
+      "minLength": 1,
+      "title": "Graft Id",
+      "type": "string"
+    },
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "open_item_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Open Item Ids",
+      "type": "array"
+    },
+    "patch_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Patch Digest",
+      "type": "string"
+    },
+    "producer": {
+      "$ref": "#/$defs/Producer"
+    },
+    "provenance": {
+      "enum": [
+        "git",
+        "snapshot"
+      ],
+      "title": "Provenance",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "graft_id",
+    "producer",
+    "created_at",
+    "provenance",
+    "branch",
+    "baseline_snapshot_ref",
+    "candidate_snapshot_ref",
+    "patch_digest",
+    "changes",
+    "open_item_ids"
+  ],
+  "title": "ChangeListV2",
+  "type": "object"
+}

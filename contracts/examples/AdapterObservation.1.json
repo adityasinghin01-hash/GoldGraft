@@ -1,0 +1,13 @@
+{
+  "basis": "observed",
+  "capability": "fixture:capability",
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "expires_at": null,
+  "node_id": "source-demo",
+  "observation_id": "fixture:observation_id",
+  "status": "available"
+}

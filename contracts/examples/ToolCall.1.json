@@ -1,0 +1,6 @@
+{
+  "arguments_digest": "66d649631b8143062e568549e4f46acbead6fc656b04e4e36df528f46ad019f5",
+  "arguments_ref": "fixture:arguments_ref",
+  "call_id": "fixture:call_id",
+  "tool": "fixture:tool"
+}

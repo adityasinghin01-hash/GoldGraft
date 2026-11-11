@@ -1,0 +1,109 @@
+{
+  "format": "HeraldQualificationManifest/1",
+  "at_utc": "2026-11-11T07:27:58.232616+00:00",
+  "status": "deterministic closed-catalog Herald offline-qualified; actual-model phase not needed for closed catalog and remains unqualified; Zapier deferred",
+  "files": [
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/herald.py",
+      "sha256": "59f324c9ed92a51ac230a790f1eb6313761b9fc681067d8034d477f228cd7364"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_herald.py",
+      "sha256": "1c6ae54df69785f778266c5f6c5f863e152555b1c50f9529582927284f718b26"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_herald_qualification.py",
+      "sha256": "be19ecbe2347a3140c5525fa89b85b6464dae0f3917e5a41f73a8065d1700370"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/prompts/herald.md",
+      "sha256": "275579218211709b81fa6856950fde924a287d8401848df06731b3028d678032"
+    }
+  ],
+  "checks": [
+    {
+      "name": "01-consumer-red",
+      "exit_code": 1,
+      "log_sha256": "2e7067cda8b66ae872bfb9467b641763464b054b58cf154c23c3f12fa369b718",
+      "summary": "12 failed, 1 warning in 4.06s",
+      "model_api_calls": 0
+    },
+    {
+      "name": "02-consumer-green",
+      "exit_code": 0,
+      "log_sha256": "22b029a339a07e41035ab1283576d5eb985a7b2bc0b82512d0ef1fba300d723a",
+      "summary": "92 passed, 1 warning in 34.31s",
+      "model_api_calls": 0
+    },
+    {
+      "name": "03-matrix-green",
+      "exit_code": 1,
+      "log_sha256": "d137a4688e2432a018ebaacd43ecbbacc9f8322854368c1ef31d5efe92acd495",
+      "summary": "1 failed, 16 passed, 1 warning in 6.98s",
+      "model_api_calls": 0
+    },
+    {
+      "name": "04-matrix-green-after-bool-fix",
+      "exit_code": 1,
+      "log_sha256": "2fd80f5911ecd4663f183c96578b215d06346acf6537bf68ceac40fe10ac6f0d",
+      "summary": "1 failed, 96 passed, 1 warning in 35.27s",
+      "model_api_calls": 0
+    },
+    {
+      "name": "05-herald-green-after-strict-reparse",
+      "exit_code": 0,
+      "log_sha256": "ca23343545a2ed9cbe302abc9cb32190923865e49847f2242f62be2063620306",
+      "summary": "97 passed, 1 warning in 34.90s",
+      "model_api_calls": 0
+    },
+    {
+      "name": "104-c04-full-regression-sonnet-profile",
+      "exit_code": 0,
+      "log_sha256": "c2919c90a99c64a6217c93b9f63198715a2899067d47a9ef1c208cc42a904e0a",
+      "summary": "620 passed, 1 warning in 100.91s (0:01:40)",
+      "model_api_calls": 0
+    },
+    {
+      "name": "105-c04-lint",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "summary": "All checks passed!",
+      "model_api_calls": 0
+    },
+    {
+      "name": "106-c04-format",
+      "exit_code": 0,
+      "log_sha256": "ba72d5ff990b6755459efa6266bf58b9f38733d193f2c3339b32245e476e5994",
+      "summary": "21 files already formatted",
+      "model_api_calls": 0
+    },
+    {
+      "name": "107-c04-diff-check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "summary": "",
+      "model_api_calls": 0
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/Users/aditya/reports/goldgraft-herald-qualification-20261111/OUTPUT_USE_AUDIT.json",
+      "sha256": "e1126d83b919a348e32d2b22a77708e64ff632fb5e68c5cbe9ce899ae5f0319f"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-herald-qualification-20261111/PRESERVATION.json",
+      "sha256": "0ab20817b8b4d86399cb69b0f5208d50524b5ccab36378e3888cf773fb266933"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-herald-qualification-20261111/OWNERSHIP.md",
+      "sha256": "bceba5f97be3cd36b5bbe2ea6a5acc197f5bc24f4c5ade23235cb1b4f17f91cb"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-herald-qualification-20261111/before.json",
+      "sha256": "99ce101fbaa6a719a33f83e6973790184cb4ff85be9f5af86aa5168564bcc518"
+    }
+  ],
+  "model_api_calls": 0,
+  "notifications_sent": 0,
+  "spend_micro_usd": 0
+}

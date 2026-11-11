@@ -1,0 +1,13 @@
+{
+  "action_id": "fixture:action_id",
+  "cancel_id": "fixture:cancel_id",
+  "case_id": "case-demo",
+  "generation": null,
+  "requested_at": "2026-11-10T00:00:00Z",
+  "requested_by": "fixture:requested_by",
+  "state": "intent_recorded",
+  "termination_evidence_refs": [
+    "fixture:termination_evidence_ref"
+  ],
+  "work_id": null
+}

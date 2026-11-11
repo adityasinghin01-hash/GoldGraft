@@ -1,0 +1,38 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CreateInvitation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "recipient_hint": {
+      "anyOf": [
+        {
+          "maxLength": 8192,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Recipient Hint"
+    },
+    "resource_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Resource Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "resource_ids",
+    "recipient_hint"
+  ],
+  "title": "CreateInvitationV1",
+  "type": "object"
+}

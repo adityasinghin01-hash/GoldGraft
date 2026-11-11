@@ -1,0 +1,62 @@
+{
+  "scope": "model access preflight and independent checker preparation only",
+  "paid_checks": "NOT RUN",
+  "files": [
+    {
+      "path": "pieces/agents/cli.py",
+      "sha256": "eb15d75a3676e3d8168c612b5e7377a3e48e81d0d2314ba0e6888801c91c66c4"
+    },
+    {
+      "path": "pieces/agents/model_readiness.py",
+      "sha256": "2e58ab6b2d4f49daf9c7c7aa00af8c7df0a6ae9ceb873e9cc235779557a2a5cd"
+    },
+    {
+      "path": "pieces/agents/evals/__init__.py",
+      "sha256": "d6c2b69906b13afe9f4a2c86dff3e9fcd0bc84026e9731bf964f5267c3ffaef7"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor.py",
+      "sha256": "ccdc05b9ce6ac6184b721b95350cd2d8c58f5fcc50c57865d034cda59689cf66"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor_cases.json",
+      "sha256": "4b48d05e2294eeb47f099955d993c20b419aec5ccae760aad0ea2428e973c414"
+    },
+    {
+      "path": "pieces/agents/tests/test_model_readiness.py",
+      "sha256": "2a1c113290a5dbe42de16e5c5f262d62aa34b7d434d3329f8b1f58697bfc43ca"
+    },
+    {
+      "path": "pieces/agents/tests/test_surveyor_eval.py",
+      "sha256": "40b10f566df50c3a4eb064067dfd01e1d6c0bb31319ca332e513241db7d7e725"
+    },
+    {
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "d14bea0c0bdfa6e7b182d580855799f3a3bcd631336d4833a1d2851de1a0170e"
+    },
+    {
+      "path": "docs/engineering/plan5/MODEL_ACCESS_PREFLIGHT.md",
+      "sha256": "982e79b4a2554d66c7bee3ccc65a698010e52d20d93637b1604216e3a0c10994"
+    }
+  ],
+  "checks": [
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/15-preflight-checkers.json",
+      "sha256": "8cc2ca63056ef806ed6cdd78d871cd62ca53ec4bee0d552fb5002f85aa998789"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/16-preflight-full.json",
+      "sha256": "b4fb07d8c97650ddddb8b4a2191db27fcff219c03f984ddf44daab9c941cc5e7"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/17-preflight-lint.json",
+      "sha256": "9ea34085987517a64ac92ce57178b1b38548084762534761a4d683e8f75bf975"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/18-preflight-doctor.json",
+      "sha256": "8114de4a8e05fb0a062cf7d04402c32789b0deeed6d2830fa2c97cd180904336"
+    }
+  ],
+  "frozen_files_verified": 454,
+  "original_tracked_files_unchanged": 327
+}

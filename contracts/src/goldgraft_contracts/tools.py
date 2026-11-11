@@ -9,6 +9,21 @@ PRIVILEGED tools are additionally checked by code, never trusted to an LLM
 from dataclasses import dataclass, field
 from enum import StrEnum
 
+from .plan5_tools import TOOL_CATALOG as V2_TOOL_CATALOG
+from .plan5_tools import V2_TOOLS, validate_tool_arguments
+
+__all__ = [
+    "AGENTS",
+    "TOOLS",
+    "SideEffect",
+    "ToolSpec",
+    "tool",
+    "tools_for",
+    "V2_TOOL_CATALOG",
+    "V2_TOOLS",
+    "validate_tool_arguments",
+]
+
 
 class SideEffect(StrEnum):
     READ = "READ"            # reads data only

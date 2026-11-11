@@ -1,0 +1,19 @@
+{
+  "$id": "https://goldgraft.dev/schemas/StatusReadArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "run_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_ref"
+  ],
+  "title": "StatusReadArgsV1",
+  "type": "object"
+}

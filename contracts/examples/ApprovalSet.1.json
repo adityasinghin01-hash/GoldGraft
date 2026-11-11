@@ -1,0 +1,18 @@
+{
+  "approval_refs": [
+    "fixture:approval_ref"
+  ],
+  "approval_set_id": "fixture:approval_set_id",
+  "authority_epochs": {
+    "binding-demo": 1
+  },
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "generation": 1,
+  "plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "required_controller_ids": [
+    "fixture:required_controller_id"
+  ],
+  "run_id": "run-demo",
+  "state": "complete"
+}

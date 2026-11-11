@@ -1,0 +1,19 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ExecutionStatusArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "request_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Request Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id"
+  ],
+  "title": "ExecutionStatusArgsV1",
+  "type": "object"
+}

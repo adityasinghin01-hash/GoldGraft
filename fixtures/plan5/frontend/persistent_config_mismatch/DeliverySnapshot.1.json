@@ -1,0 +1,26 @@
+{
+  "action_plan_ref": null,
+  "approval_set_ref": null,
+  "cancellation_ref": null,
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "current_evidence_refs": [
+    "fixture:current_evidence_ref"
+  ],
+  "deployment_ref": null,
+  "exit_manifest_ref": null,
+  "exit_plan_ref": null,
+  "final_asset_manifest_ref": null,
+  "generation": 1,
+  "graph_ref": "fixture:graph_ref",
+  "issue": null,
+  "lifecycle_ref": "fixture:lifecycle_ref",
+  "pending_effect_refs": [
+    "fixture:original-effect-unknown"
+  ],
+  "reservation_ref": null,
+  "review_ref": null,
+  "run_id": "run-demo",
+  "state_cutover_ref": null,
+  "state_version": 1
+}

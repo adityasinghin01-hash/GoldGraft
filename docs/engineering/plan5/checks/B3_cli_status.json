@@ -1,0 +1,18 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pieces.agents.cli",
+    "status",
+    "--mode",
+    "offline",
+    "--state-file",
+    "/Users/aditya/reports/goldgraft-phase5.3-b3-2026-11-10/demo.sqlite"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "started_at": "2026-11-10T13:57:26.364359+00:00",
+  "seconds": 0.232,
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B3_cli_status.log",
+  "output_sha256": "e8ae75f3eee58feb45dc41fdb4cd24ec26de680ebd0785250ae6754302231081"
+}

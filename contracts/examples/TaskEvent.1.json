@@ -1,0 +1,14 @@
+{
+  "case_id": "case-demo",
+  "causation_id": "fixture:causation_id",
+  "correlation_id": "fixture:correlation_id",
+  "event_id": "fixture:event_id",
+  "generation": 1,
+  "kind": "task_ready",
+  "occurred_at": "2026-11-10T00:00:00Z",
+  "payload_digest": "a31e99666786956f1a9d67be2b37dc097499df6188ed91d789ddd34f5b187f4f",
+  "payload_ref": "fixture:payload_ref",
+  "run_id": "run-demo",
+  "sequence": 1,
+  "task_id": null
+}

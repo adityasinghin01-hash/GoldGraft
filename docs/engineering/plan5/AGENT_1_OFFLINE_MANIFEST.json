@@ -1,0 +1,63 @@
+{
+  "scope": "supported Surveyor source-only offline completion",
+  "real_model_acceptance": "OPEN",
+  "model_api_calls": 0,
+  "model_spend_micro_usd": 0,
+  "project_total_ceiling_micro_usd": 20000000,
+  "initial_checkpoint_micro_usd": 5000000,
+  "frozen_inputs_verified": 454,
+  "original_tracked_files_verified": 327,
+  "frontend_unchanged": true,
+  "files": [
+    {
+      "path": "pieces/agents/source_inventory.py",
+      "sha256": "17aab0af1c3dabc28336b03d05b8abdc1a935a088b34b309fda9bb561da9e892"
+    },
+    {
+      "path": "pieces/agents/catalogs/surveyor_static.json",
+      "sha256": "02e310910bfa343d7d9423d0f0eaf96edf5f6a02413c2fb88e6eb78af183b894"
+    },
+    {
+      "path": "pieces/agents/tests/test_source_inventory.py",
+      "sha256": "391cf0e3bc05e5c9d62cc2875a6318a6c0177937b24fe311425c0d6b5939ade8"
+    },
+    {
+      "path": "fakes/src/goldgraft_fakes/surveyor_profile.py",
+      "sha256": "dbae19efc13e95a52e6b02d321a79aa4159a40f69c14d907c3bc31c65601c0b7"
+    },
+    {
+      "path": "foundation/src/goldgraft_foundation/offline_profile.py",
+      "sha256": "a0ff8662541da49ae1c8fd32069f04f51348ab402697198706e8a8c31bcb1a55"
+    },
+    {
+      "path": "docs/engineering/plan5/AGENT_1_OFFLINE_COMPLETION.md",
+      "sha256": "39ee01bfbc0ed48d6c902cddece163da022cf9299024ff4d851a2976a6e4ea5b"
+    },
+    {
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "70043a8fe3a18ab5ac333319b28a1904cd6c2fb353cce4bb1916c03955327ff4"
+    }
+  ],
+  "checks": [
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/22-source-final.json",
+      "sha256": "e185feb06c52d52d7f47077dc3da28b8112b80301e746de7add4429f665c08bc"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/23-source-full.json",
+      "sha256": "4fb8c380880d6ee66da844f4fa037b4c3eea150730de5f7770adeba7dd70035a"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/24-source-lint.json",
+      "sha256": "e61af7681370f1c647c026abb5977369b6b3382afa6be87d9188a986809deb42"
+    },
+    {
+      "record": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/checks/25-source-types.json",
+      "sha256": "2e715902e5b3f58f429a6e0f539a22c43fc387d39a203e12b7cd3803f3733fc5"
+    }
+  ],
+  "independent_case_results": {
+    "file": "/Users/aditya/reports/goldgraft-b4-surveyor-20261110/source-driven/results.json",
+    "sha256": "ced33c90c023d8e3e8be2109be30469536f62fdab4e9c121d11f7c5e2b352d80"
+  }
+}

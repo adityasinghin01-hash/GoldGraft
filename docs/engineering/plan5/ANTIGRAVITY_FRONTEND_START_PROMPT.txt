@@ -1,0 +1,18 @@
+Start GoldGraft Phase5.3 frontend implementation only. This pasted prompt explicitly starts that work after the shared-interface readiness check. Codex owns shared bootstrap, agents and delivery coordination. Phase5.1/5.2 specifications are complete; Plan6 is not authorised.
+
+Open: /Users/aditya/dev/GoldGraft-plan5-build
+Run only after Codex creates this folder and reports FRONTEND_READY.json ready.
+
+Read AGENTS.md; docs/engineering/START_HERE.md; docs/engineering/plan5/START_HERE.md; TWO_TERMINAL_WORKFLOW.md; FRONTEND_SPEC.md; ANTIGRAVITY_HANDOFF.md; SHARED_BOOTSTRAP_PLAN.md; COMPONENT_TEST_PLAN.md. The unqualified filenames in this list are under docs/engineering/plan5/. Check docs/engineering/plan5/FRONTEND_READY.json: status ready, actual checks passed, expected workspace, exact specification/generated-contract/fixture hashes. Missing/stale readiness means hold contract-dependent implementation and report the dependency; never invent endpoints/types or create a second bootstrap.
+
+Implement AG1–AG6 inside pieces/web. Keep React18/Vite, strict TypeScript, React Router, TanStack Query, same-origin HTTP/SSE, CSS Modules and the supplied Community grid/chart libraries where needed. Use the implemented generated types and shared synthetic fixtures. Install only ordinary workspace dependencies needed for this scoped frontend, through normal tool permissions.
+
+Use the reviewed frontend MD as the effective screen/state/copy specification. Preserve its useful short copy and Details layer. Build saved case/draft/sign-in/controller/source/processing/readiness; durable Start/receipt/progress/Stop/resume; private evidence/exact per-resource approval; delivery/recovery/independent-exit and retained-asset states. Do not copy obsolete Desktop rules for generic key forms, local-only cases, fixed screen count, PR-as-Done or automatic old cutback. Desktop/reference/personal materials stay read-only.
+
+Use VITE_GOLDGRAFT_WEB_MODE=fixture, with a visible synthetic banner on every fixture/replay/result route. Implement real local UI interactions against fixtures; do not imply connected provider/model/payment operation. Missing evidence/unknown/queued/deploy-accepted/cleanup-pending remain distinct. No secrets in storage/logs/URLs and no private IDs in public projections. Keep colours/branding/polish for the later visual decision; deliver a usable accessible structural UI now.
+
+You own only pieces/web and its package/lock/config/tests/docs. Codex owns root/shared contracts/fixtures/generated files and BUILD_STATUS/FRONTEND_READY. Write shared-interface needs to pieces/web/docs/INTERFACE_REQUESTS.md instead of editing shared files. Follow the ready-revision pause/recheck protocol if those inputs change.
+
+Run actual typecheck/unit/build/browser checks from the plan; inspect screenshots at narrow/wide widths and verify keyboard/focus, event resync, lost-response/Stop, access/approval, privacy and exit-pending cases. Fix actual defects. Write pieces/web/docs/FRONTEND_BUILD_REPORT.md with ready revision/hashes, changed files, actual commands/results, inspected routes/screenshots, exact start command and unresolved gates. Record completion locally for Codex's final handoff.
+
+No other-piece imports/edits, backend reconstruction, schema/reference hand edits, provider/model/payment calls, account changes, deployment/publication, git commit/push/merge or Plan6. Proceed through routine authorised steps without repeatedly asking to start.

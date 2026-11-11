@@ -1,0 +1,22 @@
+{
+  "candidate_change_required": false,
+  "case_id": "case-demo",
+  "dependency_check_refs": [
+    "fixture:dependency_check_ref"
+  ],
+  "desired_asset_manifest_ref": "fixture:desired_asset_manifest_ref",
+  "final_candidate_ref": null,
+  "finalisation_id": "fixture:finalisation_id",
+  "generation": 1,
+  "independence_criteria_refs": [
+    "fixture:independence_criteria_ref"
+  ],
+  "plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "required_action_slot_ids": [
+    "fixture:required_action_slot_id"
+  ],
+  "run_id": "run-demo",
+  "validation_request_refs": [
+    "fixture:validation_request_ref"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "sh",
+    "scripts/check_generated.sh"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "evidence_class": "offline_component",
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B2_accepted_generated.log",
+  "output_sha256": "4e7d510482307aac377418c739383332848176d8717b9e6110979bbf8522792f",
+  "seconds": 3.482,
+  "started_at": "2026-11-10T12:59:58.716137+00:00"
+}

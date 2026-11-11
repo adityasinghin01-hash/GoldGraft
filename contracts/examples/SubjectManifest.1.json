@@ -1,0 +1,10 @@
+{
+  "config_digest": null,
+  "oci_manifest_digest": null,
+  "runtime_profile_digest": "fbbf834c181d4f84eb11af613aea9cf5de466ede28a00437db397b2629d14cf3",
+  "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+  "source_snapshot_refs": [
+    "fixture:source_snapshot_ref"
+  ],
+  "source_tree_digest": null
+}

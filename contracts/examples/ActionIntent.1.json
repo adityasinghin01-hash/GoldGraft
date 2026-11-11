@@ -1,0 +1,9 @@
+{
+  "action_id": "fixture:action_id",
+  "actor_id": "person-demo",
+  "case_id": "case-demo",
+  "created_at": "2026-11-10T00:00:00Z",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "readiness_digest": "f2857a542112e723b022c0ef901e014c6f1a2764dd36a2c9d62b7a2526807229",
+  "readiness_id": "fixture:readiness_id"
+}

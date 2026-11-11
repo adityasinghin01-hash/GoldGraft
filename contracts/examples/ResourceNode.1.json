@@ -1,0 +1,19 @@
+{
+  "binding_refs": [
+    "fixture:binding_ref"
+  ],
+  "environment_id": null,
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "kind": "source",
+  "node_id": "source-demo",
+  "provider": {
+    "account_id": null,
+    "adapter_version": "fixture:adapter_version",
+    "provider_id": "local_folder"
+  },
+  "provider_resource_id": null,
+  "required_for_scope": true,
+  "revision": null
+}

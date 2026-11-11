@@ -1,0 +1,25 @@
+{
+  "action_group_id": "fixture:action_group_id",
+  "actor_id": "person-demo",
+  "approval_set_id": "fixture:approval_set_id",
+  "case_id": "case-demo",
+  "created_at": "2026-11-10T00:00:00Z",
+  "effect_class": "E0",
+  "effect_id": "fixture:effect_id",
+  "environment_id": "synthetic",
+  "expected_version": "fixture:expected_version",
+  "generation": 1,
+  "operation": "preserve_state",
+  "plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "provider_idempotency_ref": null,
+  "provider_receipt_ref": null,
+  "reconciliation_ref": null,
+  "request_digest": "5dca3f0f941f5c7e80b31e93cbdc8d8ca6756206e81e9776393795cb2108a546",
+  "resource_epochs": {
+    "binding-demo": 1
+  },
+  "resource_id": "synthetic-resource",
+  "run_id": "run-demo",
+  "slot_id": "fixture:slot_id",
+  "state": "intended"
+}

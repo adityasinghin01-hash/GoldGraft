@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "ProviderRef": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Id"
+        },
+        "adapter_version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "adapter_version",
+        "account_id"
+      ],
+      "title": "ProviderRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/AdapterCapabilities.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "limitations": {
+      "items": {
+        "maxLength": 8192,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "operations": {
+      "items": {
+        "enum": [
+          "source_read",
+          "deployment_read",
+          "artifact_identity",
+          "route_read",
+          "config_evidence",
+          "controller_role",
+          "revocation_observation"
+        ],
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Operations",
+      "type": "array"
+    },
+    "provider": {
+      "$ref": "#/$defs/ProviderRef"
+    },
+    "qualification": {
+      "enum": [
+        "proposed",
+        "implemented",
+        "account_tested",
+        "correspondence_qualified",
+        "e2e_tested"
+      ],
+      "title": "Qualification",
+      "type": "string"
+    },
+    "qualification_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Qualification Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "provider",
+    "operations",
+    "qualification",
+    "limitations",
+    "qualification_refs"
+  ],
+  "title": "AdapterCapabilitiesV1",
+  "type": "object"
+}

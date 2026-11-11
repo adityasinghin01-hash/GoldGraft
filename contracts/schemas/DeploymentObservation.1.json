@@ -1,0 +1,134 @@
+{
+  "$id": "https://goldgraft.dev/schemas/DeploymentObservation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "current_runtime_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Current Runtime Evidence Refs",
+      "type": "array"
+    },
+    "effect_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Effect Id",
+      "type": "string"
+    },
+    "environment_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Environment Id",
+      "type": "string"
+    },
+    "observed_artifact_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Observed Artifact Digest"
+    },
+    "observed_config_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Observed Config Digest"
+    },
+    "outcome": {
+      "enum": [
+        "pending",
+        "verified",
+        "failed",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "provider": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Provider",
+      "type": "string"
+    },
+    "provider_deploy_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Provider Deploy Id"
+    },
+    "provider_status": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Provider Status",
+      "type": "string"
+    },
+    "resource_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "submitted_artifact_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Submitted Artifact Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "effect_id",
+    "case_id",
+    "provider",
+    "resource_id",
+    "environment_id",
+    "submitted_artifact_digest",
+    "observed_artifact_digest",
+    "observed_config_digest",
+    "provider_deploy_id",
+    "provider_status",
+    "current_runtime_evidence_refs",
+    "checked_at",
+    "outcome"
+  ],
+  "title": "DeploymentObservationV1",
+  "type": "object"
+}

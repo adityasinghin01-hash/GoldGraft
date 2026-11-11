@@ -1,0 +1,14 @@
+{
+  "actual_provider_evidence_ref": "fixture:actual_provider_evidence_ref",
+  "dependency_digest": "8e9f3c6252cb388e485c93b545a008240eb0245781e671d8b583f37fa1de7cb4",
+  "immutable_source_digest": "2a7794dbde6527c204cc0f186e5842e76585c6fef80c1295af9c90ef5ba3e20e",
+  "observed_defects_ref": "fixture:observed_defects_ref",
+  "outcome": "reproduced",
+  "package_digest": "4f6e40c1fab33743c82aa55a0cabbaecbd3357028c80c3a0e7df9d372a5dcf7e",
+  "run_id": "run-demo",
+  "runtime_digest": "e94d57f00ffa112462be33f4a885bda72fe4431b745419c2de19d90963958d7e",
+  "scenario_results_ref": "fixture:scenario_results_ref",
+  "seed_digest": "9246caf563c5008e01c31281e1158a2e8ce0491b97c78349c10dd9c2e962f6ec",
+  "skipped_required": [],
+  "variant": "OLD"
+}

@@ -1,4 +1,6 @@
-# Singh's future Plan5 and Plan6 — not started
+# Singh's Plan5 and Plan6 handoff
+
+> **Superseding Plan5 sequence, 6 November2026:** The revised programme is5.1 research all3→5.2 settle specs→5.3 guided build/component checks on explicit start. Phase5.1/5.2 are now complete on paper; read [Plan5 pack](../plan5/START_HERE.md), [manual construction](../plan5/MANUAL_CONSTRUCTION_PLAN.md) and [tests](../plan5/COMPONENT_TEST_PLAN.md). Python coordinator over GU durable control selected after delegated user judgment;13 canonical logical roles; terminal agents then delivery; Antigravity frontend; style later. Phase5.3 and Plan6 NOT STARTED. The retained earlier table below uses obsolete5.1–5.5 numbering and is historical only; its safety/ownership/evidence limits remain applicable. No implementation or integration authorisation follows from paper closure.
 
 Plan5 is your own implementation and component testing. Plan6 is your integration and full-system qualification. This paper sequence stops before both.
 

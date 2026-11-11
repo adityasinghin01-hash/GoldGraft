@@ -1,0 +1,7 @@
+{
+  "account_id": "synthetic-account",
+  "environment_id": "synthetic",
+  "provider_id": "local_folder",
+  "resource_id": "synthetic-resource",
+  "resource_kind": "fixture:resource_kind"
+}

@@ -27,7 +27,9 @@ TAMPERED_CERT_ID = "cert-demo-tampered"
 
 
 def example(name: str) -> dict:
-    return json.loads((EXAMPLES / f"{name}.1.json").read_text())
+    from ._fixtures import example as boundary_example
+
+    return boundary_example(name)
 
 
 def override(route_name: str):

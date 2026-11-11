@@ -1,0 +1,60 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ModelBudget.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Cumulative micro-USD accounting declaration, not a spend authorisation.",
+  "properties": {
+    "budget_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Budget Id",
+      "type": "string"
+    },
+    "ceiling_micro_usd": {
+      "maximum": 20000000,
+      "minimum": 0,
+      "title": "Ceiling Micro Usd",
+      "type": "integer"
+    },
+    "outstanding_micro_usd": {
+      "minimum": 0,
+      "title": "Outstanding Micro Usd",
+      "type": "integer"
+    },
+    "pricing_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Pricing Ref",
+      "type": "string"
+    },
+    "spent_micro_usd": {
+      "minimum": 0,
+      "title": "Spent Micro Usd",
+      "type": "integer"
+    },
+    "target_micro_usd": {
+      "maximum": 15000000,
+      "minimum": 0,
+      "title": "Target Micro Usd",
+      "type": "integer"
+    },
+    "unknown_micro_usd": {
+      "minimum": 0,
+      "title": "Unknown Micro Usd",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "budget_id",
+    "target_micro_usd",
+    "ceiling_micro_usd",
+    "spent_micro_usd",
+    "outstanding_micro_usd",
+    "unknown_micro_usd",
+    "pricing_ref"
+  ],
+  "title": "ModelBudgetV1",
+  "type": "object"
+}

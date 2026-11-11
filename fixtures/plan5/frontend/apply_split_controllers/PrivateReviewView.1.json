@@ -1,0 +1,130 @@
+{
+  "approval_set": {
+    "approval_refs": [],
+    "approval_set_id": "fixture:approval_set_id",
+    "authority_epochs": {
+      "binding-demo": 1
+    },
+    "case_id": "case-demo",
+    "checked_at": "2026-11-10T00:00:00Z",
+    "generation": 1,
+    "plan_digest": "cb5774a8d67157ace681727f47ff8b2c7231a341e1cbfd28c09c8bf4539012a0",
+    "required_controller_ids": [
+      "source-controller",
+      "host-controller"
+    ],
+    "run_id": "run-demo",
+    "state": "missing"
+  },
+  "bundle": {
+    "artifact_digest": "sha256:13b9b0cd17072d5e5ee9326e347ac55ba7515cad8820879ebd2684b742bff573",
+    "baseline_snapshot_refs": [
+      "fixture:baseline_snapshot_ref"
+    ],
+    "bundle_digest": "f48e51c79a1bbccb4d9cd8342ad5bf414ad9be8b9ff1e771be06eaab3eead0d8",
+    "bundle_id": "fixture:bundle_id",
+    "candidate_snapshot_refs": [
+      "fixture:candidate_snapshot_ref"
+    ],
+    "case_id": "case-demo",
+    "created_at": "2026-11-10T00:00:00Z",
+    "domain_rule_result_refs": [
+      "fixture:domain_rule_result_ref"
+    ],
+    "effective_config_digest": "2f42cec7b164dcbea313d27bb3d598b256291d92fa37d2dda9034e2fec535ca1",
+    "missing_evidence_refs": [],
+    "patch_digest": "101954809cfb70625a90a069a4d95a84fc4d7b181989237552ec49eb4a24fc60",
+    "proposed_apply_plan_ref": "fixture:proposed_apply_plan_ref",
+    "recovery_plan_ref": "fixture:recovery_plan_ref",
+    "run_id": "run-demo",
+    "scenario_result_refs": [
+      "fixture:scenario_result_ref"
+    ],
+    "security_result_refs": [
+      "fixture:security_result_ref"
+    ],
+    "unsupported_paths": [],
+    "work_package_digest": "d68547de5127174d8a98098cffb585076cd9534412b3d806de8337e6e52c449f"
+  },
+  "evidence_summary_refs": [
+    "fixture:evidence_summary_ref"
+  ],
+  "missing": [
+    {
+      "code": "HOST_CONTROLLER_APPROVAL_MISSING",
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "input_ref": null,
+      "owner_role": "fixture:owner_role",
+      "recovery": "retry_read"
+    }
+  ],
+  "plan": {
+    "budget_ref": "fixture:budget_ref",
+    "case_id": "case-demo",
+    "exit_plan_ref": "fixture:exit_plan_ref",
+    "expires_at": "2026-11-11T00:00:00Z",
+    "finalisation_plan_ref": "fixture:finalisation_plan_ref",
+    "generation": 1,
+    "graph_digest": "855e6250f7862585d04131e9d230e7a4a1bc47603e596f326ad62126c7fe8901",
+    "plan_digest": "cb5774a8d67157ace681727f47ff8b2c7231a341e1cbfd28c09c8bf4539012a0",
+    "plan_id": "fixture:plan_id",
+    "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+    "recovery_plan_ref": "fixture:recovery_plan_ref",
+    "review_bundle_digest": "f48e51c79a1bbccb4d9cd8342ad5bf414ad9be8b9ff1e771be06eaab3eead0d8",
+    "run_id": "run-demo",
+    "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+    "slots": [
+      {
+        "artifact_digest": null,
+        "cardinality": 1,
+        "config_digest": null,
+        "depends_on": [],
+        "effect_class": "E0",
+        "expected_version_ref": "fixture:expected_version_ref",
+        "operation": "preserve_state",
+        "recovery_branch_ref": null,
+        "required_authority_refs": [
+          "fixture:source-authority",
+          "fixture:host-authority"
+        ],
+        "required_controller_ids": [
+          "source-controller",
+          "host-controller"
+        ],
+        "slot_id": "fixture:slot_id",
+        "state_plan_digest": null,
+        "target_key": {
+          "account_id": "synthetic-account",
+          "environment_id": "synthetic",
+          "provider_id": "local_folder",
+          "resource_id": "synthetic-resource",
+          "resource_kind": "fixture:resource_kind"
+        },
+        "trigger_digest": "5badd656953f04a4c644b31d55b25865b96c9acb5fc7f03168bc045dc9fbc872"
+      }
+    ],
+    "state_plan_ref": "fixture:state_plan_ref"
+  },
+  "processing": {
+    "checked_at": "2026-11-10T00:00:00Z",
+    "copy_scope": "fixture:copy_scope",
+    "limits": [
+      "fixture:limit"
+    ],
+    "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+    "recipients": [
+      {
+        "name": "fixture:name",
+        "purpose": "fixture:purpose",
+        "region_text": "fixture:region_text",
+        "retention_text": "fixture:retention_text",
+        "terms_evidence_refs": [
+          "fixture:terms_evidence_ref"
+        ]
+      }
+    ],
+    "status": "qualified"
+  }
+}

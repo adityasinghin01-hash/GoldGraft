@@ -1,0 +1,17 @@
+{
+  "limitations": [
+    "fixture:limitation"
+  ],
+  "operations": [
+    "source_read"
+  ],
+  "provider": {
+    "account_id": null,
+    "adapter_version": "fixture:adapter_version",
+    "provider_id": "local_folder"
+  },
+  "qualification": "proposed",
+  "qualification_refs": [
+    "fixture:qualification_ref"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "authenticity_ref": "fixture:authenticity_ref",
+  "completed_at": "2026-11-10T00:00:00Z",
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "generation": 1,
+  "inputs_digest": "199d3a8a22b11d3667be2c5bd1271c990252ee69e1416f3d5299772da55ebab2",
+  "limitation_codes": [],
+  "outcome": "completed",
+  "output_artifact_refs": [
+    "fixture:output_artifact_ref"
+  ],
+  "request_id": "fixture:request_id",
+  "run_id": "run-demo",
+  "source_unchanged": true,
+  "worker_identity_ref": "fixture:worker_identity_ref"
+}

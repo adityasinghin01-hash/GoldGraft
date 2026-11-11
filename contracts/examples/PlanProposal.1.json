@@ -1,0 +1,31 @@
+{
+  "case_id": "case-demo",
+  "generation": 1,
+  "parent_request_id": "fixture:parent_request_id",
+  "reason_refs": [
+    "fixture:reason_ref"
+  ],
+  "run_id": "run-demo",
+  "tasks": [
+    {
+      "allowed_tool_ids": [
+        "source.read"
+      ],
+      "dependencies": [],
+      "expected_schemas": [
+        "RootMap/1"
+      ],
+      "expected_subject": "d200e45322bacb3929e1d18cf400e4a0bd62c33abd493ca684a4c0fddaa63e79",
+      "input_refs": [
+        "fixture:input"
+      ],
+      "operation": "survey",
+      "output_slot": "fixture:output_slot",
+      "output_subject_policy": "same_subject",
+      "required": true,
+      "role": "Surveyor",
+      "task_id": "survey-demo",
+      "workspace_ref": null
+    }
+  ]
+}

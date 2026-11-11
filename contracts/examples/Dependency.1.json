@@ -1,0 +1,11 @@
+{
+  "access_mode": "fixture",
+  "authority_ref": null,
+  "component_ids": [
+    "fixture:component_id"
+  ],
+  "dependency_id": "fixture:dependency_id",
+  "limitation": "fixture:limitation",
+  "purpose": "fixture:purpose",
+  "test_identity_ref": null
+}

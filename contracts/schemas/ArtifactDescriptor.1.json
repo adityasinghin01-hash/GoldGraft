@@ -1,0 +1,139 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ArtifactDescriptor.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "byte_count": {
+      "minimum": 0,
+      "title": "Byte Count",
+      "type": "integer"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "derivation_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Derivation Ref"
+    },
+    "evidence_class": {
+      "enum": [
+        "scripted",
+        "component_offline",
+        "real_model",
+        "real_provider",
+        "real_payment",
+        "isolation_qualified",
+        "merchant_exit"
+      ],
+      "title": "Evidence Class",
+      "type": "string"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Expires At"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Digest",
+      "type": "string"
+    },
+    "payload_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Payload Digest",
+      "type": "string"
+    },
+    "producer_identity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Producer Identity Ref",
+      "type": "string"
+    },
+    "ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Ref",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "schema": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Schema",
+      "type": "string"
+    },
+    "subject_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Digest",
+      "type": "string"
+    },
+    "trust": {
+      "enum": [
+        "model_proposal",
+        "collector_observed",
+        "deterministic_result"
+      ],
+      "title": "Trust",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ref",
+    "case_id",
+    "run_id",
+    "generation",
+    "schema",
+    "payload_digest",
+    "byte_count",
+    "subject_digest",
+    "input_digest",
+    "derivation_ref",
+    "producer_identity_ref",
+    "trust",
+    "evidence_class",
+    "created_at",
+    "expires_at"
+  ],
+  "title": "ArtifactDescriptorV1",
+  "type": "object"
+}

@@ -1,0 +1,43 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CreateProviderIntent.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "provider_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "purpose": {
+      "enum": [
+        "read_connect",
+        "apply_connect"
+      ],
+      "title": "Purpose",
+      "type": "string"
+    },
+    "resource_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Resource Id"
+    }
+  },
+  "required": [
+    "provider_id",
+    "resource_id",
+    "purpose"
+  ],
+  "title": "CreateProviderIntentV1",
+  "type": "object"
+}

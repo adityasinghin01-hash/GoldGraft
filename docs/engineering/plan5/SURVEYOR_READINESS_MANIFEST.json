@@ -1,0 +1,328 @@
+{
+  "format": "SurveyorOfflineReadinessManifest/1",
+  "date": "2026-11-10",
+  "scope": "agent_owned_offline_source_reference_and_evaluation_preparation",
+  "agent_checks_passed": 508,
+  "affected_surveyor_checks_passed": 121,
+  "post_report_metadata_recheck_passed": 14,
+  "offline_diagnostic_runs_passed": 60,
+  "offline_diagnostic_runs_total": 60,
+  "accepted_inventories_inspected": 30,
+  "pre_dispatch_holds": 30,
+  "resume_added_dispatches": 0,
+  "model_api_calls": 0,
+  "model_spend_micro_usd": 0,
+  "real_model_evaluation": "NOT RUN",
+  "sdk_installation": "NOT RUN",
+  "key_configuration": "NOT RUN",
+  "service_adapter": "HELD_PENDING_QUALIFIED_GU_PROFILE",
+  "project_total_ceiling_micro_usd": 20000000,
+  "initial_checkpoint_micro_usd": 5000000,
+  "qualified_project_ledger": false,
+  "outstanding_unknown_reservations_certified": false,
+  "files": [
+    {
+      "path": "pieces/agents/source_references.py",
+      "sha256": "59d866af635bd1ea85888ccb5c9243b8865727607e9c5b0ec20de44bf0787655"
+    },
+    {
+      "path": "pieces/agents/source_inventory.py",
+      "sha256": "d2fd12c42e26505c9e5c210bc87a849db75445f894e766d072b2357f84da6c44"
+    },
+    {
+      "path": "pieces/agents/surveyor.py",
+      "sha256": "9c5d3e33183c87073f6563964926f0d11362d49d803e10cd976e565b31717664"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor.py",
+      "sha256": "676fe2b272317133fb538496ad79ebd8d07aa2d81fb419ee0dca23e56a8b1654"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor_readiness.py",
+      "sha256": "8198268785f5ad1074d5574274ecb8aa193607f9b3a3b6eeaa68b71882e854be"
+    },
+    {
+      "path": "pieces/agents/evals/surveyor_readiness_cases.json",
+      "sha256": "ee8c907e66bd9702a7c3388770acab4156bd69725cedfe66afbfa4481a2ebc61"
+    },
+    {
+      "path": "pieces/agents/tests/test_source_references.py",
+      "sha256": "3cde91a455f32455de4853d274c255dff7476addcdc9987e08e1291262eef59d"
+    },
+    {
+      "path": "pieces/agents/tests/test_surveyor_readiness.py",
+      "sha256": "505436d63b5e4ea2e819528b2dbeef0f6cb2094b44aea5c4728d801ce04ea6e6"
+    },
+    {
+      "path": "pieces/agents/tests/test_surveyor_eval.py",
+      "sha256": "1dd9333866d1033a328183694a526bcf33596d7f25d3ebe5124e3b049fd16e81"
+    },
+    {
+      "path": "docs/engineering/plan5/SURVEYOR_READINESS_PLAN.md",
+      "sha256": "3dba84d5afb3ffcda41163be8b5a0e8acc920bf4cb3a45bb54009007bd527aed"
+    },
+    {
+      "path": "docs/engineering/plan5/SURVEYOR_READINESS_REPORT.md",
+      "sha256": "4ae42920c94f2d33632ecd1540115a66b3f45f467ac10d0857a3cc74ed7c788a"
+    },
+    {
+      "path": "docs/engineering/plan5/SURVEYOR_MODEL_GATE_HANDOFF.md",
+      "sha256": "0c9b56a5fc245d90d5c1868fafa57dd72f1a8635b7871dd3e2e459d28b5b9416"
+    },
+    {
+      "path": "docs/engineering/plan5/SURVEYOR_MODEL_CANDIDATES.json",
+      "sha256": "36872ae1bf59a747868e8d0139972d560e9c68fb98df086f11c5ab5637874d49"
+    },
+    {
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "70eb511e46709a8d9e56a38116854150327fedeb0cd7c9b2edf4219e27f2a568"
+    }
+  ],
+  "checks": [
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/01-source-gaps-red.json",
+      "sha256": "7521b3b603322191cc1cb6178aca3739c595c2b9f1dd015cf8245df81effab4c",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_source_references.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/02-source-gaps-green.json",
+      "sha256": "4adbe3a7628b64e67dc934e627669d120de2f7a75d9e535c17061d59c5e39102",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_source_references.py",
+        "pieces/agents/tests/test_source_inventory.py",
+        "pieces/agents/tests/test_surveyor.py",
+        "pieces/agents/tests/test_surveyor_eval.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/03-evaluator-red.json",
+      "sha256": "f68819e6d5e2dbc87e8a49a1ca4b5c218320d8212cda8d935425c947bbef094f",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_surveyor_eval.py",
+        "pieces/agents/tests/test_surveyor_readiness.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/04-evaluator-green.json",
+      "sha256": "7f86c2a4f15b0122d720d5a19468e01f065ae755050c7548beb2238f48674c20",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_surveyor_eval.py",
+        "pieces/agents/tests/test_surveyor_readiness.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/05-lint.json",
+      "sha256": "20032cf279f9c5c7bbba92d7ffcb2fcbd0eea34b5dc3bc325b672dd788304310",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "pieces/agents/source_references.py",
+        "pieces/agents/source_inventory.py",
+        "pieces/agents/surveyor.py",
+        "pieces/agents/evals/surveyor.py",
+        "pieces/agents/evals/surveyor_readiness.py",
+        "pieces/agents/tests/test_source_references.py",
+        "pieces/agents/tests/test_surveyor_readiness.py",
+        "pieces/agents/tests/test_surveyor_eval.py"
+      ],
+      "exit_code": 1
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/06-lexical-context-red.json",
+      "sha256": "9fbdcffd51ae2e4750cdaa33520490cb9d68042114df9d8c7c5d38bf42df653a",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_source_references.py",
+        "-k",
+        "attribute_context or interpolated_string"
+      ],
+      "exit_code": 1
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/07-source-final.json",
+      "sha256": "17cee996e0de30cebeea01ed134bee3d0474abe1cfa58117a7572be764de5c0c",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_source_references.py",
+        "pieces/agents/tests/test_source_inventory.py",
+        "pieces/agents/tests/test_surveyor.py",
+        "pieces/agents/tests/test_surveyor_eval.py",
+        "pieces/agents/tests/test_surveyor_readiness.py",
+        "pieces/agents/tests/test_model_readiness.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/08-lint.json",
+      "sha256": "b56bed56c8125c9d3dba1886f5bf48dc35a66a81defcd1afbdfc7923663f07f0",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "pieces/agents"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/09-agents-regression.json",
+      "sha256": "73b21c3986ba7e98f4dc60c95c67163ca9c01c20d6eba06b504f32880b987251",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/10-diagnostic-sixty.json",
+      "sha256": "e38f71323a23afac2f10405b148d099eb670f16fa1e7786169f3ef250913b3db",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pieces.agents.evals.surveyor_readiness",
+        "--state-dir",
+        "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/diagnostic-state",
+        "--repeats",
+        "3"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/11-readonly-doctor.json",
+      "sha256": "cc3cbe2bd1831781b2e6f250dc0f76299b748cfcd709a15a48a1853a7be9e357",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pieces.agents.cli",
+        "doctor",
+        "--mode",
+        "offline"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/12-diff-whitespace.json",
+      "sha256": "1bcfa13e35e2f18bb4ef40f7f031d154167a1728b6c0612f1628feaaed04bf56",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/13-diagnostic-report-recheck.json",
+      "sha256": "9277d170e8681ec5b7305306e7164d3cd5c407a16a289b02a1498937a9712602",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "pieces/agents/tests/test_surveyor_readiness.py",
+        "pieces/agents/tests/test_surveyor_eval.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/14-diagnostic-same-state-resume.json",
+      "sha256": "586de1783b3011d80a59b0f634839ccc093fabc04efbbc5e851bc09d3aedb5c3",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "-m",
+        "pieces.agents.evals.surveyor_readiness",
+        "--state-dir",
+        "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/diagnostic-state",
+        "--repeats",
+        "3"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/15-final-lint.json",
+      "sha256": "85013e6afb3446ee55b249457a1093273c0bcf38ced3977bb70c9100673db4f8",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "pieces/agents"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/checks/16-final-diff.json",
+      "sha256": "7564a797e57e9a2c2ca7408441a12afffdae380f6005e628df1622540ea2adec",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "private_evidence_files": [
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/diagnostic_summary.json",
+      "sha256": "87ef32b0306b86920825e993c0b8a8fa7f29a1a7ce81b9c220774e08f7c69bbd"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/preservation.json",
+      "sha256": "ddb71271b687e72ef02e5ca27dc7fc3af03bd9c72c3b90689944958ad30abf75"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-surveyor-readiness-20261110/before.json",
+      "sha256": "c83136616869b80e0c23c841bab54556de1c88f0c7881933edc4ab6fff746adf"
+    }
+  ],
+  "frontend_revision": 2,
+  "frozen_input_hashes_unchanged": 454,
+  "original_tracked_hashes_unchanged": 327,
+  "original_status_head_unchanged": true,
+  "frontend_unchanged": true,
+  "no_subagents": true,
+  "limitations": [
+    "Offline deterministic/scripted evidence, not model competence.",
+    "PHP lexical reference recognition is bounded; unresolved/unsupported syntax holds.",
+    "Literal payment matching remains five indicators/three families; broad detection is unqualified.",
+    "Actual GU model/budget/custody/control/tool services and own service adaptation remain pending.",
+    "No paid batch or reservation is authorized by this manifest."
+  ]
+}

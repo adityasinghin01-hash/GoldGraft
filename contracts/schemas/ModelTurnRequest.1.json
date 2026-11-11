@@ -1,0 +1,109 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ModelTurnRequest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tool_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Allowed Tool Ids",
+      "type": "array"
+    },
+    "budget_reservation_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Budget Reservation Ref",
+      "type": "string"
+    },
+    "context_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Context Digest",
+      "type": "string"
+    },
+    "context_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Context Ref",
+      "type": "string"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_token_cap": {
+      "exclusiveMinimum": 0,
+      "maximum": 24000,
+      "title": "Input Token Cap",
+      "type": "integer"
+    },
+    "lease_epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Lease Epoch",
+      "type": "integer"
+    },
+    "model_profile_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Model Profile Ref",
+      "type": "string"
+    },
+    "output_schema": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Output Schema",
+      "type": "string"
+    },
+    "output_token_cap": {
+      "exclusiveMinimum": 0,
+      "maximum": 4000,
+      "title": "Output Token Cap",
+      "type": "integer"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "turn_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Turn Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "turn_id",
+    "task_id",
+    "generation",
+    "lease_epoch",
+    "model_profile_ref",
+    "context_ref",
+    "context_digest",
+    "allowed_tool_ids",
+    "output_schema",
+    "input_token_cap",
+    "output_token_cap",
+    "budget_reservation_ref",
+    "deadline"
+  ],
+  "title": "ModelTurnRequestV1",
+  "type": "object"
+}

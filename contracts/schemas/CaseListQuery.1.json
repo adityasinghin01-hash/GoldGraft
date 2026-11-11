@@ -1,0 +1,33 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CaseListQuery.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cursor": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Cursor"
+    },
+    "limit": {
+      "exclusiveMinimum": 0,
+      "maximum": 50,
+      "title": "Limit",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "cursor",
+    "limit"
+  ],
+  "title": "CaseListQueryV1",
+  "type": "object"
+}

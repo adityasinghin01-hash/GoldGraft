@@ -1,0 +1,220 @@
+{
+  "$defs": {
+    "TargetKey": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_kind": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "account_id",
+        "environment_id",
+        "resource_kind",
+        "resource_id"
+      ],
+      "title": "TargetKey",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/EffectSlot.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_digest": {
+      "anyOf": [
+        {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Artifact Digest"
+    },
+    "cardinality": {
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "title": "Cardinality",
+      "type": "integer"
+    },
+    "config_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Config Digest"
+    },
+    "depends_on": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 32,
+      "title": "Depends On",
+      "type": "array"
+    },
+    "effect_class": {
+      "enum": [
+        "E0",
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "title": "Effect Class",
+      "type": "string"
+    },
+    "expected_version_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Expected Version Ref",
+      "type": "string"
+    },
+    "operation": {
+      "enum": [
+        "preserve_state",
+        "publish_artifact",
+        "publish_source",
+        "merge_protected",
+        "apply_configuration",
+        "deploy_exact",
+        "finalise",
+        "prepare_exit",
+        "run_exit",
+        "read_exit_evidence",
+        "revoke_exit_evidence",
+        "configure_ingress",
+        "restart_target",
+        "revoke_grant",
+        "delete_temporary",
+        "stop_worker",
+        "financial_compensation"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "recovery_branch_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Recovery Branch Ref"
+    },
+    "required_authority_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Required Authority Refs",
+      "type": "array"
+    },
+    "required_controller_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Required Controller Ids",
+      "type": "array"
+    },
+    "slot_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Slot Id",
+      "type": "string"
+    },
+    "state_plan_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "State Plan Digest"
+    },
+    "target_key": {
+      "$ref": "#/$defs/TargetKey"
+    },
+    "trigger_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Trigger Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "slot_id",
+    "operation",
+    "target_key",
+    "effect_class",
+    "depends_on",
+    "artifact_digest",
+    "config_digest",
+    "state_plan_digest",
+    "trigger_digest",
+    "required_authority_refs",
+    "required_controller_ids",
+    "expected_version_ref",
+    "cardinality",
+    "recovery_branch_ref"
+  ],
+  "title": "EffectSlotV1",
+  "type": "object"
+}

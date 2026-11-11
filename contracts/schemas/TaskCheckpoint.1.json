@@ -1,0 +1,129 @@
+{
+  "$id": "https://goldgraft.dev/schemas/TaskCheckpoint.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "budget_reservation_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Budget Reservation Refs",
+      "type": "array"
+    },
+    "committed_message_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Committed Message Refs",
+      "type": "array"
+    },
+    "context_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Context Digest",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "invocation_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 24,
+      "title": "Invocation Refs",
+      "type": "array"
+    },
+    "lease_epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Lease Epoch",
+      "type": "integer"
+    },
+    "next_step": {
+      "enum": [
+        "model_turn",
+        "await_tool",
+        "validate_output"
+      ],
+      "title": "Next Step",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "staged_output_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Staged Output Refs",
+      "type": "array"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "turn": {
+      "maximum": 12,
+      "minimum": 0,
+      "title": "Turn",
+      "type": "integer"
+    },
+    "wake_condition_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Wake Condition Ref"
+    }
+  },
+  "required": [
+    "task_id",
+    "generation",
+    "lease_epoch",
+    "turn",
+    "committed_message_refs",
+    "invocation_refs",
+    "staged_output_refs",
+    "context_digest",
+    "policy_digest",
+    "budget_reservation_refs",
+    "wake_condition_ref",
+    "next_step",
+    "created_at"
+  ],
+  "title": "TaskCheckpointV1",
+  "type": "object"
+}

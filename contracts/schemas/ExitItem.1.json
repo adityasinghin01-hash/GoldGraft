@@ -1,0 +1,61 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ExitItem.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "item_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Item Id",
+      "type": "string"
+    },
+    "owner": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Owner",
+      "type": "string"
+    },
+    "required_for_exit": {
+      "title": "Required For Exit",
+      "type": "boolean"
+    },
+    "state": {
+      "enum": [
+        "preserved",
+        "local_denied",
+        "termination_pending",
+        "revocation_pending",
+        "deleted_active",
+        "backup_pending",
+        "held",
+        "exported_unrecallable",
+        "confirmed",
+        "unknown"
+      ],
+      "title": "State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "item_id",
+    "owner",
+    "required_for_exit",
+    "state",
+    "evidence_refs"
+  ],
+  "title": "ExitItemV1",
+  "type": "object"
+}

@@ -27,12 +27,13 @@ EXAMPLES = ROOT / "contracts/examples"
 
 
 def example(name):
-    return json.loads((EXAMPLES / f"{name}.1.json").read_text())
+    filename = name.replace("/", ".") if "/" in name else f"{name}.1"
+    return json.loads((EXAMPLES / f"{filename}.json").read_text())
 
 
 @pytest.mark.parametrize("name", sorted(REGISTRY))
 def test_example_schema_and_roundtrip(name):
-    payload = example(name.split("/")[0])
+    payload = example(name)
     schema = REGISTRY[name].model_json_schema(by_alias=True)
     Draft202012Validator.check_schema(schema)
     Draft202012Validator(schema).validate(payload)

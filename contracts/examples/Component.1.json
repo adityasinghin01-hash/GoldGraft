@@ -1,0 +1,15 @@
+{
+  "build_context_ref": null,
+  "configuration_manifest_ref": "fixture:configuration_manifest_ref",
+  "controller_binding_refs": [
+    "fixture:controller_binding_ref"
+  ],
+  "correspondence_evidence_refs": [
+    "fixture:correspondence_evidence_ref"
+  ],
+  "dependency_manifest_ref": "fixture:dependency_manifest_ref",
+  "node_id": "source-demo",
+  "purpose": "fixture:purpose",
+  "runtime_profile_ref": "fixture:runtime_profile_ref",
+  "source_snapshot_ref": null
+}

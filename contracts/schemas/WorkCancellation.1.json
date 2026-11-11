@@ -1,0 +1,101 @@
+{
+  "$id": "https://goldgraft.dev/schemas/WorkCancellation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "cancel_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Cancel Id",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "generation": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Generation"
+    },
+    "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+    },
+    "requested_by": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Requested By",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "intent_recorded",
+        "fenced",
+        "termination_pending",
+        "confirmed",
+        "unknown"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "termination_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Termination Evidence Refs",
+      "type": "array"
+    },
+    "work_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Work Id"
+    }
+  },
+  "required": [
+    "cancel_id",
+    "case_id",
+    "action_id",
+    "requested_by",
+    "requested_at",
+    "state",
+    "work_id",
+    "generation",
+    "termination_evidence_refs"
+  ],
+  "title": "WorkCancellationV1",
+  "type": "object"
+}

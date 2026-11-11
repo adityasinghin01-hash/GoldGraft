@@ -1,0 +1,18 @@
+Start GoldGraft Phase5.3 for shared bootstrap, agents, delivery coordination and final own-component handoff. This pasted prompt explicitly starts implementation for that scope. Phase5.1/5.2 are complete; do not restart research or Plan2 uploads. Antigravity owns frontend implementation. Plan6 remains separate.
+
+Open initially: /Users/aditya/dev/GoldGraft
+Build workspace to create after inspection: /Users/aditya/dev/GoldGraft-plan5-build
+
+Read /Users/aditya/.agents/memory/MEMORY.md and its current GoldGraft topic as dated context. Then read AGENTS.md; docs/engineering/START_HERE.md; docs/engineering/plan5/START_HERE.md; TWO_TERMINAL_WORKFLOW.md; MANUAL_CONSTRUCTION_PLAN.md; SHARED_BOOTSTRAP_PLAN.md; AGENT_ARCHITECTURE.md; AGENT_ROLES.md; COMMUNICATION_AND_CONTRACTS.md; DELIVERY_AND_EXIT_SPEC.md; COMPONENT_TEST_PLAN.md; REQUIREMENTS_AND_GATES.md; REVIEW_AND_HANDOFF.md. The unqualified filenames in this list are under docs/engineering/plan5/. Read frontend specifications enough to supply compatible contracts/fixtures. Current prompt/completed specifications override old memory's undecided/unstarted and paper-only/deferred-internals wording within this explicit build scope.
+
+Drive construction and explain each small step: what you are building, which files/settings/commands it uses, how I inspect it, and the actual check result. Implement routine work yourself; involve me for genuine missing decisions, credentials or controller approvals. Do not ask me to authorise each already-scoped file/test again.
+
+Execute B0 first: inspect actual local/remote/team contributions, preserve dirty/protected work, create the isolated build workspace from the inspected accepted base, and copy the reviewed local Plan5 pack and applicable entry documents into it. The new pack is not yet on remote main. Reuse an existing build workspace safely if present; never reset/clean/overwrite it. Continue all implementation there.
+
+Then B1/B2: implement versioned Python contracts/routes/exports/examples, compatibility and labelled persistent/scripted stand-ins together. Python owns wire support. After actual checks pass, write BUILD_STATUS.md and FRONTEND_READY.json exactly as TWO_TERMINAL_WORKFLOW specifies. Print the folder Antigravity should open and the ready revision. Freeze those shared frontend inputs; continue agents/delivery while Antigravity works only in pieces/web.
+
+Execute B3/B4/B5: first prove one bounded autonomous task plus next step, durable restart, unknown/Stop handling; then complete the13 verified logical role charters, typed collaboration, bounded repairs, guards and independent proof boundary. Use the chosen Python coordinator over GU-owned durable control/brokers; no n8n or additional workflow platform. Build Singh's delivery/recovery/exit coordinator through shared GU/VJ/SH contracts, without recreating teammates' mechanisms.
+
+Workspace dependencies and offline component/browser checks are included; obey tool permission controls. Real models/private-source processing/provider/payment/hosting actions require actual qualified profile, named authority and cost scope. Keep unavailable evidence open and continue independent work. No commit/push/merge/publish, account provisioning, teammate messages or Plan6. No fake-as-real completion or money/oldDB undo.
+
+Finish B7 for your scope. Inspect Antigravity's pieces/web/docs/FRONTEND_BUILD_REPORT.md when available; run compatible combined own-component checks and prepare AS_BUILT_HANDOFF.md with actual versions/results, reproducible setup/operation/debug instructions, remaining gates and Plan6 replacement list. If frontend or real-model evidence is pending, state that precisely; never mark all Phase5.3 complete early. Stop before Plan6.

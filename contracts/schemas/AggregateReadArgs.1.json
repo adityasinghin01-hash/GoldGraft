@@ -1,0 +1,27 @@
+{
+  "$id": "https://goldgraft.dev/schemas/AggregateReadArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "projection_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Projection Ref",
+      "type": "string"
+    },
+    "query_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Query Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "query_ref",
+    "projection_ref"
+  ],
+  "title": "AggregateReadArgsV1",
+  "type": "object"
+}

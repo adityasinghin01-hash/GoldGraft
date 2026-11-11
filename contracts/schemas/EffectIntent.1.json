@@ -1,0 +1,226 @@
+{
+  "$id": "https://goldgraft.dev/schemas/EffectIntent.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_group_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Action Group Id",
+      "type": "string"
+    },
+    "actor_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Actor Id",
+      "type": "string"
+    },
+    "approval_set_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Approval Set Id",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "effect_class": {
+      "enum": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "EU"
+      ],
+      "title": "Effect Class",
+      "type": "string"
+    },
+    "effect_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Effect Id",
+      "type": "string"
+    },
+    "environment_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Environment Id",
+      "type": "string"
+    },
+    "expected_version": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Expected Version",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "operation": {
+      "enum": [
+        "preserve_state",
+        "publish_artifact",
+        "publish_source",
+        "merge_protected",
+        "apply_configuration",
+        "deploy_exact",
+        "finalise",
+        "prepare_exit",
+        "run_exit",
+        "read_exit_evidence",
+        "revoke_exit_evidence",
+        "configure_ingress",
+        "restart_target",
+        "revoke_grant",
+        "delete_temporary",
+        "stop_worker",
+        "financial_compensation"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "provider_idempotency_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Provider Idempotency Ref"
+    },
+    "provider_receipt_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Provider Receipt Ref"
+    },
+    "reconciliation_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Reconciliation Ref"
+    },
+    "request_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Request Digest",
+      "type": "string"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "resource_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "slot_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Slot Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "intended",
+        "submitted",
+        "acknowledged",
+        "observed",
+        "failed",
+        "unknown",
+        "compensated"
+      ],
+      "title": "State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "effect_id",
+    "action_group_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "actor_id",
+    "operation",
+    "resource_id",
+    "environment_id",
+    "request_digest",
+    "approval_set_id",
+    "plan_digest",
+    "slot_id",
+    "resource_epochs",
+    "expected_version",
+    "effect_class",
+    "provider_idempotency_ref",
+    "created_at",
+    "state",
+    "provider_receipt_ref",
+    "reconciliation_ref"
+  ],
+  "title": "EffectIntentV1",
+  "type": "object"
+}

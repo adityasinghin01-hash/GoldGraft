@@ -1,0 +1,117 @@
+{
+  "$id": "https://goldgraft.dev/schemas/SubjectDerivation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authenticity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authenticity Ref",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "collector_identity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Collector Identity Ref",
+      "type": "string"
+    },
+    "derivation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Derivation Id",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "operation": {
+      "enum": [
+        "candidate_patch",
+        "artifact_build",
+        "evidence_derivation"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "output_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "output_subject": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Subject",
+      "type": "string"
+    },
+    "parent_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Parent Refs",
+      "type": "array"
+    },
+    "parent_subject": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Parent Subject",
+      "type": "string"
+    },
+    "recipe_or_patch_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Recipe Or Patch Digest",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "derivation_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "task_id",
+    "parent_refs",
+    "parent_subject",
+    "operation",
+    "recipe_or_patch_digest",
+    "output_refs",
+    "output_subject",
+    "collector_identity_ref",
+    "authenticity_ref"
+  ],
+  "title": "SubjectDerivationV1",
+  "type": "object"
+}

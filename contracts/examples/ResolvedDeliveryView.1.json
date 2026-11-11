@@ -1,0 +1,67 @@
+{
+  "approvals": null,
+  "delivery_route": "git_protected",
+  "deployment": null,
+  "exit_manifest": null,
+  "exit_plan": null,
+  "final_assets": null,
+  "lifecycle": {
+    "active_effect_refs": [
+      "fixture:active_effect_ref"
+    ],
+    "attempt": 1,
+    "case_id": "case-demo",
+    "evidence_refs": [
+      "fixture:evidence_ref"
+    ],
+    "generation": 1,
+    "resource_graph_digest": "94efeebe58287d7aec4b884a01cf45565575def18c7b2d672071ec4d10c31286",
+    "run_id": "run-demo",
+    "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+    "stage": "BASELINE_VERIFY",
+    "updated_at": "2026-11-10T00:00:00Z",
+    "work_id": "fixture:work_id",
+    "work_package_digest": "d68547de5127174d8a98098cffb585076cd9534412b3d806de8337e6e52c449f",
+    "work_package_ref": "fixture:work_package_ref"
+  },
+  "plan": null,
+  "predicate_results": [
+    {
+      "checked_at": "2026-11-10T00:00:00Z",
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "predicate": "can_review",
+      "slot_id": null,
+      "status": "pass",
+      "subject_digest": "7e96e6c699649db7c444f691f6df1662cc31fa20b085be10339ca0551862ffda"
+    }
+  ],
+  "reservation": null,
+  "review": null,
+  "snapshot": {
+    "action_plan_ref": null,
+    "approval_set_ref": null,
+    "cancellation_ref": null,
+    "case_id": "case-demo",
+    "checked_at": "2026-11-10T00:00:00Z",
+    "current_evidence_refs": [
+      "fixture:current_evidence_ref"
+    ],
+    "deployment_ref": null,
+    "exit_manifest_ref": null,
+    "exit_plan_ref": null,
+    "final_asset_manifest_ref": null,
+    "generation": 1,
+    "graph_ref": "fixture:graph_ref",
+    "issue": null,
+    "lifecycle_ref": "fixture:lifecycle_ref",
+    "pending_effect_refs": [],
+    "reservation_ref": null,
+    "review_ref": null,
+    "run_id": "run-demo",
+    "state_cutover_ref": null,
+    "state_version": 1
+  },
+  "state_cutover": null
+}

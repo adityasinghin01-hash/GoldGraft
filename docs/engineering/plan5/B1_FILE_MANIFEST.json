@@ -1,0 +1,2247 @@
+{
+  "agent_construction": "deferred_to_user_manual_build_with_guidance",
+  "base_revision": "0365c5e1adcb1875a7f72c99dc7c63631501e131",
+  "checks": [
+    {
+      "record": "checks/accepted_full_suite.json",
+      "record_sha256": "f41985946ce058781b9977642abddbd136463d0b0ad28d7b103208824ab66567",
+      "result": {
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q"
+        ],
+        "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+        "exit_code": 0,
+        "output": "checks/accepted_full_suite.log",
+        "seconds": 12.708,
+        "started_at": "2026-11-10T12:21:21.350708+00:00"
+      }
+    },
+    {
+      "record": "checks/accepted_b1_checks.json",
+      "record_sha256": "ec9832ec9821dfc78eadc27c07cb73c3e49703912fdb4f9aff71002b9e20526c",
+      "result": {
+        "command": [
+          ".venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "contracts/tests/test_plan5_contracts.py",
+          "contracts/tests/test_plan5_routes.py",
+          "contracts/tests/test_plan5_relationships.py",
+          "contracts/tests/test_plan5_compatibility.py",
+          "contracts/tests/test_plan5_offline.py"
+        ],
+        "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+        "exit_code": 0,
+        "output": "checks/accepted_b1_checks.log",
+        "seconds": 2.366,
+        "started_at": "2026-11-10T12:21:21.352163+00:00"
+      }
+    },
+    {
+      "record": "checks/accepted_lint.json",
+      "record_sha256": "fd4b164b5c609e4c261d9f95f4f0b09d10e502ecdc4f562f77a416197514ad43",
+      "result": {
+        "command": [
+          ".venv/bin/ruff",
+          "check",
+          "."
+        ],
+        "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+        "exit_code": 0,
+        "output": "checks/accepted_lint.log",
+        "seconds": 0.046,
+        "started_at": "2026-11-10T12:21:21.364941+00:00"
+      }
+    },
+    {
+      "record": "checks/accepted_types.json",
+      "record_sha256": "439c27eed7cbfa4410dff3b3a04bbfae9eeb0a65f0ca9e37a52470d1b7cbe31d",
+      "result": {
+        "command": [
+          "npm",
+          "run",
+          "check:types"
+        ],
+        "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+        "exit_code": 0,
+        "output": "checks/accepted_types.log",
+        "seconds": 1.46,
+        "started_at": "2026-11-10T12:21:21.355929+00:00"
+      }
+    },
+    {
+      "record": "checks/accepted_generated.json",
+      "record_sha256": "4914a05cba785955da1c3ec8ede5b7d6a15db5fc6827341325ae280776619f12",
+      "result": {
+        "command": [
+          "sh",
+          "scripts/check_generated.sh"
+        ],
+        "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+        "exit_code": 0,
+        "output": "checks/accepted_generated.log",
+        "seconds": 4.596,
+        "started_at": "2026-11-10T12:21:21.360067+00:00"
+      }
+    },
+    {
+      "record": "checks/accepted_diff.json",
+      "record_sha256": "50793e0f74da40392516539215fcfdf1173716de17d13395b4f6167a88890541",
+      "result": {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+        "exit_code": 0,
+        "output": "checks/accepted_diff.log",
+        "seconds": 0.068,
+        "started_at": "2026-11-10T12:21:21.375172+00:00"
+      }
+    },
+    {
+      "record": "checks/generated_drift_probe.json",
+      "record_sha256": "1e74012184090402a934d31df364a2587caad90135fe3897ab608454c73265c4",
+      "result": {
+        "actual_exit_code": 1,
+        "command": [
+          "sh",
+          "scripts/check_generated.sh"
+        ],
+        "expected_verifier_exit_nonzero": true,
+        "injected_fault": "trailing byte in TaskContext schema",
+        "passed": true,
+        "restored_by_exporter": true
+      }
+    }
+  ],
+  "created_at": "2026-11-10T12:23:21.129224+00:00",
+  "evidence_class": "component_offline",
+  "files": [
+    {
+      "bytes": 909,
+      "path": "conftest.py",
+      "sha256": "1207619bca409b3143e8bc53c5d2162fb7fd19248c1f4f68dc724e502376ee33",
+      "status": "new"
+    },
+    {
+      "bytes": 528805,
+      "path": "contracts/api/openapi.json",
+      "sha256": "ecac5d7ceddf720a82c8f09b57ac4d2797fcdb6fdb48e9fd5301e53747b065c6",
+      "status": "modified"
+    },
+    {
+      "bytes": 306,
+      "path": "contracts/examples/ActionIntent.1.json",
+      "sha256": "251ddea3da0fc180b946c523873207f2d404b15288d2e322bdb4c885f724dea8",
+      "status": "new"
+    },
+    {
+      "bytes": 1698,
+      "path": "contracts/examples/ActionPlan.1.json",
+      "sha256": "80583b7cc9edfb3cca9f574ab49b2bd6a67339e780819525b90a0026a23f682d",
+      "status": "new"
+    },
+    {
+      "bytes": 311,
+      "path": "contracts/examples/ActionStatusView.1.json",
+      "sha256": "a0967cfce9c16faeb125eb9374734e5655224727f6cee390687b99dd5d1a6bc7",
+      "status": "new"
+    },
+    {
+      "bytes": 316,
+      "path": "contracts/examples/AdapterCapabilities.1.json",
+      "sha256": "0b0f61cac12ebc0f0adea192720a0f40776928f78cb982fae6ddb3d17d4da38c",
+      "status": "new"
+    },
+    {
+      "bytes": 304,
+      "path": "contracts/examples/AdapterObservation.1.json",
+      "sha256": "9d77b5f1a7ec4c7abc7f81de9bf870b3afd390038e71660337396b9e04286c8d",
+      "status": "new"
+    },
+    {
+      "bytes": 481,
+      "path": "contracts/examples/AgentResult.1.json",
+      "sha256": "c3dccbda80372542a26e0cf53de71fe61eb8c13d5d9b952fb751e1dada682e5c",
+      "status": "new"
+    },
+    {
+      "bytes": 1299,
+      "path": "contracts/examples/AgentTask.1.json",
+      "sha256": "2fbb7bd55c09f35922512c996fbd5c0621047d3e2af000fb1bc21e419274e4a9",
+      "status": "new"
+    },
+    {
+      "bytes": 85,
+      "path": "contracts/examples/AggregateReadArgs.1.json",
+      "sha256": "04aa9b0e2aedc4618348c54e870e6304ddc306d6ac6291d06afd8d41e8bce610",
+      "status": "new"
+    },
+    {
+      "bytes": 99,
+      "path": "contracts/examples/AnalysisMatchesArgs.1.json",
+      "sha256": "1dc3a47361f37ec5380482bb438f48988ad398f0ab142d8670f1c30455d60be9",
+      "status": "new"
+    },
+    {
+      "bytes": 1946,
+      "path": "contracts/examples/ApplyApproval.1.json",
+      "sha256": "aaa7b9c3b16030fd10738d70096df54be163fda1f54b12fddc8086f4c7df7703",
+      "status": "new"
+    },
+    {
+      "bytes": 549,
+      "path": "contracts/examples/ApplyAuthority.1.json",
+      "sha256": "e076ae963320324b49d39eb9bcfc55da8dd5aefc861ed9ff806b1c9e1d3e429d",
+      "status": "new"
+    },
+    {
+      "bytes": 445,
+      "path": "contracts/examples/ApprovalSet.1.json",
+      "sha256": "0282a576d358474f178fff085b46763f07e616676e50fae4d74ae864cdd39deb",
+      "status": "new"
+    },
+    {
+      "bytes": 1260,
+      "path": "contracts/examples/ArtifactBuild.1.json",
+      "sha256": "37ef5dd6c1cd88ce11b5c19278233ac134ded999ee0a84ba43b87a1bdc6d27d5",
+      "status": "new"
+    },
+    {
+      "bytes": 613,
+      "path": "contracts/examples/ArtifactDescriptor.1.json",
+      "sha256": "e83fd4c4f73dc780f4e0c3fed37564fc70964c36c902ffd88e87bb34365587ad",
+      "status": "new"
+    },
+    {
+      "bytes": 534,
+      "path": "contracts/examples/Asset.1.json",
+      "sha256": "c463152cb0d20fcaae665734421bf208b88a3edcf93557916fafd3b117d3d2ef",
+      "status": "new"
+    },
+    {
+      "bytes": 1084,
+      "path": "contracts/examples/AssetManifest.1.json",
+      "sha256": "98aefdafa92cb8c7d2f4eea77dc2ea4610cb28aea3bbb5a11064a98767a2cbb4",
+      "status": "new"
+    },
+    {
+      "bytes": 53,
+      "path": "contracts/examples/AuditSummaryArgs.1.json",
+      "sha256": "d0555207980f68f0dac4f9beb2b7f37f93d48da3488ad6e5dfe2cbc4e1c8c40b",
+      "status": "new"
+    },
+    {
+      "bytes": 739,
+      "path": "contracts/examples/BaselineEvidence.1.json",
+      "sha256": "90869a517a09a0d38d09a4c679b8b20db06f2b779eea504e5e85f3dcc03bf8c9",
+      "status": "new"
+    },
+    {
+      "bytes": 3,
+      "path": "contracts/examples/CancelUploadRequest.1.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "status": "new"
+    },
+    {
+      "bytes": 39,
+      "path": "contracts/examples/CancelWorkRequest.1.json",
+      "sha256": "9a8700b6bdb65f85a7882b8959c3920c325790f30cae9fbb21e8900ba6674c06",
+      "status": "new"
+    },
+    {
+      "bytes": 170,
+      "path": "contracts/examples/CandidatePatchArgs.1.json",
+      "sha256": "cc333ee7c10eb8729c6ac41345a684c3f7fe309a3cf80e64acfe447048e94923",
+      "status": "new"
+    },
+    {
+      "bytes": 297,
+      "path": "contracts/examples/CaseEvent.1.json",
+      "sha256": "5560fa71f3b2c5c83ad2bb8147d7ea9d4f3f05cc04728bfb226602f08ac25925",
+      "status": "new"
+    },
+    {
+      "bytes": 20,
+      "path": "contracts/examples/CaseEventsQuery.1.json",
+      "sha256": "9267d4edeeda7d436bb687819e0d903b940a145fec69a4c7c2e74497c0578736",
+      "status": "new"
+    },
+    {
+      "bytes": 202,
+      "path": "contracts/examples/CaseList.1.json",
+      "sha256": "639b3c04c8e018d1385fe219078f0d093788b608abba63977fc09f55bb722252",
+      "status": "new"
+    },
+    {
+      "bytes": 35,
+      "path": "contracts/examples/CaseListQuery.1.json",
+      "sha256": "a99839d96910caf68167bc769bcce710e136f9bf32073f4d202f77e1c212dae0",
+      "status": "new"
+    },
+    {
+      "bytes": 134,
+      "path": "contracts/examples/CaseSummary.1.json",
+      "sha256": "a3cde9cf844aa18a8f18570b9d035927190fface451f0fd768574b7f2c8fe794",
+      "status": "new"
+    },
+    {
+      "bytes": 1129,
+      "path": "contracts/examples/CaseView.1.json",
+      "sha256": "6575160d3a5fb934d0fe66404044a89de8f4aa3a6deb5929f0d10350709f8d4b",
+      "status": "new"
+    },
+    {
+      "bytes": 639,
+      "path": "contracts/examples/ChangeList.2.json",
+      "sha256": "1cf9c033918af525721608a00e540ea264d96c0518d1234644a6f8b53adeeb78",
+      "status": "new"
+    },
+    {
+      "bytes": 197,
+      "path": "contracts/examples/CheckResult.1.json",
+      "sha256": "44739c14c222d2c16c76967a093de83ac5250edebc0330c203db6f1bbcea0c80",
+      "status": "new"
+    },
+    {
+      "bytes": 211,
+      "path": "contracts/examples/Chunk.1.json",
+      "sha256": "e37514b611f78c897ab087741e2659fa97d4167deed24c97a416e13f5115132b",
+      "status": "new"
+    },
+    {
+      "bytes": 218,
+      "path": "contracts/examples/ChunkReceipt.1.json",
+      "sha256": "fc8630984f794b360011bb31da521d6d0d8afb8a9d8b9f697b3b6884fdc8a0cd",
+      "status": "new"
+    },
+    {
+      "bytes": 141,
+      "path": "contracts/examples/ChunkUploadRequest.1.json",
+      "sha256": "102980deb2b57be672eb39116d0da0f2107429792303200e792cb3d52f74efd3",
+      "status": "new"
+    },
+    {
+      "bytes": 53,
+      "path": "contracts/examples/ClaimDraft.1.json",
+      "sha256": "d3e764008a094145e7d99cf2309a842ae984c8fbdb352632f4a40c96e25a4cfc",
+      "status": "new"
+    },
+    {
+      "bytes": 177,
+      "path": "contracts/examples/CollectorAcceptance.1.json",
+      "sha256": "9ef511e7b065a535c63ac149ab7f874a67b48469a64e2cdd34b9ee5dcdb243e8",
+      "status": "new"
+    },
+    {
+      "bytes": 469,
+      "path": "contracts/examples/Component.1.json",
+      "sha256": "f944d132ff493a71463d8e4ae72dbb1dd1ebdb392da6d606c5080ab017641e26",
+      "status": "new"
+    },
+    {
+      "bytes": 555,
+      "path": "contracts/examples/ComponentManifest.1.json",
+      "sha256": "bc83ce0c037810bf4f11b70ac1bb26d09e0c4a2490d3797b73744c5edfc53c59",
+      "status": "new"
+    },
+    {
+      "bytes": 181,
+      "path": "contracts/examples/ConfigurationEntry.1.json",
+      "sha256": "c8d12b26a81c95f53eed952863d60ba9616c49d5f554a5927154f57b212ac97a",
+      "status": "new"
+    },
+    {
+      "bytes": 244,
+      "path": "contracts/examples/ConfigurationManifest.1.json",
+      "sha256": "413875688e7961cb66d682dfaf95abb27edbed4fadd28085d5b43c5782efde2f",
+      "status": "new"
+    },
+    {
+      "bytes": 269,
+      "path": "contracts/examples/ConnectionCase.1.json",
+      "sha256": "d6e750bd34133a751ab33b527b506f318039bce90c028ef1f4903389d293fea2",
+      "status": "new"
+    },
+    {
+      "bytes": 1476,
+      "path": "contracts/examples/ConnectionReadiness.1.json",
+      "sha256": "476b3d4be6d2be1d960ca02660dcc9bb3f76a06b91ac3b16a67a4993f99bb80e",
+      "status": "new"
+    },
+    {
+      "bytes": 102,
+      "path": "contracts/examples/ControlError.1.json",
+      "sha256": "801bb9378da0ba59f54c2ba3cf2ad03a69a1a0a5372439a83c9efad15f7a708c",
+      "status": "new"
+    },
+    {
+      "bytes": 314,
+      "path": "contracts/examples/ControllerInvitation.1.json",
+      "sha256": "d5f509d2d96c34dbf68fa12d13724944968ee08e19fb24472d0fdc0fc2ebc629",
+      "status": "new"
+    },
+    {
+      "bytes": 135,
+      "path": "contracts/examples/CreateActionIntent.1.json",
+      "sha256": "24b6edcef10014cdc83a057f7a0fd30149833888b5ff0a8f173a53b764a454ac",
+      "status": "new"
+    },
+    {
+      "bytes": 47,
+      "path": "contracts/examples/CreateCase.1.json",
+      "sha256": "2719e08aa5b1a2368465b04903254b0e10f3c15ad0caec2d2d3e5e8d26b4cf6d",
+      "status": "new"
+    },
+    {
+      "bytes": 47,
+      "path": "contracts/examples/CreateDraft.1.json",
+      "sha256": "2719e08aa5b1a2368465b04903254b0e10f3c15ad0caec2d2d3e5e8d26b4cf6d",
+      "status": "new"
+    },
+    {
+      "bytes": 79,
+      "path": "contracts/examples/CreateInvitation.1.json",
+      "sha256": "a3dd4a5efa5801e48ee882c28130882a187b4f728d813c0ad00c968153c3a445",
+      "status": "new"
+    },
+    {
+      "bytes": 88,
+      "path": "contracts/examples/CreateProviderIntent.1.json",
+      "sha256": "5f4c2cb3f99bb0be06e41264510f15416fac9c665043840c47e138d68203d5c0",
+      "status": "new"
+    },
+    {
+      "bytes": 377,
+      "path": "contracts/examples/CreateUploadRequest.1.json",
+      "sha256": "998056b9f49cf05be05d44be6a26db59733b2aa2ef9684c2c7659a6bf6e35ec7",
+      "status": "new"
+    },
+    {
+      "bytes": 315,
+      "path": "contracts/examples/DeliveryDecision.1.json",
+      "sha256": "3310d4274e16e57cce0a18ca7b904e03404ef2ebb0461f5dba711ef808335d66",
+      "status": "new"
+    },
+    {
+      "bytes": 606,
+      "path": "contracts/examples/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e",
+      "status": "new"
+    },
+    {
+      "bytes": 252,
+      "path": "contracts/examples/Dependency.1.json",
+      "sha256": "973ac919b606929485c5b8593a9285e5af537c732c8d956b3bc95606314bb67c",
+      "status": "new"
+    },
+    {
+      "bytes": 105,
+      "path": "contracts/examples/DependencyInspectArgs.1.json",
+      "sha256": "1c2708711784e212f188b3cd82fc22f6575de76793e5b5d0329b8332e05af34f",
+      "status": "new"
+    },
+    {
+      "bytes": 25,
+      "path": "contracts/examples/DependencyManifest.1.json",
+      "sha256": "9736ab41765f59e54dd10c6fb56e8205ff8a8ed9e0ac01e5263fb611c7713f3b",
+      "status": "new"
+    },
+    {
+      "bytes": 574,
+      "path": "contracts/examples/DeploymentObservation.1.json",
+      "sha256": "db4bca6758d5ebdcebf965ead92b088f865ad2e857b2ae8c60d3286a50611a8c",
+      "status": "new"
+    },
+    {
+      "bytes": 103,
+      "path": "contracts/examples/DocsLookupArgs.1.json",
+      "sha256": "c25f70bf9537822d53c0599e2c9bf0f41f044ccad97cff25c34d4bc764a8cb81",
+      "status": "new"
+    },
+    {
+      "bytes": 235,
+      "path": "contracts/examples/DraftCase.1.json",
+      "sha256": "88dc09d45784a5bef66ab5cbccce4d18fcbe7b1b4c2e0f4bbecda8e68cd39657",
+      "status": "new"
+    },
+    {
+      "bytes": 828,
+      "path": "contracts/examples/EffectIntent.1.json",
+      "sha256": "23dd9e5733036f6aa077df7265e30622a13c06c29fbdf004d49e71fc9531ecae",
+      "status": "new"
+    },
+    {
+      "bytes": 754,
+      "path": "contracts/examples/EffectSlot.1.json",
+      "sha256": "c8896a55fbff0b73de9ce294e0769eee262793f63075ce6b86282cc6e5ede25a",
+      "status": "new"
+    },
+    {
+      "bytes": 45,
+      "path": "contracts/examples/EvidenceReadArgs.1.json",
+      "sha256": "204f90a7f1bbc134fa2546aa41c59a99665f2a602241d5ab60cb483e411a6787",
+      "status": "new"
+    },
+    {
+      "bytes": 69,
+      "path": "contracts/examples/EvidenceSummaryArgs.1.json",
+      "sha256": "d9cd31dc4539abfd9deb9dcd6ffe814772de21a0f89694a05325ac19b02e69ca",
+      "status": "new"
+    },
+    {
+      "bytes": 403,
+      "path": "contracts/examples/ExecutionProposal.1.json",
+      "sha256": "af0eb99019d99011695a3660cbda0395aba533f4ff58e5e7123ad79ae1cecebb",
+      "status": "new"
+    },
+    {
+      "bytes": 45,
+      "path": "contracts/examples/ExecutionRequestArgs.1.json",
+      "sha256": "ba8ef3ada936cc56ca97041523954d0cacf19ea9ebcc30a2c3e02dd413f72dc2",
+      "status": "new"
+    },
+    {
+      "bytes": 41,
+      "path": "contracts/examples/ExecutionStatusArgs.1.json",
+      "sha256": "4ecd75ff14a5f2c76dce2bc1421371e82120a3bf5575fa5a6844eb7806ee8f09",
+      "status": "new"
+    },
+    {
+      "bytes": 1153,
+      "path": "contracts/examples/ExitCheckPlan.1.json",
+      "sha256": "51074770464b0e09b7531aaa26269fbb3652cf449af72846b02935ecb94df651",
+      "status": "new"
+    },
+    {
+      "bytes": 169,
+      "path": "contracts/examples/ExitItem.1.json",
+      "sha256": "ba59503aa4c7379604c4faa6547c93ffa3be7097a3afdf50ea33ed82b12b0e48",
+      "status": "new"
+    },
+    {
+      "bytes": 691,
+      "path": "contracts/examples/ExitManifest.1.json",
+      "sha256": "50be9de3dcb3ff6fbdb7568013210e495336ba2e7c6aebb3c844dc70aca05dea",
+      "status": "new"
+    },
+    {
+      "bytes": 640,
+      "path": "contracts/examples/FinalisationPlan.1.json",
+      "sha256": "bbe0f60107275845e5a649bdeed19cd5e58e7b27a96fa40af8173a0633ef5ad4",
+      "status": "new"
+    },
+    {
+      "bytes": 101,
+      "path": "contracts/examples/FinaliseUploadRequest.1.json",
+      "sha256": "7e23fbf5a505acdc37cd5c05785f347c12d3e1347c8bd606d08912fcdd226e1b",
+      "status": "new"
+    },
+    {
+      "bytes": 169,
+      "path": "contracts/examples/Issue.1.json",
+      "sha256": "77b7910500304fb9b427756c1530a947ee5da2981e6d44d3882fa54a357510a9",
+      "status": "new"
+    },
+    {
+      "bytes": 218,
+      "path": "contracts/examples/IssueApplyApproval.1.json",
+      "sha256": "bb625527b78c5d517f8a5fd37c1c374259e55dc6fabbe5c1d2eb80a74b77c820",
+      "status": "new"
+    },
+    {
+      "bytes": 630,
+      "path": "contracts/examples/LifecycleRun.1.json",
+      "sha256": "ee105edf79e91d5af0f6d41e8aa2fc33263ae45784ae889b89eb46dd086e6803",
+      "status": "new"
+    },
+    {
+      "bytes": 766,
+      "path": "contracts/examples/LifecycleWorkRequest.1.json",
+      "sha256": "6fe283c4af7593d1aa42f267538541e0b2989fa8cc6901976ecdeb666009e038",
+      "status": "new"
+    },
+    {
+      "bytes": 213,
+      "path": "contracts/examples/LifecycleWorkRequestReceipt.1.json",
+      "sha256": "d8f4dbd0048d0e7f4aa3293db00a6dd1d33dbcbffb920d5f5a52df386ba454c7",
+      "status": "new"
+    },
+    {
+      "bytes": 519,
+      "path": "contracts/examples/LifecycleWorkResult.1.json",
+      "sha256": "89123ebf5949bbafba6dfbf2cdc3cbbe740d672f9477a3e01bf42c09ad93d002",
+      "status": "new"
+    },
+    {
+      "bytes": 152,
+      "path": "contracts/examples/ManifestEntry.1.json",
+      "sha256": "f898afec011e0bd70823e1d96e4ccb3b59235a1059ff7ed04c1d565b438d626b",
+      "status": "new"
+    },
+    {
+      "bytes": 224,
+      "path": "contracts/examples/ModelBudget.1.json",
+      "sha256": "87ba8022c227fa70e262bd1794977ed1682376156100a1c0a8a7bc0bc6097a85",
+      "status": "new"
+    },
+    {
+      "bytes": 522,
+      "path": "contracts/examples/ModelTurnRequest.1.json",
+      "sha256": "9a1ac32b96d8850eb15919a2a627d94dba32353464044605b08d749565d98e19",
+      "status": "new"
+    },
+    {
+      "bytes": 455,
+      "path": "contracts/examples/ModelTurnResult.1.json",
+      "sha256": "7579af5164a3742c8b58d76c2ec3edd69da0b11ad220a7246ab3e6fc4c3632b4",
+      "status": "new"
+    },
+    {
+      "bytes": 194,
+      "path": "contracts/examples/ModelTurnStatus.1.json",
+      "sha256": "cd9d4c7c208d2353135b45351b885e843f23c6823171fad4077896ae49f92e9e",
+      "status": "new"
+    },
+    {
+      "bytes": 184,
+      "path": "contracts/examples/Omission.1.json",
+      "sha256": "de4b03c6aff682cc852828a24ffc227060fe7acd6e1499afdeb342348d7c7f51",
+      "status": "new"
+    },
+    {
+      "bytes": 241,
+      "path": "contracts/examples/OmissionManifest.1.json",
+      "sha256": "7bb59d9ab3902e9f187c823a8c17052848a6ee03cff3517945495ca4523ab877",
+      "status": "new"
+    },
+    {
+      "bytes": 324,
+      "path": "contracts/examples/P5Problem.1.json",
+      "sha256": "a7dc0d396b58b0fddd07365a9454eb474b6fd379fa09fdca856e7dc07c59e1bb",
+      "status": "new"
+    },
+    {
+      "bytes": 155,
+      "path": "contracts/examples/PendingResult.1.json",
+      "sha256": "9cb62581723f88d869a11ba6e62e58d2afc13bc221dc0b82713960a7cace57c3",
+      "status": "new"
+    },
+    {
+      "bytes": 724,
+      "path": "contracts/examples/PlanProposal.1.json",
+      "sha256": "56058ed33eb8e9b6e39c4ad1c66366303aea4866bb43f1ac4af50f0a0d43677b",
+      "status": "new"
+    },
+    {
+      "bytes": 252,
+      "path": "contracts/examples/PredicateResult.1.json",
+      "sha256": "94e20deeb4c9f0305455e2736b2e58366f2def9f4529b9f660a06d2e7cbcf540",
+      "status": "new"
+    },
+    {
+      "bytes": 3860,
+      "path": "contracts/examples/PrivateReviewView.1.json",
+      "sha256": "3d98a9426c649e93005801fde2aae5d7575213615c433d6c0fca4ce6338da577",
+      "status": "new"
+    },
+    {
+      "bytes": 503,
+      "path": "contracts/examples/ProcessingDisclosure.1.json",
+      "sha256": "2a623863952fab17dcb4a9a2bea2dd8bb764df2dd1d315875e023351d82a766a",
+      "status": "new"
+    },
+    {
+      "bytes": 212,
+      "path": "contracts/examples/ProcessingRecipient.1.json",
+      "sha256": "0b78d8fbf7aa677a366971345df999fc9af774177d80de5fdfbb7001ad9cf065",
+      "status": "new"
+    },
+    {
+      "bytes": 301,
+      "path": "contracts/examples/ProviderIntent.1.json",
+      "sha256": "46ae67ad550ef79c649ee468a4b984e5708e170cd5d899dcd4b931438e4ae11b",
+      "status": "new"
+    },
+    {
+      "bytes": 106,
+      "path": "contracts/examples/ProviderRef.1.json",
+      "sha256": "f079b06b200fb90aa9faf6392807a6d6ced9b75233a7fc9eee6955993d9de06c",
+      "status": "new"
+    },
+    {
+      "bytes": 102,
+      "path": "contracts/examples/PublicMetric.1.json",
+      "sha256": "3951650ecb6c2bb0ea8f087e6697fb4d16e92139336407ec53fa5dfde544d950",
+      "status": "new"
+    },
+    {
+      "bytes": 375,
+      "path": "contracts/examples/PublicProofView.1.json",
+      "sha256": "dd2bfc5122c1e58d6bcf7ecc6eaba23397fa6608ea46a9e306022c51f3dbd9ee",
+      "status": "new"
+    },
+    {
+      "bytes": 83,
+      "path": "contracts/examples/RecipeLookupArgs.1.json",
+      "sha256": "e5df6b2ee2ac1564142484209bbfd1c11567786e00d974c747ca72c47bffaf5e",
+      "status": "new"
+    },
+    {
+      "bytes": 71,
+      "path": "contracts/examples/RecipeStageArgs.1.json",
+      "sha256": "d33a5a66ec3e7db4d8a9ae67c111d68a9b1e7c62376f81cd37713aeddf03b0ef",
+      "status": "new"
+    },
+    {
+      "bytes": 777,
+      "path": "contracts/examples/RecoveryPlan.1.json",
+      "sha256": "2b4a9275d1d31088ff607c9a6bcde1a298009c265e946f2a92abc65ef51b5f68",
+      "status": "new"
+    },
+    {
+      "bytes": 121,
+      "path": "contracts/examples/RequiredAction.1.json",
+      "sha256": "59448e342e56c8f69f741c2508931a3a2c422e47093b18e23ee345645a29304c",
+      "status": "new"
+    },
+    {
+      "bytes": 294,
+      "path": "contracts/examples/RequiredFlow.1.json",
+      "sha256": "9094bfdb1a9ef24c67f19862534fd1488449d73af09f30e017914afdb2306e19",
+      "status": "new"
+    },
+    {
+      "bytes": 375,
+      "path": "contracts/examples/RequiredFlowManifest.1.json",
+      "sha256": "897af1f72a20cb5ec1f44f1e4716f02152ee0d72f8b15bcb0e358e7d3447315c",
+      "status": "new"
+    },
+    {
+      "bytes": 1906,
+      "path": "contracts/examples/ResolvedDeliveryView.1.json",
+      "sha256": "46340ebf9fd241dc13c363e619f3c3880aeccc31b7e1c04764a9b6d36baa0b94",
+      "status": "new"
+    },
+    {
+      "bytes": 705,
+      "path": "contracts/examples/ResourceBinding.1.json",
+      "sha256": "1bdd169e4c3e761ef7365703283b5bdea0a363c9738f58e8a117c517635f1270",
+      "status": "new"
+    },
+    {
+      "bytes": 205,
+      "path": "contracts/examples/ResourceEdge.1.json",
+      "sha256": "c4e268995a3933590b95d348cbc1146a43ad79133482252cae6f38927410d47c",
+      "status": "new"
+    },
+    {
+      "bytes": 898,
+      "path": "contracts/examples/ResourceGraph.1.json",
+      "sha256": "7a1e9cf353a3881506fe9240c4384ecdfe5ca485937b1a77c0da3ca9cefac3e4",
+      "status": "new"
+    },
+    {
+      "bytes": 392,
+      "path": "contracts/examples/ResourceNode.1.json",
+      "sha256": "d5111727f7d665d5243b6b12caceda7e7b8e31b287064922ee1e27ed1346943e",
+      "status": "new"
+    },
+    {
+      "bytes": 68,
+      "path": "contracts/examples/ResourceRecipient.1.json",
+      "sha256": "0d9f283555c9629eecb504259bca27ffc9d654701b8a72d7bcf4c26329157152",
+      "status": "new"
+    },
+    {
+      "bytes": 448,
+      "path": "contracts/examples/ResourceSummary.1.json",
+      "sha256": "75de64de677ca3ba85de679da5fd1fe28325e77c38015b338874a645cbdf79ce",
+      "status": "new"
+    },
+    {
+      "bytes": 120,
+      "path": "contracts/examples/ResumeRunRequest.1.json",
+      "sha256": "89d487aa2109ed20f835cc1adc35614f91cc8751d0b14ae9b282c24531a5278d",
+      "status": "new"
+    },
+    {
+      "bytes": 1113,
+      "path": "contracts/examples/ReviewBundle.1.json",
+      "sha256": "f4c667b78b8060da26036989d22642d6783dc957767e9bada3d0c566befb7705",
+      "status": "new"
+    },
+    {
+      "bytes": 1642,
+      "path": "contracts/examples/RunTaskSnapshot.1.json",
+      "sha256": "ad978c84c3b26fc5c58dfcf97f65ddef9eeea257a1923b07da6a2ea2f016fbcb",
+      "status": "new"
+    },
+    {
+      "bytes": 128,
+      "path": "contracts/examples/SafetyRequestHoldArgs.1.json",
+      "sha256": "1ca29eed1beb2b3d82a0c5f0743f0eea109424dc1e6d6a957d81fd51e85be30a",
+      "status": "new"
+    },
+    {
+      "bytes": 99,
+      "path": "contracts/examples/ScenarioStageArgs.1.json",
+      "sha256": "af2ddc21216a76783e1ba7eaa31a9688519c738d14e95aa0d43d70f6cfb854c7",
+      "status": "new"
+    },
+    {
+      "bytes": 85,
+      "path": "contracts/examples/SourceReadArgs.1.json",
+      "sha256": "dcaacd5ec45c30ee469c1085e5aad03e8560e50ea64284da85d3847b284a8f82",
+      "status": "new"
+    },
+    {
+      "bytes": 56,
+      "path": "contracts/examples/SourceRevision.1.json",
+      "sha256": "d59cdc1fa08d23f063c199736fb7ae9dd1d37a8fcac2b66197952dfa02996272",
+      "status": "new"
+    },
+    {
+      "bytes": 730,
+      "path": "contracts/examples/SourceSnapshot.1.json",
+      "sha256": "357ed44cd3d9a69b51891f74a7ca4ddbf3e30654bbb332d2bf2384c4d728b624",
+      "status": "new"
+    },
+    {
+      "bytes": 171,
+      "path": "contracts/examples/StartWorkRequest.1.json",
+      "sha256": "ebeb1a131e1938ba40aeacec1573d3e81c55524ee22a27a087d37d2e44a0884c",
+      "status": "new"
+    },
+    {
+      "bytes": 979,
+      "path": "contracts/examples/StateCutover.1.json",
+      "sha256": "b5bf2e227ec1d8748a512a5763d8d17d5c207eae9ba18b9ee86548b941a54fe8",
+      "status": "new"
+    },
+    {
+      "bytes": 35,
+      "path": "contracts/examples/StatusReadArgs.1.json",
+      "sha256": "64b54840c65a5f6f20e273895f86b03f8352fba4180a3c1f292dd2845ff4707d",
+      "status": "new"
+    },
+    {
+      "bytes": 655,
+      "path": "contracts/examples/SubjectDerivation.1.json",
+      "sha256": "09fa3b7d91bdd53f539083894d1fa90b0bc01d69944fdbcbb939337dad3cff6a",
+      "status": "new"
+    },
+    {
+      "bytes": 338,
+      "path": "contracts/examples/SubjectManifest.1.json",
+      "sha256": "1da629503ecae94bb78a0ba5d02fa2fb27caf5b81f771559fbba413f5ebdd260",
+      "status": "new"
+    },
+    {
+      "bytes": 189,
+      "path": "contracts/examples/TargetKey.1.json",
+      "sha256": "5bbd2514eb10fd4991aab6777c656e39e0e91cf46ca005bffdfd36274dc17eaa",
+      "status": "new"
+    },
+    {
+      "bytes": 651,
+      "path": "contracts/examples/TargetReservation.1.json",
+      "sha256": "2ec99f1ce5d64cd49adc599f79f80712e223751603d7ca1eedb64bdfed812ea3",
+      "status": "new"
+    },
+    {
+      "bytes": 621,
+      "path": "contracts/examples/TaskCheckpoint.1.json",
+      "sha256": "a52142df63a4ec2d2a8322c4a847e6e817b2b1ddac419c26a60f8831ec4b38f8",
+      "status": "new"
+    },
+    {
+      "bytes": 576,
+      "path": "contracts/examples/TaskContext.1.json",
+      "sha256": "60aa47ccf481055e2b400323ec61696cc572203d7c462d9b46cd5c502d744cec",
+      "status": "new"
+    },
+    {
+      "bytes": 423,
+      "path": "contracts/examples/TaskEvent.1.json",
+      "sha256": "bb45bd0a81a4f7e1a476282aa16910a3885aafd1ad72faa6e9777df3c7d69362",
+      "status": "new"
+    },
+    {
+      "bytes": 232,
+      "path": "contracts/examples/TaskLease.1.json",
+      "sha256": "14d7efa3bbcf73201044e380174c39ee62282d0a0066ae3c191baba13453bda1",
+      "status": "new"
+    },
+    {
+      "bytes": 453,
+      "path": "contracts/examples/TaskSpec.1.json",
+      "sha256": "c57cb64fef4d4732b58178d328005e743bea308a2e9aabb3f2e44f66110b0097",
+      "status": "new"
+    },
+    {
+      "bytes": 195,
+      "path": "contracts/examples/ToolCall.1.json",
+      "sha256": "165a0fd22a1f2931d804f4587e9eb74875fb9d4554809fa5c4fd9f9ebcfda796",
+      "status": "new"
+    },
+    {
+      "bytes": 673,
+      "path": "contracts/examples/ToolInvocation.1.json",
+      "sha256": "1496aa804d5d55c27345344de963cb002aef71fe003036db88554affeb2c4f38",
+      "status": "new"
+    },
+    {
+      "bytes": 226,
+      "path": "contracts/examples/UnresolvedInputs.1.json",
+      "sha256": "fdd9a6d9ed004660077bceccb4f2a318113bc7ff26e18edf076a40a66a1205e2",
+      "status": "new"
+    },
+    {
+      "bytes": 549,
+      "path": "contracts/examples/UploadSession.1.json",
+      "sha256": "e8aafb2bc7d889b752610e8e5afa31455138fa1f46d5cc2cd8d0d64b6ed2eca8",
+      "status": "new"
+    },
+    {
+      "bytes": 328,
+      "path": "contracts/examples/WakeCondition.1.json",
+      "sha256": "2229e2ab37f53ea9f827e15ae774b08dbb638b6726096fe607fd39aede7519b5",
+      "status": "new"
+    },
+    {
+      "bytes": 638,
+      "path": "contracts/examples/WorkAcceptance.1.json",
+      "sha256": "f5320c67909ef15c1b400f87f7496b67eb0d6bf921184fe4a69d988a5c86ca90",
+      "status": "new"
+    },
+    {
+      "bytes": 333,
+      "path": "contracts/examples/WorkCancellation.1.json",
+      "sha256": "710d1db32d289337938b8056d8b8539e591a4c24873cd3a757251a24cbd1280d",
+      "status": "new"
+    },
+    {
+      "bytes": 1473,
+      "path": "contracts/examples/WorkPackage.1.json",
+      "sha256": "924d0b8aa8501dcad365cbbd2b228cd2bc7cfd6427a93b343931f173eb08101c",
+      "status": "new"
+    },
+    {
+      "bytes": 247,
+      "path": "contracts/examples/WorkStatus.1.json",
+      "sha256": "2753270f801393f6e291707258ae079c13f31f7c5c4a020f5936fa5266f1b166",
+      "status": "new"
+    },
+    {
+      "bytes": 1013,
+      "path": "contracts/examples/WorkerOperation.1.json",
+      "sha256": "a4fdffdd753f194690d5b96a34ba0993db3c5b3816082cedbee358710d1b3c3e",
+      "status": "new"
+    },
+    {
+      "bytes": 1320,
+      "path": "contracts/schemas/ActionIntent.1.json",
+      "sha256": "a2dea285a5dc56b5fe0448e99a7bf5bd05a3b0855aa5741725414d290f10da85",
+      "status": "new"
+    },
+    {
+      "bytes": 8205,
+      "path": "contracts/schemas/ActionPlan.1.json",
+      "sha256": "38009008a15aa5f9835486f7c8ff562cc79debd56bfc496bbe5ea13fe95e49cd",
+      "status": "new"
+    },
+    {
+      "bytes": 5975,
+      "path": "contracts/schemas/ActionStatusView.1.json",
+      "sha256": "2e97f717fa0893f8b9b9e16b310d4020696575c936e54153b469f0cf3dbb76cf",
+      "status": "new"
+    },
+    {
+      "bytes": 2449,
+      "path": "contracts/schemas/AdapterCapabilities.1.json",
+      "sha256": "e88139d791b3ddb7cfe37af1e5ea6706222bbc522df8f6b0f287d8b5baa05eac",
+      "status": "new"
+    },
+    {
+      "bytes": 1942,
+      "path": "contracts/schemas/AdapterObservation.1.json",
+      "sha256": "14b6001ca934e333ab4ca7e6a262cc4bfc45515d08639254020578330c54a82d",
+      "status": "new"
+    },
+    {
+      "bytes": 5002,
+      "path": "contracts/schemas/AgentResult.1.json",
+      "sha256": "b224f3c110871f718dc3f232a53d7c6891385a01f6ba6cc84f304ffbb1662d0d",
+      "status": "new"
+    },
+    {
+      "bytes": 10107,
+      "path": "contracts/schemas/AgentTask.1.json",
+      "sha256": "75d5a8e6e44b8b54f8458a1c75bc7ebf67e1c2b48bb3e3e92166d842c593cac6",
+      "status": "new"
+    },
+    {
+      "bytes": 611,
+      "path": "contracts/schemas/AggregateReadArgs.1.json",
+      "sha256": "16bc400a9287c7d996ecc6f021633a299704940f218ef4d5e00909f0dea0846e",
+      "status": "new"
+    },
+    {
+      "bytes": 758,
+      "path": "contracts/schemas/AnalysisMatchesArgs.1.json",
+      "sha256": "2b40547fdaceb0da1e5499ef501ac96f5801b3596f8c570f439499255257e49e",
+      "status": "new"
+    },
+    {
+      "bytes": 6343,
+      "path": "contracts/schemas/ApplyApproval.1.json",
+      "sha256": "eb84069159db866ee27dd427277ccf4694013cfd18fa486a57c5c13a4ad8d63f",
+      "status": "new"
+    },
+    {
+      "bytes": 3747,
+      "path": "contracts/schemas/ApplyAuthority.1.json",
+      "sha256": "4d99c23d70a53de81a843024cc25a40cca15da00b6296c3fc82a44771eb6c76f",
+      "status": "new"
+    },
+    {
+      "bytes": 2223,
+      "path": "contracts/schemas/ApprovalSet.1.json",
+      "sha256": "3284b3286c8981c321a20110c14b7006471a4464d9ad25074569a1408e898fd3",
+      "status": "new"
+    },
+    {
+      "bytes": 3906,
+      "path": "contracts/schemas/ArtifactBuild.1.json",
+      "sha256": "b01cade68d9b3110c1c6c35182d82188791b5c5bf73cdd6a2878f46e514176f2",
+      "status": "new"
+    },
+    {
+      "bytes": 2908,
+      "path": "contracts/schemas/ArtifactDescriptor.1.json",
+      "sha256": "4e4276f71b41e98dd500649a16b7c5dff2d9b11b5f70da0be8802251c8ff93e3",
+      "status": "new"
+    },
+    {
+      "bytes": 3400,
+      "path": "contracts/schemas/Asset.1.json",
+      "sha256": "0a0ebde248e7be5bf174e107b47c2c186e3251db44b7a67f1aa768a2d1758775",
+      "status": "new"
+    },
+    {
+      "bytes": 5302,
+      "path": "contracts/schemas/AssetManifest.1.json",
+      "sha256": "75f3e959491efee0eadd43163d21ecc597561a6236e9aef3eaffb434c2b63029",
+      "status": "new"
+    },
+    {
+      "bytes": 535,
+      "path": "contracts/schemas/AuditSummaryArgs.1.json",
+      "sha256": "001d78dcb747a4b711c225f91aa9518c9cb42a7185dc6f4b67c16fd3d1a7e376",
+      "status": "new"
+    },
+    {
+      "bytes": 2410,
+      "path": "contracts/schemas/BaselineEvidence.1.json",
+      "sha256": "200139fcb7ed98a78ba4d32182e4a2eb17e94af98b008890b63980f05e9ade9b",
+      "status": "new"
+    },
+    {
+      "bytes": 242,
+      "path": "contracts/schemas/CancelUploadRequest.1.json",
+      "sha256": "3a0ade2bfe5d2c1747713e40857bb155847bda554ee6a14d2f1ae0936215c56a",
+      "status": "new"
+    },
+    {
+      "bytes": 427,
+      "path": "contracts/schemas/CancelWorkRequest.1.json",
+      "sha256": "8f50e5dd20b2e3609e5de08627ec2f1b6eeeae3f7a572a7df2ee92c4dfc4e0ee",
+      "status": "new"
+    },
+    {
+      "bytes": 751,
+      "path": "contracts/schemas/CandidatePatchArgs.1.json",
+      "sha256": "c5689cf604e27f1eb8b2cf1f66d0df3be5e0ffeaef417554b1559d9a12551961",
+      "status": "new"
+    },
+    {
+      "bytes": 1536,
+      "path": "contracts/schemas/CaseEvent.1.json",
+      "sha256": "53aa17b7c14de722af684e016e5b6e785c616c6f10ee8fa8d930d55aa05c9423",
+      "status": "new"
+    },
+    {
+      "bytes": 458,
+      "path": "contracts/schemas/CaseEventsQuery.1.json",
+      "sha256": "5ebfce55cd9a59decaf0ae1136a35d6686e6b52ecbcf2619deaeeb14b4d5a47a",
+      "status": "new"
+    },
+    {
+      "bytes": 1702,
+      "path": "contracts/schemas/CaseList.1.json",
+      "sha256": "c14a09d6c141616330fc4d8133125b1f8bd378b3ffcf1d507a30b46cb7e1f8e0",
+      "status": "new"
+    },
+    {
+      "bytes": 650,
+      "path": "contracts/schemas/CaseListQuery.1.json",
+      "sha256": "ed45c2701cd3a425e2aa281d9bd3edf0b44f64ca30e3e3040a80ad9ab2abeb86",
+      "status": "new"
+    },
+    {
+      "bytes": 928,
+      "path": "contracts/schemas/CaseSummary.1.json",
+      "sha256": "cc9e8768d37bf9ba0bfa4c8511a9776ea9bee378fc182237bb4618c77b9edfe9",
+      "status": "new"
+    },
+    {
+      "bytes": 26707,
+      "path": "contracts/schemas/CaseView.1.json",
+      "sha256": "7afe52759a44e83080c68c182546ffaf301b237ed05a0be14a9c3227ed1d0319",
+      "status": "new"
+    },
+    {
+      "bytes": 5385,
+      "path": "contracts/schemas/ChangeList.2.json",
+      "sha256": "5253f87271d481a972e4f8021ec0017a10042a668630298a47dcb0ab3cd5dfe4",
+      "status": "new"
+    },
+    {
+      "bytes": 1529,
+      "path": "contracts/schemas/CheckResult.1.json",
+      "sha256": "3759fb35b3a46108105268e2000e4c57d910fab7c7a9aa6f78afa58fc7a3d142",
+      "status": "new"
+    },
+    {
+      "bytes": 1076,
+      "path": "contracts/schemas/Chunk.1.json",
+      "sha256": "ada13f2d041063fc04688c6a8d936f8692ea849eec64b98eea8c3015f3ac9e01",
+      "status": "new"
+    },
+    {
+      "bytes": 1054,
+      "path": "contracts/schemas/ChunkReceipt.1.json",
+      "sha256": "390d09953aa8953f26a8cc3ae8463f4496eb19f93cb100dab6f745377de0fb89",
+      "status": "new"
+    },
+    {
+      "bytes": 868,
+      "path": "contracts/schemas/ChunkUploadRequest.1.json",
+      "sha256": "70777cca2e46ba8ee2a79c044529b87db83f19aaee31a2165853409930f7979d",
+      "status": "new"
+    },
+    {
+      "bytes": 435,
+      "path": "contracts/schemas/ClaimDraft.1.json",
+      "sha256": "c4a868936392a434be263932d396dbc0d70b9c21b0156061d8765875194e1d3f",
+      "status": "new"
+    },
+    {
+      "bytes": 1132,
+      "path": "contracts/schemas/CollectorAcceptance.1.json",
+      "sha256": "0ff15fe30e960106c2f79f642936b47f99482cfba8a4fd188fb6f32a297a3272",
+      "status": "new"
+    },
+    {
+      "bytes": 2390,
+      "path": "contracts/schemas/Component.1.json",
+      "sha256": "353811816ca13db8d24c8a1a06311f2cae8852dbfd358f13fa8079c2c56d3034",
+      "status": "new"
+    },
+    {
+      "bytes": 3152,
+      "path": "contracts/schemas/ComponentManifest.1.json",
+      "sha256": "366c88c8a8eb23c90b6acc4f0bf8738526bf8260da5368432d7158a85b2d9e03",
+      "status": "new"
+    },
+    {
+      "bytes": 2330,
+      "path": "contracts/schemas/ConfigurationEntry.1.json",
+      "sha256": "32c20f7e9f017e2b509d0d8f5e4d232a33a1cec0f1c03e74d56af28b043c2113",
+      "status": "new"
+    },
+    {
+      "bytes": 3156,
+      "path": "contracts/schemas/ConfigurationManifest.1.json",
+      "sha256": "590d5d93801e61b0c708b87007092e2d92efe305a044f73daa3d9a415f31d7a1",
+      "status": "new"
+    },
+    {
+      "bytes": 1808,
+      "path": "contracts/schemas/ConnectionCase.1.json",
+      "sha256": "de69c2198c8e5f5e6f27a11117b64227c7f656afe0c5d0d131c22a60d71749a7",
+      "status": "new"
+    },
+    {
+      "bytes": 5422,
+      "path": "contracts/schemas/ConnectionReadiness.1.json",
+      "sha256": "faedf645e0c17f36bc5913f03ebaa42a0da9d21046f75785d8bd539a916d3555",
+      "status": "new"
+    },
+    {
+      "bytes": 1050,
+      "path": "contracts/schemas/ControlError.1.json",
+      "sha256": "76ac9b491eec6350c68d0b57f069c5ead6fbfa468634b80f2b83221a2299c7f9",
+      "status": "new"
+    },
+    {
+      "bytes": 1745,
+      "path": "contracts/schemas/ControllerInvitation.1.json",
+      "sha256": "cf91f74c94a6726bd5c7e8e2512808a57b9d77228fd70cb7fc84046e1cf61981",
+      "status": "new"
+    },
+    {
+      "bytes": 588,
+      "path": "contracts/schemas/CreateActionIntent.1.json",
+      "sha256": "52738bf7c598520327c234f3ebc90ac66037794aede9f58034cee6fadb2bb663",
+      "status": "new"
+    },
+    {
+      "bytes": 384,
+      "path": "contracts/schemas/CreateCase.1.json",
+      "sha256": "107bbf07283abe53d59478609a4beb3712b90d6b5d2e7c73276ec0727c5571de",
+      "status": "new"
+    },
+    {
+      "bytes": 386,
+      "path": "contracts/schemas/CreateDraft.1.json",
+      "sha256": "229b605cd59923deffab4638e66ffc5556b2bfe5fb35610943ddd6f6fcbc2ee6",
+      "status": "new"
+    },
+    {
+      "bytes": 793,
+      "path": "contracts/schemas/CreateInvitation.1.json",
+      "sha256": "db8ea98b1a5254f2217222918d16886835a8b479675f0c11df2ed18442c9501f",
+      "status": "new"
+    },
+    {
+      "bytes": 880,
+      "path": "contracts/schemas/CreateProviderIntent.1.json",
+      "sha256": "e3212cd8a293fc3864b3ab2606eccc03e6abf8b67290462a62ac94362f0be2ee",
+      "status": "new"
+    },
+    {
+      "bytes": 3019,
+      "path": "contracts/schemas/CreateUploadRequest.1.json",
+      "sha256": "6188dba490b54a26bd3f8e8dee941886f27d3f73c84833a4324aa91448797a5c",
+      "status": "new"
+    },
+    {
+      "bytes": 5774,
+      "path": "contracts/schemas/DeliveryDecision.1.json",
+      "sha256": "4d60de62cc27da032318691da050fe799e71345ce9f7719b5b8eca335d7a785f",
+      "status": "new"
+    },
+    {
+      "bytes": 6554,
+      "path": "contracts/schemas/DeliverySnapshot.1.json",
+      "sha256": "787675999da3ff163597225be6d0e400c08fcf08e508244a0234ed6790422b16",
+      "status": "new"
+    },
+    {
+      "bytes": 1791,
+      "path": "contracts/schemas/Dependency.1.json",
+      "sha256": "96bc9121fbc1fb9ccfa1ba574bdddc1494287ef39d7253ef72b7abfc36ea3a03",
+      "status": "new"
+    },
+    {
+      "bytes": 761,
+      "path": "contracts/schemas/DependencyInspectArgs.1.json",
+      "sha256": "de5f7da154403bc1d970b7d348848f36a3a2271abb001a601a01ef6859502f13",
+      "status": "new"
+    },
+    {
+      "bytes": 2490,
+      "path": "contracts/schemas/DependencyManifest.1.json",
+      "sha256": "cb1dc9055fc2cd299589139ef09746181241187e21bf958f221ab6ab819855a8",
+      "status": "new"
+    },
+    {
+      "bytes": 2927,
+      "path": "contracts/schemas/DeploymentObservation.1.json",
+      "sha256": "dcadc18672840403033512a4c4abfb8446fa1977501e0a18d0050ecfd13e3fff",
+      "status": "new"
+    },
+    {
+      "bytes": 744,
+      "path": "contracts/schemas/DocsLookupArgs.1.json",
+      "sha256": "fa2bb0ca2d6f81b580505331500b9b89762cac9f269add33e448442ed1d1365d",
+      "status": "new"
+    },
+    {
+      "bytes": 1152,
+      "path": "contracts/schemas/DraftCase.1.json",
+      "sha256": "e2f5248f98aea2a30cfe26244da9b3772a9380b5e9130d4abf8f7378b233bcad",
+      "status": "new"
+    },
+    {
+      "bytes": 4806,
+      "path": "contracts/schemas/EffectIntent.1.json",
+      "sha256": "61b96c7fa1bba3cfcc008d84e6e4f5dd1568fe570b672af47b6ff1f63401cdd9",
+      "status": "new"
+    },
+    {
+      "bytes": 4835,
+      "path": "contracts/schemas/EffectSlot.1.json",
+      "sha256": "e1e0743445943559d781babc4c843ad5f9d675dddc743f49263e4ff480f4d0a0",
+      "status": "new"
+    },
+    {
+      "bytes": 556,
+      "path": "contracts/schemas/EvidenceReadArgs.1.json",
+      "sha256": "488a5d677d61e27020f7a5001ce6d175b743c62305e1059e40113744b1b1dfcd",
+      "status": "new"
+    },
+    {
+      "bytes": 596,
+      "path": "contracts/schemas/EvidenceSummaryArgs.1.json",
+      "sha256": "d310d1d3da08eddff0ff21b976ac8b5d095b372827c5cb491cf9ab5a1e939a23",
+      "status": "new"
+    },
+    {
+      "bytes": 2299,
+      "path": "contracts/schemas/ExecutionProposal.1.json",
+      "sha256": "4ca3021228aabe788897a672d5190738d8989d3501b3babedfb774168f5f3346",
+      "status": "new"
+    },
+    {
+      "bytes": 443,
+      "path": "contracts/schemas/ExecutionRequestArgs.1.json",
+      "sha256": "9d6145523e51c9992f738146e7754dad1c6bf16fa758897a575059535cc356e5",
+      "status": "new"
+    },
+    {
+      "bytes": 434,
+      "path": "contracts/schemas/ExecutionStatusArgs.1.json",
+      "sha256": "a4814f1741d7f1b7ae9f4f34b48d1d76f1a1b22d3c8a7c4ac905f2481ac33ec9",
+      "status": "new"
+    },
+    {
+      "bytes": 3862,
+      "path": "contracts/schemas/ExitCheckPlan.1.json",
+      "sha256": "fe586cc7e3b4c5c61c83985e8ea2b361c67147d709b7e87dcdef458b69d0b743",
+      "status": "new"
+    },
+    {
+      "bytes": 1289,
+      "path": "contracts/schemas/ExitItem.1.json",
+      "sha256": "3e1d1fe823afe6888f63cdf247863225db0ed5159c5113ad09236baa224ee440",
+      "status": "new"
+    },
+    {
+      "bytes": 3772,
+      "path": "contracts/schemas/ExitManifest.1.json",
+      "sha256": "4a85ef6cf1b8faced0d637d26ad29aee6a31768a0c83cc40d97853acd06805d6",
+      "status": "new"
+    },
+    {
+      "bytes": 2852,
+      "path": "contracts/schemas/FinalisationPlan.1.json",
+      "sha256": "e0454e15b35e40991dce2bdfdc4c911f3ce71cc59effe3f96f3ed6495022e780",
+      "status": "new"
+    },
+    {
+      "bytes": 442,
+      "path": "contracts/schemas/FinaliseUploadRequest.1.json",
+      "sha256": "7ec16478c951517a09085fefb16911fa8402b5846cd5efde1b3b3836e2369ce8",
+      "status": "new"
+    },
+    {
+      "bytes": 1392,
+      "path": "contracts/schemas/Issue.1.json",
+      "sha256": "bef7d3a4039f80ae592a83d4aa7a2f54c3d9fa41675a24602a0bc256a9844997",
+      "status": "new"
+    },
+    {
+      "bytes": 730,
+      "path": "contracts/schemas/IssueApplyApproval.1.json",
+      "sha256": "8895c88d60720d5e37191380c8cc8b182ce3de261971fa27adf8618b4d82fddb",
+      "status": "new"
+    },
+    {
+      "bytes": 2779,
+      "path": "contracts/schemas/LifecycleRun.1.json",
+      "sha256": "3df9a63506abdf2ba0831fd2ebbe2f9a043793c28b75e1ee111b59820f39f03e",
+      "status": "new"
+    },
+    {
+      "bytes": 3127,
+      "path": "contracts/schemas/LifecycleWorkRequest.1.json",
+      "sha256": "5cb8bef93fbc0457aa0722211717e1ec5cf8eb0c8d7729497bdd564a4a0905b9",
+      "status": "new"
+    },
+    {
+      "bytes": 1008,
+      "path": "contracts/schemas/LifecycleWorkRequestReceipt.1.json",
+      "sha256": "6d7aff950be23c0fdc3cd906362542c4fc74fdcc777d34f0ae03575edce549eb",
+      "status": "new"
+    },
+    {
+      "bytes": 2490,
+      "path": "contracts/schemas/LifecycleWorkResult.1.json",
+      "sha256": "b8909468cc1e22fedb7b302c21b39152af6ceeb66bf70ed7d342feb5304e8509",
+      "status": "new"
+    },
+    {
+      "bytes": 1613,
+      "path": "contracts/schemas/ManifestEntry.1.json",
+      "sha256": "9a1397bbcb7bbb9f474d1f924d60649679d30796bfc9cc0da26bee0325516213",
+      "status": "new"
+    },
+    {
+      "bytes": 1433,
+      "path": "contracts/schemas/ModelBudget.1.json",
+      "sha256": "8b8488003355ed6014c8cdc09240f5d3181091cb9c56e6bd38cbc189d20c98c5",
+      "status": "new"
+    },
+    {
+      "bytes": 2454,
+      "path": "contracts/schemas/ModelTurnRequest.1.json",
+      "sha256": "9d7a4c18eff36373a25f21f0c8ab7be0089654e71f019be4336cdb83af3600e8",
+      "status": "new"
+    },
+    {
+      "bytes": 6192,
+      "path": "contracts/schemas/ModelTurnResult.1.json",
+      "sha256": "278b5f0a64458c2a943679a4bd5de8d7f2021bbcda2c06868dafd13ad455873c",
+      "status": "new"
+    },
+    {
+      "bytes": 3214,
+      "path": "contracts/schemas/ModelTurnStatus.1.json",
+      "sha256": "ed62907bc0384f5a26624d8ee8fc4ba064379690912d8ceb6bc8d308758b3ea8",
+      "status": "new"
+    },
+    {
+      "bytes": 1201,
+      "path": "contracts/schemas/Omission.1.json",
+      "sha256": "16d33acd374cb0842ddab271e6ef98d140a21a92b2a992d6e8b2805247a9a862",
+      "status": "new"
+    },
+    {
+      "bytes": 1757,
+      "path": "contracts/schemas/OmissionManifest.1.json",
+      "sha256": "f3ad9f154729b9cf749e82b91a907065c44549fc4714f26da8bef8d9395cc4dc",
+      "status": "new"
+    },
+    {
+      "bytes": 2341,
+      "path": "contracts/schemas/P5Problem.1.json",
+      "sha256": "b9192bc72eab604094aaf447fe54d68c9bd802551bc75bd34f35fae3341da265",
+      "status": "new"
+    },
+    {
+      "bytes": 988,
+      "path": "contracts/schemas/PendingResult.1.json",
+      "sha256": "cadfcc0bb80bef15b873d382017b81857e2c88201b6f21971d12b5843923581c",
+      "status": "new"
+    },
+    {
+      "bytes": 5316,
+      "path": "contracts/schemas/PlanProposal.1.json",
+      "sha256": "06b2f7c6b72622ee66dd82e910fb5dd0dbcaa5ec4ddf5b8bc190932f827e1e3d",
+      "status": "new"
+    },
+    {
+      "bytes": 1500,
+      "path": "contracts/schemas/PredicateResult.1.json",
+      "sha256": "744e58833686a9b2529740944d660fbffc02b60ee0ced99147ee50f74e6584b5",
+      "status": "new"
+    },
+    {
+      "bytes": 20927,
+      "path": "contracts/schemas/PrivateReviewView.1.json",
+      "sha256": "06561a98fca77362dd61877de805fb9eba0aa9366cf5abbb0a0b6b9ed4b01143",
+      "status": "new"
+    },
+    {
+      "bytes": 2453,
+      "path": "contracts/schemas/ProcessingDisclosure.1.json",
+      "sha256": "fb382c1ff94bc5d6e69a35deae1a7da8ba388cb0b90e766e38d80653103314c0",
+      "status": "new"
+    },
+    {
+      "bytes": 1105,
+      "path": "contracts/schemas/ProcessingRecipient.1.json",
+      "sha256": "83b197f1640ac9dc32500eb0855ce57ed24a7c1a96d644d1d6dd48db3427fc68",
+      "status": "new"
+    },
+    {
+      "bytes": 1661,
+      "path": "contracts/schemas/ProviderIntent.1.json",
+      "sha256": "64e47d78923bcabcd790b5bdb1dc450e50a664ca0d2dfabce0b7d82ab368a795",
+      "status": "new"
+    },
+    {
+      "bytes": 883,
+      "path": "contracts/schemas/ProviderRef.1.json",
+      "sha256": "cb09d79e3937a340fc666a6c7d74a833a713b89578e5cfaf5ce827e01d3573f3",
+      "status": "new"
+    },
+    {
+      "bytes": 652,
+      "path": "contracts/schemas/PublicMetric.1.json",
+      "sha256": "8d5d57ab2354fc897dcaadc61e9fd7130029d073f062d146919a91ea917ba36f",
+      "status": "new"
+    },
+    {
+      "bytes": 2300,
+      "path": "contracts/schemas/PublicProofView.1.json",
+      "sha256": "ba1bb86f3c938ad2203c403d6aae87eb94d60468e6626d826b81f475dc5418d7",
+      "status": "new"
+    },
+    {
+      "bytes": 605,
+      "path": "contracts/schemas/RecipeLookupArgs.1.json",
+      "sha256": "2b19d17d73601932bb2ae87ab48242a5cb252bc21e26358976f7dac884180f50",
+      "status": "new"
+    },
+    {
+      "bytes": 729,
+      "path": "contracts/schemas/RecipeStageArgs.1.json",
+      "sha256": "74750e149b5ac56e8e9fbcd81372a58522a18ce7bac517fb7d61fe3dc494b002",
+      "status": "new"
+    },
+    {
+      "bytes": 3811,
+      "path": "contracts/schemas/RecoveryPlan.1.json",
+      "sha256": "c431101edb09b518287e31f0e208149fc3d22a992488dfab327dce473b403647",
+      "status": "new"
+    },
+    {
+      "bytes": 1030,
+      "path": "contracts/schemas/RequiredAction.1.json",
+      "sha256": "7bd9ed60da407feccdd9aebd900ddf0a893fec7d39c748c9537da6fcfe083950",
+      "status": "new"
+    },
+    {
+      "bytes": 1726,
+      "path": "contracts/schemas/RequiredFlow.1.json",
+      "sha256": "624f60f89dd432707181787dab9df73c881445e009e39352f4cf574b46c30c6e",
+      "status": "new"
+    },
+    {
+      "bytes": 2390,
+      "path": "contracts/schemas/RequiredFlowManifest.1.json",
+      "sha256": "39a679391a070d6d6b412e6cc5ab502241e8cd7deb5966b6edf83d338c190ca7",
+      "status": "new"
+    },
+    {
+      "bytes": 54070,
+      "path": "contracts/schemas/ResolvedDeliveryView.1.json",
+      "sha256": "3be27aac7fd392117320f8b6c5caa8997e47693c57e84068d9deba963f185487",
+      "status": "new"
+    },
+    {
+      "bytes": 3426,
+      "path": "contracts/schemas/ResourceBinding.1.json",
+      "sha256": "3e05edb08d03bf3f602953f45e21bbe5808d91226e2dba3e1b3398a291302cf2",
+      "status": "new"
+    },
+    {
+      "bytes": 1362,
+      "path": "contracts/schemas/ResourceEdge.1.json",
+      "sha256": "ea24e4df55cb9384eff687e8634e4c051d42ae823e61a1bbb732260c1313a39b",
+      "status": "new"
+    },
+    {
+      "bytes": 6579,
+      "path": "contracts/schemas/ResourceGraph.1.json",
+      "sha256": "127f6ec96e919aa89f755577c9981e94577a00c24718812c1b27c52d251e7216",
+      "status": "new"
+    },
+    {
+      "bytes": 3708,
+      "path": "contracts/schemas/ResourceNode.1.json",
+      "sha256": "413c7f25c57d1e64086c3822bebbd8bb063e84045d32a0fbb8091367c1ffb77f",
+      "status": "new"
+    },
+    {
+      "bytes": 602,
+      "path": "contracts/schemas/ResourceRecipient.1.json",
+      "sha256": "1c9b4bdb0f0a4f8e026a49ac471fb7756e6db600c170648751be2f81aec92b3d",
+      "status": "new"
+    },
+    {
+      "bytes": 2967,
+      "path": "contracts/schemas/ResourceSummary.1.json",
+      "sha256": "079f8b55f9f745ce8dce03439574d47324aceeed7dfbbbd6c0423e4fcb562d8c",
+      "status": "new"
+    },
+    {
+      "bytes": 559,
+      "path": "contracts/schemas/ResumeRunRequest.1.json",
+      "sha256": "33237b1a31097fc014141496a89f3ae059ffe8a90b4a7ce19d92afad08a696d0",
+      "status": "new"
+    },
+    {
+      "bytes": 4004,
+      "path": "contracts/schemas/ReviewBundle.1.json",
+      "sha256": "d3a3f18254b3eaf2e818aa57740ecb9fa068359d9c15b8a45501cdcc7bf1c1a6",
+      "status": "new"
+    },
+    {
+      "bytes": 12364,
+      "path": "contracts/schemas/RunTaskSnapshot.1.json",
+      "sha256": "97dc4bab1bddb38bc040f709022eb5d35b5884c637adb978f4ac63addaf21a58",
+      "status": "new"
+    },
+    {
+      "bytes": 862,
+      "path": "contracts/schemas/SafetyRequestHoldArgs.1.json",
+      "sha256": "559c7f48c8f45a584c69a8acf783f1c2ec09a708f00f30719a0e7c21844fc449",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "contracts/schemas/ScenarioStageArgs.1.json",
+      "sha256": "3f02350aa30514950e71fc646a01104a562144c935841b51a05fd6ac6f80b266",
+      "status": "new"
+    },
+    {
+      "bytes": 705,
+      "path": "contracts/schemas/SourceReadArgs.1.json",
+      "sha256": "810c717cf553823400aa894ff408017eb4e8f88b370dd62e842d5c73b40358db",
+      "status": "new"
+    },
+    {
+      "bytes": 586,
+      "path": "contracts/schemas/SourceRevision.1.json",
+      "sha256": "aacfaaaa7d5be9deed7bf14f604ca35a0d7ab76f06bdd9083352da2f3f97efda",
+      "status": "new"
+    },
+    {
+      "bytes": 4287,
+      "path": "contracts/schemas/SourceSnapshot.1.json",
+      "sha256": "91085bb0564f0cdedc8da11943352016c3e55ecb6005ade720fa467a2e5e8e6f",
+      "status": "new"
+    },
+    {
+      "bytes": 751,
+      "path": "contracts/schemas/StartWorkRequest.1.json",
+      "sha256": "b0185979db1691237ec3df5116c352b8e6a8745f9172a1ec7dbddf6944682764",
+      "status": "new"
+    },
+    {
+      "bytes": 4321,
+      "path": "contracts/schemas/StateCutover.1.json",
+      "sha256": "0d972f46b5db4348906bf0c14f7ab10abfeff40c35fbb6e2d2293c2e99b78abf",
+      "status": "new"
+    },
+    {
+      "bytes": 416,
+      "path": "contracts/schemas/StatusReadArgs.1.json",
+      "sha256": "81eb6c2acea4ae0afebdfeaf614cc21988cef9dff92c03560bdceb35509cf432",
+      "status": "new"
+    },
+    {
+      "bytes": 2606,
+      "path": "contracts/schemas/SubjectDerivation.1.json",
+      "sha256": "21bf581241e4ceee66510dcf425534f14959bbd6dd330f00dd441baaca04840f",
+      "status": "new"
+    },
+    {
+      "bytes": 1602,
+      "path": "contracts/schemas/SubjectManifest.1.json",
+      "sha256": "446ac156b67d28a7201410cc0b5603585d390d7f8b62f6a005bf3adbcf4038ca",
+      "status": "new"
+    },
+    {
+      "bytes": 1121,
+      "path": "contracts/schemas/TargetKey.1.json",
+      "sha256": "fa5de85db2474561b5944fcc3b0274b49fbe90601b1562a2afb42fd06b7d5648",
+      "status": "new"
+    },
+    {
+      "bytes": 3594,
+      "path": "contracts/schemas/TargetReservation.1.json",
+      "sha256": "557c7099db1041e6e5f6353eca08226bccdc1eb6013813e27c280ba543387545",
+      "status": "new"
+    },
+    {
+      "bytes": 2808,
+      "path": "contracts/schemas/TaskCheckpoint.1.json",
+      "sha256": "4b32a47758e3cc75c6985b3044bfe375ec5bbeff6f42591fbef267cfdb6bccbf",
+      "status": "new"
+    },
+    {
+      "bytes": 3773,
+      "path": "contracts/schemas/TaskContext.1.json",
+      "sha256": "f1d03bc8d94655bcab9376971191a64660cec47d6c7c1763c4473355a20fc52e",
+      "status": "new"
+    },
+    {
+      "bytes": 2331,
+      "path": "contracts/schemas/TaskEvent.1.json",
+      "sha256": "be167050181db4d1e723bb8704c2cdb74d78b35913f2d466ccc176dd09bb351f",
+      "status": "new"
+    },
+    {
+      "bytes": 1423,
+      "path": "contracts/schemas/TaskLease.1.json",
+      "sha256": "0e8ca4124870066332c3fabd99c7842dd44730b8f02b3b2d296d10ae817ac005",
+      "status": "new"
+    },
+    {
+      "bytes": 3352,
+      "path": "contracts/schemas/TaskSpec.1.json",
+      "sha256": "df246943e883fc2ad31609fab2e9728e8c06d199dd7a3d4be61fde1ff7619617",
+      "status": "new"
+    },
+    {
+      "bytes": 885,
+      "path": "contracts/schemas/ToolCall.1.json",
+      "sha256": "1f9389b2fec460a0a071a71ce816b94d3594dff09c01f83ad38d0f8b3c6c116e",
+      "status": "new"
+    },
+    {
+      "bytes": 4791,
+      "path": "contracts/schemas/ToolInvocation.1.json",
+      "sha256": "2dad201dc5db96b7919f92ed6afa12e102842237151f3358d1df9cda89e0712b",
+      "status": "new"
+    },
+    {
+      "bytes": 1989,
+      "path": "contracts/schemas/UnresolvedInputs.1.json",
+      "sha256": "f20663eb8a1a25a920aae8f85090f11d542328390ef77dd382107875499f6f38",
+      "status": "new"
+    },
+    {
+      "bytes": 3534,
+      "path": "contracts/schemas/UploadSession.1.json",
+      "sha256": "5365d16dc902328947fe0a4125de7213c40756c727ba9630df0253dbf7239c50",
+      "status": "new"
+    },
+    {
+      "bytes": 2154,
+      "path": "contracts/schemas/WakeCondition.1.json",
+      "sha256": "24500cb45683f00781f8b684ffd6867f0be6597b25e129f37ba47ba6fbe8706a",
+      "status": "new"
+    },
+    {
+      "bytes": 1826,
+      "path": "contracts/schemas/WorkAcceptance.1.json",
+      "sha256": "ef04515045189c8ccf92ce1c913841c392369e787d97131bc0c537fb8d67ae05",
+      "status": "new"
+    },
+    {
+      "bytes": 2072,
+      "path": "contracts/schemas/WorkCancellation.1.json",
+      "sha256": "378bc5d3bd35b676d0ba1f32c3b057e8f792eb1b1e84ee7be5949282b62ee09a",
+      "status": "new"
+    },
+    {
+      "bytes": 4459,
+      "path": "contracts/schemas/WorkPackage.1.json",
+      "sha256": "9fd6f9b97ffadc8b3cfcc9eb332b0fe58737c3962a4d0593a4cf9caa2243ca85",
+      "status": "new"
+    },
+    {
+      "bytes": 4582,
+      "path": "contracts/schemas/WorkStatus.1.json",
+      "sha256": "a73781ca0c390e9baaba928c428fafbfe7d7e89d2ad2e1e1d17ed683601c9c1a",
+      "status": "new"
+    },
+    {
+      "bytes": 2946,
+      "path": "contracts/schemas/WorkerOperation.1.json",
+      "sha256": "fd27a5b3e624e3175323f563c14c5f6ede3f6365cae728bc99718e715f6806e7",
+      "status": "new"
+    },
+    {
+      "bytes": 1151,
+      "path": "contracts/src/goldgraft_contracts/__init__.py",
+      "sha256": "cddc546716a4727ca99ad48df2dcd8cd0dd2672258229826bd4317608b561e5c",
+      "status": "modified"
+    },
+    {
+      "bytes": 16540,
+      "path": "contracts/src/goldgraft_contracts/agent_runtime.py",
+      "sha256": "a6d8a7bd5758a95f8f8ad2b4674aa23111fe62853cf22802c442ca7e085b7d34",
+      "status": "new"
+    },
+    {
+      "bytes": 4974,
+      "path": "contracts/src/goldgraft_contracts/agents.py",
+      "sha256": "73bf023ddffc94c53aa6fb93eabc48663009a8578ce891e169f7dd0f823441ae",
+      "status": "modified"
+    },
+    {
+      "bytes": 6298,
+      "path": "contracts/src/goldgraft_contracts/api.py",
+      "sha256": "8e5aca50c70a8838b1742c5c5633c459c7eb24020d6e75b12e903c08c02ce987",
+      "status": "modified"
+    },
+    {
+      "bytes": 11051,
+      "path": "contracts/src/goldgraft_contracts/api_routes.py",
+      "sha256": "d6f5e73692ce42bb038d03100ae8fd7e356d78d081168384be31154ab7c00fb5",
+      "status": "modified"
+    },
+    {
+      "bytes": 14465,
+      "path": "contracts/src/goldgraft_contracts/connection_control.py",
+      "sha256": "780e352e20f798152f384e7fd4ce19f181a8096fd2e4f57020cd776ad698f60f",
+      "status": "new"
+    },
+    {
+      "bytes": 4158,
+      "path": "contracts/src/goldgraft_contracts/connector_adapters.py",
+      "sha256": "907f2b7fec077b1e39ea64190b24fc9bc64e9f64a169aa0b76ac3e0bc80c8edd",
+      "status": "new"
+    },
+    {
+      "bytes": 3962,
+      "path": "contracts/src/goldgraft_contracts/interfaces.py",
+      "sha256": "1ea8188f0c721b55f19fd18124a21e36bf09b3cf830837760257ce67798e3ff3",
+      "status": "modified"
+    },
+    {
+      "bytes": 23578,
+      "path": "contracts/src/goldgraft_contracts/lifecycle.py",
+      "sha256": "e9d69da45e8cb77b4940bd31c42a2b4aa5bcc1e5464ce49c864415e8c28f7577",
+      "status": "new"
+    },
+    {
+      "bytes": 6838,
+      "path": "contracts/src/goldgraft_contracts/plan5_common.py",
+      "sha256": "7facad47b5c11cf385bc827f7904a3075edfe3f3847635a9de5a3948815ba3d6",
+      "status": "new"
+    },
+    {
+      "bytes": 6493,
+      "path": "contracts/src/goldgraft_contracts/plan5_openapi.py",
+      "sha256": "b075f8e6426d6285b03d17dccc0f295755742c5879740979ff93647718a552a9",
+      "status": "new"
+    },
+    {
+      "bytes": 5948,
+      "path": "contracts/src/goldgraft_contracts/plan5_schema.py",
+      "sha256": "400a53ab8fe4f52d8f502d3ec71fed7b6b5e8bd73096f1a490c2cf29820dc1b6",
+      "status": "new"
+    },
+    {
+      "bytes": 5859,
+      "path": "contracts/src/goldgraft_contracts/plan5_tools.py",
+      "sha256": "8e514ea99a0cc435ec6d1b61a94f8c82446f4601cf50a2b64996a97240707fe1",
+      "status": "new"
+    },
+    {
+      "bytes": 16257,
+      "path": "contracts/src/goldgraft_contracts/plan5_validation.py",
+      "sha256": "1afc24d63ad4f454166531f1bbaad40a568e02d27584c28564a0f128cd4ecb12",
+      "status": "new"
+    },
+    {
+      "bytes": 3567,
+      "path": "contracts/src/goldgraft_contracts/registry.py",
+      "sha256": "35cd3c329e408199e5cf948884120313bdbbb3edf8b9258a85b1d7f36e6bd554",
+      "status": "modified"
+    },
+    {
+      "bytes": 7607,
+      "path": "contracts/src/goldgraft_contracts/tools.py",
+      "sha256": "bbf6feaf04994f46c5d9adee0cf9e66b733280017965b00847fe8e8b5e1222d3",
+      "status": "modified"
+    },
+    {
+      "bytes": 6512,
+      "path": "contracts/src/goldgraft_contracts/work_package.py",
+      "sha256": "6c0b81d47a8f746fe30ed68e0ee3b867012306d89480ee16707fed66dbe00786",
+      "status": "new"
+    },
+    {
+      "bytes": 14966,
+      "path": "contracts/tests/test_invariants.py",
+      "sha256": "21d0645b237e3000d6ec86293d9c7b415c6b04edd0e2cc735df049e6cae4114d",
+      "status": "modified"
+    },
+    {
+      "bytes": 2173,
+      "path": "contracts/tests/test_plan5_compatibility.py",
+      "sha256": "0fcc1cd6d90aa940426746006f6b998e65609eaa6e37ccb5336073c2a62a376c",
+      "status": "new"
+    },
+    {
+      "bytes": 6608,
+      "path": "contracts/tests/test_plan5_contracts.py",
+      "sha256": "955eb4d5ae09103346f8aeedd690a299b4669a56a030e31bbf182475c4306d24",
+      "status": "new"
+    },
+    {
+      "bytes": 958,
+      "path": "contracts/tests/test_plan5_offline.py",
+      "sha256": "d740cb04e24a35849eeef449941664bd904333e647a8eabcfbc85fb20aa1fe34",
+      "status": "new"
+    },
+    {
+      "bytes": 17676,
+      "path": "contracts/tests/test_plan5_relationships.py",
+      "sha256": "8f8a7a59bf3543180ae4f4cd1748b3e5bec60524d9fea27f19e23e8f4881d5e2",
+      "status": "new"
+    },
+    {
+      "bytes": 2908,
+      "path": "contracts/tests/test_plan5_routes.py",
+      "sha256": "a9231ea8a8144c57a1f9db5acd14f54dcf725fd9f7305472e4c95f5f312a7653",
+      "status": "new"
+    },
+    {
+      "bytes": 3670,
+      "path": "contracts/tests/types.test.ts",
+      "sha256": "7743340c1f70e3baf4fddd5ddb6968c2a7f613461900ab65b867f3eee7e76f93",
+      "status": "modified"
+    },
+    {
+      "bytes": 281228,
+      "path": "contracts/ts/goldgraft-api.d.ts",
+      "sha256": "66f340162e508e5c279d825c32f3608b9fc1fbda46698734d34eea63f02a7649",
+      "status": "modified"
+    },
+    {
+      "bytes": 200510,
+      "path": "contracts/ts/goldgraft-contracts.d.ts",
+      "sha256": "63ac74672f37538816699b9c1c2e08bcf55428933fa678374250bed9dc10b2a9",
+      "status": "modified"
+    },
+    {
+      "bytes": 18944,
+      "path": "docs/FORMAT_CHANGES.md",
+      "sha256": "ae4a22273620ed8a7dc1cf8d4f431563b305af2b96d9b1aec0a3985736cefabb",
+      "status": "modified"
+    },
+    {
+      "bytes": 9115,
+      "path": "docs/engineering/plan5/B1_BUILD_REPORT.md",
+      "sha256": "89606109fef7a2e7d5268b594ea02c108e2b9eb7edcd0d09322abf2b9afdf9ed",
+      "status": "new"
+    },
+    {
+      "bytes": 1035,
+      "path": "fakes/src/goldgraft_fakes/_fixtures.py",
+      "sha256": "70bffdfdaaa18dabe2640410eb3df13aebd346d700973951f93e591e3150de69",
+      "status": "modified"
+    },
+    {
+      "bytes": 9302,
+      "path": "fakes/src/goldgraft_fakes/data.py",
+      "sha256": "76b9f52ec1cb2169dc3de08f5caf30a0a47c7f3c13c121da97b6f6d1cea8a436",
+      "status": "modified"
+    },
+    {
+      "bytes": 7976,
+      "path": "fakes/tests/test_api.py",
+      "sha256": "576ffddf40e3ec869b52bc6efdbae071c4571ee4101be24e274eb521ef52167a",
+      "status": "modified"
+    },
+    {
+      "bytes": 100364,
+      "path": "fixtures/INDEX.md",
+      "sha256": "40cebd5ab2280e97442838feea61839590666e7ae49df4006829673722477087",
+      "status": "modified"
+    },
+    {
+      "bytes": 74619,
+      "path": "fixtures/plan5/index.json",
+      "sha256": "c711904ee384dc8926d7a75f8f8cc1525267f45989833377e817eea8270485a6",
+      "status": "new"
+    },
+    {
+      "bytes": 152,
+      "path": "fixtures/plan5/negative/absolute_path.json",
+      "sha256": "7a63b872405fc4a82c080c008e7d0891ac1ec4388cf175ba2af63273838336fd",
+      "status": "new"
+    },
+    {
+      "bytes": 579,
+      "path": "fixtures/plan5/negative/bool_generation.json",
+      "sha256": "a583c33efc2b7bb61d486da25b360f1948c4c8d415f407114163e0407a0759cf",
+      "status": "new"
+    },
+    {
+      "bytes": 313,
+      "path": "fixtures/plan5/negative/complete_with_deploy.json",
+      "sha256": "9c7f9c3754a15d2c09b32ca4952cb6c686e3724b7fc93716dcf34cb1dee54a42",
+      "status": "new"
+    },
+    {
+      "bytes": 453,
+      "path": "fixtures/plan5/negative/empty_completed_output.json",
+      "sha256": "093ba99c5b423fcb2b6b980bcbd6907985fcf6c34514eb5e84ab41d7b5e0d39c",
+      "status": "new"
+    },
+    {
+      "bytes": 593,
+      "path": "fixtures/plan5/negative/extra_authority.json",
+      "sha256": "bb0ad7eaa13d0f156a4bd5927142ac1559b1bad07d11375f050545211c174998",
+      "status": "new"
+    },
+    {
+      "bytes": 647,
+      "path": "fixtures/plan5/negative/fake_snapshot_git.json",
+      "sha256": "3cf470cc28d64b695e74978159f47272ca16ba854657fa87f12167c49fd4a25c",
+      "status": "new"
+    },
+    {
+      "bytes": 578,
+      "path": "fixtures/plan5/negative/float_generation.json",
+      "sha256": "1176bcb375a8e81a2d261f21872a88aa46fb7298a5b37e3babdc4c29158cb955",
+      "status": "new"
+    },
+    {
+      "bytes": 226,
+      "path": "fixtures/plan5/negative/float_micro_cost.json",
+      "sha256": "f0dcab696fae5f49e3aec0bec021c33beae01fe648115cb93824d1038f50aa8a",
+      "status": "new"
+    },
+    {
+      "bytes": 639,
+      "path": "fixtures/plan5/negative/missing_changed_final_candidate.json",
+      "sha256": "8715268c25a01b5f8fc986a689b340fd5866dbf3f745766a3b55ed125015db1c",
+      "status": "new"
+    },
+    {
+      "bytes": 471,
+      "path": "fixtures/plan5/negative/mixed_model_form.json",
+      "sha256": "93bcc1dceea2e99e905a2ec3a8810983266286b5637279cb430a69cb24db984d",
+      "status": "new"
+    },
+    {
+      "bytes": 1153,
+      "path": "fixtures/plan5/negative/multiple_exit_restarts.json",
+      "sha256": "86e3a5bb448b57cb7cddd8d58e077811b87bbe5dd3f8fef930e7da56a5666d20",
+      "status": "new"
+    },
+    {
+      "bytes": 575,
+      "path": "fixtures/plan5/negative/naive_time.json",
+      "sha256": "a81b99fbd9d31da7b4e1b5c696fdf55b645234c74e37a5bb692df72ec2ade5c2",
+      "status": "new"
+    },
+    {
+      "bytes": 581,
+      "path": "fixtures/plan5/negative/non_utc_time.json",
+      "sha256": "17cad6c0c0df83fab6480707df335990f1ea3ee3d03567578ec580f08bca956a",
+      "status": "new"
+    },
+    {
+      "bytes": 1253,
+      "path": "fixtures/plan5/negative/oci_is_not_tar.json",
+      "sha256": "5b0b5f7715902efbfb7d93b26bbeba79fe1f358db045ca9a97ce96b47e04c325",
+      "status": "new"
+    },
+    {
+      "bytes": 154,
+      "path": "fixtures/plan5/negative/path_escape.json",
+      "sha256": "639c9d4df92a24acedbb87bfece0594cd1cd4a3ee4c445bb85ed749b6babec39",
+      "status": "new"
+    },
+    {
+      "bytes": 580,
+      "path": "fixtures/plan5/negative/unknown_role.json",
+      "sha256": "8472586ae01180733721ca362b164859af950cf3c1c96bb997c3080c71712441",
+      "status": "new"
+    },
+    {
+      "bytes": 479,
+      "path": "fixtures/plan5/negative/unknown_without_issue.json",
+      "sha256": "ac262512520832ca34051557372e80cc3fa15b641e75c35963deee876f7c60b5",
+      "status": "new"
+    },
+    {
+      "bytes": 231,
+      "path": "fixtures/plan5/negative/unreserved_micro_cost.json",
+      "sha256": "6a80269871fe009f66ce247d8856e6fb4118bdea62ce28ad3197a06060baad77",
+      "status": "new"
+    },
+    {
+      "bytes": 687,
+      "path": "fixtures/plan5/negative/unresolved_reservation_release.json",
+      "sha256": "6e6e2e023b3fafae99248c7e42a06ad637cd5d7680dc651c4335b6b5af6d6a71",
+      "status": "new"
+    },
+    {
+      "bytes": 28176,
+      "path": "fixtures/tests/test_fixtures.py",
+      "sha256": "4274c74b075cb8c14e6e44d2223fe54ad7b7b0b56b7bf72f7fd4feb4616a54f7",
+      "status": "modified"
+    },
+    {
+      "bytes": 1244,
+      "path": "scripts/check_generated.sh",
+      "sha256": "bb17a7068596cbf88ebcf493093ae57b553631c446acea8909ab1d6f5165d8ee",
+      "status": "modified"
+    },
+    {
+      "bytes": 1261,
+      "path": "scripts/export_openapi.py",
+      "sha256": "fbe4c044d2a0ed02785028741f7835e4db1bccf295f04731b81a5d9860618630",
+      "status": "modified"
+    },
+    {
+      "bytes": 13938,
+      "path": "scripts/make_plan5_examples.py",
+      "sha256": "700d2e4a57224aa3a9507df5d27feb072dc5f11d7419d9c0a7f44fccebb0963d",
+      "status": "new"
+    }
+  ],
+  "format": "GoldGraftB1FileManifest/1",
+  "frontend_ready": false,
+  "hash_scope": "B1 changes since private pre-edit build snapshot; excludes this manifest itself",
+  "legacy_schema_count": 42,
+  "limitations": [
+    "Contract-only v2 routes; no backend handlers installed",
+    "No B2 persistent stand-ins or frontend fixture modes",
+    "No runtime, model evaluation, agent, frontend or delivery construction",
+    "No real counterpart/provider/payment/isolation/merchant-exit qualification"
+  ],
+  "new_route_count": 23,
+  "new_schema_keys": [
+    "ActionIntent/1",
+    "ActionPlan/1",
+    "ActionStatusView/1",
+    "AdapterCapabilities/1",
+    "AdapterObservation/1",
+    "AgentResult/1",
+    "AgentTask/1",
+    "AggregateReadArgs/1",
+    "AnalysisMatchesArgs/1",
+    "ApplyApproval/1",
+    "ApplyAuthority/1",
+    "ApprovalSet/1",
+    "ArtifactBuild/1",
+    "ArtifactDescriptor/1",
+    "Asset/1",
+    "AssetManifest/1",
+    "AuditSummaryArgs/1",
+    "BaselineEvidence/1",
+    "CancelUploadRequest/1",
+    "CancelWorkRequest/1",
+    "CandidatePatchArgs/1",
+    "CaseEvent/1",
+    "CaseEventsQuery/1",
+    "CaseList/1",
+    "CaseListQuery/1",
+    "CaseSummary/1",
+    "CaseView/1",
+    "ChangeList/2",
+    "CheckResult/1",
+    "Chunk/1",
+    "ChunkReceipt/1",
+    "ChunkUploadRequest/1",
+    "ClaimDraft/1",
+    "CollectorAcceptance/1",
+    "Component/1",
+    "ComponentManifest/1",
+    "ConfigurationEntry/1",
+    "ConfigurationManifest/1",
+    "ConnectionCase/1",
+    "ConnectionReadiness/1",
+    "ControlError/1",
+    "ControllerInvitation/1",
+    "CreateActionIntent/1",
+    "CreateCase/1",
+    "CreateDraft/1",
+    "CreateInvitation/1",
+    "CreateProviderIntent/1",
+    "CreateUploadRequest/1",
+    "DeliveryDecision/1",
+    "DeliverySnapshot/1",
+    "Dependency/1",
+    "DependencyInspectArgs/1",
+    "DependencyManifest/1",
+    "DeploymentObservation/1",
+    "DocsLookupArgs/1",
+    "DraftCase/1",
+    "EffectIntent/1",
+    "EffectSlot/1",
+    "EvidenceReadArgs/1",
+    "EvidenceSummaryArgs/1",
+    "ExecutionProposal/1",
+    "ExecutionRequestArgs/1",
+    "ExecutionStatusArgs/1",
+    "ExitCheckPlan/1",
+    "ExitItem/1",
+    "ExitManifest/1",
+    "FinalisationPlan/1",
+    "FinaliseUploadRequest/1",
+    "Issue/1",
+    "IssueApplyApproval/1",
+    "LifecycleRun/1",
+    "LifecycleWorkRequest/1",
+    "LifecycleWorkRequestReceipt/1",
+    "LifecycleWorkResult/1",
+    "ManifestEntry/1",
+    "ModelBudget/1",
+    "ModelTurnRequest/1",
+    "ModelTurnResult/1",
+    "ModelTurnStatus/1",
+    "Omission/1",
+    "OmissionManifest/1",
+    "P5Problem/1",
+    "PendingResult/1",
+    "PlanProposal/1",
+    "PredicateResult/1",
+    "PrivateReviewView/1",
+    "ProcessingDisclosure/1",
+    "ProcessingRecipient/1",
+    "ProviderIntent/1",
+    "ProviderRef/1",
+    "PublicMetric/1",
+    "PublicProofView/1",
+    "RecipeLookupArgs/1",
+    "RecipeStageArgs/1",
+    "RecoveryPlan/1",
+    "RequiredAction/1",
+    "RequiredFlow/1",
+    "RequiredFlowManifest/1",
+    "ResolvedDeliveryView/1",
+    "ResourceBinding/1",
+    "ResourceEdge/1",
+    "ResourceGraph/1",
+    "ResourceNode/1",
+    "ResourceRecipient/1",
+    "ResourceSummary/1",
+    "ResumeRunRequest/1",
+    "ReviewBundle/1",
+    "RunTaskSnapshot/1",
+    "SafetyRequestHoldArgs/1",
+    "ScenarioStageArgs/1",
+    "SourceReadArgs/1",
+    "SourceRevision/1",
+    "SourceSnapshot/1",
+    "StartWorkRequest/1",
+    "StateCutover/1",
+    "StatusReadArgs/1",
+    "SubjectDerivation/1",
+    "SubjectManifest/1",
+    "TargetKey/1",
+    "TargetReservation/1",
+    "TaskCheckpoint/1",
+    "TaskContext/1",
+    "TaskEvent/1",
+    "TaskLease/1",
+    "TaskSpec/1",
+    "ToolCall/1",
+    "ToolInvocation/1",
+    "UnresolvedInputs/1",
+    "UploadSession/1",
+    "WakeCondition/1",
+    "WorkAcceptance/1",
+    "WorkCancellation/1",
+    "WorkPackage/1",
+    "WorkStatus/1",
+    "WorkerOperation/1"
+  ],
+  "phase": "B1",
+  "schema_count": 177,
+  "scope": "shared_contracts_only",
+  "workspace": "/Users/aditya/dev/GoldGraft-plan5-build"
+}

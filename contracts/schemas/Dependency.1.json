@@ -1,0 +1,87 @@
+{
+  "$id": "https://goldgraft.dev/schemas/Dependency.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "access_mode": {
+      "enum": [
+        "fixture",
+        "sandbox_broker",
+        "read_evidence",
+        "unavailable"
+      ],
+      "title": "Access Mode",
+      "type": "string"
+    },
+    "authority_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Authority Ref"
+    },
+    "component_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Component Ids",
+      "type": "array"
+    },
+    "dependency_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Dependency Id",
+      "type": "string"
+    },
+    "limitation": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Limitation",
+      "type": "string"
+    },
+    "purpose": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Purpose",
+      "type": "string"
+    },
+    "test_identity_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Test Identity Ref"
+    }
+  },
+  "required": [
+    "dependency_id",
+    "component_ids",
+    "purpose",
+    "access_mode",
+    "authority_ref",
+    "test_identity_ref",
+    "limitation"
+  ],
+  "title": "DependencyV1",
+  "type": "object"
+}

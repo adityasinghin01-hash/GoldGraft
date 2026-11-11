@@ -1,0 +1,30 @@
+{
+  "authenticity_ref": "fixture:authenticity_ref",
+  "build_config_digest": "67921091cbf0a7f649f421be177aae56ede83eedc9057b030a41c78d5531ec3d",
+  "build_id": "fixture:build_id",
+  "case_id": "case-demo",
+  "collector_identity_ref": "fixture:collector_identity_ref",
+  "dependency_digest": "8e9f3c6252cb388e485c93b545a008240eb0245781e671d8b583f37fa1de7cb4",
+  "exact_image_test_refs": [
+    "fixture:exact_image_test_ref"
+  ],
+  "export_tar_digest": "00c3cf33671b274a7493a80d244aa3db744f46976003a67c014815ec07840129",
+  "generation": 1,
+  "layer_digests": [
+    "sha256:1558a02b95fe0936bf0923f1db772ba2438385cca233d4a653b88ceecbae27e7"
+  ],
+  "leak_scan_refs": [
+    "fixture:leak_scan_ref"
+  ],
+  "oci_manifest_digest": "7bb1eb2b8ced9de7da502744ef452093e6017a3a6fae281039c80335f4c9107c",
+  "outcome": "built",
+  "platform": "linux/amd64",
+  "provenance_ref": "fixture:provenance_ref",
+  "recipe_digest": "dd39ba11f44e9ac0347b4ff5f4c5a5962b46873e75b576745f04df1d2ab9ad13",
+  "run_id": "run-demo",
+  "runtime_profile_digest": "fbbf834c181d4f84eb11af613aea9cf5de466ede28a00437db397b2629d14cf3",
+  "source_snapshot_refs": [
+    "fixture:source_snapshot_ref"
+  ],
+  "source_tree_digest": "d7c1ea076f036b361161ef0ff917ad5793f97454efc417f72148a8351f60056d"
+}

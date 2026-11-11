@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/Library/Developer/CommandLineTools/usr/bin/git",
+    "diff",
+    "--check"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "exit_code": 0,
+  "seconds": 0.051,
+  "output": "docs/engineering/plan5/checks/B4_Herald_14-final-diff.log",
+  "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "original_record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/14-final-diff.json"
+}

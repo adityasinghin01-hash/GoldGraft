@@ -1,0 +1,52 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ControlError.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "enum": [
+        "INVALID",
+        "DENIED",
+        "NOT_FOUND",
+        "CONFLICT",
+        "STALE",
+        "EXPIRED",
+        "CANCELLED",
+        "UNKNOWN",
+        "BUDGET_EXHAUSTED",
+        "MISSING_EVIDENCE",
+        "UNSUPPORTED"
+      ],
+      "title": "Code",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "retry_class": {
+      "enum": [
+        "none",
+        "safe_read",
+        "reconcile",
+        "reauthorise"
+      ],
+      "title": "Retry Class",
+      "type": "string"
+    }
+  },
+  "required": [
+    "code",
+    "retry_class",
+    "evidence_refs"
+  ],
+  "title": "ControlErrorV1",
+  "type": "object"
+}

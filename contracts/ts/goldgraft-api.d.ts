@@ -412,6 +412,381 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v2/connection-cases": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** list cases */
+        get: operations["list_cases"];
+        put?: never;
+        /** create case */
+        post: operations["create_case"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** get case */
+        get: operations["get_case"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/action-intents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** create action intent */
+        post: operations["create_action_intent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/actions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** start work */
+        post: operations["start_work"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/actions/{action_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** action status */
+        get: operations["action_status"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/actions/{action_id}/cancellation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** cancel work */
+        post: operations["cancel_work"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/apply-approvals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** issue apply approval */
+        post: operations["issue_apply_approval"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** case events */
+        get: operations["case_events"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/invitations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** controller invitation */
+        post: operations["controller_invitation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/lifecycle-runs/{run_id}/resume": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** resume run */
+        post: operations["resume_run"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/provider-intents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** provider intent */
+        post: operations["provider_intent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/review-bundles/{bundle_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** private review */
+        get: operations["private_review"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/source-uploads": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** create upload */
+        post: operations["create_upload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/source-uploads/{upload_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** upload status */
+        get: operations["upload_status"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/source-uploads/{upload_id}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** cancel upload */
+        post: operations["cancel_upload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/source-uploads/{upload_id}/chunks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** upload chunk */
+        post: operations["upload_chunk"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/source-uploads/{upload_id}/finalise": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** finalise upload */
+        post: operations["finalise_upload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/view": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** case view */
+        get: operations["case_view"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-drafts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** create draft */
+        post: operations["create_draft"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-drafts/{draft_id}/claim": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** claim draft */
+        post: operations["claim_draft"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/public-proof/{public_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** public proof */
+        get: operations["public_proof"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/worker-operations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** worker operation */
+        post: operations["worker_operation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1063,6 +1438,3102 @@ export interface components {
             label: string;
             /** Shops */
             shops: components["schemas"]["FleetRow"][];
+        };
+        /** ActionIntent */
+        P5_ActionIntent: {
+            /** Action Id */
+            action_id: string;
+            /** Actor Id */
+            actor_id: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Readiness Digest */
+            readiness_digest: string;
+            /** Readiness Id */
+            readiness_id: string;
+        };
+        /** ActionPlan */
+        P5_ActionPlan: {
+            /** Budget Ref */
+            budget_ref: string;
+            /** Case Id */
+            case_id: string;
+            /** Exit Plan Ref */
+            exit_plan_ref: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Finalisation Plan Ref */
+            finalisation_plan_ref: string;
+            /** Generation */
+            generation: number;
+            /** Graph Digest */
+            graph_digest: string;
+            /** Plan Digest */
+            plan_digest: string;
+            /** Plan Id */
+            plan_id: string;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Recovery Plan Ref */
+            recovery_plan_ref: string;
+            /** Review Bundle Digest */
+            review_bundle_digest: string;
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Slots */
+            slots: components["schemas"]["P5_EffectSlot"][];
+            /** State Plan Ref */
+            state_plan_ref: string;
+        };
+        /** ActionStatusView */
+        P5_ActionStatusView: {
+            /** Acceptance Ref */
+            acceptance_ref: string | null;
+            status: components["schemas"]["P5_WorkStatus"];
+        };
+        /** AdapterCapabilities */
+        P5_AdapterCapabilities: {
+            /** Limitations */
+            limitations: string[];
+            /** Operations */
+            operations: ("source_read" | "deployment_read" | "artifact_identity" | "route_read" | "config_evidence" | "controller_role" | "revocation_observation")[];
+            provider: components["schemas"]["P5_ProviderRef"];
+            /**
+             * Qualification
+             * @enum {string}
+             */
+            qualification: "proposed" | "implemented" | "account_tested" | "correspondence_qualified" | "e2e_tested";
+            /** Qualification Refs */
+            qualification_refs: string[];
+        };
+        /** AdapterObservation */
+        P5_AdapterObservation: {
+            /**
+             * Basis
+             * @enum {string}
+             */
+            basis: "observed" | "provider_reported" | "controller_attested";
+            /** Capability */
+            capability: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Expires At */
+            expires_at: string | null;
+            /** Node Id */
+            node_id: string;
+            /** Observation Id */
+            observation_id: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "available" | "changed" | "revoked" | "unsupported" | "unknown";
+        };
+        /** AgentResult */
+        P5_AgentResult: {
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Completed At
+             * Format: date-time
+             */
+            completed_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Generation */
+            generation: number;
+            /** Input Digest */
+            input_digest: string;
+            issue: components["schemas"]["P5_Issue"] | null;
+            /** Lease Epoch */
+            lease_epoch: number;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "completed" | "blocked" | "failed" | "unknown";
+            /** Output Refs */
+            output_refs: string[];
+            /** Request Id */
+            request_id: string;
+            /** Run Id */
+            run_id: string;
+            /** Task Id */
+            task_id: string;
+        } & ({
+            issue?: null;
+            /**
+             * Outcome
+             * @constant
+             * @enum {string}
+             */
+            outcome?: "completed";
+            /** Output Refs */
+            output_refs?: string[];
+        } | {
+            issue?: components["schemas"]["P5_Issue"];
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome?: "blocked" | "failed" | "unknown";
+        });
+        /** AgentTask */
+        P5_AgentTask: {
+            /** Attempt */
+            attempt: number;
+            /** Case Id */
+            case_id: string;
+            /** Checkpoint Ref */
+            checkpoint_ref: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Deadline
+             * Format: date-time
+             */
+            deadline: string;
+            /** Generation */
+            generation: number;
+            /** Input Digest */
+            input_digest: string;
+            issue: components["schemas"]["P5_Issue"] | null;
+            /** Lease Epoch */
+            lease_epoch: number;
+            /** Lease Owner */
+            lease_owner: string | null;
+            /** Lease Until */
+            lease_until: string | null;
+            /** Model Profile Ref */
+            model_profile_ref: string | null;
+            /** Next Wake At */
+            next_wake_at: string | null;
+            /** Output Refs */
+            output_refs: string[];
+            /** Policy Digest */
+            policy_digest: string;
+            /** Policy Ref */
+            policy_ref: string;
+            /** Prompt Digest */
+            prompt_digest: string;
+            /** Prompt Ref */
+            prompt_ref: string;
+            /** Request Id */
+            request_id: string;
+            /** Run Id */
+            run_id: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "pending" | "ready" | "leased" | "running" | "waiting" | "retry_due" | "succeeded" | "held" | "unknown" | "failed" | "cancelled";
+            /** State Version */
+            state_version: number;
+            task: components["schemas"]["P5_TaskSpec"];
+            /** Wake Condition Ref */
+            wake_condition_ref: string | null;
+        };
+        /** AggregateReadArgs */
+        P5_AggregateReadArgs: {
+            /** Projection Ref */
+            projection_ref: string;
+            /** Query Ref */
+            query_ref: string;
+        };
+        /** AnalysisMatchesArgs */
+        P5_AnalysisMatchesArgs: {
+            /** Max Matches */
+            max_matches: number;
+            /** Rule Ref */
+            rule_ref: string;
+            /** Snapshot Ref */
+            snapshot_ref: string;
+        };
+        /** ApplyApproval */
+        P5_ApplyApproval: {
+            /** Action Group Id */
+            action_group_id: string;
+            /** Action Plan Digest */
+            action_plan_digest: string;
+            /** Allowed Actions */
+            allowed_actions: ("preserve_state" | "publish_artifact" | "publish_source" | "merge_protected" | "apply_configuration" | "deploy_exact" | "finalise" | "prepare_exit" | "run_exit" | "read_exit_evidence" | "revoke_exit_evidence" | "configure_ingress" | "restart_target" | "revoke_grant" | "delete_temporary" | "stop_worker" | "financial_compensation")[];
+            /** Approval Id */
+            approval_id: string;
+            /** Artifact Digest */
+            artifact_digest: string;
+            /** Authority Binding Epochs */
+            authority_binding_epochs: {
+                [key: string]: number;
+            };
+            /** Authority Refs */
+            authority_refs: string[];
+            /** Baseline Digest */
+            baseline_digest: string;
+            /** Candidate Digest */
+            candidate_digest: string;
+            /** Case Id */
+            case_id: string;
+            /** Config Digest */
+            config_digest: string;
+            /** Controller Id */
+            controller_id: string;
+            /**
+             * Delivery Route
+             * @enum {string}
+             */
+            delivery_route: "git_protected" | "direct_artifact";
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Generation */
+            generation: number;
+            /** Graph Digest */
+            graph_digest: string;
+            /**
+             * Issued At
+             * Format: date-time
+             */
+            issued_at: string;
+            /** Patch Digest */
+            patch_digest: string;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Publication Destination Refs */
+            publication_destination_refs: string[];
+            /** Recovery Plan Digest */
+            recovery_plan_digest: string;
+            /** Reviewed Bundle Digest */
+            reviewed_bundle_digest: string;
+            /** Revoked At */
+            revoked_at: string | null;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Source Base */
+            source_base: string | null;
+            /** Source Head */
+            source_head: string | null;
+            /** Source Snapshot Digests */
+            source_snapshot_digests: string[];
+            /** State Plan Digest */
+            state_plan_digest: string;
+            /** Target Resources */
+            target_resources: string[];
+            /** Trigger Chain Digest */
+            trigger_chain_digest: string;
+        };
+        /** ApplyAuthority */
+        P5_ApplyAuthority: {
+            /** Actions */
+            actions: ("preserve_state" | "publish_artifact" | "publish_source" | "merge_protected" | "apply_configuration" | "deploy_exact" | "finalise" | "prepare_exit" | "run_exit" | "read_exit_evidence" | "revoke_exit_evidence" | "configure_ingress" | "restart_target" | "revoke_grant" | "delete_temporary" | "stop_worker" | "financial_compensation")[];
+            /** Authority Id */
+            authority_id: string;
+            /** Controller Id */
+            controller_id: string;
+            /** Delegate Id */
+            delegate_id: string | null;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Grant Epoch */
+            grant_epoch: number;
+            /**
+             * Issued At
+             * Format: date-time
+             */
+            issued_at: string;
+            /** Revoked At */
+            revoked_at: string | null;
+            /** Role Evidence Refs */
+            role_evidence_refs: string[];
+            target_key: components["schemas"]["P5_TargetKey"];
+        };
+        /** ApprovalSet */
+        P5_ApprovalSet: {
+            /** Approval Refs */
+            approval_refs: string[];
+            /** Approval Set Id */
+            approval_set_id: string;
+            /** Authority Epochs */
+            authority_epochs: {
+                [key: string]: number;
+            };
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Generation */
+            generation: number;
+            /** Plan Digest */
+            plan_digest: string;
+            /** Required Controller Ids */
+            required_controller_ids: string[];
+            /** Run Id */
+            run_id: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "complete" | "missing" | "stale" | "revoked";
+        };
+        /** ArtifactBuild */
+        P5_ArtifactBuild: {
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /** Build Config Digest */
+            build_config_digest: string;
+            /** Build Id */
+            build_id: string;
+            /** Case Id */
+            case_id: string;
+            /** Collector Identity Ref */
+            collector_identity_ref: string;
+            /** Dependency Digest */
+            dependency_digest: string;
+            /** Exact Image Test Refs */
+            exact_image_test_refs: string[];
+            /** Export Tar Digest */
+            export_tar_digest: string;
+            /** Generation */
+            generation: number;
+            /** Layer Digests */
+            layer_digests: string[];
+            /** Leak Scan Refs */
+            leak_scan_refs: string[];
+            /** Oci Manifest Digest */
+            oci_manifest_digest: string;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "built" | "tested" | "held" | "failed" | "unknown";
+            /**
+             * Platform
+             * @constant
+             */
+            platform: "linux/amd64";
+            /** Provenance Ref */
+            provenance_ref: string;
+            /** Recipe Digest */
+            recipe_digest: string;
+            /** Run Id */
+            run_id: string;
+            /** Runtime Profile Digest */
+            runtime_profile_digest: string;
+            /** Source Snapshot Refs */
+            source_snapshot_refs: string[];
+            /** Source Tree Digest */
+            source_tree_digest: string;
+        };
+        /** ArtifactDescriptor */
+        P5_ArtifactDescriptor: {
+            /** Byte Count */
+            byte_count: number;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Derivation Ref */
+            derivation_ref: string | null;
+            /**
+             * Evidence Class
+             * @enum {string}
+             */
+            evidence_class: "scripted" | "component_offline" | "real_model" | "real_provider" | "real_payment" | "isolation_qualified" | "merchant_exit";
+            /** Expires At */
+            expires_at: string | null;
+            /** Generation */
+            generation: number;
+            /** Input Digest */
+            input_digest: string;
+            /** Payload Digest */
+            payload_digest: string;
+            /** Producer Identity Ref */
+            producer_identity_ref: string;
+            /** Ref */
+            ref: string;
+            /** Run Id */
+            run_id: string;
+            /** Schema */
+            schema: string;
+            /** Subject Digest */
+            subject_digest: string;
+            /**
+             * Trust
+             * @enum {string}
+             */
+            trust: "model_proposal" | "collector_observed" | "deterministic_result";
+        };
+        /** Asset */
+        P5_Asset: {
+            /** Active Reference Refs */
+            active_reference_refs: string[];
+            /** Asset Id */
+            asset_id: string;
+            /** Authority Refs */
+            authority_refs: string[];
+            /**
+             * Desired
+             * @enum {string}
+             */
+            desired: "keep" | "deny_revoke" | "delete" | "retain_policy";
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "source" | "image" | "registry" | "runtime" | "config" | "state" | "credential" | "callback" | "origin_handler" | "grant" | "worker" | "copy" | "record" | "exit_executor";
+            /**
+             * Ownership
+             * @enum {string}
+             */
+            ownership: "merchant" | "shared_service" | "exclusive_run";
+            /** Required For Operation */
+            required_for_operation: boolean;
+            target_key: components["schemas"]["P5_TargetKey"];
+        };
+        /** AssetManifest */
+        P5_AssetManifest: {
+            /** Assets */
+            assets: components["schemas"]["P5_Asset"][];
+            /** Case Id */
+            case_id: string;
+            /** Final Artifact Digest */
+            final_artifact_digest: string;
+            /** Final Config Digest */
+            final_config_digest: string;
+            /** Legacy Obligations Ref */
+            legacy_obligations_ref: string;
+            /** Manifest Digest */
+            manifest_digest: string;
+            /** Manifest Id */
+            manifest_id: string;
+            /** Run Id */
+            run_id: string;
+        };
+        /** AuditSummaryArgs */
+        P5_AuditSummaryArgs: {
+            /** After Seq */
+            after_seq: number;
+            /** Run Ref */
+            run_ref: string;
+        };
+        /** BaselineEvidence */
+        P5_BaselineEvidence: {
+            /** Actual Provider Evidence Ref */
+            actual_provider_evidence_ref: string;
+            /** Dependency Digest */
+            dependency_digest: string;
+            /** Immutable Source Digest */
+            immutable_source_digest: string;
+            /** Observed Defects Ref */
+            observed_defects_ref: string;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "reproduced" | "reproduced_with_defects" | "failed" | "unknown";
+            /** Package Digest */
+            package_digest: string;
+            /** Run Id */
+            run_id: string;
+            /** Runtime Digest */
+            runtime_digest: string;
+            /** Scenario Results Ref */
+            scenario_results_ref: string;
+            /** Seed Digest */
+            seed_digest: string;
+            /** Skipped Required */
+            skipped_required: string[];
+            /**
+             * Variant
+             * @enum {string}
+             */
+            variant: "OLD" | "OLD_TWIN";
+        };
+        /** CancelUploadRequest */
+        P5_CancelUploadRequest: Record<string, never>;
+        /** CancelWorkRequest */
+        P5_CancelWorkRequest: {
+            /** Cancel Id */
+            cancel_id: string;
+        };
+        /** CandidatePatchArgs */
+        P5_CandidatePatchArgs: {
+            /** Expected Tree */
+            expected_tree: string;
+            /** Patch Ref */
+            patch_ref: string;
+            /** Workspace Ref */
+            workspace_ref: string;
+        };
+        /** CaseEvent */
+        P5_CaseEvent: {
+            /** Case Id */
+            case_id: string;
+            /** Event Id */
+            event_id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "case_changed" | "readiness_changed" | "work_changed" | "lifecycle_changed" | "delivery_changed" | "access_changed";
+            /**
+             * Occurred At
+             * Format: date-time
+             */
+            occurred_at: string;
+            /** Payload Digest */
+            payload_digest: string;
+            /** Payload Ref */
+            payload_ref: string;
+            /** Sequence */
+            sequence: number;
+            /** State Version */
+            state_version: number;
+        };
+        /** CaseEventsQuery */
+        P5_CaseEventsQuery: {
+            /** After */
+            after: number | null;
+        };
+        /** CaseList */
+        P5_CaseList: {
+            /** Items */
+            items: components["schemas"]["P5_CaseSummary"][];
+            /** Next Cursor */
+            next_cursor: string | null;
+        };
+        /** CaseListQuery */
+        P5_CaseListQuery: {
+            /** Cursor */
+            cursor: string | null;
+            /** Limit */
+            limit: number;
+        };
+        /** CaseSummary */
+        P5_CaseSummary: {
+            /** Case Id */
+            case_id: string;
+            /** Shop Url */
+            shop_url: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "waiting_controller" | "checking" | "setup_needed" | "ready" | "accepted" | "closed";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** CaseView */
+        P5_CaseView: {
+            action: components["schemas"]["P5_ActionStatusView"] | null;
+            case: components["schemas"]["P5_ConnectionCase"];
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Delivery Ref */
+            delivery_ref: string | null;
+            /**
+             * Evidence Class
+             * @enum {string}
+             */
+            evidence_class: "scripted" | "component_offline" | "real_model" | "real_provider" | "real_payment" | "isolation_qualified" | "merchant_exit";
+            /** Last Event Seq */
+            last_event_seq: number;
+            lifecycle: components["schemas"]["P5_LifecycleRun"] | null;
+            /** Pending Action Id */
+            pending_action_id: string | null;
+            processing: components["schemas"]["P5_ProcessingDisclosure"] | null;
+            readiness: components["schemas"]["P5_ConnectionReadiness"] | null;
+            /** Required Actions */
+            required_actions: components["schemas"]["P5_RequiredAction"][];
+            /** Resources */
+            resources: components["schemas"]["P5_ResourceSummary"][];
+            /** State Version */
+            state_version: number;
+        };
+        /** ChangeListV2 */
+        P5_ChangeListV2: {
+            /** Baseline Snapshot Ref */
+            baseline_snapshot_ref: string;
+            /** Branch */
+            branch: string | null;
+            /** Candidate Snapshot Ref */
+            candidate_snapshot_ref: string;
+            /** Changes */
+            changes: components["schemas"]["P5_SnapshotChange"][];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Graft Id */
+            graft_id: string;
+            /** Id */
+            id: string;
+            /** Open Item Ids */
+            open_item_ids: string[];
+            /** Patch Digest */
+            patch_digest: string;
+            producer: components["schemas"]["P5_Producer"];
+            /**
+             * Provenance
+             * @enum {string}
+             */
+            provenance: "git" | "snapshot";
+        } & ({
+            branch?: null;
+            /** Changes */
+            changes?: (components["schemas"]["P5_SnapshotChange"] & {
+                commit?: null;
+            })[];
+            /**
+             * Provenance
+             * @constant
+             * @enum {string}
+             */
+            provenance?: "snapshot";
+        } | {
+            branch?: string;
+            /** Changes */
+            changes?: (components["schemas"]["P5_SnapshotChange"] & {
+                commit?: string;
+            })[];
+            /**
+             * Provenance
+             * @constant
+             * @enum {string}
+             */
+            provenance?: "git";
+        });
+        /** CheckResult */
+        P5_CheckResult: {
+            /** Check Id */
+            check_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Expires At */
+            expires_at: string | null;
+            /** Recovery Code */
+            recovery_code: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pass" | "missing" | "unsupported" | "failed" | "stale" | "unknown";
+        };
+        /** Chunk */
+        P5_Chunk: {
+            /** Blob Ref */
+            blob_ref: string;
+            /** File Path */
+            file_path: string;
+            /** Length */
+            length: number;
+            /** Offset */
+            offset: number;
+            /** Sha256 */
+            sha256: string;
+            /** Upload Id */
+            upload_id: string;
+        };
+        /** ChunkReceipt */
+        P5_ChunkReceipt: {
+            /** File Path */
+            file_path: string;
+            /** Length */
+            length: number;
+            /** Offset */
+            offset: number;
+            /**
+             * Received At
+             * Format: date-time
+             */
+            received_at: string;
+            /** Sha256 */
+            sha256: string;
+            /** Upload Id */
+            upload_id: string;
+        };
+        /**
+         * ChunkUploadRequest
+         * @description Multipart metadata only; binary data is a separate bounded part, never a ref.
+         */
+        P5_ChunkUploadRequest: {
+            /** File Path */
+            file_path: string;
+            /** Length */
+            length: number;
+            /** Offset */
+            offset: number;
+            /** Sha256 */
+            sha256: string;
+        };
+        /** ClaimDraft */
+        P5_ClaimDraft: {
+            /** Continuation Ref */
+            continuation_ref: string;
+        };
+        /**
+         * CollectorAcceptance
+         * @description Receipt for service-only WorkerOperation intake; not proof of site reproduction.
+         */
+        P5_CollectorAcceptance: {
+            /**
+             * Accepted At
+             * Format: date-time
+             */
+            accepted_at: string;
+            /** Generation */
+            generation: number;
+            /** Operation Id */
+            operation_id: string;
+            /** Receipt Ref */
+            receipt_ref: string;
+            /** Work Id */
+            work_id: string;
+        };
+        /** Component */
+        P5_Component: {
+            /** Build Context Ref */
+            build_context_ref: string | null;
+            /** Configuration Manifest Ref */
+            configuration_manifest_ref: string;
+            /** Controller Binding Refs */
+            controller_binding_refs: string[];
+            /** Correspondence Evidence Refs */
+            correspondence_evidence_refs: string[];
+            /** Dependency Manifest Ref */
+            dependency_manifest_ref: string;
+            /** Node Id */
+            node_id: string;
+            /** Purpose */
+            purpose: string;
+            /** Runtime Profile Ref */
+            runtime_profile_ref: string;
+            /** Source Snapshot Ref */
+            source_snapshot_ref: string | null;
+        };
+        /** ComponentManifest */
+        P5_ComponentManifest: {
+            /** Components */
+            components: components["schemas"]["P5_Component"][];
+        };
+        /** ConfigurationEntry */
+        P5_ConfigurationEntry: {
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "public_value" | "secret_reference";
+            /** Name */
+            name: string;
+            /** Required */
+            required: boolean;
+            /** Secret Ref */
+            secret_ref: string | null;
+            /** Value */
+            value: string | null;
+        } & ({
+            /**
+             * Kind
+             * @constant
+             * @enum {string}
+             */
+            kind?: "public_value";
+            secret_ref?: null;
+            value?: string;
+        } | {
+            /**
+             * Kind
+             * @constant
+             * @enum {string}
+             */
+            kind?: "secret_reference";
+            secret_ref?: string;
+            value?: null;
+        });
+        /** ConfigurationManifest */
+        P5_ConfigurationManifest: {
+            /** Entries */
+            entries: components["schemas"]["P5_ConfigurationEntry"][];
+        };
+        /** ConnectionCase */
+        P5_ConnectionCase: {
+            /** Binding Refs */
+            binding_refs: string[];
+            /** Case Id */
+            case_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Graph Ref */
+            graph_ref: string | null;
+            /** Requester Id */
+            requester_id: string;
+            /** Shop Url */
+            shop_url: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "waiting_controller" | "checking" | "setup_needed" | "ready" | "accepted" | "closed";
+            /** Tenant Id */
+            tenant_id: string;
+        };
+        /** ConnectionReadiness */
+        P5_ConnectionReadiness: {
+            /** Actor Id */
+            actor_id: string;
+            /** Binding Epochs */
+            binding_epochs: {
+                [key: string]: number;
+            };
+            /** Case Id */
+            case_id: string;
+            /** Checks */
+            checks: components["schemas"]["P5_CheckResult"][];
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Fixture Profile Digest */
+            fixture_profile_digest: string;
+            /**
+             * Issued At
+             * Format: date-time
+             */
+            issued_at: string;
+            /** Processing Policy Digest */
+            processing_policy_digest: string;
+            /** Readiness Digest */
+            readiness_digest: string;
+            /** Readiness Id */
+            readiness_id: string;
+            /** Resource Evidence Digests */
+            resource_evidence_digests: {
+                [key: string]: string;
+            };
+            /** Resource Graph Digest */
+            resource_graph_digest: string;
+            /** Runtime Profile Digest */
+            runtime_profile_digest: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Source Manifest Digest */
+            source_manifest_digest: string;
+            /** Source Snapshot Refs */
+            source_snapshot_refs: string[];
+            /** Work Package Digest */
+            work_package_digest: string;
+            /** Work Package Ref */
+            work_package_ref: string;
+        };
+        /** ControlError */
+        P5_ControlError: {
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "INVALID" | "DENIED" | "NOT_FOUND" | "CONFLICT" | "STALE" | "EXPIRED" | "CANCELLED" | "UNKNOWN" | "BUDGET_EXHAUSTED" | "MISSING_EVIDENCE" | "UNSUPPORTED";
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Retry Class
+             * @enum {string}
+             */
+            retry_class: "none" | "safe_read" | "reconcile" | "reauthorise";
+        };
+        /** ControllerInvitation */
+        P5_ControllerInvitation: {
+            /** Case Id */
+            case_id: string;
+            /** Copy Url */
+            copy_url: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Invitation Id */
+            invitation_id: string;
+            /** Recipient Hint */
+            recipient_hint: string | null;
+            /** Requester Id */
+            requester_id: string;
+            /** Resource Ids */
+            resource_ids: string[];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pending" | "approved" | "denied" | "expired";
+        };
+        /** CreateActionIntent */
+        P5_CreateActionIntent: {
+            /** Readiness Digest */
+            readiness_digest: string;
+            /** Readiness Id */
+            readiness_id: string;
+        };
+        /** CreateCase */
+        P5_CreateCase: {
+            /** Shop Url */
+            shop_url: string;
+        };
+        /** CreateDraft */
+        P5_CreateDraft: {
+            /** Shop Url */
+            shop_url: string;
+        };
+        /** CreateInvitation */
+        P5_CreateInvitation: {
+            /** Recipient Hint */
+            recipient_hint: string | null;
+            /** Resource Ids */
+            resource_ids: string[];
+        };
+        /** CreateProviderIntent */
+        P5_CreateProviderIntent: {
+            /** Provider Id */
+            provider_id: string;
+            /**
+             * Purpose
+             * @enum {string}
+             */
+            purpose: "read_connect" | "apply_connect";
+            /** Resource Id */
+            resource_id: string | null;
+        };
+        /** CreateUploadRequest */
+        P5_CreateUploadRequest: {
+            /** Binding Epochs */
+            binding_epochs: {
+                [key: string]: number;
+            };
+            /** Expected Manifest Digest */
+            expected_manifest_digest: string;
+            /** Expected Total Bytes */
+            expected_total_bytes: number;
+            /** Manifest */
+            manifest: components["schemas"]["P5_ManifestEntry"][];
+        };
+        /** DeliveryDecision */
+        P5_DeliveryDecision: ({
+            /** Case Id */
+            case_id: string;
+            /** Existing Effect Ref */
+            existing_effect_ref: string | null;
+            /** Expected State Version */
+            expected_state_version: number;
+            /** Generation */
+            generation: number;
+            /** Input Refs */
+            input_refs: string[];
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "request" | "wait" | "hold" | "incident" | "complete";
+            /** Next Wake At */
+            next_wake_at: string | null;
+            /** Operation */
+            operation: ("review_evaluate" | "plan_apply" | "reserve_targets" | "preserve_state" | "publish_artifact" | "publish_source" | "merge_protected" | "apply_configuration" | "deploy_exact" | "reconcile_effect" | "observe_target" | "finalise" | "prepare_exit" | "run_exit" | "read_exit_evidence" | "revoke_exit_evidence" | "reconcile_cleanup") | null;
+            /** Reason Code */
+            reason_code: string;
+            /** Run Id */
+            run_id: string;
+            /** Slot Id */
+            slot_id: string | null;
+        } & (unknown & unknown)) & ({
+            /** Input Refs */
+            input_refs?: string[];
+            /**
+             * Kind
+             * @constant
+             * @enum {string}
+             */
+            kind?: "request";
+            /** @enum {string} */
+            operation?: "review_evaluate" | "plan_apply" | "reserve_targets" | "preserve_state" | "publish_artifact" | "publish_source" | "merge_protected" | "apply_configuration" | "deploy_exact" | "reconcile_effect" | "observe_target" | "finalise" | "prepare_exit" | "run_exit" | "read_exit_evidence" | "revoke_exit_evidence" | "reconcile_cleanup";
+        } | {
+            existing_effect_ref?: null;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind?: "wait" | "hold" | "incident" | "complete";
+            operation?: null;
+            slot_id?: null;
+        });
+        /** DeliverySnapshot */
+        P5_DeliverySnapshot: {
+            /** Action Plan Ref */
+            action_plan_ref: string | null;
+            /** Approval Set Ref */
+            approval_set_ref: string | null;
+            /** Cancellation Ref */
+            cancellation_ref: string | null;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Current Evidence Refs */
+            current_evidence_refs: string[];
+            /** Deployment Ref */
+            deployment_ref: string | null;
+            /** Exit Manifest Ref */
+            exit_manifest_ref: string | null;
+            /** Exit Plan Ref */
+            exit_plan_ref: string | null;
+            /** Final Asset Manifest Ref */
+            final_asset_manifest_ref: string | null;
+            /** Generation */
+            generation: number;
+            /** Graph Ref */
+            graph_ref: string;
+            issue: components["schemas"]["P5_Issue"] | null;
+            /** Lifecycle Ref */
+            lifecycle_ref: string;
+            /** Pending Effect Refs */
+            pending_effect_refs: string[];
+            /** Reservation Ref */
+            reservation_ref: string | null;
+            /** Review Ref */
+            review_ref: string | null;
+            /** Run Id */
+            run_id: string;
+            /** State Cutover Ref */
+            state_cutover_ref: string | null;
+            /** State Version */
+            state_version: number;
+        };
+        /** Dependency */
+        P5_Dependency: {
+            /**
+             * Access Mode
+             * @enum {string}
+             */
+            access_mode: "fixture" | "sandbox_broker" | "read_evidence" | "unavailable";
+            /** Authority Ref */
+            authority_ref: string | null;
+            /** Component Ids */
+            component_ids: string[];
+            /** Dependency Id */
+            dependency_id: string;
+            /** Limitation */
+            limitation: string;
+            /** Purpose */
+            purpose: string;
+            /** Test Identity Ref */
+            test_identity_ref: string | null;
+        };
+        /** DependencyInspectArgs */
+        P5_DependencyInspectArgs: {
+            /** Package */
+            package: string;
+            /** Recipe Ref */
+            recipe_ref: string;
+            /** Version */
+            version: string;
+        };
+        /** DependencyManifest */
+        P5_DependencyManifest: {
+            /** Dependencies */
+            dependencies: components["schemas"]["P5_Dependency"][];
+        };
+        /** DeploymentObservation */
+        P5_DeploymentObservation: {
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Current Runtime Evidence Refs */
+            current_runtime_evidence_refs: string[];
+            /** Effect Id */
+            effect_id: string;
+            /** Environment Id */
+            environment_id: string;
+            /** Observed Artifact Digest */
+            observed_artifact_digest: string | null;
+            /** Observed Config Digest */
+            observed_config_digest: string | null;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "pending" | "verified" | "failed" | "unknown";
+            /** Provider */
+            provider: string;
+            /** Provider Deploy Id */
+            provider_deploy_id: string | null;
+            /** Provider Status */
+            provider_status: string;
+            /** Resource Id */
+            resource_id: string;
+            /** Submitted Artifact Digest */
+            submitted_artifact_digest: string;
+        };
+        /** DocsLookupArgs */
+        P5_DocsLookupArgs: {
+            /** Catalog Ref */
+            catalog_ref: string;
+            /** Topic */
+            topic: string;
+            /** Version */
+            version: string;
+        };
+        /** DraftCase */
+        P5_DraftCase: {
+            /** Continuation Ref */
+            continuation_ref: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Draft Id */
+            draft_id: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Shop Url */
+            shop_url: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "unclaimed" | "claimed" | "expired";
+        };
+        /** EffectIntent */
+        P5_EffectIntent: {
+            /** Action Group Id */
+            action_group_id: string;
+            /** Actor Id */
+            actor_id: string;
+            /** Approval Set Id */
+            approval_set_id: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Effect Class
+             * @enum {string}
+             */
+            effect_class: "E0" | "E1" | "E2" | "E3" | "EU";
+            /** Effect Id */
+            effect_id: string;
+            /** Environment Id */
+            environment_id: string;
+            /** Expected Version */
+            expected_version: string;
+            /** Generation */
+            generation: number;
+            /**
+             * Operation
+             * @enum {string}
+             */
+            operation: "preserve_state" | "publish_artifact" | "publish_source" | "merge_protected" | "apply_configuration" | "deploy_exact" | "finalise" | "prepare_exit" | "run_exit" | "read_exit_evidence" | "revoke_exit_evidence" | "configure_ingress" | "restart_target" | "revoke_grant" | "delete_temporary" | "stop_worker" | "financial_compensation";
+            /** Plan Digest */
+            plan_digest: string;
+            /** Provider Idempotency Ref */
+            provider_idempotency_ref: string | null;
+            /** Provider Receipt Ref */
+            provider_receipt_ref: string | null;
+            /** Reconciliation Ref */
+            reconciliation_ref: string | null;
+            /** Request Digest */
+            request_digest: string;
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Resource Id */
+            resource_id: string;
+            /** Run Id */
+            run_id: string;
+            /** Slot Id */
+            slot_id: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "intended" | "submitted" | "acknowledged" | "observed" | "failed" | "unknown" | "compensated";
+        };
+        /** EffectSlot */
+        P5_EffectSlot: {
+            /** Artifact Digest */
+            artifact_digest: string | null;
+            /** Cardinality */
+            cardinality: number;
+            /** Config Digest */
+            config_digest: string | null;
+            /** Depends On */
+            depends_on: string[];
+            /**
+             * Effect Class
+             * @enum {string}
+             */
+            effect_class: "E0" | "E1" | "E2" | "E3";
+            /** Expected Version Ref */
+            expected_version_ref: string;
+            /**
+             * Operation
+             * @enum {string}
+             */
+            operation: "preserve_state" | "publish_artifact" | "publish_source" | "merge_protected" | "apply_configuration" | "deploy_exact" | "finalise" | "prepare_exit" | "run_exit" | "read_exit_evidence" | "revoke_exit_evidence" | "configure_ingress" | "restart_target" | "revoke_grant" | "delete_temporary" | "stop_worker" | "financial_compensation";
+            /** Recovery Branch Ref */
+            recovery_branch_ref: string | null;
+            /** Required Authority Refs */
+            required_authority_refs: string[];
+            /** Required Controller Ids */
+            required_controller_ids: string[];
+            /** Slot Id */
+            slot_id: string;
+            /** State Plan Digest */
+            state_plan_digest: string | null;
+            target_key: components["schemas"]["P5_TargetKey"];
+            /** Trigger Digest */
+            trigger_digest: string;
+        };
+        /** EvidenceReadArgs */
+        P5_EvidenceReadArgs: {
+            /** Max Bytes */
+            max_bytes: number;
+            /** Ref */
+            ref: string;
+        };
+        /** EvidenceSummaryArgs */
+        P5_EvidenceSummaryArgs: {
+            /**
+             * Projection
+             * @enum {string}
+             */
+            projection: "private_status" | "public_safe";
+            /** Run Ref */
+            run_ref: string;
+        };
+        /** ExecutionProposal */
+        P5_ExecutionProposal: {
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Expected Subject */
+            expected_subject: string;
+            /**
+             * Operation
+             * @enum {string}
+             */
+            operation: "build_baseline" | "build_candidate" | "validate_driver" | "run_scenario" | "run_mutant" | "selfcheck_recipe";
+            /** Recipe Ref */
+            recipe_ref: string;
+            /** Requested Output Schemas */
+            requested_output_schemas: string[];
+            /** Scenario Ref */
+            scenario_ref: string | null;
+            /** Subject Ref */
+            subject_ref: string;
+            /** Task Id */
+            task_id: string;
+            /** Variant */
+            variant: ("OLD" | "OLD_TWIN" | "NEW") | null;
+        };
+        /** ExecutionRequestArgs */
+        P5_ExecutionRequestArgs: {
+            /** Proposal Ref */
+            proposal_ref: string;
+        };
+        /** ExecutionStatusArgs */
+        P5_ExecutionStatusArgs: {
+            /** Request Id */
+            request_id: string;
+        };
+        /** ExitCheckPlan */
+        P5_ExitCheckPlan: {
+            /** Allowed Restart Count */
+            allowed_restart_count: number;
+            /** Authority Refs */
+            authority_refs: string[];
+            /** Budget Ref */
+            budget_ref: string;
+            /** Case Id */
+            case_id: string;
+            /** Criteria Refs */
+            criteria_refs: string[];
+            /**
+             * Deadline
+             * Format: date-time
+             */
+            deadline: string;
+            /** Evidence Read Authority Ref */
+            evidence_read_authority_ref: string;
+            /** Executor Identity Ref */
+            executor_identity_ref: string;
+            /** Exit Plan Id */
+            exit_plan_id: string;
+            /** Failure Route Ref */
+            failure_route_ref: string;
+            /** Final Artifact Digest */
+            final_artifact_digest: string;
+            /** Final Config Digest */
+            final_config_digest: string;
+            /** Generation */
+            generation: number;
+            /** Plan Digest */
+            plan_digest: string;
+            /** Private Evidence Destination Ref */
+            private_evidence_destination_ref: string;
+            /** Recovery Plan Ref */
+            recovery_plan_ref: string;
+            /** Reservation Ref */
+            reservation_ref: string;
+            /** Run Id */
+            run_id: string;
+            /** State Digest */
+            state_digest: string;
+            /** Trusted Code Digest */
+            trusted_code_digest: string;
+        };
+        /** ExitItem */
+        P5_ExitItem: {
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Item Id */
+            item_id: string;
+            /** Owner */
+            owner: string;
+            /** Required For Exit */
+            required_for_exit: boolean;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "preserved" | "local_denied" | "termination_pending" | "revocation_pending" | "deleted_active" | "backup_pending" | "held" | "exported_unrecallable" | "confirmed" | "unknown";
+        };
+        /** ExitManifest */
+        P5_ExitManifest: {
+            /** Case Id */
+            case_id: string;
+            /** Cleanup Items */
+            cleanup_items: components["schemas"]["P5_ExitItem"][];
+            /** Exit Id */
+            exit_id: string;
+            /** Legacy Obligations Ref */
+            legacy_obligations_ref: string;
+            /** Merchant Assets Ref */
+            merchant_assets_ref: string;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "complete" | "pending" | "failed_safe" | "unknown";
+            /** Persistent Runtime Evidence Refs */
+            persistent_runtime_evidence_refs: string[];
+            /** Post Denial Observation Refs */
+            post_denial_observation_refs: string[];
+            /** Run Id */
+            run_id: string;
+            /** Temporary Assets Ref */
+            temporary_assets_ref: string;
+        };
+        /** FinalisationPlan */
+        P5_FinalisationPlan: {
+            /** Candidate Change Required */
+            candidate_change_required: boolean;
+            /** Case Id */
+            case_id: string;
+            /** Dependency Check Refs */
+            dependency_check_refs: string[];
+            /** Desired Asset Manifest Ref */
+            desired_asset_manifest_ref: string;
+            /** Final Candidate Ref */
+            final_candidate_ref: string | null;
+            /** Finalisation Id */
+            finalisation_id: string;
+            /** Generation */
+            generation: number;
+            /** Independence Criteria Refs */
+            independence_criteria_refs: string[];
+            /** Plan Digest */
+            plan_digest: string;
+            /** Required Action Slot Ids */
+            required_action_slot_ids: string[];
+            /** Run Id */
+            run_id: string;
+            /** Validation Request Refs */
+            validation_request_refs: string[];
+        };
+        /** FinaliseUploadRequest */
+        P5_FinaliseUploadRequest: {
+            /** Expected Manifest Digest */
+            expected_manifest_digest: string;
+        };
+        /** Issue */
+        P5_Issue: {
+            /** Code */
+            code: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Input Ref */
+            input_ref: string | null;
+            /** Owner Role */
+            owner_role: string;
+            /**
+             * Recovery
+             * @enum {string}
+             */
+            recovery: "retry_read" | "reconnect" | "supply_input" | "review_scope" | "reapprove" | "await_counterpart" | "reconcile" | "unsupported";
+        };
+        /** IssueApplyApproval */
+        P5_IssueApplyApproval: {
+            /** Plan Digest */
+            plan_digest: string;
+            /** Plan Ref */
+            plan_ref: string;
+            /** Reviewed Bundle Digest */
+            reviewed_bundle_digest: string;
+        };
+        /** LifecycleRun */
+        P5_LifecycleRun: {
+            /** Active Effect Refs */
+            active_effect_refs: string[];
+            /** Attempt */
+            attempt: number;
+            /** Case Id */
+            case_id: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Generation */
+            generation: number;
+            /** Resource Graph Digest */
+            resource_graph_digest: string;
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /**
+             * Stage
+             * @enum {string}
+             */
+            stage: "BASELINE_VERIFY" | "BASELINE_RUN" | "CANDIDATE_READY" | "VALIDATING" | "REVIEW_READY" | "AWAITING_APPLY" | "PUBLISHING" | "MERGING" | "DEPLOY_PREPARED" | "DEPLOYING" | "OBSERVING" | "FINALISING" | "EXITING" | "COMPLETE" | "HELD" | "FAILED_SAFE" | "INCIDENT_UNKNOWN";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+            /** Work Id */
+            work_id: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+            /** Work Package Ref */
+            work_package_ref: string;
+        };
+        /** LifecycleWorkRequest */
+        P5_LifecycleWorkRequest: {
+            /** Authority Binding Epochs */
+            authority_binding_epochs: {
+                [key: string]: number;
+            };
+            /** Budget Ref */
+            budget_ref: string;
+            /**
+             * Deadline
+             * Format: date-time
+             */
+            deadline: string;
+            /** Expected Output Schema */
+            expected_output_schema: string;
+            /** Forbidden Effect Codes */
+            forbidden_effect_codes: string[];
+            /** Generation */
+            generation: number;
+            /** Input Artifact Refs */
+            input_artifact_refs: string[];
+            /**
+             * Operation Kind
+             * @enum {string}
+             */
+            operation_kind: "build_baseline" | "run_baseline" | "validate_candidate" | "build_candidate" | "run_scenario" | "run_mutant" | "validate_driver" | "selfcheck_recipe";
+            /** Package Digest */
+            package_digest: string;
+            /** Package Ref */
+            package_ref: string;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Request Id */
+            request_id: string;
+            /** Run Id */
+            run_id: string;
+            /** Runtime Profile Digest */
+            runtime_profile_digest: string;
+        };
+        /** LifecycleWorkRequestReceipt */
+        P5_LifecycleWorkRequestReceipt: {
+            /**
+             * Accepted At
+             * Format: date-time
+             */
+            accepted_at: string;
+            /** Generation */
+            generation: number;
+            /** Request Digest */
+            request_digest: string;
+            /** Request Id */
+            request_id: string;
+            /** Run Id */
+            run_id: string;
+        };
+        /** LifecycleWorkResult */
+        P5_LifecycleWorkResult: {
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /**
+             * Completed At
+             * Format: date-time
+             */
+            completed_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Generation */
+            generation: number;
+            /** Inputs Digest */
+            inputs_digest: string;
+            /** Limitation Codes */
+            limitation_codes: string[];
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "completed" | "failed" | "blocked" | "unknown";
+            /** Output Artifact Refs */
+            output_artifact_refs: string[];
+            /** Request Id */
+            request_id: string;
+            /** Run Id */
+            run_id: string;
+            /** Source Unchanged */
+            source_unchanged: boolean;
+            /** Worker Identity Ref */
+            worker_identity_ref: string;
+        };
+        /** ManifestEntry */
+        P5_ManifestEntry: {
+            /** Bytes */
+            bytes: number;
+            /**
+             * File Type
+             * @enum {string}
+             */
+            file_type: "file" | "directory";
+            /** Relative Path */
+            relative_path: string;
+            /** Sha256 */
+            sha256: string | null;
+        } & ({
+            /**
+             * File Type
+             * @constant
+             * @enum {string}
+             */
+            file_type?: "file";
+            sha256?: string;
+        } | {
+            /** @constant */
+            bytes?: 0;
+            /**
+             * File Type
+             * @constant
+             * @enum {string}
+             */
+            file_type?: "directory";
+            sha256?: null;
+        });
+        /**
+         * ModelBudget
+         * @description Cumulative micro-USD accounting declaration, not a spend authorisation.
+         */
+        P5_ModelBudget: {
+            /** Budget Id */
+            budget_id: string;
+            /** Ceiling Micro Usd */
+            ceiling_micro_usd: number;
+            /** Outstanding Micro Usd */
+            outstanding_micro_usd: number;
+            /** Pricing Ref */
+            pricing_ref: string;
+            /** Spent Micro Usd */
+            spent_micro_usd: number;
+            /** Target Micro Usd */
+            target_micro_usd: number;
+            /** Unknown Micro Usd */
+            unknown_micro_usd: number;
+        };
+        /** ModelTurnRequest */
+        P5_ModelTurnRequest: {
+            /** Allowed Tool Ids */
+            allowed_tool_ids: string[];
+            /** Budget Reservation Ref */
+            budget_reservation_ref: string;
+            /** Context Digest */
+            context_digest: string;
+            /** Context Ref */
+            context_ref: string;
+            /**
+             * Deadline
+             * Format: date-time
+             */
+            deadline: string;
+            /** Generation */
+            generation: number;
+            /** Input Token Cap */
+            input_token_cap: number;
+            /** Lease Epoch */
+            lease_epoch: number;
+            /** Model Profile Ref */
+            model_profile_ref: string;
+            /** Output Schema */
+            output_schema: string;
+            /** Output Token Cap */
+            output_token_cap: number;
+            /** Task Id */
+            task_id: string;
+            /** Turn Id */
+            turn_id: string;
+        };
+        /** ModelTurnResult */
+        P5_ModelTurnResult: {
+            /** Calls */
+            calls: components["schemas"]["P5_ToolCall"][];
+            /** Final Artifact Ref */
+            final_artifact_ref: string | null;
+            issue: components["schemas"]["P5_Issue"] | null;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "tool_calls" | "final" | "blocked";
+            /** Provider Receipt Ref */
+            provider_receipt_ref: string | null;
+            /** Task Id */
+            task_id: string;
+            /** Turn Id */
+            turn_id: string;
+            /** Usage Receipt Ref */
+            usage_receipt_ref: string;
+        } & ({
+            /** Calls */
+            calls?: components["schemas"]["P5_ToolCall"][];
+            final_artifact_ref?: null;
+            issue?: null;
+            /**
+             * Kind
+             * @constant
+             * @enum {string}
+             */
+            kind?: "tool_calls";
+        } | {
+            /** Calls */
+            calls?: components["schemas"]["P5_ToolCall"][];
+            final_artifact_ref?: string;
+            issue?: null;
+            /**
+             * Kind
+             * @constant
+             * @enum {string}
+             */
+            kind?: "final";
+        } | {
+            /** Calls */
+            calls?: components["schemas"]["P5_ToolCall"][];
+            final_artifact_ref?: null;
+            issue?: components["schemas"]["P5_Issue"];
+            /**
+             * Kind
+             * @constant
+             * @enum {string}
+             */
+            kind?: "blocked";
+        });
+        /** ModelTurnStatus */
+        P5_ModelTurnStatus: {
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            issue: components["schemas"]["P5_Issue"] | null;
+            /** Result Ref */
+            result_ref: string | null;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "intended" | "submitted" | "observed" | "failed" | "unknown";
+            /** Task Id */
+            task_id: string;
+            /** Turn Id */
+            turn_id: string;
+            /** Usage Receipt Ref */
+            usage_receipt_ref: string | null;
+        };
+        /** Omission */
+        P5_Omission: {
+            /** Component Id */
+            component_id: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Path */
+            path: string | null;
+            /** Reason Code */
+            reason_code: string;
+            /** Required For Scope */
+            required_for_scope: boolean;
+        };
+        /** OmissionManifest */
+        P5_OmissionManifest: {
+            /** Items */
+            items: components["schemas"]["P5_Omission"][];
+        };
+        /** P5Problem */
+        P5_P5Problem: {
+            /** Code */
+            code: string;
+            /** Detail */
+            detail: string | null;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Instance */
+            instance: string | null;
+            /** Reason Code */
+            reason_code: string;
+            /** Recovery Action */
+            recovery_action: string | null;
+            /** Request Id */
+            request_id: string;
+            /**
+             * Retry
+             * @enum {string}
+             */
+            retry: "never" | "status_only" | "safe_read" | "reauthorise";
+            /** Status */
+            status: number;
+            /** Title */
+            title: string;
+            /** Type */
+            type: string;
+        };
+        /** PendingResult */
+        P5_PendingResult: {
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Request Id */
+            request_id: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "queued" | "running" | "waiting" | "unknown";
+        };
+        /**
+         * PlanProposal
+         * @description Untrusted seed/extension proposal; full dependency resolution requires admission.
+         */
+        P5_PlanProposal: {
+            /** Case Id */
+            case_id: string;
+            /** Generation */
+            generation: number;
+            /** Parent Request Id */
+            parent_request_id: string;
+            /** Reason Refs */
+            reason_refs: string[];
+            /** Run Id */
+            run_id: string;
+            /** Tasks */
+            tasks: components["schemas"]["P5_TaskSpec"][];
+        };
+        /** PredicateResult */
+        P5_PredicateResult: {
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Predicate
+             * @enum {string}
+             */
+            predicate: "can_review" | "can_prepare_apply" | "can_submit_slot" | "upgrade_verified" | "exit_complete";
+            /** Slot Id */
+            slot_id: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pass" | "missing" | "stale" | "failed" | "unknown";
+            /** Subject Digest */
+            subject_digest: string;
+        };
+        /** PrivateReviewView */
+        P5_PrivateReviewView: {
+            approval_set: components["schemas"]["P5_ApprovalSet"] | null;
+            bundle: components["schemas"]["P5_ReviewBundle"];
+            /** Evidence Summary Refs */
+            evidence_summary_refs: string[];
+            /** Missing */
+            missing: components["schemas"]["P5_Issue"][];
+            plan: components["schemas"]["P5_ActionPlan"];
+            processing: components["schemas"]["P5_ProcessingDisclosure"];
+        };
+        /** ProcessingDisclosure */
+        P5_ProcessingDisclosure: {
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Copy Scope */
+            copy_scope: string;
+            /** Limits */
+            limits: string[];
+            /** Policy Digest */
+            policy_digest: string;
+            /** Recipients */
+            recipients: components["schemas"]["P5_ProcessingRecipient"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "qualified" | "missing" | "stale";
+        };
+        /** ProcessingRecipient */
+        P5_ProcessingRecipient: {
+            /** Name */
+            name: string;
+            /** Purpose */
+            purpose: string;
+            /** Region Text */
+            region_text: string;
+            /** Retention Text */
+            retention_text: string;
+            /** Terms Evidence Refs */
+            terms_evidence_refs: string[];
+        };
+        /** Producer */
+        P5_Producer: {
+            kind: components["schemas"]["P5_ProducerKind"];
+            /**
+             * Model
+             * @default null
+             */
+            model: string | null;
+            /** Name */
+            name: string;
+            /** Version */
+            version: string;
+        };
+        /**
+         * ProducerKind
+         * @enum {string}
+         */
+        P5_ProducerKind: "agent" | "service";
+        /** ProviderIntent */
+        P5_ProviderIntent: {
+            /** Case Id */
+            case_id: string;
+            /** Continuation Ref */
+            continuation_ref: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Intent Id */
+            intent_id: string;
+            /** Provider Id */
+            provider_id: string;
+            /**
+             * Purpose
+             * @enum {string}
+             */
+            purpose: "read_connect" | "apply_connect";
+            /** Redirect Url */
+            redirect_url: string;
+            /** Resource Id */
+            resource_id: string | null;
+        };
+        /** ProviderRef */
+        P5_ProviderRef: {
+            /** Account Id */
+            account_id: string | null;
+            /** Adapter Version */
+            adapter_version: string;
+            /** Provider Id */
+            provider_id: string;
+        };
+        /** PublicMetric */
+        P5_PublicMetric: {
+            /** Evidence Ref */
+            evidence_ref: string;
+            /** Name */
+            name: string;
+            /** Value */
+            value: string;
+        };
+        /** PublicProofView */
+        P5_PublicProofView: {
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /**
+             * Evidence Class
+             * @enum {string}
+             */
+            evidence_class: "scripted" | "component_offline" | "real_model" | "real_provider" | "real_payment" | "isolation_qualified" | "merchant_exit";
+            /**
+             * Integrity
+             * @enum {string}
+             */
+            integrity: "verified" | "unverified" | "invalid" | "unknown";
+            /** Limitations */
+            limitations: string[];
+            /** Public Id */
+            public_id: string;
+            /** Scope Text */
+            scope_text: string;
+            /** Summary Metrics */
+            summary_metrics: components["schemas"]["P5_PublicMetric"][];
+        };
+        /** RecipeLookupArgs */
+        P5_RecipeLookupArgs: {
+            /** Catalog Ref */
+            catalog_ref: string;
+            /** Fingerprint */
+            fingerprint: string;
+        };
+        /** RecipeStageArgs */
+        P5_RecipeStageArgs: {
+            /** Detection Rule Ref */
+            detection_rule_ref: string | null;
+            /** Recipe Ref */
+            recipe_ref: string;
+        };
+        /** RecoveryPlan */
+        P5_RecoveryPlan: {
+            /** Affected Effect Refs */
+            affected_effect_refs: string[];
+            /** Baseline Refs */
+            baseline_refs: string[];
+            /** Case Id */
+            case_id: string;
+            /**
+             * Chosen Route
+             * @enum {string}
+             */
+            chosen_route: "code_cutback" | "config_cutback" | "forward_repair" | "safe_hold";
+            /** Compensatable Effects */
+            compensatable_effects: string[];
+            /** Irreversible Effects */
+            irreversible_effects: string[];
+            /** Original Transaction Routes Ref */
+            original_transaction_routes_ref: string;
+            /** Plan Digest */
+            plan_digest: string;
+            /** Plan Id */
+            plan_id: string;
+            /** Required Current Authority */
+            required_current_authority: string[];
+            /** Restore Preconditions Ref */
+            restore_preconditions_ref: string;
+            /** Reversible Effects */
+            reversible_effects: string[];
+            /** State Compatibility Ref */
+            state_compatibility_ref: string;
+            /** Unknown Effects */
+            unknown_effects: string[];
+            /** Verification Case Refs */
+            verification_case_refs: string[];
+        };
+        /** RequiredAction */
+        P5_RequiredAction: {
+            /** Enabled */
+            enabled: boolean;
+            /** Kind */
+            kind: string;
+            /** Reason Code */
+            reason_code: string | null;
+            /** Resource Ids */
+            resource_ids: string[];
+        };
+        /** RequiredFlow */
+        P5_RequiredFlow: {
+            /** Acceptance Rule Ids */
+            acceptance_rule_ids: string[];
+            /** Flow Id */
+            flow_id: string;
+            /** Limitation */
+            limitation: string | null;
+            /** Origin Routes */
+            origin_routes: string[];
+            /** Payment Family */
+            payment_family: string;
+            /** Required */
+            required: boolean;
+            /** Scenario Refs */
+            scenario_refs: string[];
+        };
+        /** RequiredFlowManifest */
+        P5_RequiredFlowManifest: {
+            /** Flows */
+            flows: components["schemas"]["P5_RequiredFlow"][];
+        };
+        /** ResolvedDeliveryView */
+        P5_ResolvedDeliveryView: {
+            approvals: components["schemas"]["P5_ApprovalSet"] | null;
+            /**
+             * Delivery Route
+             * @enum {string}
+             */
+            delivery_route: "git_protected" | "direct_artifact";
+            deployment: components["schemas"]["P5_DeploymentObservation"] | null;
+            exit_manifest: components["schemas"]["P5_ExitManifest"] | null;
+            exit_plan: components["schemas"]["P5_ExitCheckPlan"] | null;
+            final_assets: components["schemas"]["P5_AssetManifest"] | null;
+            lifecycle: components["schemas"]["P5_LifecycleRun"];
+            plan: components["schemas"]["P5_ActionPlan"] | null;
+            /** Predicate Results */
+            predicate_results: components["schemas"]["P5_PredicateResult"][];
+            reservation: components["schemas"]["P5_TargetReservation"] | null;
+            review: components["schemas"]["P5_ReviewBundle"] | null;
+            snapshot: components["schemas"]["P5_DeliverySnapshot"];
+            state_cutover: components["schemas"]["P5_StateCutover"] | null;
+        };
+        /** ResourceBinding */
+        P5_ResourceBinding: {
+            /**
+             * Approved At
+             * Format: date-time
+             */
+            approved_at: string;
+            /**
+             * Authority Basis
+             * @enum {string}
+             */
+            authority_basis: "provider_verified" | "controller_attested";
+            /** Authority Evidence Refs */
+            authority_evidence_refs: string[];
+            /** Binding Id */
+            binding_id: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Controller Id */
+            controller_id: string;
+            /** Epoch */
+            epoch: number;
+            /** Granted Actions */
+            granted_actions: ("view" | "connect" | "start" | "review")[];
+            /** Node Id */
+            node_id: string;
+            /** Recipients */
+            recipients: components["schemas"]["P5_ResourceRecipient"][];
+            /** Relation Digest */
+            relation_digest: string;
+            /** Requester Id */
+            requester_id: string;
+            /** Revoked At */
+            revoked_at: string | null;
+        };
+        /** ResourceEdge */
+        P5_ResourceEdge: {
+            /** Edge Id */
+            edge_id: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** From Node */
+            from_node: string;
+            /**
+             * Relation
+             * @enum {string}
+             */
+            relation: "builds_from" | "routes_to" | "stores_state_in" | "receives_callback_from" | "depends_on";
+            /** Required For Scope */
+            required_for_scope: boolean;
+            /** To Node */
+            to_node: string;
+        };
+        /** ResourceGraph */
+        P5_ResourceGraph: {
+            /** Case Id */
+            case_id: string;
+            /** Edges */
+            edges: components["schemas"]["P5_ResourceEdge"][];
+            /** Graph Digest */
+            graph_digest: string;
+            /** Graph Id */
+            graph_id: string;
+            /** Nodes */
+            nodes: components["schemas"]["P5_ResourceNode"][];
+        };
+        /** ResourceNode */
+        P5_ResourceNode: {
+            /** Binding Refs */
+            binding_refs: string[];
+            /** Environment Id */
+            environment_id: string | null;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "source" | "frontend" | "backend" | "datastore" | "callback" | "scheduled_job" | "external_service" | "artifact";
+            /** Node Id */
+            node_id: string;
+            provider: components["schemas"]["P5_ProviderRef"];
+            /** Provider Resource Id */
+            provider_resource_id: string | null;
+            /** Required For Scope */
+            required_for_scope: boolean;
+            revision: components["schemas"]["P5_SourceRevision"] | null;
+        };
+        /** ResourceRecipient */
+        P5_ResourceRecipient: {
+            /** Principal Id */
+            principal_id: string;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "requester" | "controller" | "reviewer";
+        };
+        /** ResourceSummary */
+        P5_ResourceSummary: {
+            /** Check Refs */
+            check_refs: string[];
+            /**
+             * Controller State
+             * @enum {string}
+             */
+            controller_state: "unbound" | "waiting" | "approved" | "revoked" | "unknown";
+            /** Environment */
+            environment: string;
+            /** Label */
+            label: string;
+            /** Node Id */
+            node_id: string;
+            /** Permitted Actions */
+            permitted_actions: string[];
+            provider: components["schemas"]["P5_ProviderRef"];
+            /** Read Scope Text */
+            read_scope_text: string;
+            /** Source Snapshot Ref */
+            source_snapshot_ref: string | null;
+        };
+        /** ResumeRunRequest */
+        P5_ResumeRunRequest: {
+            /** Expected State Version */
+            expected_state_version: number;
+            /** Scope Digest */
+            scope_digest: string;
+        };
+        /** ReviewBundle */
+        P5_ReviewBundle: {
+            /** Artifact Digest */
+            artifact_digest: string;
+            /** Baseline Snapshot Refs */
+            baseline_snapshot_refs: string[];
+            /** Bundle Digest */
+            bundle_digest: string;
+            /** Bundle Id */
+            bundle_id: string;
+            /** Candidate Snapshot Refs */
+            candidate_snapshot_refs: string[];
+            /** Case Id */
+            case_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Domain Rule Result Refs */
+            domain_rule_result_refs: string[];
+            /** Effective Config Digest */
+            effective_config_digest: string;
+            /** Missing Evidence Refs */
+            missing_evidence_refs: string[];
+            /** Patch Digest */
+            patch_digest: string;
+            /** Proposed Apply Plan Ref */
+            proposed_apply_plan_ref: string;
+            /** Recovery Plan Ref */
+            recovery_plan_ref: string;
+            /** Run Id */
+            run_id: string;
+            /** Scenario Result Refs */
+            scenario_result_refs: string[];
+            /** Security Result Refs */
+            security_result_refs: string[];
+            /** Unsupported Paths */
+            unsupported_paths: string[];
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
+        /** RunTaskSnapshot */
+        P5_RunTaskSnapshot: {
+            /** Cancellation Ref */
+            cancellation_ref: string | null;
+            /** Case Id */
+            case_id: string;
+            /** Generation */
+            generation: number;
+            /** Last Event Seq */
+            last_event_seq: number;
+            /** Run Id */
+            run_id: string;
+            /** State Version */
+            state_version: number;
+            /** Tasks */
+            tasks: components["schemas"]["P5_AgentTask"][];
+        };
+        /** SafetyRequestHoldArgs */
+        P5_SafetyRequestHoldArgs: {
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Reason Code */
+            reason_code: string;
+            /** Run Ref */
+            run_ref: string;
+        };
+        /** ScenarioStageArgs */
+        P5_ScenarioStageArgs: {
+            /** Mutant Set Ref */
+            mutant_set_ref: string;
+            /** Scenario Set Ref */
+            scenario_set_ref: string;
+        };
+        /** SnapshotChange */
+        P5_SnapshotChange: {
+            /** Commit */
+            commit: string | null;
+            /** Plan Item Ids */
+            plan_item_ids: string[];
+            /** Summary */
+            summary: string;
+        };
+        /** SourceReadArgs */
+        P5_SourceReadArgs: {
+            /** Max Bytes */
+            max_bytes: number;
+            /** Path */
+            path: string;
+            /** Snapshot Ref */
+            snapshot_ref: string;
+        };
+        /** SourceRevision */
+        P5_SourceRevision: {
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "git_commit" | "provider_revision_set" | "capture";
+            /** Value */
+            value: string;
+        };
+        /** SourceSnapshot */
+        P5_SourceSnapshot: {
+            /** Authority Binding Refs */
+            authority_binding_refs: string[];
+            /**
+             * Captured At
+             * Format: date-time
+             */
+            captured_at: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Completeness
+             * @enum {string}
+             */
+            completeness: "complete_for_declared_scope" | "incomplete" | "unknown";
+            /** File Count */
+            file_count: number;
+            /** Manifest Digest */
+            manifest_digest: string;
+            /** Omission Manifest Ref */
+            omission_manifest_ref: string;
+            /**
+             * Provenance Class
+             * @enum {string}
+             */
+            provenance_class: "provider_reported" | "controller_attested" | "verified_build_link";
+            provider: components["schemas"]["P5_ProviderRef"];
+            revision: components["schemas"]["P5_SourceRevision"];
+            /** Snapshot Id */
+            snapshot_id: string;
+            /**
+             * Source Kind
+             * @enum {string}
+             */
+            source_kind: "git" | "local_folder" | "cloud_files" | "host_export";
+            /** Source Resource Id */
+            source_resource_id: string | null;
+            /** Total Bytes */
+            total_bytes: number;
+        };
+        /** StartWorkRequest */
+        P5_StartWorkRequest: {
+            /** Action Id */
+            action_id: string;
+            /** Readiness Digest */
+            readiness_digest: string;
+            /** Readiness Id */
+            readiness_id: string;
+        };
+        /** StateCutover */
+        P5_StateCutover: {
+            /** Admission Ref */
+            admission_ref: string;
+            /** Case Id */
+            case_id: string;
+            /** Cutover Id */
+            cutover_id: string;
+            /** Drain Evidence Refs */
+            drain_evidence_refs: string[];
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Export Manifest Ref */
+            export_manifest_ref: string;
+            /** Fence Epochs */
+            fence_epochs: {
+                [key: string]: number;
+            };
+            /** Generation */
+            generation: number;
+            /** Handler Inventory Ref */
+            handler_inventory_ref: string;
+            /** High Water Ref */
+            high_water_ref: string;
+            /** Ingress Ref */
+            ingress_ref: string;
+            /** Origin Route Ref */
+            origin_route_ref: string;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "prepared" | "fenced" | "exported" | "restored" | "replayed" | "verified" | "held" | "unknown";
+            /** Pending External Effect Refs */
+            pending_external_effect_refs: string[];
+            /** Replay Manifest Ref */
+            replay_manifest_ref: string;
+            /** Restore Manifest Ref */
+            restore_manifest_ref: string;
+            /** Run Id */
+            run_id: string;
+            /** Schema Digest */
+            schema_digest: string;
+            /** State Digest */
+            state_digest: string;
+            /** Writer Inventory Ref */
+            writer_inventory_ref: string;
+        };
+        /** StatusReadArgs */
+        P5_StatusReadArgs: {
+            /** Run Ref */
+            run_ref: string;
+        };
+        /** SubjectDerivation */
+        P5_SubjectDerivation: {
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /** Case Id */
+            case_id: string;
+            /** Collector Identity Ref */
+            collector_identity_ref: string;
+            /** Derivation Id */
+            derivation_id: string;
+            /** Generation */
+            generation: number;
+            /**
+             * Operation
+             * @enum {string}
+             */
+            operation: "candidate_patch" | "artifact_build" | "evidence_derivation";
+            /** Output Refs */
+            output_refs: string[];
+            /** Output Subject */
+            output_subject: string;
+            /** Parent Refs */
+            parent_refs: string[];
+            /** Parent Subject */
+            parent_subject: string;
+            /** Recipe Or Patch Digest */
+            recipe_or_patch_digest: string;
+            /** Run Id */
+            run_id: string;
+            /** Task Id */
+            task_id: string;
+        };
+        /** SubjectManifest */
+        P5_SubjectManifest: {
+            /** Config Digest */
+            config_digest: string | null;
+            /** Oci Manifest Digest */
+            oci_manifest_digest: string | null;
+            /** Runtime Profile Digest */
+            runtime_profile_digest: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Source Snapshot Refs */
+            source_snapshot_refs: string[];
+            /** Source Tree Digest */
+            source_tree_digest: string | null;
+        };
+        /** TargetKey */
+        P5_TargetKey: {
+            /** Account Id */
+            account_id: string;
+            /** Environment Id */
+            environment_id: string;
+            /** Provider Id */
+            provider_id: string;
+            /** Resource Id */
+            resource_id: string;
+            /** Resource Kind */
+            resource_kind: string;
+        };
+        /** TargetReservation */
+        P5_TargetReservation: {
+            /** Action Plan Ref */
+            action_plan_ref: string;
+            /** Case Id */
+            case_id: string;
+            /** Expected Version Refs */
+            expected_version_refs: string[];
+            /**
+             * Lease Until
+             * Format: date-time
+             */
+            lease_until: string;
+            /** Reservation Id */
+            reservation_id: string;
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Run Id */
+            run_id: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "held" | "reconciling" | "releasable" | "released";
+            /** Target Keys */
+            target_keys: components["schemas"]["P5_TargetKey"][];
+            /** Unresolved Effect Refs */
+            unresolved_effect_refs: string[];
+        };
+        /** TaskCheckpoint */
+        P5_TaskCheckpoint: {
+            /** Budget Reservation Refs */
+            budget_reservation_refs: string[];
+            /** Committed Message Refs */
+            committed_message_refs: string[];
+            /** Context Digest */
+            context_digest: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Generation */
+            generation: number;
+            /** Invocation Refs */
+            invocation_refs: string[];
+            /** Lease Epoch */
+            lease_epoch: number;
+            /**
+             * Next Step
+             * @enum {string}
+             */
+            next_step: "model_turn" | "await_tool" | "validate_output";
+            /** Policy Digest */
+            policy_digest: string;
+            /** Staged Output Refs */
+            staged_output_refs: string[];
+            /** Task Id */
+            task_id: string;
+            /** Turn */
+            turn: number;
+            /** Wake Condition Ref */
+            wake_condition_ref: string | null;
+        };
+        /** TaskContext */
+        P5_TaskContext: {
+            /** Allowed Tool Ids */
+            allowed_tool_ids: string[];
+            /** Budget Ref */
+            budget_ref: string;
+            /** Case Id */
+            case_id: string;
+            /** Checkpoint Ref */
+            checkpoint_ref: string | null;
+            /**
+             * Deadline
+             * Format: date-time
+             */
+            deadline: string;
+            /** Expected Schemas */
+            expected_schemas: string[];
+            /** Expected Subject */
+            expected_subject: string;
+            /** Generation */
+            generation: number;
+            /** Input Refs */
+            input_refs: string[];
+            /** Lease Epoch */
+            lease_epoch: number;
+            /**
+             * Operation
+             * @enum {string}
+             */
+            operation: "verify_package" | "survey" | "explain_status" | "audit" | "propose_plan" | "build_baseline" | "build_candidate" | "validate_driver" | "run_scenario" | "scribe_draft" | "scribe_final" | "architect" | "candidate_patch" | "run_mutant" | "derive_guards" | "diagnose" | "learn" | "selfcheck_recipe" | "aggregate";
+            /** Policy Ref */
+            policy_ref: string;
+            /** Prompt Ref */
+            prompt_ref: string;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "Gardener" | "Surveyor" | "Builder" | "Explorer" | "Scribe" | "Architect" | "Grafter" | "Adversary" | "Healer" | "Librarian" | "Herald" | "Orchard Analyst" | "Sentinel";
+            /** Run Id */
+            run_id: string;
+            /** Task Ref */
+            task_ref: string;
+        };
+        /** TaskEvent */
+        P5_TaskEvent: {
+            /** Case Id */
+            case_id: string;
+            /** Causation Id */
+            causation_id: string;
+            /** Correlation Id */
+            correlation_id: string;
+            /** Event Id */
+            event_id: string;
+            /** Generation */
+            generation: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "task_ready" | "task_changed" | "tool_observed" | "approval_changed" | "cancellation_changed" | "timer_due" | "evidence_changed";
+            /**
+             * Occurred At
+             * Format: date-time
+             */
+            occurred_at: string;
+            /** Payload Digest */
+            payload_digest: string;
+            /** Payload Ref */
+            payload_ref: string;
+            /** Run Id */
+            run_id: string;
+            /** Sequence */
+            sequence: number;
+            /** Task Id */
+            task_id: string | null;
+        };
+        /** TaskLease */
+        P5_TaskLease: {
+            /** Context Ref */
+            context_ref: string;
+            /** Generation */
+            generation: number;
+            /** Lease Epoch */
+            lease_epoch: number;
+            /**
+             * Lease Until
+             * Format: date-time
+             */
+            lease_until: string;
+            /** Run Id */
+            run_id: string;
+            /** Task Id */
+            task_id: string;
+            /** Task Version */
+            task_version: number;
+            /** Worker Id */
+            worker_id: string;
+        };
+        /** TaskSpec */
+        P5_TaskSpec: {
+            /** Allowed Tool Ids */
+            allowed_tool_ids: string[];
+            /** Dependencies */
+            dependencies: string[];
+            /** Expected Schemas */
+            expected_schemas: string[];
+            /** Expected Subject */
+            expected_subject: string;
+            /** Input Refs */
+            input_refs: string[];
+            /**
+             * Operation
+             * @enum {string}
+             */
+            operation: "verify_package" | "survey" | "explain_status" | "audit" | "propose_plan" | "build_baseline" | "build_candidate" | "validate_driver" | "run_scenario" | "scribe_draft" | "scribe_final" | "architect" | "candidate_patch" | "run_mutant" | "derive_guards" | "diagnose" | "learn" | "selfcheck_recipe" | "aggregate";
+            /** Output Slot */
+            output_slot: string;
+            /**
+             * Output Subject Policy
+             * @enum {string}
+             */
+            output_subject_policy: "same_subject" | "candidate_child" | "build_from_source" | "derived_evidence";
+            /** Required */
+            required: boolean;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "Gardener" | "Surveyor" | "Builder" | "Explorer" | "Scribe" | "Architect" | "Grafter" | "Adversary" | "Healer" | "Librarian" | "Herald" | "Orchard Analyst" | "Sentinel";
+            /** Task Id */
+            task_id: string;
+            /** Workspace Ref */
+            workspace_ref: string | null;
+        };
+        /** ToolCall */
+        P5_ToolCall: {
+            /** Arguments Digest */
+            arguments_digest: string;
+            /** Arguments Ref */
+            arguments_ref: string;
+            /** Call Id */
+            call_id: string;
+            /** Tool */
+            tool: string;
+        };
+        /** ToolInvocation */
+        P5_ToolInvocation: {
+            /** Arguments Digest */
+            arguments_digest: string;
+            /** Arguments Ref */
+            arguments_ref: string;
+            /** Budget Reservation Ref */
+            budget_reservation_ref: string;
+            /** Capability Ref */
+            capability_ref: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Deadline
+             * Format: date-time
+             */
+            deadline: string;
+            /** Effect Ref */
+            effect_ref: string | null;
+            /** Generation */
+            generation: number;
+            /** Input Digest */
+            input_digest: string;
+            /** Invocation Id */
+            invocation_id: string;
+            issue: components["schemas"]["P5_Issue"] | null;
+            /** Lease Epoch */
+            lease_epoch: number;
+            /** Result Refs */
+            result_refs: string[];
+            /** Run Id */
+            run_id: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "intended" | "submitted" | "observed" | "denied" | "failed" | "unknown";
+            /** Task Id */
+            task_id: string;
+            /** Tool Id */
+            tool_id: string;
+        };
+        /** UnresolvedInputs */
+        P5_UnresolvedInputs: {
+            /** Items */
+            items: components["schemas"]["P5_Issue"][];
+        };
+        /** UploadSession */
+        P5_UploadSession: {
+            /** Binding Epochs */
+            binding_epochs: {
+                [key: string]: number;
+            };
+            /** Case Id */
+            case_id: string;
+            /** Contributor Id */
+            contributor_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Expected Manifest Digest */
+            expected_manifest_digest: string;
+            /** Expected Manifest Ref */
+            expected_manifest_ref: string;
+            /** Expected Total Bytes */
+            expected_total_bytes: number;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Finalised Snapshot Ref */
+            finalised_snapshot_ref: string | null;
+            /** Received Chunk Refs */
+            received_chunk_refs: string[];
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "pending" | "receiving" | "finalised" | "cancelled" | "expired";
+            /** Upload Id */
+            upload_id: string;
+        } & ({
+            finalised_snapshot_ref?: string;
+            /**
+             * State
+             * @constant
+             * @enum {string}
+             */
+            state?: "finalised";
+        } | {
+            finalised_snapshot_ref?: null;
+            /**
+             * State
+             * @enum {string}
+             */
+            state?: "pending" | "receiving" | "cancelled" | "expired";
+        });
+        /** WakeCondition */
+        P5_WakeCondition: {
+            /** Case Id */
+            case_id: string;
+            /** Condition Id */
+            condition_id: string;
+            /** Due At */
+            due_at: string | null;
+            /** Expected Digest */
+            expected_digest: string | null;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Generation */
+            generation: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "timer" | "task_result" | "authority" | "approval" | "counterpart" | "tool_reconcile";
+            /** Minimum Version */
+            minimum_version: number;
+            /** Owner */
+            owner: string;
+            /** Run Id */
+            run_id: string;
+            /** Subject Ref */
+            subject_ref: string;
+        };
+        /** WorkAcceptance */
+        P5_WorkAcceptance: {
+            /**
+             * Accepted At
+             * Format: date-time
+             */
+            accepted_at: string;
+            /** Action Id */
+            action_id: string;
+            /** Case Id */
+            case_id: string;
+            /** Readiness Digest */
+            readiness_digest: string;
+            /** Receipt Ref */
+            receipt_ref: string;
+            /** Resource Graph Digest */
+            resource_graph_digest: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Source Manifest Digest */
+            source_manifest_digest: string;
+            /** Work Id */
+            work_id: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
+        /** WorkCancellation */
+        P5_WorkCancellation: {
+            /** Action Id */
+            action_id: string;
+            /** Cancel Id */
+            cancel_id: string;
+            /** Case Id */
+            case_id: string;
+            /** Generation */
+            generation: number | null;
+            /**
+             * Requested At
+             * Format: date-time
+             */
+            requested_at: string;
+            /** Requested By */
+            requested_by: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "intent_recorded" | "fenced" | "termination_pending" | "confirmed" | "unknown";
+            /** Termination Evidence Refs */
+            termination_evidence_refs: string[];
+            /** Work Id */
+            work_id: string | null;
+        };
+        /** WorkPackage */
+        P5_WorkPackage: {
+            /**
+             * Acquisition Expires At
+             * Format: date-time
+             */
+            acquisition_expires_at: string;
+            /** Baseline Manifest Digest */
+            baseline_manifest_digest: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Completeness
+             * @enum {string}
+             */
+            completeness: "sufficient_for_declared_static_scope" | "incomplete" | "unknown";
+            /** Components Ref */
+            components_ref: string;
+            /** Custody Policy Digest */
+            custody_policy_digest: string;
+            /** Delivery Feasibility Ref */
+            delivery_feasibility_ref: string;
+            /** External Dependencies Ref */
+            external_dependencies_ref: string;
+            /** Fixture Profile Digest */
+            fixture_profile_digest: string;
+            /** Omission Manifest Ref */
+            omission_manifest_ref: string;
+            /** Processing Policy Digest */
+            processing_policy_digest: string;
+            /** Required Flow Refs */
+            required_flow_refs: string[];
+            /** Resource Graph Digest */
+            resource_graph_digest: string;
+            /** Resource Graph Ref */
+            resource_graph_ref: string;
+            /** Runtime Profile Digest */
+            runtime_profile_digest: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Source Snapshot Refs */
+            source_snapshot_refs: string[];
+            /** State Recipe Refs */
+            state_recipe_refs: string[];
+            /** Synthetic Seed Refs */
+            synthetic_seed_refs: string[];
+            /** Unresolved Requirements Ref */
+            unresolved_requirements_ref: string;
+            /** Work Package Id */
+            work_package_id: string;
+        };
+        /** WorkStatus */
+        P5_WorkStatus: {
+            /** Action Id */
+            action_id: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /** Generation */
+            generation: number | null;
+            /** Last Event Seq */
+            last_event_seq: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "submitting" | "accepted" | "queued" | "provisioning" | "operation_started" | "held" | "unknown" | "cancellation_pending" | "cancelled" | "stopped" | "failed";
+            /** Work Id */
+            work_id: string | null;
+        } & ({
+            /**
+             * State
+             * @enum {string}
+             */
+            state?: "submitting" | "held" | "unknown" | "cancellation_pending" | "cancelled" | "failed";
+        } | {
+            /**
+             * State
+             * @enum {string}
+             */
+            state?: "accepted" | "queued" | "provisioning";
+            work_id?: string;
+        } | {
+            /** Evidence Refs */
+            evidence_refs?: string[];
+            generation?: number;
+            /**
+             * State
+             * @constant
+             * @enum {string}
+             */
+            state?: "operation_started";
+            work_id?: string;
+        } | {
+            /** Evidence Refs */
+            evidence_refs?: string[];
+            /**
+             * State
+             * @constant
+             * @enum {string}
+             */
+            state?: "stopped";
+            work_id?: string;
+        });
+        /** WorkerOperation */
+        P5_WorkerOperation: {
+            /** Assignment Digest */
+            assignment_digest: string;
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Finished At
+             * Format: date-time
+             */
+            finished_at: string;
+            /** Generation */
+            generation: number;
+            /**
+             * Kind
+             * @constant
+             */
+            kind: "BASELINE_READ";
+            /** Observed Digest */
+            observed_digest: string;
+            /** Operation Id */
+            operation_id: string;
+            /** Resource Graph Digest */
+            resource_graph_digest: string;
+            /**
+             * Result
+             * @enum {string}
+             */
+            result: "verified" | "failed";
+            /** Runtime Profile Digest */
+            runtime_profile_digest: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Source Manifest Digest */
+            source_manifest_digest: string;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Work Id */
+            work_id: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+            /** Worker Id */
+            worker_id: string;
         };
         /** PayPalEvidence */
         PayPalEvidence: {
@@ -2240,6 +5711,2697 @@ export interface operations {
                 };
                 content: {
                     "application/problem+json": unknown;
+                };
+            };
+        };
+    };
+    list_cases: {
+        parameters: {
+            query?: {
+                cursor?: string;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_CaseList"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    create_case: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CreateCase"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ConnectionCase"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    get_case: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ConnectionCase"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    create_action_intent: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CreateActionIntent"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ActionIntent"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    start_work: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_StartWorkRequest"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_WorkAcceptance"] | components["schemas"]["P5_WorkCancellation"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    action_status: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                action_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ActionStatusView"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    cancel_work: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+                action_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CancelWorkRequest"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_WorkCancellation"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    issue_apply_approval: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_IssueApplyApproval"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ApplyApproval"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    case_events: {
+        parameters: {
+            query?: {
+                after?: number;
+            };
+            header?: {
+                "Last-Event-ID"?: string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/event-stream": components["schemas"]["P5_CaseEvent"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    controller_invitation: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CreateInvitation"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ControllerInvitation"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    resume_run: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+                run_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_ResumeRunRequest"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_LifecycleRun"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    provider_intent: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CreateProviderIntent"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ProviderIntent"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    private_review: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                bundle_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_PrivateReviewView"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    create_upload: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CreateUploadRequest"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_UploadSession"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    upload_status: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_UploadSession"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    cancel_upload: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CancelUploadRequest"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_UploadSession"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    upload_chunk: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    /** Format: binary */
+                    data: string;
+                    metadata: components["schemas"]["P5_ChunkUploadRequest"];
+                };
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ChunkReceipt"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    finalise_upload: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                case_id: string;
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_FinaliseUploadRequest"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_UploadSession"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    case_view: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_CaseView"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    create_draft: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_CreateDraft"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_DraftCase"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    claim_draft: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+                "X-CSRF-Token": string;
+            };
+            path: {
+                draft_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_ClaimDraft"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_ConnectionCase"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    public_proof: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                public_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_PublicProofView"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    worker_operation: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["P5_WorkerOperation"];
+            };
+        };
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_CollectorAcceptance"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
                 };
             };
         };

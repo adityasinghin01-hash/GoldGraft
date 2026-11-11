@@ -1,0 +1,19 @@
+{
+  "authenticity_ref": "fixture:authenticity_ref",
+  "case_id": "case-demo",
+  "completed_at": "2026-11-10T00:00:00Z",
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "generation": 1,
+  "input_digest": "e420502e2403b9711173e44c60f5aa5eba0fcaf5ddce9ba91ab3c207a9b1e335",
+  "issue": null,
+  "lease_epoch": 1,
+  "outcome": "completed",
+  "output_refs": [
+    "fixture:output_ref"
+  ],
+  "request_id": "fixture:request_id",
+  "run_id": "run-demo",
+  "task_id": "survey-demo"
+}

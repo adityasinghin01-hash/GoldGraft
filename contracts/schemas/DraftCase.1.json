@@ -1,0 +1,56 @@
+{
+  "$id": "https://goldgraft.dev/schemas/DraftCase.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "continuation_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Continuation Ref",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "draft_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Draft Id",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "shop_url": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Shop Url",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "unclaimed",
+        "claimed",
+        "expired"
+      ],
+      "title": "State",
+      "type": "string"
+    }
+  },
+  "required": [
+    "draft_id",
+    "shop_url",
+    "created_at",
+    "expires_at",
+    "continuation_ref",
+    "state"
+  ],
+  "title": "DraftCaseV1",
+  "type": "object"
+}

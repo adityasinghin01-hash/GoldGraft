@@ -1,0 +1,33 @@
+{
+  "$id": "https://goldgraft.dev/schemas/SourceReadArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "max_bytes": {
+      "exclusiveMinimum": 0,
+      "maximum": 32768,
+      "title": "Max Bytes",
+      "type": "integer"
+    },
+    "path": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "Path",
+      "type": "string"
+    },
+    "snapshot_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Snapshot Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "snapshot_ref",
+    "path",
+    "max_bytes"
+  ],
+  "title": "SourceReadArgsV1",
+  "type": "object"
+}

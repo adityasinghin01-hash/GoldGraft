@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-11-10T00:00:00Z",
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "predicate": "can_review",
+  "slot_id": null,
+  "status": "pass",
+  "subject_digest": "7e96e6c699649db7c444f691f6df1662cc31fa20b085be10339ca0551862ffda"
+}

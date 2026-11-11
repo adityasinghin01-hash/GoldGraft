@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "kind": "fixture:kind",
+  "reason_code": null,
+  "resource_ids": [
+    "synthetic-resource"
+  ]
+}

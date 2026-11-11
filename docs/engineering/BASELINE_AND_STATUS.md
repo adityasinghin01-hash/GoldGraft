@@ -1,5 +1,7 @@
 # Inspected baseline and limits
 
+> **Current local Plan5 inspection, 6 November2026:** Phase5.1 research and Phase5.2 paper design are complete; [Plan5 pack](plan5/START_HERE.md). Local main remains05b5b3b with prior dirty work preserved; read-only remote refs observed main da2b5f02d5559c510de6b3b9d81e58400bdf6c89 and proof571393c563522dfd2e4d49afcfa080987e33b695. Product pieces web/agents are placeholders here; typed13-role stand-ins exist. Proof handoff/source inspected, no rerun/merge; other unpushed work unknown. Plan2 GitHub/Drive publication COMPLETE per current programme evidence; old unavailable/publication wording below is historical. New Plan5 docs are local/unpublished. No product/generated/secret/reference/Desktop changes, installs, product tests/jobs/accounts or Phase5.3/Plan6 execution.
+
 | Area | Inspected fact / remaining work |
 |---|---|
 | Local repository | Main at `05b5b3beb37a2ac4b242c9ff0cb34f387f200e9f`; clean before this documentation update. Shared contracts/foundation/fakes/fixtures/plugtests exist. Product piece placeholders on this main do not establish other people's local/unpushed work. |
