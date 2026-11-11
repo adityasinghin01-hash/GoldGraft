@@ -28,6 +28,10 @@ def tick(run_ref, now, ports):
             from .workflow import advance
 
             advance(run_ref, ports)
+        elif getattr(ports, "program", None) == "integrated":
+            from .integrated import advance as advance_integrated
+
+            advance_integrated(run_ref, ports)
         lease = ports.control.claim("runtime-worker", ports.clock())
         if lease is None:
             break
