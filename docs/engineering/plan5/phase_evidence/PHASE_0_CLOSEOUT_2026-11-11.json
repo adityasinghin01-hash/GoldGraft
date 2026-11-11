@@ -1,0 +1,33 @@
+{
+  "at_utc": "2026-11-11T18:08:02.967207+00:00",
+  "phase": 0,
+  "gate": "PASS_OFFLINE_IMPLEMENTATION",
+  "owner": "Codex: every non-frontend component, review, commits/pushes and handoff; Claude frontend only",
+  "user_authority": "Latest direct clarification, 11 Nov 2026",
+  "sequencing_correction": "Exact paid-context sizing depends on the Phase1/2 adapters. Zero-cost implementation may proceed; before paid dispatch the unchanged per-role/project envelopes and current qualification must pass.",
+  "labels_cases_repeats_changed": false,
+  "paid_lane_allowance_micro_usd": 0,
+  "active_cap_micro_usd": 10000000,
+  "spent_micro_usd": 3353287,
+  "available_micro_usd": 6646713,
+  "uncertain_turns": 0,
+  "new_model_calls": 0,
+  "merge_validation": {
+    "passed": 187,
+    "skipped": 1,
+    "skip": "PHP unavailable"
+  },
+  "followup_checks": {
+    "passed": 43,
+    "skipped": 0
+  },
+  "lint": "PASS",
+  "format_selected_23_files": "PASS",
+  "style_changes": "EOF blanks removed in six incoming files; Ruff formatting only in lifecycle approvals and lifecycle proof",
+  "pending_reuse_pr": {
+    "number": 12,
+    "head": "b25ce0a8e6e1a53dfc63780b34d27f9d1f412e02",
+    "state": "reviewed relevant source; not yet integrated"
+  },
+  "next_phase": "Phase1 actual counterpart/API completion; no waiting for former package owners"
+}

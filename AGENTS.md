@@ -1,5 +1,21 @@
 # Rules for coding agents working in GoldGraft
 
+## Current execution ownership — Aditya, 11 November 2026
+
+Aditya explicitly assigned Claude **frontend only** and Codex **all non-frontend
+work**: agents, backend/runner/domain/proof, sponsor integrations, testing,
+integration, Git commits/pushes and operating handoff. Work directly on `main`
+in `/Users/aditya/dev/GoldGraft-plan5-build`. Do not recreate integration branches
+or wait for Claude to review/commit non-frontend changes. Reuse and preserve
+teammates' work; inspect their current PRs before duplicating changes. Keep
+`pieces/web` exclusively Claude-owned and report after every phase.
+
+This execution assignment supersedes older owner-only edit restrictions and
+the old Claude-driver rule below. Existing budget, secret, format-change,
+read-only intake, external authority, money/state and qualification rules remain.
+Git publication is not permission for merchant/provider deployments, account
+changes, external messages or financial operations.
+
 Read [docs/engineering/START_HERE.md](docs/engineering/START_HERE.md) and the relevant shared START guide before implementation. The reviewed target is a browser connector service with fixed saved-case journey, variable sources/hosts, genuinely read-only initial access, isolated work and separately authorised complete working-site delivery/recovery/exit. Render is first reference, not universal host support.
 
 Current Python models under `contracts/src/goldgraft_contracts/` own actual wire support. New records/routes in reviewed engineering Markdown are **PROPOSED**, not existing APIs. Original `docs/design/` has historical bodies; use its supersession notices. Do not silently widen current formats, fill fake Git/workflow certificate fields, or create a second `pieces/connector` package from superseded sketches.
@@ -23,7 +39,7 @@ Paper Plans1/3/4 completion and Plan2 docs do not authorise product jobs, Plans5
 5. Never write secrets, keys or tokens into code, fixtures, logs or docs. Use `.env.example` with empty values.
 6. Licences: our code is MIT. Do NOT copy code from Diffy (CC BY-NC-ND) or Juspay Decision Engine (AGPL) — ideas only. Do NOT copy code from the PayPal AG Grid boilerplate (no licence file). Cutover's `samples/legacy-php-shop` (MIT) may be vendored with its licence notice.
 7. PayPal response shapes in fixtures must follow PayPal's public docs; put the doc URL in a comment or a `_source` field.
-8. Do not run `git commit` or `git push`. The driver (Claude) runs the full checks and commits.
+8. Codex runs required checks and commits/pushes non-frontend work on main under Aditya's current assignment. No force push, stash, destructive reset or publication of secrets/private evidence. Claude owns frontend only.
 9. Python 3.12, managed by `uv`; lint with `ruff`; test with `pytest`. Node 22 for TypeScript tooling.
 10. When something in the design is ambiguous, choose the simplest reading, write it down in your final report under "Decisions", and keep going.
 

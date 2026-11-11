@@ -95,8 +95,7 @@ class ApprovalGate:
         )
 
         reason = (
-            f"Deployment approval granted: {permission_level} "
-            f"for {target_resource} by {granted_by}"
+            f"Deployment approval granted: {permission_level} for {target_resource} by {granted_by}"
         )
 
         self.ledger.append(

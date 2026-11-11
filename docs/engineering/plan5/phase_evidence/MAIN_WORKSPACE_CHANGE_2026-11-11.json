@@ -1,0 +1,110 @@
+{
+  "captured_utc": "2026-11-11T17:53:13.397070+00:00",
+  "authorised_by": "Aditya explicit instruction: work/integrate on main and delete temporary integration branches",
+  "workspace": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "branch": "main",
+  "head": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+  "incoming_main": "aee298f31b13a6a6c76d28845b43763b948add7b",
+  "staged_merge_tree": "3387868630cf4df9349577b7ce92e7a883dcb6e8",
+  "merge_status": "prepared_without_commit",
+  "retired_local_integration_branches": [
+    {
+      "branch": "integration/all-work-20261111",
+      "former_tip": "4f9bf0c7f88dd811ba58cba856ff91ae226db172",
+      "directory_preserved": "/Users/aditya/dev/GoldGraft-integration",
+      "reason_directory_preserved": "ignored local generated files; no file deletion authorised by branch cleanup"
+    },
+    {
+      "branch": "integration/agents-into-main-20261111",
+      "former_tip": "d5572353f9b17777316b238833910b4385e78419",
+      "directory_preserved": "/Users/aditya/dev/GoldGraft-merge-20261111",
+      "reason_directory_preserved": "ignored local generated files; no file deletion authorised by branch cleanup"
+    }
+  ],
+  "remote_branch_cleanup": {
+    "status": "deleted_and_branch_list_verified",
+    "branches": [
+      "integration/all-work-20261111",
+      "integration/agents-into-main-20261111"
+    ],
+    "authority": "Aditya requested deletion of the temporary integration branches; both exact tips verified already merged in main"
+  },
+  "original_checkout": {
+    "path": "/Users/aditya/dev/GoldGraft",
+    "head": "05b5b3beb37a2ac4b242c9ff0cb34f387f200e9f",
+    "branch": "detached",
+    "dirty_paths_preserved": true
+  },
+  "original_build_dirty_paths": [
+    "M docs/engineering/START_HERE.md",
+    " M docs/engineering/plan5/BUILD_STATUS.md",
+    " M docs/engineering/plan5/FINAL_AGENTS_REPORT_2026-11-11.md",
+    " M docs/engineering/plan5/START_HERE.md",
+    " M docs/engineering/work/DONE_AND_TEST_MATRIX.md",
+    " M docs/engineering/work/SINGH_PLAN_5_6_HANDOFF.md",
+    "?? docs/engineering/plan5/ALL_AGENTS_END_TO_END_EXECUTION_PLAN_2026-11-11.md",
+    "?? docs/engineering/plan5/TEAM_GITHUB_AUDIT_2026-11-11.md",
+    "?? docs/engineering/plan5/phase_evidence/PHASE_0_2026-11-11.md",
+    "?? docs/engineering/plan5/phase_evidence/PHASE_0_CHECKS_2026-11-11.json",
+    "?? docs/engineering/plan5/phase_evidence/PHASE_0_CORPUS_2026-11-11.json",
+    "?? docs/engineering/plan5/phase_evidence/PHASE_0_DRIVER_REQUEST_2026-11-11.md",
+    "?? docs/engineering/plan5/phase_evidence/PHASE_0_INPUTS_2026-11-11.json",
+    "?? docs/engineering/plan5/phase_evidence/PHASE_0_TOOLS_2026-11-11.json"
+  ],
+  "worktree_files_deleted": false,
+  "commit_push_stash_performed": false,
+  "application_integration_package_preserved": true,
+  "incoming_staged_whitespace_check": {
+    "status": "FAIL_INHERITED_EOF_BLANK_LINES",
+    "paths": [
+      "pieces/backend/connection/__init__.py",
+      "pieces/backend/connection/providers.py",
+      "pieces/backend/connection/readiness.py",
+      "pieces/backend/connection/resource_graph.py",
+      "pieces/backend/lifecycle/reconcile.py",
+      "providers/__init__.py"
+    ],
+    "owner": "Gupta",
+    "note": "No manual change to teammate code; fix before final qualification"
+  },
+  "incoming_merged_paths": [
+    ".github/workflows/proof-signing.yml",
+    "conftest.py",
+    "docs/PROOF_HANDOFF.md",
+    "pieces/backend/connection/__init__.py",
+    "pieces/backend/connection/acquisition.py",
+    "pieces/backend/connection/authority.py",
+    "pieces/backend/connection/cases.py",
+    "pieces/backend/connection/providers.py",
+    "pieces/backend/connection/readiness.py",
+    "pieces/backend/connection/resource_graph.py",
+    "pieces/backend/connection/upload_sessions.py",
+    "pieces/backend/lifecycle/__init__.py",
+    "pieces/backend/lifecycle/effects.py",
+    "pieces/backend/lifecycle/reconcile.py",
+    "pieces/backend/lifecycle/reservations.py",
+    "pieces/backend/lifecycle/state_plan.py",
+    "pieces/proof/lifecycle_evidence.py",
+    "pieces/proof/review_projection.py",
+    "pieces/runner/artifact_build.py",
+    "plugtests/test_connection_and_providers.py",
+    "plugtests/test_lifecycle_evidence.py",
+    "providers/__init__.py",
+    "providers/artifact_publisher.py",
+    "providers/github_publisher.py",
+    "providers/render_deploy.py",
+    "scripts/live_paypal_sandbox_payment.py"
+  ],
+  "validation": {
+    "command": "env GOLDGRAFT_PROOF=pieces.proof.proof:Proof GOLDGRAFT_API_APP=integration.app:create_app .venv/bin/python -B -m pytest -q plugtests pieces/agents/tests/test_workflow.py pieces/agents/tests/test_combined_model_eval.py",
+    "exit_code": 0,
+    "passed": 187,
+    "skipped": 1,
+    "warnings": 1,
+    "seconds": 22.5,
+    "skip": "PHP CLI unavailable",
+    "unstaged_diff_check": "PASS",
+    "conflicts": 0,
+    "stage_diff_check": "six inherited EOF blank-line warnings; recorded separately"
+  }
+}

@@ -1,0 +1,906 @@
+{
+  "record_kind": "internal_scope_freeze_not_service_wire",
+  "captured_utc": "2026-11-11T17:40:39.777684+00:00",
+  "phase_status": "BLOCKED",
+  "product_code_changed": false,
+  "model_api_calls": 0,
+  "external_effects": 0,
+  "local_head": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+  "remote_main": "aee298f31b13a6a6c76d28845b43763b948add7b",
+  "merge_base": "d5572353f9b17777316b238833910b4385e78419",
+  "candidate_merge_tree": "3387868630cf4df9349577b7ce92e7a883dcb6e8",
+  "merge_preflight": "clean; tree object only in scratch clone; no branch merge or commit",
+  "dirty_paths_before_evidence_generation": [
+    "M docs/engineering/START_HERE.md",
+    " M docs/engineering/plan5/BUILD_STATUS.md",
+    " M docs/engineering/plan5/FINAL_AGENTS_REPORT_2026-11-11.md",
+    " M docs/engineering/plan5/START_HERE.md",
+    " M docs/engineering/work/DONE_AND_TEST_MATRIX.md",
+    " M docs/engineering/work/SINGH_PLAN_5_6_HANDOFF.md",
+    "?? docs/engineering/plan5/ALL_AGENTS_END_TO_END_EXECUTION_PLAN_2026-11-11.md",
+    "?? docs/engineering/plan5/TEAM_GITHUB_AUDIT_2026-11-11.md"
+  ],
+  "seed_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+  "ledger": {
+    "access": "sqlite mode=ro plus query_only; no Ledger constructor",
+    "spent_micro_usd": 3353287,
+    "reserved_micro_usd": 0,
+    "available_micro_usd": 6646713,
+    "active_cap_micro_usd": 10000000,
+    "hard_cap_micro_usd": 20000000,
+    "frozen": false,
+    "uncertain_states": []
+  },
+  "role_budget": [
+    {
+      "role": "Surveyor",
+      "envelope_micro_usd": 1250000,
+      "spent_micro_usd": 1162982,
+      "remaining_micro_usd": 87018,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 1,
+      "historical_ag_spend_micro_usd": 2092,
+      "historical_largest_run_micro_usd": 2092,
+      "historical_stress_estimate_26_runs_micro_usd": 54392,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Herald",
+      "envelope_micro_usd": 250000,
+      "spent_micro_usd": 64296,
+      "remaining_micro_usd": 185704,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 41,
+      "historical_ag_spend_micro_usd": 64296,
+      "historical_largest_run_micro_usd": 2673,
+      "historical_stress_estimate_26_runs_micro_usd": 69498,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Orchard Analyst",
+      "envelope_micro_usd": 500000,
+      "spent_micro_usd": 19885,
+      "remaining_micro_usd": 480115,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 21,
+      "historical_ag_spend_micro_usd": 19885,
+      "historical_largest_run_micro_usd": 1056,
+      "historical_stress_estimate_26_runs_micro_usd": 27456,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Librarian",
+      "envelope_micro_usd": 400000,
+      "spent_micro_usd": 52313,
+      "remaining_micro_usd": 347687,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 25,
+      "historical_ag_spend_micro_usd": 52313,
+      "historical_largest_run_micro_usd": 2345,
+      "historical_stress_estimate_26_runs_micro_usd": 60970,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Healer",
+      "envelope_micro_usd": 600000,
+      "spent_micro_usd": 50141,
+      "remaining_micro_usd": 549859,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 31,
+      "historical_ag_spend_micro_usd": 50141,
+      "historical_largest_run_micro_usd": 1841,
+      "historical_stress_estimate_26_runs_micro_usd": 47866,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Adversary",
+      "envelope_micro_usd": 1200000,
+      "spent_micro_usd": 502364,
+      "remaining_micro_usd": 697636,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 44,
+      "historical_ag_spend_micro_usd": 502364,
+      "historical_largest_run_micro_usd": 49608,
+      "historical_stress_estimate_26_runs_micro_usd": 1289808,
+      "stress_estimate_exceeds_role_remainder": true,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Grafter",
+      "envelope_micro_usd": 1600000,
+      "spent_micro_usd": 99049,
+      "remaining_micro_usd": 1500951,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 40,
+      "historical_ag_spend_micro_usd": 99049,
+      "historical_largest_run_micro_usd": 17055,
+      "historical_stress_estimate_26_runs_micro_usd": 443430,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Architect",
+      "envelope_micro_usd": 1000000,
+      "spent_micro_usd": 689284,
+      "remaining_micro_usd": 310716,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 69,
+      "historical_ag_spend_micro_usd": 689284,
+      "historical_largest_run_micro_usd": 29268,
+      "historical_stress_estimate_26_runs_micro_usd": 760968,
+      "stress_estimate_exceeds_role_remainder": true,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Scribe",
+      "envelope_micro_usd": 1000000,
+      "spent_micro_usd": 126126,
+      "remaining_micro_usd": 873874,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 86,
+      "historical_ag_spend_micro_usd": 126126,
+      "historical_largest_run_micro_usd": 2886,
+      "historical_stress_estimate_26_runs_micro_usd": 75036,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Explorer",
+      "envelope_micro_usd": 1000000,
+      "spent_micro_usd": 67976,
+      "remaining_micro_usd": 932024,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 37,
+      "historical_ag_spend_micro_usd": 67976,
+      "historical_largest_run_micro_usd": 2012,
+      "historical_stress_estimate_26_runs_micro_usd": 52312,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Builder",
+      "envelope_micro_usd": 900000,
+      "spent_micro_usd": 105572,
+      "remaining_micro_usd": 794428,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 37,
+      "historical_ag_spend_micro_usd": 105572,
+      "historical_largest_run_micro_usd": 3006,
+      "historical_stress_estimate_26_runs_micro_usd": 78156,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Sentinel",
+      "envelope_micro_usd": 400000,
+      "spent_micro_usd": 154488,
+      "remaining_micro_usd": 245512,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 113,
+      "historical_ag_spend_micro_usd": 154488,
+      "historical_largest_run_micro_usd": 2799,
+      "historical_stress_estimate_26_runs_micro_usd": 72774,
+      "stress_estimate_exceeds_role_remainder": false,
+      "estimate_is_not_dispatch_authority": true
+    },
+    {
+      "role": "Gardener",
+      "envelope_micro_usd": 400000,
+      "spent_micro_usd": 258811,
+      "remaining_micro_usd": 141189,
+      "minimum_phase4_runs": 26,
+      "historical_ag_closed_paid_batches": 65,
+      "historical_ag_spend_micro_usd": 258811,
+      "historical_largest_run_micro_usd": 26840,
+      "historical_stress_estimate_26_runs_micro_usd": 697840,
+      "stress_estimate_exceeds_role_remainder": true,
+      "estimate_is_not_dispatch_authority": true
+    }
+  ],
+  "profiles": {
+    "haiku": {
+      "model": "claude-haiku-5-5",
+      "sdk": "2.7.0",
+      "input_cap": 24000,
+      "output_cap": 1536,
+      "max_turns": 4,
+      "timeout_seconds": 90,
+      "input_micro_per_million": 100000,
+      "output_micro_per_million": 500000,
+      "framing_token_allowance": 1024,
+      "purpose": "original_synthetic_MIT_agent_component_evaluation_only",
+      "profile_ref": "local:model-profile:59c164262bbdf058559dbeaa25521c4d4bd5645f0c67561cbb9473331cf44ad1",
+      "turn_reservation_micro_usd": 3168,
+      "batch_reservation_micro_usd": 12672
+    },
+    "sonnet": {
+      "model": "claude-sonnet-5-5",
+      "sdk": "2.7.0",
+      "input_cap": 24000,
+      "output_cap": 4000,
+      "max_turns": 8,
+      "timeout_seconds": 90,
+      "input_micro_per_million": 2000000,
+      "output_micro_per_million": 10000000,
+      "framing_token_allowance": 1024,
+      "purpose": "original_synthetic_MIT_agent_component_evaluation_only",
+      "thinking_type": "between_tools",
+      "input_bound": "provider_count",
+      "count_margin_tokens": 512,
+      "cache_prefix": true,
+      "cache_write_micro_per_million": 2500000,
+      "cache_read_micro_per_million": 100000,
+      "profile_ref": "local:model-profile:25ad8f08dbe9bb40b92fc2b660e8edcb246d04a225dd807e44a7e4c945cd13d5",
+      "turn_reservation_micro_usd": 100000,
+      "batch_reservation_micro_usd": 800000
+    },
+    "haiku8": {
+      "model": "claude-haiku-5-5",
+      "sdk": "2.7.0",
+      "input_cap": 24000,
+      "output_cap": 1536,
+      "max_turns": 8,
+      "timeout_seconds": 90,
+      "input_micro_per_million": 100000,
+      "output_micro_per_million": 500000,
+      "framing_token_allowance": 1024,
+      "purpose": "original_synthetic_MIT_agent_component_evaluation_only",
+      "profile_ref": "local:model-profile:756998dc870dce5e61f3618a984b20185f59f095a586a35c3db2ffe83969ed75",
+      "turn_reservation_micro_usd": 3168,
+      "batch_reservation_micro_usd": 25344
+    }
+  },
+  "role_contracts": [
+    {
+      "role": "Surveyor",
+      "operation": "survey",
+      "additional_operations": [],
+      "schemas": [
+        "RootMap/1"
+      ],
+      "tools": [
+        "source.read",
+        "analysis.matches",
+        "evidence.read"
+      ]
+    },
+    {
+      "role": "Herald",
+      "operation": "explain_status",
+      "additional_operations": [],
+      "schemas": [
+        "HeraldText/1"
+      ],
+      "tools": [
+        "status.read",
+        "evidence.summary"
+      ]
+    },
+    {
+      "role": "Orchard Analyst",
+      "operation": "aggregate",
+      "additional_operations": [],
+      "schemas": [
+        "DashboardSpec/1"
+      ],
+      "tools": [
+        "aggregate.read"
+      ]
+    },
+    {
+      "role": "Librarian",
+      "operation": "learn",
+      "additional_operations": [
+        "selfcheck_recipe"
+      ],
+      "schemas": [
+        "Recipe/1",
+        "DetectionRule/1",
+        "ExecutionProposal/1"
+      ],
+      "tools": [
+        "recipe.stage",
+        "execution.request",
+        "execution.status"
+      ]
+    },
+    {
+      "role": "Healer",
+      "operation": "diagnose",
+      "additional_operations": [],
+      "schemas": [
+        "HealNote/1"
+      ],
+      "tools": [
+        "status.read",
+        "evidence.read",
+        "safety.request_hold"
+      ]
+    },
+    {
+      "role": "Adversary",
+      "operation": "derive_guards",
+      "additional_operations": [
+        "run_mutant"
+      ],
+      "schemas": [
+        "ScenarioSet/1",
+        "MutantSet/1",
+        "ExecutionProposal/1"
+      ],
+      "tools": [
+        "source.read",
+        "scenario.stage",
+        "execution.request",
+        "execution.status",
+        "evidence.read"
+      ]
+    },
+    {
+      "role": "Grafter",
+      "operation": "candidate_patch",
+      "additional_operations": [],
+      "schemas": [
+        "ChangeList/2"
+      ],
+      "tools": [
+        "source.read",
+        "dependency.inspect",
+        "candidate.patch"
+      ]
+    },
+    {
+      "role": "Architect",
+      "operation": "architect",
+      "additional_operations": [],
+      "schemas": [
+        "TargetPlan/1"
+      ],
+      "tools": [
+        "recipe.lookup",
+        "docs.lookup",
+        "evidence.read"
+      ]
+    },
+    {
+      "role": "Scribe",
+      "operation": "scribe_draft",
+      "additional_operations": [
+        "scribe_final"
+      ],
+      "schemas": [
+        "Contract/1",
+        "TriangleRequest/1"
+      ],
+      "tools": [
+        "source.read",
+        "evidence.read"
+      ]
+    },
+    {
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "additional_operations": [],
+      "schemas": [
+        "ExecutionProposal/1"
+      ],
+      "tools": [
+        "execution.request",
+        "execution.status",
+        "evidence.read"
+      ]
+    },
+    {
+      "role": "Builder",
+      "operation": "build_baseline",
+      "additional_operations": [
+        "build_candidate",
+        "validate_driver"
+      ],
+      "schemas": [
+        "ExecutionProposal/1"
+      ],
+      "tools": [
+        "recipe.lookup",
+        "dependency.inspect",
+        "evidence.read",
+        "execution.request",
+        "execution.status"
+      ]
+    },
+    {
+      "role": "Sentinel",
+      "operation": "audit",
+      "additional_operations": [],
+      "schemas": [
+        "Alert/1"
+      ],
+      "tools": [
+        "audit.summary",
+        "safety.request_hold"
+      ]
+    },
+    {
+      "role": "Gardener",
+      "operation": "propose_plan",
+      "additional_operations": [],
+      "schemas": [
+        "PlanProposal/1"
+      ],
+      "tools": [
+        "status.read"
+      ]
+    }
+  ],
+  "service_routes": [
+    {
+      "name": "create_draft",
+      "method": "POST",
+      "path": "/v2/connection-drafts",
+      "auth": "draft",
+      "sse": false,
+      "request": "CreateDraft",
+      "responses": [
+        "DraftCase"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "claim_draft",
+      "method": "POST",
+      "path": "/v2/connection-drafts/{draft_id}/claim",
+      "auth": "session_and_draft",
+      "sse": false,
+      "request": "ClaimDraft",
+      "responses": [
+        "ConnectionCase"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "create_case",
+      "method": "POST",
+      "path": "/v2/connection-cases",
+      "auth": "session",
+      "sse": false,
+      "request": "CreateCase",
+      "responses": [
+        "ConnectionCase"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "list_cases",
+      "method": "GET",
+      "path": "/v2/connection-cases",
+      "auth": "session",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "CaseList"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "get_case",
+      "method": "GET",
+      "path": "/v2/connection-cases/{case_id}",
+      "auth": "session",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "ConnectionCase"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "case_view",
+      "method": "GET",
+      "path": "/v2/connection-cases/{case_id}/view",
+      "auth": "session",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "CaseView"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "provider_intent",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/provider-intents",
+      "auth": "session",
+      "sse": false,
+      "request": "CreateProviderIntent",
+      "responses": [
+        "ProviderIntent"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "controller_invitation",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/invitations",
+      "auth": "session",
+      "sse": false,
+      "request": "CreateInvitation",
+      "responses": [
+        "ControllerInvitation"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "create_upload",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/source-uploads",
+      "auth": "session",
+      "sse": false,
+      "request": "CreateUploadRequest",
+      "responses": [
+        "UploadSession"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "upload_status",
+      "method": "GET",
+      "path": "/v2/connection-cases/{case_id}/source-uploads/{upload_id}",
+      "auth": "session",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "UploadSession"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "upload_chunk",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/source-uploads/{upload_id}/chunks",
+      "auth": "session",
+      "sse": false,
+      "request": "ChunkUploadRequest",
+      "responses": [
+        "ChunkReceipt"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "finalise_upload",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/source-uploads/{upload_id}/finalise",
+      "auth": "session",
+      "sse": false,
+      "request": "FinaliseUploadRequest",
+      "responses": [
+        "UploadSession"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "cancel_upload",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/source-uploads/{upload_id}/cancel",
+      "auth": "session",
+      "sse": false,
+      "request": "CancelUploadRequest",
+      "responses": [
+        "UploadSession"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "create_action_intent",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/action-intents",
+      "auth": "session",
+      "sse": false,
+      "request": "CreateActionIntent",
+      "responses": [
+        "ActionIntent"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "start_work",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/actions",
+      "auth": "session",
+      "sse": false,
+      "request": "StartWorkRequest",
+      "responses": [
+        "WorkAcceptance",
+        "WorkCancellation"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "action_status",
+      "method": "GET",
+      "path": "/v2/connection-cases/{case_id}/actions/{action_id}",
+      "auth": "session",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "ActionStatusView"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "cancel_work",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/actions/{action_id}/cancellation",
+      "auth": "session",
+      "sse": false,
+      "request": "CancelWorkRequest",
+      "responses": [
+        "WorkCancellation"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "resume_run",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/lifecycle-runs/{run_id}/resume",
+      "auth": "session",
+      "sse": false,
+      "request": "ResumeRunRequest",
+      "responses": [
+        "LifecycleRun"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "private_review",
+      "method": "GET",
+      "path": "/v2/connection-cases/{case_id}/review-bundles/{bundle_id}",
+      "auth": "session",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "PrivateReviewView"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "issue_apply_approval",
+      "method": "POST",
+      "path": "/v2/connection-cases/{case_id}/apply-approvals",
+      "auth": "session",
+      "sse": false,
+      "request": "IssueApplyApproval",
+      "responses": [
+        "ApplyApproval"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "case_events",
+      "method": "GET",
+      "path": "/v2/connection-cases/{case_id}/events",
+      "auth": "session",
+      "sse": true,
+      "request": null,
+      "responses": [
+        "CaseEvent"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "public_proof",
+      "method": "GET",
+      "path": "/v2/public-proof/{public_id}",
+      "auth": "public_projection",
+      "sse": false,
+      "request": null,
+      "responses": [
+        "PublicProofView"
+      ],
+      "present_in_backend_app_decorators": false
+    },
+    {
+      "name": "worker_operation",
+      "method": "POST",
+      "path": "/v2/worker-operations",
+      "auth": "service",
+      "sse": false,
+      "request": "WorkerOperation",
+      "responses": [
+        "CollectorAcceptance"
+      ],
+      "present_in_backend_app_decorators": false
+    }
+  ],
+  "tool_contracts": [
+    {
+      "tool_id": "status.read",
+      "argument_type": "StatusReadArgs",
+      "roles": [
+        "Gardener",
+        "Healer",
+        "Herald"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "source.read",
+      "argument_type": "SourceReadArgs",
+      "roles": [
+        "Surveyor",
+        "Scribe",
+        "Grafter",
+        "Adversary"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "analysis.matches",
+      "argument_type": "AnalysisMatchesArgs",
+      "roles": [
+        "Surveyor"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "evidence.read",
+      "argument_type": "EvidenceReadArgs",
+      "roles": [
+        "Surveyor",
+        "Builder",
+        "Explorer",
+        "Scribe",
+        "Architect",
+        "Adversary",
+        "Healer"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "evidence.summary",
+      "argument_type": "EvidenceSummaryArgs",
+      "roles": [
+        "Herald"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "recipe.lookup",
+      "argument_type": "RecipeLookupArgs",
+      "roles": [
+        "Builder",
+        "Architect",
+        "Grafter"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "docs.lookup",
+      "argument_type": "DocsLookupArgs",
+      "roles": [
+        "Architect",
+        "Grafter"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "dependency.inspect",
+      "argument_type": "DependencyInspectArgs",
+      "roles": [
+        "Builder",
+        "Grafter"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "execution.request",
+      "argument_type": "ExecutionRequestArgs",
+      "roles": [
+        "Builder",
+        "Explorer",
+        "Adversary",
+        "Librarian"
+      ],
+      "effect": "sandbox_request",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "execution.status",
+      "argument_type": "ExecutionStatusArgs",
+      "roles": [
+        "Builder",
+        "Explorer",
+        "Adversary",
+        "Librarian"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "candidate.patch",
+      "argument_type": "CandidatePatchArgs",
+      "roles": [
+        "Grafter"
+      ],
+      "effect": "candidate_cas",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "scenario.stage",
+      "argument_type": "ScenarioStageArgs",
+      "roles": [
+        "Adversary"
+      ],
+      "effect": "quarantine",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "recipe.stage",
+      "argument_type": "RecipeStageArgs",
+      "roles": [
+        "Librarian"
+      ],
+      "effect": "quarantine",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "aggregate.read",
+      "argument_type": "AggregateReadArgs",
+      "roles": [
+        "Orchard Analyst"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "audit.summary",
+      "argument_type": "AuditSummaryArgs",
+      "roles": [
+        "Sentinel"
+      ],
+      "effect": "read",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    },
+    {
+      "tool_id": "safety.request_hold",
+      "argument_type": "SafetyRequestHoldArgs",
+      "roles": [
+        "Healer",
+        "Sentinel"
+      ],
+      "effect": "hold_request",
+      "service_binding": "NOT_QUALIFIED; existing evaluated runtime uses labelled injected counterparts"
+    }
+  ],
+  "paid_dispatch_for_new_service": "BLOCKED until actual-context sizing, service processing/qualification and envelopes verified",
+  "historical_cost_limit": "largest observed cost is a stress estimate, not a guaranteed price; legacy Surveyor is not fully represented by ag-prefix samples",
+  "blockers": [
+    {
+      "id": "P0-GIT",
+      "owner": "Claude",
+      "need": "Integrate pinned main with agent commit and preserve dirty docs; clean scratch merge preflight available"
+    },
+    {
+      "id": "P0-COST",
+      "owner": "Codex; existing budget authority unchanged",
+      "need": "Exact new-context free sizing and envelope feasibility before paid service tests; three historical stress forecasts exceed role remainder"
+    },
+    {
+      "id": "P0-ENV",
+      "owner": "execution environment / driver",
+      "need": "PHP CLI, Docker/isolation capability and pinned SDK-wire test dependencies before mandatory qualification; no install performed"
+    }
+  ]
+}

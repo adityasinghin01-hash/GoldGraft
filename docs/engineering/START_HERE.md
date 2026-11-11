@@ -1,5 +1,29 @@
 # GoldGraft reviewed engineering baseline — 6 November 2026
 
+> **Latest execution ownership, Aditya, 11 November 2026:** Claude owns frontend
+> only. Codex owns all non-frontend completion, including backend/runner/domain/
+> proof, agent APIs/tools, integration, review, commits/pushes on main and handoff.
+> Earlier owner/driver assignments below are dated history where they conflict.
+> This does not widen model budgets, external grants or financial authority.
+
+> **Current execution status, 11 November 2026:** all 13 roles have real-model
+> evaluation evidence; the combined synthetic sample passed 13/13, with an actual
+> Surveyor→Herald handoff and eleven independent component jobs. This is not the
+> complete delivery graph. Gupta PR #11 and Singhal PR #10 are merged; live
+> backend/provider qualification and authenticated proof integration remain open.
+> Read the [current build status](plan5/BUILD_STATUS.md),
+> [GitHub completion audit](plan5/TEAM_GITHUB_AUDIT_2026-11-11.md) and
+> [current handoff](work/SINGH_PLAN_5_6_HANDOFF.md). Aditya assigned frontend to
+> Claude and the 13-agent end-to-end integration, testing and handoff to Codex.
+> Earlier NOT STARTED statements below are dated planning snapshots. External
+> authority and release gates remain unchanged.
+
+> **Next execution plan, 11 November 2026:** follow the
+> [all 13 agents, integrations and handoff plan](plan5/ALL_AGENTS_END_TO_END_EXECUTION_PLAN_2026-11-11.md).
+> It covers every non-frontend workstream, relevant sponsor tools, measured role
+> ceilings, the actual connected workflow, final retesting and operating handoff.
+> Its phase gates are planned, not completed by the existing evaluation results.
+
 > **Plan5 update, 6 November2026:** Phase5.1 research and Phase5.2 specifications are complete locally. Read the [reviewed Plan5 construction pack](plan5/START_HERE.md), [manual build plan](plan5/MANUAL_CONSTRUCTION_PLAN.md) and [component-test plan](plan5/COMPONENT_TEST_PLAN.md). New internal agent/communication/bootstrap proposals are settled there; current Python remains implemented wire and atomic safety protocols remain normative. Phase5.3 implementation and Plan6 are NOT STARTED. This new pack/entry reconciliation is unpublished; Plan2's EXPORT_MANIFEST is its dated publication snapshot, not a current whole-tree hash manifest.
 
 > **Current team action, 10 November 2026:** follow [GitHub / Drive / team-chat coordination and owner setup duties](work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md). Owners research their own free/event/student access, configure only approved scopes and return actual commit-pinned results. See [Vijay's dependency reply](work/VIJAY_TEAM_INPUTS_REPLY.md) before real sandbox scenario dispatch. This supersedes the earlier exclusion of student-plan assessment from the owner assignment; it authorises no account claim or live action by the publisher.

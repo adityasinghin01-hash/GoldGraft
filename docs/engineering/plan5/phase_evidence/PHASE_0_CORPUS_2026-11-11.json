@@ -1,0 +1,531 @@
+{
+  "record_kind": "frozen_internal_acceptance_spec_not_executable_model_catalog",
+  "revision": 1,
+  "cases": [
+    {
+      "id": "U01",
+      "category": "supported_upgrade",
+      "variant": "git_baseline",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Submit pinned Git-backed baseline with full manifest; no transform",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U02",
+      "category": "supported_upgrade",
+      "variant": "uploaded_baseline",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Submit identical full baseline as validated uploaded archive; no fictitious Git provenance",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U03",
+      "category": "supported_upgrade",
+      "variant": "line_shift",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Insert exactly 12 newline characters immediately after the first <?php newline in every PHP file; keep actual symbols and update location oracle from bytes",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U04",
+      "category": "supported_upgrade",
+      "variant": "unicode_comment",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Insert // café — 漢字 source variation followed by newline after first PHP opener in every PHP file; preserve UTF-8",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U05",
+      "category": "supported_upgrade",
+      "variant": "alternate_refund",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Copy src/api/refund.php to src/api/refund-alt.php byte-for-byte; require both endpoints in inventory and candidate tests",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U06",
+      "category": "supported_upgrade",
+      "variant": "nonpayment_helper",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Add src/lib/merchant_health.php containing <?php newline function merchant_health() { return \"ok\"; } newline; require this file unchanged in candidate",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U07",
+      "category": "supported_upgrade",
+      "variant": "nvp_symbol_rename",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Replace every literal paypal_nvp( with merchant_nvp( in PHP sources; filenames/includes stay unchanged; driver exercises unchanged routes",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "U08",
+      "category": "supported_upgrade",
+      "variant": "source_bound",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Add five inert PHP helper files to the 11-file PHP model lens, then ASCII comment-pad the last to make all 16 PHP files total exactly 16384 bytes; complete build assets retained",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "M09",
+      "category": "model_or_repair",
+      "variant": "haiku_question",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Use U01; exercise a named terminal output-quality failure twice through explicitly labelled offline fault injection, then verify Sonnet routing and valid output; actual-model receipts separately required in live harness",
+      "expected_outcome": "escalated_or_qualified_sonnet_route",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "M10",
+      "category": "model_or_repair",
+      "variant": "sonnet_shape",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Use U08; qualified complex-shape route starts Sonnet; verify grounded outputs and unchanged authority/tool ceiling",
+      "expected_outcome": "verified_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "M11",
+      "category": "model_or_repair",
+      "variant": "one_candidate_repair",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Use U01; test harness privately introduces one wrong currency mapping in isolated candidate after patch collection; independent proof fails; bounded repair creates new subject and reproves",
+      "expected_outcome": "repaired_upgrade",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "M12",
+      "category": "model_or_repair",
+      "variant": "two_repairs_exhausted",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Use U01; independent oracle exposes same named amount defect on initial candidate and both allowed semantic repairs; never weaken oracle or issue readiness",
+      "expected_outcome": "held_repair_limit",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "N13",
+      "category": "authority_subject_privacy",
+      "variant": "wrong_case_ref",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Substitute an otherwise valid artifact reference from a separate case before dependent admission",
+      "expected_outcome": "blocked_before_dispatch",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "N14",
+      "category": "authority_subject_privacy",
+      "variant": "stale_generation",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Advance generation and attempt admission/tool commit with original lease and generation",
+      "expected_outcome": "blocked_before_effect",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "N15",
+      "category": "authority_subject_privacy",
+      "variant": "mixed_subject",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Swap a candidate image or config digest from a different candidate while retaining correct-looking source proof",
+      "expected_outcome": "held_subject_mismatch",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "N16",
+      "category": "authority_subject_privacy",
+      "variant": "revoked_projection",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Revoke recipient access before private review/search/aggregate read; attempt public endpoint extraction of the same private evidence",
+      "expected_outcome": "denied_without_disclosure",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "F17",
+      "category": "restart_unknown_tool_fault",
+      "variant": "restart_checkpoint",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Kill worker after committed completed-tool observation and checkpoint, before downstream output commit; resume original run",
+      "expected_outcome": "same_identity_resume_no_duplicate",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "F18",
+      "category": "restart_unknown_tool_fault",
+      "variant": "unknown_effect",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Explicitly labelled offline provider fault accepts effect then loses response; no reliable external observation yet; retain original effect and reservation",
+      "expected_outcome": "unknown_pending_no_replay",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "F19",
+      "category": "restart_unknown_tool_fault",
+      "variant": "notification_quota",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Use U01; permitted notification connector returns quota failure after committed progress event; do not fabricate successful delivery or change proof state",
+      "expected_outcome": "core_progress_notification_pending",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    },
+    {
+      "id": "F20",
+      "category": "restart_unknown_tool_fault",
+      "variant": "stop_after_model",
+      "seed": {
+        "root": "fixtures/shops/legacy-php-shop",
+        "revision": "c9f9ee9a5477660f06f03e4891832f9ce722be71",
+        "git_tree": "3bfb438bccf83a53e789b1b4860cd3c7973e2976",
+        "rights": "Existing Cutover MIT fixture; preserve LICENSE.cutover and NOTICE.md",
+        "model_lens": "11 PHP files, 11181 source bytes before variations; build uses full source/assets",
+        "not_real_provider_evidence": true
+      },
+      "input_construction": "Stop after attributable terminal model observation but before candidate/effect commit; refuse new work and reconcile already dispatched identities",
+      "expected_outcome": "stopped_no_new_effect",
+      "assertions": [
+        "source/tree/image/config lineage matches",
+        "independent proof meets every required rule",
+        "unrelated required behaviour preserved",
+        "no duplicate economic effect",
+        "no unapproved live effect"
+      ],
+      "repeats": 3,
+      "executed": false,
+      "fault_evidence_rule": "Injected faults are labelled; never forge real provider receipts or imply model failure was naturally observed",
+      "live_effects": "NONE under current authority; staging effects require exact later authorisation"
+    }
+  ],
+  "runs": 60,
+  "independent_expected_outcomes": true,
+  "expected_labels_hidden_from_model": true,
+  "label_change_rule": "retain original bytes/result and issue disclosed new revision before new runs",
+  "not_claimed": "No case executed; this corpus does not close or replace original unrun acceptance cases"
+}

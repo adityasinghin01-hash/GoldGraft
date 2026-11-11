@@ -1,0 +1,160 @@
+{
+  "record_kind": "internal_tool_requirement_register",
+  "actual_accounts_not_inferred": true,
+  "tools": [
+    {
+      "tool": "Render",
+      "owner": "Gupta",
+      "requirement": "targeted",
+      "acceptance": "actual resource observation, persistent exact-image deployment, restart/state/exit",
+      "current_evidence": "unqualified; local receipt generator observed",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Kernel",
+      "owner": "Vijay + Gupta",
+      "requirement": "targeted",
+      "acceptance": "scoped browser checkout/return/cancel, replay and independent correlated capture, termination",
+      "current_evidence": "deferred; actual entitlement/security profile not established",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "APIMatic",
+      "owner": "Vijay + Codex",
+      "requirement": "targeted",
+      "acceptance": "pinned operation/symbol mapping and installed-version compiling adapter consumed by roles",
+      "current_evidence": "deferred; no account integration evidence",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Postman",
+      "owner": "Gupta + Vijay + Singhal",
+      "requirement": "targeted",
+      "acceptance": "actual API/fault/privacy collections; separate offline and sandbox reports",
+      "current_evidence": "collection exists; actual external qualification not established",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Elastic",
+      "owner": "Singhal + Gupta",
+      "requirement": "targeted",
+      "acceptance": "actual redacted ingestion and authenticated exact-subject retrieval with revoke/cross-case negatives",
+      "current_evidence": "formatter exists; actual ACL search integration unqualified",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Zapier",
+      "owner": "Gupta + Codex",
+      "requirement": "targeted",
+      "acceptance": "explicit opt-in minimal committed-event delivery, durable dedupe/opt-out/quota/failure",
+      "current_evidence": "historical permitted receipt exists; expanded service path unqualified; sends remain prohibited",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "AG Grid / Studio",
+      "owner": "Claude + Singhal",
+      "requirement": "targeted_nonfrontend_producers",
+      "acceptance": "safe scenario/evidence/aggregate API and server-side ACL; Claude owns actual UI",
+      "current_evidence": "producer qualification open; UI excluded from Codex scope",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Bryntum",
+      "owner": "Claude + Gupta",
+      "requirement": "targeted_nonfrontend_producers",
+      "acceptance": "read-only dependency/timing/blocker event projection; Claude owns licensed display",
+      "current_evidence": "producer qualification open; no backend rescheduling",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Astropods",
+      "owner": "Gupta + Codex",
+      "requirement": "conditional",
+      "acceptance": "demonstrated benefit and model/processing/usage/budget/reconciliation parity before adoption",
+      "current_evidence": "deferred; no forced adoption",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Channel3",
+      "owner": "Vijay + Singhal",
+      "requirement": "conditional",
+      "acceptance": "material uncovered defect plus rights-cleared pinned product/variant snapshot",
+      "current_evidence": "deferred; rights and material value not established",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "PayPal",
+      "owner": "Gupta + Vijay + Singhal",
+      "requirement": "core",
+      "acceptance": "actual scoped sandbox operations, authenticated callbacks, independent money/origin evidence and re-fetch",
+      "current_evidence": "scripted broker/recorder; actual expanded path unqualified",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "E2B",
+      "owner": "Gupta + Vijay",
+      "requirement": "core",
+      "acceptance": "actual isolated execution/egress/credential/termination and observed artifacts",
+      "current_evidence": "no qualified actual profile established",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Source / registry / storage / custody",
+      "owner": "Gupta",
+      "requirement": "core",
+      "acceptance": "read-only initial acquisition, immutable snapshots, safe uploads, durable refs, scoped later writes",
+      "current_evidence": "scaffold/fixtures; provider and durable service qualification open",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    },
+    {
+      "tool": "Domain recipes / mutations / aggregates",
+      "owner": "Vijay + Singhal + Gupta",
+      "requirement": "core",
+      "acceptance": "pinned real recipe/driver/symbols, independent guards, quarantine consent and aggregate ACL",
+      "current_evidence": "offline evidence only; actual service binding open",
+      "allowed_data": "approved synthetic MIT inputs until separately qualified private-data scope",
+      "external_action_authority": "not expanded by this record",
+      "quota_cost_licence_retention": "NOT_ESTABLISHED for expanded service; owner must supply exact evidence",
+      "failure_policy": "hold required boundary; optional peripheral outage cannot mint proof or authority"
+    }
+  ]
+}

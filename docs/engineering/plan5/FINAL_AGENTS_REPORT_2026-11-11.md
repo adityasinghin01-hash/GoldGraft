@@ -5,6 +5,15 @@ The final combined synthetic sample passed **13/13**. This completes this evalua
 scope, not full model acceptance, a merchant migration or production qualification.
 Claude still owns independent verification, commits and pushes.
 
+**Later integration handoff, 11 November 2026:** Claude committed the agent work
+locally at `c9f9ee9`. Aditya assigned frontend to Claude and full 13-agent
+integration/testing/handoff to Codex. The subsequent
+[GitHub audit](TEAM_GITHUB_AUDIT_2026-11-11.md) confirms Gupta/Singhal merges and
+identifies remaining live backend and authenticated proof gaps. The evaluation
+results and spend below remain the evaluation-close snapshot; they are not a
+whole-service completion claim. References below to dirty work describe that
+earlier handoff, before Claude's commit.
+
 | Final measure | Observed result |
 |---|---|
 | Current offline suite | **886 passed**, one existing Pydantic warning |

@@ -1,5 +1,58 @@
 # Local construction status — 11 November 2026
 
+**Latest ownership correction:** Claude is frontend-only. Codex owns all remaining
+non-frontend components, testing, integration, review, commits/pushes on main and
+operating handoff. Teammates' existing work is reused; their old ownership is not
+an implementation blocker. Phase 0 now passes for zero-cost implementation;
+paid model/provider dispatch remains gated on actual-context sizing, unchanged
+envelopes and the required scope. The earlier blocked report is retained below
+as history; this sequencing correction changes no test labels or denominators.
+
+**Current status after GitHub audit, 11 November 2026:** all 13 roles have
+completed the sequential real-model evaluation scope. The combined synthetic
+sample passed **13/13**; only Surveyor→Herald was a connected graph, followed by
+eleven independent component jobs. The full role-to-role delivery path and live
+service qualification remain incomplete. See the
+[final evaluation report](FINAL_AGENTS_REPORT_2026-11-11.md).
+
+The remaining work is specified in the
+[strict end-to-end execution plan](ALL_AGENTS_END_TO_END_EXECUTION_PLAN_2026-11-11.md):
+phases 0–10, all non-frontend integrations, role ceilings, sponsor tools,
+independent acceptance and handoff. **Phase 0 is PASS for zero-cost implementation;
+new paid dispatch remains HELD for actual-context sizing**. The
+[Phase 0 report](phase_evidence/PHASE_0_2026-11-11.md) records
+the frozen 20-case/60-run specification, 13-role/16-tool/23-route inventory,
+clean scratch merge preflight and fresh baseline **2873 passed / 18 skipped**.
+An additional pinned-environment SDK check passed **32/32**. Actual backend
+registers **0/23 v2 service routes**; paid scope needs actual-context cost sizing
+under unchanged envelopes. Aditya subsequently instructed work directly on
+**main**: the active build now uses main, with incoming GitHub main merged
+without commit. The two obsolete integration branches are deleted locally and
+on GitHub; original dirty files and old checkout folders are preserved. Source
+integration is no longer a workspace blocker. Codex now owns final commit/push.
+See [workspace evidence](phase_evidence/MAIN_WORKSPACE_CHANGE_2026-11-11.json).
+No new model/provider call or spend occurred. The previous 13/13 sample does
+not satisfy these new gates. Report to Aditya after each phase, as requested.
+
+| Workstream | Done and remaining |
+|---|---|
+| Agents / Codex | Real-model evidence for all 13 roles; final affected regression 886 passed; recorded spend $3.353287/$10 at evaluation close. Next: actual counterpart integration, full graph fault/restart/authority testing and operating handoff. |
+| Backend and runner / Codex, reusing Gupta groundwork | PR #11 merged. Complete actual resource verification, isolated execution, authentic callbacks, build/publish/deploy, upload bounds and state/recovery. Review PR #12 before duplicating its upload/effect/dry-run fixes. |
+| Proof and domain / Codex, reusing Singhal/Vijay groundwork | Fixture proof/replay, lifecycle checks, summary and signing exist. Complete authenticated service integration, actual domain/payment evidence, certificate verification and access-controlled retrieval. Review PR #12's proof changes; no teammate handover blocks implementation. |
+| Frontend / Claude | Aditya's current ownership assignment; frontend completion was not assessed in this audit. |
+
+Audit pinned GitHub `main` at `aee298f31b13a6a6c76d28845b43763b948add7b`.
+Main CI is green; fresh offline plugtests passed **177**, with **1 skipped** for
+missing local PHP. No live payment/deployment was performed. See the
+[audit and owner checklist](TEAM_GITHUB_AUDIT_2026-11-11.md) for evidence and
+acceptance requirements. Codex's agent implementation is already committed by
+Claude locally at `c9f9ee9`; this documentation update is uncommitted.
+
+## Historical construction snapshots
+
+The entries below retain their original revisions, budgets, blockers and next
+steps as dated evidence. They do not override the current status above.
+
 Workspace: `/Users/aditya/dev/GoldGraft-plan5-build`; base
 `0365c5e1adcb1875a7f72c99dc7c63631501e131`; branch `plan5-build-20261110`.
 No new commit was made. Frontend coordination revision: **2**.

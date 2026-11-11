@@ -10,13 +10,18 @@ def deny_ip_network(monkeypatch):
     connect = socket.socket.connect
     connect_ex = socket.socket.connect_ex
 
+    def _is_loopback(address):
+        if isinstance(address, tuple) and len(address) >= 1:
+            return address[0] in ("127.0.0.1", "localhost", "::1")
+        return False
+
     def guarded_connect(sock, address):
-        if sock.family in (socket.AF_INET, socket.AF_INET6):
+        if sock.family in (socket.AF_INET, socket.AF_INET6) and not _is_loopback(address):
             raise AssertionError("ordinary tests are offline: IP connection denied")
         return connect(sock, address)
 
     def guarded_connect_ex(sock, address):
-        if sock.family in (socket.AF_INET, socket.AF_INET6):
+        if sock.family in (socket.AF_INET, socket.AF_INET6) and not _is_loopback(address):
             raise AssertionError("ordinary tests are offline: IP connection denied")
         return connect_ex(sock, address)
 

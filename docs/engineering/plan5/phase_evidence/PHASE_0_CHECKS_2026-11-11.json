@@ -1,0 +1,49 @@
+{
+  "phase": "0",
+  "status": "BLOCKED",
+  "product_code_changed": false,
+  "model_calls": 0,
+  "new_spend_micro_usd": 0,
+  "baseline": {
+    "command": "env GOLDGRAFT_PROOF=pieces.proof.proof:Proof GOLDGRAFT_API_APP=integration.app:create_app .venv/bin/python -B -m pytest -q",
+    "exit_code": 0,
+    "passed": 2873,
+    "skipped": 18,
+    "warnings": 2,
+    "seconds": 148.8
+  },
+  "skip_diagnostic": {
+    "passed": 21,
+    "skipped": 18,
+    "reasons": {
+      "httpx2_missing_in_repo_venv": 17,
+      "php_missing": 1
+    }
+  },
+  "pinned_sdk_wire_tests": {
+    "passed": 32,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "backend_runtime_v2_routes": {
+    "required": 23,
+    "registered": 0,
+    "backend_blob": "f5db660a7daebef1031f52b6e6fd54a81ec08e33"
+  },
+  "freeze_validation": {
+    "cases": 20,
+    "outcomes": 60,
+    "roles": 13,
+    "tools": 16,
+    "routes": 23,
+    "all_cases_unexecuted": true,
+    "json_parse": "PASS",
+    "local_links": "PASS",
+    "role_spend_sum": "PASS"
+  },
+  "frozen_artifact_sha256": {
+    "PHASE_0_INPUTS_2026-11-11.json": "2719709a2acf1641be6cdcbd46bfed5c63d00ba1be3146fb92cb22f37713ca0b",
+    "PHASE_0_CORPUS_2026-11-11.json": "b0f37f4cb7b3f2b33432d6bb46d6f0cacede51947c5a49359ebb9da33b37601a",
+    "PHASE_0_TOOLS_2026-11-11.json": "dfbafda8f5ef4a2a7315c4ed0b364eba625f0681df38ea92597b5c6e0fc77d44"
+  }
+}
