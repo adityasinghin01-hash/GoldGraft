@@ -1,0 +1,38 @@
+{
+  "id": "e44d01aa-goldgraft-env-template",
+  "name": "GoldGraft Local & Sandbox Environment",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8700",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "shopId",
+      "value": "shop-cutover-legacy",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "graftId",
+      "value": "demo-1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "sandboxClientId",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "sandboxClientSecret",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}
+

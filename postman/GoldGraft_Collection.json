@@ -1,0 +1,166 @@
+{
+  "info": {
+    "name": "GoldGraft API & Lifecycle Verification Suite",
+    "_postman_id": "c1f7b882-901e-450a-9d91-goldgraft001",
+    "description": "Postman test collection covering GoldGraft control-plane routes, idempotency, lifecycle progression, custody broker, and webhook deduplication.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01 - Probe Shop Integration",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"url\": \"https://github.com/goldgraft/legacy-php-shop\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/probe",
+          "host": ["{{baseUrl}}"],
+          "path": ["probe"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Discovered legacy families', function () {",
+              "  var json = pm.response.json();",
+              "  pm.expect(json.families_found).to.be.an('array');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 - Create Shop (Requires Idempotency-Key)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Idempotency-Key", "value": "{{$guid}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"repo\": \"https://github.com/goldgraft/legacy-php-shop\",\n  \"name\": \"Cutover Legacy PHP Shop\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/shops",
+          "host": ["{{baseUrl}}"],
+          "path": ["shops"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Shop created successfully', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.environment.set('shopId', json.shop_id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Connect Credentials (Custody Isolation)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Idempotency-Key", "value": "{{$guid}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paypal_client_id\": \"{{sandboxClientId}}\",\n  \"paypal_client_secret\": \"{{sandboxClientSecret}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/shops/{{shopId}}/connect",
+          "host": ["{{baseUrl}}"],
+          "path": ["shops", "{{shopId}}", "connect"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Credentials safely stored in Doppler custody', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.expect(json.secrets_ref).to.match(/^doppler:\\/\\//);",
+              "pm.expect(pm.response.text()).to.not.include(pm.environment.get('sandboxClientSecret'));"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Start Graft Cycle",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Idempotency-Key", "value": "{{$guid}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/shops/{{shopId}}/graft",
+          "host": ["{{baseUrl}}"],
+          "path": ["shops", "{{shopId}}", "graft"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Graft started successfully', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.environment.set('graftId', json.graft_id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Verify Proof & Strength",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/grafts/{{graftId}}/proof",
+          "host": ["{{baseUrl}}"],
+          "path": ["grafts", "{{graftId}}", "proof"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Proof artifact returned', function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.expect(json.strength).to.be.oneOf(['FULL', 'HIGH', 'MEDIUM', 'PARTIAL']);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}
+
