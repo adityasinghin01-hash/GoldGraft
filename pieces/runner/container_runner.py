@@ -8,6 +8,9 @@ blobs into foundation.blobs.
 
 import json
 import logging
+import os
+import re
+import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -124,6 +127,73 @@ class ContainerRunner:
         self.blob_store.put(capture_bytes)
 
         return validate("RawCapture/1", raw_content)
+
+    def _redact_output(self, text: str) -> str:
+        if not text:
+            return ""
+        pattern = r"(?i)(token|secret|password|api[_-]?key|bearer\s+[a-z0-9_\-\.]+)=([^\s&]+)"
+        return re.sub(pattern, r"\1=[REDACTED]", text)
+
+    def execute_shop_process(
+        self,
+        shop_dir: Path,
+        command: list[str],
+        env: dict[str, str] | None = None,
+        timeout_s: float = 30.0,
+    ) -> dict[str, Any]:
+        """Executes a shop process inside an isolated environment with secret redaction."""
+        start = datetime.now(UTC)
+        safe_env = {
+            "PATH": os.environ.get("PATH", ""),
+            "SYSTEMROOT": os.environ.get("SYSTEMROOT", ""),
+            "TMP": os.environ.get("TMP", ""),
+            "TEMP": os.environ.get("TEMP", ""),
+        }
+        if env:
+            safe_env.update(env)
+
+        try:
+            proc = subprocess.run(
+                command,
+                cwd=str(shop_dir),
+                env=safe_env,
+                capture_output=True,
+                text=True,
+                timeout=timeout_s,
+                check=False,
+            )
+            duration_ms = (datetime.now(UTC) - start).total_seconds() * 1000
+            return {
+                "exit_code": proc.returncode,
+                "stdout": self._redact_output(proc.stdout),
+                "stderr": self._redact_output(proc.stderr),
+                "duration_ms": duration_ms,
+                "timed_out": False,
+            }
+        except subprocess.TimeoutExpired as exc:
+            duration_ms = (datetime.now(UTC) - start).total_seconds() * 1000
+            stdout_str = (
+                exc.stdout.decode() if isinstance(exc.stdout, bytes) else (exc.stdout or "")
+            )
+            stderr_str = (
+                exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
+            )
+            return {
+                "exit_code": -1,
+                "stdout": self._redact_output(stdout_str),
+                "stderr": self._redact_output(stderr_str),
+                "duration_ms": duration_ms,
+                "timed_out": True,
+            }
+        except Exception as exc:
+            duration_ms = (datetime.now(UTC) - start).total_seconds() * 1000
+            return {
+                "exit_code": -1,
+                "stdout": "",
+                "stderr": f"Execution error: {exc}",
+                "duration_ms": duration_ms,
+                "timed_out": False,
+            }
 
 
 Runner = ContainerRunner

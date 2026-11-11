@@ -10,6 +10,10 @@ from pathlib import Path
 from threading import Lock
 
 
+MAX_INLINE_SIZE_BYTES = 16 * 1024
+MAX_CHUNK_SIZE_BYTES = 1024 * 1024
+
+
 @dataclass
 class UploadChunk:
     chunk_index: int
@@ -70,9 +74,22 @@ class UploadSessionManager:
             raise ValueError("Upload session is not active")
         return session
 
+    def validate_inline_upload(self, data: bytes) -> bool:
+        if len(data) > MAX_INLINE_SIZE_BYTES:
+            raise ValueError("PAYLOAD_TOO_LARGE: Inline payload exceeds 16 KiB")
+        return True
+
     def create_session(
         self, case_id: str, filename: str, total_chunks: int, expected_sha256: str
     ) -> UploadSession:
+        if (
+            not filename.strip()
+            or filename in {".", ".."}
+            or "/" in filename
+            or "\\" in filename
+            or "\x00" in filename
+        ):
+            raise ValueError("UNSAFE_FILE_PATH: Expected a single filename")
         if (
             type(total_chunks) is not int
             or not 1 <= total_chunks <= min(self.max_size_bytes, 10_000)
@@ -110,6 +127,8 @@ class UploadSessionManager:
                 raise ValueError("Upload session is not active")
             if type(chunk_index) is not int or not 0 <= chunk_index < session["total_chunks"]:
                 raise ValueError("Upload chunk index is out of range")
+            if len(data) > MAX_CHUNK_SIZE_BYTES:
+                raise ValueError("CHUNK_TOO_LARGE: Chunk exceeds 1 MiB")
             if not data:
                 raise ValueError("Upload chunks must be nonempty")
             old = self._db.execute(
@@ -125,7 +144,7 @@ class UploadSessionManager:
                 (session_id,),
             ).fetchone()[0]
             if stored_bytes + len(data) > self.max_size_bytes:
-                raise ValueError("Upload exceeds size limit")
+                raise ValueError("PAYLOAD_TOO_LARGE: Upload exceeds size limit")
             digest = hashlib.sha256(data).hexdigest()
             self._db.execute(
                 "INSERT INTO upload_chunks VALUES (?, ?, ?, ?)",
@@ -147,7 +166,7 @@ class UploadSessionManager:
             if count != session["total_chunks"]:
                 raise ValueError(f"Missing chunks: received {count} of {session['total_chunks']}")
             if size > self.max_size_bytes:
-                raise ValueError("Upload exceeds size limit")
+                raise ValueError("PAYLOAD_TOO_LARGE: Upload exceeds size limit")
             chunks = self._db.execute(
                 "SELECT data FROM upload_chunks WHERE session_id = ? ORDER BY chunk_index",
                 (session_id,),

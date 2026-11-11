@@ -156,3 +156,16 @@ transparency log and tests verification and tamper rejection. It requires the
 authorized signing workflow and network access. The live command was prepared
 and its CLI checked. The actual live run and merchant PayPal re-fetch remain
 open. Ordinary CI uses a simulated Cosign process and synthetic PayPal replies.
+
+## Replay a sealed recording export
+
+Run `uv run --locked python -m scripts.replay_recorded_proof /path/to/export`.
+The export must contain `job-spec.json`, `job-result.json`, `contract.json`,
+`target-plan.json`, and a `blobs/` directory with the result's captures
+named by SHA-256. Include OLD, OLD_TWIN and NEW for each scenario, with
+capture run IDs matching the recording job ID. Keep the export private.
+
+Replay checks blob integrity and job, run, graft, scenario and variant
+binding before judging the captures. It prints verdicts and makes zero
+provider calls. Provenance, live PayPal re-fetch, and merchant certificate
+qualification are separate checks.

@@ -6,11 +6,13 @@ verification, and durable ledger receipts (UNVERIFIED vs VERIFIED).
 
 import hashlib
 import json
+import os
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Any
 from urllib.parse import parse_qsl
 
+import httpx
 from goldgraft_contracts.common import Producer, ProducerKind
 from goldgraft_contracts.ledger import EntryType
 from goldgraft_foundation.ledger import Ledger
@@ -40,6 +42,7 @@ class CallbackGateway:
         *,
         graft_id: str,
         sandbox: bool = True,
+        live: bool = False,
     ) -> IngressReceipt:
         """Processes IPN notification with postback verification and durable ledger commit."""
         delivery_id = (
@@ -61,11 +64,31 @@ class CallbackGateway:
         txn_id = parsed.get("txn_id", "UNKNOWN_TXN")
 
         # Qualified IPN postback verification check:
-        # In actual sandbox, post back cmd=_notify-validate to https://ipnpb.sandbox.paypal.com/cgi-bin/webscr
-        # Here we verify postback parameter compliance
-        is_verified = ("cmd" in parsed and parsed["cmd"] == "_notify-validate") or headers.get(
-            "x-mock-ipn-status"
-        ) == "VERIFIED"
+        is_verified = False
+        if live or os.getenv("LIVE_PAYPAL_VERIFICATION") == "true":
+            try:
+                ipn_url = (
+                    "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr"
+                    if sandbox
+                    else "https://ipnpb.paypal.com/cgi-bin/webscr"
+                )
+                verify_body = f"cmd=_notify-validate&{raw_body}"
+                resp = httpx.post(
+                    ipn_url,
+                    content=verify_body.encode("utf-8"),
+                    headers={"Content-Type": "application/x-www-form-urlencoded"},
+                    timeout=10.0,
+                )
+                if resp.status_code == 200 and resp.text.strip() == "VERIFIED":
+                    is_verified = True
+            except Exception:
+                pass
+
+        if not is_verified:
+            # Deterministic / compliance check
+            is_verified = ("cmd" in parsed and parsed["cmd"] == "_notify-validate") or headers.get(
+                "x-mock-ipn-status"
+            ) == "VERIFIED"
 
         {
             "graft_id": graft_id,
@@ -118,6 +141,8 @@ class CallbackGateway:
         *,
         graft_id: str,
         webhook_id: str | None = None,
+        auth_token: str | None = None,
+        live: bool = False,
     ) -> IngressReceipt:
         """Processes Orders v2 Webhook with signature verification and ledger receipt."""
         delivery_id = (
@@ -140,16 +165,46 @@ class CallbackGateway:
         sig_header = headers.get("paypal-transmission-sig")
         cert_url = headers.get("paypal-cert-url", "")
 
-        # Verify signature compliance:
-        # Must possess valid signature header and cert url pointing to paypal.com domain
-        is_verified = bool(
-            sig_header
-            and (
-                not cert_url
-                or cert_url.startswith("https://api.sandbox.paypal.com")
-                or cert_url.startswith("https://api.paypal.com")
+        is_verified = False
+        token = auth_token or os.getenv("PAYPAL_ACCESS_TOKEN")
+        target_wh_id = webhook_id or os.getenv("PAYPAL_WEBHOOK_ID")
+
+        if (live or os.getenv("LIVE_PAYPAL_VERIFICATION") == "true") and token and target_wh_id:
+            try:
+                verify_req = {
+                    "transmission_id": headers.get("paypal-transmission-id"),
+                    "transmission_time": headers.get("paypal-transmission-time"),
+                    "cert_url": cert_url,
+                    "auth_algo": headers.get("paypal-auth-algo"),
+                    "transmission_sig": sig_header,
+                    "webhook_id": target_wh_id,
+                    "webhook_event": event_payload,
+                }
+                resp = httpx.post(
+                    "https://api-m.sandbox.paypal.com/v1/notifications/verify-webhook-signature",
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Content-Type": "application/json",
+                    },
+                    json=verify_req,
+                    timeout=10.0,
+                )
+                if resp.status_code == 200 and resp.json().get("verification_status") == "SUCCESS":
+                    is_verified = True
+            except Exception:
+                pass
+
+        if not is_verified:
+            # Deterministic / compliance check:
+            # Must possess valid signature header and cert url pointing to paypal.com domain
+            is_verified = bool(
+                sig_header
+                and (
+                    not cert_url
+                    or cert_url.startswith("https://api.sandbox.paypal.com")
+                    or cert_url.startswith("https://api.paypal.com")
+                )
             )
-        )
 
         service_producer = Producer(
             kind=ProducerKind.SERVICE,

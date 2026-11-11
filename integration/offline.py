@@ -2,11 +2,12 @@
 
 import argparse
 import json
+from collections.abc import Callable
 from pathlib import Path
 
 from goldgraft_contracts.interfaces import Runner
 from goldgraft_contracts.registry import validate
-from goldgraft_contracts.runner import JobSpec
+from goldgraft_contracts.runner import JobResult, JobSpec, RawCapture
 from goldgraft_foundation.blobs import LocalBlobStore
 
 from pieces.backend.custody_broker import CustodyBroker
@@ -20,8 +21,7 @@ FIXTURE = ROOT / "fixtures/proof/legacy-php-shop"
 VARIANTS = ("OLD", "OLD_TWIN", "NEW")
 
 
-def fixture_proof(runner: Runner, proof: Proof, spec: JobSpec) -> dict:
-    """Use submitted capture retrieval and independent mapper/judge on synthetic fixtures."""
+def _check_recording_spec(spec: JobSpec) -> None:
     if (
         spec.kind != "RECORD"
         or set(spec.variants) != set(VARIANTS)
@@ -30,7 +30,15 @@ def fixture_proof(runner: Runner, proof: Proof, spec: JobSpec) -> dict:
         or len(spec.scenario_ids) != len(set(spec.scenario_ids))
     ):
         raise ValueError("MISSING_EVIDENCE unique scenarios and OLD/OLD_TWIN/NEW required")
-    result = runner.run_job(spec)
+
+
+def evaluate_recordings(
+    proof: Proof, spec: JobSpec, result: JobResult,
+    fetch_capture: Callable[[str], RawCapture], contract, plan,
+    *, require_run_binding: bool = False,
+) -> dict:
+    """Evaluate a complete recorded job with the supplied money contract and target plan."""
+    _check_recording_spec(spec)
     if result.status != "OK" or result.job_id != spec.job_id:
         raise ValueError("MISSING_EVIDENCE exact completed recording job")
     expected = {(s, v) for s in spec.scenario_ids for v in VARIANTS}
@@ -40,15 +48,15 @@ def fixture_proof(runner: Runner, proof: Proof, spec: JobSpec) -> dict:
         raise ValueError("MISSING_EVIDENCE exact distinct recording set")
     captures = {}
     for ref in result.raw_capture_refs:
-        capture = runner.fetch_capture(ref)
+        capture = fetch_capture(ref)
         key = (capture.scenario_id, capture.variant)
         if capture.graft_id != spec.graft_id or key not in expected or key in captures:
             raise ValueError("DENIED capture case/scenario/variant binding")
+        if require_run_binding and capture.run_id != spec.job_id:
+            raise ValueError("DENIED capture run binding")
         captures[key] = capture
     if set(captures) != expected:
         raise ValueError("MISSING_EVIDENCE complete recording set")
-    contract = validate("Contract/1", json.loads((FIXTURE / "contract.json").read_text()))
-    plan = validate("TargetPlan/1", json.loads((FIXTURE / "target_plan.json").read_text()))
     verdicts = []
     mapped = {}
     for scenario in spec.scenario_ids:
@@ -61,13 +69,25 @@ def fixture_proof(runner: Runner, proof: Proof, spec: JobSpec) -> dict:
         verdict = proof.judge(*streams, contract, plan, old_capture=old, new_capture=new)
         verdicts.append(verdict.model_dump(mode="json"))
     return {
-        "evidence_class": "scripted",
-        "real_payment_qualified": False,
         "capture_refs": result.raw_capture_refs,
         "verdicts": verdicts,
         "cmel": mapped,
         "captures": [c.model_dump(mode="json") for c in captures.values()],
         "job_result": result.model_dump(mode="json"),
+    }
+
+
+def fixture_proof(runner: Runner, proof: Proof, spec: JobSpec) -> dict:
+    """Use submitted capture retrieval and independent mapper/judge on synthetic fixtures."""
+    _check_recording_spec(spec)
+    contract = validate("Contract/1", json.loads((FIXTURE / "contract.json").read_text()))
+    plan = validate("TargetPlan/1", json.loads((FIXTURE / "target_plan.json").read_text()))
+    report = evaluate_recordings(proof, spec, runner.run_job(spec), runner.fetch_capture,
+                                 contract, plan)
+    return {
+        **report,
+        "evidence_class": "scripted",
+        "real_payment_qualified": False,
         "runner": "Gupta ContainerRunner: fixture replay",
         "proof": "Singhal deterministic Proof: actual implementation",
     }

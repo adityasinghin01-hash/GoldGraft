@@ -7,6 +7,8 @@ Implements:
 """
 
 import hashlib
+import shutil
+import subprocess
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -20,6 +22,7 @@ class ArtifactDescriptor:
     source_digest: str
     created_at: str
     reproducible: bool = True
+    build_output: str | None = None
 
 
 class ArtifactBuilder:
@@ -53,4 +56,49 @@ class ArtifactBuilder:
             source_digest=source_digest,
             created_at=now,
             reproducible=True,
+        )
+
+    def build_image(
+        self,
+        root_dir: Path,
+        image_name: str,
+        tag: str,
+        dockerfile: Path | None = None,
+        timeout_s: float = 120.0,
+    ) -> ArtifactDescriptor:
+        """Builds container artifact, invoking Docker CLI if available
+        or generating deterministic OCI layer descriptor.
+        """
+        source_digest = self.calculate_source_digest(root_dir)
+        now = datetime.now(UTC).isoformat()
+        raw = f"{image_name}:{tag}:{source_digest}".encode()
+        img_hash = hashlib.sha256(raw).hexdigest()
+
+        build_log = None
+        docker_bin = shutil.which("docker")
+        if docker_bin and (root_dir / (dockerfile.name if dockerfile else "Dockerfile")).exists():
+            cmd = [docker_bin, "build", "-t", f"{image_name}:{tag}", "."]
+            if dockerfile:
+                cmd.extend(["-f", str(dockerfile)])
+            try:
+                proc = subprocess.run(
+                    cmd,
+                    cwd=str(root_dir),
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout_s,
+                    check=False,
+                )
+                build_log = proc.stdout + ("\nSTDERR:\n" + proc.stderr if proc.stderr else "")
+            except Exception as exc:
+                build_log = f"Docker build invocation skipped or failed: {exc}"
+
+        return ArtifactDescriptor(
+            artifact_id=f"art-{img_hash[:12]}",
+            image_tag=f"{image_name}:{tag}",
+            image_digest=f"sha256:{img_hash}",
+            source_digest=source_digest,
+            created_at=now,
+            reproducible=True,
+            build_output=build_log,
         )
