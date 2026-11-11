@@ -66,18 +66,35 @@ def test_connection_case_and_authority(tmp_path):
 
 def test_provider_adapters_and_resource_graph():
     adapter = ProviderAdapter()
-    gh = adapter.observe_github_repo("https://github.com/merchant/shop")
-    assert gh.verified is True
-    assert gh.read_only is True
-    assert gh.provider == "github"
+    gh_offline = adapter.observe_github_repo("https://github.com/merchant/shop")
+    assert gh_offline.verified is False
+    assert gh_offline.read_only is True
+    assert gh_offline.evidence_class == "offline"
+    assert "no GitHub token" in str(gh_offline.error)
 
-    render_obs = adapter.observe_render_service("srv-web-123")
-    assert render_obs.verified is True
-    assert render_obs.provider == "render"
+    # With mock live transport
+    class MockTransport:
+        def get(self, url, headers=None, timeout=None):
+            class Resp:
+                status_code = 200
 
-    workos_obs = adapter.observe_workos_user("user-1", "org-retail")
-    assert workos_obs.verified is True
-    assert workos_obs.provider == "workos"
+                def json(self):
+                    return {
+                        "name": "shop",
+                        "default_branch": "main",
+                        "private": True,
+                        "permissions": {"pull": True, "push": False},
+                    }
+
+            return Resp()
+
+    live_adapter = ProviderAdapter(transport=MockTransport())
+    gh_live = live_adapter.observe_github_repo(
+        "https://github.com/merchant/shop", token="ghp_test"
+    )
+    assert gh_live.verified is True
+    assert gh_live.evidence_class == "live"
+    assert gh_live.read_only is True
 
     graph = ResourceGraph()
     graph.add_resource("res-1", "repository", "github.com/org/repo", selected=True)
@@ -157,9 +174,30 @@ def test_lifecycle_reservations_and_effects():
 
 def test_state_plan_and_reconciliation(tmp_path):
     planner = StatePlanner()
+    # Unapproved plan due to missing manifests / fence evidence
     plan = planner.create_cutover_plan("graft-1", "NVP", "OrdersV2", ["ORDER-1", "ORDER-2"])
     assert plan.preserved_order_count == 2
-    assert plan.approved is True
+    assert plan.approved is False
+    assert len(plan.holds) > 0
+
+    # Approved plan with all required evidence
+    approved_plan = planner.create_cutover_plan(
+        "graft-1",
+        "NVP",
+        "OrdersV2",
+        ["ORDER-1", "ORDER-2"],
+        writer_inventory_ref="blob://writer/inv",
+        handler_inventory_ref="blob://handler/inv",
+        ingress_ref="blob://ingress/route",
+        high_water_mark=42,
+        fence_epochs={"writer-1": 1},
+        export_manifest_ref="blob://export/manifest",
+        restore_verified_ref="blob://restore/verified",
+        replay_manifest_ref="blob://replay/manifest",
+        approvals=["approval-slot-1"],
+    )
+    assert approved_plan.approved is True
+    assert len(approved_plan.holds) == 0
 
     ledger = Ledger()
     reconciler = LedgerReconciler(ledger=ledger)
@@ -174,8 +212,10 @@ def test_artifact_build_and_providers(tmp_path):
     assert len(source_digest) == 64
 
     artifact = builder.create_artifact_build("graft-1", "goldgraft-shop", "v1.0.0", source_digest)
-    assert artifact.reproducible is True
+    assert artifact.outcome == "not_built"
+    assert artifact.reproducible is False
     assert artifact.image_tag == "goldgraft-shop:v1.0.0"
+    assert artifact.metadata_digest is not None
 
     gh_pub = GitHubPublisher()
     pr = gh_pub.publish_pull_request(
@@ -184,13 +224,39 @@ def test_artifact_build_and_providers(tmp_path):
         title="Upgrade to Orders v2",
         commit_sha="abcd1234ef",
     )
-    assert pr.pr_id.startswith("pr-")
+    assert pr.state == "not_attempted"
+    assert pr.pr_id is None
+    assert len(pr.receipt_digest) == 64
     assert pr.commit_sha == "abcd1234ef"
+
+    # With mock transport returning created PR
+    class MockPRTransport:
+        def post(self, url, headers=None, json=None, timeout=None):
+            class Resp:
+                status_code = 201
+
+                def json(self):
+                    return {"number": 42, "html_url": "https://github.com/org/repo/pull/42"}
+
+            return Resp()
+
+    gh_pub_live = GitHubPublisher(transport=MockPRTransport())
+    pr_live = gh_pub_live.publish_pull_request(
+        "https://github.com/org/repo",
+        "feat/upgrade",
+        title="Upgrade to Orders v2",
+        commit_sha="abcd1234ef",
+        token="ghp_test",
+    )
+    assert pr_live.state == "created"
+    assert pr_live.pr_id == "42"
+    assert pr_live.live is True
 
     render = RenderDeployer()
     dep = render.deploy_service("srv-test", "goldgraft-shop:v1.0.0")
-    assert dep.status == "LIVE"
-    assert dep.health_url == "https://srv-test.onrender.com/health"
+    assert dep.status == "not_dispatched"
+    assert dep.live is False
+    assert "no Render credential" in str(dep.error)
 
     pub = ArtifactPublisher()
     pub_rcpt = pub.publish_artifact(
@@ -225,7 +291,17 @@ def test_upload_session_limits_and_traversal_guards():
 
 
 def test_isolated_shop_execution_and_redaction(tmp_path):
+    from pieces.runner.container_runner import IsolationNotEstablished
+
     runner = ContainerRunner()
+    # Unisolated host execution denied by default
+    with pytest.raises(IsolationNotEstablished):
+        runner.execute_shop_process(
+            shop_dir=tmp_path,
+            command=["python", "-c", "print('hello')"],
+        )
+
+    # Opted-in execution redacts secrets
     result = runner.execute_shop_process(
         shop_dir=tmp_path,
         command=[
@@ -233,18 +309,20 @@ def test_isolated_shop_execution_and_redaction(tmp_path):
             "-c",
             "print('API_KEY=super_secret_val_123'); print('NORMAL_LINE=hello_world')",
         ],
+        allow_host_process=True,
     )
     assert result["exit_code"] == 0
     assert "super_secret_val_123" not in result["stdout"]
     assert "[REDACTED]" in result["stdout"]
     assert "NORMAL_LINE=hello_world" in result["stdout"]
+    assert result["isolation_verified"] is False
 
 
 def test_authenticated_callback_gateway():
     ledger = Ledger()
     gateway = CallbackGateway(ledger=ledger)
 
-    # Webhook with valid PayPal cert URL and signature
+    # Webhook without verifier: unverified receipt with hold
     wh_receipt = gateway.handle_webhook(
         event_payload={"id": "WH-TEST-1", "event_type": "PAYMENT.CAPTURE.COMPLETED"},
         headers={
@@ -253,17 +331,33 @@ def test_authenticated_callback_gateway():
         },
         graft_id="graft-wh-1",
     )
-    assert wh_receipt.verified is True
-    assert wh_receipt.status == "VERIFIED"
+    assert wh_receipt.verified is False
+    assert wh_receipt.status == "UNVERIFIED"
+    assert "no webhook signature verifier configured" in wh_receipt.holds
 
-    # IPN with _notify-validate
-    ipn_receipt = gateway.handle_ipn(
+    # With configured verifier
+    class MockVerifier:
+        def verify(self, payload_or_body, headers):
+            return "verified"
+
+    verified_gateway = CallbackGateway(
+        ledger=ledger, webhook_verifier=MockVerifier(), ipn_verifier=MockVerifier()
+    )
+    wh_ok = verified_gateway.handle_webhook(
+        event_payload={"id": "WH-TEST-2", "event_type": "PAYMENT.CAPTURE.COMPLETED"},
+        headers={"paypal-transmission-sig": "sig"},
+        graft_id="graft-wh-2",
+    )
+    assert wh_ok.verified is True
+    assert wh_ok.status == "APPLIED"
+
+    ipn_ok = verified_gateway.handle_ipn(
         raw_body="cmd=_notify-validate&payment_status=Completed&txn_id=TXN123",
         headers={},
-        graft_id="graft-ipn-1",
+        graft_id="graft-ipn-2",
     )
-    assert ipn_receipt.verified is True
-    assert ipn_receipt.status == "VERIFIED"
+    assert ipn_ok.verified is True
+    assert ipn_ok.status == "APPLIED"
 
 
 def test_interrupted_operation_recovery(tmp_path):
@@ -310,9 +404,85 @@ def test_payment_broker_live_and_evidence_class():
     broker_live = PaymentBroker(custody_broker=custody, ledger=ledger, live=True)
     assert broker_live.evidence_class == "real_sandbox"
 
-    # Both accepted by SandboxRecorder
+    # Synthetic recorder accepts only scripted broker
     recorder_1 = SandboxRecorder(broker=broker_scripted)
     assert recorder_1 is not None
 
-    recorder_2 = SandboxRecorder(broker=broker_live)
-    assert recorder_2 is not None
+    with pytest.raises(
+        ValueError, match="SandboxRecorder generates synthetic exchanges in process"
+    ):
+        SandboxRecorder(broker=broker_live)
+
+
+def test_control_store_transactions_and_fencing(tmp_path):
+    from pieces.backend.control_store import ControlStore
+
+    db_path = tmp_path / "test_control.db"
+    store = ControlStore(db_path)
+
+    # 1. Insert session and case inside transaction
+    with store.transaction() as tx:
+        tx.run(
+            "INSERT INTO cases (case_id, tenant_id, requester_id, shop_url, "
+            "status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (
+                "case-100",
+                "tenant-1",
+                "user-1",
+                "https://shop.local",
+                "OPEN",
+                "2026-11-12T00:00:00Z",
+                "2026-11-12T00:00:00Z",
+            ),
+        )
+        tx.run(
+            "INSERT INTO members (case_id, principal_id, role) VALUES (?, ?, ?)",
+            ("case-100", "user-1", "OWNER"),
+        )
+
+    # Verify read outside transaction
+    case_row = store.read("SELECT * FROM cases WHERE case_id = ?", ("case-100",))
+    assert len(case_row) == 1
+    assert case_row[0]["tenant_id"] == "tenant-1"
+
+    # 2. Work generation lease & fencing
+    with store.transaction() as tx:
+        tx.run(
+            "INSERT INTO work (work_id, action_id, case_id, state, generation, lease_until) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            ("work-1", "act-1", "case-100", "LEASED", 1, "2026-11-12T01:00:00Z"),
+        )
+
+    work_row = store.read("SELECT * FROM work WHERE work_id = ?", ("work-1",))
+    assert work_row[0]["generation"] == 1
+
+    # 3. Cancellation and tombstone
+    with store.transaction() as tx:
+        tx.run(
+            "INSERT INTO cancellations (cancel_id, case_id, action_id, "
+            "requested_by, requested_at, state, generation) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            ("cancel-1", "case-100", "act-1", "user-1", "2026-11-12T00:30:00Z", "CANCELLED", 1),
+        )
+        tx.run(
+            "INSERT INTO tombstones (action_id, cancel_id, created_at) VALUES (?, ?, ?)",
+            ("act-1", "cancel-1", "2026-11-12T00:30:00Z"),
+        )
+
+    tombstone = store.read("SELECT * FROM tombstones WHERE action_id = ?", ("act-1",))
+    assert len(tombstone) == 1
+    assert tombstone[0]["cancel_id"] == "cancel-1"
+
+    # 4. Rollback test on transaction failure
+    with pytest.raises(RuntimeError):
+        with store.transaction() as tx:
+            tx.run(
+                "INSERT INTO cases (case_id, tenant_id, requester_id, shop_url, "
+                "status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                ("case-failed", "tenant-1", "user-1", "url", "OPEN", "now", "now"),
+            )
+            raise RuntimeError("simulated crash during write")
+
+    failed_case = store.read("SELECT * FROM cases WHERE case_id = ?", ("case-failed",))
+    assert len(failed_case) == 0
+
+    store.close()

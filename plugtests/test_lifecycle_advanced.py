@@ -59,19 +59,33 @@ def test_safe_recovery_and_rollback():
     ledger = Ledger()
     recovery = RecoveryManager(ledger=ledger)
 
-    receipt = recovery.execute_safe_rollback(
+    # Missing state preservation manifests: must hold rather than blind restore
+    held_receipt = recovery.execute_safe_rollback(
         graft_id="graft-live-1",
         current_stage="LIVE_100",
         reason="Heartbeat ping failure on host gateway",
         idempotency_key="idem-rb-1",
         processed_orders=["ORDER-101", "ORDER-102", "ORDER-103"],
     )
+    assert held_receipt.outcome == "held"
+    assert held_receipt.reverted_to is None
+    assert "no consistent state export; a cutback would lose state" in held_receipt.holds
 
-    assert receipt.graft_id == "graft-live-1"
-    assert receipt.prior_stage == "LIVE_100"
-    assert receipt.reverted_to == "CUTBACK"
-    assert receipt.retained_orders_count == 3
-    assert receipt.reason == "Heartbeat ping failure on host gateway"
+    # With verified export and disposable restore manifests
+    prepared_receipt = recovery.execute_safe_rollback(
+        graft_id="graft-live-1",
+        current_stage="LIVE_100",
+        reason="Heartbeat ping failure on host gateway",
+        idempotency_key="idem-rb-2",
+        processed_orders=["ORDER-101", "ORDER-102", "ORDER-103"],
+        export_manifest_ref="blob://export/manifest-1",
+        restore_verified_ref="blob://restore/verified-1",
+    )
+    assert prepared_receipt.graft_id == "graft-live-1"
+    assert prepared_receipt.prior_stage == "LIVE_100"
+    assert prepared_receipt.reverted_to == "CUTBACK"
+    assert prepared_receipt.retained_orders_count == 3
+    assert prepared_receipt.reason == "Heartbeat ping failure on host gateway"
 
     # Verify ledger entry
     entries = ledger.read("graft-live-1")
@@ -80,6 +94,12 @@ def test_safe_recovery_and_rollback():
 
 
 def test_exit_controller_teardown_and_verification():
+    from pieces.backend.lifecycle.exit import (
+        ORDINARY_CAPABILITIES,
+        ExitCheckResult,
+        RevocationAck,
+    )
+
     ledger = Ledger()
 
     class FakeCustodyBroker:
@@ -108,19 +128,56 @@ def test_exit_controller_teardown_and_verification():
         container_runner=runner,
     )
 
-    receipt = exit_ctrl.execute_merchant_exit(
+    # Missing independent executor: must hold
+    held_receipt = exit_ctrl.execute_merchant_exit(
         graft_id="graft-exit-99",
         actor_name="MerchantCTO",
         idempotency_key="idem-exit-1",
         token_keys=["tok_doppler_sandbox_abc"],
         container_ids=["container_runner_456"],
     )
+    assert held_receipt.graft_id == "graft-exit-99"
+    assert held_receipt.outcome == "held"
+    assert held_receipt.status == "HELD"
+    assert "no qualified independent exit-check executor; exit held" in held_receipt.holds
 
-    assert receipt.graft_id == "graft-exit-99"
-    assert receipt.status == "EXIT_COMPLETE"
-    assert receipt.verified_clean is True
-    assert receipt.revoked_tokens_count == 1
-    assert receipt.cleaned_containers_count == 1
+    # With merchant-owned executor and capability revocations
+    class MerchantExecutor:
+        identity_ref = "merchant-executor-1"
+
+        def run_exit_check(self):
+            return ExitCheckResult(
+                executor_identity_ref="merchant-executor-1",
+                restart_performed=True,
+                recovery_outcome="recovered",
+                observed_evidence_refs=["blob://obs-1"],
+                signed=True,
+            )
+
+    revocations = [
+        RevocationAck(capability=c, acknowledged=True, evidence_ref=f"blob://revoked/{c}")
+        for c in ORDINARY_CAPABILITIES
+    ]
+    exit_ack = RevocationAck(
+        capability="exit_evidence", acknowledged=True, evidence_ref="blob://revoked/exit_evidence"
+    )
+
+    complete_receipt = exit_ctrl.execute_merchant_exit(
+        graft_id="graft-exit-99",
+        actor_name="MerchantCTO",
+        idempotency_key="idem-exit-2",
+        executor=MerchantExecutor(),
+        revocations=revocations,
+        exit_evidence_ack=exit_ack,
+        token_keys=["tok_doppler_sandbox_abc"],
+        container_ids=["container_runner_456"],
+    )
+    assert complete_receipt.graft_id == "graft-exit-99"
+    assert complete_receipt.outcome == "complete"
+    assert complete_receipt.status == "EXIT_COMPLETE"
+    assert complete_receipt.verified_clean is True
+    assert complete_receipt.revoked_tokens_count == 1
+    assert complete_receipt.cleaned_containers_count == 1
     assert "tok_doppler_sandbox_abc" in broker.revoked
     assert "container_runner_456" in runner.cleaned
 
