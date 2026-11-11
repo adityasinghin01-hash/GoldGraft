@@ -166,10 +166,10 @@
 .graftTag[data-pos='1'] { left: calc(var(--jx) + 72px); top: calc(var(--jy) - 26svh); }
 .graftTag[data-pos='2'] { right: calc(100vw - var(--jx) + 15svh + 40px); top: var(--jy); translate: 0 -50%; }
 .leader { position: absolute; top: 50%; height: 1px; width: 56px; }
-.graftTag[data-pos='0'] .leader { left: 100%; width: 100px; transform-origin: left; background: linear-gradient(90deg, rgb(205 190 156 / 0.8), rgb(205 190 156 / 0.1)); }
+.graftTag[data-pos='0'] .leader { left: 100%; width: 64px; transform-origin: left; background: linear-gradient(90deg, rgb(205 190 156 / 0.8), rgb(205 190 156 / 0.1)); }
 .graftTag[data-pos='1'] .leader { right: 100%; transform-origin: right; background: linear-gradient(270deg, rgb(205 190 156 / 0.8), rgb(205 190 156 / 0.1)); }
 .graftTag[data-pos='2'] .leader { left: 100%; transform-origin: left; background: linear-gradient(90deg, rgb(205 190 156 / 0.8), rgb(205 190 156 / 0.1)); }
-.graftTag[data-pos='2'] .leader { width: 36px; }
+.graftTag[data-pos='2'] .leader { width: 80px; }
 
 /* ── 5 · What it does (heading in flow, then a pinned stage) ── */
 .features { padding-top: var(--gg-s-10); }
