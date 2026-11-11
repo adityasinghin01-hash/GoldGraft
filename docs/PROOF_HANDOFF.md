@@ -40,6 +40,48 @@ The fixture hash demo returns `hash=True, verified=False` for the original
 synthetic certificate, and `hash=False, verified=False` for the edited one.
 The certificate fixture has no authentic signature.
 
+## Adapter handoff for the reference shop
+
+Status as of 11 November 2026: **ready for fixture replay**. PR #1 is merged
+into `main` at [`4f9bf0c`](https://github.com/adityasinghin01-hash/GoldGraft/commit/4f9bf0c7f88dd811ba58cba856ff91ae226db172).
+Use `pieces.proof.proof:Proof` from that revision. The adapter accepts
+`RawCapture/1` for OLD, OLD_TWIN and NEW, maps each capture to `CMEL/1`,
+and judges the three streams with `Contract/1` and `TargetPlan/1`. The
+composition in `integration.offline.fixture_proof` checks the recording job,
+graft, scenario and variant before calling the mapper and judge. It supplies
+the OLD and NEW captures for payment-evidence checks and returns `Verdict/1`.
+
+From that checkout with Python 3.12 and uv, use a fresh local state directory:
+
+```sh
+uv sync --locked
+uv run --locked python -m integration.check --state-dir .goldgraft/proof-handoff
+```
+
+The [main CI run](https://github.com/adityasinghin01-hash/GoldGraft/actions/runs/42979872863)
+passed this boundary check and the PHP mutation step. The
+[recorded results](engineering/integration/VERIFICATION.md) show nine
+scenarios, 208 CMEL events and 272 ledger entries. Evidence remains partial:
+five PASS, one PASS_FIXED, two PROBLEM and one UNVERIFIED. Restart reads the
+same result without rerunning the job. The integration app exposes the stored
+scenario, CMEL and proof records via the routes in the
+[reference flow](engineering/integration/README.md#run-the-combined-reference).
+
+**Real sandbox runs are on hold.** Gupta owns the qualified broker,
+isolated runner and authenticated callback path. Vijay owns the actual
+reference-shop recordings and payment witnesses. Singh owns the accepted
+SI01 schemas and integration. Until those inputs are available, the fixture
+adapter is the supported invocation. The verifier rejects the unsigned
+sample certificate.
+
+**Sponsor evidence.** The published Elastic path formats diagnostic
+documents. Exact-subject retrieval with access checks and an approved
+redacted index still needs a qualified Elastic profile and Gupta's
+ingestion/access-control integration. The Postman assertions have an
+offline replay result. The private/public projection negatives depend on
+the accepted SI01 projection schema. Search and UI projections consume
+proof results without issuing verdicts.
+
 ## Integration and live checks
 
 The [reviewed START guide](START_Aditya_Singhal_proof.md) defines SH01–SH03.
