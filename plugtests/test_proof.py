@@ -63,9 +63,14 @@ def test_judge(proof, path):
     expected = validate("Verdict/1", read(path))
     streams = [models("CMEL/1", PROOF / f"cmel/{expected.scenario_id}.{v}.json")
                for v in ("OLD", "OLD_TWIN", "NEW")]
+    evidence = {}
+    if proof.__class__.__module__ == "pieces.proof.proof":
+        for side in ("OLD", "NEW"):
+            raw = read(PROOF / f"raw/{expected.scenario_id}.{side}.json")
+            evidence[f"{side.lower()}_capture"] = validate("RawCapture/1", raw)
     result = validate("Verdict/1", proof.judge(
         *streams, validate("Contract/1", read(PROOF / "contract.json")),
-        validate("TargetPlan/1", read(PROOF / "target_plan.json"))))
+        validate("TargetPlan/1", read(PROOF / "target_plan.json")), **evidence))
     assert result.scenario_id == expected.scenario_id
     assert result.grade == expected.grade
     assert {(hit.rule, hit.side) for hit in result.rule_hits} == {
@@ -75,8 +80,14 @@ def test_judge(proof, path):
 
 def test_proof_strength(proof):
     mutants = [validate("Mutant/1", read(p)) for p in sorted((PROOF / "mutants").glob("M*.json"))]
-    runs = {row["mutant"]: row["grades"] for row in read(PROOF / "mutants/runs.json")["runs"]}
-    actual = validate("ProofStrength/1", proof.proof_strength(mutants, runs))
+    rows = read(PROOF / "mutants/runs.json")["runs"]
+    runs = {row["mutant"]: row["grades"] for row in rows}
+    evidence = {}
+    if proof.__class__.__module__ == "pieces.proof.proof":
+        evidence["reviewed_equivalent"] = {
+            row["mutant"] for row in rows if row["equivalence"] == "DROPPED"
+        }
+    actual = validate("ProofStrength/1", proof.proof_strength(mutants, runs, **evidence))
     expected = validate("ProofStrength/1", read(PROOF / "expected/proof_strength.json"))
     assert (actual.total, actual.equivalent_dropped, actual.killed) == (
         expected.total, expected.equivalent_dropped, expected.killed)
@@ -110,10 +121,21 @@ def test_recipe_confidence(proof, case):
 
 @pytest.mark.parametrize("name", ["valid", "tampered"])
 def test_certificate_hash_binding_vectors(proof, name):
-    certificate = validate("Certificate/1", read(PROOF / f"certificate/{name}.json"))
-    key = read(PROOF / "certificate/expected_verify.json")[name]
+    wire = read(PROOF / f"certificate/{name}.json")
+    certificate = validate("Certificate/1", wire)
+    expected = read(PROOF / "certificate/expected_verify.json")
+    key = expected[name]
     result = CertificateVerifyResult.model_validate(proof.verify_certificate(certificate))
     assert result.cert_id == certificate.cert_id
+    if proof.__class__.__module__ == "pieces.proof.proof":
+        from pieces.proof.certificate import matches_payload_hash
+
+        assert matches_payload_hash(wire, expected["trusted_payload_sha256"]) == (
+            key["payload_hash_matches"]
+        )
+        assert not result.ok
+        assert result.checks and all(not check.ok for check in result.checks)
+        return
     assert result.ok == key["payload_hash_matches"]
     assert result.checks
     if not result.ok:

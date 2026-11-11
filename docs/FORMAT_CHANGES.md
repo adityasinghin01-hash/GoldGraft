@@ -258,3 +258,12 @@ real GU qualification or numeric trust obtained from prose. Frontend inputs
 were marked updating before editing this shared Python helper; revision2 will
 publish fresh hashes only after actual checks. Existing schemas/types/fixtures
 and legacy validation behaviour remain unchanged.
+
+# Integration composition ports — 11 November 2026
+
+`offline_payments.py` and `run_views.py` add Python-only composition protocols.
+No serialized field, route, registry entry, schema version or generated wire format
+changes. Existing `Graft`, `ScenarioList`, `CmelView`, `ProofView`, `JobSpec/1`,
+`RawCapture/1`, `CMEL/1`, `Verdict/1` and `CertificateVerifyResult` shapes are reused.
+The repository-level integration composes pieces; the recorder uses shared ports
+instead of importing backend internals. See [integration](engineering/integration/README.md).
