@@ -30,7 +30,7 @@ export function Hero() {
         {HERO.scroll}
         <ArrowDownIcon size={13} aria-hidden />
       </a>
-      <img className={s.fallbackArt} src="/world/01-graft-union.webp" alt="" aria-hidden data-fallback-art />
+      <img className={s.fallbackArt} src="/world/01-graft-union.jpg" alt="" aria-hidden data-fallback-art />
     </section>
   );
 }

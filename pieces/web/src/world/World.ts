@@ -14,7 +14,7 @@ function pickCount(): number {
   const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
   const small = Math.min(window.innerWidth, window.innerHeight) < 700;
   if (small || cores <= 4 || mem <= 4) return 26000;
-  return 64000;
+  return 100000;
 }
 
 export class World {

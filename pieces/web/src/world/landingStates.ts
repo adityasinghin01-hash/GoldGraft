@@ -5,7 +5,7 @@ import type { StateDef } from './states';
 // Photos live in /public/world (generated for GoldGraft, see CREDITS.md).
 // Layout: cx, cy in -1..1 of the viewport (0,0 = centre); h = share of viewport height.
 
-const img = (name: string) => `/world/${name}.webp`;
+const img = (name: string) => `/world/${name}.jpg`;
 
 function codeLines(ctx: CanvasRenderingContext2D, w: number, h: number, seed: number, hot: number[], tidy: boolean) {
   let s = seed;
@@ -34,7 +34,7 @@ export const LANDING_STATES: StateDef[] = [
 
   // 1 Hero — the graft union, the shop as a living tree
   { id: 'graft', source: { kind: 'image', src: img('01-graft-union'), threshold: 0.075, gamma: 1.1, depth: 0.9 },
-    layout: { cx: 0.42, cy: -0.02, h: 1.05 }, layoutNarrow: { cx: 0.15, cy: 0.38, h: 0.62 },
+    layout: { cx: 0.5, cy: -0.16, h: 0.86 }, layoutNarrow: { cx: 0.15, cy: 0.38, h: 0.62 },
     motion: { drift: 1, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 1, warm: 0.15, pointer: 0.8 } },
 
   // 2 Proof — the tree rings: time is running out
