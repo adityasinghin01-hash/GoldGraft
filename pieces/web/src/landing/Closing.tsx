@@ -79,7 +79,7 @@ export function Final() {
     window.setTimeout(() => document.getElementById('shop-url')?.focus({ preventScroll: true }), 1400);
   };
   return (
-    <section id="start" className={s.final} data-world="bloom" data-world-lead="0.7">
+    <section id="start" className={s.final} data-world="bloom" data-world-lead="0.4">
       <div className={`gg-wrap gg-grid ${s.finalGrid}`}>
         <div data-exit>
           <h2 className={s.finalTitle}>

@@ -54,7 +54,7 @@ export function GraftLayout() {
   return (
     <GraftCtx.Provider value={{ graft: g, graftId, certId, reviewOpen, setReviewOpen }}>
       <div className={s.wrap}>
-        <div className={s.status} data-tone={line.tone} role="status">
+        <div className={`gg-lg ${s.status}`} data-tone={line.tone} role="status">
           <span className={s.statusDot} aria-hidden />
           <p className={s.statusText}>{line.text}</p>
           <div className={s.statusExtra}>

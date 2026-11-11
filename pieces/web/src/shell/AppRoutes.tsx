@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, Route, Routes, useLocation, Link } from 'react-router-dom';
 import { WorldCanvas } from '../world/WorldCanvas';
 import { LANDING_STATES } from '../world/landingStates';
@@ -8,6 +8,8 @@ import { Skeleton, WakingLine } from '../components/Loaders';
 import { NAV_APP } from '../copy/words';
 import { onWaking } from '../api/client';
 import { SiteFooter } from './SiteFooter';
+import { useLiquidGlass } from '../components/liquidGlass';
+import h from './SiteHeader.module.css';
 import { GraftLayout } from './GraftLayout';
 import s from './AppShell.module.css';
 
@@ -28,8 +30,15 @@ const NotFound = lazy(() => import('../screens/NotFound'));
 
 const CALM = ['canopy'];
 
+/** App header: the same three liquid-glass islands as the landing (brand · screens · sandbox). */
 function AppHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const brandRef = useRef<HTMLAnchorElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+  useLiquidGlass(brandRef);
+  useLiquidGlass(navRef);
+  useLiquidGlass(endRef);
   useEffect(() => {
     const f = () => setScrolled(window.scrollY > 8);
     f();
@@ -38,14 +47,18 @@ function AppHeader() {
   }, []);
   return (
     <header className={s.header} data-scrolled={scrolled || undefined}>
-      <div className={s.bar}>
-        <Link to="/" className={s.brand} aria-label="GoldGraft home"><span className={s.mark}><Mark size={26} /></span><span className={s.word}>GoldGraft</span></Link>
-        <nav className={s.nav} aria-label="App">
+      <div className={`${h.bar} ${s.bar}`}>
+        <Link ref={brandRef} to="/" className={`gg-lg ${h.island} ${h.brand}`} aria-label="GoldGraft home">
+          <span className={h.mark}><Mark size={24} /></span><span className={h.word}>GoldGraft</span>
+        </Link>
+        <nav ref={navRef} className={`gg-lg ${h.island} ${h.nav} ${s.nav}`} aria-label="App">
           {NAV_APP.map((n) => (
-            <NavLink key={n.to} to={n.to} className={({ isActive }) => `${s.link} ${isActive ? s.active : ''}`}>{n.label}</NavLink>
+            <NavLink key={n.to} to={n.to} className={h.navLink}>{n.label}</NavLink>
           ))}
         </nav>
-        <SandboxChip />
+        <div ref={endRef} className={`gg-lg ${h.island} ${h.actions} ${s.end}`}>
+          <SandboxChip />
+        </div>
       </div>
     </header>
   );

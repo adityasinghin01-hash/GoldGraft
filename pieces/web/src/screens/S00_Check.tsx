@@ -71,7 +71,7 @@ export default function S00_Check() {
 
   return (
     <div className={s.screen}>
-      <PageHead title={<>Don't cut the tree. <em className={s.em}>Graft.</em></>} sub="Upgrades old PayPal checkout, proves every payment, switches back if wrong." />
+      <PageHead title="Check your shop" sub="Upgrades old PayPal checkout, proves every payment, switches back if wrong." />
 
       <section className={`gg-glass ${s.card}`}>
         <div className={s.tabsRow}>

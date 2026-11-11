@@ -129,3 +129,18 @@
   --gg-z-overlay: 60;
   --gg-z-toast: 80;
 }
+
+/* Wide screens: the scale above tops out at 1440. Past 1680 the big roles take one more
+   step (×1.2) so the hero and chapter headings keep their share of a 1920 screen. */
+@media (min-width: 1680px) {
+  :root {
+    --gg-t-display: 5.75rem;    /* 92 */
+    --gg-t-display-2: 3.25rem;  /* 52 */
+    --gg-t-h2: 4.25rem;         /* 68 */
+    --gg-t-quote: 2.25rem;      /* 36 */
+    --gg-t-h3: 1.625rem;        /* 26 */
+    --gg-t-lead: 1.625rem;
+    --gg-t-body: 1.1875rem;     /* 19 */
+    --gg-t-meta: 0.9375rem;     /* 15 */
+  }
+}
