@@ -82,6 +82,30 @@ offline replay result. The private/public projection negatives depend on
 the accepted SI01 projection schema. Search and UI projections consume
 proof results without issuing verdicts.
 
+## Lifecycle review and demo signing
+
+`pieces.proof.lifecycle_evidence.review_lifecycle` consumes an independently
+authenticated set of observations and a trusted, current set of required checks.
+The baseline and candidate requirements bind case, run, generation, fence, scope,
+package, image, config, runtime and origin. Missing, duplicate, mismatched,
+unverified or fixture-only critical observations result in HOLD. Noncritical
+gaps result in PARTIAL. READY refers to the supplied review plan.
+
+The internal review retains the check names and gap reasons. The public summary
+from `pieces.proof.review_projection.public_review` contains only the disposition,
+counts and fixed reason codes. Keep the internal review behind the case-access
+boundary. This local API awaits SI01 and the authenticated lifecycle adapters
+before wiring into merchant review or certificate issuance.
+
+The **Fixture proof signing** workflow replays the deterministic fixture path,
+then signs only the aggregate verdict counts and the workflow revision. The
+workflow requires a valid signature for the original bytes and rejects a
+modified copy before uploading the report, Sigstore bundle and verification
+output. Rekor records the GitHub workflow identity and payload hash publicly.
+The fixture summary includes problem verdicts and is ineligible for a
+`Certificate/1` merchant certificate. Live sandbox evidence remains required
+for that certificate and its PayPal re-fetch check.
+
 ## Integration and live checks
 
 The [reviewed START guide](START_Aditya_Singhal_proof.md) defines SH01–SH03.

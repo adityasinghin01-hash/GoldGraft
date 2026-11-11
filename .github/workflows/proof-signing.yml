@@ -1,0 +1,70 @@
+name: Fixture proof signing
+on:
+  push:
+    branches: [proof/submission-closeout]
+    paths: [.github/workflows/proof-signing.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixture-proof:
+    if: github.repository == 'adityasinghin01-hash/GoldGraft'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+      - uses: sigstore/cosign-installer@d7543c93d881b35a8faa02e8e3605f69b7a1ce62 # v3.10.0
+      - name: Replay proof and select public-safe counts
+        shell: bash
+        run: |
+          uv python install 3.12
+          uv sync --locked
+          uv run --locked python -m integration.check --state-dir "$RUNNER_TEMP/fixture-run"
+          mkdir proof-signing
+          jq -eS --arg sha "$GITHUB_SHA" '
+            select(.evidence_class == "scripted" and .pipeline_status == "PASS"
+              and .external_provider_calls == 0 and .ledger_chain_valid == true
+              and .unsigned_certificate_accepted == false
+              and (.verdicts | length) == .scenario_count and .scenario_count > 0)
+            | {
+              evidence_class: "synthetic-fixture-proof",
+              verdict_counts: (.verdicts | [.[]] | group_by(.) | map({key: .[0], value: length}) | from_entries),
+              workflow_sha: $sha,
+              merchant_certificate_issued: false
+            }' "$RUNNER_TEMP/fixture-run/end-to-end.json" > proof-signing/fixture-proof.json
+      - name: Sign, verify and reject a modified payload
+        shell: bash
+        run: |
+          payload=proof-signing/fixture-proof.json
+          bundle=proof-signing/fixture-proof.sigstore.json
+          identity="https://github.com/$GITHUB_WORKFLOW_REF"
+          issuer=https://token.actions.githubusercontent.com
+          verify_args=(--bundle "$bundle" --certificate-identity "$identity"
+            --certificate-oidc-issuer "$issuer" --certificate-github-workflow-sha "$GITHUB_SHA")
+          cosign sign-blob --yes --bundle "$bundle" "$payload"
+          cosign verify-blob "${verify_args[@]}" "$payload"
+          jq '.merchant_certificate_issued = true' "$payload" > "$RUNNER_TEMP/tampered-proof.json"
+          if cosign verify-blob "${verify_args[@]}" "$RUNNER_TEMP/tampered-proof.json"; then
+            echo "Verification accepted a modified payload" >&2
+            exit 1
+          fi
+          jq -n --arg identity "$identity" --arg sha "$GITHUB_SHA" '{
+            signature_verified: true,
+            tampered_payload_verified: false,
+            merchant_certificate_verified: false,
+            workflow_identity: $identity,
+            workflow_sha: $sha
+          }' | tee proof-signing/verification.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: signed-fixture-proof
+          path: proof-signing/
+          if-no-files-found: error
