@@ -1,0 +1,22 @@
+{
+  "actions": [
+    "preserve_state"
+  ],
+  "authority_id": "fixture:authority_id",
+  "controller_id": "controller-demo",
+  "delegate_id": null,
+  "expires_at": "2026-11-11T00:00:00Z",
+  "grant_epoch": 1,
+  "issued_at": "2026-11-10T00:00:00Z",
+  "revoked_at": null,
+  "role_evidence_refs": [
+    "fixture:role_evidence_ref"
+  ],
+  "target_key": {
+    "account_id": "synthetic-account",
+    "environment_id": "synthetic",
+    "provider_id": "local_folder",
+    "resource_id": "synthetic-resource",
+    "resource_kind": "fixture:resource_kind"
+  }
+}

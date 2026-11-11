@@ -1,0 +1,462 @@
+{
+  "$defs": {
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Ref"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "recovery": {
+          "enum": [
+            "retry_read",
+            "reconnect",
+            "supply_input",
+            "review_scope",
+            "reapprove",
+            "await_counterpart",
+            "reconcile",
+            "unsupported"
+          ],
+          "title": "Recovery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "input_ref",
+        "owner_role",
+        "recovery",
+        "evidence_refs"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "TaskSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_tool_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Allowed Tool Ids",
+          "type": "array"
+        },
+        "dependencies": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "expected_schemas": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Expected Schemas",
+          "type": "array"
+        },
+        "expected_subject": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Expected Subject",
+          "type": "string"
+        },
+        "input_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "operation": {
+          "enum": [
+            "verify_package",
+            "survey",
+            "explain_status",
+            "audit",
+            "propose_plan",
+            "build_baseline",
+            "build_candidate",
+            "validate_driver",
+            "run_scenario",
+            "scribe_draft",
+            "scribe_final",
+            "architect",
+            "candidate_patch",
+            "run_mutant",
+            "derive_guards",
+            "diagnose",
+            "learn",
+            "selfcheck_recipe",
+            "aggregate"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "output_slot": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Output Slot",
+          "type": "string"
+        },
+        "output_subject_policy": {
+          "enum": [
+            "same_subject",
+            "candidate_child",
+            "build_from_source",
+            "derived_evidence"
+          ],
+          "title": "Output Subject Policy",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "role": {
+          "enum": [
+            "Gardener",
+            "Surveyor",
+            "Builder",
+            "Explorer",
+            "Scribe",
+            "Architect",
+            "Grafter",
+            "Adversary",
+            "Healer",
+            "Librarian",
+            "Herald",
+            "Orchard Analyst",
+            "Sentinel"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "task_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "workspace_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Workspace Ref"
+        }
+      },
+      "required": [
+        "task_id",
+        "role",
+        "operation",
+        "dependencies",
+        "input_refs",
+        "expected_schemas",
+        "output_slot",
+        "workspace_ref",
+        "expected_subject",
+        "allowed_tool_ids",
+        "required",
+        "output_subject_policy"
+      ],
+      "title": "TaskSpec",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/AgentTask.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attempt": {
+      "exclusiveMinimum": 0,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checkpoint_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Checkpoint Ref"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Digest",
+      "type": "string"
+    },
+    "issue": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Issue"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lease_epoch": {
+      "minimum": 0,
+      "title": "Lease Epoch",
+      "type": "integer"
+    },
+    "lease_owner": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lease Owner"
+    },
+    "lease_until": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lease Until"
+    },
+    "model_profile_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Model Profile Ref"
+    },
+    "next_wake_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next Wake At"
+    },
+    "output_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Output Refs",
+      "type": "array"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "policy_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Policy Ref",
+      "type": "string"
+    },
+    "prompt_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Prompt Digest",
+      "type": "string"
+    },
+    "prompt_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Prompt Ref",
+      "type": "string"
+    },
+    "request_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "pending",
+        "ready",
+        "leased",
+        "running",
+        "waiting",
+        "retry_due",
+        "succeeded",
+        "held",
+        "unknown",
+        "failed",
+        "cancelled"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "state_version": {
+      "exclusiveMinimum": 0,
+      "title": "State Version",
+      "type": "integer"
+    },
+    "task": {
+      "$ref": "#/$defs/TaskSpec"
+    },
+    "wake_condition_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Wake Condition Ref"
+    }
+  },
+  "required": [
+    "task",
+    "case_id",
+    "run_id",
+    "generation",
+    "request_id",
+    "input_digest",
+    "policy_ref",
+    "policy_digest",
+    "prompt_ref",
+    "prompt_digest",
+    "model_profile_ref",
+    "state",
+    "state_version",
+    "attempt",
+    "created_at",
+    "deadline",
+    "next_wake_at",
+    "wake_condition_ref",
+    "lease_owner",
+    "lease_epoch",
+    "lease_until",
+    "checkpoint_ref",
+    "output_refs",
+    "issue"
+  ],
+  "title": "AgentTaskV1",
+  "type": "object"
+}

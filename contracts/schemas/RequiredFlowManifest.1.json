@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "RequiredFlow": {
+      "additionalProperties": false,
+      "properties": {
+        "acceptance_rule_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Acceptance Rule Ids",
+          "type": "array"
+        },
+        "flow_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Flow Id",
+          "type": "string"
+        },
+        "limitation": {
+          "anyOf": [
+            {
+              "maxLength": 8192,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Limitation"
+        },
+        "origin_routes": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Origin Routes",
+          "type": "array"
+        },
+        "payment_family": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Payment Family",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "scenario_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Scenario Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "flow_id",
+        "payment_family",
+        "scenario_refs",
+        "required",
+        "origin_routes",
+        "acceptance_rule_ids",
+        "limitation"
+      ],
+      "title": "RequiredFlow",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/RequiredFlowManifest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "flows": {
+      "items": {
+        "$ref": "#/$defs/RequiredFlow"
+      },
+      "maxItems": 256,
+      "title": "Flows",
+      "type": "array"
+    }
+  },
+  "required": [
+    "flows"
+  ],
+  "title": "RequiredFlowManifestV1",
+  "type": "object"
+}

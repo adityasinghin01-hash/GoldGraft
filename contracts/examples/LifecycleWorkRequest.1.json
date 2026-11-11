@@ -1,0 +1,22 @@
+{
+  "authority_binding_epochs": {
+    "binding-demo": 1
+  },
+  "budget_ref": "fixture:budget_ref",
+  "deadline": "2026-11-11T00:00:00Z",
+  "expected_output_schema": "fixture:expected_output_schema",
+  "forbidden_effect_codes": [
+    "fixture:forbidden_effect_code"
+  ],
+  "generation": 1,
+  "input_artifact_refs": [
+    "fixture:input_artifact_ref"
+  ],
+  "operation_kind": "build_baseline",
+  "package_digest": "4f6e40c1fab33743c82aa55a0cabbaecbd3357028c80c3a0e7df9d372a5dcf7e",
+  "package_ref": "fixture:package_ref",
+  "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+  "request_id": "fixture:request_id",
+  "run_id": "run-demo",
+  "runtime_profile_digest": "fbbf834c181d4f84eb11af613aea9cf5de466ede28a00437db397b2629d14cf3"
+}

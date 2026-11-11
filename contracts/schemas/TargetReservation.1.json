@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "TargetKey": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_kind": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "account_id",
+        "environment_id",
+        "resource_kind",
+        "resource_id"
+      ],
+      "title": "TargetKey",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/TargetReservation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Action Plan Ref",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "expected_version_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Expected Version Refs",
+      "type": "array"
+    },
+    "lease_until": {
+      "format": "date-time",
+      "title": "Lease Until",
+      "type": "string"
+    },
+    "reservation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Reservation Id",
+      "type": "string"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "held",
+        "reconciling",
+        "releasable",
+        "released"
+      ],
+      "title": "State",
+      "type": "string"
+    },
+    "target_keys": {
+      "items": {
+        "$ref": "#/$defs/TargetKey"
+      },
+      "maxItems": 256,
+      "title": "Target Keys",
+      "type": "array"
+    },
+    "unresolved_effect_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Unresolved Effect Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reservation_id",
+    "case_id",
+    "run_id",
+    "action_plan_ref",
+    "target_keys",
+    "resource_epochs",
+    "lease_until",
+    "expected_version_refs",
+    "unresolved_effect_refs",
+    "state"
+  ],
+  "title": "TargetReservationV1",
+  "type": "object"
+}

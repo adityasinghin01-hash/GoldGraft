@@ -1,0 +1,74 @@
+{
+  "$id": "https://goldgraft.dev/schemas/PredicateResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "predicate": {
+      "enum": [
+        "can_review",
+        "can_prepare_apply",
+        "can_submit_slot",
+        "upgrade_verified",
+        "exit_complete"
+      ],
+      "title": "Predicate",
+      "type": "string"
+    },
+    "slot_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Slot Id"
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "missing",
+        "stale",
+        "failed",
+        "unknown"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "subject_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "predicate",
+    "slot_id",
+    "status",
+    "evidence_refs",
+    "subject_digest",
+    "checked_at"
+  ],
+  "title": "PredicateResultV1",
+  "type": "object"
+}

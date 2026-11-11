@@ -1,0 +1,27 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ScenarioStageArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "mutant_set_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Mutant Set Ref",
+      "type": "string"
+    },
+    "scenario_set_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Scenario Set Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scenario_set_ref",
+    "mutant_set_ref"
+  ],
+  "title": "ScenarioStageArgsV1",
+  "type": "object"
+}

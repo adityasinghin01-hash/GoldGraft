@@ -1,0 +1,15 @@
+{
+  "binding_epochs": {
+    "binding-demo": 1
+  },
+  "expected_manifest_digest": "b56db0e8685fe2cd6fc67da8143a2271b3b4031d7fac11fcd604e8540e7ec654",
+  "expected_total_bytes": 53,
+  "manifest": [
+    {
+      "bytes": 53,
+      "file_type": "file",
+      "relative_path": "shop.php",
+      "sha256": "a580085add847d5b7986efbda2e2bfe2b251eab5285f8b62235f14c9cc96411c"
+    }
+  ]
+}

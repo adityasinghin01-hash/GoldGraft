@@ -1,0 +1,5 @@
+{
+  "max_matches": 1,
+  "rule_ref": "fixture:rule_ref",
+  "snapshot_ref": "fixture:snapshot_ref"
+}

@@ -1,0 +1,26 @@
+{
+  "case_id": "case-demo",
+  "cleanup_items": [
+    {
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "item_id": "fixture:item_id",
+      "owner": "fixture:owner",
+      "required_for_exit": true,
+      "state": "revocation_pending"
+    }
+  ],
+  "exit_id": "fixture:exit_id",
+  "legacy_obligations_ref": "fixture:legacy_obligations_ref",
+  "merchant_assets_ref": "fixture:merchant_assets_ref",
+  "outcome": "pending",
+  "persistent_runtime_evidence_refs": [
+    "fixture:persistent_runtime_evidence_ref"
+  ],
+  "post_denial_observation_refs": [
+    "fixture:post_denial_observation_ref"
+  ],
+  "run_id": "run-demo",
+  "temporary_assets_ref": "fixture:temporary_assets_ref"
+}

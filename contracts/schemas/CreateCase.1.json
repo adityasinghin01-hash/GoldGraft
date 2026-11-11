@@ -1,0 +1,18 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CreateCase.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "shop_url": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Shop Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "shop_url"
+  ],
+  "title": "CreateCaseV1",
+  "type": "object"
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "started_at": "2026-11-10T13:57:24.521460+00:00",
+  "seconds": 19.786,
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B3_final_full.log",
+  "output_sha256": "031e7d1b7c190640c40774b9d83830922ce2079038850c5e6916e40e1a4eef58"
+}

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "sh",
+    "scripts/check_generated.sh"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "exit_code": 0,
+  "seconds": 3.314,
+  "output": "docs/engineering/plan5/checks/B4_Herald_13-final-generated.log",
+  "output_sha256": "177514251b453e282a8e9bb26c914af0997f0507552364ef4cce3a587967f9ac",
+  "original_record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/13-final-generated.json"
+}

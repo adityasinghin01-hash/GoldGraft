@@ -1,0 +1,19 @@
+{
+  "authenticity_ref": "fixture:authenticity_ref",
+  "case_id": "case-demo",
+  "collector_identity_ref": "fixture:collector_identity_ref",
+  "derivation_id": "fixture:derivation_id",
+  "generation": 1,
+  "operation": "candidate_patch",
+  "output_refs": [
+    "fixture:output_ref"
+  ],
+  "output_subject": "5218bef060a9bac8adb8b8fcb00f3208e7aebb1b4cc332ae54d879491164b0e9",
+  "parent_refs": [
+    "fixture:input"
+  ],
+  "parent_subject": "d2cbe955c253723ceedaef3072d7b6b75af6a809e318cd981e2c45b929fb3087",
+  "recipe_or_patch_digest": "b23ac76975d454e321fca6afa42ea4f1753828fc215592312be4a652189d44f0",
+  "run_id": "run-demo",
+  "task_id": "survey-demo"
+}

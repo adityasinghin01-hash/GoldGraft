@@ -1,0 +1,25 @@
+{
+  "admin": true,
+  "allowed_tool_ids": [
+    "source.read"
+  ],
+  "budget_ref": "fixture:budget_ref",
+  "case_id": "case-demo",
+  "checkpoint_ref": null,
+  "deadline": "2026-11-11T00:00:00Z",
+  "expected_schemas": [
+    "RootMap/1"
+  ],
+  "expected_subject": "d200e45322bacb3929e1d18cf400e4a0bd62c33abd493ca684a4c0fddaa63e79",
+  "generation": 1,
+  "input_refs": [
+    "fixture:input"
+  ],
+  "lease_epoch": 1,
+  "operation": "survey",
+  "policy_ref": "fixture:policy_ref",
+  "prompt_ref": "fixture:prompt_ref",
+  "role": "Surveyor",
+  "run_id": "run-demo",
+  "task_ref": "fixture:task_ref"
+}

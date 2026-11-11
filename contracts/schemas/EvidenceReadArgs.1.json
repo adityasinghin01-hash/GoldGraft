@@ -1,0 +1,26 @@
+{
+  "$id": "https://goldgraft.dev/schemas/EvidenceReadArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "max_bytes": {
+      "exclusiveMinimum": 0,
+      "maximum": 32768,
+      "title": "Max Bytes",
+      "type": "integer"
+    },
+    "ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ref",
+    "max_bytes"
+  ],
+  "title": "EvidenceReadArgsV1",
+  "type": "object"
+}

@@ -1,0 +1,234 @@
+{
+  "$defs": {
+    "CheckResult": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Check Id",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "expires_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expires At"
+        },
+        "recovery_code": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recovery Code"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "missing",
+            "unsupported",
+            "failed",
+            "stale",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "status",
+        "evidence_refs",
+        "checked_at",
+        "expires_at",
+        "recovery_code"
+      ],
+      "title": "CheckResult",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ConnectionReadiness.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Actor Id",
+      "type": "string"
+    },
+    "binding_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Binding Epochs",
+      "type": "object"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/CheckResult"
+      },
+      "maxItems": 256,
+      "title": "Checks",
+      "type": "array"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "fixture_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Fixture Profile Digest",
+      "type": "string"
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "processing_policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Processing Policy Digest",
+      "type": "string"
+    },
+    "readiness_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Readiness Digest",
+      "type": "string"
+    },
+    "readiness_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Readiness Id",
+      "type": "string"
+    },
+    "resource_evidence_digests": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Evidence Digests",
+      "type": "object"
+    },
+    "resource_graph_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resource Graph Digest",
+      "type": "string"
+    },
+    "runtime_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Profile Digest",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "source_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Manifest Digest",
+      "type": "string"
+    },
+    "source_snapshot_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Source Snapshot Refs",
+      "type": "array"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    },
+    "work_package_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Work Package Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "readiness_id",
+    "case_id",
+    "actor_id",
+    "work_package_ref",
+    "work_package_digest",
+    "resource_graph_digest",
+    "source_snapshot_refs",
+    "source_manifest_digest",
+    "resource_evidence_digests",
+    "binding_epochs",
+    "scope_digest",
+    "processing_policy_digest",
+    "runtime_profile_digest",
+    "fixture_profile_digest",
+    "checks",
+    "issued_at",
+    "expires_at",
+    "readiness_digest"
+  ],
+  "title": "ConnectionReadinessV1",
+  "type": "object"
+}

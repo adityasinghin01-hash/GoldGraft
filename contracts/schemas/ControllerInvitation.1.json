@@ -1,0 +1,85 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ControllerInvitation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "copy_url": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Copy Url",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "invitation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Invitation Id",
+      "type": "string"
+    },
+    "recipient_hint": {
+      "anyOf": [
+        {
+          "maxLength": 8192,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Recipient Hint"
+    },
+    "requester_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Requester Id",
+      "type": "string"
+    },
+    "resource_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Resource Ids",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "approved",
+        "denied",
+        "expired"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "invitation_id",
+    "case_id",
+    "resource_ids",
+    "requester_id",
+    "recipient_hint",
+    "copy_url",
+    "expires_at",
+    "status"
+  ],
+  "title": "ControllerInvitationV1",
+  "type": "object"
+}

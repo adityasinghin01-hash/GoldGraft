@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "Component": {
+      "additionalProperties": false,
+      "properties": {
+        "build_context_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Build Context Ref"
+        },
+        "configuration_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Configuration Manifest Ref",
+          "type": "string"
+        },
+        "controller_binding_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Controller Binding Refs",
+          "type": "array"
+        },
+        "correspondence_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Correspondence Evidence Refs",
+          "type": "array"
+        },
+        "dependency_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Dependency Manifest Ref",
+          "type": "string"
+        },
+        "node_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Node Id",
+          "type": "string"
+        },
+        "purpose": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Purpose",
+          "type": "string"
+        },
+        "runtime_profile_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Runtime Profile Ref",
+          "type": "string"
+        },
+        "source_snapshot_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Snapshot Ref"
+        }
+      },
+      "required": [
+        "node_id",
+        "purpose",
+        "source_snapshot_ref",
+        "build_context_ref",
+        "runtime_profile_ref",
+        "dependency_manifest_ref",
+        "configuration_manifest_ref",
+        "correspondence_evidence_refs",
+        "controller_binding_refs"
+      ],
+      "title": "Component",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ComponentManifest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "components": {
+      "items": {
+        "$ref": "#/$defs/Component"
+      },
+      "maxItems": 256,
+      "title": "Components",
+      "type": "array"
+    }
+  },
+  "required": [
+    "components"
+  ],
+  "title": "ComponentManifestV1",
+  "type": "object"
+}

@@ -1,0 +1,4 @@
+{
+  "mutant_set_ref": "fixture:mutant_set_ref",
+  "scenario_set_ref": "fixture:scenario_set_ref"
+}

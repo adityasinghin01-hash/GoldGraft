@@ -1,0 +1,29 @@
+{
+  "approved_at": "2026-11-10T00:00:00Z",
+  "authority_basis": "provider_verified",
+  "authority_evidence_refs": [
+    "fixture:authority_evidence_ref"
+  ],
+  "binding_id": "fixture:binding_id",
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "controller_id": "controller-demo",
+  "epoch": 1,
+  "granted_actions": [
+    "view"
+  ],
+  "node_id": "source-demo",
+  "recipients": [
+    {
+      "principal_id": "person-demo",
+      "role": "requester"
+    },
+    {
+      "principal_id": "controller-demo",
+      "role": "controller"
+    }
+  ],
+  "relation_digest": "4e30a04b1f8ae5a2b8deefa7d1e682b31e3c9e69c32661ed455b57d12106a054",
+  "requester_id": "person-demo",
+  "revoked_at": null
+}

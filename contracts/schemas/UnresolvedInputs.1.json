@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Ref"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "recovery": {
+          "enum": [
+            "retry_read",
+            "reconnect",
+            "supply_input",
+            "review_scope",
+            "reapprove",
+            "await_counterpart",
+            "reconcile",
+            "unsupported"
+          ],
+          "title": "Recovery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "input_ref",
+        "owner_role",
+        "recovery",
+        "evidence_refs"
+      ],
+      "title": "Issue",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/UnresolvedInputs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "maxItems": 256,
+      "title": "Items",
+      "type": "array"
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "title": "UnresolvedInputsV1",
+  "type": "object"
+}

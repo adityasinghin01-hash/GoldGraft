@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-11-10T00:00:00Z",
+  "evidence_class": "scripted",
+  "integrity": "verified",
+  "limitations": [
+    "fixture:limitation",
+    "Mock mode: showing saved sample data, not a live system."
+  ],
+  "public_id": "fixture:public_id",
+  "scope_text": "fixture:scope_text",
+  "summary_metrics": [
+    {
+      "evidence_ref": "public:synthetic-metric",
+      "name": "fixture:name",
+      "value": "fixture:value"
+    }
+  ]
+}

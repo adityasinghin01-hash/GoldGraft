@@ -1,0 +1,16 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pieces.agents.cli",
+    "doctor",
+    "--mode",
+    "offline"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "started_at": "2026-11-10T13:57:25.572974+00:00",
+  "seconds": 0.231,
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B3_cli_doctor.log",
+  "output_sha256": "e364698b47f86f0fcfb0ed619e26bec47c50b8e52b3159141f7a44b7718a8b9a"
+}

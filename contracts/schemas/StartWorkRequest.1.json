@@ -1,0 +1,33 @@
+{
+  "$id": "https://goldgraft.dev/schemas/StartWorkRequest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "readiness_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Readiness Digest",
+      "type": "string"
+    },
+    "readiness_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Readiness Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_id",
+    "readiness_id",
+    "readiness_digest"
+  ],
+  "title": "StartWorkRequestV1",
+  "type": "object"
+}

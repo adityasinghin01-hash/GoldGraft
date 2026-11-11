@@ -1,0 +1,35 @@
+{
+  "$id": "https://goldgraft.dev/schemas/DependencyInspectArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "package": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Package",
+      "type": "string"
+    },
+    "recipe_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Recipe Ref",
+      "type": "string"
+    },
+    "version": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recipe_ref",
+    "package",
+    "version"
+  ],
+  "title": "DependencyInspectArgsV1",
+  "type": "object"
+}

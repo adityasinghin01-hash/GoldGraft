@@ -1,0 +1,18 @@
+{
+  "binding_epochs": {
+    "binding-demo": 1
+  },
+  "case_id": "case-demo",
+  "contributor_id": "fixture:contributor_id",
+  "created_at": "2026-11-10T00:00:00Z",
+  "expected_manifest_digest": "65e15544c03d23259fb7b2cac56d8a8980ca8901dc01ac790ca6c06d0664c3d7",
+  "expected_manifest_ref": "fixture:expected_manifest_ref",
+  "expected_total_bytes": 53,
+  "expires_at": "2026-11-11T00:00:00Z",
+  "finalised_snapshot_ref": null,
+  "received_chunk_refs": [
+    "fixture:received_chunk_ref"
+  ],
+  "state": "pending",
+  "upload_id": "fixture:upload_id"
+}

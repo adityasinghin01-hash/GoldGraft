@@ -1,0 +1,89 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ConnectionCase.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Binding Refs",
+      "type": "array"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "graph_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Graph Ref"
+    },
+    "requester_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Requester Id",
+      "type": "string"
+    },
+    "shop_url": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "title": "Shop Url",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "waiting_controller",
+        "checking",
+        "setup_needed",
+        "ready",
+        "accepted",
+        "closed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "tenant_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "tenant_id",
+    "requester_id",
+    "shop_url",
+    "created_at",
+    "graph_ref",
+    "binding_refs",
+    "status"
+  ],
+  "title": "ConnectionCaseV1",
+  "type": "object"
+}

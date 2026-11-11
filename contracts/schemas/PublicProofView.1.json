@@ -1,0 +1,108 @@
+{
+  "$defs": {
+    "PublicMetric": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ref": {
+          "pattern": "^public:[A-Za-z0-9_-]+$",
+          "title": "Evidence Ref",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "evidence_ref"
+      ],
+      "title": "PublicMetric",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/PublicProofView.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "evidence_class": {
+      "enum": [
+        "scripted",
+        "component_offline",
+        "real_model",
+        "real_provider",
+        "real_payment",
+        "isolation_qualified",
+        "merchant_exit"
+      ],
+      "title": "Evidence Class",
+      "type": "string"
+    },
+    "integrity": {
+      "enum": [
+        "verified",
+        "unverified",
+        "invalid",
+        "unknown"
+      ],
+      "title": "Integrity",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "maxLength": 8192,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "public_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Public Id",
+      "type": "string"
+    },
+    "scope_text": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Scope Text",
+      "type": "string"
+    },
+    "summary_metrics": {
+      "items": {
+        "$ref": "#/$defs/PublicMetric"
+      },
+      "maxItems": 256,
+      "title": "Summary Metrics",
+      "type": "array"
+    }
+  },
+  "required": [
+    "public_id",
+    "scope_text",
+    "evidence_class",
+    "summary_metrics",
+    "integrity",
+    "limitations",
+    "checked_at"
+  ],
+  "title": "PublicProofViewV1",
+  "type": "object"
+}

@@ -38,3 +38,28 @@ const rawNull: RawExchange = {...rawArray, body_json: null};
 // @ts-expect-error Both body encodings cannot coexist.
 const bothBodies: RawExchange = {...rawArray, body_text: ''};
 void [ledger, bothPayloads, rawArray, rawNull, bothBodies];
+
+import type {
+  AgentResultV1, ChangeListV2, ModelTurnResultV1, TaskContextV1,
+  PublicProofViewV1, IssueV1,
+} from '../ts/goldgraft-contracts';
+
+declare const plan5Context: TaskContextV1;
+// @ts-expect-error Generation is an integer-valued number, never a boolean.
+const boolGeneration: TaskContextV1 = {...plan5Context, generation: true};
+// @ts-expect-error Logical roles are a closed catalog.
+const unknownRole: TaskContextV1 = {...plan5Context, role: 'Unregistered'};
+declare const turn: ModelTurnResultV1;
+// @ts-expect-error A final result cannot carry tool calls or omit the final artifact.
+const mixedTurn: ModelTurnResultV1 = {...turn, kind: 'final', final_artifact_ref: null};
+declare const change: ChangeListV2;
+// @ts-expect-error Snapshot provenance cannot invent a Git branch.
+const fakeGit: ChangeListV2 = {...change, provenance: 'snapshot', branch: 'invented'};
+declare const result: AgentResultV1;
+declare const heldIssue: IssueV1;
+// @ts-expect-error A completed result cannot carry a blocking issue.
+const falseCompletion: AgentResultV1 = {...result, outcome: 'completed', issue: heldIssue};
+declare const publicProof: PublicProofViewV1;
+// @ts-expect-error Public proof has no private source-reference field.
+const privateProof: PublicProofViewV1 = {...publicProof, source_snapshot_ref: 'private:source'};
+void [boolGeneration, unknownRole, mixedTurn, fakeGit, falseCompletion, privateProof];

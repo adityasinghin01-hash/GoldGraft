@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from goldgraft_contracts.registry import validate
+from goldgraft_contracts.registry import REGISTRY, validate
 
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "fixtures"
@@ -17,7 +17,10 @@ def read(path: Path):
 
 
 def example(name: str) -> dict:
-    return read(EXAMPLES / f"{name}.1.json")
+    schema = name if "/" in name else f"{name}/1"
+    if schema not in REGISTRY:
+        raise ValueError("unknown versioned fixture schema")
+    return read(EXAMPLES / f"{schema.replace('/', '.')}.json")
 
 
 def boundary(schema: str, path: Path):
@@ -29,5 +32,7 @@ def events(path: Path, schema: str) -> list:
 
 
 def ledger_entries() -> list[dict]:
-    return [json.loads(line) for line in
-            (FIXTURES / "events/demo_graft_events.jsonl").read_text().splitlines()]
+    return [
+        json.loads(line)
+        for line in (FIXTURES / "events/demo_graft_events.jsonl").read_text().splitlines()
+    ]

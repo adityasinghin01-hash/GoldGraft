@@ -1,0 +1,17 @@
+{
+  "allowed_tool_ids": [
+    "source.read"
+  ],
+  "budget_reservation_ref": "fixture:budget_reservation_ref",
+  "context_digest": "0aa6836cc45e8fe210fa0e128cf4d22265e8ae697d3f5c9f992c6786a4bb3bef",
+  "context_ref": "fixture:context_ref",
+  "deadline": "2026-11-11T00:00:00Z",
+  "generation": 1,
+  "input_token_cap": 1,
+  "lease_epoch": 1,
+  "model_profile_ref": "fixture:model_profile_ref",
+  "output_schema": "fixture:output_schema",
+  "output_token_cap": 1,
+  "task_id": "survey-demo",
+  "turn_id": "fixture:turn_id"
+}

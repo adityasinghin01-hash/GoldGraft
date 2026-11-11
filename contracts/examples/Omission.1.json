@@ -1,0 +1,9 @@
+{
+  "component_id": "fixture:component_id",
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "path": null,
+  "reason_code": "fixture:reason_code",
+  "required_for_scope": true
+}

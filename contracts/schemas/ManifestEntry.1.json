@@ -1,0 +1,85 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ManifestEntry.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "file_type": {
+          "const": "file",
+          "enum": [
+            "file",
+            "directory"
+          ],
+          "title": "File Type",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "bytes": {
+          "const": 0
+        },
+        "file_type": {
+          "const": "directory",
+          "enum": [
+            "file",
+            "directory"
+          ],
+          "title": "File Type",
+          "type": "string"
+        },
+        "sha256": {
+          "type": "null"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "bytes": {
+      "maximum": 20971520,
+      "minimum": 0,
+      "title": "Bytes",
+      "type": "integer"
+    },
+    "file_type": {
+      "enum": [
+        "file",
+        "directory"
+      ],
+      "title": "File Type",
+      "type": "string"
+    },
+    "relative_path": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "Relative Path",
+      "type": "string"
+    },
+    "sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Sha256"
+    }
+  },
+  "required": [
+    "relative_path",
+    "file_type",
+    "bytes",
+    "sha256"
+  ],
+  "title": "ManifestEntryV1",
+  "type": "object"
+}

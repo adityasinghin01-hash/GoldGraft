@@ -1,0 +1,13 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "check:types"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "started_at": "2026-11-10T13:52:15.768928+00:00",
+  "seconds": 1.331,
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B3_accepted_types.log",
+  "output_sha256": "a4661b2feee5d502a71e931a1963cac6c04fecdd30ced9e4eec443210c4a7605"
+}

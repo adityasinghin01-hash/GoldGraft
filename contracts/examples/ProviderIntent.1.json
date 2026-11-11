@@ -1,0 +1,10 @@
+{
+  "case_id": "case-demo",
+  "continuation_ref": "fixture:continuation_ref",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "intent_id": "fixture:intent_id",
+  "provider_id": "local_folder",
+  "purpose": "read_connect",
+  "redirect_url": "https://provider.example.test/authorize",
+  "resource_id": null
+}

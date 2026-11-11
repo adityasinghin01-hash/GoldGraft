@@ -1,0 +1,67 @@
+{
+  "$id": "https://goldgraft.dev/schemas/TaskLease.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "context_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Context Ref",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "lease_epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Lease Epoch",
+      "type": "integer"
+    },
+    "lease_until": {
+      "format": "date-time",
+      "title": "Lease Until",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "task_version": {
+      "exclusiveMinimum": 0,
+      "title": "Task Version",
+      "type": "integer"
+    },
+    "worker_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Worker Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "run_id",
+    "generation",
+    "worker_id",
+    "lease_epoch",
+    "task_version",
+    "lease_until",
+    "context_ref"
+  ],
+  "title": "TaskLeaseV1",
+  "type": "object"
+}

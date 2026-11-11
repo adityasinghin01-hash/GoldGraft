@@ -1,0 +1,181 @@
+{
+  "$id": "https://goldgraft.dev/schemas/WorkPackage.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acquisition_expires_at": {
+      "format": "date-time",
+      "title": "Acquisition Expires At",
+      "type": "string"
+    },
+    "baseline_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Baseline Manifest Digest",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "completeness": {
+      "enum": [
+        "sufficient_for_declared_static_scope",
+        "incomplete",
+        "unknown"
+      ],
+      "title": "Completeness",
+      "type": "string"
+    },
+    "components_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Components Ref",
+      "type": "string"
+    },
+    "custody_policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Custody Policy Digest",
+      "type": "string"
+    },
+    "delivery_feasibility_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Delivery Feasibility Ref",
+      "type": "string"
+    },
+    "external_dependencies_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "External Dependencies Ref",
+      "type": "string"
+    },
+    "fixture_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Fixture Profile Digest",
+      "type": "string"
+    },
+    "omission_manifest_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Omission Manifest Ref",
+      "type": "string"
+    },
+    "processing_policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Processing Policy Digest",
+      "type": "string"
+    },
+    "required_flow_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Required Flow Refs",
+      "type": "array"
+    },
+    "resource_graph_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resource Graph Digest",
+      "type": "string"
+    },
+    "resource_graph_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Resource Graph Ref",
+      "type": "string"
+    },
+    "runtime_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Profile Digest",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "source_snapshot_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Source Snapshot Refs",
+      "type": "array"
+    },
+    "state_recipe_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "State Recipe Refs",
+      "type": "array"
+    },
+    "synthetic_seed_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Synthetic Seed Refs",
+      "type": "array"
+    },
+    "unresolved_requirements_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Unresolved Requirements Ref",
+      "type": "string"
+    },
+    "work_package_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Work Package Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "work_package_id",
+    "case_id",
+    "resource_graph_ref",
+    "resource_graph_digest",
+    "scope_digest",
+    "source_snapshot_refs",
+    "components_ref",
+    "external_dependencies_ref",
+    "state_recipe_refs",
+    "synthetic_seed_refs",
+    "required_flow_refs",
+    "processing_policy_digest",
+    "custody_policy_digest",
+    "runtime_profile_digest",
+    "fixture_profile_digest",
+    "baseline_manifest_digest",
+    "omission_manifest_ref",
+    "acquisition_expires_at",
+    "completeness",
+    "unresolved_requirements_ref",
+    "delivery_feasibility_ref"
+  ],
+  "title": "WorkPackageV1",
+  "type": "object"
+}

@@ -1,0 +1,843 @@
+{
+  "$defs": {
+    "ActionPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "budget_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Budget Ref",
+          "type": "string"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "exit_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Exit Plan Ref",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "finalisation_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Finalisation Plan Ref",
+          "type": "string"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "graph_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Graph Digest",
+          "type": "string"
+        },
+        "plan_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Digest",
+          "type": "string"
+        },
+        "plan_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "policy_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Policy Digest",
+          "type": "string"
+        },
+        "recovery_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Recovery Plan Ref",
+          "type": "string"
+        },
+        "review_bundle_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Review Bundle Digest",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "scope_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Scope Digest",
+          "type": "string"
+        },
+        "slots": {
+          "items": {
+            "$ref": "#/$defs/EffectSlot"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Slots",
+          "type": "array"
+        },
+        "state_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "State Plan Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "plan_id",
+        "case_id",
+        "run_id",
+        "generation",
+        "graph_digest",
+        "scope_digest",
+        "review_bundle_digest",
+        "policy_digest",
+        "slots",
+        "recovery_plan_ref",
+        "state_plan_ref",
+        "finalisation_plan_ref",
+        "exit_plan_ref",
+        "budget_ref",
+        "expires_at",
+        "plan_digest"
+      ],
+      "title": "ActionPlan",
+      "type": "object"
+    },
+    "ApprovalSet": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Approval Refs",
+          "type": "array"
+        },
+        "approval_set_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Approval Set Id",
+          "type": "string"
+        },
+        "authority_epochs": {
+          "maxProperties": 256,
+          "patternProperties": {
+            "^\\S+$": {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            }
+          },
+          "propertyNames": {
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "title": "Authority Epochs",
+          "type": "object"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "generation": {
+          "exclusiveMinimum": 0,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "plan_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Digest",
+          "type": "string"
+        },
+        "required_controller_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required Controller Ids",
+          "type": "array"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "complete",
+            "missing",
+            "stale",
+            "revoked"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approval_set_id",
+        "case_id",
+        "run_id",
+        "generation",
+        "plan_digest",
+        "required_controller_ids",
+        "approval_refs",
+        "authority_epochs",
+        "checked_at",
+        "state"
+      ],
+      "title": "ApprovalSet",
+      "type": "object"
+    },
+    "EffectSlot": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "anyOf": [
+            {
+              "pattern": "^sha256:[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Artifact Digest"
+        },
+        "cardinality": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Cardinality",
+          "type": "integer"
+        },
+        "config_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Config Digest"
+        },
+        "depends_on": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Depends On",
+          "type": "array"
+        },
+        "effect_class": {
+          "enum": [
+            "E0",
+            "E1",
+            "E2",
+            "E3"
+          ],
+          "title": "Effect Class",
+          "type": "string"
+        },
+        "expected_version_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Expected Version Ref",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "preserve_state",
+            "publish_artifact",
+            "publish_source",
+            "merge_protected",
+            "apply_configuration",
+            "deploy_exact",
+            "finalise",
+            "prepare_exit",
+            "run_exit",
+            "read_exit_evidence",
+            "revoke_exit_evidence",
+            "configure_ingress",
+            "restart_target",
+            "revoke_grant",
+            "delete_temporary",
+            "stop_worker",
+            "financial_compensation"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "recovery_branch_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recovery Branch Ref"
+        },
+        "required_authority_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required Authority Refs",
+          "type": "array"
+        },
+        "required_controller_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Required Controller Ids",
+          "type": "array"
+        },
+        "slot_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Slot Id",
+          "type": "string"
+        },
+        "state_plan_digest": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "State Plan Digest"
+        },
+        "target_key": {
+          "$ref": "#/$defs/TargetKey"
+        },
+        "trigger_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Trigger Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slot_id",
+        "operation",
+        "target_key",
+        "effect_class",
+        "depends_on",
+        "artifact_digest",
+        "config_digest",
+        "state_plan_digest",
+        "trigger_digest",
+        "required_authority_refs",
+        "required_controller_ids",
+        "expected_version_ref",
+        "cardinality",
+        "recovery_branch_ref"
+      ],
+      "title": "EffectSlot",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "input_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Input Ref"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "recovery": {
+          "enum": [
+            "retry_read",
+            "reconnect",
+            "supply_input",
+            "review_scope",
+            "reapprove",
+            "await_counterpart",
+            "reconcile",
+            "unsupported"
+          ],
+          "title": "Recovery",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "input_ref",
+        "owner_role",
+        "recovery",
+        "evidence_refs"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "ProcessingDisclosure": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "copy_scope": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Copy Scope",
+          "type": "string"
+        },
+        "limits": {
+          "items": {
+            "maxLength": 8192,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Limits",
+          "type": "array"
+        },
+        "policy_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Policy Digest",
+          "type": "string"
+        },
+        "recipients": {
+          "items": {
+            "$ref": "#/$defs/ProcessingRecipient"
+          },
+          "maxItems": 256,
+          "title": "Recipients",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "qualified",
+            "missing",
+            "stale"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy_digest",
+        "recipients",
+        "copy_scope",
+        "limits",
+        "checked_at",
+        "status"
+      ],
+      "title": "ProcessingDisclosure",
+      "type": "object"
+    },
+    "ProcessingRecipient": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "purpose": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "region_text": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Region Text",
+          "type": "string"
+        },
+        "retention_text": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Retention Text",
+          "type": "string"
+        },
+        "terms_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Terms Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "purpose",
+        "region_text",
+        "retention_text",
+        "terms_evidence_refs"
+      ],
+      "title": "ProcessingRecipient",
+      "type": "object"
+    },
+    "ReviewBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": {
+          "pattern": "^sha256:[a-f0-9]{64}$",
+          "title": "Artifact Digest",
+          "type": "string"
+        },
+        "baseline_snapshot_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Baseline Snapshot Refs",
+          "type": "array"
+        },
+        "bundle_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Bundle Digest",
+          "type": "string"
+        },
+        "bundle_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Bundle Id",
+          "type": "string"
+        },
+        "candidate_snapshot_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Candidate Snapshot Refs",
+          "type": "array"
+        },
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "domain_rule_result_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Domain Rule Result Refs",
+          "type": "array"
+        },
+        "effective_config_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Effective Config Digest",
+          "type": "string"
+        },
+        "missing_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Missing Evidence Refs",
+          "type": "array"
+        },
+        "patch_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Patch Digest",
+          "type": "string"
+        },
+        "proposed_apply_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Proposed Apply Plan Ref",
+          "type": "string"
+        },
+        "recovery_plan_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Recovery Plan Ref",
+          "type": "string"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "scenario_result_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Scenario Result Refs",
+          "type": "array"
+        },
+        "security_result_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Security Result Refs",
+          "type": "array"
+        },
+        "unsupported_paths": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Unsupported Paths",
+          "type": "array"
+        },
+        "work_package_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Work Package Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bundle_id",
+        "case_id",
+        "run_id",
+        "work_package_digest",
+        "baseline_snapshot_refs",
+        "candidate_snapshot_refs",
+        "patch_digest",
+        "artifact_digest",
+        "effective_config_digest",
+        "scenario_result_refs",
+        "domain_rule_result_refs",
+        "security_result_refs",
+        "unsupported_paths",
+        "missing_evidence_refs",
+        "recovery_plan_ref",
+        "proposed_apply_plan_ref",
+        "bundle_digest",
+        "created_at"
+      ],
+      "title": "ReviewBundle",
+      "type": "object"
+    },
+    "TargetKey": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_kind": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "account_id",
+        "environment_id",
+        "resource_kind",
+        "resource_id"
+      ],
+      "title": "TargetKey",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/PrivateReviewView.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_set": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ApprovalSet"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bundle": {
+      "$ref": "#/$defs/ReviewBundle"
+    },
+    "evidence_summary_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Summary Refs",
+      "type": "array"
+    },
+    "missing": {
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "maxItems": 256,
+      "title": "Missing",
+      "type": "array"
+    },
+    "plan": {
+      "$ref": "#/$defs/ActionPlan"
+    },
+    "processing": {
+      "$ref": "#/$defs/ProcessingDisclosure"
+    }
+  },
+  "required": [
+    "bundle",
+    "plan",
+    "approval_set",
+    "evidence_summary_refs",
+    "processing",
+    "missing"
+  ],
+  "title": "PrivateReviewViewV1",
+  "type": "object"
+}

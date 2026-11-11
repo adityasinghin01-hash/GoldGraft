@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "ResourceRecipient": {
+      "additionalProperties": false,
+      "properties": {
+        "principal_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Principal Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "requester",
+            "controller",
+            "reviewer"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "principal_id",
+        "role"
+      ],
+      "title": "ResourceRecipient",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ResourceBinding.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "authority_basis": {
+      "enum": [
+        "provider_verified",
+        "controller_attested"
+      ],
+      "title": "Authority Basis",
+      "type": "string"
+    },
+    "authority_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Authority Evidence Refs",
+      "type": "array"
+    },
+    "binding_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Binding Id",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "controller_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Controller Id",
+      "type": "string"
+    },
+    "epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Epoch",
+      "type": "integer"
+    },
+    "granted_actions": {
+      "items": {
+        "enum": [
+          "view",
+          "connect",
+          "start",
+          "review"
+        ],
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Granted Actions",
+      "type": "array"
+    },
+    "node_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Node Id",
+      "type": "string"
+    },
+    "recipients": {
+      "items": {
+        "$ref": "#/$defs/ResourceRecipient"
+      },
+      "maxItems": 256,
+      "title": "Recipients",
+      "type": "array"
+    },
+    "relation_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Relation Digest",
+      "type": "string"
+    },
+    "requester_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Requester Id",
+      "type": "string"
+    },
+    "revoked_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Revoked At"
+    }
+  },
+  "required": [
+    "binding_id",
+    "case_id",
+    "node_id",
+    "controller_id",
+    "requester_id",
+    "recipients",
+    "granted_actions",
+    "relation_digest",
+    "authority_basis",
+    "authority_evidence_refs",
+    "checked_at",
+    "epoch",
+    "approved_at",
+    "revoked_at"
+  ],
+  "title": "ResourceBindingV1",
+  "type": "object"
+}

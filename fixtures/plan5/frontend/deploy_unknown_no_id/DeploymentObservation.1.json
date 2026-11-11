@@ -1,0 +1,17 @@
+{
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "current_runtime_evidence_refs": [
+    "fixture:current_runtime_evidence_ref"
+  ],
+  "effect_id": "fixture:effect_id",
+  "environment_id": "synthetic",
+  "observed_artifact_digest": null,
+  "observed_config_digest": null,
+  "outcome": "unknown",
+  "provider": "fixture:provider",
+  "provider_deploy_id": null,
+  "provider_status": "unknown",
+  "resource_id": "synthetic-resource",
+  "submitted_artifact_digest": "sha256:e54169d46f4ec09083ac959aa1f577aa6dc535bb57a387e358cffeed06a1198d"
+}

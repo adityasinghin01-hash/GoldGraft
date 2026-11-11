@@ -1,0 +1,28 @@
+{
+  "admission_ref": "fixture:admission_ref",
+  "case_id": "case-demo",
+  "cutover_id": "fixture:cutover_id",
+  "drain_evidence_refs": [
+    "fixture:drain_evidence_ref"
+  ],
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "export_manifest_ref": "fixture:export_manifest_ref",
+  "fence_epochs": {
+    "binding-demo": 1
+  },
+  "generation": 1,
+  "handler_inventory_ref": "fixture:handler_inventory_ref",
+  "high_water_ref": "fixture:high_water_ref",
+  "ingress_ref": "fixture:ingress_ref",
+  "origin_route_ref": "fixture:origin_route_ref",
+  "outcome": "prepared",
+  "pending_external_effect_refs": [],
+  "replay_manifest_ref": "fixture:replay_manifest_ref",
+  "restore_manifest_ref": "fixture:restore_manifest_ref",
+  "run_id": "run-demo",
+  "schema_digest": "8bb27a7b41a300ca30b2eb204e78c9132b48f0cce6baf805adb7fe339bafc7d9",
+  "state_digest": "4996382ae687c83afc2459b3e58703cb35b0f330b992bd85367ac94ded59f558",
+  "writer_inventory_ref": "fixture:writer_inventory_ref"
+}

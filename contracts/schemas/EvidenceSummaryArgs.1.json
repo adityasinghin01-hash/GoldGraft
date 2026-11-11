@@ -1,0 +1,28 @@
+{
+  "$id": "https://goldgraft.dev/schemas/EvidenceSummaryArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "projection": {
+      "enum": [
+        "private_status",
+        "public_safe"
+      ],
+      "title": "Projection",
+      "type": "string"
+    },
+    "run_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_ref",
+    "projection"
+  ],
+  "title": "EvidenceSummaryArgsV1",
+  "type": "object"
+}

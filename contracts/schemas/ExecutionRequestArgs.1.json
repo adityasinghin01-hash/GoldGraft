@@ -1,0 +1,19 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ExecutionRequestArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "proposal_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Proposal Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_ref"
+  ],
+  "title": "ExecutionRequestArgsV1",
+  "type": "object"
+}

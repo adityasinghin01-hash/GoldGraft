@@ -1,0 +1,105 @@
+{
+  "$id": "https://goldgraft.dev/schemas/BaselineEvidence.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actual_provider_evidence_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Actual Provider Evidence Ref",
+      "type": "string"
+    },
+    "dependency_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Dependency Digest",
+      "type": "string"
+    },
+    "immutable_source_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Immutable Source Digest",
+      "type": "string"
+    },
+    "observed_defects_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Observed Defects Ref",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "reproduced",
+        "reproduced_with_defects",
+        "failed",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Digest",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "runtime_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Digest",
+      "type": "string"
+    },
+    "scenario_results_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Scenario Results Ref",
+      "type": "string"
+    },
+    "seed_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Seed Digest",
+      "type": "string"
+    },
+    "skipped_required": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Skipped Required",
+      "type": "array"
+    },
+    "variant": {
+      "enum": [
+        "OLD",
+        "OLD_TWIN"
+      ],
+      "title": "Variant",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "package_digest",
+    "variant",
+    "immutable_source_digest",
+    "runtime_digest",
+    "dependency_digest",
+    "seed_digest",
+    "scenario_results_ref",
+    "observed_defects_ref",
+    "actual_provider_evidence_ref",
+    "skipped_required",
+    "outcome"
+  ],
+  "title": "BaselineEvidenceV1",
+  "type": "object"
+}

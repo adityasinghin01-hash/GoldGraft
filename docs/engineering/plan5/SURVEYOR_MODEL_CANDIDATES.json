@@ -1,0 +1,73 @@
+{
+  "format": "SurveyorModelCandidateObservations/1",
+  "inspected_on": "2026-11-10",
+  "scope": "public_documentation_and_integer_cost_projection_only",
+  "sdk_candidate": {
+    "package": "anthropic",
+    "version": "2.7.0",
+    "release_commit_prefix": "d497641",
+    "installed": false,
+    "dependency_lock_qualified": false,
+    "source": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v2.7.0"
+  },
+  "pricing_scope": "standard_text_no_cache_no_batch_no_fast_no_paid_provider_tools; Haiku prompt<=100000 tokens",
+  "sources": [
+    "https://platform.claude.com/docs/en/models/overview",
+    "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+    "https://platform.claude.com/docs/en/about-claude/pricing",
+    "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+    "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python",
+    "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention"
+  ],
+  "candidates": [
+    {
+      "model_id": "claude-haiku-5-5",
+      "standard_input_micro_usd_per_million_tokens": 100000,
+      "standard_output_micro_usd_per_million_tokens": 500000,
+      "max_input_tokens_per_turn_including_overhead": 24000,
+      "max_output_tokens_per_turn_including_billed_reasoning": 4000,
+      "max_turns_per_task_including_correction": 12,
+      "max_turn_micro_usd": 4400,
+      "four_case_trial_micro_usd": 211200,
+      "sixty_run_trial_micro_usd": 3168000,
+      "thirteen_times_sixty_run_micro_usd": 41184000,
+      "selected": false,
+      "qualified": false
+    },
+    {
+      "model_id": "claude-sonnet-5-5",
+      "standard_input_micro_usd_per_million_tokens": 2000000,
+      "standard_output_micro_usd_per_million_tokens": 10000000,
+      "max_input_tokens_per_turn_including_overhead": 24000,
+      "max_output_tokens_per_turn_including_billed_reasoning": 4000,
+      "max_turns_per_task_including_correction": 12,
+      "max_turn_micro_usd": 88000,
+      "four_case_trial_micro_usd": 4224000,
+      "sixty_run_trial_micro_usd": 63360000,
+      "thirteen_times_sixty_run_micro_usd": 823680000,
+      "selected": false,
+      "qualified": false
+    }
+  ],
+  "project_budget": {
+    "scope": "all_13_agents_and_all_project_API_work",
+    "active_checkpoint_micro_usd": 5000000,
+    "target_micro_usd": 15000000,
+    "hard_ceiling_micro_usd": 20000000,
+    "qualified_shared_ledger": false,
+    "reservations_reconciled": false,
+    "paid_dispatch_authorized": false
+  },
+  "unqualified": [
+    "actual_entitlement",
+    "SDK_installed_dependency_symbols",
+    "processing_and_custody",
+    "token_count_calibration_and_conservative_bound",
+    "authenticated_GU_model_tool_control_ports",
+    "durable_shared_atomic_reservations_and_reconciliation",
+    "agent_service_adapter",
+    "reviewed_named_batch_authority"
+  ],
+  "model_api_calls": 0,
+  "real_model_evaluation": "NOT RUN"
+}

@@ -1,0 +1,5 @@
+{
+  "package": "fixture:package",
+  "recipe_ref": "fixture:recipe_ref",
+  "version": "fixture:version"
+}

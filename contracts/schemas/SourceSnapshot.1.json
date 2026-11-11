@@ -1,0 +1,196 @@
+{
+  "$defs": {
+    "ProviderRef": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Id"
+        },
+        "adapter_version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "adapter_version",
+        "account_id"
+      ],
+      "title": "ProviderRef",
+      "type": "object"
+    },
+    "SourceRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "git_commit",
+            "provider_revision_set",
+            "capture"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "SourceRevision",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/SourceSnapshot.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_binding_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Authority Binding Refs",
+      "type": "array"
+    },
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "completeness": {
+      "enum": [
+        "complete_for_declared_scope",
+        "incomplete",
+        "unknown"
+      ],
+      "title": "Completeness",
+      "type": "string"
+    },
+    "file_count": {
+      "maximum": 20000,
+      "minimum": 0,
+      "title": "File Count",
+      "type": "integer"
+    },
+    "manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Digest",
+      "type": "string"
+    },
+    "omission_manifest_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Omission Manifest Ref",
+      "type": "string"
+    },
+    "provenance_class": {
+      "enum": [
+        "provider_reported",
+        "controller_attested",
+        "verified_build_link"
+      ],
+      "title": "Provenance Class",
+      "type": "string"
+    },
+    "provider": {
+      "$ref": "#/$defs/ProviderRef"
+    },
+    "revision": {
+      "$ref": "#/$defs/SourceRevision"
+    },
+    "snapshot_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Snapshot Id",
+      "type": "string"
+    },
+    "source_kind": {
+      "enum": [
+        "git",
+        "local_folder",
+        "cloud_files",
+        "host_export"
+      ],
+      "title": "Source Kind",
+      "type": "string"
+    },
+    "source_resource_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Resource Id"
+    },
+    "total_bytes": {
+      "maximum": 209715200,
+      "minimum": 0,
+      "title": "Total Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "snapshot_id",
+    "case_id",
+    "source_kind",
+    "provider",
+    "source_resource_id",
+    "revision",
+    "manifest_digest",
+    "file_count",
+    "total_bytes",
+    "captured_at",
+    "omission_manifest_ref",
+    "authority_binding_refs",
+    "provenance_class",
+    "completeness"
+  ],
+  "title": "SourceSnapshotV1",
+  "type": "object"
+}

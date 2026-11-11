@@ -1,0 +1,164 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ExitCheckPlan.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_restart_count": {
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "title": "Allowed Restart Count",
+      "type": "integer"
+    },
+    "authority_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Authority Refs",
+      "type": "array"
+    },
+    "budget_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Budget Ref",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "criteria_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Criteria Refs",
+      "type": "array"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "evidence_read_authority_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Evidence Read Authority Ref",
+      "type": "string"
+    },
+    "executor_identity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Executor Identity Ref",
+      "type": "string"
+    },
+    "exit_plan_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Exit Plan Id",
+      "type": "string"
+    },
+    "failure_route_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Failure Route Ref",
+      "type": "string"
+    },
+    "final_artifact_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Final Artifact Digest",
+      "type": "string"
+    },
+    "final_config_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Final Config Digest",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "private_evidence_destination_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Private Evidence Destination Ref",
+      "type": "string"
+    },
+    "recovery_plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Recovery Plan Ref",
+      "type": "string"
+    },
+    "reservation_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Reservation Ref",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "state_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "State Digest",
+      "type": "string"
+    },
+    "trusted_code_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Trusted Code Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "exit_plan_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "reservation_ref",
+    "executor_identity_ref",
+    "trusted_code_digest",
+    "final_artifact_digest",
+    "final_config_digest",
+    "state_digest",
+    "criteria_refs",
+    "allowed_restart_count",
+    "recovery_plan_ref",
+    "budget_ref",
+    "deadline",
+    "private_evidence_destination_ref",
+    "evidence_read_authority_ref",
+    "failure_route_ref",
+    "authority_refs",
+    "plan_digest"
+  ],
+  "title": "ExitCheckPlanV1",
+  "type": "object"
+}

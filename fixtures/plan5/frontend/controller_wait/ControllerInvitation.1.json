@@ -1,0 +1,12 @@
+{
+  "case_id": "case-demo",
+  "copy_url": "https://goldgraft.example.test/invitation/synthetic",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "invitation_id": "fixture:invitation_id",
+  "recipient_hint": null,
+  "requester_id": "person-demo",
+  "resource_ids": [
+    "synthetic-resource"
+  ],
+  "status": "pending"
+}

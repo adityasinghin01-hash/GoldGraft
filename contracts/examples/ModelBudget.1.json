@@ -1,0 +1,9 @@
+{
+  "budget_id": "fixture:budget_id",
+  "ceiling_micro_usd": 20000000,
+  "outstanding_micro_usd": 0,
+  "pricing_ref": "fixture:pricing_ref",
+  "spent_micro_usd": 0,
+  "target_micro_usd": 15000000,
+  "unknown_micro_usd": 0
+}

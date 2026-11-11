@@ -1,0 +1,8 @@
+Checked 135 positive and 19 negative synthetic examples
+Checked 15 scripted frontend modes
+Exported 177 schemas
+Generated TypeScript for 177 schemas
+Exported OpenAPI with 46 paths
+✨ openapi-typescript 7.13.0
+🚀 contracts/api/openapi.json → contracts/ts/goldgraft-api.d.ts [185ms]
+Generated outputs are current

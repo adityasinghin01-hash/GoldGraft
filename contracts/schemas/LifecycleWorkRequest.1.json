@@ -1,0 +1,136 @@
+{
+  "$id": "https://goldgraft.dev/schemas/LifecycleWorkRequest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority_binding_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Authority Binding Epochs",
+      "type": "object"
+    },
+    "budget_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Budget Ref",
+      "type": "string"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "expected_output_schema": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Expected Output Schema",
+      "type": "string"
+    },
+    "forbidden_effect_codes": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Forbidden Effect Codes",
+      "type": "array"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_artifact_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Input Artifact Refs",
+      "type": "array"
+    },
+    "operation_kind": {
+      "enum": [
+        "build_baseline",
+        "run_baseline",
+        "validate_candidate",
+        "build_candidate",
+        "run_scenario",
+        "run_mutant",
+        "validate_driver",
+        "selfcheck_recipe"
+      ],
+      "title": "Operation Kind",
+      "type": "string"
+    },
+    "package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Package Digest",
+      "type": "string"
+    },
+    "package_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Package Ref",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "request_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "runtime_profile_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Runtime Profile Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "run_id",
+    "generation",
+    "operation_kind",
+    "package_ref",
+    "package_digest",
+    "input_artifact_refs",
+    "expected_output_schema",
+    "policy_digest",
+    "runtime_profile_digest",
+    "authority_binding_epochs",
+    "budget_ref",
+    "deadline",
+    "forbidden_effect_codes"
+  ],
+  "title": "LifecycleWorkRequestV1",
+  "type": "object"
+}

@@ -1,0 +1,113 @@
+{
+  "$id": "https://goldgraft.dev/schemas/LifecycleWorkResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authenticity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authenticity Ref",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "inputs_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Inputs Digest",
+      "type": "string"
+    },
+    "limitation_codes": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Limitation Codes",
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "completed",
+        "failed",
+        "blocked",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "output_artifact_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Output Artifact Refs",
+      "type": "array"
+    },
+    "request_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "source_unchanged": {
+      "title": "Source Unchanged",
+      "type": "boolean"
+    },
+    "worker_identity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Worker Identity Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "run_id",
+    "generation",
+    "worker_identity_ref",
+    "inputs_digest",
+    "outcome",
+    "source_unchanged",
+    "output_artifact_refs",
+    "evidence_refs",
+    "completed_at",
+    "limitation_codes",
+    "authenticity_ref"
+  ],
+  "title": "LifecycleWorkResultV1",
+  "type": "object"
+}

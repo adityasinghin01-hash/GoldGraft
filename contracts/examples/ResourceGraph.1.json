@@ -1,0 +1,38 @@
+{
+  "case_id": "case-demo",
+  "edges": [
+    {
+      "edge_id": "fixture:edge_id",
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "from_node": "source-demo",
+      "relation": "builds_from",
+      "required_for_scope": true,
+      "to_node": "source-demo"
+    }
+  ],
+  "graph_digest": "d7eb7fc0e50ff0308d208eab5a7eb80a26d41b9c2af81efd90d03790d0a0e17d",
+  "graph_id": "fixture:graph_id",
+  "nodes": [
+    {
+      "binding_refs": [
+        "fixture:binding_ref"
+      ],
+      "environment_id": null,
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "kind": "source",
+      "node_id": "source-demo",
+      "provider": {
+        "account_id": null,
+        "adapter_version": "fixture:adapter_version",
+        "provider_id": "local_folder"
+      },
+      "provider_resource_id": null,
+      "required_for_scope": true,
+      "revision": null
+    }
+  ]
+}

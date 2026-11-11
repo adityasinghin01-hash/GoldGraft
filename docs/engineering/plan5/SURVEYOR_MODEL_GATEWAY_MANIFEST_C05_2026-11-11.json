@@ -1,0 +1,252 @@
+{
+  "format": "SurveyorContinuation05Manifest/2",
+  "at_utc": "2026-11-11T08:05:18.600667+00:00",
+  "status": "Surveyor qualified to its role package bound (16 files/16 KB) on synthetic source-only scope; ceiling cases 3/3 each; original unknown retained",
+  "routing": "haiku if files+2<=4 else sonnet ceiling; decided before dispatch, never as retry",
+  "profiles": {
+    "haiku": {
+      "ref": "local:model-profile:59c164262bbdf058559dbeaa25521c4d4bd5645f0c67561cbb9473331cf44ad1",
+      "unchanged": true
+    },
+    "sonnet_ceiling": {
+      "ref": "local:model-profile:25ad8f08dbe9bb40b92fc2b660e8edcb246d04a225dd807e44a7e4c945cd13d5",
+      "thinking": "between_tools",
+      "input_bound": "provider count + 512",
+      "turns": 8,
+      "output_cap": 4000,
+      "prompt_cache": "tools+system, 5m ephemeral; write 1.25x, read 0.05x",
+      "turn_reservation": 100000,
+      "batch_reservation": 800000
+    }
+  },
+  "transport_policy_sha256": "bfbfca834a9d9b068c9cd726cfbed55f782bc5949ce74e8c7de2c0e4be184af2",
+  "role_prompt_digest": "60260ae18618c68aec74388700e7e19415afa6375744ec3e9a95885af603b4b5",
+  "role_policy_digest": "234a6a733908e1afe94ca515cc75f410853a7aa37a3545b0130af02459980aed",
+  "runs": {
+    "s5-inventory-browser-ipn-h1": {
+      "case": "inventory-browser-ipn",
+      "model": "claude-haiku-5-5",
+      "passed": true,
+      "turns": 2,
+      "priced_micro_usd": 2297,
+      "input_tokens": 16628,
+      "output_tokens": 1266,
+      "latency_seconds": 6.373548
+    },
+    "s5-c04-nvp-substitute-h1": {
+      "case": "c04-nvp-substitute",
+      "model": "claude-haiku-5-5",
+      "passed": true,
+      "turns": 2,
+      "priced_micro_usd": 2380,
+      "input_tokens": 16777,
+      "output_tokens": 1402,
+      "latency_seconds": 6.590822
+    },
+    "s5-c05-mid-eight-c1": {
+      "case": "c05-mid-eight",
+      "model": "claude-sonnet-5-5",
+      "passed": true,
+      "turns": 4,
+      "priced_micro_usd": 110702,
+      "input_tokens": 43161,
+      "output_tokens": 2438,
+      "latency_seconds": 18.14844
+    },
+    "s5-c05-max-package-c1": {
+      "case": "c05-max-package",
+      "model": "claude-sonnet-5-5",
+      "passed": true,
+      "turns": 6,
+      "priced_micro_usd": 231054,
+      "input_tokens": 95122,
+      "output_tokens": 4081,
+      "latency_seconds": 29.182873
+    },
+    "s5-c05-mid-eight-c2": {
+      "case": "c05-mid-eight",
+      "model": "claude-sonnet-5-5",
+      "passed": true,
+      "turns": 4,
+      "priced_micro_usd": 82182,
+      "input_tokens": 43161,
+      "output_tokens": 2383,
+      "latency_seconds": 21.045392
+    },
+    "s5-c05-max-package-c2": {
+      "case": "c05-max-package",
+      "model": "claude-sonnet-5-5",
+      "passed": true,
+      "turns": 6,
+      "priced_micro_usd": 170254,
+      "input_tokens": 95122,
+      "output_tokens": 4133,
+      "latency_seconds": 41.351861
+    },
+    "s5-c05-mid-eight-c3": {
+      "case": "c05-mid-eight",
+      "model": "claude-sonnet-5-5",
+      "passed": true,
+      "turns": 4,
+      "priced_micro_usd": 69712,
+      "input_tokens": 43161,
+      "output_tokens": 2427,
+      "latency_seconds": 17.935134
+    },
+    "s5-c05-max-package-c3": {
+      "case": "c05-max-package",
+      "model": "claude-sonnet-5-5",
+      "passed": true,
+      "turns": 6,
+      "priced_micro_usd": 169784,
+      "input_tokens": 95122,
+      "output_tokens": 4086,
+      "latency_seconds": 32.294475
+    }
+  },
+  "final_configuration_record": {
+    "haiku_le_2_files": "41/41",
+    "sonnet_5_files": "2/2",
+    "sonnet_8_files": "3/3",
+    "sonnet_16_files_max": "3/3",
+    "code_holds": "30/30",
+    "model_negatives": "9/9"
+  },
+  "caching_effect": {
+    "mid_8_files_micro_usd": {
+      "uncached": 110702,
+      "cached": [
+        82182,
+        69712
+      ]
+    },
+    "max_16_files_micro_usd": {
+      "uncached": 231054,
+      "cached": [
+        170254,
+        169784
+      ]
+    }
+  },
+  "budget": {
+    "project_cap_micro_usd": 10000000,
+    "surveyor_allocation_micro_usd": 1250000,
+    "surveyor_spent_micro_usd": 1160890,
+    "retained_unknown_reservation_micro_usd": 12672,
+    "project_available_micro_usd": 8826438
+  },
+  "audit": {
+    "inference_attempts_all_time": 200,
+    "observed_responses_all_time": 197,
+    "attributable_terminal_unbilled_400": 2,
+    "original_unknown": 1,
+    "c05_accepted_outputs_audited": 8,
+    "ledger_changed_by_audit": false
+  },
+  "changed_files": [
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/broker.py",
+      "sha256": "c7b82bc5526363da788c0fa3a623273b2459ebc3c55f5f992c1bef3ff9fe5f27"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/profile.py",
+      "sha256": "2d866d26696057d9e2377c020b9b21aefcd07970cc81077422aa0de438cb96d5"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/independent_review.py",
+      "sha256": "215e4d2d67e4c173338124730b0595fe782be4fb9b0577e9387d4680ce881211"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/context.py",
+      "sha256": "939fa74d29034f0ed4c3b81c98c3585d1adb796571f7a34b9a5ff4fa30290dd1"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/scripts/live_surveyor_model_eval.py",
+      "sha256": "377dfc40fc255445a1b024545f1f5e7181640ea6b1b09da27a9ba81e471bc904"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/fakes/src/goldgraft_fakes/surveyor_profile.py",
+      "sha256": "51c24818dffab40e8e8a0d0f927cee5b85f92ac8f32a975325fa6d6d301bbc4f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_evaluation_gateway.py",
+      "sha256": "f81facd421c8efc2bdc0ad561993840f809a8edee79876627fa9dc7ea7a31b09"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_broker.py",
+      "sha256": "ed4fbc1ff654c6a71d66811cc09e92fa26d965ab752ef53be6c0bf116be7d2b8"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_independent_review.py",
+      "sha256": "708e62e7dfba517d14c859c9c16e26977455a1e2f36d286e2e7f92390102dd12"
+    }
+  ],
+  "checks": [
+    {
+      "name": "112-c05-full-regression-caching",
+      "exit_code": 0,
+      "log_sha256": "f40a976e24f6c0bc46a64aaf89308fade291462dfaa91dbdb4007d18a75c3cd5",
+      "summary": "770 passed, 1 warning in 104.56s (0:01:44)"
+    },
+    {
+      "name": "113-c05-lint",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "summary": "All checks passed!"
+    },
+    {
+      "name": "114-c05-format",
+      "exit_code": 0,
+      "log_sha256": "7b4549ac2e9820f695aa60c4695796689a11c0dce1a49f0b01a6250eca9f55aa",
+      "summary": "22 files already formatted"
+    },
+    {
+      "name": "115-c05-diff-check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "summary": ""
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/USER_BUDGET_10USD_DECISION.json",
+      "sha256": "386cd60615e6cbd3fe31e5c535d311993c8edd5c2185e6084c243978b171b35f"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/USER_SURVEYOR_EXTENSION.json",
+      "sha256": "b371efc8365dfe7eb2615210e64fb16174713dd5e5bfcc6636c7a38af4bb59db"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/CAP_RAISE.json",
+      "sha256": "fe0a6f6c3440fa47e87cd54fb23613611cd9163e88a56ce4dad933236a3ddf8d"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/c05_ceiling_cases.json",
+      "sha256": "e2206f72299cac85cc574d12d8fc7637a585826e141b54471d4cccd9ea3c3616"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/SIZING_DRYRUN.json",
+      "sha256": "955e34ca4635f9764161fbcb88e75147ff45e9e28f4562c759b48ada2e3b8fb4"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/SERIES_LOG.jsonl",
+      "sha256": "cbc0a12b94b3c34c3f2c2cee489a9bd286c8e48f65540fe7bf0915e87f797ba1"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/C05_AUDIT.json",
+      "sha256": "32cc2132de49101cd15b41dbfa0a0dd028d02fdbedf1667807c6b75867602ff9"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/preservation_c05.json",
+      "sha256": "d5f77820086d471f8a525b783597a09e521f6212fd20e4e2436fe68d5ffdcf35"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-05/before/model-budget-before-10usd-raise.sqlite",
+      "sha256": "0adb60aa63cd2efa2abe3f3329f65d2e57e4301feb51fd77d11c1be3f70b8b12"
+    }
+  ],
+  "remaining": [
+    "Original 10 Nov 20:18 UTC request unattributed; $0.012672 held until Console usage-by-day or Admin API attribution.",
+    "Literal 5-indicator catalog on synthetic source; production GU/VJ/SH and merchant/payment unqualified."
+  ]
+}

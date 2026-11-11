@@ -1,0 +1,4 @@
+{
+  "projection": "private_status",
+  "run_ref": "fixture:run_ref"
+}

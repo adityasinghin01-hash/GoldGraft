@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "ProcessingRecipient": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "purpose": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "region_text": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Region Text",
+          "type": "string"
+        },
+        "retention_text": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Retention Text",
+          "type": "string"
+        },
+        "terms_evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Terms Evidence Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "purpose",
+        "region_text",
+        "retention_text",
+        "terms_evidence_refs"
+      ],
+      "title": "ProcessingRecipient",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ProcessingDisclosure.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "copy_scope": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Copy Scope",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "maxLength": 8192,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Limits",
+      "type": "array"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "recipients": {
+      "items": {
+        "$ref": "#/$defs/ProcessingRecipient"
+      },
+      "maxItems": 256,
+      "title": "Recipients",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "qualified",
+        "missing",
+        "stale"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "policy_digest",
+    "recipients",
+    "copy_scope",
+    "limits",
+    "checked_at",
+    "status"
+  ],
+  "title": "ProcessingDisclosureV1",
+  "type": "object"
+}

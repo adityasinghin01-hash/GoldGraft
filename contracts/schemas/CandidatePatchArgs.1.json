@@ -1,0 +1,33 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CandidatePatchArgs.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "expected_tree": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Tree",
+      "type": "string"
+    },
+    "patch_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Patch Ref",
+      "type": "string"
+    },
+    "workspace_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Workspace Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "workspace_ref",
+    "expected_tree",
+    "patch_ref"
+  ],
+  "title": "CandidatePatchArgsV1",
+  "type": "object"
+}

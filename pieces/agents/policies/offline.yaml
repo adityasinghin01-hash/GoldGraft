@@ -1,0 +1,13 @@
+format: GoldGraftRuntimePolicy/1
+mode: offline
+evidence_class: scripted
+concurrency: 1
+candidate_writers: 1
+max_turns: 12
+max_tools: 24
+max_tool_batch: 4
+malformed_corrections: 1
+max_input_tokens: 24000
+max_output_tokens: 4000
+project_model_budget_micro_usd: 0
+service_profile: unavailable

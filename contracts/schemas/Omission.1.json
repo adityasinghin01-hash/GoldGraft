@@ -1,0 +1,58 @@
+{
+  "$id": "https://goldgraft.dev/schemas/Omission.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "component_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Component Id",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "path": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Path"
+    },
+    "reason_code": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "required_for_scope": {
+      "title": "Required For Scope",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "component_id",
+    "path",
+    "reason_code",
+    "required_for_scope",
+    "evidence_refs"
+  ],
+  "title": "OmissionV1",
+  "type": "object"
+}

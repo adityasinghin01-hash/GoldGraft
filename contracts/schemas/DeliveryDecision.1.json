@@ -1,0 +1,273 @@
+{
+  "$id": "https://goldgraft.dev/schemas/DeliveryDecision.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "operation": {
+            "enum": [
+              "publish_artifact",
+              "publish_source",
+              "merge_protected",
+              "apply_configuration",
+              "deploy_exact",
+              "preserve_state",
+              "finalise",
+              "run_exit",
+              "revoke_exit_evidence"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "slot_id": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "operation": {
+            "const": "reconcile_effect"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "existing_effect_ref": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "slot_id": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "input_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "title": "Input Refs",
+          "type": "array"
+        },
+        "kind": {
+          "const": "request",
+          "enum": [
+            "request",
+            "wait",
+            "hold",
+            "incident",
+            "complete"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "review_evaluate",
+            "plan_apply",
+            "reserve_targets",
+            "preserve_state",
+            "publish_artifact",
+            "publish_source",
+            "merge_protected",
+            "apply_configuration",
+            "deploy_exact",
+            "reconcile_effect",
+            "observe_target",
+            "finalise",
+            "prepare_exit",
+            "run_exit",
+            "read_exit_evidence",
+            "revoke_exit_evidence",
+            "reconcile_cleanup"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "existing_effect_ref": {
+          "type": "null"
+        },
+        "kind": {
+          "enum": [
+            "wait",
+            "hold",
+            "incident",
+            "complete"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "operation": {
+          "type": "null"
+        },
+        "slot_id": {
+          "type": "null"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "existing_effect_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Existing Effect Ref"
+    },
+    "expected_state_version": {
+      "exclusiveMinimum": 0,
+      "title": "Expected State Version",
+      "type": "integer"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "kind": {
+      "enum": [
+        "request",
+        "wait",
+        "hold",
+        "incident",
+        "complete"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "next_wake_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next Wake At"
+    },
+    "operation": {
+      "anyOf": [
+        {
+          "enum": [
+            "review_evaluate",
+            "plan_apply",
+            "reserve_targets",
+            "preserve_state",
+            "publish_artifact",
+            "publish_source",
+            "merge_protected",
+            "apply_configuration",
+            "deploy_exact",
+            "reconcile_effect",
+            "observe_target",
+            "finalise",
+            "prepare_exit",
+            "run_exit",
+            "read_exit_evidence",
+            "revoke_exit_evidence",
+            "reconcile_cleanup"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Operation"
+    },
+    "reason_code": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "slot_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Slot Id"
+    }
+  },
+  "required": [
+    "case_id",
+    "run_id",
+    "generation",
+    "expected_state_version",
+    "kind",
+    "operation",
+    "input_refs",
+    "existing_effect_ref",
+    "slot_id",
+    "reason_code",
+    "next_wake_at"
+  ],
+  "title": "DeliveryDecisionV1",
+  "type": "object"
+}

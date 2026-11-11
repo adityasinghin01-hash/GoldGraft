@@ -8,11 +8,27 @@ all-rounder · agent tools (tools.py) -> Aditya.
 from collections.abc import Mapping, Sequence
 from typing import Protocol, runtime_checkable
 
+from .agent_runtime import ArtifactPort, ModelPort, TaskControl, ToolPort
 from .api import CertificateVerifyResult
+from .lifecycle import DeliveryPort
 from .money import MoneyEvent
 from .proof import Certificate, Grade, MoneyContract, Mutant, ProofStrength, Verdict
 from .runner import GuardEvent, HealDecision, JobResult, JobSpec, RawCapture
 from .survey import TargetPlan
+
+__all__ = [
+    "ToolCaller",
+    "AgentRunner",
+    "Runner",
+    "Proof",
+    "PayPalClient",
+    "MutantRuns",
+    "ArtifactPort",
+    "ModelPort",
+    "TaskControl",
+    "ToolPort",
+    "DeliveryPort",
+]
 
 # mutant id -> scenario id -> grade of that scenario when run on NEW + that mutant
 MutantRuns = Mapping[str, Mapping[str, Grade]]
@@ -33,8 +49,9 @@ class AgentRunner(Protocol):
     belongs in LedgerEntry/1; AgentArtifact payloads also carry their own producer.
     """
 
-    def run(self, agent: str, inputs: Mapping[str, object],
-            tools: ToolCaller) -> list[tuple[str, dict]]: ...
+    def run(
+        self, agent: str, inputs: Mapping[str, object], tools: ToolCaller
+    ) -> list[tuple[str, dict]]: ...
 
 
 @runtime_checkable
@@ -55,9 +72,14 @@ class Proof(Protocol):
         PayPal ledger reads inside the capture become source=PAYPAL_LEDGER events."""
         ...
 
-    def judge(self, old: Sequence[MoneyEvent], old_twin: Sequence[MoneyEvent],
-              new: Sequence[MoneyEvent], contract: MoneyContract,
-              target_plan: TargetPlan) -> Verdict:
+    def judge(
+        self,
+        old: Sequence[MoneyEvent],
+        old_twin: Sequence[MoneyEvent],
+        new: Sequence[MoneyEvent],
+        contract: MoneyContract,
+        target_plan: TargetPlan,
+    ) -> Verdict:
         """Tri-Witness verdict for one scenario (design 04 U2). Ledger reads are the
         PAYPAL_LEDGER events inside each list; missing evidence -> UNVERIFIED."""
         ...
@@ -66,8 +88,13 @@ class Proof(Protocol):
         """score = killed / (total - equivalent_dropped) (design 04)."""
         ...
 
-    def heal_decide(self, graft_id: str, stage_pct: int, events: Sequence[GuardEvent],
-                    hard_stops: Sequence[str] = ()) -> HealDecision:
+    def heal_decide(
+        self,
+        graft_id: str,
+        stage_pct: int,
+        events: Sequence[GuardEvent],
+        hard_stops: Sequence[str] = (),
+    ) -> HealDecision:
         """Go-live decision for one stage (design 05 H2, Beta-Binomial posterior)."""
         ...
 
@@ -87,5 +114,10 @@ class PayPalClient(Protocol):
 
     def nvp(self, method: str, params: Mapping[str, str]) -> Mapping[str, str]: ...
 
-    def rest(self, method: str, path: str, body: Mapping | None = None,
-             headers: Mapping[str, str] | None = None) -> tuple[int, Mapping]: ...
+    def rest(
+        self,
+        method: str,
+        path: str,
+        body: Mapping | None = None,
+        headers: Mapping[str, str] | None = None,
+    ) -> tuple[int, Mapping]: ...

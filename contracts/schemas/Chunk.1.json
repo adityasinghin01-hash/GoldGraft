@@ -1,0 +1,53 @@
+{
+  "$id": "https://goldgraft.dev/schemas/Chunk.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "blob_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Blob Ref",
+      "type": "string"
+    },
+    "file_path": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "File Path",
+      "type": "string"
+    },
+    "length": {
+      "exclusiveMinimum": 0,
+      "maximum": 4194304,
+      "title": "Length",
+      "type": "integer"
+    },
+    "offset": {
+      "minimum": 0,
+      "title": "Offset",
+      "type": "integer"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "upload_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Upload Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "upload_id",
+    "file_path",
+    "offset",
+    "length",
+    "sha256",
+    "blob_ref"
+  ],
+  "title": "ChunkV1",
+  "type": "object"
+}

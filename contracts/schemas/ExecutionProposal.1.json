@@ -1,0 +1,110 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ExecutionProposal.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "expected_subject": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Subject",
+      "type": "string"
+    },
+    "operation": {
+      "enum": [
+        "build_baseline",
+        "build_candidate",
+        "validate_driver",
+        "run_scenario",
+        "run_mutant",
+        "selfcheck_recipe"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "recipe_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Recipe Ref",
+      "type": "string"
+    },
+    "requested_output_schemas": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Requested Output Schemas",
+      "type": "array"
+    },
+    "scenario_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Scenario Ref"
+    },
+    "subject_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Subject Ref",
+      "type": "string"
+    },
+    "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "variant": {
+      "anyOf": [
+        {
+          "enum": [
+            "OLD",
+            "OLD_TWIN",
+            "NEW"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Variant"
+    }
+  },
+  "required": [
+    "task_id",
+    "operation",
+    "subject_ref",
+    "recipe_ref",
+    "scenario_ref",
+    "variant",
+    "requested_output_schemas",
+    "expected_subject",
+    "evidence_refs"
+  ],
+  "title": "ExecutionProposalV1",
+  "type": "object"
+}

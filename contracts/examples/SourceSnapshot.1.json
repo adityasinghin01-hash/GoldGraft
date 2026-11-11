@@ -1,0 +1,25 @@
+{
+  "authority_binding_refs": [
+    "fixture:authority_binding_ref"
+  ],
+  "captured_at": "2026-11-10T00:00:00Z",
+  "case_id": "case-demo",
+  "completeness": "complete_for_declared_scope",
+  "file_count": 0,
+  "manifest_digest": "09c8738c62f0379838ee8e6715d86a5444c67b0657fdb8be93477fa23998ff58",
+  "omission_manifest_ref": "fixture:omission_manifest_ref",
+  "provenance_class": "provider_reported",
+  "provider": {
+    "account_id": null,
+    "adapter_version": "fixture:adapter_version",
+    "provider_id": "local_folder"
+  },
+  "revision": {
+    "kind": "capture",
+    "value": "synthetic-capture"
+  },
+  "snapshot_id": "fixture:snapshot_id",
+  "source_kind": "local_folder",
+  "source_resource_id": null,
+  "total_bytes": 0
+}

@@ -1,0 +1,12 @@
+{
+  "accepted_at": "2026-11-10T00:00:00Z",
+  "action_id": "fixture:action_id",
+  "case_id": "case-demo",
+  "readiness_digest": "f2857a542112e723b022c0ef901e014c6f1a2764dd36a2c9d62b7a2526807229",
+  "receipt_ref": "fixture:receipt_ref",
+  "resource_graph_digest": "94efeebe58287d7aec4b884a01cf45565575def18c7b2d672071ec4d10c31286",
+  "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+  "source_manifest_digest": "c25fb2fb7b40dc72b4997a50dab3d5f1c58b28804354a969c82d579f789c6aeb",
+  "work_id": "work-demo",
+  "work_package_digest": "d68547de5127174d8a98098cffb585076cd9534412b3d806de8337e6e52c449f"
+}

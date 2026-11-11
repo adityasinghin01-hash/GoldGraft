@@ -1,0 +1,420 @@
+{
+  "format": "SurveyorContinuation04Manifest/1",
+  "at_utc": "2026-11-11T07:27:58.218201+00:00",
+  "status": "selected synthetic source-only scope qualified on Haiku final policy; >=3-file Haiku limit; original unknown retained",
+  "model_profiles": {
+    "haiku": {
+      "ref": "local:model-profile:59c164262bbdf058559dbeaa25521c4d4bd5645f0c67561cbb9473331cf44ad1",
+      "model": "claude-haiku-5-5",
+      "batch_reservation_micro_usd": 12672
+    },
+    "sonnet_comparison": {
+      "ref": "local:model-profile:540c52ab70b92ebb191ed2fcd8cd7eb77bc60297bb31af0a00f5e81d87101396",
+      "model": "claude-sonnet-5-5",
+      "thinking": "between_tools",
+      "batch_reservation_micro_usd": 253440
+    }
+  },
+  "sdk": "anthropic 2.7.0",
+  "caps": {
+    "input_tokens": 24000,
+    "output_tokens": 1536,
+    "turns": 4,
+    "retries": 0,
+    "timeout_s": 90,
+    "calls_per_response": 4,
+    "wire_bytes_bound": 22976
+  },
+  "rates_verified": {
+    "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "at": "2026-11-11",
+    "haiku_5_5": "$0.10/$0.50 per MTok (<=100K prompt)",
+    "sonnet_5_5": "$2/$10 per MTok"
+  },
+  "role_prompt_digest": "60260ae18618c68aec74388700e7e19415afa6375744ec3e9a95885af603b4b5",
+  "role_policy_digest": "234a6a733908e1afe94ca515cc75f410853a7aa37a3545b0130af02459980aed",
+  "transport_policies": {
+    "3c6ed4e12282bcc950ed682f963c1b9d81412c328637863ae726009508aa5fc9": "c03-final (series a1)",
+    "736eb023a683f537a9b2f8af152725065163486e74ea00bb78b034a5a2a029d4": "c04-v2 unread_paths/ready_to_submit (series n1,n2)",
+    "64193bd365f222ae728ed8efa5f23bfbfeac3d4fc9658dc8573aa84c6be2f340": "c04-v3 call-cap text (n3) - failed named question",
+    "bfbfca834a9d9b068c9cd726cfbed55f782bc5949ce74e8c7de2c0e4be184af2": "c04-v4 next_calls, FINAL (s1, sonnet1-2, f1-f3) - call-cap line stopped"
+  },
+  "current_transport_policy_sha256": "bfbfca834a9d9b068c9cd726cfbed55f782bc5949ce74e8c7de2c0e4be184af2",
+  "series": {
+    "r1": {
+      "runs": 1,
+      "passed": 0,
+      "turns": 0,
+      "priced_micro_usd": 0,
+      "input": 0,
+      "output": 0,
+      "median_latency_s": 0.03,
+      "failed": [
+        [
+          "inventory-browser-ipn",
+          "DENIED",
+          []
+        ]
+      ]
+    },
+    "a1": {
+      "runs": 14,
+      "passed": 11,
+      "turns": 37,
+      "priced_micro_usd": 38609,
+      "input": 305714,
+      "output": 16041,
+      "median_latency_s": 6.57,
+      "failed": [
+        [
+          "readiness-comment-reference",
+          "TURN_LIMIT",
+          []
+        ],
+        [
+          "readiness-quoted-reference",
+          "TURN_LIMIT",
+          []
+        ],
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          []
+        ]
+      ]
+    },
+    "n1": {
+      "runs": 6,
+      "passed": 5,
+      "turns": 11,
+      "priced_micro_usd": 11774,
+      "input": 88252,
+      "output": 5887,
+      "median_latency_s": 6.0,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          []
+        ]
+      ]
+    },
+    "n2": {
+      "runs": 1,
+      "passed": 0,
+      "turns": 1,
+      "priced_micro_usd": 1194,
+      "input": 8009,
+      "output": 785,
+      "median_latency_s": 3.78,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          [
+            [
+              "tool_call_count",
+              7
+            ]
+          ]
+        ]
+      ]
+    },
+    "n3": {
+      "runs": 1,
+      "passed": 0,
+      "turns": 1,
+      "priced_micro_usd": 1201,
+      "input": 8080,
+      "output": 786,
+      "median_latency_s": 4.21,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          [
+            [
+              "tool_call_count",
+              7
+            ]
+          ]
+        ]
+      ]
+    },
+    "s1": {
+      "runs": 1,
+      "passed": 0,
+      "turns": 1,
+      "priced_micro_usd": 1116,
+      "input": 8124,
+      "output": 606,
+      "median_latency_s": 3.34,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          [
+            [
+              "tool_call_count",
+              5
+            ]
+          ]
+        ]
+      ]
+    },
+    "sonnet1": {
+      "runs": 1,
+      "passed": 1,
+      "turns": 3,
+      "priced_micro_usd": 75928,
+      "input": 27789,
+      "output": 2035,
+      "median_latency_s": 19.17,
+      "failed": []
+    },
+    "sonnet2": {
+      "runs": 1,
+      "passed": 1,
+      "turns": 3,
+      "priced_micro_usd": 75368,
+      "input": 27789,
+      "output": 1979,
+      "median_latency_s": 17.17,
+      "failed": []
+    },
+    "f1": {
+      "runs": 14,
+      "passed": 13,
+      "turns": 27,
+      "priced_micro_usd": 29914,
+      "input": 221901,
+      "output": 15422,
+      "median_latency_s": 6.4,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          [
+            [
+              "tool_call_count",
+              7
+            ]
+          ]
+        ]
+      ]
+    },
+    "f2": {
+      "runs": 14,
+      "passed": 13,
+      "turns": 27,
+      "priced_micro_usd": 29690,
+      "input": 221901,
+      "output": 14978,
+      "median_latency_s": 6.04,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          [
+            [
+              "tool_call_count",
+              7
+            ]
+          ]
+        ]
+      ]
+    },
+    "f3": {
+      "runs": 14,
+      "passed": 13,
+      "turns": 28,
+      "priced_micro_usd": 31068,
+      "input": 230461,
+      "output": 16022,
+      "median_latency_s": 5.93,
+      "failed": [
+        [
+          "c04-size-probe",
+          "INVALID_MODEL_OUTPUT",
+          [
+            [
+              "tool_call_count",
+              7
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "c04_totals": {
+    "runs": 68,
+    "passed": 57,
+    "cost": 295862,
+    "in": 1148020,
+    "out": 74541,
+    "turns": 139
+  },
+  "reviewed_20x3_mapping": {
+    "inventory_cases_x3_actual_model_final_policy": "30/30 accepted (inventory-nvp substituted by separately authored c04-nvp-substitute; original unknown not replayed)",
+    "hold_cases_x3_code_enforced_zero_model_calls": "30/30",
+    "extra_model_negatives_x3": {
+      "c04-tool-escalation": "3/3",
+      "c04-false-claims": "3/3",
+      "c04-duplicate-lines": "3/3"
+    },
+    "size_probe_5_files_6_touchpoints": {
+      "haiku_final": "0/3 (tool_call_count 7>4)",
+      "sonnet_5_5": "2/2"
+    }
+  },
+  "audit": {
+    "inference_attempts_all_time": 166,
+    "observed_responses_all_time": 163,
+    "attributable_terminal_unbilled_400": 2,
+    "original_unknown": 1,
+    "input_tokens_all_time": 1344144,
+    "output_tokens_all_time": 88612,
+    "c04_accepted_outputs_audited": 57,
+    "ledger_changed_by_audit": false,
+    "network_calls": 0,
+    "model_dispatches": 0
+  },
+  "ledger_now": {
+    "spent_micro_usd": 322525,
+    "reserved_micro_usd": 12672,
+    "unknown_micro_usd": 3168,
+    "outstanding_micro_usd": 9504,
+    "active_cap_micro_usd": 500000,
+    "hard_cap_micro_usd": 20000000,
+    "frozen": false,
+    "available_micro_usd": 164803
+  },
+  "changed_source_files": [
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/ledger.py",
+      "sha256": "6c5a274136370d7eb5600222bb7c094dd911aac12f4167da2324d4f9f33a1672"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/independent_review.py",
+      "sha256": "2161103e4641f9e7c50a4f6bdc33a41c75985bb83fe7c9cb835bca6724d7391f"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/broker.py",
+      "sha256": "748aad37393bc668b2563ff3e33ecb171bec926446bed9a964252e4ad57c2758"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/profile.py",
+      "sha256": "a2994dd37aee07fe198eea4402bf5259020dbe5c022981e3159cdd79c172812a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/context.py",
+      "sha256": "26dee5cb4fca23e9a9ef9363410f7ede2e9c2a5a1395a696ae797bb04f512eab"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/scripts/live_surveyor_model_eval.py",
+      "sha256": "bd2b25e62b000cbfc2d15bfca0cfbbe34ec1475b17dcde7438608fb38bcefcc2"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_ledger.py",
+      "sha256": "a1406107bc926877d7ee55d68272ac244b5831bebed57e64f1e63cbe2627c93a"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_independent_review.py",
+      "sha256": "0bec21abb21f931eca5250f4d721c8572aa197725d66915f1c1ddebffc03f14c"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/backend/model_gateway/tests/test_broker.py",
+      "sha256": "2bc3322d6b820d106cf54e4270b5738871b3122e6dc7cc79fad8f903c525ca34"
+    },
+    {
+      "path": "/Users/aditya/dev/GoldGraft-plan5-build/pieces/agents/tests/test_evaluation_gateway.py",
+      "sha256": "2dc9317f2668179054510180445ef8a81d03f3facd7214ff616864294144d344"
+    }
+  ],
+  "checks": [
+    {
+      "name": "104-c04-full-regression-sonnet-profile",
+      "exit_code": 0,
+      "log_sha256": "c2919c90a99c64a6217c93b9f63198715a2899067d47a9ef1c208cc42a904e0a",
+      "summary": "620 passed, 1 warning in 100.91s (0:01:40)",
+      "model_api_calls": 0
+    },
+    {
+      "name": "105-c04-lint",
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "summary": "All checks passed!",
+      "model_api_calls": 0
+    },
+    {
+      "name": "106-c04-format",
+      "exit_code": 0,
+      "log_sha256": "ba72d5ff990b6755459efa6266bf58b9f38733d193f2c3339b32245e476e5994",
+      "summary": "21 files already formatted",
+      "model_api_calls": 0
+    },
+    {
+      "name": "107-c04-diff-check",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "summary": "",
+      "model_api_calls": 0
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/USER_CAP_DECISION.json",
+      "sha256": "ebe1421e8c75ceb47b77839ddec4c61bb61a9a23f6437fa15a9bb6462b30b223"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/CAP_RAISE.json",
+      "sha256": "3fc1873936087f59cd79d2df9aa21d26614aa8fad35d51f29efb114456962b54"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/c04_model_cases.json",
+      "sha256": "cbbab3d3a4399169b5b9519fb935c3295ae0a91dfad8810aa6c65ffc43d418c8"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/SERIES_LOG.jsonl",
+      "sha256": "00203ae4a38c59478dddafe27b966bcb045eeb17022b9148d11469c4c89bcfa4"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/C04_AUDIT.json",
+      "sha256": "a9b690b560596136185d78ccbe9ed6b88132149fde7ebffc305256d71016375f"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/C04_SERIES_SUMMARY.json",
+      "sha256": "ca09c3b9c500d700dd7959de6eda0a7774281fde021b38156e97815e0cde84d6"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/HOLDS_X3.json",
+      "sha256": "f38fac2a8cfe704759e6115648bf5da92ba06be0a69aced3469d292d4353e8cb"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/DRYRUN_OFFLINE.json",
+      "sha256": "b29ae05923c3a406d57417785dd9a7783bed68301f4858d4adcd1a7057779458"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/DRYRUN_OFFLINE_policy_v3.json",
+      "sha256": "1219410878ea4f266ffcf96485ad56dc390c19304922f16b48b14fede3407204"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/preservation_c04.json",
+      "sha256": "ea59201d30134054ab9333a9259dd551829fc9a79214aa7cfcd259b7da853c70"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/before/model-budget-before-cap-raise.sqlite",
+      "sha256": "8194b75c4b17450b835f720f0c90d82c7a1cb5fa2e911964db0af530414ea608"
+    },
+    {
+      "path": "/Users/aditya/reports/goldgraft-model-gateway-20261111/continuation-04/before/qualification-continuation03-final.json",
+      "sha256": "03b2d19e7fccd5ddf7c9179873d351777f4bbb7d0432fb2911828b12a076e5b1"
+    }
+  ],
+  "remaining_gates": [
+    "Original 10 Nov 20:18 UTC request: provider attribution still missing; $0.012672 retained (Console usage by day / Admin usage API needed).",
+    "Haiku cannot keep <=4 calls/response when >=3 files: 2 variants failed; Sonnet comparison passes at ~34x cost.",
+    "Conservative wire bound (22,976 bytes) caps observations at ~4.5 KB; 10-file and 6 KB probes held before dispatch.",
+    "Dynamic calls, REST mappings, runtime recall, merchant/payment and production GU/VJ/SH remain unqualified."
+  ]
+}

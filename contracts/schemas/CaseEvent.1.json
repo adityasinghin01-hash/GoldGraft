@@ -1,0 +1,72 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CaseEvent.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "event_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "case_changed",
+        "readiness_changed",
+        "work_changed",
+        "lifecycle_changed",
+        "delivery_changed",
+        "access_changed"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "payload_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Payload Digest",
+      "type": "string"
+    },
+    "payload_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Payload Ref",
+      "type": "string"
+    },
+    "sequence": {
+      "exclusiveMinimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "state_version": {
+      "exclusiveMinimum": 0,
+      "title": "State Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "event_id",
+    "case_id",
+    "sequence",
+    "state_version",
+    "kind",
+    "payload_ref",
+    "payload_digest",
+    "occurred_at"
+  ],
+  "title": "CaseEventV1",
+  "type": "object"
+}

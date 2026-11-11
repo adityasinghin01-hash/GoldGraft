@@ -1,0 +1,164 @@
+{
+  "$defs": {
+    "ExitItem": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "item_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner",
+          "type": "string"
+        },
+        "required_for_exit": {
+          "title": "Required For Exit",
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "preserved",
+            "local_denied",
+            "termination_pending",
+            "revocation_pending",
+            "deleted_active",
+            "backup_pending",
+            "held",
+            "exported_unrecallable",
+            "confirmed",
+            "unknown"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "owner",
+        "required_for_exit",
+        "state",
+        "evidence_refs"
+      ],
+      "title": "ExitItem",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ExitManifest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "cleanup_items": {
+      "items": {
+        "$ref": "#/$defs/ExitItem"
+      },
+      "maxItems": 256,
+      "title": "Cleanup Items",
+      "type": "array"
+    },
+    "exit_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Exit Id",
+      "type": "string"
+    },
+    "legacy_obligations_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Legacy Obligations Ref",
+      "type": "string"
+    },
+    "merchant_assets_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Merchant Assets Ref",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "complete",
+        "pending",
+        "failed_safe",
+        "unknown"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "persistent_runtime_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Persistent Runtime Evidence Refs",
+      "type": "array"
+    },
+    "post_denial_observation_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Post Denial Observation Refs",
+      "type": "array"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "temporary_assets_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Temporary Assets Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "exit_id",
+    "case_id",
+    "run_id",
+    "merchant_assets_ref",
+    "temporary_assets_ref",
+    "legacy_obligations_ref",
+    "persistent_runtime_evidence_refs",
+    "post_denial_observation_refs",
+    "cleanup_items",
+    "outcome"
+  ],
+  "title": "ExitManifestV1",
+  "type": "object"
+}

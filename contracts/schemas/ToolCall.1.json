@@ -1,0 +1,41 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ToolCall.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arguments_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Arguments Digest",
+      "type": "string"
+    },
+    "arguments_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Arguments Ref",
+      "type": "string"
+    },
+    "call_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Call Id",
+      "type": "string"
+    },
+    "tool": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Tool",
+      "type": "string"
+    }
+  },
+  "required": [
+    "call_id",
+    "tool",
+    "arguments_ref",
+    "arguments_digest"
+  ],
+  "title": "ToolCallV1",
+  "type": "object"
+}

@@ -102,6 +102,23 @@ def test_every_payload_validates_against_its_registry_boundary(name, schema):
     if path.suffix not in {".json", ".yaml"}:
         return
     value = load(path)
+    if name.startswith('plan5/'):
+        # Plan5 deliberately includes negative inputs. Its own index is the
+        # versioned expectation authority; C4 positive checks remain unchanged.
+        index = load(ROOT / 'plan5/index.json')
+        if name == 'plan5/index.json':
+            assert value['format'] == 'GoldGraftPlan5FixtureIndex/1'
+            return
+        row = next(r for r in index['entries'] if r['path'] == 'fixtures/' + name)
+        assert row['evidence_class'] == 'scripted'
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == row['sha256']
+        if row['expected'] == 'validation_error':
+            from pydantic import ValidationError
+            with pytest.raises(ValidationError):
+                validate(row['schema'], value)
+        else:
+            validate(row['schema'], value)
+        return
     if schema == "reference":
         # These requested derived tables have NO registry boundary; do not invent one.
         assert value["_label"].startswith("SYNTHETIC —")

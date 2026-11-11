@@ -1,0 +1,127 @@
+{
+  "$id": "https://goldgraft.dev/schemas/LifecycleRun.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_effect_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Active Effect Refs",
+      "type": "array"
+    },
+    "attempt": {
+      "exclusiveMinimum": 0,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "resource_graph_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Resource Graph Digest",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "stage": {
+      "enum": [
+        "BASELINE_VERIFY",
+        "BASELINE_RUN",
+        "CANDIDATE_READY",
+        "VALIDATING",
+        "REVIEW_READY",
+        "AWAITING_APPLY",
+        "PUBLISHING",
+        "MERGING",
+        "DEPLOY_PREPARED",
+        "DEPLOYING",
+        "OBSERVING",
+        "FINALISING",
+        "EXITING",
+        "COMPLETE",
+        "HELD",
+        "FAILED_SAFE",
+        "INCIDENT_UNKNOWN"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "work_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Work Id",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    },
+    "work_package_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Work Package Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "case_id",
+    "work_id",
+    "generation",
+    "work_package_ref",
+    "work_package_digest",
+    "resource_graph_digest",
+    "scope_digest",
+    "stage",
+    "attempt",
+    "evidence_refs",
+    "active_effect_refs",
+    "updated_at"
+  ],
+  "title": "LifecycleRunV1",
+  "type": "object"
+}

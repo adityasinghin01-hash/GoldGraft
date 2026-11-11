@@ -1,0 +1,51 @@
+{
+  "$id": "https://goldgraft.dev/schemas/TargetKey.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "account_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Account Id",
+      "type": "string"
+    },
+    "environment_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Environment Id",
+      "type": "string"
+    },
+    "provider_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Provider Id",
+      "type": "string"
+    },
+    "resource_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Resource Id",
+      "type": "string"
+    },
+    "resource_kind": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Resource Kind",
+      "type": "string"
+    }
+  },
+  "required": [
+    "provider_id",
+    "account_id",
+    "environment_id",
+    "resource_kind",
+    "resource_id"
+  ],
+  "title": "TargetKeyV1",
+  "type": "object"
+}

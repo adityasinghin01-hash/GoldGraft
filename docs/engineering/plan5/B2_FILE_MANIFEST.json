@@ -1,0 +1,459 @@
+{
+  "base_revision": "0365c5e1adcb1875a7f72c99dc7c63631501e131",
+  "created_at": "2026-11-10T13:02:42.879260+00:00",
+  "files": [
+    {
+      "bytes": 8997,
+      "path": "docs/engineering/plan5/B2_BUILD_REPORT.md",
+      "sha256": "46e2bb2d0612e9912f38d7800839fc7a448977d8d8a3c70cd8a2f5bf946bdbb3",
+      "status": "new"
+    },
+    {
+      "bytes": 1681,
+      "path": "docs/engineering/plan5/BUILD_STATUS.md",
+      "sha256": "75d082e8c4f6dc7a027a4c35ecce5f7c3f3bc453ba8e6b648775daf846f2b02a",
+      "status": "new"
+    },
+    {
+      "bytes": 72929,
+      "path": "docs/engineering/plan5/FRONTEND_READY.json",
+      "sha256": "a33cf43923ba774739cc4df5e713c9b7dffb2943a7c00dc749df11e860e4775a",
+      "status": "new"
+    },
+    {
+      "bytes": 623,
+      "path": "docs/engineering/plan5/checks/B2_accepted_b2.json",
+      "sha256": "53e47c406542e947c241b2661699ba3040db10dc28ebc27d1c26d5bdcc026645",
+      "status": "new"
+    },
+    {
+      "bytes": 99,
+      "path": "docs/engineering/plan5/checks/B2_accepted_b2.log",
+      "sha256": "eab6c87435e123faa9546a00c1194639d3068dc47623c734ca978ac62c1baccc",
+      "status": "new"
+    },
+    {
+      "bytes": 396,
+      "path": "docs/engineering/plan5/checks/B2_accepted_diff.json",
+      "sha256": "05db1647e10ce1bca3acef35e217e46ace36bde3501a105a4724cbce9b0ff29c",
+      "status": "new"
+    },
+    {
+      "bytes": 0,
+      "path": "docs/engineering/plan5/checks/B2_accepted_diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "new"
+    },
+    {
+      "bytes": 417,
+      "path": "docs/engineering/plan5/checks/B2_accepted_full.json",
+      "sha256": "0fc795004ded2f3052bc249bb5342a682db956c282366c5dfbf8f4972920971e",
+      "status": "new"
+    },
+    {
+      "bytes": 2930,
+      "path": "docs/engineering/plan5/checks/B2_accepted_full.log",
+      "sha256": "0fe341cc8aa00d4aa369304ce186d98bfb4c63553868b07edb833aa00b6b8e58",
+      "status": "new"
+    },
+    {
+      "bytes": 407,
+      "path": "docs/engineering/plan5/checks/B2_accepted_generated.json",
+      "sha256": "1e7a5cf767674b40d31d93ac2e5501fb6dff1973a35731139f67df3c9d458088",
+      "status": "new"
+    },
+    {
+      "bytes": 318,
+      "path": "docs/engineering/plan5/checks/B2_accepted_generated.log",
+      "sha256": "4e7d510482307aac377418c739383332848176d8717b9e6110979bbf8522792f",
+      "status": "new"
+    },
+    {
+      "bytes": 402,
+      "path": "docs/engineering/plan5/checks/B2_accepted_lint.json",
+      "sha256": "47e572fb18e2635797baeb0247f8f1ffa48017a8d0a1fab0d756652b50cdf65a",
+      "status": "new"
+    },
+    {
+      "bytes": 19,
+      "path": "docs/engineering/plan5/checks/B2_accepted_lint.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "status": "new"
+    },
+    {
+      "bytes": 400,
+      "path": "docs/engineering/plan5/checks/B2_accepted_types.json",
+      "sha256": "e1c6b113ceadec117999705e9368df7f5bd8171d42a39e26e274436dc237bc9d",
+      "status": "new"
+    },
+    {
+      "bytes": 56,
+      "path": "docs/engineering/plan5/checks/B2_accepted_types.log",
+      "sha256": "a4661b2feee5d502a71e931a1963cac6c04fecdd30ced9e4eec443210c4a7605",
+      "status": "new"
+    },
+    {
+      "bytes": 1763,
+      "path": "fakes/src/goldgraft_fakes/case_views.py",
+      "sha256": "c59a1c76ee279ee52b79ccf58f9e505b55278390cd136e6d209c17e65454481a",
+      "status": "new"
+    },
+    {
+      "bytes": 5945,
+      "path": "fakes/src/goldgraft_fakes/guarded_tools.py",
+      "sha256": "0cfa4bcd45c94ab874ed2f5d6a84bad2ed3e849485265bef98fc72e14e36f4dc",
+      "status": "new"
+    },
+    {
+      "bytes": 10707,
+      "path": "fakes/src/goldgraft_fakes/lifecycle_control.py",
+      "sha256": "121ba335924e0152b00f96e6545a013c2c7377de95a0dd10672be59942d7e564",
+      "status": "new"
+    },
+    {
+      "bytes": 7977,
+      "path": "fakes/src/goldgraft_fakes/model_broker.py",
+      "sha256": "02a9776bb446aac4629ec61334a765e12e94b88d04a4b534321ac55052ac41dd",
+      "status": "new"
+    },
+    {
+      "bytes": 3546,
+      "path": "fakes/src/goldgraft_fakes/offline_artifacts.py",
+      "sha256": "4386d42b0c7abb6015f67913dc0bf36392c41608637bd16e174daa4975c37825",
+      "status": "new"
+    },
+    {
+      "bytes": 5026,
+      "path": "fakes/src/goldgraft_fakes/offline_store.py",
+      "sha256": "e2c648cee1b55136cf61d6b13fc6a9a2b684115d896067358b355316326ffbbb",
+      "status": "new"
+    },
+    {
+      "bytes": 24881,
+      "path": "fakes/src/goldgraft_fakes/task_control.py",
+      "sha256": "132d5ecf641cad56785873feda6812cca2c9d886f64d908d75df396ea92da9f5",
+      "status": "new"
+    },
+    {
+      "bytes": 6215,
+      "path": "fakes/tests/test_plan5_brokers.py",
+      "sha256": "d8870ce8e3b8398b2bd7eb10f9a77f78a6083df3db4878a81af8705c0609e816",
+      "status": "new"
+    },
+    {
+      "bytes": 8434,
+      "path": "fakes/tests/test_plan5_faults.py",
+      "sha256": "90de24be43c4c3840117b1eaddb4bfb41e53c445376daf19627c4d749a0210dc",
+      "status": "new"
+    },
+    {
+      "bytes": 3111,
+      "path": "fakes/tests/test_plan5_lifecycle.py",
+      "sha256": "5460c72757a121ee1e414b07d2f02ec537b0a65d177a5e6d36c1bbe68f0d1d1f",
+      "status": "new"
+    },
+    {
+      "bytes": 5617,
+      "path": "fakes/tests/test_plan5_task_control.py",
+      "sha256": "f9d574cda33f581eee0e891a061467442dfc1e4b2347eaa8bd69e812a12b3fdd",
+      "status": "new"
+    },
+    {
+      "bytes": 2954,
+      "path": "fakes/tests/test_plan5_views.py",
+      "sha256": "f105f667e23a062ce921dc52819646b649b9eb47754128547a8349c8a8e9ddf2",
+      "status": "new"
+    },
+    {
+      "bytes": 110618,
+      "path": "fixtures/INDEX.md",
+      "sha256": "60adc4e945557458217d31217ccca5c9377e4c27843e8c29a712fe8f951e261e",
+      "status": "modified"
+    },
+    {
+      "bytes": 2702,
+      "path": "fixtures/plan5/frontend/apply_split_controllers/CaseView.1.json",
+      "sha256": "1f936a0cd68398723265f8d27e04d00b34dab43144c4dca0104bb91b8e205136",
+      "status": "new"
+    },
+    {
+      "bytes": 4377,
+      "path": "fixtures/plan5/frontend/apply_split_controllers/PrivateReviewView.1.json",
+      "sha256": "4ac263dafdcebad76d4d67249aedcfd01d73228c83114a636ebd07eafd7d7c17",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/apply_split_controllers/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 2005,
+      "path": "fixtures/plan5/frontend/cancel_before_accept/CaseView.1.json",
+      "sha256": "5229a0f048722db4bbe7dffc7838e59c838f8e517977140bb37525079d4b861f",
+      "status": "new"
+    },
+    {
+      "bytes": 285,
+      "path": "fixtures/plan5/frontend/cancel_before_accept/WorkCancellation.1.json",
+      "sha256": "58f331c61d50516d6bd92a0c4ced22ccacd8eec12efabce8ddffdbb4baf2f770",
+      "status": "new"
+    },
+    {
+      "bytes": 2053,
+      "path": "fixtures/plan5/frontend/cancel_pending/CaseView.1.json",
+      "sha256": "d99ec9a0367a1b529f0900fde56f96e788ed2bc153dc468b7917ccc8781a20aa",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/cancel_pending/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 299,
+      "path": "fixtures/plan5/frontend/cancel_pending/WorkCancellation.1.json",
+      "sha256": "d9011eb71ef3faec7b50c62cb3b533996b6c36b70d70aa54eb252b1d2c65a5b7",
+      "status": "new"
+    },
+    {
+      "bytes": 2013,
+      "path": "fixtures/plan5/frontend/claimed_no_operation/CaseView.1.json",
+      "sha256": "b13680b377afe214144783490cb0ecc2c9bcd08b3add27effb60362113909761",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/claimed_no_operation/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 2717,
+      "path": "fixtures/plan5/frontend/cleanup_pending/CaseView.1.json",
+      "sha256": "ec6a3a440b4bf229aec329aacab2e03612732106afa1a221eda09ef7b9a8baf7",
+      "status": "new"
+    },
+    {
+      "bytes": 606,
+      "path": "fixtures/plan5/frontend/cleanup_pending/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e",
+      "status": "new"
+    },
+    {
+      "bytes": 699,
+      "path": "fixtures/plan5/frontend/cleanup_pending/ExitManifest.1.json",
+      "sha256": "cbf279e53d0fa05c560d7d17171e2d955052dc049969b0d85bcb5e8ba0948e72",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/cleanup_pending/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 1847,
+      "path": "fixtures/plan5/frontend/controller_wait/CaseView.1.json",
+      "sha256": "4a1371f35bed71223efffc908a25b802c50aa0f659e87d87efdfd78a472b1c90",
+      "status": "new"
+    },
+    {
+      "bytes": 314,
+      "path": "fixtures/plan5/frontend/controller_wait/ControllerInvitation.1.json",
+      "sha256": "d5f509d2d96c34dbf68fa12d13724944968ee08e19fb24472d0fdc0fc2ebc629",
+      "status": "new"
+    },
+    {
+      "bytes": 2736,
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/CaseView.1.json",
+      "sha256": "591fed6b7104114ab3ce0e0d4b17259490f9451f816f1caf851fd233183ec69c",
+      "status": "new"
+    },
+    {
+      "bytes": 647,
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/DeliverySnapshot.1.json",
+      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661",
+      "status": "new"
+    },
+    {
+      "bytes": 558,
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/DeploymentObservation.1.json",
+      "sha256": "b72171c7c02361ec3297c0efde63a271e36a4ff6c2bf50684e43237e972315bd",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 297,
+      "path": "fixtures/plan5/frontend/event_gap/CaseEvent.1.json",
+      "sha256": "6b08141a33cc90e3fc7f7060ea4f07e48a68bf4f6ad18df35b9f2a09e6300396",
+      "status": "new"
+    },
+    {
+      "bytes": 2160,
+      "path": "fixtures/plan5/frontend/event_gap/CaseView.1.json",
+      "sha256": "01fbb42903e967d8c79b563dbbe0314a77da9aa07d428bb4311630fb0186e828",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/event_gap/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 2726,
+      "path": "fixtures/plan5/frontend/exit_executor_missing/CaseView.1.json",
+      "sha256": "3638b19a09f78b43a09fab7f83e4b99d0e4fadcaf0d33aaa99bf31be1fb7587e",
+      "status": "new"
+    },
+    {
+      "bytes": 786,
+      "path": "fixtures/plan5/frontend/exit_executor_missing/DeliverySnapshot.1.json",
+      "sha256": "3502a0a0b4fe41f5c6431ea2d5d4f58e33ed99a15f035f9823f2aeb1bcc37276",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/exit_executor_missing/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 1840,
+      "path": "fixtures/plan5/frontend/missing_source/CaseView.1.json",
+      "sha256": "a00392e5404bd0dd6c964ecd0665a8d71f13564ea3aa2a1c8e48e5b2781d32fa",
+      "status": "new"
+    },
+    {
+      "bytes": 2741,
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/CaseView.1.json",
+      "sha256": "33f18e50bebde30141309d2dd65354f7b56ea678fea718db2ebf1807cc271fc5",
+      "status": "new"
+    },
+    {
+      "bytes": 647,
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/DeliverySnapshot.1.json",
+      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661",
+      "status": "new"
+    },
+    {
+      "bytes": 697,
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/DeploymentObservation.1.json",
+      "sha256": "c9292262fb201ca08d2b85693f7e138d3010b29ed5f881be2b8c1941763e76f1",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 2682,
+      "path": "fixtures/plan5/frontend/proof_missing/CaseView.1.json",
+      "sha256": "e39c17a9bf27c7adac9f0d7b4a42fed9cba665692b680c68473bc482b2527d14",
+      "status": "new"
+    },
+    {
+      "bytes": 3914,
+      "path": "fixtures/plan5/frontend/proof_missing/PrivateReviewView.1.json",
+      "sha256": "9a3b48c15c9c4087d880ff5678f7053da0ae3d5486fc6b3436b7abe1382f70aa",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/proof_missing/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 3356,
+      "path": "fixtures/plan5/frontend/ready/CaseView.1.json",
+      "sha256": "3035bf9af0a2c4d9319dc665eb53cd63b4ca4ad7858c605e6c86e2634a4c9033",
+      "status": "new"
+    },
+    {
+      "bytes": 2059,
+      "path": "fixtures/plan5/frontend/start_response_lost/CaseView.1.json",
+      "sha256": "74100664769b0a123034f38f152de862f143086364e8ecd529782ee0cba24bbc",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/start_response_lost/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 2724,
+      "path": "fixtures/plan5/frontend/synthetic_complete/CaseView.1.json",
+      "sha256": "cec0146e4996a3cd14c8ee46fc9d58fb22d95a79df7e27ed11955640c397abe4",
+      "status": "new"
+    },
+    {
+      "bytes": 606,
+      "path": "fixtures/plan5/frontend/synthetic_complete/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e",
+      "status": "new"
+    },
+    {
+      "bytes": 691,
+      "path": "fixtures/plan5/frontend/synthetic_complete/ExitManifest.1.json",
+      "sha256": "d5d8166b503b371da8d59686011de992a3bf8a794e60c34d9d7777c1b0a0390e",
+      "status": "new"
+    },
+    {
+      "bytes": 439,
+      "path": "fixtures/plan5/frontend/synthetic_complete/PublicProofView.1.json",
+      "sha256": "671596ef91236f9200b5ca709f3af7a38ac2504d7bf6cedb6eeb25ee350f12c6",
+      "status": "new"
+    },
+    {
+      "bytes": 632,
+      "path": "fixtures/plan5/frontend/synthetic_complete/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789",
+      "status": "new"
+    },
+    {
+      "bytes": 119713,
+      "path": "fixtures/plan5/index.json",
+      "sha256": "5e81fd67d24e6508f95960fc880431ffedd68ebd10b068fbbfe8025d11eab21a",
+      "status": "modified"
+    },
+    {
+      "bytes": 1313,
+      "path": "scripts/check_generated.sh",
+      "sha256": "43352b90a8d4bba4955dbd9f3774152248d0afb255e931e11f07230676ffac70",
+      "status": "modified"
+    },
+    {
+      "bytes": 10465,
+      "path": "scripts/make_plan5_views.py",
+      "sha256": "4d9a30c8f54d4f5c4219acb5e12665892912ce33c66d4c29105b47d8477867f5",
+      "status": "new"
+    }
+  ],
+  "format": "GoldGraftB2FileManifest/1",
+  "frontend_ready_revision": 1,
+  "hash_scope": "B2 changes only; excludes this file itself",
+  "limitations": [
+    "Offline fixture frontend construction only; 15 scripted modes / 42 payloads.",
+    "Contract-only v2 routes; no production backend, model or provider operation.",
+    "No agent runtime, roles, delivery coordinator or frontend implemented.",
+    "Aditya will create agents by hand later with guidance; B3 has not started.",
+    "TaskControl counterpart profile is one synthetic run per local SQLite database.",
+    "Fake signatures/references and synthetic completion are not real proof or merchant exit.",
+    "One existing Starlette TestClient/httpx deprecation warning remains.",
+    "No new Git commit, public publication or deployment. Shared changes follow pause/revision protocol."
+  ],
+  "phase": "B2",
+  "workspace": "/Users/aditya/dev/GoldGraft-plan5-build"
+}

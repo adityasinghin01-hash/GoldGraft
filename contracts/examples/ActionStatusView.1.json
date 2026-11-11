@@ -1,0 +1,15 @@
+{
+  "acceptance_ref": null,
+  "status": {
+    "action_id": "fixture:action_id",
+    "case_id": "case-demo",
+    "checked_at": "2026-11-10T00:00:00Z",
+    "evidence_refs": [
+      "fixture:evidence_ref"
+    ],
+    "generation": null,
+    "last_event_seq": 0,
+    "state": "submitting",
+    "work_id": null
+  }
+}

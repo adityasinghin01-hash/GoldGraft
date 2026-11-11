@@ -1,0 +1,19 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ClaimDraft.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "continuation_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Continuation Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "continuation_ref"
+  ],
+  "title": "ClaimDraftV1",
+  "type": "object"
+}

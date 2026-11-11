@@ -1,0 +1,7 @@
+{
+  "evidence_refs": [
+    "fixture:evidence_ref"
+  ],
+  "reason_code": "fixture:reason_code",
+  "run_ref": "fixture:run_ref"
+}

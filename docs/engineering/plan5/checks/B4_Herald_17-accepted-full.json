@@ -1,0 +1,18 @@
+{
+  "command": [
+    "uv",
+    "run",
+    "--locked",
+    "--no-sync",
+    "python",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "exit_code": 0,
+  "seconds": 66.449,
+  "output": "docs/engineering/plan5/checks/B4_Herald_17-accepted-full.log",
+  "output_sha256": "a4017e4342d5edeb7428bd4b0a0c7787438be23018afb8c0a9a52f1f3e03654c",
+  "original_record": "/Users/aditya/reports/goldgraft-b4-herald-20261110/checks/17-accepted-full.json"
+}

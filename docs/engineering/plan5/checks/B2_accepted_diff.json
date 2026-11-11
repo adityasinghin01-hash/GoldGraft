@@ -1,0 +1,14 @@
+{
+  "command": [
+    "git",
+    "diff",
+    "--check"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "evidence_class": "offline_component",
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B2_accepted_diff.log",
+  "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "seconds": 0.074,
+  "started_at": "2026-11-10T12:59:57.577869+00:00"
+}

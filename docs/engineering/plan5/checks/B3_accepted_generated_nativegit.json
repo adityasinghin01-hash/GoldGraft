@@ -1,0 +1,12 @@
+{
+  "command": [
+    "sh",
+    "scripts/check_generated.sh"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "started_at": "2026-11-10T13:53:33.762121+00:00",
+  "seconds": 3.719,
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B3_accepted_generated_nativegit.log",
+  "output_sha256": "a7384611a621ff37922a29ec77d6db96b3105e2968cc26d5dd1705eab01ddc9b"
+}

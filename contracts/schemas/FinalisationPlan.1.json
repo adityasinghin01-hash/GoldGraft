@@ -1,0 +1,123 @@
+{
+  "$id": "https://goldgraft.dev/schemas/FinalisationPlan.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_change_required": {
+      "title": "Candidate Change Required",
+      "type": "boolean"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "dependency_check_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Dependency Check Refs",
+      "type": "array"
+    },
+    "desired_asset_manifest_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Desired Asset Manifest Ref",
+      "type": "string"
+    },
+    "final_candidate_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Final Candidate Ref"
+    },
+    "finalisation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Finalisation Id",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "independence_criteria_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Independence Criteria Refs",
+      "type": "array"
+    },
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "required_action_slot_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Required Action Slot Ids",
+      "type": "array"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "validation_request_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Validation Request Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "finalisation_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "desired_asset_manifest_ref",
+    "dependency_check_refs",
+    "candidate_change_required",
+    "final_candidate_ref",
+    "validation_request_refs",
+    "required_action_slot_ids",
+    "independence_criteria_refs",
+    "plan_digest"
+  ],
+  "title": "FinalisationPlanV1",
+  "type": "object"
+}

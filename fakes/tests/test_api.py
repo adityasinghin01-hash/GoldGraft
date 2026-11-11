@@ -169,10 +169,15 @@ def test_unknown_ids_are_problems(client):
     assert cmel.status_code == 404
 
 
-def test_openapi_export_is_stable_and_committed():
+def test_openapi_export_is_stable_and_complete():
     from importlib import import_module
+
+    from goldgraft_contracts.plan5_openapi import add_plan5
     first = create_app().openapi()
     second = create_app().openapi()
+    # v2 routes are contract-only, not fabricated live handlers in this legacy fake.
+    add_plan5(first)
+    add_plan5(second)
     assert json.dumps(first, sort_keys=True) == json.dumps(second, sort_keys=True)
     spec = json.loads((ROOT / "contracts/api/openapi.json").read_text())
     assert set(spec["paths"]) == set(first["paths"])

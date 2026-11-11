@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "ProviderRef": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Id"
+        },
+        "adapter_version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "adapter_version",
+        "account_id"
+      ],
+      "title": "ProviderRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ResourceSummary.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "check_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Check Refs",
+      "type": "array"
+    },
+    "controller_state": {
+      "enum": [
+        "unbound",
+        "waiting",
+        "approved",
+        "revoked",
+        "unknown"
+      ],
+      "title": "Controller State",
+      "type": "string"
+    },
+    "environment": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Environment",
+      "type": "string"
+    },
+    "label": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Label",
+      "type": "string"
+    },
+    "node_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Node Id",
+      "type": "string"
+    },
+    "permitted_actions": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Permitted Actions",
+      "type": "array"
+    },
+    "provider": {
+      "$ref": "#/$defs/ProviderRef"
+    },
+    "read_scope_text": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Read Scope Text",
+      "type": "string"
+    },
+    "source_snapshot_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Snapshot Ref"
+    }
+  },
+  "required": [
+    "node_id",
+    "label",
+    "provider",
+    "environment",
+    "controller_state",
+    "read_scope_text",
+    "source_snapshot_ref",
+    "check_refs",
+    "permitted_actions"
+  ],
+  "title": "ResourceSummaryV1",
+  "type": "object"
+}

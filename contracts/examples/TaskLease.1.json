@@ -1,0 +1,10 @@
+{
+  "context_ref": "fixture:context_ref",
+  "generation": 1,
+  "lease_epoch": 1,
+  "lease_until": "2026-11-11T00:00:00Z",
+  "run_id": "run-demo",
+  "task_id": "survey-demo",
+  "task_version": 1,
+  "worker_id": "fixture:worker_id"
+}

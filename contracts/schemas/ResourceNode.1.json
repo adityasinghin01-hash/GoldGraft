@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "ProviderRef": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Account Id"
+        },
+        "adapter_version": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Adapter Version",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "adapter_version",
+        "account_id"
+      ],
+      "title": "ProviderRef",
+      "type": "object"
+    },
+    "SourceRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "git_commit",
+            "provider_revision_set",
+            "capture"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "title": "SourceRevision",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ResourceNode.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Binding Refs",
+      "type": "array"
+    },
+    "environment_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Environment Id"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "kind": {
+      "enum": [
+        "source",
+        "frontend",
+        "backend",
+        "datastore",
+        "callback",
+        "scheduled_job",
+        "external_service",
+        "artifact"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "node_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Node Id",
+      "type": "string"
+    },
+    "provider": {
+      "$ref": "#/$defs/ProviderRef"
+    },
+    "provider_resource_id": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Provider Resource Id"
+    },
+    "required_for_scope": {
+      "title": "Required For Scope",
+      "type": "boolean"
+    },
+    "revision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SourceRevision"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "node_id",
+    "provider",
+    "kind",
+    "provider_resource_id",
+    "environment_id",
+    "revision",
+    "required_for_scope",
+    "binding_refs",
+    "evidence_refs"
+  ],
+  "title": "ResourceNodeV1",
+  "type": "object"
+}

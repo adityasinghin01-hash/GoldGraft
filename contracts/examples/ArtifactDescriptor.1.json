@@ -1,0 +1,17 @@
+{
+  "byte_count": 972,
+  "case_id": "case-demo",
+  "created_at": "2026-11-10T00:00:00Z",
+  "derivation_ref": null,
+  "evidence_class": "scripted",
+  "expires_at": null,
+  "generation": 1,
+  "input_digest": "e420502e2403b9711173e44c60f5aa5eba0fcaf5ddce9ba91ab3c207a9b1e335",
+  "payload_digest": "f8ef25a4dc3dbbd1be5fd99feab8eb6be8c7f2ab716949d737a38a524c8c39ca",
+  "producer_identity_ref": "fixture:producer_identity_ref",
+  "ref": "fixture:ref",
+  "run_id": "run-demo",
+  "schema": "RootMap/1",
+  "subject_digest": "7e96e6c699649db7c444f691f6df1662cc31fa20b085be10339ca0551862ffda",
+  "trust": "model_proposal"
+}

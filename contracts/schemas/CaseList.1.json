@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "CaseSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Case Id",
+          "type": "string"
+        },
+        "shop_url": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "title": "Shop Url",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "draft",
+            "waiting_controller",
+            "checking",
+            "setup_needed",
+            "ready",
+            "accepted",
+            "closed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "case_id",
+        "shop_url",
+        "status",
+        "updated_at"
+      ],
+      "title": "CaseSummary",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/CaseList.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/CaseSummary"
+      },
+      "maxItems": 50,
+      "title": "Items",
+      "type": "array"
+    },
+    "next_cursor": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next Cursor"
+    }
+  },
+  "required": [
+    "items",
+    "next_cursor"
+  ],
+  "title": "CaseListV1",
+  "type": "object"
+}

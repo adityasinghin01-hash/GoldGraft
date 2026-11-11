@@ -1,0 +1,108 @@
+{
+  "$id": "https://goldgraft.dev/schemas/WakeCondition.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "condition_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Condition Id",
+      "type": "string"
+    },
+    "due_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Due At"
+    },
+    "expected_digest": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Expected Digest"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "kind": {
+      "enum": [
+        "timer",
+        "task_result",
+        "authority",
+        "approval",
+        "counterpart",
+        "tool_reconcile"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "minimum_version": {
+      "minimum": 0,
+      "title": "Minimum Version",
+      "type": "integer"
+    },
+    "owner": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Owner",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "subject_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Subject Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "condition_id",
+    "case_id",
+    "run_id",
+    "generation",
+    "kind",
+    "subject_ref",
+    "expected_digest",
+    "minimum_version",
+    "owner",
+    "due_at",
+    "expires_at"
+  ],
+  "title": "WakeConditionV1",
+  "type": "object"
+}

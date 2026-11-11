@@ -1,0 +1,225 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "active_reference_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Active Reference Refs",
+          "type": "array"
+        },
+        "asset_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "authority_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Authority Refs",
+          "type": "array"
+        },
+        "desired": {
+          "enum": [
+            "keep",
+            "deny_revoke",
+            "delete",
+            "retain_policy"
+          ],
+          "title": "Desired",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "source",
+            "image",
+            "registry",
+            "runtime",
+            "config",
+            "state",
+            "credential",
+            "callback",
+            "origin_handler",
+            "grant",
+            "worker",
+            "copy",
+            "record",
+            "exit_executor"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "ownership": {
+          "enum": [
+            "merchant",
+            "shared_service",
+            "exclusive_run"
+          ],
+          "title": "Ownership",
+          "type": "string"
+        },
+        "required_for_operation": {
+          "title": "Required For Operation",
+          "type": "boolean"
+        },
+        "target_key": {
+          "$ref": "#/$defs/TargetKey"
+        }
+      },
+      "required": [
+        "asset_id",
+        "kind",
+        "ownership",
+        "target_key",
+        "required_for_operation",
+        "active_reference_refs",
+        "desired",
+        "authority_refs",
+        "evidence_refs"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "TargetKey": {
+      "additionalProperties": false,
+      "properties": {
+        "account_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Account Id",
+          "type": "string"
+        },
+        "environment_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Environment Id",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Provider Id",
+          "type": "string"
+        },
+        "resource_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_kind": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Resource Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_id",
+        "account_id",
+        "environment_id",
+        "resource_kind",
+        "resource_id"
+      ],
+      "title": "TargetKey",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/AssetManifest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 256,
+      "title": "Assets",
+      "type": "array"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "final_artifact_digest": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "title": "Final Artifact Digest",
+      "type": "string"
+    },
+    "final_config_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Final Config Digest",
+      "type": "string"
+    },
+    "legacy_obligations_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Legacy Obligations Ref",
+      "type": "string"
+    },
+    "manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Manifest Digest",
+      "type": "string"
+    },
+    "manifest_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Manifest Id",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "manifest_id",
+    "case_id",
+    "run_id",
+    "assets",
+    "final_artifact_digest",
+    "final_config_digest",
+    "legacy_obligations_ref",
+    "manifest_digest"
+  ],
+  "title": "AssetManifestV1",
+  "type": "object"
+}

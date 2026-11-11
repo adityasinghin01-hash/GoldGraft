@@ -1,0 +1,97 @@
+{
+  "action": {
+    "acceptance_ref": "fixture:acceptance:cleanup_pending",
+    "status": {
+      "action_id": "fixture:action_id",
+      "case_id": "case-demo",
+      "checked_at": "2026-11-10T00:00:00Z",
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "generation": 1,
+      "last_event_seq": 0,
+      "state": "queued",
+      "work_id": "work-demo"
+    }
+  },
+  "case": {
+    "binding_refs": [
+      "fixture:binding_ref"
+    ],
+    "case_id": "case-demo",
+    "created_at": "2026-11-10T00:00:00Z",
+    "graph_ref": null,
+    "requester_id": "person-demo",
+    "shop_url": "https://shop.example.test/",
+    "status": "accepted",
+    "tenant_id": "tenant-demo"
+  },
+  "checked_at": "2026-11-10T00:00:00Z",
+  "delivery_ref": "fixture:delivery:cleanup_pending",
+  "evidence_class": "scripted",
+  "last_event_seq": 0,
+  "lifecycle": {
+    "active_effect_refs": [
+      "fixture:active_effect_ref"
+    ],
+    "attempt": 1,
+    "case_id": "case-demo",
+    "evidence_refs": [
+      "fixture:evidence_ref"
+    ],
+    "generation": 1,
+    "resource_graph_digest": "94efeebe58287d7aec4b884a01cf45565575def18c7b2d672071ec4d10c31286",
+    "run_id": "run-demo",
+    "scope_digest": "2753a80e733712453d267a67f479c66910d06940824ebd7cae59da18ddf24495",
+    "stage": "EXITING",
+    "updated_at": "2026-11-10T00:00:00Z",
+    "work_id": "work-demo",
+    "work_package_digest": "d68547de5127174d8a98098cffb585076cd9534412b3d806de8337e6e52c449f",
+    "work_package_ref": "fixture:work_package_ref"
+  },
+  "pending_action_id": null,
+  "processing": {
+    "checked_at": "2026-11-10T00:00:00Z",
+    "copy_scope": "fixture:copy_scope",
+    "limits": [
+      "fixture:limit"
+    ],
+    "policy_digest": "f7a8fd975afb2a95e283e5b61e83b166ab9e82b84ed8f45c21a4675209b8b9f5",
+    "recipients": [
+      {
+        "name": "fixture:name",
+        "purpose": "fixture:purpose",
+        "region_text": "fixture:region_text",
+        "retention_text": "fixture:retention_text",
+        "terms_evidence_refs": [
+          "fixture:terms_evidence_ref"
+        ]
+      }
+    ],
+    "status": "qualified"
+  },
+  "readiness": null,
+  "required_actions": [],
+  "resources": [
+    {
+      "check_refs": [
+        "fixture:check_ref"
+      ],
+      "controller_state": "approved",
+      "environment": "fixture:environment",
+      "label": "Synthetic PHP shop",
+      "node_id": "source-demo",
+      "permitted_actions": [
+        "fixture:permitted_action"
+      ],
+      "provider": {
+        "account_id": null,
+        "adapter_version": "fixture:adapter_version",
+        "provider_id": "local_folder"
+      },
+      "read_scope_text": "fixture:read_scope_text",
+      "source_snapshot_ref": null
+    }
+  ],
+  "state_version": 1
+}

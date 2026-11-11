@@ -1,0 +1,96 @@
+{
+  "$id": "https://goldgraft.dev/schemas/AdapterObservation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "basis": {
+      "enum": [
+        "observed",
+        "provider_reported",
+        "controller_attested"
+      ],
+      "title": "Basis",
+      "type": "string"
+    },
+    "capability": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Capability",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Expires At"
+    },
+    "node_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Node Id",
+      "type": "string"
+    },
+    "observation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Observation Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "available",
+        "changed",
+        "revoked",
+        "unsupported",
+        "unknown"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "observation_id",
+    "case_id",
+    "node_id",
+    "capability",
+    "status",
+    "basis",
+    "evidence_refs",
+    "checked_at",
+    "expires_at"
+  ],
+  "title": "AdapterObservationV1",
+  "type": "object"
+}

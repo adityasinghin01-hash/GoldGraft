@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "/Users/aditya/reports/goldgraft-phase5.3-b0-2026-11-10/b0_audit.py",
+    "verify"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "started_at": "2026-11-10T13:53:33.419660+00:00",
+  "seconds": 0.239,
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B3_accepted_preservation.log",
+  "output_sha256": "bffcdf59719c1a0748533b890cf02115cc0667841d90f20d551500c35227fc4a"
+}

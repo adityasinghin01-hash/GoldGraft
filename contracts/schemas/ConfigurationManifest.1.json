@@ -1,0 +1,139 @@
+{
+  "$defs": {
+    "ConfigurationEntry": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "kind": {
+              "const": "public_value",
+              "enum": [
+                "public_value",
+                "secret_reference"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "secret_ref": {
+              "type": "null"
+            },
+            "value": {
+              "maxLength": 8192,
+              "minLength": 1,
+              "type": "string"
+            }
+          }
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "secret_reference",
+              "enum": [
+                "public_value",
+                "secret_reference"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "secret_ref": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            "value": {
+              "type": "null"
+            }
+          }
+        }
+      ],
+      "properties": {
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "public_value",
+            "secret_reference"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "secret_ref": {
+          "anyOf": [
+            {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^\\S+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Secret Ref"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "maxLength": 8192,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "value",
+        "secret_ref",
+        "required",
+        "evidence_refs"
+      ],
+      "title": "ConfigurationEntry",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ConfigurationManifest.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/ConfigurationEntry"
+      },
+      "maxItems": 256,
+      "title": "Entries",
+      "type": "array"
+    }
+  },
+  "required": [
+    "entries"
+  ],
+  "title": "ConfigurationManifestV1",
+  "type": "object"
+}

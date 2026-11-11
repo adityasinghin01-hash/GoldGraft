@@ -1,0 +1,19 @@
+{
+  "check_refs": [
+    "fixture:check_ref"
+  ],
+  "controller_state": "unbound",
+  "environment": "fixture:environment",
+  "label": "fixture:label",
+  "node_id": "source-demo",
+  "permitted_actions": [
+    "fixture:permitted_action"
+  ],
+  "provider": {
+    "account_id": null,
+    "adapter_version": "fixture:adapter_version",
+    "provider_id": "local_folder"
+  },
+  "read_scope_text": "fixture:read_scope_text",
+  "source_snapshot_ref": null
+}

@@ -1,0 +1,164 @@
+{
+  "$id": "https://goldgraft.dev/schemas/RecoveryPlan.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "affected_effect_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Affected Effect Refs",
+      "type": "array"
+    },
+    "baseline_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Baseline Refs",
+      "type": "array"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "chosen_route": {
+      "enum": [
+        "code_cutback",
+        "config_cutback",
+        "forward_repair",
+        "safe_hold"
+      ],
+      "title": "Chosen Route",
+      "type": "string"
+    },
+    "compensatable_effects": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Compensatable Effects",
+      "type": "array"
+    },
+    "irreversible_effects": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Irreversible Effects",
+      "type": "array"
+    },
+    "original_transaction_routes_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Original Transaction Routes Ref",
+      "type": "string"
+    },
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "plan_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "required_current_authority": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Required Current Authority",
+      "type": "array"
+    },
+    "restore_preconditions_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Restore Preconditions Ref",
+      "type": "string"
+    },
+    "reversible_effects": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Reversible Effects",
+      "type": "array"
+    },
+    "state_compatibility_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "State Compatibility Ref",
+      "type": "string"
+    },
+    "unknown_effects": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Unknown Effects",
+      "type": "array"
+    },
+    "verification_case_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Verification Case Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "plan_id",
+    "case_id",
+    "baseline_refs",
+    "affected_effect_refs",
+    "state_compatibility_ref",
+    "original_transaction_routes_ref",
+    "required_current_authority",
+    "reversible_effects",
+    "compensatable_effects",
+    "irreversible_effects",
+    "unknown_effects",
+    "chosen_route",
+    "restore_preconditions_ref",
+    "verification_case_refs",
+    "plan_digest"
+  ],
+  "title": "RecoveryPlanV1",
+  "type": "object"
+}

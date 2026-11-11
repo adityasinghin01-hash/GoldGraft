@@ -1,0 +1,180 @@
+{
+  "$id": "https://goldgraft.dev/schemas/TaskContext.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_tool_ids": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Allowed Tool Ids",
+      "type": "array"
+    },
+    "budget_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Budget Ref",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checkpoint_ref": {
+      "anyOf": [
+        {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Checkpoint Ref"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "expected_schemas": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Expected Schemas",
+      "type": "array"
+    },
+    "expected_subject": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Subject",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "input_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Input Refs",
+      "type": "array"
+    },
+    "lease_epoch": {
+      "exclusiveMinimum": 0,
+      "title": "Lease Epoch",
+      "type": "integer"
+    },
+    "operation": {
+      "enum": [
+        "verify_package",
+        "survey",
+        "explain_status",
+        "audit",
+        "propose_plan",
+        "build_baseline",
+        "build_candidate",
+        "validate_driver",
+        "run_scenario",
+        "scribe_draft",
+        "scribe_final",
+        "architect",
+        "candidate_patch",
+        "run_mutant",
+        "derive_guards",
+        "diagnose",
+        "learn",
+        "selfcheck_recipe",
+        "aggregate"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "policy_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Policy Ref",
+      "type": "string"
+    },
+    "prompt_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Prompt Ref",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "Gardener",
+        "Surveyor",
+        "Builder",
+        "Explorer",
+        "Scribe",
+        "Architect",
+        "Grafter",
+        "Adversary",
+        "Healer",
+        "Librarian",
+        "Herald",
+        "Orchard Analyst",
+        "Sentinel"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "task_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Task Ref",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_ref",
+    "case_id",
+    "run_id",
+    "generation",
+    "lease_epoch",
+    "role",
+    "operation",
+    "input_refs",
+    "expected_subject",
+    "policy_ref",
+    "prompt_ref",
+    "allowed_tool_ids",
+    "expected_schemas",
+    "budget_ref",
+    "deadline",
+    "checkpoint_ref"
+  ],
+  "title": "TaskContextV1",
+  "type": "object"
+}

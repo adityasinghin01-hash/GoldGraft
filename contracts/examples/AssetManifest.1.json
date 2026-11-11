@@ -1,0 +1,34 @@
+{
+  "assets": [
+    {
+      "active_reference_refs": [
+        "fixture:active_reference_ref"
+      ],
+      "asset_id": "fixture:asset_id",
+      "authority_refs": [
+        "fixture:authority_ref"
+      ],
+      "desired": "keep",
+      "evidence_refs": [
+        "fixture:evidence_ref"
+      ],
+      "kind": "source",
+      "ownership": "merchant",
+      "required_for_operation": true,
+      "target_key": {
+        "account_id": "synthetic-account",
+        "environment_id": "synthetic",
+        "provider_id": "local_folder",
+        "resource_id": "synthetic-resource",
+        "resource_kind": "fixture:resource_kind"
+      }
+    }
+  ],
+  "case_id": "case-demo",
+  "final_artifact_digest": "sha256:f66d0724e4659cf586472838e7e07aec10da8c4eb06ddc77c804ffba1ccfb388",
+  "final_config_digest": "6f35ae9927efd5782e3b625b11e48ccb0216b98687fba6a389755537d5208f87",
+  "legacy_obligations_ref": "fixture:legacy_obligations_ref",
+  "manifest_digest": "09c8738c62f0379838ee8e6715d86a5444c67b0657fdb8be93477fa23998ff58",
+  "manifest_id": "fixture:manifest_id",
+  "run_id": "run-demo"
+}

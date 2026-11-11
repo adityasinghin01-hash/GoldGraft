@@ -1,0 +1,25 @@
+{
+  "affected_effect_refs": [
+    "fixture:affected_effect_ref"
+  ],
+  "baseline_refs": [
+    "fixture:baseline_ref"
+  ],
+  "case_id": "case-demo",
+  "chosen_route": "code_cutback",
+  "compensatable_effects": [],
+  "irreversible_effects": [],
+  "original_transaction_routes_ref": "fixture:original_transaction_routes_ref",
+  "plan_digest": "22087e503123b495f8b21f2d4b33172e7cebf8486c7fc421b72a6ed78ce946e4",
+  "plan_id": "fixture:plan_id",
+  "required_current_authority": [
+    "fixture:required_current_authority"
+  ],
+  "restore_preconditions_ref": "fixture:restore_preconditions_ref",
+  "reversible_effects": [],
+  "state_compatibility_ref": "fixture:state_compatibility_ref",
+  "unknown_effects": [],
+  "verification_case_refs": [
+    "fixture:verification_case_ref"
+  ]
+}

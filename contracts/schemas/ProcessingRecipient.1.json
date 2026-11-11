@@ -1,0 +1,51 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ProcessingRecipient.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "purpose": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Purpose",
+      "type": "string"
+    },
+    "region_text": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Region Text",
+      "type": "string"
+    },
+    "retention_text": {
+      "maxLength": 8192,
+      "minLength": 1,
+      "title": "Retention Text",
+      "type": "string"
+    },
+    "terms_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Terms Evidence Refs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "purpose",
+    "region_text",
+    "retention_text",
+    "terms_evidence_refs"
+  ],
+  "title": "ProcessingRecipientV1",
+  "type": "object"
+}

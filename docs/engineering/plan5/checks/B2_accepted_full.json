@@ -1,0 +1,15 @@
+{
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "evidence_class": "offline_component",
+  "exit_code": 0,
+  "output": "docs/engineering/plan5/checks/B2_accepted_full.log",
+  "output_sha256": "0fe341cc8aa00d4aa369304ce186d98bfb4c63553868b07edb833aa00b6b8e58",
+  "seconds": 13.432,
+  "started_at": "2026-11-10T12:59:57.577258+00:00"
+}

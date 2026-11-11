@@ -1,0 +1,26 @@
+{
+  "artifact_digest": null,
+  "cardinality": 1,
+  "config_digest": null,
+  "depends_on": [],
+  "effect_class": "E0",
+  "expected_version_ref": "fixture:expected_version_ref",
+  "operation": "preserve_state",
+  "recovery_branch_ref": null,
+  "required_authority_refs": [
+    "fixture:required_authority_ref"
+  ],
+  "required_controller_ids": [
+    "fixture:required_controller_id"
+  ],
+  "slot_id": "fixture:slot_id",
+  "state_plan_digest": null,
+  "target_key": {
+    "account_id": "synthetic-account",
+    "environment_id": "synthetic",
+    "provider_id": "local_folder",
+    "resource_id": "synthetic-resource",
+    "resource_kind": "fixture:resource_kind"
+  },
+  "trigger_digest": "5badd656953f04a4c644b31d55b25865b96c9acb5fc7f03168bc045dc9fbc872"
+}

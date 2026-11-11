@@ -1,0 +1,25 @@
+{
+  "baseline_snapshot_ref": "fixture:baseline_snapshot_ref",
+  "branch": "fabricated",
+  "candidate_snapshot_ref": "fixture:candidate_snapshot_ref",
+  "changes": [
+    {
+      "commit": null,
+      "plan_item_ids": [
+        "fixture:plan_item_id"
+      ],
+      "summary": "fixture:summary"
+    }
+  ],
+  "created_at": "2026-11-10T00:00:00Z",
+  "graft_id": "fixture:graft_id",
+  "id": "fixture:id",
+  "open_item_ids": [],
+  "patch_digest": "101954809cfb70625a90a069a4d95a84fc4d7b181989237552ec49eb4a24fc60",
+  "producer": {
+    "kind": "agent",
+    "name": "Grafter",
+    "version": "synthetic-contract-example"
+  },
+  "provenance": "snapshot"
+}

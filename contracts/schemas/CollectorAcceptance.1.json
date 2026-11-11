@@ -1,0 +1,48 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CollectorAcceptance.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Receipt for service-only WorkerOperation intake; not proof of site reproduction.",
+  "properties": {
+    "accepted_at": {
+      "format": "date-time",
+      "title": "Accepted At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "operation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "receipt_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Receipt Ref",
+      "type": "string"
+    },
+    "work_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Work Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "operation_id",
+    "work_id",
+    "generation",
+    "accepted_at",
+    "receipt_ref"
+  ],
+  "title": "CollectorAcceptanceV1",
+  "type": "object"
+}

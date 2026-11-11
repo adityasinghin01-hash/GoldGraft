@@ -1,0 +1,64 @@
+{
+  "$id": "https://goldgraft.dev/schemas/ResourceEdge.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "edge_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Edge Id",
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Evidence Refs",
+      "type": "array"
+    },
+    "from_node": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "From Node",
+      "type": "string"
+    },
+    "relation": {
+      "enum": [
+        "builds_from",
+        "routes_to",
+        "stores_state_in",
+        "receives_callback_from",
+        "depends_on"
+      ],
+      "title": "Relation",
+      "type": "string"
+    },
+    "required_for_scope": {
+      "title": "Required For Scope",
+      "type": "boolean"
+    },
+    "to_node": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "To Node",
+      "type": "string"
+    }
+  },
+  "required": [
+    "edge_id",
+    "from_node",
+    "to_node",
+    "relation",
+    "required_for_scope",
+    "evidence_refs"
+  ],
+  "title": "ResourceEdgeV1",
+  "type": "object"
+}
