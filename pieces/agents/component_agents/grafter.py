@@ -240,11 +240,13 @@ def facts(task, data):
             # Copy fields for ChangeList/2 (identifiers, not code): exact ids and a size bound.
             "plan_item_ids": sorted(i.touchpoint for i in data.target_plan.items),
             "summary_max_chars": 300,
-            "call_policy": "Read every source file (follow unread_reads; max four reads per "
-            "response) and dependency.inspect with the catalog's recipe_ref, package, version. "
+            "call_policy": "Exact order, one step per response: (1) source.read for the source "
+            "files only (at most four calls in that response; follow unread_reads); (2) "
+            "dependency.inspect ALONE with the catalog's recipe_ref, package, version; "
             "Then WRITE the new checkout yourself: for every target_plan item, replace the old "
             "PayPal call in the files with the installed library operation named by target_op, "
-            "following installed_library_api exactly. Keep each endpoint's HTTP behaviour and "
+            "following installed_library_api exactly; (3) candidate.patch alone; (4) the final. "
+            "Keep each endpoint's HTTP behaviour and "
             "JSON response keys; keep unrelated lines unchanged; load the library with "
             "require_once instead of the old NVP client; no forbidden_after_patch text may remain "
             "in a file you send. Money rule: mark an order PAID only when capture_status is "
