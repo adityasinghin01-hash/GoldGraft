@@ -1,0 +1,7 @@
+{
+  "name": "goldgraft-php-lint",
+  "private": true,
+  "type": "module",
+  "description": "PHP syntax check without a PHP install (glayzzle php-parser). Reads {path: source} JSON on stdin.",
+  "dependencies": { "php-parser": "3.1.5" }
+}

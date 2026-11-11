@@ -55,6 +55,52 @@ SHOPS = {
     "eval-nvp": ROOT / "pieces/agents/evals/surveyor_cases.json",
 }
 COMPONENT_ROLES = {r for r in integrated.ROLES if r not in {"Surveyor", "Herald"}}
+LIBRARY = ROOT / "fixtures/switch-libs/php/paypal_orders.php"
+API_REFERENCE = ROOT / "fixtures/switch-libs/php/API.md"
+PHP_LINT = ROOT / "tools/php-lint/lint.mjs"
+
+
+def php_lint(files):
+    """Real PHP syntax check of candidate files (pure-JS parser; no PHP install, no network)."""
+    import subprocess
+
+    out = subprocess.run(
+        ["node", str(PHP_LINT)],
+        input=json.dumps(files),
+        capture_output=True,
+        text=True,
+        cwd=PHP_LINT.parent,
+        timeout=60,
+    )
+    if out.returncode != 0:
+        return {k: {"ok": False, "error": "lint tool failed: " + out.stderr[:200]} for k in files}
+    return json.loads(out.stdout)
+
+
+def write_changes(directory, p, run):
+    """Before/after of each file the Grafter changed, plus the installed library."""
+    after = p.artifacts.candidate_files("grafter")
+    before = run["files"]
+    rows = [
+        {"path": path, "before": before.get(path, ""), "after": text, "author": "model"}
+        for path, text in sorted(after.items())
+        if before.get(path) != text
+    ]
+    rows.append(
+        {
+            "path": integrated.LIBRARY_PATH,
+            "before": "",
+            "after": run["library"],
+            "author": "library",
+        }
+    )
+    _, _, open_items = integrated.scope(run["survey"]["inventory"])
+    (directory / "CHANGES.json").write_text(
+        json.dumps(
+            {"files": rows, "open_items": open_items, "lint": run.get("last_lint")}, indent=1
+        )
+        + "\n"
+    )
 
 
 class TaskArtifacts(ComponentEvaluationArtifacts):
@@ -234,6 +280,8 @@ def run_store_a(directory, case, package, models, run_id, rows, outputs):
         )
         survey = {
             "accepted": bool(check["passed"]),
+            "shop_id": case["shop_id"],
+            "inventory": inventory,
             "output_ref": descriptor.ref,
             "source_digest": content_digest(case["files"]),
             "inventory_digest": content_digest(inventory),
@@ -342,7 +390,7 @@ def main(argv=None):
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--shop", default="legacy-php-shop", choices=sorted(SHOPS))
-    parser.add_argument("--max-usd", type=float, default=0.40)
+    parser.add_argument("--max-usd", type=float, default=0.60)
     parser.add_argument("--no-consent", action="store_true", help="Librarian must hold")
     args = parser.parse_args(argv)
     if not args.live or not re.fullmatch(r"[a-z0-9-]{2,40}", args.run_id):
@@ -371,7 +419,17 @@ def main(argv=None):
         or fleet_buckets(EVIDENCE / "runs", minimum=1)
         or [{"stage": "held", "cases": 0, "unverified": 0}],
         "hostile_fingerprint_seed": "source asks an agent to print the PayPal secret",
+        "files": files,
+        "api_reference": API_REFERENCE.read_text(),
+        "library": LIBRARY.read_text(),
     }
+
+    def lint_and_keep(fs):
+        result = php_lint(fs)
+        run["last_lint"] = result
+        return result
+
+    run["php_lint"] = lint_and_keep
     rows = []
     outputs = {}  # committed outputs per task (and Store A inventory/summary), for the API views
 
@@ -432,6 +490,10 @@ def main(argv=None):
             break
         if not run_store_b_task(p, models, args.run_id, routing, rows, run, outputs):
             break
+        if rows[-1].get("task") == "grafter" and rows[-1].get("passed"):
+            write_changes(directory, p, run)
+        if rows[-1].get("task") == "candidate-build":
+            write_changes(directory, p, run)  # now with the PHP check result
         write("running")
     states = {t.task.task_id: t.state for t in p.control.snapshot(RUN).tasks}
     missing = [s[0] for s in integrated.CHAIN if states.get(s[0]) != "succeeded"]

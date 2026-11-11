@@ -25,7 +25,7 @@ from goldgraft_contracts.plan5_common import content_digest
 from .component import implementation
 from .component_cli import create as create_component
 from .roles import component_configuration
-from .workflow import BASE, STAGES, candidate, committed, execution, payload
+from .workflow import BASE, STAGES, committed, execution, payload
 from .workflow import stage_data as chain_data
 
 GARDENER = "gardener:propose_plan"
@@ -35,7 +35,7 @@ SIDE = (
     ("healer-golive", "Healer", "diagnose", ("candidate-new",)),
     ("sentinel-audit", "Sentinel", "audit", ("adversary-mutant",)),
     ("librarian-recipe", "Librarian", "learn", ("adversary-mutant",)),
-    ("orchard-aggregate", "Orchard Analyst", "aggregate", ("librarian-recipe",)),
+    ("orchard-aggregate", "Orchard Analyst", "aggregate", ("adversary-mutant",)),
 )
 ALL_STAGES = CHAIN + SIDE
 # Roles that take part, in lifecycle order (Surveyor and Herald run in the linked Store A).
@@ -116,9 +116,8 @@ def _side_data(p, task_id, role, operation, run):
             for i, (kind, seed) in enumerate(events[:32])
         ]
     elif task_id == "librarian-recipe":
-        c = candidate(p)
-        data["source_tree_digest"] = c["tree"]
-        data["origin_fixture_ref"] = c["snapshot_ref"]
+        # The de-identified recipe template stays the qualified one (its drafts must be copied
+        # exactly); the finished candidate reaches Librarian through the dependency's output refs.
         data["completed"] = True
         # Stated assumption (12 Nov): the MIT-licensed synthetic sample shop is rights-cleared.
         data["learning_consent"] = bool(run.get("learning_consent", True))
@@ -140,8 +139,102 @@ def stage_data(p, task_id, role, operation, run):
         data["execution_result"]["source_tree_digest"] = survey["source_digest"]
         return data
     if any(task_id == s[0] for s in STAGES):
-        return chain_data(p, task_id, role, operation)
+        data = chain_data(p, task_id, role, operation)
+        return _real_code(p, task_id, data, run) if run.get("survey", {}).get("inventory") else data
     return _side_data(p, task_id, role, operation, run)
+
+
+# ── Real code fixing (12 Nov): the shop's own source, planned from the Surveyor's real map,
+# rewritten by the model against the installed GoldGraft Orders v2 library. ─────────────────
+ORDERS_CATALOG = {
+    "ref": "catalog:goldgraft-orders-v2-php:1",
+    "fingerprint": "php-ec-nvp",
+    "recipe_ref": "recipe:php-ec-nvp-to-orders-v2:1",
+    "package": "goldgraft/switch-paypal-orders-php",
+    "version": "1",
+    "topic": "orders",
+    "qualified_fixture": True,
+    "installed_symbols": [
+        "gg_create_order",
+        "gg_capture_order",
+        "gg_refund_capture",
+        "gg_verify_webhook",
+    ],
+}
+# Surveyor catalog rule → installed library operation (the migration this profile supports).
+RULE_SYMBOL = {
+    "nvp-create": "gg_create_order",
+    "nvp-capture": "gg_capture_order",
+    "nvp-refund": "gg_refund_capture",
+    "ipn-notify": "gg_verify_webhook",
+}
+FORBIDDEN_AFTER = ["paypal_nvp(", "cmd=_notify-validate"]
+LIBRARY_PATH = "lib/paypal_orders.php"
+
+
+def scope(inventory):
+    """Deterministic plan scope: supported touchpoints only, marked PayPal-only with their target.
+
+    Returns (root_map, mappings, open_items). Unsupported touchpoints (e.g. the checkout.js v4
+    browser button) are listed as open items, never silently dropped.
+    """
+    keep, mappings, open_items = [], [], []
+    for t in inventory["touchpoints"]:
+        rule = t["target"]["paypal_mapping_id"]
+        if rule in RULE_SYMBOL and t["family"] in {"EC_NVP", "IPN"}:
+            symbol = RULE_SYMBOL[rule]
+            keep.append(dict(t, paypal_only=True, target=dict(t["target"], rest_op=symbol)))
+            mappings.append(
+                {
+                    "touchpoint_id": t["id"],
+                    "symbol": symbol,
+                    "mapping_id": rule,
+                    "payment_only": True,
+                }
+            )
+        else:
+            open_items.append(
+                {"touchpoint": t["id"], "family": t["family"], "location": t["location"]}
+            )
+    places = [t["location"] for t in keep]
+    flows = {k: [loc for loc in v if loc in places] for k, v in inventory["money_flow"].items()}
+    root_map = dict(inventory, touchpoints=keep, money_flow=flows)
+    return root_map, mappings, open_items
+
+
+def _real_code(p, task_id, data, run):
+    survey, files = run["survey"], run["files"]
+    if task_id in {"scribe-draft", "scribe-final"}:
+        data["shop_id"] = survey["shop_id"]
+    elif task_id == "architect":
+        root_map, mappings, _ = scope(survey["inventory"])
+        data["root_map"] = root_map
+        data["catalog"] = ORDERS_CATALOG
+        data["mappings"] = mappings
+    elif task_id == "grafter":
+        root_map, _, _ = scope(survey["inventory"])
+        paths = sorted({t["location"]["file"] for t in root_map["touchpoints"]})[:4]
+        chosen = {path: files[path] for path in paths}
+        data.update(
+            files=chosen,
+            allowed_paths=paths,
+            expected_tree=content_digest(chosen),
+            replacements=None,
+            catalog=ORDERS_CATALOG,
+            required_symbol="gg_capture_order",
+            author=True,
+            api_reference=run.get("api_reference", ""),
+            forbidden_calls=FORBIDDEN_AFTER,
+            paid_marker="COMPLETED",
+        )
+    elif task_id == "candidate-build" and run.get("php_lint"):
+        candidate_files = p.artifacts.candidate_files("grafter")
+        tree = {**candidate_files, LIBRARY_PATH: run.get("library", "")}
+        lint = run["php_lint"]({k: v for k, v in tree.items() if k.endswith(".php")})
+        data["execution_result"]["php_lint"] = {k: bool(v["ok"]) for k, v in sorted(lint.items())}
+        if not all(v["ok"] for v in lint.values()):
+            data["execution_state"] = "failed"
+    return data
 
 
 # Model routing (lower tasks Haiku, higher tasks Sonnet). Each role's existing route() picks the

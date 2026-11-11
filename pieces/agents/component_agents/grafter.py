@@ -19,7 +19,7 @@ class Input(P5Record):
     expected_tree: Digest
     files: dict[RelativePath, str] = Field(min_length=1, max_length=4)
     allowed_paths: list[RelativePath] = Field(min_length=1, max_length=4)
-    replacements: dict[RelativePath, str] = Field(min_length=1, max_length=4)
+    replacements: dict[RelativePath, str] | None = Field(default=None, min_length=1, max_length=4)
     target_plan: TargetPlan
     catalog: Catalog
     required_symbol: str
@@ -28,6 +28,12 @@ class Input(P5Record):
     failure_fingerprint: Digest | None
     previous_failure_fingerprint: Digest | None
     collector_receipt_fault: Literal["none", "wrong_tree", "missing_snapshot"] = "none"
+    # Authoring mode (12 Nov): the model writes the new code itself from the target plan and the
+    # installed library's API; no replacement content is given. Deterministic review judges it.
+    author: StrictBool = False
+    api_reference: str | None = Field(default=None, max_length=4000)
+    forbidden_calls: list[str] = Field(default_factory=list, max_length=8)
+    paid_marker: str | None = None
 
 
 def admit(task, data):
@@ -37,7 +43,12 @@ def admit(task, data):
         or content_digest(data.files) != data.expected_tree
     ):
         raise ValueError("DENIED exclusive writer/CAS")
-    paths = set(data.replacements)
+    if data.author:
+        if data.replacements is not None or not data.api_reference:
+            raise ValueError("DENIED authoring needs the API reference and no given replacements")
+    elif data.replacements is None:
+        raise ValueError("MISSING_EVIDENCE replacements")
+    paths = set(data.allowed_paths if data.author else data.replacements)
     if not paths <= set(data.allowed_paths) <= set(data.files):
         raise ValueError("DENIED allowed candidate paths")
     if any(
@@ -67,6 +78,19 @@ def schemas(operation, data):
     return ["ChangeList/2"]
 
 
+def reference_patch(data):
+    """Offline stub for the scripted model only (never shown to a real model)."""
+    symbols = sorted({i.target_op for i in data.target_plan.items})
+    out = {}
+    for n, path in enumerate(sorted(data.allowed_paths)):
+        body = "<?php\nrequire_once __DIR__ . '/../lib/paypal_orders.php';\n// offline stub\n"
+        if n == 0:
+            body += "".join(f"$r = {s}();\n" for s in symbols)
+            body += "if ($r['capture_status'] === 'COMPLETED') { $paid = true; }\n"
+        out[path] = body
+    return out
+
+
 def requests(task, data):
     return [
         *[
@@ -91,7 +115,18 @@ def requests(task, data):
                 expected_tree=data.expected_tree,
                 patch_ref="inline:patch",
             ),
-            patch=data.replacements,
+            **(
+                {
+                    "authored": {
+                        "workspace_ref": data.workspace_ref,
+                        "expected_tree": data.expected_tree,
+                    },
+                    # Only the offline scripted model sends this stub; a real model writes its own.
+                    "patch": reference_patch(data),
+                }
+                if data.author
+                else {"patch": data.replacements}
+            ),
         ),
     ]
 
@@ -106,7 +141,7 @@ def synthesize(task, data, packet, observations):
         branch=None,
         baseline_snapshot_ref=data.source_ref,
         candidate_snapshot_ref=receipt["snapshot_ref"],
-        patch_digest=content_digest(data.replacements),
+        patch_digest=receipt["patch_digest"] if data.author else content_digest(data.replacements),
         changes=[
             dict(
                 plan_item_ids=[i.touchpoint for i in data.target_plan.items],
@@ -119,9 +154,42 @@ def synthesize(task, data, packet, observations):
     return [dict(schema="ChangeList/2", payload=value)]
 
 
+def check_authored(data, patch):
+    """Deterministic judgement of model-written code (no equality to an answer key)."""
+    from ..source_inventory import reject_secret
+
+    if not isinstance(patch, dict) or not patch or set(patch) - set(data.allowed_paths):
+        raise ValueError("DENIED authored paths")
+    merged = {**data.files, **patch}
+    symbols = {i.target_op for i in data.target_plan.items}
+    for path, text in patch.items():
+        if not isinstance(text, str) or not text.lstrip().startswith("<?php") or len(text) > 8192:
+            raise ValueError("DENIED authored file shape " + path)
+        reject_secret(text)
+        if any(bad in text for bad in data.forbidden_calls):
+            raise ValueError("DENIED old PayPal call left in " + path)
+        if any(s + "(" in text for s in symbols) and "paypal_orders.php" not in text:
+            raise ValueError("MISSING_EVIDENCE installed library not loaded in " + path)
+    code = "\n".join(patch.values())
+    missing = sorted(s for s in symbols if s + "(" not in code)
+    if missing:
+        raise ValueError("MISSING_EVIDENCE planned operations not called: " + ", ".join(missing))
+    if data.paid_marker and data.paid_marker not in code:
+        raise ValueError("DENIED money rule: paid only on a completed capture")
+    untouched = set(data.files) - set(patch)
+    if any(any(bad in data.files[p] for bad in data.forbidden_calls) for p in untouched):
+        raise ValueError("MISSING_EVIDENCE an allowed file still uses the old API")
+    return merged
+
+
 def review(task, data, packet, outputs, observations):
     receipt = observations[-1]["value"]["payload"]
-    files = {**data.files, **data.replacements}
+    if data.author:
+        files = check_authored(data, receipt.get("patch"))
+        if receipt.get("patch_digest") != content_digest(receipt.get("patch")):
+            raise ValueError("DENIED collector patch digest")
+    else:
+        files = {**data.files, **data.replacements}
     want = (
         synthesize(task, data, packet, observations)[0]["payload"]
         if receipt.get("snapshot_ref")
@@ -132,7 +200,7 @@ def review(task, data, packet, outputs, observations):
         receipt.get("tree") != content_digest(files)
         or receipt.get("synthetic_only") is not True
         or not receipt.get("snapshot_ref")
-        or receipt.get("patch_digest") != content_digest(data.replacements)
+        or (not data.author and receipt.get("patch_digest") != content_digest(data.replacements))
         or not valid_metadata(got, want)
         or any(
             got[k] != want[k]
@@ -159,10 +227,33 @@ PROGRESS = True
 
 
 def route(data):
-    return "sonnet" if len(data.files) >= 4 else "haiku8"
+    # Writing real code needs Sonnet's output room; replay of given replacements fits Haiku.
+    return "sonnet" if data.author or len(data.files) >= 4 else "haiku8"
 
 
 def facts(task, data):
+    if data.author:
+        return {
+            "max_bytes": 4096,
+            "installed_library_api": data.api_reference,
+            "forbidden_after_patch": data.forbidden_calls,
+            "call_policy": "Read every source file (follow unread_reads; max four reads per "
+            "response) and dependency.inspect with the catalog's recipe_ref, package, version. "
+            "Then WRITE the new checkout yourself: for every target_plan item, replace the old "
+            "PayPal call in the files with the installed library operation named by target_op, "
+            "following installed_library_api exactly. Keep each endpoint's HTTP behaviour and "
+            "JSON response keys; keep unrelated lines unchanged; load the library with "
+            "require_once instead of the old NVP client; no forbidden_after_patch text may remain "
+            "in a file you send. Money rule: mark an order PAID only when capture_status is "
+            "'COMPLETED'; store PENDING otherwise. Then call candidate.patch alone with "
+            "workspace_ref, expected_tree and an inline patch object {path: full new file "
+            "content} for every file you changed (start each with <?php). Never mint patch_ref. "
+            "Accept only a synthetic collector receipt with snapshot_ref and patch_digest; "
+            "otherwise report_hold. Copy receipt snapshot_ref and patch_digest into ChangeList/2, "
+            "snapshot provenance, null branch/commits, baseline=source_ref, one change covering "
+            "every target_plan touchpoint, open_item_ids empty. Use reference_metadata. "
+            "Summarize the edits in plain words; avoid deployed, published and verified.",
+        }
     return {
         "max_bytes": 4096,
         "call_policy": "Read every source file and dependency.inspect using the catalog's "

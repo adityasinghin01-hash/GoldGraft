@@ -156,6 +156,7 @@ def paired(planned, observations):
                     and (
                         "proposal" in call
                         or "patch" in call
+                        or "authored" in call
                         or "drafts" in call
                         or (o.get("value") or {}).get("arguments") == call["arguments"]
                     )
@@ -184,6 +185,12 @@ def validate_result(task, payload, packet, observations):
         if "proposal" in call:
             if value.get("payload", {}).get("proposal") != call["proposal"]:
                 raise ValueError("DENIED execution proposal binding")
+        elif "authored" in call:
+            # Model-authored content: the custody arguments must match exactly; the content
+            # itself is judged by the role's deterministic review, never by equality.
+            args = value.get("arguments", {})
+            if any(args.get(k) != v for k, v in call["authored"].items()):
+                raise ValueError("DENIED authored patch custody")
         elif "patch" in call:
             if value.get("payload", {}).get("patch") != call["patch"]:
                 raise ValueError("DENIED candidate patch binding")
