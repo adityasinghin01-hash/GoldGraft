@@ -167,6 +167,9 @@ export class World {
 
   setScroll(p: number) { this.scroll = p; }
 
+  /** A state's layout changed (the page measured where its picture may go): redraw with it. */
+  relayout() { this.applyBlend(); }
+
   /** The chain of pictures in scroll order, and where along it the page is (eased every frame). */
   private timeline: string[] = [];
   private pos = 0;

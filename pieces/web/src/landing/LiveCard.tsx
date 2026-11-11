@@ -9,9 +9,9 @@ import s from './landing.module.css';
 const ROWS = [
   { who: 'Surveyor', text: 'Found 5 old PayPal pieces' },
   { who: 'Grafter', text: 'Wrote the new checkout' },
-  { who: 'Union Judge', text: 'Payment tests: 5 same, 1 old bug fixed' },
+  { who: 'Union Judge', text: 'Tests: 5 same, 1 bug fixed' },
   { who: 'Adversary', text: 'Caught 11 of 12 planted bugs' },
-  { who: 'Heal Controller', text: '10% of buyers on the new checkout' },
+  { who: 'Heal Controller', text: '10% of buyers moved over' },
 ];
 
 export function LiveCard() {
@@ -49,7 +49,8 @@ export function LiveCard() {
         <span className={s.chip} title="Stand-in sample data, not a recording of a real run">Sample</span>
       </header>
       <ol className={s.liveRows}>
-        {ROWS.slice(0, n).map((r, i) => {
+        {ROWS.map((r, i) => {
+          if (i >= n) return <li key={r.text} data-waiting aria-hidden><span className={s.liveTick} /><span className={s.liveWho}>{r.who}</span><span className={s.liveText}>{r.text}</span></li>;
           const typing = i === n - 1 && !still && chars < r.text.length;
           return (
             <li key={r.text} data-done={!typing || undefined}>

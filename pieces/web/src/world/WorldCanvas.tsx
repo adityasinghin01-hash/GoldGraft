@@ -67,6 +67,8 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
     const onVis = () => world.setVisible(document.visibilityState === 'visible');
 
     window.addEventListener('resize', onResize);
+    const onRelayout = () => world.relayout();
+    window.addEventListener('gg:relayout', onRelayout);
     if (!still && !calm) {
       window.addEventListener('pointermove', onMove, { passive: true });
       document.documentElement.addEventListener('pointerleave', onLeave);
@@ -104,6 +106,7 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
 
     cleanups.push(() => {
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('gg:relayout', onRelayout);
       window.removeEventListener('pointermove', onMove);
       document.documentElement.removeEventListener('pointerleave', onLeave);
       document.removeEventListener('visibilitychange', onVis);
