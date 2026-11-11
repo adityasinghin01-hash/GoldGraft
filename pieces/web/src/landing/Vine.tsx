@@ -142,7 +142,7 @@ export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null>
       flowSap();
       const rootTop = root.getBoundingClientRect().top + window.scrollY;
       target = lenAtY(window.scrollY + window.innerHeight * 0.72 - rootTop);
-      const next = shown + (target - shown) * 0.12;
+      const next = shown + (target - shown) * 0.2;
       if (Math.abs(next - shown) > 0.05) { shown = next; paint(); }
     };
 

@@ -70,5 +70,5 @@ export const LANDING_STATES: StateDef[] = [
 
   // 9 Footer — roots
   { id: 'roots', source: { kind: 'image', src: img('07-roots'), threshold: 0.06, gamma: 1.1, depth: 0.5 },
-    layout: { cx: 0, cy: -0.62, h: 0.62 }, motion: { drift: 0.6, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 0.55, warm: 0.1, pointer: 0.5 } },
+    layout: { cx: 0, cy: -0.85, h: 0.5 }, motion: { drift: 0.6, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 0.55, warm: 0.1, pointer: 0.5 } },
 ];

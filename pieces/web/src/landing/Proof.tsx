@@ -20,10 +20,10 @@ export function Proof() {
   return (
     <section id="proof" className={s.proof} data-world="rings">
       <div className={`gg-wrap gg-grid ${s.proofGrid}`}>
-        <div className={s.head} data-exit>
+        <div className={s.head}>
           <ChapterMark label={PROOF.label} />
           <h2 className="gg-h2" data-split>{PROOF.title}</h2>
-          <p className={s.headLead} data-rise>{PROOF.lead}</p>
+          <p className={s.headLead} data-rise data-exit="dust">{PROOF.lead}</p>
         </div>
 
         <div className={s.facts} data-vine="proof">
@@ -36,7 +36,7 @@ export function Proof() {
           ))}
         </div>
 
-        <figure className={s.quote} data-rise data-exit>
+        <figure className={s.quote} data-rise data-exit="dust">
           <blockquote>{PROOF.quote}</blockquote>
           <figcaption className={s.meta}>
             {PROOF.quoteBy} · <Source {...PROOF.quoteSource} />

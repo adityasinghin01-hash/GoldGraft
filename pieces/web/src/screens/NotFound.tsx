@@ -6,7 +6,7 @@ import { PageHead } from '../components/ui';
 export default function NotFound() {
   useEffect(() => { document.title = 'GoldGraft · Page not found'; }, []);
   return (
-    <div style={{ display: 'grid', justifyItems: 'start', gap: 24, maxWidth: 640, paddingTop: 32 }}>
+    <div className="gg-center" style={{ display: 'grid', justifyItems: 'center', textAlign: 'center', gap: 24, maxWidth: 640, paddingTop: 64 }}>
       <svg width="120" height="120" viewBox="0 0 64 64" fill="none" aria-hidden style={{ color: 'var(--gg-gold)' }}>
         <circle cx="32" cy="32" r="29" stroke="currentColor" strokeOpacity=".25" strokeDasharray="3 4" />
         <path d="M20.5 53.5 C 22.6 46.4, 25.8 40.4, 30.3 35.7" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />

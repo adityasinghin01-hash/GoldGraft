@@ -34,7 +34,7 @@ export default function S10_Security() {
   };
 
   return (
-    <div className={s.screen}>
+    <div className={`gg-center ${s.screen}`}>
       <PageHead title="Security" explain="Test shops hide orders for the AI. GoldGraft treats them as data."
         sub={q.data ? <span className={s.top}>{blocked} of {attempts.length} tricks blocked{blocked < attempts.length && <b> · {attempts.length - blocked} NOT blocked</b>}</span> : undefined}
         aside={isMock ? <SampleChip /> : undefined} />

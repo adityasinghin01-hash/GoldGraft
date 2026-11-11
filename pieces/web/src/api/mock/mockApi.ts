@@ -30,7 +30,7 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
 const GRAFT = 'demo-1';
 
-async function get<T>(x: unknown, ms = 300): Promise<T> {
+async function get<T>(x: unknown, ms = 60): Promise<T> {
   await wait(ms);
   return clone(x) as T;
 }
@@ -51,7 +51,7 @@ const injectListeners = new Set<() => void>();
 
 async function requireDemo(id: string) {
   if (id !== GRAFT) {
-    await wait(300);
+    await wait(60);
     const p = clone(notFound) as { title: string; detail?: string; status: number };
     throw new ApiError('problem', p.status, p.title, (p.detail ?? '').replace(/demo-1|\{graft_id\}/g, id) || `No graft ${id}`);
   }
@@ -59,7 +59,7 @@ async function requireDemo(id: string) {
 
 export const mockApi: GoldGraftApi = {
   probe: async (url) => {
-    await wait(2000);
+    await wait(1400);
     return { ...clone(probe), files_or_pages: [url] } as never;
   },
   createShop: async (body) => { await wait(500); return { ...clone(shops), ...body } as never; },

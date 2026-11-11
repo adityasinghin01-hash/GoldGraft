@@ -70,7 +70,7 @@ try {
 
   const paths = [];
   for (const w of widths) {
-    await S('Emulation.setDeviceMetricsOverride', { width: w, height, deviceScaleFactor: 1, mobile: false });
+    await S('Emulation.setDeviceMetricsOverride', { width: w, height, deviceScaleFactor: Number(opt('dpr', 1)), mobile: false });
     await S('Page.navigate', { url });
     await sleep(wait);
     if (extraEval) { const r = await S('Runtime.evaluate', { expression: extraEval, awaitPromise: true, returnByValue: true }); console.log('EVAL', JSON.stringify(r.result?.value ?? r.exceptionDetails?.text)); }

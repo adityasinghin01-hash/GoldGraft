@@ -24,7 +24,7 @@ export default function S08_Recipes() {
   const t5 = pts.length >= 2 ? (last.usd < first.usd ? 'The latest shop cost less AI than the first' : 'The latest shop did not cost less AI') : 'AI cost of the first shop';
 
   return (
-    <div className={s.screen}>
+    <div className={`gg-center ${s.screen}`}>
       <PageHead title="Recipes" sub="Every proven upgrade is saved as a recipe for similar shops." />
       {lc.isPending ? <Skeleton what="learning curve" lines={3} /> : lc.isError ? <ProblemBanner error={lc.error} onRetry={() => lc.refetch()} /> : pts.length === 0 ? <Empty title="No upgrades finished yet" /> : (
         <>

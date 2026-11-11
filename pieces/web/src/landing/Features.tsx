@@ -6,7 +6,7 @@ import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 const PER = 30;   // svh of scroll per feature while the stage is pinned
-const TAIL = 0.06; // last part of the pin: the stage fades out before the next chapter
+const TAIL = 0; // the stage leaves only once its pin releases, as the next chapter arrives
 
 /**
  * Seven features. The heading scrolls in and away; then one stage pins: the list with its
@@ -40,7 +40,7 @@ export function Features() {
       ctx = gsap.context(() => {
         gsap.fromTo(stickyRef.current, { '--exit': 0 }, {
           '--exit': 1, ease: 'none', immediateRender: false,
-          scrollTrigger: { trigger: el, start: () => `bottom ${100 + (el.offsetHeight - window.innerHeight) * TAIL / window.innerHeight * 100}%`, end: 'bottom 100%', scrub: true, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: el, start: 'bottom bottom', end: 'bottom 45%', scrub: 0.3 },
         });
       }, el);
     }
@@ -62,15 +62,15 @@ export function Features() {
   return (
     <section id="features" className={s.features}>
       <div className={`gg-wrap gg-grid ${s.featHeadGrid}`}>
-        <div className={s.head} data-exit>
+        <div className={s.head}>
           <ChapterMark label={FEATURES_INTRO.label} />
           <h2 className="gg-h2" data-split>{FEATURES_INTRO.title}</h2>
-          <p className={s.headLead} data-rise>{FEATURES_INTRO.lead}</p>
+          <p className={s.headLead} data-rise data-exit="dust">{FEATURES_INTRO.lead}</p>
         </div>
       </div>
       <div ref={wrapRef} className={s.featStageWrap} data-world="stage" data-world-lead="0.6"
         style={{ height: `calc(100svh + ${FEATURES.length * PER}svh)` }}>
-        <div ref={stickyRef} className={s.featSticky} data-exit-manual>
+        <div ref={stickyRef} className={s.featSticky} data-exit-manual data-pin>
           <div className={`gg-wrap gg-grid ${s.featGrid}`}>
             <ol className={s.featList} data-vine="features">
               {FEATURES.map((f, i) => (

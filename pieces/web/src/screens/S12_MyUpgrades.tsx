@@ -25,7 +25,7 @@ export default function S12_MyUpgrades() {
   const sorted = [...list].sort((a, b) => b.started_at.localeCompare(a.started_at));
 
   return (
-    <div className={s.screen}>
+    <div className={`gg-center ${s.screen}`}>
       <PageHead title="My upgrades" explain="Saved in this browser only. Keys are never saved."
         sub={list.length === 1 ? '1 upgrade started in this browser' : `${list.length} upgrades started in this browser`} />
       {!ok && <p className={s.warn}>This browser can't save your list.</p>}

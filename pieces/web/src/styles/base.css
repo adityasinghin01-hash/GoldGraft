@@ -42,6 +42,8 @@ p { text-wrap: pretty; }
   margin-inline: auto;
   padding-inline: var(--gg-margin);
 }
+/* App screens with one column of content sit on the page's centre axis (the eye lands there). */
+.gg-center { width: 100%; max-width: 880px; margin-inline: auto; }
 .gg-grid {
   display: grid;
   grid-template-columns: repeat(var(--gg-cols), minmax(0, 1fr));
@@ -162,11 +164,11 @@ p { text-wrap: pretty; }
   .gg-glass-blur { background: var(--gg-glass-bg-strong); }
 }
 
-/* ── buttons: liquid glass. Light from above, a rim, depth; a shine on hover, light where you press ── */
+/* ── buttons: liquid glass, answered in one frame ─────────────────────────────
+   Press: scale 0.97 within 70 ms. Release: a short spring back. Hover: a light overlay fades in
+   (opacity only). Shadows never animate. */
 .gg-btn {
   --h: 48px;
-  --mx: 50%;
-  --my: 50%;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -182,78 +184,45 @@ p { text-wrap: pretty; }
   letter-spacing: -0.005em;
   white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 160ms var(--gg-ease-out), box-shadow var(--gg-d-base) var(--gg-ease-out), background var(--gg-d-base) var(--gg-ease-out), color var(--gg-d-fast);
+  user-select: none;
+  transition: transform 260ms linear(0, 0.3 9%, 0.83 25%, 1.04 38%, 1.07 47%, 1.03 60%, 0.995 78%, 1), color var(--gg-d-fast);
 }
-.gg-btn::before { /* pointer light */
+.gg-btn::before { /* hover light */
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(120px 80px at var(--mx) var(--my), rgb(255 255 255 / 0.32), transparent 70%);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.04));
   opacity: 0;
-  transition: opacity var(--gg-d-base) var(--gg-ease-out);
+  transition: opacity 140ms var(--gg-ease-out);
   z-index: -1;
   pointer-events: none;
 }
 .gg-btn:hover::before { opacity: 1; }
-.gg-btn::after { /* shine sweep */
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: -60%;
-  width: 45%;
-  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.38), transparent);
-  transform: skewX(-18deg);
-  opacity: 0;
-  pointer-events: none;
-}
-.gg-btn:hover::after { animation: gg-shine 0.9s var(--gg-ease-out); }
-@keyframes gg-shine { 0% { left: -60%; opacity: 0; } 20% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
-.gg-btn:active { transform: scale(0.965) translateY(1px); }
+.gg-btn:active { transform: scale(0.97); transition-duration: 70ms; transition-timing-function: var(--gg-ease-out); }
 .gg-btn--gold {
   color: #17140e;
-  background: linear-gradient(180deg, #efe4c8 0%, #d6c7a3 42%, #c2b085 100%);
+  background: linear-gradient(180deg, #efe4c8 0%, #d6c7a3 46%, #c4b288 100%);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.75),
-    inset 0 -2px 5px rgb(110 90 50 / 0.35),
-    0 0 0 1px rgb(118 98 60 / 0.55),
-    0 10px 28px -10px rgb(205 190 156 / 0.7),
-    0 2px 6px -2px rgb(0 0 0 / 0.6);
+    inset 0 1px 0 rgb(255 255 255 / 0.7),
+    inset 0 -2px 4px rgb(110 90 50 / 0.3),
+    0 0 0 1px rgb(118 98 60 / 0.5),
+    0 8px 22px -10px rgb(205 190 156 / 0.55),
+    0 2px 5px -2px rgb(0 0 0 / 0.6);
 }
-.gg-btn--gold:hover {
-  background: linear-gradient(180deg, #f5ecd5 0%, #ddcfac 42%, #c8b68b 100%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.85),
-    inset 0 -2px 5px rgb(110 90 50 / 0.3),
-    0 0 0 1px rgb(118 98 60 / 0.6),
-    0 16px 40px -12px rgb(205 190 156 / 0.85),
-    0 2px 6px -2px rgb(0 0 0 / 0.6);
-}
-.gg-btn--gold:active { box-shadow: inset 0 2px 6px rgb(90 70 35 / 0.45), 0 0 0 1px rgb(118 98 60 / 0.6), 0 6px 16px -8px rgb(205 190 156 / 0.6); }
+.gg-btn--gold::before { background: linear-gradient(180deg, rgb(255 255 255 / 0.3), rgb(255 255 255 / 0.06)); }
 .gg-btn--ghost {
   color: var(--gg-ivory);
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.025));
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
     inset 0 0 0 1px rgb(245 243 239 / 0.12),
-    inset 0 -8px 16px -10px rgb(0 0 0 / 0.5),
-    0 8px 24px -14px rgb(0 0 0 / 0.9);
+    0 6px 18px -12px rgb(0 0 0 / 0.9);
 }
-.gg-btn--ghost::before { background: radial-gradient(120px 80px at var(--mx) var(--my), rgb(205 190 156 / 0.25), transparent 70%); }
-.gg-btn--ghost:hover { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.26), inset 0 0 0 1px rgb(205 190 156 / 0.4), inset 0 -8px 16px -10px rgb(0 0 0 / 0.5), 0 12px 30px -14px rgb(205 190 156 / 0.45); }
+.gg-btn--ghost::before { background: linear-gradient(180deg, rgb(205 190 156 / 0.16), rgb(205 190 156 / 0.04)); }
 .gg-btn--sm { --h: 38px; padding-inline: 16px; font-size: 14px; }
 .gg-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-.gg-btn:disabled::after, .gg-btn:disabled::before { display: none; }
-.gg-ripple {
-  position: absolute;
-  width: 12px; height: 12px;
-  margin: -6px 0 0 -6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(255 255 255 / 0.7), rgb(255 255 255 / 0) 70%);
-  pointer-events: none;
-  animation: gg-ripple 0.6s var(--gg-ease-out) forwards;
-  z-index: -1;
-}
-@keyframes gg-ripple { to { transform: scale(18); opacity: 0; } }
+.gg-btn:disabled::before { display: none; }
 
 /* glowing typing cursor (native caret hidden where the glow caret runs) */
 .gg-caret {

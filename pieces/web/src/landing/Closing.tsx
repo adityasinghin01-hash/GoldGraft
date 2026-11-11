@@ -11,13 +11,13 @@ export function Steps() {
   return (
     <section id="steps" className={s.steps} data-world="sapling">
       <div className={`gg-wrap gg-grid ${s.stepsGrid}`}>
-        <div className={s.head} data-exit>
+        <div className={s.head}>
           <ChapterMark label={STEPS.label} />
           <h2 className="gg-h2" data-split>{STEPS.title}</h2>
         </div>
         <ol className={s.stepList} data-vine="steps">
           {STEPS.items.map((st, i) => (
-            <li key={st.n} className={s.step} data-rise data-delay={i * 0.06} data-exit>
+            <li key={st.n} className={s.step} data-rise data-delay={i * 0.06} data-exit="dust">
               <span className={s.stepN} aria-hidden>{i + 1}</span>
               <div>
                 <h3 className={s.h3}>{st.title}</h3>
@@ -56,10 +56,10 @@ export function Faq() {
   return (
     <section id="faq" className={s.faq} data-world="canopy">
       <div className={`gg-wrap gg-grid ${s.faqGrid}`}>
-        <div className={`${s.head} ${s.faqHead}`} data-exit data-vine="faq">
+        <div className={`${s.head} ${s.faqHead}`} data-vine="faq">
           <ChapterMark label={FAQ.label} />
           <h2 className="gg-h2" data-split>{FAQ.title}</h2>
-          <p className={s.headLead} data-rise>{FAQ.lead}</p>
+          <p className={s.headLead} data-rise data-exit="dust">{FAQ.lead}</p>
         </div>
         {cols.map((items, c) => (
           <ul key={c} className={s.faqCol} data-stagger>
@@ -81,13 +81,13 @@ export function Final() {
   return (
     <section id="start" className={s.final} data-world="bloom" data-world-lead="0.4">
       <div className={`gg-wrap gg-grid ${s.finalGrid}`}>
-        <div data-exit>
+        <div>
           <h2 className={s.finalTitle}>
             <span className={s.heroA} data-split>{FINAL.title}</span>
             <span className={s.heroB} data-split>{FINAL.titleEm}</span>
           </h2>
-          <p className={`gg-lead ${s.finalLead}`} data-rise>{FINAL.lead}</p>
-          <div className={s.finalActions} data-rise data-vine="final">
+          <p className={`gg-lead ${s.finalLead}`} data-rise data-exit="dust">{FINAL.lead}</p>
+          <div className={s.finalActions} data-rise data-exit data-vine="final">
             <a href="#top" onClick={checkMyShop} className="gg-btn gg-btn--gold">{FINAL.primary} <ArrowRightIcon size={16} weight="bold" aria-hidden /></a>
             <Link to="/g/demo-1" className="gg-btn gg-btn--ghost">{FINAL.secondary}</Link>
           </div>

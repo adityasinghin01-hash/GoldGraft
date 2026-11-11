@@ -39,16 +39,16 @@ export function Problem() {
   return (
     <section id="problem" className={s.problem} data-world="dying">
       <div className={`gg-wrap gg-grid ${s.problemGrid}`}>
-        <div className={s.head} data-exit>
+        <div className={s.head}>
           <ChapterMark label={PROBLEM.label} />
           <h2 className="gg-h2" data-split>{PROBLEM.title}</h2>
-          <p className={s.headLead} data-rise>{PROBLEM.lead}</p>
+          <p className={s.headLead} data-rise data-exit="dust">{PROBLEM.lead}</p>
         </div>
         <ol className={s.pains} data-vine="pains">
           {PROBLEM.pains.map((p, i) => {
             const Icon = ICONS[i];
             return (
-              <li key={p.title} className={s.pain} data-rise data-delay={i * 0.08} data-exit>
+              <li key={p.title} className={s.pain} data-rise data-delay={i * 0.08} data-exit="dust">
                 <span className={s.painIcon} aria-hidden><Icon size={22} weight="light" /></span>
                 <div>
                   <h3 className={s.h3}>{p.title}</h3>

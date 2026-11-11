@@ -310,7 +310,7 @@ export class World {
     const dt = this.lastT < 0 ? 0.016 : Math.min(0.05, Math.max(0, t - this.lastT));
     this.lastT = t;
     if (Math.abs(this.targetPos - this.pos) > 0.0005) {
-      this.pos += (this.targetPos - this.pos) * (1 - Math.exp(-dt * 4.2));
+      this.pos += (this.targetPos - this.pos) * (1 - Math.exp(-dt * 6.5));
       this.applyPos();
     }
     const p = this.pointer;

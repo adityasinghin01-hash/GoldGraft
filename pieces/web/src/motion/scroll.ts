@@ -15,13 +15,15 @@ const listeners = new Set<(y: number) => void>();
 /** One clock for smooth scroll, ScrollTrigger and the world (Lenis drives, GSAP ticks). */
 export function startSmoothScroll(): Lenis | null {
   if (lenis || reducedMotion()) return lenis;
-  lenis = new Lenis({ lerp: 0.14, wheelMultiplier: 1.05, smoothWheel: true, syncTouch: false });
+  // a wheel step travels 0.78× the native distance and settles fast, so the page stops when the hand stops
+  lenis = new Lenis({ lerp: 0.16, wheelMultiplier: 0.78, touchMultiplier: 0.9, smoothWheel: true, syncTouch: false });
   lenis.on('scroll', () => {
     ScrollTrigger.update();
     for (const l of listeners) l(window.scrollY);
   });
   gsap.ticker.add((time) => lenis?.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
+  if (import.meta.env.DEV) Object.assign(window, { __lenis: lenis });
   return lenis;
 }
 
@@ -40,7 +42,7 @@ export function onScroll(cb: (y: number) => void): () => void {
 export function scrollToTarget(target: string | HTMLElement) {
   const el = typeof target === 'string' ? document.querySelector<HTMLElement>(target) : target;
   if (!el) return;
-  if (lenis) lenis.scrollTo(el, { offset: -72, duration: 1.3 });
+  if (lenis) lenis.scrollTo(el, { offset: -72, duration: 0.9, easing: (t) => 1 - Math.pow(1 - t, 4) });
   else el.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
 }
 

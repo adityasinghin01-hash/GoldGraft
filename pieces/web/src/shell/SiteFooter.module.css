@@ -22,6 +22,7 @@
   background: linear-gradient(90deg, transparent, rgb(232 220 190 / 0.9), transparent);
   box-shadow: 0 0 18px 2px rgb(205 190 156 / 0.45);
 }
+.footer:not([data-compact]) { margin-top: 0; }
 .footer[data-compact] { margin-top: var(--gg-s-8); padding-top: var(--gg-s-8); background: linear-gradient(180deg, rgb(30 28 22 / 0.8), rgb(13 12 9 / 0.9)); }
 .footer[data-compact] .word { font-size: clamp(4rem, 13vw, 15rem); }
 .top {

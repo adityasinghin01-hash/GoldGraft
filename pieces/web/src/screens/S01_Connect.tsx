@@ -107,7 +107,7 @@ export default function S01_Connect() {
   const reset = () => { setShop(null); setConn(null); setName(''); setRepo(''); setSite(''); setErr(null); startKey.current = ''; };
 
   return (
-    <div className={s.screen}>
+    <div className={`gg-center ${s.screen}`}>
       <PageHead title={<>Connect your shop <span className={s.count}>· {step} of 3</span></>} />
       <ol className={s.steps}>
         <li className={`gg-glass ${s.step}`} data-state={step > 1 ? 'done' : 'now'}>

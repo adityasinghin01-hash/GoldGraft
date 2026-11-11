@@ -233,7 +233,7 @@
 .faqItem[data-open] .faqA { grid-template-rows: 1fr; }
 
 /* ── 8 · Final call to action (text on cols 1–6, bloom right) ── */
-.final { min-height: 100svh; display: grid; align-items: center; padding-block: var(--gg-s-9); }
+.final { min-height: 86svh; display: grid; align-items: center; padding-block: var(--gg-s-9) var(--gg-s-7); }
 .finalGrid > * { grid-column: 1 / span 6; }
 .finalTitle { display: grid; gap: var(--gg-s-2); font-weight: 380; }
 .finalLead { margin-top: var(--gg-s-6); max-width: 26em; }

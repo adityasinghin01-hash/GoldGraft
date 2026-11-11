@@ -13,20 +13,41 @@ import h from './SiteHeader.module.css';
 import { GraftLayout } from './GraftLayout';
 import s from './AppShell.module.css';
 
-const S00 = lazy(() => import('../screens/S00_Check'));
-const S01 = lazy(() => import('../screens/S01_Connect'));
-const S02 = lazy(() => import('../screens/S02_Progress'));
-const S03 = lazy(() => import('../screens/S03_OldPieces'));
-const S04 = lazy(() => import('../screens/S04_PaymentTests'));
-const S05 = lazy(() => import('../screens/S05_Proof'));
-const S06 = lazy(() => import('../screens/S06_Certificate'));
-const S07 = lazy(() => import('../screens/S07_GoLive'));
-const S08 = lazy(() => import('../screens/S08_Recipes'));
-const S09 = lazy(() => import('../screens/S09_PayPalTeam'));
-const S10 = lazy(() => import('../screens/S10_Security'));
-const S11 = lazy(() => import('../screens/S11_Compare'));
-const S12 = lazy(() => import('../screens/S12_MyUpgrades'));
-const NotFound = lazy(() => import('../screens/NotFound'));
+// Every screen is its own chunk; prefetchScreens() loads them all in the background
+// (called while the visitor reads), so a click never waits for code.
+const load = {
+  S00: () => import('../screens/S00_Check'),
+  S01: () => import('../screens/S01_Connect'),
+  S02: () => import('../screens/S02_Progress'),
+  S03: () => import('../screens/S03_OldPieces'),
+  S04: () => import('../screens/S04_PaymentTests'),
+  S05: () => import('../screens/S05_Proof'),
+  S06: () => import('../screens/S06_Certificate'),
+  S07: () => import('../screens/S07_GoLive'),
+  S08: () => import('../screens/S08_Recipes'),
+  S09: () => import('../screens/S09_PayPalTeam'),
+  S10: () => import('../screens/S10_Security'),
+  S11: () => import('../screens/S11_Compare'),
+  S12: () => import('../screens/S12_MyUpgrades'),
+  NotFound: () => import('../screens/NotFound'),
+};
+export function prefetchScreens() {
+  for (const l of Object.values(load)) l().catch(() => {});
+}
+const S00 = lazy(load.S00);
+const S01 = lazy(load.S01);
+const S02 = lazy(load.S02);
+const S03 = lazy(load.S03);
+const S04 = lazy(load.S04);
+const S05 = lazy(load.S05);
+const S06 = lazy(load.S06);
+const S07 = lazy(load.S07);
+const S08 = lazy(load.S08);
+const S09 = lazy(load.S09);
+const S10 = lazy(load.S10);
+const S11 = lazy(load.S11);
+const S12 = lazy(load.S12);
+const NotFound = lazy(load.NotFound);
 
 const CALM = ['canopy'];
 
@@ -77,6 +98,7 @@ function FocusOnRoute() {
 function AppLayout() {
   const [waking, setWaking] = useState(false);
   useEffect(() => onWaking(setWaking), []);
+  useEffect(() => { const t = window.setTimeout(prefetchScreens, 400); return () => window.clearTimeout(t); }, []);
   return (
     <DetailsProvider>
       <WorldCanvas states={LANDING_STATES} first={CALM} calm />

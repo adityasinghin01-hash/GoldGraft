@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowClockwiseIcon, CheckIcon, CopyIcon, FlaskIcon, InfoIcon, ShieldCheckIcon, XIcon } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon, CaretRightIcon, CheckIcon, CopyIcon, FlaskIcon, InfoIcon, ShieldCheckIcon, XIcon } from '@phosphor-icons/react';
 import { H } from '../copy/words';
 import type { Tone } from '../copy/words';
 import { ApiError, type FeedStatus } from '../api/client';
@@ -143,9 +143,8 @@ export function Details({ children, label = 'Details' }: { children: ReactNode; 
   return (
     <section className={s.details} data-open={open || undefined}>
       <button className={s.detailsBtn} aria-expanded={open} aria-controls={id} onClick={() => set(!open)}>
-        <span className={s.detailsLine} aria-hidden />
-        {open ? 'Hide details' : label}
-        <span className={s.detailsLine} aria-hidden />
+        <CaretRightIcon size={14} weight="bold" className={s.detailsCaret} aria-hidden />
+        {open ? 'Hide details' : `Show ${label.toLowerCase()}`}
       </button>
       <div id={id} className={s.detailsBody} hidden={!open}>{children}</div>
     </section>

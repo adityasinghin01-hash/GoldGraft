@@ -70,7 +70,7 @@ export default function S00_Check() {
   const t = TABS[tab];
 
   return (
-    <div className={s.screen}>
+    <div className={`gg-center ${s.screen}`}>
       <PageHead title="Check your shop" sub="Upgrades old PayPal checkout, proves every payment, switches back if wrong." />
 
       <section className={`gg-glass ${s.card}`}>
