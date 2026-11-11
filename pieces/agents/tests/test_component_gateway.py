@@ -339,3 +339,109 @@ def test_reads_may_come_in_any_order_but_writes_keep_their_place():
     assert (
         pairs[0][1]["value"]["arguments"]["path"] == "b"
     )  # mismatched read is left for the binding check
+
+
+def test_inline_candidate_patch_has_a_private_map_schema_and_rejects_bad_content():
+    from pieces.backend.model_gateway.component_port import CandidatePatch, inline_schema
+
+    schema = inline_schema("candidate.patch", {"patch_ref": ("patch", "candidate_patch")})
+    assert schema["properties"]["patch"]["additionalProperties"]["type"] == "string"
+    assert "patch_ref" not in schema["properties"]
+    for value in [
+        {},
+        {"../escape.php": "bad"},
+        {"checkout.php": 7},
+        {"checkout.php": {"code": "x"}},
+    ]:
+        with pytest.raises(ValueError):
+            CandidatePatch.model_validate(value)
+
+
+def test_synthetic_collector_fault_control_is_hidden_from_the_model(tmp_path):
+    from pieces.agents.component_agents.grafter import sample
+    from pieces.backend.model_gateway.component_port import ComponentGateway
+    from pieces.backend.model_gateway.ledger import Ledger
+    from pieces.backend.model_gateway.profile import HaikuLongProfile
+    from scripts.live_component_model_eval import run_case
+
+    seen = []
+
+    class Observer:
+        def count(self, wire):
+            return 1000
+
+        def generate(self, wire):
+            seen.append(json.loads(wire["messages"][0]["content"]))
+            return {
+                "id": "msg_hidden",
+                "model": "claude-haiku-5-5",
+                "content": [
+                    {
+                        "type": "tool_use",
+                        "id": "h",
+                        "name": "report_hold",
+                        "input": {"code": "MISSING_EVIDENCE"},
+                    }
+                ],
+                "usage": {"input_tokens": 1000, "output_tokens": 50},
+            }
+
+    data = sample("candidate_patch")
+    data["collector_receipt_fault"] = "wrong_tree"
+    gateway = ComponentGateway(
+        Ledger(tmp_path / "m.sqlite"),
+        tmp_path / "k",
+        HaikuLongProfile(),
+        Observer(),
+        roles={"Grafter"},
+    )
+    run_case(
+        {"role": "Grafter", "operation": "candidate_patch", "data": data}, gateway, tmp_path, "h"
+    )
+    assert seen
+    assert "collector_receipt_fault" not in seen[0]["role_inputs"]["data"]
+    assert "wrong_tree" not in json.dumps(seen)
+
+
+def test_candidate_patch_provider_schema_is_closed_to_scoped_paths():
+    from pieces.backend.model_gateway.component_port import inline_schema
+
+    schema = inline_schema(
+        "candidate.patch",
+        {"patch_ref": ("patch", "candidate_patch")},
+        patch_paths=["src/pay.php", "keep.php"],
+    )["properties"]["patch"]
+    assert set(schema["properties"]) == {"src/pay.php", "keep.php"}
+    assert schema["additionalProperties"] is False
+    assert "propertyNames" not in schema
+
+
+def test_snapshot_transport_narrows_changelist_without_changing_public_contract():
+    from goldgraft_contracts.registry import REGISTRY
+
+    from pieces.backend.model_gateway.component_port import output_schema
+
+    schema = output_schema(["ChangeList/2"])
+    assert "oneOf" not in schema
+    assert schema["properties"]["provenance"]["const"] == "snapshot"
+    assert schema["properties"]["branch"]["type"] == "null"
+    assert schema["$defs"]["SnapshotChange"]["properties"]["commit"]["type"] == "null"
+    assert "oneOf" in REGISTRY["ChangeList/2"].model_json_schema()
+
+
+def test_orchard_fault_switch_is_hidden_without_mutating_authenticated_context():
+    from scripts.live_component_model_eval import ComponentEvaluationArtifacts
+
+    context = {
+        "role_inputs": {
+            "role": "Orchard Analyst",
+            "data": {
+                "query_ref": "catalog:upgrade-counts:1",
+                "aggregate_receipt_fault": "raw_rows",
+            },
+        }
+    }
+    boundary = object.__new__(ComponentEvaluationArtifacts)
+    result = boundary.presentation_context(context)
+    assert "aggregate_receipt_fault" not in result["role_inputs"]["data"]
+    assert context["role_inputs"]["data"]["aggregate_receipt_fault"] == "raw_rows"

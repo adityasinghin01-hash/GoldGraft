@@ -4,6 +4,22 @@ from goldgraft_contracts.agent_runtime import ExecutionProposal
 from goldgraft_contracts.plan5_common import Digest, Id, P5Record, Ref
 from pydantic import Field, StrictBool
 
+from .sentinel import same_instant
+
+
+def valid_metadata(got, want):
+    """Scoped metadata with an honest variable model label; wording is reviewed separately."""
+    who = dict(got.get("producer") or {})
+    model = who.pop("model", None)
+    return (
+        got.get("id") == want["id"]
+        and got.get("graft_id") == want["graft_id"]
+        and same_instant(got.get("created_at"), want["created_at"])
+        and who == {k: v for k, v in want["producer"].items() if k != "model"}
+        and isinstance(model, str)
+        and bool(model)
+    )
+
 
 class Catalog(P5Record):
     ref: Ref

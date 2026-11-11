@@ -3,10 +3,24 @@
 from types import SimpleNamespace
 
 from goldgraft_contracts.plan5_common import Ref, content_digest
+from goldgraft_contracts.registry import validate
 from pydantic import StrictBool
 
 from ..component import metadata
-from .execution import ExecutionInput, admission, catalog_sample, execution_calls, proposal, receipt
+from .execution import (
+    INLINE as EXECUTION_INLINE,
+)
+from .execution import (
+    ExecutionInput,
+    admission,
+    catalog_sample,
+    execution_calls,
+    execution_facts,
+    proposal,
+    receipt,
+    same_proposal,
+    valid_metadata,
+)
 
 
 class Input(ExecutionInput):
@@ -103,9 +117,9 @@ def synthesize(task, data, packet, observations):
 
 
 def review(task, data, packet, outputs, observations):
-    if outputs != synthesize(task, data, packet, observations):
-        raise ValueError("DENIED raw reuse or self promotion")
     if task.task.operation == "selfcheck_recipe":
+        if not same_proposal(outputs[0]["payload"], draft_execution(task, data)):
+            raise ValueError("DENIED independent selfcheck proposal")
         result = receipt(task, observations)
         if (
             result.get("fixture_ref") != data.independent_fixture_ref
@@ -113,12 +127,74 @@ def review(task, data, packet, outputs, observations):
         ):
             raise ValueError("MISSING_EVIDENCE independent selfcheck")
     else:
+        want = {x["schema"]: x["payload"] for x in drafts(task, data)}
+        if len(outputs) != 2 or {x["schema"] for x in outputs} != set(want):
+            raise ValueError("DENIED quarantine bundle")
+        for item in outputs:
+            got = validate(item["schema"], item["payload"]).model_dump(mode="json")
+            expected = validate(item["schema"], want[item["schema"]]).model_dump(mode="json")
+            if item["schema"] == "DetectionRule/1":
+                if not valid_metadata(got, expected):
+                    raise ValueError("DENIED detection metadata")
+                for key in ("producer", "created_at"):
+                    got.pop(key)
+                    expected.pop(key)
+            if got != expected:
+                raise ValueError("DENIED raw reuse or self promotion")
         result = observations[-1]["value"]["payload"]
         if (
             result.get("drafts") != {x["schema"]: x["payload"] for x in outputs}
             or result.get("active_promotion") is not False
         ):
             raise ValueError("DENIED quarantine stage")
+
+
+INLINE = {
+    **EXECUTION_INLINE,
+    "recipe.stage": {
+        "recipe_ref": ("recipe", "Recipe/1"),
+        "detection_rule_ref": ("detection", "DetectionRule/1"),
+    },
+}
+
+
+def route(data):
+    return "haiku8"
+
+
+def facts(task, data):
+    if task.task.operation == "selfcheck_recipe":
+        facts = execution_facts(
+            task,
+            ["ProbeResult/1"],
+            "; result.fixture_ref equals independent_fixture_ref and result.passed true",
+        )
+        facts["call_policy"] = (
+            "1) execution.request alone with inline proposal: task_id, operation, subject_ref, "
+            "recipe_ref=catalog.recipe_ref, scenario_ref:null, variant:null, "
+            "requested_output_schemas:['ProbeResult/1'], expected_subject, evidence_refs. "
+            "2) execution.status(request_id). 3) submit the same proposal only if receipt_rule "
+            "holds, else report_hold. The independent fixture must differ from origin. "
+            "A selfcheck never promotes a recipe."
+        )
+        return facts
+    return {
+        "quarantine_id": "quarantine-" + content_digest(data.template_id)[:16],
+        "shape_digest": content_digest("pending-capture"),
+        "provenance_refs": list(task.task.input_refs),
+        "guard_id": "guard-captured-before-paid",
+        "call_policy": "Submit only consented deidentified template metadata. Call recipe.stage "
+        "alone with inline recipe (Recipe/1) and detection (DetectionRule/1). Closed template "
+        "catalog: lang php, framework fixture, family EC_NVP, ast_shape_hash=shape_digest; "
+        "recipe id=quarantine_id, transform=template_id, env:null, scenarios:[guard_id], "
+        "provenance=provenance_refs, confidence:0, status:QUARANTINE, "
+        "signature:'UNSIGNED_SYNTHETIC_QUARANTINE' (a label, not a signature claim). "
+        "Detection uses reference_metadata, language:php, pattern:'literal:legacy_capture', "
+        "operation:capture, evidence_refs:provenance_refs. Stage receipt must say "
+        "active_promotion:false, else hold. Finally submit outputs bundle containing those "
+        "same two payloads from the returned drafts. Never add raw source, new tenants, "
+        "ACTIVE status, a signature claim or independent proof.",
+    }
 
 
 def inspect(outputs):

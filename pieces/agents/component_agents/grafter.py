@@ -1,12 +1,16 @@
 """Sole isolated candidate writer; no host writes or self-approved success."""
 
+import re
+from typing import Literal
+
+from goldgraft_contracts.agents import ChangeListV2
 from goldgraft_contracts.plan5_common import Digest, P5Record, Ref, RelativePath, content_digest
 from goldgraft_contracts.survey import TargetPlan
 from pydantic import Field, StrictBool
 
 from ..component import metadata
 from .architect import sample as architect_sample
-from .execution import Catalog
+from .execution import Catalog, valid_metadata
 
 
 class Input(P5Record):
@@ -23,6 +27,7 @@ class Input(P5Record):
     repair_round: int = Field(ge=0, le=2, strict=True)
     failure_fingerprint: Digest | None
     previous_failure_fingerprint: Digest | None
+    collector_receipt_fault: Literal["none", "wrong_tree", "missing_snapshot"] = "none"
 
 
 def admit(task, data):
@@ -49,6 +54,8 @@ def admit(task, data):
         raise ValueError("MISSING_EVIDENCE installed symbol")
     if not data.target_plan.items or any(not i.paypal_only for i in data.target_plan.items):
         raise ValueError("DENIED plan scope")
+    if any(i.target_op not in data.catalog.installed_symbols for i in data.target_plan.items):
+        raise ValueError("MISSING_EVIDENCE installed plan operation")
     if data.repair_round and (
         data.failure_fingerprint is None
         or data.failure_fingerprint == data.previous_failure_fingerprint
@@ -91,6 +98,8 @@ def requests(task, data):
 
 def synthesize(task, data, packet, observations):
     receipt = observations[-1]["value"]["payload"]
+    if not receipt.get("snapshot_ref"):
+        raise ValueError("MISSING_EVIDENCE collector snapshot")
     value = metadata(task, packet)
     value.update(
         provenance="snapshot",
@@ -113,12 +122,62 @@ def synthesize(task, data, packet, observations):
 def review(task, data, packet, outputs, observations):
     receipt = observations[-1]["value"]["payload"]
     files = {**data.files, **data.replacements}
+    want = (
+        synthesize(task, data, packet, observations)[0]["payload"]
+        if receipt.get("snapshot_ref")
+        else {}
+    )
+    got = ChangeListV2.model_validate(outputs[0]["payload"]).model_dump(mode="json")
     if (
         receipt.get("tree") != content_digest(files)
         or receipt.get("synthetic_only") is not True
-        or outputs != synthesize(task, data, packet, observations)
+        or not receipt.get("snapshot_ref")
+        or receipt.get("patch_digest") != content_digest(data.replacements)
+        or not valid_metadata(got, want)
+        or any(
+            got[k] != want[k]
+            for k in (
+                "provenance",
+                "branch",
+                "baseline_snapshot_ref",
+                "candidate_snapshot_ref",
+                "patch_digest",
+                "open_item_ids",
+            )
+        )
+        or len(got["changes"]) != 1
+        or got["changes"][0]["commit"] is not None
+        or sorted(got["changes"][0]["plan_item_ids"]) != sorted(want["changes"][0]["plan_item_ids"])
+        or not 1 <= len(got["changes"][0]["summary"]) <= 400
+        or re.search(r"\b(deployed|published|verified)\b", got["changes"][0]["summary"], re.I)
     ):
         raise ValueError("DENIED collector patch/snapshot lineage")
+
+
+INLINE = {"candidate.patch": {"patch_ref": ("patch", "candidate_patch")}}
+PROGRESS = True
+
+
+def route(data):
+    return "sonnet" if len(data.files) >= 4 else "haiku8"
+
+
+def facts(task, data):
+    return {
+        "max_bytes": 4096,
+        "call_policy": "Read every source file and dependency.inspect using the catalog's "
+        "recipe_ref, package, version. Follow unread_reads; max four reads per response. "
+        "Then call candidate.patch alone with workspace_ref, expected_tree and the exact "
+        "replacements map inline as patch. Never mint patch_ref. Accept only a synthetic "
+        "collector receipt with a snapshot_ref, patch_digest, and tree matching its manifest "
+        "source_tree_digest; otherwise report_hold. Copy receipt snapshot_ref and patch_digest "
+        "into ChangeList/2, use snapshot provenance, null branch/commits, baseline=source_ref, "
+        "one change covering every target_plan touchpoint, open_item_ids empty. Use the "
+        "plan_item_ids from target_plan.items[].touchpoint (never mapping_id). Use the "
+        "reference_metadata. Summarize only isolated payment edits; independent build/proof "
+        "remains required. Literal wording guard: avoid deployed, published and verified. "
+        "No baseline writes, test edits, live host changes or claims of proof.",
+    }
 
 
 def inspect(outputs):

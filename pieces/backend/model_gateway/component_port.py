@@ -8,9 +8,15 @@ swaps the role-specific wire and normalization. The Surveyor broker is untouched
 from datetime import UTC, datetime
 
 from goldgraft_contracts.agent_runtime import ModelTurnResult, ToolCall
-from goldgraft_contracts.plan5_common import canonical_bytes, content_digest, reject_secret
+from goldgraft_contracts.plan5_common import (
+    RelativePath,
+    canonical_bytes,
+    content_digest,
+    reject_secret,
+)
 from goldgraft_contracts.plan5_tools import TOOL_CATALOG, validate_tool_arguments
 from goldgraft_contracts.registry import REGISTRY, validate
+from pydantic import Field, RootModel, StrictStr
 
 from .broker import MAX_CALLS_PER_RESPONSE, Gateway, ModelPort, issue
 
@@ -51,7 +57,16 @@ class ComponentGateway(Gateway):
 
 def output_schema(schemas):
     if len(schemas) == 1:
-        return REGISTRY[schemas[0]].model_json_schema()
+        schema = REGISTRY[schemas[0]].model_json_schema()
+        if schemas == ["ChangeList/2"]:
+            # This synthetic profile admits snapshot provenance only. Project
+            # that supported branch for the provider; the public contract and
+            # its full validator (including Git custody) are unchanged.
+            schema.pop("oneOf", None)
+            schema["properties"]["provenance"] = {"type": "string", "const": "snapshot"}
+            schema["properties"]["branch"] = {"type": "null"}
+            schema["$defs"]["SnapshotChange"]["properties"]["commit"] = {"type": "null"}
+        return schema
     defs, variants = {}, []
     for sid in schemas:  # typed bundle members, so a model sees each payload's fields
         content = REGISTRY[sid].model_json_schema()
@@ -108,11 +123,26 @@ def closed_shape(block, names):
     return shape
 
 
-def inline_schema(tool, fields):
+class CandidatePatch(RootModel[dict[RelativePath, StrictStr]]):
+    """Private model transport shape, not a shared record or new public API."""
+
+    root: dict[RelativePath, StrictStr] = Field(min_length=1, max_length=4)
+
+
+def inline_schema(tool, fields, *, patch_paths=None):
     """Tool argument schema with each staged *_ref replaced by its inline content schema."""
     schema = TOOL_CATALOG[tool].arguments.model_json_schema()
     for ref_field, (name, schema_id) in fields.items():
-        content = REGISTRY[schema_id].model_json_schema()
+        model = CandidatePatch if schema_id == "candidate_patch" else REGISTRY[schema_id]
+        content = model.model_json_schema()
+        if schema_id == "candidate_patch" and patch_paths is not None:
+            # The provider accepts a closed task-scoped object. Local validation
+            # still enforces RelativePath, string values and 1–4 entries.
+            content = {
+                "type": "object",
+                "properties": {p: {"type": "string"} for p in sorted(patch_paths)},
+                "additionalProperties": False,
+            }
         schema.setdefault("$defs", {}).update(content.pop("$defs", {}))
         schema["properties"].pop(ref_field, None)
         schema["properties"][name] = content
@@ -139,7 +169,10 @@ class ComponentModelPort(ModelPort):
             if name not in given or ref_field in given:
                 raise ValueError("INVALID inline staged content")
             content = given.pop(name)
-            validate(schema_id, content)
+            if schema_id == "candidate_patch":
+                CandidatePatch.model_validate(content)
+            else:
+                validate(schema_id, content)
             given[ref_field] = self.boundary.stage(content)
         return dict(block, input=given)
 
@@ -186,7 +219,11 @@ class ComponentModelPort(ModelPort):
                     if tool in inline
                     else ""
                 ),
-                "input_schema": inline_schema(tool, inline.get(tool, {})),
+                "input_schema": inline_schema(
+                    tool,
+                    inline.get(tool, {}),
+                    patch_paths=context.get("role_inputs", {}).get("data", {}).get("allowed_paths"),
+                ),
             }
             for tool in request.allowed_tool_ids
         ]
@@ -224,6 +261,9 @@ class ComponentModelPort(ModelPort):
             tool_progress=progress,
             reference_metadata=self.boundary.reference_metadata(request),
         )
+        presentation = getattr(self.boundary, "presentation_context", None)
+        if presentation is not None:
+            message = presentation(message)
         facts = getattr(self.boundary, "call_facts", None)
         if facts is not None:
             message["call_facts"] = facts(request)

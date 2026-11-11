@@ -190,3 +190,22 @@ For B6 across the two installed applications, use
 [the Codex frontend coordinator prompt](CODEX_TWO_ANTIGRAVITY_FRONTEND_COORDINATOR_PROMPT.txt);
 it keeps one frontend folder and exclusive file ownership. The prompt is prepared;
 no Antigravity chat was submitted or frontend implementation started here.
+
+
+11 November 2026 — Scribe real-model close-out is HELD. Fresh regression: 862 passed; lint/format/diff clean; free haiku8 dry run 11/11 including four hostile $0 holds. Existing g0/g1 plus five completed g2 runs audit clean (19/19 completed, 19/28 requested final runs completed). The inherited intended turn in `ag-scribe-sc-three-rules-g2` blocks all further paid work; no paid calls or live-ledger mutations in this session. Scribe recorded spend $0.110597, project $1.913525 with $0.024718 reserved. Architect through Orchard Analyst and combined run remain pending. See [Scribe partial card](SCRIBE_AI_TEST_REPORT_2026-11-11.md) and private `CODEX_OUT.md`; no production acceptance.
+
+11 November 2026 — Scribe close-out completed after Aditya-approved reconciliation of the never-submitted g2 turn. Final Haiku8 series 28/28, audit 28/28, hostile 4/4 $0, 862 offline tests. g2r replaces the interrupted g2 three-rule case; original batch not replayed. Scribe $0.124970, project $1.927898, no unresolved turns or reservations. [Scribe card](SCRIBE_AI_TEST_REPORT_2026-11-11.md). Architect is next.
+
+11 November 2026 — Architect: 27/28 real-model final, audit 27/28, hostile 3/3 $0; $0.666534/$1.00. Synthetic component scope only; limits and exact checks in [Architect card](ARCHITECT_AI_TEST_REPORT_2026-11-11.md). Project $2.594432, zero unresolved turns/reservations.
+
+11 November 2026 — Grafter: 24/29 real-model final, audit 24/29, hostile 3/3 $0; $0.096823/$1.60. Synthetic component scope only; limits and exact checks in [Grafter card](GRAFTER_AI_TEST_REPORT_2026-11-11.md). Project $2.691255, zero unresolved turns/reservations.
+
+11 November 2026 — Adversary: 28/28 real-model final, audit 28/28, hostile 3/3 $0; $0.454404/$1.20. Synthetic component scope only; limits and exact checks in [Adversary card](ADVERSARY_AI_TEST_REPORT_2026-11-11.md). Project $3.145659, zero unresolved turns/reservations.
+
+11 November 2026 — Healer: 24/24 real-model final, audit 24/24, hostile 3/3 $0; $0.048457/$0.60. Synthetic component scope only; limits and exact checks in [Healer card](HEALER_AI_TEST_REPORT_2026-11-11.md). Project $3.194116, zero unresolved turns/reservations.
+
+11 November 2026 — Librarian: 23/24 real-model final, audit 23/24, hostile 3/3 $0; $0.050198/$0.40. Synthetic component scope only; limits and exact checks in [Librarian card](LIBRARIAN_AI_TEST_REPORT_2026-11-11.md). Project $3.244314, zero unresolved turns/reservations.
+
+11 November 2026 — Orchard Analyst: 20/20 real-model final, audit 20/20, hostile 3/3 $0; $0.018869/$0.50. Synthetic component scope only; limits and exact checks in [Orchard Analyst card](ORCHARD_ANALYST_AI_TEST_REPORT_2026-11-11.md). Project $3.263183, zero unresolved turns/reservations.
+
+11 November 2026 — Sequential real-model evaluation complete for all13 roles; final combined sample13/13, actual Surveyor→Herald artifact handoff plus eleven independent representative component jobs. Final regression886 passed; lint/format/diff green. Combined audit13 batches/33 signed turns and graph/artifact reopen passed. Project spend$3.353287/$10, no reservations/unknowns. Per-role failures, Grafter four-file limit and case/route selection decisions remain explicit in [final agents report](FINAL_AGENTS_REPORT_2026-11-11.md). No full delivery graph, production/provider/payment/exit or broader60-run acceptance claim. Claude owns verification/commits/pushes.
