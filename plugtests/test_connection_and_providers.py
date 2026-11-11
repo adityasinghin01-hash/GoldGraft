@@ -190,3 +190,54 @@ def test_artifact_build_and_providers(tmp_path):
         artifact.artifact_id, "registry.local/image", b"docker_image_bytes"
     )
     assert pub_rcpt.publish_id.startswith("pub-")
+
+
+def test_upload_limits_retry_and_interrupted_assembly(tmp_path):
+    import hashlib
+
+    database = tmp_path / "uploads.sqlite3"
+    upload = UploadSessionManager(max_size_bytes=5, database=database)
+    digest = hashlib.sha256(b"abcde").hexdigest()
+    session = upload.create_session("case-1", "file", 2, digest)
+    sid = session.session_id
+    first = upload.add_chunk(sid, 0, b"abc")
+    assert upload.create_session("case-1", "file", 2, digest).session_id == sid
+    assert upload.add_chunk(sid, 0, b"abc") == first
+    with pytest.raises(ValueError, match="retry"):
+        upload.add_chunk(sid, 0, b"bad")
+    with pytest.raises(ValueError, match="Missing chunks"):
+        upload.finalize_session(sid)
+    with pytest.raises(ValueError, match="index"):
+        upload.add_chunk(sid, 2, b"x")
+    with pytest.raises(ValueError, match="size limit"):
+        upload.add_chunk(sid, 1, b"toolong")
+    upload.close()
+    upload = UploadSessionManager(max_size_bytes=5, database=database)
+    assert upload.create_session("case-1", "file", 2, digest).received_chunks[0] == first
+    upload.add_chunk(sid, 1, b"de")
+    assert upload.finalize_session(sid) == b"abcde"
+    assert upload.finalize_session(sid) == b"abcde"
+    with pytest.raises(ValueError, match="not active"):
+        upload.add_chunk(sid, 0, b"abc")
+    upload.close()
+
+
+def test_unknown_effect_survives_restart_without_resetting_intent(tmp_path):
+    database = tmp_path / "effects.sqlite3"
+    args = ("case-1", "PUBLISH_PR", "github.com/org/repo", "request-1")
+    first = EffectManager(database=database)
+    intent = first.allocate_slot(*args)
+    first.mark_unknown(intent.slot_id, "Request timed out")
+    first.close()
+
+    resumed = EffectManager(database=database)
+    unknown = resumed.allocate_slot(*args)
+    assert unknown.slot_id == intent.slot_id and unknown.status == EffectStatus.UNKNOWN
+    assert unknown.reconciliation_note == "Request timed out"
+    with pytest.raises(ValueError, match="reconciliation note"):
+        resumed.record_execution(unknown.slot_id, success=True)
+    completed = resumed.record_execution(unknown.slot_id, success=True, note="PR receipt read")
+    assert completed.status == EffectStatus.EXECUTED
+    with pytest.raises(ValueError, match="terminal effect"):
+        resumed.mark_unknown(completed.slot_id, "Old retry")
+    resumed.close()

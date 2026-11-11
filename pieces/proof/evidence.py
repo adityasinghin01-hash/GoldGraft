@@ -61,10 +61,10 @@ def capture_evidence(events: Sequence[MoneyEvent]) -> list[PayPalEvidence]:
 def refetch_capture(client: PayPalClient, row: PayPalEvidence, event: MoneyEvent) -> bool:
     if not PAYPAL_ID.fullmatch(row.order_id) or not PAYPAL_ID.fullmatch(row.capture_id):
         return False
-    order_status, order = client.rest("GET", f"/v2/checkout/orders/{row.order_id}")
-    if order_status != 200 or not isinstance(order, Mapping) or order.get("id") != row.order_id:
-        return False
     try:
+        order_status, order = client.rest("GET", f"/v2/checkout/orders/{row.order_id}")
+        if order_status != 200 or not isinstance(order, Mapping) or order.get("id") != row.order_id:
+            return False
         order_captures = [
             capture
             for unit in order["purchase_units"]
@@ -85,7 +85,7 @@ def refetch_capture(client: PayPalClient, row: PayPalEvidence, event: MoneyEvent
                 return False
         related = capture.get("supplementary_data", {}).get("related_ids", {})
         return related.get("order_id", row.order_id) == row.order_id
-    except (AttributeError, KeyError, InvalidOperation, TypeError, ValueError):
+    except (AttributeError, KeyError, InvalidOperation, OSError, TypeError, ValueError):
         return False
 
 
@@ -100,6 +100,27 @@ def archived_evidence(ledger: Ledger, graft_id: str, root: str):
     return events, verdicts
 
 
+def _payment_witnesses(
+    events: Sequence[MoneyEvent], verdicts: Mapping[str, Verdict]
+) -> list[tuple[PayPalEvidence, MoneyEvent]]:
+    # Check conflicting ledger observations before filtering by verdict.
+    capture_evidence(events)
+    passing = {
+        scenario for scenario, verdict in verdicts.items()
+        if verdict.grade in {Grade.PASS, Grade.PASS_FIXED}
+    }
+    eligible = [event for event in events if event.scenario_id in passing]
+    rows = capture_evidence(eligible)
+    by_key = {}
+    for event in eligible:
+        for row in capture_evidence((event,)):
+            by_key[row.scenario, row.order_id, row.capture_id, row.debug_id] = event
+    return [
+        (row, by_key[row.scenario, row.order_id, row.capture_id, row.debug_id])
+        for row in rows
+    ]
+
+
 def verify_certificate_evidence(
     certificate: Certificate,
     *,
@@ -110,43 +131,26 @@ def verify_certificate_evidence(
     workflow_sha: str,
     cosign: str = "cosign",
 ) -> CertificateVerifyResult:
-    archive: Mapping[tuple[str, str, str, str], MoneyEvent] = {}
+    witnesses: list[tuple[PayPalEvidence, MoneyEvent]] = []
 
     def check_ledger(cert: Certificate, _payload: bytes) -> bool:
-        nonlocal archive
+        nonlocal witnesses
         try:
             events, verdicts = archived_evidence(ledger, graft_id, cert.ledger_root)
+            if cert.results.model_dump(by_alias=True) != verdict_counts(list(verdicts.values())):
+                return False
+            expected = _payment_witnesses(events, verdicts)
         except ValueError:
             return False
-        if cert.results.model_dump(by_alias=True) != verdict_counts(list(verdicts.values())):
+        if not expected or cert.paypal_evidence != [row for row, _ in expected]:
             return False
-        try:
-            capture_evidence(events)
-        except ValueError:
-            return False
-        archived = {}
-        for event in events:
-            verdict = verdicts.get(event.scenario_id)
-            if verdict is None or verdict.grade not in {Grade.PASS, Grade.PASS_FIXED}:
-                continue
-            for row in capture_evidence((event,)):
-                key = row.scenario, row.order_id, row.capture_id, row.debug_id
-                if key in archived and archived[key].money != event.money:
-                    return False
-                archived[key] = event
-        archive = archived
+        witnesses = expected
         return True
 
-    def check_paypal(cert: Certificate, _payload: bytes) -> bool:
-        if not cert.paypal_evidence:
-            return False
-        rows = {
-            (row.scenario, row.order_id, row.capture_id, row.debug_id): row
-            for row in cert.paypal_evidence
-        }
-        if len(rows) != len(cert.paypal_evidence) or not rows.keys() <= archive.keys():
-            return False
-        return all(refetch_capture(paypal, row, archive[key]) for key, row in rows.items())
+    def check_paypal(_cert: Certificate, _payload: bytes) -> bool:
+        return bool(witnesses) and all(
+            refetch_capture(paypal, row, event) for row, event in witnesses
+        )
 
     return verify_signed_certificate(
         certificate,
@@ -167,6 +171,7 @@ def issue_certificate_from_ledger(
     scenarios: Sequence[Scenario],
     verdicts: Sequence[Verdict],
     smoke_verdicts: Sequence[Verdict],
+    paypal: PayPalClient,
     strength: ProofStrength,
     dependencies_allowlisted: bool,
     signer: RunnerSigner,
@@ -185,13 +190,12 @@ def issue_certificate_from_ledger(
     events, archived_verdicts = archived_evidence(ledger, graft_id, root)
     if archived_verdicts != {verdict.scenario_id: verdict for verdict in verdicts}:
         raise ValueError("Certificate verdicts must match the audited ledger")
-    capture_evidence(events)
-    passing = {
-        verdict.scenario_id
-        for verdict in verdicts
-        if verdict.grade in {Grade.PASS, Grade.PASS_FIXED}
-    }
-    rows = capture_evidence([event for event in events if event.scenario_id in passing])
+    witnesses = _payment_witnesses(events, archived_verdicts)
+    if not witnesses or not all(refetch_capture(paypal, row, event) for row, event in witnesses):
+        raise ValueError(
+            "Certificate requires successful PayPal re-fetch for all payment witnesses"
+        )
+    rows = [row for row, _ in witnesses]
     return issue_certificate(
         {**metadata, "ledger_root": root, "paypal_evidence": rows},
         contract=contract,

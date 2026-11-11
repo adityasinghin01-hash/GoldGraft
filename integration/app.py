@@ -2,16 +2,21 @@
 
 from pathlib import Path
 
+from integration.evidence_api import mount_evidence_routes
 from integration.service import FixtureRun
 from pieces.backend.app import create_app as backend_app
 from pieces.proof.proof import Proof
 
 
-def create_app(*, service=None):
+def create_app(*, service=None, evidence_authorize=None, evidence_loader=None):
     from fastapi.responses import JSONResponse
 
     service = service if service is not None else FixtureRun(Path(".goldgraft/pushed-integration"))
     app = backend_app(proof=Proof(), views=service)
+    if (evidence_authorize is None) != (evidence_loader is None):
+        raise ValueError("Evidence routes require both an authorizer and an authenticated loader")
+    if evidence_authorize is not None:
+        mount_evidence_routes(app, authorize=evidence_authorize, load_evidence=evidence_loader)
 
     @app.middleware("http")
     async def offline_boundary(request, call_next):
