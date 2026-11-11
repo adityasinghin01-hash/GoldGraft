@@ -121,3 +121,32 @@ def test_forged_child_lineage_is_not_accepted(tmp_path, fault):
 
     p.artifacts.stage_outputs = forged
     assert tick(p.run_ref, NOW, p).completed == 0
+
+
+def test_grafter_model_metadata_and_grounded_summary_are_accepted(tmp_path):
+    p = create("Grafter", tmp_path / "g.sqlite", clock=lambda: NOW)
+    original = p.model.renderer
+
+    def explained(*args):
+        v = original(*args)
+        v["producer"]["model"] = "qualified-synthetic-model"
+        v["changes"][0]["summary"] = "Isolated payment patch; independent build/proof required."
+        return v
+
+    p.model.renderer = explained
+    assert tick(p.run_ref, NOW, p).completed == 1
+
+
+def test_grafter_cannot_accept_uninstalled_plan_operation(tmp_path):
+    d = sample("candidate_patch")
+    d["target_plan"]["items"][0]["target_op"] = "invented_symbol"
+    p = create("Grafter", tmp_path / "g.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0
+
+
+@pytest.mark.parametrize("fault", ["wrong_tree", "missing_snapshot"])
+def test_grafter_faulty_collector_receipt_is_held(tmp_path, fault):
+    d = sample("candidate_patch")
+    d["collector_receipt_fault"] = fault
+    p = create("Grafter", tmp_path / "g.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0

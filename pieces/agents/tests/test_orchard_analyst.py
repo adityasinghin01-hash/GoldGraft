@@ -51,3 +51,34 @@ def test_orchard_dashboard_cannot_widen_scope(tmp_path, fault):
 
     p.model.renderer = bad
     assert tick(p.run_ref, NOW, p).completed == 0
+
+
+def test_orchard_accepts_grounded_aggregate_wording(tmp_path):
+    p = create("Orchard Analyst", tmp_path / "o.sqlite", clock=lambda: NOW)
+    original = p.model.renderer
+
+    def phrased(*args):
+        v = original(*args)
+        v["producer"]["model"] = "qualified-model"
+        v["title"] = "Authorised stage counts"
+        v["question"] = "How many synthetic cases remain unverified by stage?"
+        return v
+
+    p.model.renderer = phrased
+    assert tick(p.run_ref, NOW, p).completed == 1
+
+
+def test_orchard_duplicate_aggregate_stage_is_refused(tmp_path):
+    d = sample("aggregate")
+    d["buckets"] *= 2
+    p = create("Orchard Analyst", tmp_path / "o.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0
+    assert p.model.total_dispatches() == 0
+
+
+@pytest.mark.parametrize("fault", ["wrong_tenant", "raw_rows"])
+def test_orchard_observed_acl_fault_is_held(tmp_path, fault):
+    d = sample("aggregate")
+    d["aggregate_receipt_fault"] = fault
+    p = create("Orchard Analyst", tmp_path / "o.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0

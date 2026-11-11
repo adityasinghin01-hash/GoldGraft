@@ -1,5 +1,58 @@
 # Local construction status — 11 November 2026
 
+**Latest ownership correction:** Claude is frontend-only. Codex owns all remaining
+non-frontend components, testing, integration, review, commits/pushes on main and
+operating handoff. Teammates' existing work is reused; their old ownership is not
+an implementation blocker. Phase 0 now passes for zero-cost implementation;
+paid model/provider dispatch remains gated on actual-context sizing, unchanged
+envelopes and the required scope. The earlier blocked report is retained below
+as history; this sequencing correction changes no test labels or denominators.
+
+**Current status after GitHub audit, 11 November 2026:** all 13 roles have
+completed the sequential real-model evaluation scope. The combined synthetic
+sample passed **13/13**; only Surveyor→Herald was a connected graph, followed by
+eleven independent component jobs. The full role-to-role delivery path and live
+service qualification remain incomplete. See the
+[final evaluation report](FINAL_AGENTS_REPORT_2026-11-11.md).
+
+The remaining work is specified in the
+[strict end-to-end execution plan](ALL_AGENTS_END_TO_END_EXECUTION_PLAN_2026-11-11.md):
+phases 0–10, all non-frontend integrations, role ceilings, sponsor tools,
+independent acceptance and handoff. **Phase 0 is PASS for zero-cost implementation;
+new paid dispatch remains HELD for actual-context sizing**. The
+[Phase 0 report](phase_evidence/PHASE_0_2026-11-11.md) records
+the frozen 20-case/60-run specification, 13-role/16-tool/23-route inventory,
+clean scratch merge preflight and fresh baseline **2873 passed / 18 skipped**.
+An additional pinned-environment SDK check passed **32/32**. Actual backend
+registers **0/23 v2 service routes**; paid scope needs actual-context cost sizing
+under unchanged envelopes. Aditya subsequently instructed work directly on
+**main**: the active build now uses main, with incoming GitHub main merged
+without commit. The two obsolete integration branches are deleted locally and
+on GitHub; original dirty files and old checkout folders are preserved. Source
+integration is no longer a workspace blocker. Codex now owns final commit/push.
+See [workspace evidence](phase_evidence/MAIN_WORKSPACE_CHANGE_2026-11-11.json).
+No new model/provider call or spend occurred. The previous 13/13 sample does
+not satisfy these new gates. Report to Aditya after each phase, as requested.
+
+| Workstream | Done and remaining |
+|---|---|
+| Agents / Codex | Real-model evidence for all 13 roles; final affected regression 886 passed; recorded spend $3.353287/$10 at evaluation close. Next: actual counterpart integration, full graph fault/restart/authority testing and operating handoff. |
+| Backend and runner / Codex, reusing Gupta groundwork | PR #11 merged. Complete actual resource verification, isolated execution, authentic callbacks, build/publish/deploy, upload bounds and state/recovery. Review PR #12 before duplicating its upload/effect/dry-run fixes. |
+| Proof and domain / Codex, reusing Singhal/Vijay groundwork | Fixture proof/replay, lifecycle checks, summary and signing exist. Complete authenticated service integration, actual domain/payment evidence, certificate verification and access-controlled retrieval. Review PR #12's proof changes; no teammate handover blocks implementation. |
+| Frontend / Claude | Aditya's current ownership assignment; frontend completion was not assessed in this audit. |
+
+Audit pinned GitHub `main` at `aee298f31b13a6a6c76d28845b43763b948add7b`.
+Main CI is green; fresh offline plugtests passed **177**, with **1 skipped** for
+missing local PHP. No live payment/deployment was performed. See the
+[audit and owner checklist](TEAM_GITHUB_AUDIT_2026-11-11.md) for evidence and
+acceptance requirements. Codex's agent implementation is already committed by
+Claude locally at `c9f9ee9`; this documentation update is uncommitted.
+
+## Historical construction snapshots
+
+The entries below retain their original revisions, budgets, blockers and next
+steps as dated evidence. They do not override the current status above.
+
 Workspace: `/Users/aditya/dev/GoldGraft-plan5-build`; base
 `0365c5e1adcb1875a7f72c99dc7c63631501e131`; branch `plan5-build-20261110`.
 No new commit was made. Frontend coordination revision: **2**.
@@ -190,3 +243,22 @@ For B6 across the two installed applications, use
 [the Codex frontend coordinator prompt](CODEX_TWO_ANTIGRAVITY_FRONTEND_COORDINATOR_PROMPT.txt);
 it keeps one frontend folder and exclusive file ownership. The prompt is prepared;
 no Antigravity chat was submitted or frontend implementation started here.
+
+
+11 November 2026 — Scribe real-model close-out is HELD. Fresh regression: 862 passed; lint/format/diff clean; free haiku8 dry run 11/11 including four hostile $0 holds. Existing g0/g1 plus five completed g2 runs audit clean (19/19 completed, 19/28 requested final runs completed). The inherited intended turn in `ag-scribe-sc-three-rules-g2` blocks all further paid work; no paid calls or live-ledger mutations in this session. Scribe recorded spend $0.110597, project $1.913525 with $0.024718 reserved. Architect through Orchard Analyst and combined run remain pending. See [Scribe partial card](SCRIBE_AI_TEST_REPORT_2026-11-11.md) and private `CODEX_OUT.md`; no production acceptance.
+
+11 November 2026 — Scribe close-out completed after Aditya-approved reconciliation of the never-submitted g2 turn. Final Haiku8 series 28/28, audit 28/28, hostile 4/4 $0, 862 offline tests. g2r replaces the interrupted g2 three-rule case; original batch not replayed. Scribe $0.124970, project $1.927898, no unresolved turns or reservations. [Scribe card](SCRIBE_AI_TEST_REPORT_2026-11-11.md). Architect is next.
+
+11 November 2026 — Architect: 27/28 real-model final, audit 27/28, hostile 3/3 $0; $0.666534/$1.00. Synthetic component scope only; limits and exact checks in [Architect card](ARCHITECT_AI_TEST_REPORT_2026-11-11.md). Project $2.594432, zero unresolved turns/reservations.
+
+11 November 2026 — Grafter: 24/29 real-model final, audit 24/29, hostile 3/3 $0; $0.096823/$1.60. Synthetic component scope only; limits and exact checks in [Grafter card](GRAFTER_AI_TEST_REPORT_2026-11-11.md). Project $2.691255, zero unresolved turns/reservations.
+
+11 November 2026 — Adversary: 28/28 real-model final, audit 28/28, hostile 3/3 $0; $0.454404/$1.20. Synthetic component scope only; limits and exact checks in [Adversary card](ADVERSARY_AI_TEST_REPORT_2026-11-11.md). Project $3.145659, zero unresolved turns/reservations.
+
+11 November 2026 — Healer: 24/24 real-model final, audit 24/24, hostile 3/3 $0; $0.048457/$0.60. Synthetic component scope only; limits and exact checks in [Healer card](HEALER_AI_TEST_REPORT_2026-11-11.md). Project $3.194116, zero unresolved turns/reservations.
+
+11 November 2026 — Librarian: 23/24 real-model final, audit 23/24, hostile 3/3 $0; $0.050198/$0.40. Synthetic component scope only; limits and exact checks in [Librarian card](LIBRARIAN_AI_TEST_REPORT_2026-11-11.md). Project $3.244314, zero unresolved turns/reservations.
+
+11 November 2026 — Orchard Analyst: 20/20 real-model final, audit 20/20, hostile 3/3 $0; $0.018869/$0.50. Synthetic component scope only; limits and exact checks in [Orchard Analyst card](ORCHARD_ANALYST_AI_TEST_REPORT_2026-11-11.md). Project $3.263183, zero unresolved turns/reservations.
+
+11 November 2026 — Sequential real-model evaluation complete for all13 roles; final combined sample13/13, actual Surveyor→Herald artifact handoff plus eleven independent representative component jobs. Final regression886 passed; lint/format/diff green. Combined audit13 batches/33 signed turns and graph/artifact reopen passed. Project spend$3.353287/$10, no reservations/unknowns. Per-role failures, Grafter four-file limit and case/route selection decisions remain explicit in [final agents report](FINAL_AGENTS_REPORT_2026-11-11.md). No full delivery graph, production/provider/payment/exit or broader60-run acceptance claim. Claude owns verification/commits/pushes.

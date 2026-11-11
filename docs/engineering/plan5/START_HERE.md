@@ -1,5 +1,13 @@
 # Plan5 construction specification
 
+> **Current next plan, 11 November 2026:**
+> [All 13 agents, integrations and handoff](ALL_AGENTS_END_TO_END_EXECUTION_PLAN_2026-11-11.md)
+> is the strict remaining non-frontend execution sequence. Existing real-model
+> evaluation is complete within its reported scope; the full service graph and
+> live qualification remain open. Claude owns frontend only; Codex owns all
+> non-frontend work, review, Git publication on main and handoff. The 6 November launch/ownership
+> descriptions below are historical where superseded by this assignment.
+
 6 November 2026. Phase5.1 research and Phase5.2 paper design complete. Saving/reading this specification pack does not start implementation. The separately prepared scoped launch prompts explicitly start their Phase5.3 work **when Aditya pastes them into the respective build terminal**; Plan6 remains separate. No implementation starts merely from preparing those prompts. New files, records, services, commands and tests described here remain construction targets until actual implementation/checks.
 
 For the two-terminal start, read [folder/order/ownership instructions](TWO_TERMINAL_WORKFLOW.md), then use the [Codex agents/delivery prompt](CODEX_AGENTS_DELIVERY_START_PROMPT.txt) and [Antigravity frontend prompt](ANTIGRAVITY_FRONTEND_START_PROMPT.txt). Codex starts B0/B1/B2 first; Antigravity starts after a checked frontend-ready revision. The original dirty checkout is the initial reference; both builders use the same isolated construction worktree with disjoint write scopes.

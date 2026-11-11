@@ -32,13 +32,20 @@ class ProofSubject:
             and all(
                 isinstance(value, str) and value.strip()
                 for value in (
-                    self.case_id, self.run_id, self.fence, self.runtime_identity, self.origin
+                    self.case_id,
+                    self.run_id,
+                    self.fence,
+                    self.runtime_identity,
+                    self.origin,
                 )
             )
             and all(
                 _digest(value)
                 for value in (
-                    self.scope_digest, self.package_digest, self.image_digest, self.config_digest
+                    self.scope_digest,
+                    self.package_digest,
+                    self.image_digest,
+                    self.config_digest,
                 )
             )
         )

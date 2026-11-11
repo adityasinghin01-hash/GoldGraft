@@ -52,4 +52,3 @@ class ResourceGraph:
         selected = [n.node_id for n in self._nodes.values() if n.selected]
         unselected = [n.node_id for n in self._nodes.values() if not n.selected]
         return {"authorized_selected": selected, "fenced_unselected": unselected}
-

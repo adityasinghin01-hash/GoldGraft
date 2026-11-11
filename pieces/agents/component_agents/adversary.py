@@ -7,7 +7,20 @@ from goldgraft_contracts.proof import MoneyContract
 from pydantic import Field, StrictBool
 
 from ..component import metadata
-from .execution import ExecutionInput, admission, catalog_sample, execution_calls, proposal, receipt
+from .execution import (
+    INLINE as EXECUTION_INLINE,
+)
+from .execution import (
+    ExecutionInput,
+    admission,
+    catalog_sample,
+    execution_calls,
+    execution_facts,
+    proposal,
+    receipt,
+    same_proposal,
+    valid_metadata,
+)
 from .scribe import sample as scribe_sample
 
 
@@ -27,6 +40,11 @@ def admit(task, data):
     admission(data)
     if not data.contract.rules or set(data.mutation_rule_ids) - {r.id for r in data.contract.rules}:
         raise ValueError("MISSING_EVIDENCE Contract mutation catalog")
+    if any(
+        r.id in data.mutation_rule_ids and r.predicate != "paid implies capture_status == COMPLETED"
+        for r in data.contract.rules
+    ):
+        raise ValueError("UNSUPPORTED mutation operator for predicate")
     if task.task.operation == "run_mutant" and (
         not data.disposable_fork
         or data.fork_ref != data.subject_ref
@@ -130,9 +148,9 @@ def synthesize(task, data, packet, observations):
 
 
 def review(task, data, packet, outputs, observations):
-    if outputs != synthesize(task, data, packet, observations):
-        raise ValueError("DENIED missing guard or self-declared kill/equivalence")
     if task.task.operation == "run_mutant":
+        if not same_proposal(outputs[0]["payload"], draft(task, data)):
+            raise ValueError("DENIED mutant execution proposal")
         r = receipt(task, observations)
         if (
             r.get("fork_ref") != data.fork_ref
@@ -141,6 +159,23 @@ def review(task, data, packet, outputs, observations):
         ):
             raise ValueError("MISSING_EVIDENCE isolated mutant capture")
     else:
+        expected = {x["schema"]: x["payload"] for x in sets(task, data)}
+        if len(outputs) != 2 or {x["schema"] for x in outputs} != set(expected):
+            raise ValueError("DENIED guard bundle")
+        for item in outputs:
+            got, want = item["payload"], expected[item["schema"]]
+            # Bundle ids may be unique model-chosen ids, but owner/time/scope
+            # and every substantive guard/mutant field remain exact.
+            if not got.get("id") or not valid_metadata(got, dict(want, id=got["id"])):
+                raise ValueError("DENIED guard metadata")
+            if any(
+                got.get(k) != value
+                for k, value in want.items()
+                if k not in {"id", "producer", "created_at"}
+            ):
+                raise ValueError("DENIED missing guard or self-declared kill/equivalence")
+        if len({x["payload"]["id"] for x in outputs}) != 2:
+            raise ValueError("DENIED duplicate guard ids")
         v = observations[-1]["value"]["payload"]
         if (
             v.get("drafts") != {x["schema"]: x["payload"] for x in outputs}
@@ -148,6 +183,61 @@ def review(task, data, packet, outputs, observations):
             or v.get("status") != "QUARANTINE"
         ):
             raise ValueError("DENIED guard staging")
+
+
+INLINE = {
+    **EXECUTION_INLINE,
+    "scenario.stage": {
+        "scenario_set_ref": ("scenarios", "ScenarioSet/1"),
+        "mutant_set_ref": ("mutants", "MutantSet/1"),
+    },
+}
+PROGRESS = True
+
+
+def route(data):
+    # Haiku invented an unavailable guard and malformed staged calls repeatedly;
+    # end that tuning line. Fork requests use the demonstrated Haiku path.
+    return "sonnet" if data.fork_ref is None else "haiku8"
+
+
+def facts(task, data):
+    if task.task.operation == "run_mutant":
+        facts = execution_facts(
+            task,
+            ["RawCapture/1"],
+            "; fork_ref equals input fork_ref, capture_complete true, candidate_mutated false",
+        )
+        facts["call_policy"] = (
+            "1) execution.request alone with proposal ExecutionProposal/1: task_id, operation, "
+            "subject_ref, recipe_ref=catalog.recipe_ref, scenario_ref, variant, "
+            "requested_output_schemas=['RawCapture/1'], expected_subject, evidence_refs. "
+            "2) execution.status(request_id), never before requesting. "
+            "3) If receipt_rule holds submit that same proposal; otherwise report_hold. "
+            "Do not read source or catalog for this operation. Never mutate candidate."
+        )
+        return facts
+    return {
+        "max_bytes": 4096,
+        "bundle_ids": {
+            suffix: metadata(task, SimpleNamespace(observed_at=task.created_at), suffix)["id"]
+            for suffix in ("scenarios", "mutants")
+        },
+        "call_policy": "Read source files exactly via unread_reads. Then scenario.stage alone "
+        "with scenarios (ScenarioSet/1) and mutants (MutantSet/1) inline, not refs. "
+        "Use reference_metadata with unique id per set. Supported operator: for each "
+        "Contract rule in mutation_rule_ids create scenario id guard-<rule id>, family PENDING, "
+        "cart {fixture:true}, steps [{driver_step:capture_pending}], rules [rule id], expect "
+        "{predicate:<unchanged Contract predicate>}, assured "
+        "{passes_on_old:false,flake_free_runs:0}; "
+        "mutant id mutant-<rule id>, op M1, location first input file line 1, patch exactly "
+        "'SYNTHETIC_OPERATOR: allow mark_paid on PENDING capture', rule=<rule id>, "
+        "equivalent_suspect:false, killed_by:[]. Every unsupported rule is listed as "
+        "unguarded_rule_ids in both sets, never given an invented guard. After staging "
+        "submit a bundle of those same two payloads copied from the returned drafts; "
+        "never change ids or metadata after staging. Staging must report QUARANTINE and "
+        "candidate_mutated false, else report_hold. SH owns all kill/equivalence verdicts.",
+    }
 
 
 def inspect(outputs):

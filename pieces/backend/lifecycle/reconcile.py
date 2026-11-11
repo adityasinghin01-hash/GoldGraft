@@ -141,7 +141,6 @@ class LedgerReconciler:
             outcome="clean",
             reason=f"ledger verified and terminal at {last_stage}",
         )
-
     def reconcile_interrupted_operation(
         self,
         graft_id: str,

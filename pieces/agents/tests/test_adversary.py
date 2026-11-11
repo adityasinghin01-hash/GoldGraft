@@ -66,3 +66,34 @@ def test_missing_catalog_guard_stays_explicit(tmp_path):
     t = p.control.snapshot(p.run_ref).tasks[0]
     out = p.artifacts.inspect_outputs(t, p.context_for(t.task.task_id))
     assert out[0]["payload"]["unguarded_rule_ids"] == ["captured-before-paid"]
+
+
+def test_adversary_accepts_model_labels_without_self_certifying(tmp_path):
+    p = create("Adversary", tmp_path / "a.sqlite", clock=lambda: NOW)
+    original = p.model.renderer
+
+    def labelled(*args):
+        v = original(*args)
+        for item in v["outputs"]:
+            item["payload"]["producer"]["model"] = "qualified-model"
+        return v
+
+    planner = p.model.planner
+
+    def labelled_stage(*args):
+        calls = planner(*args)
+        for call in calls:
+            for draft in call.get("drafts", {}).values():
+                draft["producer"]["model"] = "qualified-model"
+        return calls
+
+    p.model.planner = labelled_stage
+    p.model.renderer = labelled
+    assert tick(p.run_ref, NOW, p).completed == 1
+
+
+def test_adversary_unsupported_rule_cannot_get_pending_capture_mutant(tmp_path):
+    d = sample("derive_guards")
+    d["contract"]["rules"][0]["predicate"] = "refund_total <= captured_total"
+    p = create("Adversary", tmp_path / "a.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0

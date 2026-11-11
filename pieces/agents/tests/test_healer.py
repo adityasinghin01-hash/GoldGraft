@@ -51,3 +51,28 @@ def test_healer_output_cannot_claim_actions(tmp_path, fault):
 
     p.model.renderer = bad
     assert tick(p.run_ref, NOW, p).completed == 0
+
+
+def test_healer_accepts_grounded_model_wording(tmp_path):
+    p = create("Healer", tmp_path / "h.sqlite", clock=lambda: NOW)
+    original = p.model.renderer
+
+    def described(*args):
+        v = original(*args)
+        v["producer"]["model"] = "qualified-model"
+        v["text"] = (
+            "current_state_incompatible: hold requested; independent review required. "
+            "No recovery performed."
+        )
+        return v
+
+    p.model.renderer = described
+    assert tick(p.run_ref, NOW, p).completed == 1
+
+
+def test_healer_boolean_generation_is_not_current_evidence(tmp_path):
+    d = sample("diagnose")
+    d["status"]["generation"] = True
+    p = create("Healer", tmp_path / "h.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0
+    assert p.model.total_dispatches() == 0

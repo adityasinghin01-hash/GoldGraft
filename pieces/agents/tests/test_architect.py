@@ -48,3 +48,36 @@ def test_architect_untrusted_output_cannot_broaden_plan(tmp_path, fault):
 
     p.model.renderer = bad
     assert tick(p.run_ref, NOW, p).completed == 0
+
+
+def test_architect_accepts_grounded_handoff_wording_and_reordered_sets(tmp_path):
+    p = create("Architect", tmp_path / "a.sqlite", clock=lambda: NOW)
+    original = p.model.renderer
+
+    def explain(*args):
+        v = original(*args)
+        v["handoff"] = ["Pinned fixture documentation; independent proof required before apply."]
+        v["target_experience"].reverse()
+        return v
+
+    p.model.renderer = explain
+    assert tick(p.run_ref, NOW, p).completed == 1
+
+
+def test_architect_conflicting_final_evidence_cannot_be_accepted(tmp_path):
+    d = sample("architect")
+    d["evidence"]["fixture:final-contract"]["final"] = False
+    p = create("Architect", tmp_path / "a.sqlite", data=d, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 0
+
+
+def test_architect_routes_larger_or_annotated_evidence_before_dispatch():
+    from pieces.agents.component_agents.architect import Input, route
+
+    d = sample("architect")
+    assert route(Input.model_validate(d)) == "sonnet"
+    d["evidence"]["fixture:final-contract"]["note"] = "untrusted annotation"
+    assert route(Input.model_validate(d)) == "sonnet"
+    d["evidence"]["fixture:final-contract"].pop("note")
+    d["mappings"] *= 2
+    assert route(Input.model_validate(d)) == "sonnet"

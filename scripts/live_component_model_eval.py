@@ -29,6 +29,22 @@ from scripts.live_surveyor_model_eval import EvaluationArtifacts, EvaluationPort
 
 
 class ComponentEvaluationArtifacts(EvaluationArtifacts):
+    def presentation_context(self, context):
+        """Synthetic tool-fault controls are not evidence or model-visible answers.
+
+        The authenticated stored context remains intact. Only the provider's
+        presentation excludes this fixture switch; observed receipts remain visible.
+        """
+        field = {
+            "Grafter": "collector_receipt_fault",
+            "Orchard Analyst": "aggregate_receipt_fault",
+        }.get(context.get("role_inputs", {}).get("role"))
+        if field is None:
+            return context
+        packet = dict(context["role_inputs"])
+        packet["data"] = {k: v for k, v in packet["data"].items() if k != field}
+        return dict(context, role_inputs=packet)
+
     def ticket(self, lease):
         self.last_lease = lease
         ticket = self.base.ticket(lease)
@@ -197,7 +213,7 @@ def main(argv=None):
     # model_hold: the model itself must choose report_hold (judgment), never a malformed stop.
     # Turn ids are digests (unordered); a blocked turn only comes from report_hold and ends
     # the task, so any blocked turn means the model itself chose to hold.
-    model_held = any(t["result"]["kind"] == "blocked" for t in turns)
+    model_held = any((t.get("result") or {}).get("kind") == "blocked" for t in turns)
     if case.get("expected_outcome") == "model_hold":
         passed = task.state != "succeeded" and outputs is None and model_held
     elif case.get("expected_outcome") == "held_any":  # unverifiable by a model: system must hold

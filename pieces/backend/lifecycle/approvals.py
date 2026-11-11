@@ -93,6 +93,7 @@ class ApprovalGate:
         )
         self._slots[slot_id] = slot
 
+        # Commit durable audit trail to foundation.ledger
         producer = Producer(kind=ProducerKind.SERVICE, name="ApprovalGate", version="2.0.0")
         self.ledger.append(
             graft_id=graft_id,

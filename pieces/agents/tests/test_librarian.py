@@ -65,3 +65,23 @@ def test_librarian_cannot_promote_or_forge_source_rights(tmp_path, fault):
 
     p.model.renderer = bad
     assert tick(p.run_ref, NOW, p).completed == 0
+
+
+def test_librarian_accepts_consistent_model_label_in_quarantine(tmp_path):
+    p = create("Librarian", tmp_path / "l.sqlite", clock=lambda: NOW)
+    original, planner = p.model.renderer, p.model.planner
+
+    def labelled(*args):
+        v = original(*args)
+        v["outputs"][1]["payload"]["producer"]["model"] = "qualified-model"
+        return v
+
+    def staged(*args):
+        calls = planner(*args)
+        for c in calls:
+            if "drafts" in c:
+                c["drafts"]["detection_rule_ref"]["producer"]["model"] = "qualified-model"
+        return calls
+
+    p.model.renderer, p.model.planner = labelled, staged
+    assert tick(p.run_ref, NOW, p).completed == 1

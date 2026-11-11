@@ -74,4 +74,3 @@ class ReadinessInspector:
             overall_status=overall,
             checks=checks,
         )
-

@@ -49,6 +49,12 @@ def score(case, outputs, base):
         "Builder": _builder,
         "Explorer": _explorer,
         "Scribe": _scribe,
+        "Architect": _architect,
+        "Grafter": _grafter,
+        "Adversary": _adversary,
+        "Healer": _healer,
+        "Librarian": _librarian,
+        "Orchard Analyst": _orchard,
     }.get(case["role"])
     if scorer is None:
         raise ValueError("UNSUPPORTED unscored role")
@@ -184,4 +190,130 @@ def _scribe(expected, outputs, base):
         failures.append("followups")
     if base.tools.total_dispatches() != expected["reads"]:
         failures.append("reads")
+    return failures
+
+
+def _architect(expected, outputs, base):
+    p = outputs[0]["payload"] if outputs else {}
+    failures = []
+    items = p.get("items", [])
+    if sorted(items, key=lambda i: i["touchpoint"]) != sorted(
+        expected["items"], key=lambda i: i["touchpoint"]
+    ):
+        failures.append("touchpoint_mapping")
+    if p.get("path") != "REWRITE" or p.get("deltas"):
+        failures.append("unapproved_scope")
+    if sorted(p.get("origin_rules", [])) != sorted(expected["rules"]):
+        failures.append("normative_rules")
+    if p.get("order") != ["READ_BOTH", "NEW_FLOWS_BEHIND_SWITCH", "CLEANUP"]:
+        failures.append("switch_order")
+    if "independent proof required" not in " ".join(p.get("handoff", [])).lower():
+        failures.append("proof_prerequisite")
+    if base.tools.total_dispatches() != expected["reads"]:
+        failures.append("tool_flow")
+    return failures
+
+
+def _grafter(expected, outputs, base):
+    p = outputs[0]["payload"] if outputs else {}
+    failures = []
+    if p.get("provenance") != "snapshot" or p.get("branch") is not None:
+        failures.append("provenance")
+    if (
+        p.get("patch_digest") != expected["patch_digest"]
+        or p.get("baseline_snapshot_ref") != expected["baseline"]
+    ):
+        failures.append("patch_binding")
+    changes = p.get("changes", [])
+    if (
+        len(changes) != 1
+        or changes[0].get("commit") is not None
+        or sorted(changes[0].get("plan_item_ids", [])) != expected["touchpoints"]
+    ):
+        failures.append("plan_binding")
+    if base.tools.total_dispatches() != expected["tools"]:
+        failures.append("tool_flow")
+    with base.control.store.transaction() as db:
+        row = db.execute("SELECT body FROM scripts WHERE namespace='candidate-tree'").fetchone()
+    if row is None or json.loads(row[0])["files"] != expected["files"]:
+        failures.append("candidate_bytes")
+    return failures
+
+
+def _adversary(expected, outputs, base):
+    if expected["operation"] == "run_mutant":
+        return _explorer(expected, outputs, base)
+    values = {o["schema"]: o["payload"] for o in outputs or []}
+    scenarios = values.get("ScenarioSet/1", {})
+    mutants = values.get("MutantSet/1", {})
+    failures = []
+    if (
+        sorted(scenarios.get("unguarded_rule_ids", [])) != expected["unguarded"]
+        or sorted(mutants.get("unguarded_rule_ids", [])) != expected["unguarded"]
+    ):
+        failures.append("unguarded")
+    if sorted(r for s in scenarios.get("scenarios", []) for r in s["rules"]) != expected["guarded"]:
+        failures.append("guard_coverage")
+    if sorted(m["rule"] for m in mutants.get("mutants", [])) != expected["guarded"]:
+        failures.append("mutant_coverage")
+    if any(m["killed_by"] or m["equivalent_suspect"] for m in mutants.get("mutants", [])):
+        failures.append("self_certification")
+    if base.tools.total_dispatches() != expected["tools"]:
+        failures.append("tool_flow")
+    return failures
+
+
+def _healer(expected, outputs, base):
+    p = outputs[0]["payload"] if outputs else {}
+    failures = []
+    if p.get("pause_requested") is not expected["pause"] or p.get("cutback_requested") is not False:
+        failures.append("hold_decision")
+    if (
+        p.get("stage_pct") != expected["stage_pct"]
+        or sorted(p.get("evidence_refs", [])) != expected["evidence"]
+    ):
+        failures.append("grounding")
+    if base.tools.total_dispatches() != expected["tools"]:
+        failures.append("hold_effect")
+    return failures
+
+
+def _librarian(expected, outputs, base):
+    failures = []
+    if expected["operation"] == "selfcheck_recipe":
+        p = outputs[0]["payload"] if outputs else {}
+        if p.get("subject_ref") != expected["independent"] or p.get("requested_output_schemas") != [
+            "ProbeResult/1"
+        ]:
+            failures.append("independent_selfcheck")
+    else:
+        values = {o["schema"]: o["payload"] for o in outputs or []}
+        recipe, detection = values.get("Recipe/1", {}), values.get("DetectionRule/1", {})
+        if (
+            recipe.get("status") != "QUARANTINE"
+            or recipe.get("confidence") != 0
+            or recipe.get("signature") != "UNSIGNED_SYNTHETIC_QUARANTINE"
+        ):
+            failures.append("self_promotion")
+        if (
+            recipe.get("transform") != "template:pending-capture-guard:1"
+            or detection.get("pattern") != "literal:legacy_capture"
+        ):
+            failures.append("raw_reuse")
+    if base.tools.total_dispatches() != expected["tools"]:
+        failures.append("tool_flow")
+    return failures
+
+
+def _orchard(expected, outputs, base):
+    p = outputs[0]["payload"] if outputs else {}
+    failures = []
+    if p.get("metrics") != expected["metrics"] or p.get("group_by") != ["stage"]:
+        failures.append("metrics")
+    if p.get("filters") != {"tenant": "offline"} or p.get("evidence_refs") != [
+        "projection:offline:upgrade:1"
+    ]:
+        failures.append("scope")
+    if base.tools.total_dispatches() != 1:
+        failures.append("aggregate_read")
     return failures

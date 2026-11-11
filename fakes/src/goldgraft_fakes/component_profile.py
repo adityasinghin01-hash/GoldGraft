@@ -274,6 +274,12 @@ def tool_value(control, db, task, packet, invocation, args):
             "subject": content_digest(manifest),
             "synthetic_only": True,
         }
+        # Explicit fault injection for original synthetic Grafter cases only;
+        # candidate bytes and the independently built manifest remain unchanged.
+        if data.get("collector_receipt_fault") == "wrong_tree":
+            receipt["tree"] = "0" * 64
+        elif data.get("collector_receipt_fault") == "missing_snapshot":
+            receipt.pop("snapshot_ref")
         db.execute(
             "INSERT OR REPLACE INTO scripts VALUES('candidate-tree',?,?)",
             (args.workspace_ref, encoded({"files": files, "owner": task.task.task_id})),
@@ -327,11 +333,13 @@ def tool_value(control, db, task, packet, invocation, args):
         if any(b["cases"] < data["minimum_cohort"] for b in data["buckets"]):
             fail("DENIED minimum disclosure cohort")
         return {
-            "tenant_id": "offline",
+            "tenant_id": "other"
+            if data.get("aggregate_receipt_fault") == "wrong_tenant"
+            else "offline",
             "purpose": "upgrade_audit",
             "buckets": data["buckets"],
             "projection_ref": args.projection_ref,
-            "raw_rows": False,
+            "raw_rows": data.get("aggregate_receipt_fault") == "raw_rows",
         }
     fail("UNSUPPORTED tool handler not implemented")
 
