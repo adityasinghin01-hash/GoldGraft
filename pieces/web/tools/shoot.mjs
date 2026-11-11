@@ -31,7 +31,7 @@ const port = 9300 + (process.pid % 500);
 const args = [
   `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, '--headless=new', '--no-first-run',
   '--no-default-browser-check', '--hide-scrollbars', '--mute-audio', `--window-size=${widths[0]},${height}`,
-  ...(flag('gpu') ? ['--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']),
+  ...(flag('nogl') ? ['--disable-webgl', '--disable-3d-apis'] : flag('gpu') ? ['--use-angle=metal', '--enable-gpu', '--ignore-gpu-blocklist'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']),
 ];
 const chrome = spawn(CHROME, args, { stdio: 'ignore' });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

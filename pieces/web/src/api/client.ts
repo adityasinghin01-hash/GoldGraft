@@ -6,18 +6,8 @@ import type {
 } from './types';
 import { mockApi } from './mock/mockApi';
 
-/** Every failure the UI can show, already in the pack's words (05 §24). */
-export class ApiError extends Error {
-  constructor(
-    public kind: 'problem' | 'timeout' | 'network' | 'unexpected',
-    public status: number,
-    public title: string,
-    public detail?: string,
-    public seconds?: number,
-  ) {
-    super(title);
-  }
-}
+export { ApiError } from './errors';
+import { ApiError } from './errors';
 
 export type FeedStatus = 'connecting' | 'live' | 'reconnecting' | 'ended';
 export type Feed = { close: () => void };

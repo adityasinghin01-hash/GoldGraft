@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { World } from './World';
+import type { World as WorldT } from './World';
 import { Director } from './director';
 import type { StateDef } from './states';
 import { onScroll, reducedMotion } from '../motion/scroll';
@@ -41,10 +41,17 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
     setMode(still ? 'still' : 'live');
     document.documentElement.dataset.worldMode = still ? 'still' : 'live';
 
-    const world = new World(canvas);
+    let world: WorldT | null = null;
     const director = new Director();
-    if (import.meta.env.DEV) Object.assign(window, { __gg: { world, director } });
     let disposed = false;
+    const cleanups: Array<() => void> = [];
+    import('./World').then(({ World }) => {
+      if (disposed) return;
+      world = new World(canvas);
+      boot(world);
+    });
+    const boot = (world: WorldT) => {
+    if (import.meta.env.DEV) Object.assign(window, { __gg: { world, director } });
 
     const sync = (y: number) => {
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -94,8 +101,7 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
       waitFirst();
     }
 
-    return () => {
-      disposed = true;
+    cleanups.push(() => {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onMove);
       document.documentElement.removeEventListener('pointerleave', onLeave);
@@ -104,6 +110,12 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
       offScroll();
       ro.disconnect();
       world.dispose();
+    });
+    };
+    return () => {
+      disposed = true;
+      cleanups.forEach((c) => c());
+      void world;
     };
   }, [states, first, calm]);
 

@@ -1,5 +1,6 @@
 // Sample mode (03 §G): the stand-in's own saved answers, same signatures as the live client.
 import type { FeedStatus, GoldGraftApi } from '../client';
+import { ApiError } from '../errors';
 import type { HealFrame, LedgerEntry } from '../types';
 import graft from './data/GET_graft.json';
 import rootmap from './data/GET_rootmap.json';
@@ -52,7 +53,6 @@ async function requireDemo(id: string) {
   if (id !== GRAFT) {
     await wait(300);
     const p = clone(notFound) as { title: string; detail?: string; status: number };
-    const { ApiError } = await import('../client');
     throw new ApiError('problem', p.status, p.title, (p.detail ?? '').replace(/demo-1|\{graft_id\}/g, id) || `No graft ${id}`);
   }
 }
@@ -89,8 +89,7 @@ export const mockApi: GoldGraftApi = {
   certificate: async (id) => {
     await wait(300);
     if (id !== 'cert-demo' && id !== 'cert-demo-tampered') {
-      const { ApiError } = await import('../client');
-      throw new ApiError('problem', 404, 'Certificate not found', `No certificate ${id}`);
+        throw new ApiError('problem', 404, 'Certificate not found', `No certificate ${id}`);
     }
     return { ...clone(certificate), cert_id: id } as never;
   },
