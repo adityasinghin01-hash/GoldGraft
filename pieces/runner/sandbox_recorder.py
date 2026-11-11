@@ -2,6 +2,11 @@
 
 This implementation generates exchanges in-process. It does not provision
 isolation, execute shop scenarios or contact PayPal. Production GU04 remains held.
+
+The recorder only accepts a broker that declares itself synthetic. A broker that
+can produce real sandbox exchanges must not be wired here: every capture written
+by this class is scripted, and a stronger broker label would make a synthetic
+exchange look like observed provider behaviour.
 """
 
 import hashlib
@@ -31,7 +36,10 @@ class SandboxRecorder:
         repo_root: Path | None = None,
     ):
         if broker.evidence_class != "scripted":
-            raise ValueError("UNQUALIFIED recorder accepts synthetic brokers only")
+            raise ValueError(
+                "SandboxRecorder generates synthetic exchanges in process and accepts only a "
+                f"scripted broker, not {broker.evidence_class!r}"
+            )
         self.broker = broker
         self.blob_store = blob_store or LocalBlobStore()
         current_dir = Path(__file__).resolve()
