@@ -33,6 +33,7 @@ class EffectManager:
 
     def __init__(self, *, database: Path | None = None):
         self._lock = Lock()
+        self._views: dict[str, EffectSlot] = {}
         self._db = sqlite3.connect(
             database if database is not None else ":memory:", check_same_thread=False
         )
@@ -53,18 +54,26 @@ class EffectManager:
         values["status"] = EffectStatus(values["status"])
         return EffectSlot(**values)
 
+    def _view(self, slot: EffectSlot) -> EffectSlot:
+        view = self._views.setdefault(slot.slot_id, slot)
+        view.status = slot.status
+        view.executed_at = slot.executed_at
+        view.reconciliation_note = slot.reconciliation_note
+        return view
+
     def allocate_slot(
         self, case_id: str, action_type: str, target_resource: str, idempotency_key: str
     ) -> EffectSlot:
         raw = repr((case_id, action_type, target_resource, idempotency_key)).encode()
         slot_id = f"effect-{hashlib.sha256(raw).hexdigest()[:24]}"
-        with self._lock, self._db:
-            self._db.execute(
-                "INSERT OR IGNORE INTO effects VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)",
-                (slot_id, case_id, action_type, target_resource, EffectStatus.PENDING,
-                 datetime.now(UTC).isoformat()),
-            )
-            return self._read_slot(slot_id)
+        with self._lock:
+            with self._db:
+                self._db.execute(
+                    "INSERT OR IGNORE INTO effects VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)",
+                    (slot_id, case_id, action_type, target_resource, EffectStatus.PENDING,
+                     datetime.now(UTC).isoformat()),
+                )
+            return self._view(self._read_slot(slot_id))
 
     def record_execution(self, slot_id: str, success: bool, note: str = "") -> EffectSlot:
         status = EffectStatus.EXECUTED if success else EffectStatus.ROLLED_BACK
@@ -74,21 +83,27 @@ class EffectManager:
         return self._record(slot_id, EffectStatus.UNKNOWN, reason)
 
     def _record(self, slot_id: str, status: EffectStatus, note: str) -> EffectSlot:
-        with self._lock, self._db:
-            self._db.execute("BEGIN IMMEDIATE")
-            previous = self._read_slot(slot_id)
-            if previous.status == status:
-                return previous
-            if previous.status in {EffectStatus.EXECUTED, EffectStatus.ROLLED_BACK}:
-                raise ValueError("A recorded terminal effect outcome cannot be overwritten")
-            if previous.status == EffectStatus.UNKNOWN and not note.strip():
-                raise ValueError("Resolving an unknown effect requires a reconciliation note")
-            executed_at = None if status == EffectStatus.UNKNOWN else datetime.now(UTC).isoformat()
-            self._db.execute(
-                "UPDATE effects SET status = ?, executed_at = ?, reconciliation_note = ? "
-                "WHERE slot_id = ?", (status, executed_at, note, slot_id)
-            )
-            return self._read_slot(slot_id)
+        with self._lock:
+            with self._db:
+                self._db.execute("BEGIN IMMEDIATE")
+                previous = self._read_slot(slot_id)
+                if previous.status != status:
+                    if previous.status in {EffectStatus.EXECUTED, EffectStatus.ROLLED_BACK}:
+                        raise ValueError(
+                            "A recorded terminal effect outcome cannot be overwritten"
+                        )
+                    if previous.status == EffectStatus.UNKNOWN and not note.strip():
+                        raise ValueError(
+                            "Resolving an unknown effect requires a reconciliation note"
+                        )
+                    executed_at = (
+                        None if status == EffectStatus.UNKNOWN else datetime.now(UTC).isoformat()
+                    )
+                    self._db.execute(
+                        "UPDATE effects SET status = ?, executed_at = ?, reconciliation_note = ? "
+                        "WHERE slot_id = ?", (status, executed_at, note, slot_id)
+                    )
+            return self._view(self._read_slot(slot_id))
 
     def close(self) -> None:
         with self._lock:

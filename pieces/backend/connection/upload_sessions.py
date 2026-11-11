@@ -38,6 +38,7 @@ class UploadSessionManager:
             raise ValueError("Upload size limit must be positive")
         self.max_size_bytes = max_size_bytes
         self._lock = Lock()
+        self._views: dict[str, UploadSession] = {}
         self._db = sqlite3.connect(database if database is not None else ":memory:",
                                    check_same_thread=False)
         self._db.row_factory = sqlite3.Row
@@ -96,7 +97,11 @@ class UploadSessionManager:
             session["received_chunks"] = {row[0]: UploadChunk(*row) for row in chunks}
             session["completed"] = bool(session["completed"])
             session["cancelled"] = bool(session["cancelled"])
-            return UploadSession(**session)
+            self._db.commit()
+            view = self._views.setdefault(session_id, UploadSession(**session))
+            view.received_chunks = session["received_chunks"]
+            view.completed = session["completed"]
+            return view
 
     def add_chunk(self, session_id: str, chunk_index: int, data: bytes) -> UploadChunk:
         with self._write():
@@ -126,7 +131,11 @@ class UploadSessionManager:
                 "INSERT INTO upload_chunks VALUES (?, ?, ?, ?)",
                 (session_id, chunk_index, digest, data),
             )
-            return UploadChunk(chunk_index, digest, len(data))
+            self._db.commit()
+            chunk = UploadChunk(chunk_index, digest, len(data))
+            if session_id in self._views:
+                self._views[session_id].received_chunks[chunk_index] = chunk
+            return chunk
 
     def finalize_session(self, session_id: str) -> bytes:
         with self._write():
@@ -147,12 +156,18 @@ class UploadSessionManager:
             if hashlib.sha256(final_data).hexdigest() != session["expected_sha256"]:
                 raise ValueError("Upload checksum mismatch")
             self._db.execute("UPDATE uploads SET completed = 1 WHERE session_id = ?", (session_id,))
+            self._db.commit()
+            if session_id in self._views:
+                self._views[session_id].completed = True
             return final_data
 
     def cancel_session(self, session_id: str) -> None:
         with self._write():
             self._db.execute("UPDATE uploads SET cancelled = 1 WHERE session_id = ?", (session_id,))
             self._db.execute("DELETE FROM upload_chunks WHERE session_id = ?", (session_id,))
+            self._db.commit()
+            if session_id in self._views:
+                self._views[session_id].cancelled = True
 
     def close(self) -> None:
         with self._lock:
