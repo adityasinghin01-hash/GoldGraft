@@ -237,6 +237,9 @@ def facts(task, data):
             "max_bytes": 4096,
             "installed_library_api": data.api_reference,
             "forbidden_after_patch": data.forbidden_calls,
+            # Copy fields for ChangeList/2 (identifiers, not code): exact ids and a size bound.
+            "plan_item_ids": sorted(i.touchpoint for i in data.target_plan.items),
+            "summary_max_chars": 300,
             "call_policy": "Read every source file (follow unread_reads; max four reads per "
             "response) and dependency.inspect with the catalog's recipe_ref, package, version. "
             "Then WRITE the new checkout yourself: for every target_plan item, replace the old "
@@ -251,8 +254,9 @@ def facts(task, data):
             "Accept only a synthetic collector receipt with snapshot_ref and patch_digest; "
             "otherwise report_hold. Copy receipt snapshot_ref and patch_digest into ChangeList/2, "
             "snapshot provenance, null branch/commits, baseline=source_ref, one change covering "
-            "every target_plan touchpoint, open_item_ids empty. Use reference_metadata. "
-            "Summarize the edits in plain words; avoid deployed, published and verified.",
+            "every target_plan touchpoint (plan_item_ids exactly as given), open_item_ids empty. "
+            "Use reference_metadata. The change summary is ONE short plain sentence, at most "
+            "summary_max_chars characters; avoid the words deployed, published and verified.",
         }
     return {
         "max_bytes": 4096,
