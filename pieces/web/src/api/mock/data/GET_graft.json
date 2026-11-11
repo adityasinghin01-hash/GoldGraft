@@ -1,0 +1,178 @@
+{
+  "card": {
+    "cost_usd": 3.85,
+    "minutes": 41.0,
+    "notes": {
+      "_label": "SYNTHETIC \u2014 stand-in data, not a recording",
+      "cost_usd": "AI cost for this shop so far",
+      "old_pieces_found": "Old PayPal code spots found in the shop",
+      "problems": "Payment situations where the new code is wrong",
+      "proof_strength_score": "Share of planted money bugs our tests caught",
+      "scenarios_pass": "Payment situations that behave the same or better"
+    },
+    "old_pieces_found": 5,
+    "pieces_upgraded": 5,
+    "problems": 2,
+    "proof_strength_score": 0.92,
+    "scenarios_pass": 6,
+    "scenarios_total": 9
+  },
+  "graft_id": "demo-1",
+  "lane": "FULL",
+  "ledger_root": "d4245dfd43bf38799c4a49b7933290023d367caf2bcb3506b4ffa6e63a7bd9ff",
+  "shop_id": "legacy-php-shop",
+  "stage": "DONE",
+  "stages": [
+    {
+      "minutes": 1.5,
+      "stage": "CREATED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "GATED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "SURVEYED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "BUILT",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "RECORDED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "CONTRACTED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "ATTACK_PLANNED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "GRAFTED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "PROVING",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "REPAIRING",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "PROVING",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "CERTIFIED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "PR_OPEN",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "MERGED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "SHADOW",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "HEAL_1",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "HEAL_10",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "CUTBACK",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "GRAFTED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "PROVING",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "CERTIFIED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "PR_OPEN",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "MERGED",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "SHADOW",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "HEAL_1",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "HEAL_10",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "HEAL_50",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "LIVE_100",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "CLEANUP_PR",
+      "usd": 0.05
+    },
+    {
+      "minutes": 1.5,
+      "stage": "DONE",
+      "usd": 0.05
+    }
+  ],
+  "started_at": "2026-11-02T13:15:59.391735Z"
+}

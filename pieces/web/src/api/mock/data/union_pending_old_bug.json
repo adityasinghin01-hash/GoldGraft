@@ -1,0 +1,348 @@
+{
+  "_label": "MOCK · SYNTHETIC — shows the 'bug found in your CURRENT shop' case (rule R07: pending payment marked paid). Shape = GET /grafts/{id}/cmel?scenario=pending + its Verdict from GET /grafts/{id}/scenarios.",
+  "cmel": {
+    "graft_id": "demo-1",
+    "scenario_id": "pending",
+    "old": [
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old",
+        "variant": "OLD",
+        "scenario_id": "pending",
+        "seq": 0,
+        "t_ms": 0,
+        "source": "PAYPAL_CALL",
+        "kind": "INTENT",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "legacy_token": "EC-1AB23456CD789012E"
+        },
+        "raw_ref": "r2://captures/run-old/0",
+        "noise": [
+          "pp.legacy_token"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        }
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old",
+        "variant": "OLD",
+        "scenario_id": "pending",
+        "seq": 1,
+        "t_ms": 900,
+        "source": "SHOP_HTTP",
+        "kind": "APPROVE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "legacy_token": "EC-1AB23456CD789012E"
+        },
+        "raw_ref": "r2://captures/run-old/1",
+        "noise": [
+          "pp.legacy_token"
+        ]
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old",
+        "variant": "OLD",
+        "scenario_id": "pending",
+        "seq": 2,
+        "t_ms": 1400,
+        "source": "PAYPAL_CALL",
+        "kind": "CAPTURE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "txn_id": "8MC585209K746392H"
+        },
+        "raw_ref": "r2://captures/run-old/2",
+        "noise": [
+          "pp.txn_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        },
+        "status_norm": "PENDING"
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old",
+        "variant": "OLD",
+        "scenario_id": "pending",
+        "seq": 3,
+        "t_ms": 1500,
+        "source": "SHOP_DB",
+        "kind": "SHOP_PAID",
+        "order_ref": "order-pend-1",
+        "pp": {},
+        "raw_ref": "r2://captures/run-old/3",
+        "noise": []
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old",
+        "variant": "OLD",
+        "scenario_id": "pending",
+        "seq": 4,
+        "t_ms": 2100,
+        "source": "PAYPAL_LEDGER",
+        "kind": "CAPTURE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "txn_id": "8MC585209K746392H"
+        },
+        "raw_ref": "r2://captures/run-old/4",
+        "noise": [
+          "pp.txn_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        },
+        "status_norm": "PENDING"
+      }
+    ],
+    "old_twin": [
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old_twin",
+        "variant": "OLD_TWIN",
+        "scenario_id": "pending",
+        "seq": 0,
+        "t_ms": 0,
+        "source": "PAYPAL_CALL",
+        "kind": "INTENT",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "legacy_token": "EC-9ZY87654XW321098V"
+        },
+        "raw_ref": "r2://captures/run-old_twin/0",
+        "noise": [
+          "pp.legacy_token"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        }
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old_twin",
+        "variant": "OLD_TWIN",
+        "scenario_id": "pending",
+        "seq": 1,
+        "t_ms": 900,
+        "source": "SHOP_HTTP",
+        "kind": "APPROVE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "legacy_token": "EC-9ZY87654XW321098V"
+        },
+        "raw_ref": "r2://captures/run-old_twin/1",
+        "noise": [
+          "pp.legacy_token"
+        ]
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old_twin",
+        "variant": "OLD_TWIN",
+        "scenario_id": "pending",
+        "seq": 2,
+        "t_ms": 1400,
+        "source": "PAYPAL_CALL",
+        "kind": "CAPTURE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "txn_id": "3GG279541U471931P"
+        },
+        "raw_ref": "r2://captures/run-old_twin/2",
+        "noise": [
+          "pp.txn_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        },
+        "status_norm": "PENDING"
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old_twin",
+        "variant": "OLD_TWIN",
+        "scenario_id": "pending",
+        "seq": 3,
+        "t_ms": 1500,
+        "source": "SHOP_DB",
+        "kind": "SHOP_PAID",
+        "order_ref": "order-pend-1",
+        "pp": {},
+        "raw_ref": "r2://captures/run-old_twin/3",
+        "noise": []
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-old_twin",
+        "variant": "OLD_TWIN",
+        "scenario_id": "pending",
+        "seq": 4,
+        "t_ms": 2100,
+        "source": "PAYPAL_LEDGER",
+        "kind": "CAPTURE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "txn_id": "3GG279541U471931P"
+        },
+        "raw_ref": "r2://captures/run-old_twin/4",
+        "noise": [
+          "pp.txn_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        },
+        "status_norm": "PENDING"
+      }
+    ],
+    "new": [
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-new",
+        "variant": "NEW",
+        "scenario_id": "pending",
+        "seq": 0,
+        "t_ms": 0,
+        "source": "PAYPAL_CALL",
+        "kind": "INTENT",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "order_id": "5O190127TN364715T"
+        },
+        "raw_ref": "r2://captures/run-new/0",
+        "noise": [
+          "pp.order_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        }
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-new",
+        "variant": "NEW",
+        "scenario_id": "pending",
+        "seq": 1,
+        "t_ms": 850,
+        "source": "SHOP_HTTP",
+        "kind": "APPROVE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "order_id": "5O190127TN364715T"
+        },
+        "raw_ref": "r2://captures/run-new/1",
+        "noise": [
+          "pp.order_id"
+        ]
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-new",
+        "variant": "NEW",
+        "scenario_id": "pending",
+        "seq": 2,
+        "t_ms": 1300,
+        "source": "PAYPAL_CALL",
+        "kind": "CAPTURE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "order_id": "5O190127TN364715T",
+          "capture_id": "2GG279541U471931P"
+        },
+        "raw_ref": "r2://captures/run-new/2",
+        "noise": [
+          "pp.order_id",
+          "pp.capture_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        },
+        "status_norm": "PENDING"
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-new",
+        "variant": "NEW",
+        "scenario_id": "pending",
+        "seq": 3,
+        "t_ms": 1350,
+        "source": "SHOP_DB",
+        "kind": "SHOP_PENDING",
+        "order_ref": "order-pend-1",
+        "pp": {},
+        "raw_ref": "r2://captures/run-new/3",
+        "noise": []
+      },
+      {
+        "graft_id": "demo-1",
+        "run_id": "run-new",
+        "variant": "NEW",
+        "scenario_id": "pending",
+        "seq": 4,
+        "t_ms": 2000,
+        "source": "PAYPAL_LEDGER",
+        "kind": "CAPTURE",
+        "order_ref": "order-pend-1",
+        "pp": {
+          "capture_id": "2GG279541U471931P"
+        },
+        "raw_ref": "r2://captures/run-new/4",
+        "noise": [
+          "pp.capture_id"
+        ],
+        "money": {
+          "minor": 1999,
+          "currency": "USD"
+        },
+        "status_norm": "PENDING"
+      }
+    ]
+  },
+  "verdict": {
+    "scenario_id": "pending",
+    "grade": "PASS_FIXED",
+    "rule_hits": [
+      {
+        "rule": "R07",
+        "side": "OLD",
+        "evidence": [
+          "old#2 CAPTURE PENDING",
+          "old#3 SHOP_PAID"
+        ]
+      }
+    ],
+    "parity_diff": [
+      {
+        "field": "kind",
+        "old": "SHOP_PAID",
+        "new": "SHOP_PENDING",
+        "waived_by": "R07 (old shop bug)"
+      }
+    ],
+    "noise_masked": [
+      "pp.legacy_token",
+      "pp.txn_id",
+      "pp.order_id",
+      "pp.capture_id",
+      "t_ms"
+    ],
+    "deltas_applied": [
+      "TOKEN→order_id",
+      "DoExpressCheckoutPayment→capture"
+    ]
+  }
+}

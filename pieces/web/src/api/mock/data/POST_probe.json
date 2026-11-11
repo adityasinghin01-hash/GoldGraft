@@ -1,0 +1,14 @@
+{
+  "deadline_notes": [
+    "PayPal: WPS buttons may retire after 1 Jan 2027"
+  ],
+  "families_found": [
+    "EC_NVP",
+    "IPN"
+  ],
+  "files_or_pages": [
+    "https://github.com/example/old-shop"
+  ],
+  "next_step": "Connect sandbox account",
+  "official_modern_module_available": false
+}

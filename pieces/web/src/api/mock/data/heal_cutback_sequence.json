@@ -1,0 +1,265 @@
+{
+  "_label": "MOCK \u00b7 SYNTHETIC \u00b7 PayPal sandbox \u00b7 simulated buyers",
+  "_how_to_use": "Mock mode only: play frames 1-3 every 2 s; play frame 4 about 3 s after the user presses Inject fault. Real data comes from GET /heal/{id} (SSE).",
+  "frames": [
+    {
+      "seq": 1,
+      "stage": "HEAL_1",
+      "stage_pct": 1,
+      "guard": "OK \u2014 no money rule broken on NEW payments",
+      "switch_config": {
+        "graft_id": "demo-1",
+        "stage_pct": 1,
+        "version": 1,
+        "expires_at": "2026-11-05T10:05:00Z",
+        "origin_rules": [
+          "legacy refunds stay OLD"
+        ],
+        "signature": "mock-signature"
+      },
+      "last_decision": {
+        "graft_id": "demo-1",
+        "from_stage_pct": 0,
+        "action": "STEP_UP",
+        "to_stage_pct": 1,
+        "reason": "Shadow runs all matched; first real buyers may use NEW",
+        "stats": {
+          "n_old": 30,
+          "success_old": 29,
+          "n_new": 30,
+          "success_new": 30,
+          "prob_new_not_worse": 0.97,
+          "threshold": 0.95
+        }
+      },
+      "recent": [
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "OLD",
+          "event": "CAPTURED",
+          "order_ref": "order-1",
+          "latency_ms": 187,
+          "ts": "2026-11-05T10:00:01Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        },
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "NEW",
+          "event": "CAPTURED",
+          "order_ref": "order-2",
+          "latency_ms": 194,
+          "ts": "2026-11-05T10:00:03Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        }
+      ],
+      "graft_id": "demo-1",
+      "label": "MOCK \u00b7 SYNTHETIC \u00b7 PayPal sandbox \u00b7 simulated buyers"
+    },
+    {
+      "seq": 2,
+      "stage": "HEAL_10",
+      "stage_pct": 10,
+      "guard": "OK \u2014 no money rule broken on NEW payments",
+      "switch_config": {
+        "graft_id": "demo-1",
+        "stage_pct": 10,
+        "version": 2,
+        "expires_at": "2026-11-05T10:05:00Z",
+        "origin_rules": [
+          "legacy refunds stay OLD"
+        ],
+        "signature": "mock-signature"
+      },
+      "last_decision": {
+        "graft_id": "demo-1",
+        "from_stage_pct": 1,
+        "action": "STEP_UP",
+        "to_stage_pct": 10,
+        "reason": "30 NEW payments, all captured; new path not worse than old",
+        "stats": {
+          "n_old": 60,
+          "success_old": 58,
+          "n_new": 30,
+          "success_new": 30,
+          "prob_new_not_worse": 0.98,
+          "threshold": 0.95
+        }
+      },
+      "recent": [
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "NEW",
+          "event": "CAPTURED",
+          "order_ref": "order-3",
+          "latency_ms": 201,
+          "ts": "2026-11-05T10:01:10Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        },
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "OLD",
+          "event": "CAPTURED",
+          "order_ref": "order-4",
+          "latency_ms": 208,
+          "ts": "2026-11-05T10:01:12Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        },
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "NEW",
+          "event": "APPROVED",
+          "order_ref": "order-5",
+          "latency_ms": 215,
+          "ts": "2026-11-05T10:01:15Z",
+          "lib_version": "1.0.0"
+        }
+      ],
+      "graft_id": "demo-1",
+      "label": "MOCK \u00b7 SYNTHETIC \u00b7 PayPal sandbox \u00b7 simulated buyers"
+    },
+    {
+      "seq": 3,
+      "stage": "HEAL_10",
+      "stage_pct": 10,
+      "guard": "OK \u2014 no money rule broken on NEW payments",
+      "switch_config": {
+        "graft_id": "demo-1",
+        "stage_pct": 10,
+        "version": 2,
+        "expires_at": "2026-11-05T10:05:00Z",
+        "origin_rules": [
+          "legacy refunds stay OLD"
+        ],
+        "signature": "mock-signature"
+      },
+      "last_decision": {
+        "graft_id": "demo-1",
+        "from_stage_pct": 10,
+        "action": "HOLD",
+        "to_stage_pct": 10,
+        "reason": "Need 30 NEW payments at this stage; have 12",
+        "stats": {
+          "n_old": 80,
+          "success_old": 78,
+          "n_new": 42,
+          "success_new": 42,
+          "prob_new_not_worse": 0.96,
+          "threshold": 0.95
+        }
+      },
+      "recent": [
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "NEW",
+          "event": "CAPTURED",
+          "order_ref": "order-6",
+          "latency_ms": 222,
+          "ts": "2026-11-05T10:02:00Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        },
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "OLD",
+          "event": "CAPTURED",
+          "order_ref": "order-7",
+          "latency_ms": 229,
+          "ts": "2026-11-05T10:02:02Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        }
+      ],
+      "graft_id": "demo-1",
+      "label": "MOCK \u00b7 SYNTHETIC \u00b7 PayPal sandbox \u00b7 simulated buyers"
+    },
+    {
+      "seq": 4,
+      "stage": "CUTBACK",
+      "stage_pct": 0,
+      "guard": "BROKEN \u2014 rule R01 broken on a NEW payment (order-8)",
+      "switch_config": {
+        "graft_id": "demo-1",
+        "stage_pct": 0,
+        "version": 3,
+        "expires_at": "2026-11-05T10:05:00Z",
+        "origin_rules": [
+          "legacy refunds stay OLD"
+        ],
+        "signature": "mock-signature"
+      },
+      "last_decision": {
+        "graft_id": "demo-1",
+        "from_stage_pct": 10,
+        "action": "CUTBACK",
+        "to_stage_pct": 0,
+        "reason": "Hard stop: money rule broken on a NEW payment",
+        "hard_stop": "R01: order-8 marked paid without a COMPLETED capture at PayPal",
+        "stats": {
+          "n_old": 81,
+          "success_old": 79,
+          "n_new": 43,
+          "success_new": 42,
+          "prob_new_not_worse": 0.62,
+          "threshold": 0.95
+        }
+      },
+      "recent": [
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "NEW",
+          "event": "ERROR",
+          "order_ref": "order-8",
+          "latency_ms": 236,
+          "ts": "2026-11-05T10:02:40Z",
+          "lib_version": "1.0.0"
+        },
+        {
+          "graft_id": "demo-1",
+          "shop_id": "legacy-php-shop",
+          "path": "OLD",
+          "event": "CAPTURED",
+          "order_ref": "order-9",
+          "latency_ms": 243,
+          "ts": "2026-11-05T10:02:47Z",
+          "lib_version": "1.0.0",
+          "money": {
+            "minor": 1999,
+            "currency": "USD"
+          }
+        }
+      ],
+      "graft_id": "demo-1",
+      "label": "MOCK \u00b7 SYNTHETIC \u00b7 PayPal sandbox \u00b7 simulated buyers"
+    }
+  ]
+}

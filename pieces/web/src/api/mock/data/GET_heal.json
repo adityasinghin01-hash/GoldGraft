@@ -1,0 +1,48 @@
+{
+  "graft_id": "demo-1",
+  "guard": "OK \u2014 no money rule broken on NEW payments",
+  "label": "PayPal sandbox \u00b7 simulated buyers",
+  "last_decision": {
+    "action": "STEP_UP",
+    "from_stage_pct": 1,
+    "graft_id": "demo-1",
+    "reason": "Enough successful samples",
+    "stats": {
+      "n_new": 100,
+      "n_old": 100,
+      "prob_new_not_worse": 0.99,
+      "success_new": 100,
+      "success_old": 100,
+      "threshold": 0.95
+    },
+    "to_stage_pct": 10
+  },
+  "recent": [
+    {
+      "event": "ATTEMPT",
+      "graft_id": "demo-1",
+      "latency_ms": 10,
+      "lib_version": "1.0.0",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "order_ref": "order-1",
+      "path": "OLD",
+      "shop_id": "legacy-php-shop",
+      "ts": "2026-11-02T09:00:00Z"
+    }
+  ],
+  "stage": "HEAL_10",
+  "stage_pct": 10,
+  "switch_config": {
+    "expires_at": "2026-11-02T09:00:00Z",
+    "graft_id": "demo-1",
+    "origin_rules": [
+      "legacy refunds stay OLD"
+    ],
+    "signature": "fixture-signature",
+    "stage_pct": 10,
+    "version": 1
+  }
+}

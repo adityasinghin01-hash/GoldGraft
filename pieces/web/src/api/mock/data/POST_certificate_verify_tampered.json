@@ -1,0 +1,26 @@
+{
+  "cert_id": "cert-demo-tampered",
+  "checks": [
+    {
+      "detail": "certificate content changed after signing",
+      "name": "SIGNATURE",
+      "ok": false
+    },
+    {
+      "detail": "log entry does not match this content",
+      "name": "REKOR",
+      "ok": false
+    },
+    {
+      "detail": "ledger root matches the demo graft chain",
+      "name": "LEDGER_CHAIN",
+      "ok": true
+    },
+    {
+      "detail": "stand-in: PayPal not called",
+      "name": "PAYPAL_REFETCH",
+      "ok": true
+    }
+  ],
+  "ok": false
+}

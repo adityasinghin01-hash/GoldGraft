@@ -1,0 +1,6 @@
+{
+  "detail": "header.Idempotency-Key",
+  "status": 422,
+  "title": "Request does not match the contract",
+  "type": "about:blank"
+}
