@@ -104,7 +104,7 @@ function GoLive() {
 }
 
 function Cert() {
-  const checks = ['Signature', 'Public log entry', 'Same build', 'Proof numbers'];
+  const checks = ['Signature matches', 'Public log matches', 'Step log unbroken', 'PayPal still agrees'];
   return (
     <div className={s.panel}>
       <header className={s.head}><b>Certificate · legacy-php-shop</b><Sample /></header>

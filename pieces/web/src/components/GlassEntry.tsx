@@ -1,10 +1,11 @@
-import { useId, useRef, useState } from 'react';
+import { useId, useRef, useState, type ReactNode } from 'react';
 import { GlowCaret } from './GlowCaret';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRightIcon } from '@phosphor-icons/react';
+import { useLiquidGlass } from './liquidGlass';
 import styles from './GlassEntry.module.css';
 
-type Props = { label: string; placeholder: string; action: string; note: string; invalid: string; inputId?: string };
+type Props = { label: string; placeholder: string; action: string; note: string; invalid: string; inputId?: string; extra?: ReactNode };
 
 const VALID = /^https?:\/\/\S+$/;
 
@@ -12,7 +13,7 @@ const VALID = /^https?:\/\/\S+$/;
  * The glass Check box (Raycast-style command entry, real form).
  * idle → focused → invalid (inline, nothing sent) → going (opens the Check screen with the address).
  */
-export function GlassEntry({ label, placeholder, action, note, invalid, inputId }: Props) {
+export function GlassEntry({ label, placeholder, action, note, invalid, inputId, extra }: Props) {
   const autoId = useId();
   const id = inputId ?? autoId;
   const [value, setValue] = useState('');
@@ -20,6 +21,8 @@ export function GlassEntry({ label, placeholder, action, note, invalid, inputId 
   const [going, setGoing] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
+  const fieldRef = useRef<HTMLDivElement>(null);
+  useLiquidGlass(fieldRef, { blur: 10, bend: 34, band: 20 });
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +36,7 @@ export function GlassEntry({ label, placeholder, action, note, invalid, inputId 
   return (
     <form className={styles.form} onSubmit={submit} noValidate data-error={error || undefined}>
       <label htmlFor={id} className={styles.label}>{label}</label>
-      <div className={`gg-glass gg-glass-blur ${styles.field}`}>
+      <div ref={fieldRef} className={`gg-lg ${styles.field}`}>
         <span className={styles.glint} aria-hidden />
         <input
           ref={inputRef}
@@ -55,9 +58,12 @@ export function GlassEntry({ label, placeholder, action, note, invalid, inputId 
           <ArrowRightIcon size={16} weight="bold" aria-hidden />
         </button>
       </div>
-      <p id={`${id}-note`} className={styles.note} role={error ? 'alert' : undefined}>
-        {error ? invalid : note}
-      </p>
+      <div className={styles.under}>
+        <p id={`${id}-note`} className={styles.note} role={error ? 'alert' : undefined}>
+          {error ? invalid : note}
+        </p>
+        {extra}
+      </div>
     </form>
   );
 }

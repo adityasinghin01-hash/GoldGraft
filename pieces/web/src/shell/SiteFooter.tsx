@@ -35,7 +35,7 @@ export function SiteFooter({ compact = false }: { compact?: boolean }) {
         </div>
         {FOOTER.groups.map((g) => (
           <nav key={g.title} className={styles.group} aria-label={g.title}>
-            <p className={styles.groupTitle}>{compact && g.title === 'This page' ? 'Overview' : g.title}</p>
+            <p className={`gg-label ${styles.groupTitle}`}>{compact && g.title === 'This page' ? 'Overview' : g.title}</p>
             <ul>{g.links.map((l) => <li key={l.label}><FooterLink l={l as L} /></li>)}</ul>
           </nav>
         ))}

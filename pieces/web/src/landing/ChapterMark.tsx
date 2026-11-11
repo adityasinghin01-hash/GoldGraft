@@ -1,12 +1,11 @@
 import s from './landing.module.css';
 
-/** "02 ——— The problem": a chapter marker whose line draws itself and whose label types in. */
-export function ChapterMark({ n, label }: { n: string; label: string }) {
+/** "——— The problem": a quiet chapter marker. The line draws itself, the word types in. */
+export function ChapterMark({ label }: { label: string }) {
   return (
-    <div className={s.chapter}>
-      <span className={`gg-num ${s.chapterNum}`}>{n}</span>
+    <p className={`gg-label ${s.chapter}`}>
       <span className={s.chapterLine} data-draw aria-hidden />
-      <span className="gg-label" data-scramble>{label}</span>
-    </div>
+      <span data-scramble>{label}</span>
+    </p>
   );
 }

@@ -2,7 +2,7 @@
 // console errors, optional reduced motion. Zero dependencies (Chrome + Node 22 WebSocket).
 //
 //   node tools/shoot.mjs <url> [--widths 1280,1440,1920] [--height 900] [--at 0,1.2,2.4] [--wait 2500]
-//                        [--out .shots] [--name hero] [--reduced] [--gpu] [--full] [--eval "js"]
+//                        [--out .shots] [--name hero] [--reduced] [--gpu] [--full] [--eval "js"] [--clip x,y,w,h]
 // --at  scroll positions in viewport heights (each gets its own shot)
 // Prints PNG paths and any console errors / page exceptions.
 
@@ -80,6 +80,12 @@ try {
         await sleep(Math.max(1400, wait * 0.6));
       }
       let clip;
+      if (opt('clip', '')) {
+        // clip is given in viewport coordinates; CDP wants document coordinates
+        const [x, y, cw, ch] = opt('clip').split(',').map(Number);
+        const { result: sy } = await S('Runtime.evaluate', { expression: 'window.scrollY', returnByValue: true });
+        clip = { x, y: y + (sy.value || 0), width: cw, height: ch, scale: 1 };
+      }
       if (flag('full')) {
         const { result } = await S('Runtime.evaluate', { expression: 'document.documentElement.scrollHeight', returnByValue: true });
         clip = { x: 0, y: 0, width: w, height: Math.min(result.value, 16000), scale: 1 };

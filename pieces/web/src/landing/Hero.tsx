@@ -1,36 +1,38 @@
 import { Link } from 'react-router-dom';
-import { PlayIcon } from '@phosphor-icons/react';
+import { GitPullRequestIcon, KeyIcon, PlayIcon, ShieldCheckIcon } from '@phosphor-icons/react';
 import { GlassEntry } from '../components/GlassEntry';
 import { HERO } from '../copy/landing';
-import { FamilyBand, LiveCard } from './LiveCard';
+import { LiveCard } from './LiveCard';
 import s from './landing.module.css';
 
+/**
+ * Hero on the 12-column grid: the promise and the Check box on columns 1–7,
+ * the living graft (world picture) upper right, a sample upgrade playing below it on columns 9–12.
+ */
 export function Hero() {
   return (
     <section id="top" className={s.hero} data-world="graft" data-world-lead="1">
-      <div className={`gg-wrap ${s.heroInner}`}>
+      <div className={`gg-wrap gg-grid ${s.heroGrid}`}>
         <div className={s.heroCopy}>
-          <p className={`gg-label ${s.eyebrow}`} data-scramble="load">
-            <span className={s.dot} aria-hidden /> {HERO.eyebrow}
-          </p>
-          <h1 className={s.heroTitle}>
+          <h1 className={s.heroTitle} data-exit>
             <span className={s.heroA} data-split="load" data-delay="0.1">{HERO.titleA}</span>
-            <em className={s.heroB} data-split="load" data-delay="0.32">{HERO.titleB}</em>
+            <span className={s.heroB} data-split="load" data-delay="0.34">{HERO.titleB}</span>
           </h1>
-          <p className={`gg-lead ${s.heroLead}`} data-rise="load" data-delay="0.6">{HERO.lead}</p>
-          <div className={s.heroEntry} data-rise="load" data-delay="0.75" data-vine="hero">
-            <GlassEntry inputId="shop-url" label={HERO.inputLabel} placeholder={HERO.placeholder} action={HERO.check} note={HERO.note} invalid={HERO.invalid} />
-            <Link to="/g/demo-1" className={`gg-btn gg-btn--ghost gg-btn--sm ${s.sampleLink}`}>
-              <PlayIcon size={13} weight="fill" aria-hidden /> {HERO.sample}
-            </Link>
+          <p className={`gg-lead ${s.heroLead}`} data-rise="load" data-delay="0.55" data-exit>{HERO.lead}</p>
+          <div className={s.heroEntry} data-rise="load" data-delay="0.7" data-vine="hero" data-exit>
+            <GlassEntry inputId="shop-url" label={HERO.inputLabel} placeholder={HERO.placeholder} action={HERO.check} note={HERO.note} invalid={HERO.invalid}
+              extra={<Link to="/g/demo-1" className={s.sampleLink}><PlayIcon size={12} weight="fill" aria-hidden /> {HERO.sample}</Link>} />
           </div>
         </div>
-        <div className={s.heroSide} data-rise="load" data-delay="1.1">
-          <LiveCard />
+        <ul className={s.promises} data-stagger="load" data-delay="0.9" data-exit>
+          {HERO.promises.map((t, i) => {
+            const Icon = [ShieldCheckIcon, KeyIcon, GitPullRequestIcon][i];
+            return <li key={t}><Icon size={18} weight="light" aria-hidden /> {t}</li>;
+          })}
+        </ul>
+        <div className={s.heroSide} data-rise="load" data-delay="1.0">
+          <div data-exit><LiveCard /></div>
         </div>
-      </div>
-      <div className={s.heroFoot}>
-        <FamilyBand />
       </div>
       <img className={s.fallbackArt} src="/world/01-graft-union.jpg" alt="" aria-hidden data-fallback-art />
     </section>

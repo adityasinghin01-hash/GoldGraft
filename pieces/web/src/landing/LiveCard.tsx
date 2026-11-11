@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { CheckIcon } from '@phosphor-icons/react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowCounterClockwiseIcon, CheckIcon } from '@phosphor-icons/react';
 import { reducedMotion } from '../motion/scroll';
 import s from './landing.module.css';
 
 // A sample upgrade playing in the hero, step by step, each line typed in as it happens.
+// It plays once and holds; hover (or the replay button) plays it again.
 // Words and numbers are the stand-in sample (labelled), so nothing here claims a real run.
 const ROWS = [
   { who: 'Surveyor', text: 'Found 5 old PayPal pieces' },
@@ -17,29 +18,35 @@ export function LiveCard() {
   const still = reducedMotion();
   const [n, setN] = useState(still ? ROWS.length : 0);
   const [chars, setChars] = useState(0);
+  const [run, setRun] = useState(0);
+  const playing = useRef(false);
 
   useEffect(() => {
     if (still) return;
-    let row = 0, c = 0;
-    let t = 0;
+    let row = 0, c = 0, t = 0;
+    playing.current = true;
+    setN(0); setChars(0);
     const tick = () => {
-      if (row >= ROWS.length) { t = window.setTimeout(() => { row = 0; c = 0; setN(0); setChars(0); t = window.setTimeout(tick, 600); }, 3800); return; }
+      if (row >= ROWS.length) { playing.current = false; return; }
       if (c === 0) setN(row + 1);
       c += 2;
       setChars(c);
-      if (c >= ROWS[row].text.length) { row += 1; c = 0; t = window.setTimeout(tick, 700); return; }
+      if (c >= ROWS[row].text.length) { row += 1; c = 0; t = window.setTimeout(tick, 650); return; }
       t = window.setTimeout(tick, 22);
     };
-    t = window.setTimeout(tick, 1600);
+    t = window.setTimeout(tick, run === 0 ? 1700 : 250);
     return () => window.clearTimeout(t);
-  }, [still]);
+  }, [still, run]);
+
+  const replay = useCallback(() => { if (!playing.current && !still) setRun((r) => r + 1); }, [still]);
+  const done = n === ROWS.length && chars >= ROWS[ROWS.length - 1].text.length;
 
   return (
-    <aside className={`gg-glass ${s.liveCard}`} data-tilt aria-label="A sample upgrade, step by step">
+    <aside className={`gg-glass ${s.liveCard}`} data-tilt aria-label="A sample upgrade, step by step" onMouseEnter={replay}>
       <header className={s.liveHead}>
-        <span className={s.liveDot} aria-hidden />
+        <span className={s.liveDot} data-done={done || undefined} aria-hidden />
         <span>Upgrading <b>legacy-php-shop</b></span>
-        <span className={s.liveSample} title="Stand-in sample data, not a recording of a real run">Sample</span>
+        <span className={s.chip} title="Stand-in sample data, not a recording of a real run">Sample</span>
       </header>
       <ol className={s.liveRows}>
         {ROWS.slice(0, n).map((r, i) => {
@@ -53,24 +60,14 @@ export function LiveCard() {
           );
         })}
       </ol>
-      <div className={s.liveBar} aria-hidden><span style={{ width: `${(n / ROWS.length) * 100}%` }} /></div>
+      <footer className={s.liveFoot}>
+        <div className={s.liveBar} aria-hidden><span style={{ width: `${(n / ROWS.length) * 100}%` }} /></div>
+        {!still && (
+          <button type="button" className={s.liveReplay} onClick={replay} disabled={!done} aria-label="Play the sample again">
+            <ArrowCounterClockwiseIcon size={13} aria-hidden /> Replay
+          </button>
+        )}
+      </footer>
     </aside>
-  );
-}
-
-const FAMILIES = ['Website Payments Standard', 'Express Checkout (NVP)', 'Express Checkout (SOAP)', 'Instant Payment Notification', 'checkout.js v4', 'JavaScript SDK v5', 'REST v1 payments', 'Direct Payment', 'Recurring payments (NVP)', 'Payment Data Transfer', 'Billing agreements', 'Payflow'];
-
-/** A band of every old PayPal product GoldGraft upgrades; it drifts and leans with scroll speed. */
-export function FamilyBand() {
-  const items = [...FAMILIES, ...FAMILIES];
-  return (
-    <div className={s.band} aria-label="Old PayPal products GoldGraft upgrades">
-      <p className={s.bandLabel}>Old PayPal it upgrades</p>
-      <div className={s.bandTrack} data-band>
-        <ul className={s.bandRow}>
-          {items.map((f, i) => <li key={i} aria-hidden={i >= FAMILIES.length || undefined}><span className={s.bandDot} />{f}</li>)}
-        </ul>
-      </div>
-    </div>
   );
 }

@@ -5,8 +5,9 @@ import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 /**
- * The graft moment (pinned while you scroll): the cut is bound, three labels appear
- * at the joint one by one, and a ring of light seals it. Scrubbed by the scroll.
+ * The idea, pinned for one screen: the heading on the left, the bound cut on the right.
+ * Three labels point at the real parts of the photo (rootstock, new branch, joint),
+ * a ring of light seals the joint, then the explanation arrives and everything leaves together.
  */
 export function Graft() {
   const ref = useRef<HTMLElement>(null);
@@ -16,13 +17,14 @@ export function Graft() {
     if (!el || reducedMotion()) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: el, start: 'top top', end: 'bottom bottom', scrub: 0.6 },
+        scrollTrigger: { trigger: el, start: 'top top', end: 'bottom bottom', scrub: 0.5 },
+        defaults: { ease: 'none' },
       });
-      tl.from('[data-g="title"]', { yPercent: 18, autoAlpha: 0, duration: 0.18, ease: 'none' }, 0.02)
-        .from('[data-g="tag"]', { autoAlpha: 0, y: 14, duration: 0.12, stagger: 0.16, ease: 'none' }, 0.2)
-        .from('[data-g="leader"]', { scaleX: 0, duration: 0.12, stagger: 0.16, ease: 'none' }, 0.2)
-        .fromTo('[data-g="seal"]', { scale: 0.4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.2, ease: 'none' }, 0.72)
-        .from('[data-g="lead"]', { autoAlpha: 0, y: 20, duration: 0.15, ease: 'none' }, 0.78);
+      tl.from('[data-g="tag"]', { autoAlpha: 0, y: 12, duration: 0.1, stagger: 0.12 }, 0.08)
+        .from('[data-g="leader"]', { scaleX: 0, duration: 0.1, stagger: 0.12 }, 0.08)
+        .fromTo('[data-g="seal"]', { scale: 0.5, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.18 }, 0.42)
+        .from('[data-g="lead"]', { autoAlpha: 0, y: 20, duration: 0.14 }, 0.5)
+        .to('[data-g="all"]', { autoAlpha: 0, y: -28, duration: 0.14 }, 0.86);
     }, el);
     return () => ctx.revert();
   }, []);
@@ -30,15 +32,16 @@ export function Graft() {
   return (
     <section ref={ref} id="graft" className={s.graft} data-world="binding" data-world-lead="0.35">
       <div className={s.graftSticky}>
-        <div className={`gg-wrap ${s.graftInner}`}>
-          <div className={s.graftMark}><ChapterMark n="03" label="The idea" /></div>
-          <h2 className={s.graftTitle} data-g="title" data-vine="graft">
-            {GRAFT.title} <em>{GRAFT.titleEm}</em>
-          </h2>
-          <div className={s.joint} aria-hidden>
-            <span className={s.seal} data-g="seal" />
+        <div data-g="all" style={{ height: '100%' }}>
+          <div className={`gg-wrap gg-grid ${s.graftGrid}`}>
+            <div className={`${s.head} ${s.graftHead}`} data-vine="graft">
+              <ChapterMark label={GRAFT.label} />
+              <h2 className="gg-h2" data-split>{GRAFT.title}</h2>
+            </div>
+            <p className={s.graftLead} data-g="lead">{GRAFT.lead}</p>
           </div>
-          <ul className={s.graftTags}>
+          <span className={s.seal} data-g="seal" aria-hidden />
+          <ul aria-label="The graft, part by part">
             {GRAFT.tags.map((t, i) => (
               <li key={t} className={s.graftTag} data-pos={i} data-g="tag">
                 <span className={s.leader} data-g="leader" aria-hidden />
@@ -46,7 +49,6 @@ export function Graft() {
               </li>
             ))}
           </ul>
-          <p className={`gg-lead ${s.graftLead}`} data-g="lead">{GRAFT.lead}</p>
         </div>
       </div>
     </section>

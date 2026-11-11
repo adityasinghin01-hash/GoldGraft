@@ -2,12 +2,10 @@ import { useEffect, useRef } from 'react';
 import { gsap, reducedMotion } from '../motion/scroll';
 import s from './vine.module.css';
 
-type Side = 'L' | 'R' | 'C';
-
 /**
- * The gold graft line. It starts at the Check box and grows down the page as you
- * scroll, touching every chapter's anchor ([data-vine]) and putting out a leaf there,
- * so the sections read as one living plant instead of separate boxes.
+ * The gold graft line. It leaves the hero's Check box, grows down the left margin lane as you
+ * scroll (a leaf opens at each chapter, [data-vine]) and ends in the final Check button:
+ * the page starts and ends at the same action.
  */
 export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null> }) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -34,82 +32,61 @@ export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null>
       const rootBox = root.getBoundingClientRect();
       const W = root.clientWidth;
       const H = root.scrollHeight;
-      const vh = window.innerHeight;
       svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
       svg.style.height = `${H}px`;
-      const margin = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gg-margin')) || 84;
-      const L = Math.max(14, margin * 0.5);
-      const R = W - L;
-      const lane = (side: Side) => (side === 'L' ? L : side === 'R' ? R : W * 0.7);
-      type A = { y: number; side: Side; secTop: number; secBottom: number; padTop: number; padBottom: number; x0?: number };
-      const anchors: A[] = [];
-      root.querySelectorAll<HTMLElement>('[data-vine]').forEach((el) => {
+      const margin = parseFloat(getComputedStyle(root).getPropertyValue('--gg-margin')) || 60;
+      // the stem lives in the left margin lane only: it never crosses a picture or a line of text
+      const lane = Math.max(10, margin * 0.5);
+      const els = [...root.querySelectorAll<HTMLElement>('[data-vine]')];
+      if (els.length < 2) return;
+      const box = (el: HTMLElement) => {
         const r = el.getBoundingClientRect();
-        const sec = (el.closest('section, footer') as HTMLElement) ?? el;
-        const sr = sec.getBoundingClientRect();
-        const cs = getComputedStyle(sec);
-        const mid = r.left - rootBox.left + r.width / 2;
-        const side: Side = el.dataset.vine === 'final' ? 'C' : mid > W * 0.55 ? 'R' : 'L';
-        anchors.push({
-          y: r.top - rootBox.top + Math.min(36, r.height * 0.3), side,
-          secTop: sr.top - rootBox.top, secBottom: sr.bottom - rootBox.top,
-          padTop: parseFloat(cs.paddingTop) || 0, padBottom: parseFloat(cs.paddingBottom) || 0,
-          x0: r.left - rootBox.left,
-        });
-      });
-      if (anchors.length < 2) return;
-      const fin = anchors[anchors.length - 1];
-      if (fin.side === 'C') fin.y = fin.secTop + vh * 0.42; // the mark's centre when the final chapter fills the screen
-
-      const sway = (i: number) => (i % 2 ? 9 : -9);
-      const a0 = anchors[0];
-      let x = lane(a0.side), y = a0.y;
-      let d = `M ${(a0.x0 ?? x) - 8} ${a0.y} C ${(a0.x0 ?? x) - 30} ${a0.y}, ${x} ${a0.y - 10}, ${x} ${a0.y + 30}`;
-      y = a0.y + 30;
-      const down = (toY: number, i: number) => {
-        if (toY <= y) return;
-        const dy = toY - y;
-        d += ` C ${x + sway(i)} ${y + dy * 0.33}, ${x - sway(i)} ${y + dy * 0.66}, ${x} ${toY}`;
-        y = toY;
+        return { x: r.left - rootBox.left, y: r.top - rootBox.top, h: r.height };
       };
-      for (let i = 1; i < anchors.length; i++) {
-        const prev = anchors[i - 1], b = anchors[i];
-        if (b.side !== prev.side) {
-          // cross only through empty space: the padding between two chapters
-          const yStart = Math.max(y + 10, prev.secBottom - prev.padBottom * 0.7);
-          const yEnd = Math.max(yStart + 80, b.side === 'C' ? b.y - vh * 0.2 : b.secTop + Math.max(b.padTop * 0.7, 60));
-          down(yStart, i);
-          const nx = lane(b.side);
-          d += ` C ${x} ${yStart + (yEnd - yStart) * 0.55}, ${nx} ${yEnd - (yEnd - yStart) * 0.55}, ${nx} ${yEnd}`;
-          x = nx; y = yEnd;
-        }
-        down(b.side === 'C' ? b.y : b.y, i);
-      }
+      const first = box(els[0]);
+      const last = box(els[els.length - 1]);
+      // start: out of the Check box's left edge, at the field's middle; end: into the final button
+      const sx = first.x - 6, sy = first.y + 52;
+      const ex = last.x - 6, ey = last.y + 24;
+      let d = `M ${sx} ${sy} C ${sx - 18} ${sy}, ${lane} ${sy + 6}, ${lane} ${sy + 46}`;
+      let y = sy + 46;
+      const stops = els.slice(1, -1).map((el) => box(el).y + 18).filter((v) => v > y + 40 && v < ey - 80);
+      stops.push(ey - 52);
+      stops.forEach((to, i) => {
+        const dy = to - y;
+        const sway = (i % 2 ? 1 : -1) * Math.min(6, margin * 0.12);
+        d += ` C ${lane + sway} ${y + dy * 0.33}, ${lane - sway} ${y + dy * 0.66}, ${lane} ${to}`;
+        y = to;
+      });
+      d += ` C ${lane} ${ey - 12}, ${ex - 18} ${ey}, ${ex} ${ey}`;
       path.setAttribute('d', d);
       glow.setAttribute('d', d);
       total = path.getTotalLength();
       lookup = [];
       for (let l = 0; l <= total; l += 16) lookup.push({ y: path.getPointAtLength(l).y, len: l });
       lookup.push({ y: path.getPointAtLength(total).y, len: total });
+      const lenAt = (yy: number) => {
+        let best = 0, bestD = Infinity;
+        for (const k of lookup) { const dd = Math.abs(k.y - yy); if (dd < bestD) { bestD = dd; best = k.len; } }
+        return best;
+      };
 
-      // a leaf beside each chapter, turned toward its content
+      // a small leaf at each chapter, opening toward the text; a seal node where the stem ends
       leavesG.replaceChildren();
-      leaves = anchors.map((a, i) => {
-        const lx = lane(a.side);
+      const marks = [...stops.slice(0, -1).map((yy) => ({ y: yy, end: false })), { y: ey, end: true }];
+      leaves = marks.map((m, i) => {
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.setAttribute('transform', `translate(${lx} ${a.y})`);
+        const at = m.end ? { x: ex, y: ey } : { x: lane, y: m.y };
+        g.setAttribute('transform', `translate(${at.x} ${at.y})`);
         const inner = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         inner.setAttribute('class', s.leaf);
-        const flip = a.side === 'R' ? -1 : 1;
-        inner.innerHTML = a.side === 'C'
-          ? `<circle r="5" class="${s.node}"/>`
-          : `<circle r="3.2" class="${s.node}"/><path class="${s.leafShape}" d="M0 0 C ${9 * flip} -11, ${22 * flip} -12, ${28 * flip} -4 C ${19 * flip} 3, ${8 * flip} 4, 0 0 Z"/>`;
+        const up = i % 2 ? -1 : 1;
+        inner.innerHTML = m.end
+          ? `<circle r="4.5" class="${s.node}"/>`
+          : `<circle r="2.6" class="${s.node}"/><path class="${s.leafShape}" d="M0 0 C 6 ${-8 * up}, 15 ${-9 * up}, 19 ${-3 * up} C 13 ${2 * up}, 6 ${3 * up}, 0 0 Z"/>`;
         g.appendChild(inner);
         leavesG.appendChild(g);
-        let best = 0, bestD = Infinity;
-        for (const k of lookup) { const dd = Math.abs(k.y - a.y); if (dd < bestD) { bestD = dd; best = k.len; } }
-        if (i === 0) best = 0;
-        return { len: best, el: inner };
+        return { len: m.end ? total : lenAt(m.y), el: inner };
       });
       path.style.strokeDasharray = `${total}`;
       glow.style.strokeDasharray = `${total}`;

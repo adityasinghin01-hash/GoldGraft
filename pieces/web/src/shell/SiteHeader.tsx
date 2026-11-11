@@ -1,16 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRightIcon as ArrowUpRight, ListIcon as List, XIcon as X } from '@phosphor-icons/react';
 import { Mark } from '../components/Mark';
+import { useLiquidGlass } from '../components/liquidGlass';
 import { NAV } from '../copy/landing';
 import { scrollToTarget } from '../motion/scroll';
 import styles from './SiteHeader.module.css';
 
-/** Landing header: clear over the hero, glass once you scroll; marks the chapter you're in. */
+/**
+ * Landing header: three liquid-glass islands on the page grid.
+ * Brand at the left margin, the chapter nav in the centre, actions at the right margin.
+ * The nav marks the chapter you are reading.
+ */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const brandRef = useRef<HTMLAnchorElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const actRef = useRef<HTMLDivElement>(null);
+  useLiquidGlass(brandRef);
+  useLiquidGlass(navRef);
+  useLiquidGlass(actRef);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -50,12 +61,12 @@ export function SiteHeader() {
   return (
     <header className={styles.header} data-scrolled={scrolled || undefined} data-open={open || undefined}>
       <div className={styles.bar}>
-        <Link to="/" className={styles.brand} aria-label="GoldGraft home">
-          <span className={styles.mark}><Mark size={30} /></span>
+        <Link ref={brandRef} to="/" className={`gg-lg ${styles.island} ${styles.brand}`} aria-label="GoldGraft home">
+          <span className={styles.mark}><Mark size={26} /></span>
           <span className={styles.word}>GoldGraft</span>
         </Link>
 
-        <nav className={styles.nav} aria-label="Page sections">
+        <nav ref={navRef} className={`gg-lg ${styles.island} ${styles.nav}`} aria-label="Page sections">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} onClick={go(n.href)} className={styles.navLink}
                aria-current={active === n.href.slice(1) ? 'true' : undefined}>
@@ -64,9 +75,9 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className={styles.actions}>
-          <Link to="/my" className={`gg-btn gg-btn--ghost gg-btn--sm ${styles.open}`}>
-            Open app <ArrowUpRight size={14} weight="bold" aria-hidden />
+        <div ref={actRef} className={`gg-lg ${styles.island} ${styles.actions}`}>
+          <Link to="/my" className={styles.open}>
+            Open app <ArrowUpRight size={13} weight="bold" aria-hidden />
           </Link>
           <a href="#top" onClick={checkMyShop} className="gg-btn gg-btn--gold gg-btn--sm">Check my shop</a>
           <button className={styles.menuBtn} aria-expanded={open} aria-controls="site-menu" aria-label={open ? 'Close menu' : 'Open menu'} onClick={() => setOpen((v) => !v)}>
@@ -75,7 +86,7 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div id="site-menu" className={styles.sheet} hidden={!open}>
+      <div id="site-menu" className={`gg-lg ${styles.sheet}`} hidden={!open}>
         {NAV.map((n) => <a key={n.href} href={n.href} onClick={go(n.href)}>{n.label}</a>)}
         <Link to="/my" onClick={() => setOpen(false)}>Open app</Link>
       </div>

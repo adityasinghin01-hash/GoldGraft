@@ -1,6 +1,11 @@
-// Every word on the landing page. Passed through the humanizer skill (11 Nov 2026):
+// Every word on the landing page. Passed through the humanizer skill (11–12 Nov 2026):
 // no em dashes, no AI vocabulary, plain words a shop owner would use.
 // Facts carry their source; anything that is a sample says so.
+//
+// Heading rule (landing and app): a heading is one phrase in sentence case with no full stop.
+// Brand names keep their own case (PayPal, GoldGraft). A display heading may break into a main
+// line and a smaller continuation line, which carries on the same phrase in lower case.
+// Body text is sentences, with full stops.
 
 export const SOURCES = {
   wps: {
@@ -28,9 +33,8 @@ export const NAV = [
 ] as const;
 
 export const HERO = {
-  eyebrow: 'For shops still on old PayPal checkout',
-  titleA: "PayPal's new checkout.",
-  titleB: 'Without rebuilding your shop.',
+  titleA: "PayPal's new checkout",
+  titleB: 'without rebuilding your shop',
   lead: 'GoldGraft finds your old PayPal code, writes the new checkout and tests every kind of payment before a single buyer sees it.',
   inputLabel: "Your shop's website or code link",
   placeholder: 'https://github.com/you/your-shop',
@@ -38,13 +42,13 @@ export const HERO = {
   note: 'A quick check. It needs no keys.',
   sample: 'See a sample upgrade',
   invalid: 'Enter a full address starting with https://',
-  scroll: 'Scroll to see how',
+  promises: ['Runs on a sandbox copy', 'Sandbox keys only', 'Nothing goes live until you approve'],
 };
 
 export const PROOF = {
   label: 'Why now',
-  title: 'PayPal is switching off the old checkout.',
-  titleEm: 'Plenty of shops still run on it.',
+  title: 'PayPal is switching off the old checkout',
+  lead: 'The date is set, and plenty of shops still run on it.',
   facts: [
     {
       big: '1 Jan 2027',
@@ -60,27 +64,32 @@ export const PROOF = {
   quote: 'Our merchants, especially the largest ones, … require much more hands-on integration support than we anticipated.',
   quoteBy: 'PayPal',
   quoteSource: SOURCES.call,
-  resultsLabel: 'Tested before we asked you to trust it',
+  resultsLabel: 'Tested before we ask for your trust',
+  resultsCaption: 'agent test runs passed, across all 13 AI agents',
+  resultsMore: 'Results for each agent',
   resultsNote: 'Results from our own test runs with real AI model calls, November 2026.',
 };
 
 export const PROBLEM = {
   label: 'The problem',
-  title: 'Your checkout runs on code PayPal is retiring.',
+  title: 'What breaks if you wait',
+  lead: 'Your checkout runs on code PayPal is retiring. Three things go wrong.',
   pains: [
     { title: 'It stops taking money', text: 'When PayPal turns the old buttons off, a buyer presses Pay and nothing happens.' },
     { title: 'A rewrite takes weeks', text: 'Someone has to find every old PayPal call, rewrite it, then test refunds, held payments and notifications by hand.' },
     { title: 'The worst bugs are quiet', text: 'A payment that is still pending gets marked as paid. Nobody notices until the money never arrives.' },
   ],
+  calcTitle: 'What a day without checkout costs you',
   calcLabel: 'Your monthly PayPal sales',
+  calcPlaceholder: '12,000',
   calcPrefix: 'If your checkout stops, about',
   calcSuffix: 'a day stops with it.',
   calcNote: 'Worked out in your browser from your own number. Nothing is sent anywhere.',
 };
 
 export const GRAFT = {
-  title: "Don't cut the tree.",
-  titleEm: 'Graft.',
+  label: 'The idea',
+  title: "Don't cut the tree, graft onto it",
   lead: "A gardener who wants better fruit doesn't cut the old tree down. They join a new branch to the living one. GoldGraft does that with your checkout, so the shop keeps selling while the new checkout grows in.",
   tags: ['Your shop stays', 'The new checkout joins', 'Every payment is tested at the joint'],
 };
@@ -88,8 +97,8 @@ export const GRAFT = {
 export type Feature = { id: string; state: string; title: string; benefit: string; text: string };
 export const FEATURES_INTRO = {
   label: 'What it does',
-  title: 'Seven jobs, done in order,',
-  titleEm: 'and each one checked.',
+  title: 'Seven jobs, each one checked',
+  lead: 'GoldGraft does them in this order. Each one leaves a record you can open and check.',
 };
 export const FEATURES: Feature[] = [
   { id: 'find', state: 'f-find', title: 'Finds every old PayPal piece', benefit: 'Nothing gets missed.', text: 'It reads your code, your live pages and your PayPal account, then lists each old piece and where it sits.' },
@@ -103,8 +112,7 @@ export const FEATURES: Feature[] = [
 
 export const STEPS = {
   label: 'How it works',
-  title: 'From old checkout to new',
-  titleEm: 'in four steps.',
+  title: 'Four steps from old checkout to new',
   items: [
     { n: '01', title: 'Paste your link', text: 'Your code or your website. The first check needs no keys.' },
     { n: '02', title: 'Add test keys', text: "Only PayPal sandbox keys are accepted, so nothing in your live shop changes." },
@@ -116,6 +124,7 @@ export const STEPS = {
 export const FAQ = {
   label: 'Questions',
   title: 'Things people ask first',
+  lead: 'Short answers. The sample upgrade shows the rest.',
   items: [
     { q: 'Will my live shop change while this runs?', a: "No. Everything runs on a copy of your shop in PayPal's test sandbox. Nothing live changes until you approve the pull request." },
     { q: 'Can GoldGraft see my PayPal keys?', a: 'Your keys go straight into a vault and the AI agents never see them. GoldGraft also refuses live keys and accepts sandbox keys only.' },
@@ -129,8 +138,8 @@ export const FAQ = {
 };
 
 export const FINAL = {
-  title: 'Keep your shop.',
-  titleEm: 'Get the new checkout.',
+  title: 'Keep your shop',
+  titleEm: 'get the new checkout',
   lead: 'Paste your link and see which old PayPal pieces your shop still uses.',
   primary: 'Check my shop',
   secondary: 'See a sample upgrade',
