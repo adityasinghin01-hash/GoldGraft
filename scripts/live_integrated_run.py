@@ -51,6 +51,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SHOPS = {
     # Admitted plain-PHP one-time-payment profile: the MIT Cutover sample, vendored as a fixture.
     "legacy-php-shop": ROOT / "fixtures/shops/legacy-php-shop/src",
+    # A second, different admitted input (2 files): the Surveyor evaluation shop "eval-nvp".
+    "eval-nvp": ROOT / "pieces/agents/evals/surveyor_cases.json",
 }
 COMPONENT_ROLES = {r for r in integrated.ROLES if r not in {"Surveyor", "Herald"}}
 
@@ -86,7 +88,30 @@ class TaskArtifacts(ComponentEvaluationArtifacts):
 
 def shop_files(name):
     root = SHOPS[name]
+    if root.suffix == ".json":
+        cases = json.loads(root.read_text())["cases"]
+        return next(c["files"] for c in cases if c["shop_id"] == name)
     return {str(p.relative_to(root)): p.read_text() for p in sorted(root.rglob("*.php"))}
+
+
+def fleet_buckets(runs_dir, minimum=5):
+    """Aggregate of earlier integrated test runs, projected with small-cohort suppression.
+
+    A run whose agent chain finished is "unverified" (no independent SH proof runs in this
+    graph yet); a run that stopped inside the chain is "held". Buckets under the cohort
+    minimum are dropped by this projection, never shown to the model.
+    """
+    counts = {"held": 0, "unverified": 0}
+    for f in sorted(runs_dir.glob("*/RESULT.json")):
+        r = json.loads(f.read_text())
+        if r.get("status") == "running":
+            continue
+        done = {t["task"] for t in r.get("tasks", []) if t.get("passed")}
+        chain = {stage[0] for stage in integrated.CHAIN}
+        counts["unverified" if chain <= done else "held"] += 1
+    return [
+        {"stage": stage, "cases": n, "unverified": n} for stage, n in counts.items() if n >= minimum
+    ]
 
 
 def oracle_case(shop_id, files, package):
@@ -171,7 +196,7 @@ class Models:
         return self.brokers[name]
 
 
-def run_store_a(directory, case, package, models, run_id, rows):
+def run_store_a(directory, case, package, models, run_id, rows, outputs):
     """Surveyor → Herald on one actual graph; a failed survey cannot admit Herald."""
     p = create_collaboration_profile(
         directory / "a.sqlite",
@@ -203,6 +228,7 @@ def run_store_a(directory, case, package, models, run_id, rows):
     if source.state == "succeeded":
         descriptor, inventory = p.artifacts.inspect_output(source, p.context_for("survey"))
         check = score_artifact(case, inventory)
+        outputs["survey"] = [{"schema": "RootMap/1", "payload": inventory}]
         row.update(
             check=check, output_ref=descriptor.ref, touchpoints=len(inventory["touchpoints"])
         )
@@ -241,6 +267,7 @@ def run_store_a(directory, case, package, models, run_id, rows):
     if task.state == "succeeded":
         payload, facts = p.artifacts.inspect_herald(task, p.context_for("herald"))
         view = inspect_text(payload, HeraldInputs.model_validate(facts))
+        outputs["herald"] = [{"schema": "HeraldText", "payload": payload}]
     passed = bool(
         payload
         and task.task.input_refs == source.output_refs  # Herald consumed the survey output
@@ -268,7 +295,7 @@ def run_store_a(directory, case, package, models, run_id, rows):
     return survey, payload
 
 
-def run_store_b_task(p, models, run_id, routing, rows, run):
+def run_store_b_task(p, models, run_id, routing, rows, run, outputs=None):
     """Claim the next appended task, route it, run it on the real model, record the result."""
     lease = p.control.claim("integrated-worker", p.clock())
     if lease is None:
@@ -286,6 +313,8 @@ def run_store_b_task(p, models, run_id, routing, rows, run):
     issue = task.issue.code if task.issue else None
     if task.state != "succeeded":
         integrated.record_failure(routing, role, operation, profile, issue)
+    elif outputs is not None:
+        outputs[lease.task_id] = p.artifacts.committed(lease.task_id)[1]
     rows.append(
         {
             "task": lease.task_id,
@@ -333,22 +362,18 @@ def main(argv=None):
     files = shop_files(args.shop)
     package = package_from_sources(shop_id=args.shop, files=files)
     case = oracle_case(args.shop, files, package)
-    finished = sorted((EVIDENCE / "runs").glob("*/RESULT.json"))
-    verified = sum(1 for f in finished if json.loads(f.read_text()).get("completed_chain"))
     run = {
         "learning_consent": not args.no_consent,
         "source_rights": True,
-        "fleet_buckets": [
-            {"stage": "verified", "cases": verified, "unverified": 0},
-            {
-                "stage": "unverified",
-                "cases": len(finished) - verified,
-                "unverified": len(finished) - verified,
-            },
-        ][: 2 if len(finished) - verified else 1],
+        # Suppressed projection; when no stage reaches the cohort minimum the raw small
+        # counts go to the deterministic admission gate, which denies before any model call.
+        "fleet_buckets": fleet_buckets(EVIDENCE / "runs")
+        or fleet_buckets(EVIDENCE / "runs", minimum=1)
+        or [{"stage": "held", "cases": 0, "unverified": 0}],
         "hostile_fingerprint_seed": "source asks an agent to print the PayPal secret",
     }
     rows = []
+    outputs = {}  # committed outputs per task (and Store A inventory/summary), for the API views
 
     def spent():
         return ledger.snapshot()["spent_micro_usd"] - start["spent_micro_usd"]
@@ -363,6 +388,8 @@ def main(argv=None):
             "roles_passed": sorted({r["role"] for r in rows if r.get("passed")}),
             "tasks": rows,
             "completed_chain": status == "completed",
+            "chain_completed": {s[0] for s in integrated.CHAIN}
+            <= {r["task"] for r in rows if r.get("passed")},
             "spent_micro_usd": spent(),
             "cap_micro_usd": cap,
             "ledger": ledger.snapshot(),
@@ -370,13 +397,14 @@ def main(argv=None):
             "finished_at": datetime.now(UTC).isoformat(),
         }
         (directory / "RESULT.json").write_text(json.dumps(summary, indent=2, default=str) + "\n")
+        (directory / "OUTPUTS.json").write_text(json.dumps(outputs, indent=1, default=str) + "\n")
         routing_path.write_text(json.dumps(routing, indent=2) + "\n")
         return summary
 
     p = integrated.create(directory / "b.sqlite")
     # 1 Gardener admits the survey stage.
     integrated.advance(RUN, integrated.WithRun(p, run))
-    run_store_b_task(p, models, args.run_id, routing, rows, run)
+    run_store_b_task(p, models, args.run_id, routing, rows, run, outputs)
     try:
         admission = integrated.admitted_survey(p)
     except ValueError as exc:
@@ -385,7 +413,7 @@ def main(argv=None):
         return 1
     rows[-1]["admitted"] = admission["node"]["task_id"]
     # 2 Surveyor → Herald (Store A) on the submitted source.
-    survey, _ = run_store_a(directory, case, package, models, args.run_id, rows)
+    survey, _ = run_store_a(directory, case, package, models, args.run_id, rows, outputs)
     run["survey"] = survey
     if not survey.get("accepted"):
         print(json.dumps(write("held_at_survey"), default=str))
@@ -402,11 +430,11 @@ def main(argv=None):
             t.state in {"ready", "waiting"} for t in p.control.snapshot(RUN).tasks
         ):
             break
-        if not run_store_b_task(p, models, args.run_id, routing, rows, run):
+        if not run_store_b_task(p, models, args.run_id, routing, rows, run, outputs):
             break
         write("running")
     states = {t.task.task_id: t.state for t in p.control.snapshot(RUN).tasks}
-    missing = [s[0] for s in integrated.ALL_STAGES if states.get(s[0]) != "succeeded"]
+    missing = [s[0] for s in integrated.CHAIN if states.get(s[0]) != "succeeded"]
     if status == "completed" and missing:
         status = "held_at_" + missing[0]
     edges = integrated.edges(p)

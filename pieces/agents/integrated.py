@@ -235,6 +235,7 @@ def edges(p):
 
 
 __all__ = [
+    "CHAIN",
     "ALL_STAGES",
     "BASE",
     "GARDENER",
