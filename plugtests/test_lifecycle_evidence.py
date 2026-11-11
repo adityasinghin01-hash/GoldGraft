@@ -95,7 +95,15 @@ def test_public_projection_excludes_private_check_names_and_evidence():
     }
 
 
-@pytest.mark.parametrize("plan", [{}, {"candidate": Requirement(CANDIDATE, critical=False)}])
+@pytest.mark.parametrize(
+    "plan",
+    [
+        {},
+        {"candidate": Requirement(CANDIDATE)},
+        {"baseline": Requirement(BASELINE)},
+        {**PLAN, "candidate": Requirement(CANDIDATE, critical=False)},
+    ],
+)
 def test_incomplete_policy_cannot_be_ready(plan):
-    with pytest.raises(ValueError, match="critical checks"):
+    with pytest.raises(ValueError, match="critical baseline and candidate"):
         review_lifecycle(plan, [NEW, OLD])

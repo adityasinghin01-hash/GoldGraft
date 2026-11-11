@@ -104,8 +104,9 @@ def review_lifecycle(
     The caller owns artifact digest authentication, authority, and the current
     fence. This check does not grant authority or perform provider operations.
     """
-    if not required or not any(item.critical for item in required.values()):
-        raise ValueError("Lifecycle review requires a nonempty trusted plan with critical checks")
+    for check in ("baseline", "candidate"):
+        if check not in required or required[check].critical is not True:
+            raise ValueError("Lifecycle review requires critical baseline and candidate checks")
 
     counts: Counter[str] = Counter()
     observed = {}
