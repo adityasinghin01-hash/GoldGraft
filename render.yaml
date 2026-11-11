@@ -1,0 +1,50 @@
+services:
+  # ---------------------------------------------------------------------------
+  # Control-Plane Web Service (pieces.backend.app:app)
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: goldgraft-control-plane
+    runtime: python
+    buildCommand: uv sync --locked
+    startCommand: uv run uvicorn pieces.backend.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: PORT
+        value: 8700
+      - key: DATABASE_URL
+        fromDatabase:
+          name: goldgraft-ledger-db
+          property: connectionString
+      - key: CUSTODY_SECRET_PROVIDER
+        value: doppler
+      - key: GOLDGRAFT_ENV
+        value: sandbox
+
+  # ---------------------------------------------------------------------------
+  # Background Lifecycle Worker (pieces.runner.sandbox_recorder)
+  # ---------------------------------------------------------------------------
+  - type: worker
+    name: goldgraft-isolated-worker
+    runtime: python
+    buildCommand: uv sync --locked
+    startCommand: uv run python -m pieces.runner.sandbox_recorder
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: DATABASE_URL
+        fromDatabase:
+          name: goldgraft-ledger-db
+          property: connectionString
+      - key: RATE_LIMIT_PER_MIN
+        value: 50
+
+databases:
+  # ---------------------------------------------------------------------------
+  # Durable Cryptographic Ledger & Audit Database
+  # ---------------------------------------------------------------------------
+  - name: goldgraft-ledger-db
+    databaseName: goldgraft
+    user: goldgraft
+    plan: free
+
