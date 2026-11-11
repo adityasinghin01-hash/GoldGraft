@@ -1,10 +1,7 @@
-"""Isolated Sandbox Execution & Capture Recorder (pieces.runner.sandbox_recorder).
+"""PR6 synthetic recorder with durable capture retrieval through the shared Runner port.
 
-Fulfills GU04 and unblocks Vijay's fourteen real scenarios:
-1. Provisions isolated scenario execution contexts (OLD, OLD_TWIN, NEW).
-2. Executes live HTTP exchanges against the sandbox payment broker.
-3. Automatically sanitizes and records raw captures with redaction of sensitive credentials.
-4. Generates honest runner identity (recording actual execution workflow and git sha).
+This implementation generates exchanges in-process. It does not provision
+isolation, execute shop scenarios or contact PayPal. Production GU04 remains held.
 """
 
 import hashlib
@@ -14,38 +11,45 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from goldgraft_contracts.offline_payments import OfflinePayments, PaymentAccessDenied
 from goldgraft_contracts.registry import validate
 from goldgraft_contracts.runner import JobResult, JobSpec, RawCapture
 from goldgraft_foundation.blobs import BlobStore, LocalBlobStore
-
-from pieces.backend.payment_broker import PaymentBroker, SecretDeniedError
 
 log = logging.getLogger("goldgraft.sandbox_recorder")
 
 
 class SandboxRecorder:
-    """Executes jobs in an isolated sandbox and records live verified captures."""
+    """Records PR6 synthetic exchanges; does not execute or isolate a shop."""
+
+    evidence_class = "scripted"
 
     def __init__(
         self,
-        broker: PaymentBroker | None = None,
+        broker: OfflinePayments,
         blob_store: BlobStore | None = None,
         repo_root: Path | None = None,
     ):
-        self.broker = broker or PaymentBroker()
+        if broker.evidence_class != "scripted":
+            raise ValueError("UNQUALIFIED recorder accepts synthetic brokers only")
+        self.broker = broker
         self.blob_store = blob_store or LocalBlobStore()
         current_dir = Path(__file__).resolve()
         self.repo_root = repo_root or current_dir.parent.parent.parent
         self._captures_store: dict[str, dict[str, Any]] = {}
 
+    def run_job(self, spec: JobSpec) -> JobResult:
+        """Shared Runner interface; successful output remains synthetic evidence."""
+        return self.run_isolated_job(spec)
+
     def run_isolated_job(self, spec: JobSpec) -> JobResult:
-        """Executes a JobSpec in isolation, recording traffic for every scenario & variant."""
+        """Compatibility entry point for synthetic scenario/variant exchange generation."""
         now = datetime.now(UTC).isoformat()
 
         # Enforce valid secret resolution before beginning work
         try:
             self.broker.resolve_and_verify(spec.secrets_ref)
-        except SecretDeniedError as err:
+        except PaymentAccessDenied as err:
             return JobResult.model_validate(
                 {
                     "job_id": spec.job_id,
@@ -58,8 +62,8 @@ class SandboxRecorder:
                     "rate_limit_pauses": 0,
                     "logs_ref": f"blob://logs/{spec.job_id}",
                     "runner_identity": {
-                        "workflow": "goldgraft-isolated-recorder",
-                        "sha": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+                        "workflow": "offline-simulated-recorder",
+                        "sha": "UNQUALIFIED-SYNTHETIC",
                         "run_id": spec.job_id,
                     },
                 }
@@ -79,8 +83,8 @@ class SandboxRecorder:
                     "rate_limit_pauses": 0,
                     "logs_ref": f"blob://logs/{spec.job_id}",
                     "runner_identity": {
-                        "workflow": "goldgraft-isolated-recorder",
-                        "sha": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+                        "workflow": "offline-simulated-recorder",
+                        "sha": "UNQUALIFIED-SYNTHETIC",
                         "run_id": spec.job_id,
                     },
                 }
@@ -90,11 +94,10 @@ class SandboxRecorder:
 
         for scenario in spec.scenario_ids:
             for variant in spec.variants:
-                capture_ref = f"blob://captures/{spec.job_id}/{scenario}.{variant}.json"
                 capture_data = self._record_scenario_exchange(spec, scenario, variant)
                 # Store in blob store
                 capture_bytes = json.dumps(capture_data, sort_keys=True).encode("utf-8")
-                self.blob_store.put(capture_bytes)
+                capture_ref = self.blob_store.put(capture_bytes)
                 self._captures_store[capture_ref] = capture_data
                 raw_capture_refs.append(capture_ref)
 
@@ -110,8 +113,8 @@ class SandboxRecorder:
                 "rate_limit_pauses": 0,
                 "logs_ref": f"blob://logs/{spec.job_id}",
                 "runner_identity": {
-                    "workflow": "goldgraft-isolated-recorder",
-                    "sha": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+                    "workflow": "offline-simulated-recorder",
+                    "sha": "UNQUALIFIED-SYNTHETIC",
                     "run_id": spec.job_id,
                 },
             }
@@ -173,11 +176,15 @@ class SandboxRecorder:
 
     def fetch_capture(self, ref: str) -> RawCapture:
         """Fetches and validates a recorded capture."""
+        if ref.startswith("blob://"):
+            return validate("RawCapture/1", json.loads(self.blob_store.get(ref)))
         if ref not in self._captures_store:
             # Fall back to fixture capture if available
             prefix = "fixtures://proof/legacy-php-shop/raw/"
             if ref.startswith(prefix):
                 name = ref.removeprefix(prefix)
+                if "/" in name or "\\" in name or not name.endswith(".json"):
+                    raise LookupError("Invalid fixture capture reference")
                 path = self.repo_root / "fixtures" / "proof" / "legacy-php-shop" / "raw" / name
                 if path.is_file():
                     data = json.loads(path.read_text(encoding="utf-8"))

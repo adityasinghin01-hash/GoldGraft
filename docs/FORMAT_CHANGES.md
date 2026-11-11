@@ -188,3 +188,11 @@ Owner Singh, future SI01 bootstrap. Implement strict Python models/typed referen
 [Lifecycle proposal](engineering/lifecycle/LIFECYCLE_INTERFACE_PROPOSALS.md) and normative [atomic protocols](engineering/lifecycle/ATOMIC_DELIVERY_PROTOCOLS.md) define exact artifact/provenance/private review, separate ApplyAuthority/ActionPlan/ApprovalSet, cross-case TargetReservation/resource epochs, per-effect slots/unknown reconciliation, StateCutover and independent ExitCheckPlan evidence. Protected Git and direct-artifact routes differ; Git fields nullable on the latter. Existing Certificate Git/workflow assumptions cannot encode these new profiles by invented values or expose private review data publicly.
 
 LC-A1 protected apply is a separately approved future policy, not granted by Start or initial Reader access. Shared bootstrap must align models/routes/registry/generated types/examples/fakes/fixtures/tests and compatibility. Downstream lifecycle consumers cannot implement incompatible Markdown guesses. Actual provider permissions/financial/state/isolation/exit qualification remains open.
+# Integration composition ports — 11 November 2026
+
+`offline_payments.py` and `run_views.py` add Python-only composition protocols.
+No serialized field, route, registry entry, schema version or generated wire format
+changes. Existing `Graft`, `ScenarioList`, `CmelView`, `ProofView`, `JobSpec/1`,
+`RawCapture/1`, `CMEL/1`, `Verdict/1` and `CertificateVerifyResult` shapes are reused.
+The repository-level integration composes pieces; the recorder uses shared ports
+instead of importing backend internals. See [integration](engineering/integration/README.md).

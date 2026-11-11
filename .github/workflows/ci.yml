@@ -2,7 +2,7 @@
 name: ci
 on:
   push:
-    branches: [main]
+    branches: [main, proof-library, 'integration/**']
   pull_request:
 concurrency:
   group: ci-${{ github.ref }}
@@ -28,8 +28,22 @@ jobs:
       - run: npm ci
       - name: Lint
         run: uv run ruff check .
-      - name: Formats, ledger, tracker, stand-ins, sample data
+      - name: All published components and backend-to-proof integration
+        env:
+          GOLDGRAFT_PROOF: pieces.proof.proof:Proof
+          GOLDGRAFT_API_APP: integration.app:create_app
         run: uv run pytest -q
+      - name: Node switch integration
+        run: node pieces/switch-libs/node/run_cases.mjs
+      - name: Published reference flow through backend and persistent proof
+        run: uv run python -m integration.check --state-dir .goldgraft/pushed-integration-ci
+      - name: Real proof library and PHP checkout mutations
+        env:
+          GOLDGRAFT_PROOF: pieces.proof.proof:Proof
+          GOLDGRAFT_PHP: php
+        run: |
+          php --version
+          uv run pytest -q plugtests/test_proof*.py
       - name: Formats still match the design (01_DATA.md)
         run: uv run python scripts/check_spec_coverage.py
       - name: Generated schemas / TypeScript / OpenAPI are current

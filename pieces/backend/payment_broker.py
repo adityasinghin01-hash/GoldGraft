@@ -14,12 +14,13 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Any
 
+from goldgraft_contracts.offline_payments import PaymentAccessDenied
 from goldgraft_foundation.ledger import Ledger
 
 from pieces.backend.custody_broker import CustodyBroker
 
 
-class SecretDeniedError(Exception):
+class SecretDeniedError(PaymentAccessDenied):
     """Raised when a secret reference cannot be securely resolved or is empty."""
 
 
@@ -38,7 +39,9 @@ class BrokerResponse:
 
 
 class PaymentBroker:
-    """Brokers typed PayPal calls into sandbox environments with strict custody."""
+    """Synthetic operation responses only; no PayPal transport is implemented."""
+
+    evidence_class = "scripted"
 
     def __init__(
         self,

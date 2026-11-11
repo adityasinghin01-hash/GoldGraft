@@ -1,6 +1,6 @@
 {
   "id": "e44d01aa-goldgraft-env-template",
-  "name": "GoldGraft Local & Sandbox Environment",
+  "name": "GoldGraft Published Offline Reference",
   "values": [
     {
       "key": "baseUrl",
@@ -16,7 +16,7 @@
     },
     {
       "key": "graftId",
-      "value": "demo-1",
+      "value": "synthetic-c4",
       "type": "default",
       "enabled": true
     },
@@ -35,4 +35,3 @@
   ],
   "_postman_variable_scope": "environment"
 }
-

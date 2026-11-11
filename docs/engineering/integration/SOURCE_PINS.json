@@ -1,0 +1,36 @@
+{
+  "repository": "adityasinghin01-hash/GoldGraft",
+  "checked_at": "2026-11-11T12:50:25.582651+05:30",
+  "scope": "current pushed branches plus integration fixes",
+  "branches": {
+    "docs/plan-2-drive-sync-status-2026-11-06": {
+      "sha": "19a2521d1638c9e1e4d8e193bcfc5b3ea5a6266c",
+      "included_via": "main"
+    },
+    "docs/plan-2-reviewed-2026-11-06": {
+      "sha": "08511a075f6610dcf20c48c936da5c550674b7a0",
+      "included_via": "main"
+    },
+    "feat/aditya-gupta-backend-runner": {
+      "sha": "faed52d3794630ecb73b2ec66aca4aa1122b5a54",
+      "included_via": "main"
+    },
+    "feat/aditya-gupta-broker-runner-handoff": {
+      "sha": "39f79b1b6393d80e1975ea0d704250c31280dba2",
+      "included_via": "main"
+    },
+    "feat/aditya-gupta-runner-integration": {
+      "sha": "e14e7de017f46103f89b4db27f11e3afe10763f2",
+      "included_via": "main"
+    },
+    "main": {
+      "sha": "dd1238578a78b92205ac210e30e4b9007b64902c",
+      "included_via": "main"
+    },
+    "proof-library": {
+      "sha": "e4b2594f5079ba7cac92b5a3a6dcdb447f02cdd0",
+      "included_via": "proof-library"
+    }
+  },
+  "unpublished_plan5": "preserved outside branch; excluded from this scoped integration"
+}

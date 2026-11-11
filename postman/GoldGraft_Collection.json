@@ -2,7 +2,7 @@
   "info": {
     "name": "GoldGraft API & Lifecycle Verification Suite",
     "_postman_id": "c1f7b882-901e-450a-9d91-goldgraft001",
-    "description": "Postman test collection covering GoldGraft control-plane routes, idempotency, lifecycle progression, custody broker, and webhook deduplication.",
+    "description": "Published offline reference profile: API metadata/custody smoke checks followed by the existing seeded fixture shop \u2192 runner \u2192 actual proof \u2192 durable ledger. Synthetic credentials only; no external provider verification.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -11,7 +11,10 @@
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -19,8 +22,12 @@
         },
         "url": {
           "raw": "{{baseUrl}}/probe",
-          "host": ["{{baseUrl}}"],
-          "path": ["probe"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "probe"
+          ]
         }
       },
       "event": [
@@ -40,12 +47,18 @@
       ]
     },
     {
-      "name": "02 - Create Shop (Requires Idempotency-Key)",
+      "name": "02 - Create Shop Metadata (Independent Smoke Check)",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Idempotency-Key", "value": "{{$guid}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{$guid}}"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -53,8 +66,12 @@
         },
         "url": {
           "raw": "{{baseUrl}}/shops",
-          "host": ["{{baseUrl}}"],
-          "path": ["shops"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "shops"
+          ]
         }
       },
       "event": [
@@ -64,7 +81,7 @@
             "exec": [
               "pm.test('Shop created successfully', function () { pm.response.to.have.status(200); });",
               "var json = pm.response.json();",
-              "pm.environment.set('shopId', json.shop_id);"
+              "pm.environment.set('createdShopId', json.shop_id);"
             ],
             "type": "text/javascript"
           }
@@ -72,21 +89,33 @@
       ]
     },
     {
-      "name": "03 - Connect Credentials (Custody Isolation)",
+      "name": "03 - Synthetic Custody Isolation (Seeded Fixture Shop)",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Idempotency-Key", "value": "{{$guid}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{$guid}}"
+          }
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"paypal_client_id\": \"{{sandboxClientId}}\",\n  \"paypal_client_secret\": \"{{sandboxClientSecret}}\"\n}"
+          "raw": "{\"paypal_client_id\": \"fixture-only-client\", \"paypal_client_secret\": \"fixture-only-secret\"}"
         },
         "url": {
           "raw": "{{baseUrl}}/shops/{{shopId}}/connect",
-          "host": ["{{baseUrl}}"],
-          "path": ["shops", "{{shopId}}", "connect"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "shops",
+            "{{shopId}}",
+            "connect"
+          ]
         }
       },
       "event": [
@@ -94,10 +123,10 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('Credentials safely stored in Doppler custody', function () { pm.response.to.have.status(200); });",
+              "pm.test('Synthetic in-memory credential custody returns an opaque reference', function () { pm.response.to.have.status(200); });",
               "var json = pm.response.json();",
               "pm.expect(json.secrets_ref).to.match(/^doppler:\\/\\//);",
-              "pm.expect(pm.response.text()).to.not.include(pm.environment.get('sandboxClientSecret'));"
+              "pm.expect(pm.response.text()).to.not.include('fixture-only-secret');"
             ],
             "type": "text/javascript"
           }
@@ -105,12 +134,18 @@
       ]
     },
     {
-      "name": "04 - Start Graft Cycle",
+      "name": "04 - Run Published Fixture Proof Through Backend",
       "request": {
         "method": "POST",
         "header": [
-          { "key": "Content-Type", "value": "application/json" },
-          { "key": "Idempotency-Key", "value": "{{$guid}}" }
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "pushed-reference-v1"
+          }
         ],
         "body": {
           "mode": "raw",
@@ -118,8 +153,14 @@
         },
         "url": {
           "raw": "{{baseUrl}}/shops/{{shopId}}/graft",
-          "host": ["{{baseUrl}}"],
-          "path": ["shops", "{{shopId}}", "graft"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "shops",
+            "{{shopId}}",
+            "graft"
+          ]
         }
       },
       "event": [
@@ -143,8 +184,14 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/grafts/{{graftId}}/proof",
-          "host": ["{{baseUrl}}"],
-          "path": ["grafts", "{{graftId}}", "proof"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "grafts",
+            "{{graftId}}",
+            "proof"
+          ]
         }
       },
       "event": [
@@ -152,9 +199,11 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('Proof artifact returned', function () { pm.response.to.have.status(200); });",
+              "pm.test('Computed fixture proof returned', function () { pm.response.to.have.status(200); });",
               "var json = pm.response.json();",
-              "pm.expect(json.strength).to.be.oneOf(['FULL', 'HIGH', 'MEDIUM', 'PARTIAL']);"
+              "pm.expect(json.proof_strength.total).to.eql(12);",
+              "pm.expect(json.proof_strength.score).to.be.within(0, 1);",
+              "pm.expect(json.triangle).to.be.an('array');"
             ],
             "type": "text/javascript"
           }
@@ -163,4 +212,3 @@
     }
   ]
 }
-

@@ -16,6 +16,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from goldgraft_contracts.api_routes import route
+from goldgraft_contracts.interfaces import Proof as ProofPort
+from goldgraft_contracts.registry import validate
+from goldgraft_contracts.run_views import FixtureRunViews
 from goldgraft_foundation.ledger import Ledger
 
 from .custody_broker import CustodyBroker
@@ -111,9 +114,20 @@ class BackendState:
         }
 
 
-def create_app() -> FastAPI:
+def create_app(
+    *, proof: ProofPort | None = None, views: FixtureRunViews | None = None
+) -> FastAPI:
     app = FastAPI(title="GoldGraft Backend Engine", version="1.0.0")
     state = BackendState()
+
+    def projected(method, *args):
+        try:
+            return getattr(views, method)(*args).model_dump(mode="json")
+        except LookupError:
+            raise HTTPException(404, "Fixture evidence is not available") from None
+        except ValueError as exc:
+            status = 409 if str(exc).startswith("CONFLICT") else 503
+            raise HTTPException(status, "Fixture evidence conflicts or failed validation") from None
 
     app.add_middleware(
         CORSMiddleware,
@@ -213,6 +227,14 @@ def create_app() -> FastAPI:
         if shop_id not in state.shops:
             return problem(404, f"Shop {shop_id} not found")
 
+        if views is not None and shop_id == views.shop_id:
+            body = await request.json()
+            try:
+                route("start_graft").request.model_validate(body)
+            except ValueError:
+                return problem(422, "Request does not match StartGraftRequest")
+            return projected("start", idempotency_key, body)
+
         graft_id = f"graft-{hashlib.sha256((shop_id + idempotency_key).encode()).hexdigest()[:8]}"
         state.lifecycle.transition(
             graft_id=graft_id,
@@ -227,12 +249,29 @@ def create_app() -> FastAPI:
 
     @app.get("/grafts/{graft_id}")
     async def get_graft(graft_id: str):
+        if views is not None and graft_id == views.graft_id:
+            return projected("graft")
         if graft_id not in state.grafts:
             return problem(404, f"Graft {graft_id} not found")
         return state.grafts[graft_id]
 
     @app.get("/grafts/{graft_id}/events")
-    async def graft_events(graft_id: str, speed: float = Query(0.0)):
+    async def graft_events(graft_id: str, request: Request, speed: float = Query(0.0)):
+        if views is not None and graft_id == views.graft_id:
+            after = request.headers.get("Last-Event-ID", "0")
+            if not after.isdecimal():
+                return problem(400, "Last-Event-ID must be a nonnegative sequence")
+            try:
+                entries = views.events(int(after))
+            except ValueError:
+                return problem(503, "Fixture ledger failed validation")
+
+            async def persisted_stream():
+                for entry in entries:
+                    yield (f"id: {entry.seq}\nevent: ledger\n"
+                           f"data: {entry.model_dump_json()}\n\n")
+
+            return StreamingResponse(persisted_stream(), media_type="text/event-stream")
         if graft_id not in state.grafts:
             return problem(404, f"Graft {graft_id} not found")
 
@@ -256,6 +295,8 @@ def create_app() -> FastAPI:
 
     @app.get("/grafts/{graft_id}/scenarios")
     async def get_scenarios(graft_id: str):
+        if views is not None and graft_id == views.graft_id:
+            return projected("scenarios")
         if graft_id not in state.grafts:
             return problem(404, f"Graft {graft_id} not found")
         from goldgraft_fakes import data
@@ -264,6 +305,8 @@ def create_app() -> FastAPI:
 
     @app.get("/grafts/{graft_id}/cmel")
     async def get_cmel(graft_id: str, scenario: str | None = Query(None)):
+        if views is not None and graft_id == views.graft_id:
+            return projected("cmel", scenario or "HAPPY")
         if graft_id not in state.grafts:
             return problem(404, f"Graft {graft_id} not found")
         from goldgraft_fakes import data
@@ -276,6 +319,8 @@ def create_app() -> FastAPI:
 
     @app.get("/grafts/{graft_id}/proof")
     async def get_proof(graft_id: str):
+        if views is not None and graft_id == views.graft_id:
+            return projected("proof")
         if graft_id not in state.grafts:
             return problem(404, f"Graft {graft_id} not found")
         from goldgraft_fakes import data
@@ -296,7 +341,10 @@ def create_app() -> FastAPI:
 
         if cert_id not in {data.CERT_ID, data.TAMPERED_CERT_ID}:
             return problem(404, f"Certificate {cert_id} not found")
-        return {"cert_id": cert_id, "verified": cert_id == data.CERT_ID}
+        if proof is None:
+            return problem(503, "Independent proof adapter is not configured")
+        certificate = validate("Certificate/1", data.certificate(cert_id))
+        return proof.verify_certificate(certificate).model_dump(mode="json")
 
     @app.get("/heal/{graft_id}")
     async def get_heal(graft_id: str):
