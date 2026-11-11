@@ -165,52 +165,6 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
         issuance["scenarios"].append(validate("Scenario/1", read(f"scenarios/{name}.json")))
         issuance["verdicts"].append(validate("Verdict/1", read(f"expected/{name}.verdict.json")))
 
-    def unexpected_sign(_):
-        pytest.fail("An incomplete smoke round must not call the signer")
-
-    with pytest.raises(ValueError, match="passing smoke proof"):
-        issue_certificate_from_ledger(
-            read("certificate/valid.json"),
-            ledger=ledger,
-            graft_id=graft,
-            smoke_verdicts=issuance["verdicts"][:1],
-            signer=unexpected_sign,
-            **issuance,
-        )
-
-    with pytest.raises(ValueError, match="verdicts must match"):
-        issue_certificate_from_ledger(
-            read("certificate/valid.json"),
-            ledger=ledger,
-            graft_id=graft,
-            smoke_verdicts=issuance["verdicts"],
-            signer=unexpected_sign,
-            **issuance,
-        )
-
-    for verdict in issuance["verdicts"]:
-        entry = ledger.append(
-            graft,
-            "VERDICT",
-            producer,
-            "Verdict/1",
-            payload=verdict.model_dump(mode="json"),
-        )
-
-    certificate = issue_certificate_from_ledger(
-        read("certificate/valid.json"),
-        ledger=ledger,
-        graft_id=graft,
-        smoke_verdicts=issuance["verdicts"],
-        signer=lambda _: ("test-signature", "test-rekor"),
-        **issuance,
-    )
-    assert certificate.ledger_root == entry.entry_hash
-    assert [item.model_dump() for item in certificate.paypal_evidence] == [row]
-
-    ledger.append(graft, "ARTIFACT", producer, "Money/1", payload=event["money"])
-    monkeypatch.setattr("pieces.proof.sigstore.verify_bundle", lambda *_, **__: True)
-
     class PayPal:
         value = "25.00"
         malformed_response = None
@@ -237,6 +191,69 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
 
     paypal = PayPal()
 
+    def unexpected_sign(_):
+        pytest.fail("An incomplete smoke round must not call the signer")
+
+    with pytest.raises(ValueError, match="passing smoke proof"):
+        issue_certificate_from_ledger(
+            read("certificate/valid.json"),
+            ledger=ledger,
+            graft_id=graft,
+            paypal=paypal,
+            smoke_verdicts=issuance["verdicts"][:1],
+            signer=unexpected_sign,
+            **issuance,
+        )
+
+    with pytest.raises(ValueError, match="verdicts must match"):
+        issue_certificate_from_ledger(
+            read("certificate/valid.json"),
+            ledger=ledger,
+            graft_id=graft,
+            paypal=paypal,
+            smoke_verdicts=issuance["verdicts"],
+            signer=unexpected_sign,
+            **issuance,
+        )
+
+    for verdict in issuance["verdicts"]:
+        entry = ledger.append(
+            graft,
+            "VERDICT",
+            producer,
+            "Verdict/1",
+            payload=verdict.model_dump(mode="json"),
+        )
+
+    paypal.value = "25.01"
+    with pytest.raises(ValueError, match="successful PayPal re-fetch"):
+        issue_certificate_from_ledger(
+            read("certificate/valid.json"),
+            ledger=ledger,
+            graft_id=graft,
+            paypal=paypal,
+            smoke_verdicts=issuance["verdicts"],
+            signer=unexpected_sign,
+            **issuance,
+        )
+    paypal.value = "25.00"
+    certificate = issue_certificate_from_ledger(
+        read("certificate/valid.json"),
+        ledger=ledger,
+        graft_id=graft,
+        paypal=paypal,
+        smoke_verdicts=issuance["verdicts"],
+        signer=lambda _: ("test-signature", "test-rekor"),
+        **issuance,
+    )
+    assert certificate.ledger_root == entry.entry_hash
+    assert [item.model_dump() for item in certificate.paypal_evidence] == [row]
+
+    ledger.append(graft, "ARTIFACT", producer, "Money/1", payload=event["money"])
+    monkeypatch.setattr("pieces.proof.sigstore.verify_bundle", lambda *_, **__: True)
+
+    paypal.calls.clear()
+
     def verify(graft_id=graft):
         return verify_certificate_evidence(
             certificate,
@@ -249,6 +266,11 @@ def test_certificate_uses_signed_ledger_prefix_and_refetches_payment(
 
     assert verify().ok
     assert len(paypal.calls) == 2
+    signed_rows = certificate.paypal_evidence
+    certificate.paypal_evidence = []
+    assert not verify().ok
+    assert len(paypal.calls) == 2
+    certificate.paypal_evidence = signed_rows
     certificate.results.pass_ -= 1
     assert not verify().ok
     assert len(paypal.calls) == 2

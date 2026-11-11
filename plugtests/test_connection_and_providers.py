@@ -190,3 +190,28 @@ def test_artifact_build_and_providers(tmp_path):
         artifact.artifact_id, "registry.local/image", b"docker_image_bytes"
     )
     assert pub_rcpt.publish_id.startswith("pub-")
+
+
+def test_upload_limits_retry_and_interrupted_assembly():
+    import hashlib
+
+    upload = UploadSessionManager(max_size_bytes=5)
+    digest = hashlib.sha256(b"abcde").hexdigest()
+    session = upload.create_session("case-1", "file", 2, digest)
+    sid = session.session_id
+    first = upload.add_chunk(sid, 0, b"abc")
+    assert upload.create_session("case-1", "file", 2, digest).session_id == sid
+    assert upload.add_chunk(sid, 0, b"abc") == first
+    with pytest.raises(ValueError, match="retry"):
+        upload.add_chunk(sid, 0, b"bad")
+    with pytest.raises(ValueError, match="Missing chunks"):
+        upload.finalize_session(sid)
+    with pytest.raises(ValueError, match="index"):
+        upload.add_chunk(sid, 2, b"x")
+    with pytest.raises(ValueError, match="size limit"):
+        upload.add_chunk(sid, 1, b"toolong")
+    upload.add_chunk(sid, 1, b"de")
+    assert upload.finalize_session(sid) == b"abcde"
+    assert upload.finalize_session(sid) == b"abcde"
+    with pytest.raises(ValueError, match="not active"):
+        upload.add_chunk(sid, 0, b"abc")

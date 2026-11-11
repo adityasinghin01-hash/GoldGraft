@@ -119,13 +119,28 @@ report rule guards. The 12/12 offline run does not establish coverage of every
 critical rule on a live merchant. Populate the contract's triangle using that
 merchant's verified scenario and mutation evidence.
 
-Call `issue_certificate_from_ledger(..., smoke_verdicts=smoke, signer=sign_payload)`
+Call `issue_certificate_from_ledger` with the smoke verdicts, sandbox
+`PayPalClient`, and `sign_payload`
 on the runner after the smoke and full proof rounds. Call
 `verify_certificate_evidence` with the certificate, graft ID, ledger, trusted
 workflow identity/SHA and the shop-specific sandbox `PayPalClient`. The client
 needs permission to read the signed order and capture. Aditya Vijay's real
 recordings and Aditya Gupta's runner and sandbox client are needed to run this
-against merchant evidence. Aditya Singh owns API wiring and deployment.
+against merchant evidence. Issuance re-fetches every eligible witness before
+signing. Verification requires the same complete witness set from the signed
+ledger prefix, then independently re-fetches it.
+
+The integration app can mount private and public case evidence routes when
+the host supplies both an authenticated evidence loader and an authorizer
+that checks the caller's current case grant and requested view. Artifact
+bytes must match the recorded digest. The public route returns aggregate
+statuses and reason codes. The default fixture deployment has no such
+credentials or stores configured.
+
+For a local sandbox-script smoke test, run
+`uv run --locked python -m scripts.live_paypal_sandbox_payment --dry-run`.
+The result reports fixture verdicts and zero provider calls. Live mode
+requires a qualified transport, shop recorder and authenticated callback.
 
 From the intended signing workflow step, after installing Cosign and enabling
 GitHub Actions `id-token: write`, run:
