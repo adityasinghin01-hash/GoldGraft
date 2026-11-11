@@ -1,0 +1,102 @@
+/* GoldGraft design tokens — the ONLY place colours, type, space and motion values live.
+   Every value below was computed with the skyward-atelier / astral-codex scripts (11 Nov 2026):
+   contrast  color.mjs   · type  scale.mjs fluid --min 16 --max 18 --rmin 1.2 --rmax 1.333
+   grid      geometry.mjs grid --width 1440 --cols 12 --gutter 24 (pixel-perfect margin 84) */
+
+@font-face {
+  font-family: 'Zodiak';
+  src: url('../assets/fonts/Zodiak-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Zodiak';
+  src: url('../assets/fonts/Zodiak-VariableItalic.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ── colour (contrast on --gg-ink, WCAG) ───────────────────────────── */
+  --gg-ink: #0d0c09;          /* ground */
+  --gg-ink-2: #1a1813;        /* raised surface (ivory on it 16.00:1) */
+  --gg-ink-3: #24211a;        /* hover surface */
+  --gg-ivory: #f5f3ef;        /* headings, key text   17.65:1 */
+  --gg-body: #d9d5cc;         /* body text            13.36:1 */
+  --gg-mute: #a39e93;         /* secondary text        7.33:1 */
+  --gg-faint: #8c8677;        /* non-text UI only      5.39:1 */
+  --gg-gold: #cdbe9c;         /* champagne accent     10.66:1 */
+  --gg-gold-deep: #9c8c68;    /* gold in shadow (decor only) */
+  --gg-gold-glow: 205 190 156;/* rgb triplet for rgba() */
+  --gg-good: #9fb894;         /*  9.09:1 */
+  --gg-bad: #e0907c;          /*  7.87:1 */
+  --gg-warn: #ddb46e;         /* 10.09:1 */
+  --gg-line: rgb(245 243 239 / 0.09);
+  --gg-line-strong: rgb(245 243 239 / 0.16);
+  --gg-line-gold: rgb(205 190 156 / 0.32);
+
+  /* ── glass (one key light from the upper left, 315°) ───────────────── */
+  --gg-glass-bg: rgb(16 15 12 / 0.56);
+  --gg-glass-bg-strong: rgb(16 15 12 / 0.78);
+  --gg-glass-blur: 20px;
+  --gg-glass-edge: linear-gradient(135deg, rgb(205 190 156 / 0.42), rgb(245 243 239 / 0.06) 38%, rgb(245 243 239 / 0.03) 62%, rgb(205 190 156 / 0.16));
+  --gg-glass-shadow: 0 1px 0 0 rgb(245 243 239 / 0.06) inset, 0 30px 80px -30px rgb(0 0 0 / 0.75), 0 0 0 1px rgb(0 0 0 / 0.35);
+  --gg-glow-gold: 0 0 0 1px rgb(205 190 156 / 0.5), 0 0 24px -4px rgb(205 190 156 / 0.45);
+
+  /* ── type ──────────────────────────────────────────────────────────── */
+  --gg-font-display: 'Zodiak', 'Iowan Old Style', 'Times New Roman', serif;
+  --gg-font-ui: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --gg-font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --gg-fs--2: 0.75rem;                                              /* 12   legal, tags */
+  --gg-fs--1: clamp(0.8125rem, 0.7905rem + 0.0939vw, 0.875rem);     /* 13→14 labels */
+  --gg-fs-0: clamp(1rem, 0.956rem + 0.1878vw, 1.125rem);            /* 16→18 body */
+  --gg-fs-1: clamp(1.1875rem, 1.0775rem + 0.4695vw, 1.5rem);        /* 19→24 lead */
+  --gg-fs-2: clamp(1.4375rem, 1.2394rem + 0.8451vw, 2rem);          /* 23→32 */
+  --gg-fs-3: clamp(1.75rem, 1.4199rem + 1.4085vw, 2.6875rem);       /* 28→43 */
+  --gg-fs-4: clamp(2.0625rem, 1.5343rem + 2.2535vw, 3.5625rem);     /* 33→57 section */
+  --gg-fs-5: clamp(2.5rem, 1.7077rem + 3.3803vw, 4.75rem);          /* 40→76 */
+  --gg-fs-6: clamp(3rem, 1.8336rem + 4.9765vw, 6.3125rem);          /* 48→101 */
+  --gg-fs-7: clamp(3.5625rem, 1.846rem + 7.3239vw, 8.4375rem);      /* 57→135 display */
+
+  --gg-lh-tight: 0.98;
+  --gg-lh-head: 1.08;
+  --gg-lh-body: 1.55;
+  --gg-track-display: -0.025em;
+  --gg-track-head: -0.015em;
+  --gg-track-label: 0.14em;
+
+  /* ── space (4px base) ──────────────────────────────────────────────── */
+  --gg-s-1: 4px;  --gg-s-2: 8px;  --gg-s-3: 12px; --gg-s-4: 16px; --gg-s-5: 24px;
+  --gg-s-6: 32px; --gg-s-7: 48px; --gg-s-8: 64px; --gg-s-9: 96px; --gg-s-10: 128px; --gg-s-11: 192px;
+
+  /* ── grid: 12 cols, gutter 24, margin 84 @1440 (pixel-perfect: col = 84px) ── */
+  --gg-cols: 12;
+  --gg-gutter: 24px;
+  --gg-margin: clamp(20px, 5.8334vw, 112px);
+  --gg-max: 1696px;
+
+  /* ── radius (outer = inner + padding) ──────────────────────────────── */
+  --gg-r-xs: 6px; --gg-r-sm: 10px; --gg-r-md: 14px; --gg-r-lg: 20px; --gg-r-xl: 28px; --gg-r-pill: 999px;
+
+  /* ── motion ────────────────────────────────────────────────────────── */
+  --gg-d-press: 120ms;
+  --gg-d-fast: 180ms;
+  --gg-d-base: 240ms;
+  --gg-d-slow: 480ms;
+  --gg-d-scene: 800ms;
+  --gg-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --gg-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --gg-ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* ── layers ────────────────────────────────────────────────────────── */
+  --gg-z-world: 0;
+  --gg-z-content: 2;
+  --gg-z-header: 40;
+  --gg-z-overlay: 60;
+  --gg-z-toast: 80;
+}

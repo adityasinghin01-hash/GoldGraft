@@ -1,0 +1,86 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--gg-z-header);
+  transition: background-color var(--gg-d-slow) var(--gg-ease-out), box-shadow var(--gg-d-slow) var(--gg-ease-out),
+    -webkit-backdrop-filter var(--gg-d-slow) var(--gg-ease-out), backdrop-filter var(--gg-d-slow) var(--gg-ease-out);
+}
+.header[data-scrolled] {
+  background: rgb(13 12 9 / 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  backdrop-filter: blur(20px) saturate(130%);
+  box-shadow: 0 1px 0 0 var(--gg-line);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--gg-s-6);
+  height: 72px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--gg-gold); }
+.mark { display: grid; transition: transform var(--gg-d-slow) var(--gg-ease-out); }
+.brand:hover .mark { transform: rotate(-8deg); }
+.word {
+  font-family: var(--gg-font-display);
+  font-size: 23px;
+  font-weight: 450;
+  letter-spacing: -0.01em;
+  color: var(--gg-ivory);
+}
+.nav {
+  display: flex;
+  gap: 4px;
+  margin-inline: auto;
+  padding: 4px;
+  border-radius: var(--gg-r-pill);
+}
+.navLink {
+  position: relative;
+  padding: 8px 14px;
+  border-radius: var(--gg-r-pill);
+  font-size: 14px;
+  color: var(--gg-mute);
+  transition: color var(--gg-d-fast) var(--gg-ease-out), background-color var(--gg-d-fast) var(--gg-ease-out);
+}
+.navLink:hover { color: var(--gg-ivory); }
+.navLink[aria-current] { color: var(--gg-ivory); background: rgb(245 243 239 / 0.06); }
+.navLink[aria-current]::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gg-gold);
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px rgb(205 190 156 / 0.8);
+}
+.actions { display: flex; align-items: center; gap: 10px; }
+.menuBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  place-items: center;
+  color: var(--gg-ivory);
+  box-shadow: 0 0 0 1px var(--gg-line-strong) inset;
+}
+.sheet {
+  display: grid;
+  gap: 4px;
+  padding: 8px var(--gg-margin) 20px;
+  background: rgb(13 12 9 / 0.92);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+.sheet a { padding: 12px 0; font-size: 18px; color: var(--gg-ivory); border-bottom: 1px solid var(--gg-line); }
+
+@media (max-width: 960px) {
+  .nav, .open { display: none; }
+  .menuBtn { display: grid; }
+  .bar { justify-content: space-between; }
+}
+
+.sheet[hidden] { display: none; }
+@media (min-width: 961px) { .sheet { display: none; } }
