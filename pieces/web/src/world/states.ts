@@ -42,7 +42,7 @@ function sampleCanvas(canvas: HTMLCanvasElement, n: number, threshold: number, g
         if (x > 0 && y > 0 && x < w - 1 && y < h - 1) {
           const gx = lum[i + 1] - lum[i - 1];
           const gy = lum[i + w] - lum[i - w];
-          v += Math.min(1, Math.sqrt(gx * gx + gy * gy) * 4) * (photo ? 0.9 : 0.4);
+          if (photo) v += Math.min(1, Math.sqrt(gx * gx + gy * gy) * 4) * 0.9;
         }
       }
       total += v;
@@ -53,7 +53,17 @@ function sampleCanvas(canvas: HTMLCanvasElement, n: number, threshold: number, g
   const out = new Float32Array(n * 4);
   const col = new Float32Array(n * 3);
   if (total <= 0) return { data: out, color: col.fill(0.6), aspect };
+  // drawings: under half the dust draws the line art, the rest stays a quiet field around it
+  const onShape = photo ? n : Math.floor(n * 0.3);
   for (let k = 0; k < n; k++) {
+    if (k >= onShape) {
+      out[k * 4] = (Math.random() * 2 - 1) * aspect * 1.25;
+      out[k * 4 + 1] = (Math.random() * 2 - 1) * 1.25;
+      out[k * 4 + 2] = (Math.random() * 2 - 1) * 0.9;
+      out[k * 4 + 3] = Math.pow(Math.random(), 3) * 0.35;
+      col[k * 3] = GOLD[0]; col[k * 3 + 1] = GOLD[1]; col[k * 3 + 2] = GOLD[2];
+      continue;
+    }
     const target = Math.random() * total;
     let lo = 0, hi = weights.length - 1;
     while (lo < hi) { const mid = (lo + hi) >> 1; if (weights[mid] < target) lo = mid + 1; else hi = mid; }
@@ -70,7 +80,7 @@ function sampleCanvas(canvas: HTMLCanvasElement, n: number, threshold: number, g
       col[k * 3 + 1] = Math.min(1, (px[lo * 4 + 1] / 255) * lift);
       col[k * 3 + 2] = Math.min(1, (px[lo * 4 + 2] / 255) * lift);
     } else {
-      const t = 0.55 + L * 0.45;
+      const t = 0.42 + L * 0.4;
       col[k * 3] = GOLD[0] * t; col[k * 3 + 1] = GOLD[1] * t; col[k * 3 + 2] = GOLD[2] * t;
     }
   }
@@ -122,5 +132,5 @@ export async function buildState(def: StateDef, n: number): Promise<PointState> 
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, w, h);
   s.draw(ctx, w, h);
-  return sampleCanvas(c, n, 0.06, 1.0, s.depth ?? 0.35, false);
+  return sampleCanvas(c, n, 0.06, 1.0, s.depth ?? 0.06, false);
 }

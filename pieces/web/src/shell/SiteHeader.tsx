@@ -19,13 +19,11 @@ export function SiteHeader() {
     const ids = NAV.map((n) => n.href.slice(1));
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+        for (const e of entries) if (e.isIntersecting) setActive(ids.includes(e.target.id) ? e.target.id : null);
       },
       { rootMargin: '-45% 0px -50% 0px' },
     );
-    ids.forEach((id) => { const el = document.getElementById(id); if (el) io.observe(el); });
-    const hero = document.getElementById('top');
-    if (hero) io.observe(hero);
+    document.querySelectorAll('main section[id], footer').forEach((el) => io.observe(el));
     return () => { window.removeEventListener('scroll', onScroll); io.disconnect(); };
   }, []);
 

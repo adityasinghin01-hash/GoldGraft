@@ -38,7 +38,7 @@ export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null>
       const margin = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gg-margin')) || 84;
       const L = Math.max(14, margin * 0.5);
       const R = W - L;
-      const lane = (side: Side) => (side === 'L' ? L : side === 'R' ? R : W / 2);
+      const lane = (side: Side) => (side === 'L' ? L : side === 'R' ? R : W * 0.7);
       type A = { y: number; side: Side; secTop: number; secBottom: number; padTop: number; padBottom: number; x0?: number };
       const anchors: A[] = [];
       root.querySelectorAll<HTMLElement>('[data-vine]').forEach((el) => {

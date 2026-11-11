@@ -216,11 +216,11 @@
 
 /* ── 8 · Final ──────────────────────────────────────────── */
 .final { min-height: 130vh; display: flex; align-items: flex-end; padding-bottom: 18vh; }
-.finalInner { display: grid; justify-items: center; text-align: center; gap: var(--gg-s-5); }
+.finalInner { display: grid; justify-items: start; text-align: left; gap: var(--gg-s-5); }
 .finalTitle { font-family: var(--gg-font-display); font-weight: 380; font-size: var(--gg-fs-6); line-height: 1; letter-spacing: -0.03em; }
-.finalTitle em { display: block; }
+.finalTitle em { display: block; padding-left: 0.6em; }
 .finalLead { max-width: 520px; }
-.finalActions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: var(--gg-s-3); }
+.finalActions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 12px; margin-top: var(--gg-s-3); }
 
 /* ── narrow screens ─────────────────────────────────────── */
 @media (max-width: 960px) {

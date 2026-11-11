@@ -43,7 +43,7 @@ export const LANDING_STATES: StateDef[] = [
 
   // 1 Hero — the graft union, the shop as a living tree
   { id: 'graft', source: { kind: 'image', src: img('01-graft-union'), threshold: 0.075, gamma: 1.1, depth: 0.9 },
-    layout: { cx: 0.5, cy: -0.16, h: 0.86 }, layoutNarrow: { cx: 0.15, cy: 0.38, h: 0.62 },
+    layout: { cx: 0.42, cy: -0.3, h: 0.68 }, layoutNarrow: { cx: 0.15, cy: 0.38, h: 0.62 },
     motion: { drift: 1, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 1, warm: 0.15, pointer: 0.8 } },
 
   // 2 Proof — the tree rings: time is running out
@@ -101,7 +101,7 @@ export const LANDING_STATES: StateDef[] = [
       }
       c.setLineDash([]);
     } }, layout: { cx: 0.44, cy: 0.3, h: 0.36 }, motion: { drift: 0.2, swirl: 0, flow: 1, fall: 0 }, silk: { intensity: 0.75, warm: 0.2, pointer: 0.4 } },
-  { id: 'f-cert', source: { kind: 'draw', aspect: 1, draw: drawMark, depth: 0.25 },
+  { id: 'f-cert', source: { kind: 'draw', aspect: 1, draw: drawMark, depth: 0.08 },
     layout: { cx: 0.44, cy: 0.3, h: 0.46 }, motion: { drift: 0.25, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 0.85, warm: 0.4, pointer: 0.5 } },
 
   // 6 Steps — a sapling grows
@@ -114,7 +114,7 @@ export const LANDING_STATES: StateDef[] = [
 
   // 8 Final — the reveal: all the dust gathers into the healed graft, in bloom
   { id: 'bloom', source: { kind: 'image', src: img('05-bloom'), threshold: 0.07, gamma: 1.05, depth: 0.8 },
-    layout: { cx: 0.02, cy: 0.2, h: 0.82 }, layoutNarrow: { cx: 0, cy: 0.3, h: 0.55 },
+    layout: { cx: 0.58, cy: 0.02, h: 0.86 }, layoutNarrow: { cx: 0, cy: 0.3, h: 0.55 },
     motion: { drift: 0.5, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 1.15, warm: 0.45, pointer: 0.9 } },
   { id: 'mark', source: { kind: 'draw', aspect: 1, draw: drawMark, depth: 0.3 },
     layout: { cx: 0, cy: 0.1, h: 0.66 }, layoutNarrow: { cx: 0, cy: 0.3, h: 0.5 },
