@@ -15,7 +15,7 @@ function pickCount(): number {
   const mem = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8;
   const small = Math.min(window.innerWidth, window.innerHeight) < 700;
   if (small || cores <= 4 || mem <= 4) return 26000;
-  return 100000;
+  return 80000;
 }
 
 export class World {
@@ -151,6 +151,7 @@ export class World {
       }
       this.states.set(def.id, loaded);
       this.applyBlend();
+      this.applyPos();
     });
     this.pending.set(def.id, p);
     return p;
@@ -165,6 +166,25 @@ export class World {
   }
 
   setScroll(p: number) { this.scroll = p; }
+
+  /** The chain of pictures in scroll order, and where along it the page is (eased every frame). */
+  private timeline: string[] = [];
+  private pos = 0;
+  private targetPos = 0;
+  private lastT = -1;
+  setTimeline(ids: string[]) { this.timeline = ids; this.applyPos(); }
+  setTarget(p: number, immediate = false) {
+    this.targetPos = p;
+    if (immediate) { this.pos = p; this.applyPos(); }
+  }
+  private applyPos() {
+    const n = this.timeline.length;
+    if (!n) return;
+    const p = Math.min(n - 1, Math.max(0, this.pos));
+    const i = Math.floor(p);
+    const j = Math.min(n - 1, i + 1);
+    this.setBlend({ from: this.timeline[i], to: this.timeline[j], mix: j === i ? 0 : p - i });
+  }
 
   setPointer(clientX: number, clientY: number, active = true) {
     this.pointer.tx = clientX / window.innerWidth;
@@ -235,10 +255,10 @@ export class World {
 
   resize() {
     const w = window.innerWidth, h = window.innerHeight;
-    const pr = Math.min(window.devicePixelRatio || 1, 1.75);
+    const pr = Math.min(window.devicePixelRatio || 1, 1.5);
     this.renderer.setPixelRatio(pr);
     this.renderer.setSize(w, h, false);
-    this.silkTarget.setSize(Math.max(2, Math.round(w * 0.5)), Math.max(2, Math.round(h * 0.5)));
+    this.silkTarget.setSize(Math.max(2, Math.round(w * 0.42)), Math.max(2, Math.round(h * 0.42)));
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
     this.viewH = 2 * CAM_Z * Math.tan(THREE.MathUtils.degToRad(FOV / 2));
@@ -273,6 +293,8 @@ export class World {
 
   /** Draw one still frame (reduced motion). */
   still(t = 12) {
+    this.pos = this.targetPos;
+    this.applyPos();
     this.renderAt(t);
   }
 
@@ -284,6 +306,13 @@ export class World {
 
   private renderAt(t: number) {
     for (const cb of this.onFrameCbs) cb(t);
+    // ease along the chain of pictures: fast scrolls glide, they never jump
+    const dt = this.lastT < 0 ? 0.016 : Math.min(0.05, Math.max(0, t - this.lastT));
+    this.lastT = t;
+    if (Math.abs(this.targetPos - this.pos) > 0.0005) {
+      this.pos += (this.targetPos - this.pos) * (1 - Math.exp(-dt * 4.2));
+      this.applyPos();
+    }
     const p = this.pointer;
     p.x += (p.tx - p.x) * 0.06;
     p.y += (p.ty - p.y) * 0.06;

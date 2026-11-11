@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { HourglassLowIcon, PlugsIcon, ProhibitIcon } from '@phosphor-icons/react';
 import { PROBLEM } from '../copy/landing';
+import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 const ICONS = [ProhibitIcon, HourglassLowIcon, PlugsIcon];
@@ -14,7 +15,7 @@ function Calculator() {
   }, [raw]);
   const fmt = (v: number) => v.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: v < 100 ? 2 : 0 });
   return (
-    <div className={`gg-glass ${s.calc}`} data-rise>
+    <div className={`gg-glass ${s.calc}`} data-rise data-tilt>
       <label htmlFor="monthly" className={s.calcLabel}>{PROBLEM.calcLabel}</label>
       <div className={s.calcField}>
         <span aria-hidden>$</span>
@@ -36,7 +37,7 @@ export function Problem() {
     <section id="problem" className={s.problem} data-world="dying">
       <div className={`gg-wrap gg-grid ${s.problemGrid}`}>
         <div className={s.problemHead}>
-          <p className="gg-label" data-rise>{PROBLEM.label}</p>
+          <ChapterMark n="02" label={PROBLEM.label} />
           <h2 className="gg-h2" data-split>{PROBLEM.title}</h2>
         </div>
         <ol className={s.pains} data-vine="pains">
@@ -47,7 +48,7 @@ export function Problem() {
                 <span className={s.painIcon} aria-hidden><Icon size={22} weight="light" /></span>
                 <div>
                   <h3 className={s.painTitle}>{p.title}</h3>
-                  <p className={s.painText}>{p.text}</p>
+                  <p className={s.painText} data-flow>{p.text}</p>
                 </div>
               </li>
             );

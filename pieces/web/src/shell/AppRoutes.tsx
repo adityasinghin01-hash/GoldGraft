@@ -38,7 +38,7 @@ function AppHeader() {
   }, []);
   return (
     <header className={s.header} data-scrolled={scrolled || undefined}>
-      <div className={`gg-wrap ${s.bar}`}>
+      <div className={s.bar}>
         <Link to="/" className={s.brand} aria-label="GoldGraft home"><span className={s.mark}><Mark size={26} /></span><span className={s.word}>GoldGraft</span></Link>
         <nav className={s.nav} aria-label="App">
           {NAV_APP.map((n) => (

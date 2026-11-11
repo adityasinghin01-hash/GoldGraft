@@ -6,6 +6,7 @@ import type { ProbeResult } from '../api/types';
 import { FAMILY } from '../copy/words';
 import { Details, NotInApiYet, PageHead, ProblemBanner, SampleChip, Tag } from '../components/ui';
 import { ActionButton, SecondsWait } from '../components/Loaders';
+import { GlowCaret } from '../components/GlowCaret';
 import { isMock } from '../config';
 import s from './s00.module.css';
 
@@ -90,6 +91,7 @@ export default function S00_Check() {
           <div className={s.field} data-error={invalid || undefined}>
             <input ref={inputRef} id="probe-url" type="url" inputMode="url" spellCheck={false} autoComplete="url" placeholder={t.ph} value={url}
               onChange={(e) => { setUrl(e.target.value); setInvalid(false); }} aria-invalid={invalid || undefined} aria-describedby="probe-note" />
+            <GlowCaret input={inputRef} />
             <ActionButton type="submit" busy={busy} busyText="Checking…">Check <ArrowRightIcon size={15} weight="bold" /></ActionButton>
           </div>
           <p id="probe-note" className={s.note} role={invalid ? 'alert' : undefined} data-error={invalid || undefined}>

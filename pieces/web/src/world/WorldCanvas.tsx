@@ -56,10 +56,10 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
     const sync = (y: number) => {
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       world.setScroll(y / max);
-      world.setBlend(director.blendAt(y));
+      world.setTarget(director.positionAt(y), still);
       if (still) world.still();
     };
-    const measure = () => { director.measure(); sync(window.scrollY); };
+    const measure = () => { director.measure(); world.setTimeline(director.timeline()); sync(window.scrollY); };
 
     const onResize = () => { world.resize(); measure(); };
     const onMove = (e: PointerEvent) => { if (e.pointerType === 'mouse') world.setPointer(e.clientX, e.clientY, true); };
@@ -85,7 +85,8 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
     if (calm) {
       world.load(states.filter((s) => s.id === 'cloud' || s.id === 'canopy'), ['canopy']).then(() => {
         if (disposed) return;
-        world.setBlend({ from: 'canopy', to: 'canopy', mix: 0 });
+        world.setTimeline(['canopy']);
+        world.setTarget(0, true);
         if (still) world.still(); else world.start();
       });
     } else {
@@ -123,6 +124,8 @@ export function WorldCanvas({ states, first, calm = false }: Props) {
     <div className={styles.root} data-mode={mode} aria-hidden="true">
       <canvas ref={ref} className={styles.canvas} />
       <div className={styles.fallback} />
+      <div className={styles.texture} />
+      <div className={styles.grain} />
     </div>
   );
 }

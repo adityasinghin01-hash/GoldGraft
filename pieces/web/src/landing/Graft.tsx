@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { GRAFT } from '../copy/landing';
 import { gsap, reducedMotion } from '../motion/scroll';
+import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 /**
@@ -30,6 +31,7 @@ export function Graft() {
     <section ref={ref} id="graft" className={s.graft} data-world="binding" data-world-lead="0.35">
       <div className={s.graftSticky}>
         <div className={`gg-wrap ${s.graftInner}`}>
+          <div className={s.graftMark}><ChapterMark n="03" label="The idea" /></div>
           <h2 className={s.graftTitle} data-g="title" data-vine="graft">
             {GRAFT.title} <em>{GRAFT.titleEm}</em>
           </h2>

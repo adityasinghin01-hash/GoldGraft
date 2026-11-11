@@ -4,10 +4,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 68px;
-  padding: 8px 8px 8px 24px;
+  height: 72px;
+  padding: 8px 8px 8px 26px;
   border-radius: var(--gg-r-pill);
   overflow: hidden;
+  /* Spotlight-style liquid glass: thick body, light on the top rim, deep soft shadow */
+  background: linear-gradient(180deg, rgb(40 37 30 / 0.62), rgb(14 13 10 / 0.72)) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.16),
+    inset 0 -1px 0 rgb(0 0 0 / 0.5),
+    inset 0 10px 24px -14px rgb(255 255 255 / 0.12),
+    0 0 0 1px rgb(0 0 0 / 0.45),
+    0 24px 60px -18px rgb(0 0 0 / 0.85),
+    0 4px 14px -4px rgb(0 0 0 / 0.6) !important;
   transition: box-shadow var(--gg-d-base) var(--gg-ease-out), background-color var(--gg-d-base) var(--gg-ease-out);
 }
 /* a soft underglow from the same upper-left light */
@@ -24,8 +33,13 @@
   transition: opacity var(--gg-d-slow) var(--gg-ease-out);
 }
 .field:focus-within {
-  background: rgb(18 17 13 / 0.7);
-  box-shadow: var(--gg-glass-shadow), 0 0 0 1px rgb(205 190 156 / 0.55), 0 0 40px -8px rgb(205 190 156 / 0.35);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    inset 0 -1px 0 rgb(0 0 0 / 0.5),
+    inset 0 10px 24px -14px rgb(255 255 255 / 0.14),
+    0 0 0 1px rgb(205 190 156 / 0.55),
+    0 0 42px -8px rgb(205 190 156 / 0.4),
+    0 24px 60px -18px rgb(0 0 0 / 0.85) !important;
 }
 .field:focus-within::after { opacity: 1; }
 /* a light glint travels along the top edge on focus */
@@ -43,13 +57,15 @@
 @keyframes glint { 0% { left: -30%; opacity: 0; } 15% { opacity: 1; } 100% { left: 110%; opacity: 0; } }
 
 .input {
+  position: relative;
   flex: 1;
   min-width: 0;
   height: 100%;
   border: 0;
   outline: 0;
   background: transparent;
-  font-size: 17px;
+  font-size: 18px;
+  letter-spacing: -0.005em;
   color: var(--gg-ivory);
   caret-color: var(--gg-gold);
 }

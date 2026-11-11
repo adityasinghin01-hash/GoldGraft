@@ -1,31 +1,75 @@
 import { gsap, ScrollTrigger, SplitText, reducedMotion } from './scroll';
 
 /**
- * Text and element entrances for one page, all on scroll, once, in reading order.
- *   data-split          heading lines rise out of a mask when they enter
+ * Text that builds and flows, all tied to load or scroll, once, in reading order.
+ *   data-split          headings: each word rises out of its line with a soft blur, one after another
  *   data-split="load"   same, on page load (hero)
+ *   data-scramble       labels type themselves in through scrambled letters ("load" = on load)
+ *   data-roll           numbers roll through digits into place when they enter
+ *   data-flow           paragraphs light up word by word as you scroll through them (scrubbed)
  *   data-rise           element rises 28px and fades in; data-delay="0.1" to offset
- *   data-stagger        children rise one after another (60 ms apart)
+ *   data-stagger        children rise one after another
+ *   data-draw           a hairline that draws itself from the left
  * Reduced motion: nothing is hidden, nothing moves.
  */
 export function setupReveals(root: HTMLElement): () => void {
   if (reducedMotion()) return () => {};
   const ctx = gsap.context(() => {
     root.querySelectorAll<HTMLElement>('[data-split]').forEach((el) => {
-      const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'gg-line', autoSplit: true,
+      SplitText.create(el, {
+        type: 'lines,words', mask: 'lines', linesClass: 'gg-line', autoSplit: true,
         onSplit(self) {
           const onLoad = el.dataset.split === 'load';
-          return gsap.from(self.lines, {
-            yPercent: 112,
-            rotate: 1.2,
-            duration: onLoad ? 1.25 : 1.05,
+          return gsap.from(self.words, {
+            yPercent: 115,
+            opacity: 0,
+            filter: 'blur(6px)',
+            duration: onLoad ? 1.2 : 1.05,
             ease: 'expo.out',
-            stagger: 0.085,
+            stagger: { each: 0.045 },
             delay: onLoad ? Number(el.dataset.delay ?? 0.15) : 0,
-            scrollTrigger: onLoad ? undefined : { trigger: el, start: 'top 86%', once: true },
+            clearProps: 'filter',
+            scrollTrigger: onLoad ? undefined : { trigger: el, start: 'top 88%', once: true },
           });
-        } });
-      void split;
+        },
+      });
+    });
+
+    root.querySelectorAll<HTMLElement>('[data-scramble]').forEach((el) => {
+      const node = [...el.childNodes].reverse().find((n) => n.nodeType === 3 && n.textContent?.trim());
+      if (!node) return;
+      const text = node.textContent ?? '';
+      const span = document.createElement('span');
+      span.textContent = text;
+      node.replaceWith(span);
+      const onLoad = el.dataset.scramble === 'load';
+      gsap.from(span, {
+        duration: 1.1,
+        scrambleText: { text: '', chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', revealDelay: 0.1, speed: 0.6 },
+        delay: onLoad ? 0.05 : 0,
+        ease: 'none',
+        scrollTrigger: onLoad ? undefined : { trigger: el, start: 'top 90%', once: true },
+      });
+    });
+
+    root.querySelectorAll<HTMLElement>('[data-roll]').forEach((el) => {
+      const final = el.textContent ?? '';
+      gsap.to(el, {
+        duration: 1.3,
+        scrambleText: { text: final, chars: '0123456789', revealDelay: 0.35, speed: 0.8 },
+        ease: 'none',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      });
+    });
+
+    root.querySelectorAll<HTMLElement>('[data-flow]').forEach((el) => {
+      const split = SplitText.create(el, { type: 'words' });
+      gsap.fromTo(split.words, { opacity: 0.16 }, {
+        opacity: 1,
+        ease: 'none',
+        stagger: 0.08,
+        scrollTrigger: { trigger: el, start: 'top 82%', end: 'bottom 52%', scrub: 0.6 },
+      });
     });
 
     root.querySelectorAll<HTMLElement>('[data-rise]').forEach((el) => {
@@ -35,7 +79,8 @@ export function setupReveals(root: HTMLElement): () => void {
         duration: 1.0,
         ease: 'expo.out',
         delay: Number(el.dataset.delay ?? 0),
-        scrollTrigger: el.dataset.rise === 'load' ? undefined : { trigger: el, start: 'top 88%', once: true },
+        clearProps: 'transform',
+        scrollTrigger: el.dataset.rise === 'load' ? undefined : { trigger: el, start: 'top 90%', once: true },
       });
     });
 
@@ -45,10 +90,21 @@ export function setupReveals(root: HTMLElement): () => void {
         autoAlpha: 0,
         duration: 0.9,
         ease: 'expo.out',
-        stagger: 0.06,
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+        stagger: 0.07,
+        scrollTrigger: { trigger: el, start: 'top 86%', once: true },
       });
     });
+
+    root.querySelectorAll<HTMLElement>('[data-draw]').forEach((el) => {
+      gsap.from(el, { scaleX: 0, transformOrigin: 'left center', duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+    });
+
+    // the band of old PayPal names leans with scroll speed
+    const band = root.querySelector<HTMLElement>('[data-band]');
+    if (band) {
+      const skew = gsap.quickTo(band, 'skewX', { duration: 0.5, ease: 'power3.out' });
+      ScrollTrigger.create({ onUpdate: (self) => skew(gsap.utils.clamp(-8, 8, self.getVelocity() / -260)) });
+    }
   }, root);
   requestAnimationFrame(() => ScrollTrigger.refresh());
   return () => ctx.revert();

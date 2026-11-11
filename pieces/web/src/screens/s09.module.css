@@ -5,7 +5,7 @@
 .muted { color: var(--gg-mute); font-size: 14px; }
 .ask { display: grid; gap: 12px; padding: var(--gg-s-5) var(--gg-s-6); }
 .askLabel { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gg-mute); }
-.askRow { display: flex; gap: 8px; align-items: center; padding: 6px 6px 6px 18px; border-radius: var(--gg-r-pill); background: rgb(13 12 9 / 0.65); box-shadow: 0 0 0 1px var(--gg-line-strong) inset; }
+.askRow { position: relative; display: flex; gap: 8px; align-items: center; padding: 6px 6px 6px 18px; border-radius: var(--gg-r-pill); background: rgb(13 12 9 / 0.65); box-shadow: 0 0 0 1px var(--gg-line-strong) inset; }
 .askRow:focus-within { box-shadow: 0 0 0 1px rgb(205 190 156 / 0.6) inset, 0 0 30px -8px rgb(205 190 156 / 0.45); }
 .askRow input { flex: 1; min-width: 0; height: 48px; border: 0; outline: 0; background: transparent; color: var(--gg-ivory); font-size: 16px; }
 .askRow input::placeholder { color: var(--gg-faint); }

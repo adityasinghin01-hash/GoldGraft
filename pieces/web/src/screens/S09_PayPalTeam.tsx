@@ -8,6 +8,7 @@ import { Details, Explain, NotInApiYet, PageHead, ProblemBanner, SampleChip, Tag
 import { Bars } from '../components/Bars';
 import { ActionButton, Skeleton, Thinking } from '../components/Loaders';
 import { newIdempotencyKey } from '../lib/store';
+import { GlowCaret } from '../components/GlowCaret';
 import s from './s09.module.css';
 
 type Shop = { shop_id: string; stage: string; old_families: string[]; deadline_risk?: string; paypal_only_items: number };
@@ -77,6 +78,7 @@ export default function S09_PayPalTeam() {
             <label htmlFor="ask" className={s.askLabel}><ChatCircleDotsIcon size={16} weight="duotone" /> Ask about all shops <Explain text="The Analyst only reads the shop table. It changes nothing." /></label>
             <div className={s.askRow}>
               <input ref={inputRef} id="ask" value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Which shops still take old Buy Now money?" />
+              <GlowCaret input={inputRef} />
               <ActionButton type="submit" busy={busy} busyText="Asking…" disabled={!question.trim()}><SparkleIcon size={15} weight="fill" /> Ask</ActionButton>
             </div>
             <div className={s.chips}>

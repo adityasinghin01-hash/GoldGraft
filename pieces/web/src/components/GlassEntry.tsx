@@ -1,4 +1,5 @@
-import { useId, useState } from 'react';
+import { useId, useRef, useState } from 'react';
+import { GlowCaret } from './GlowCaret';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import styles from './GlassEntry.module.css';
@@ -18,6 +19,7 @@ export function GlassEntry({ label, placeholder, action, note, invalid, inputId 
   const [error, setError] = useState(false);
   const [going, setGoing] = useState(false);
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,9 +33,10 @@ export function GlassEntry({ label, placeholder, action, note, invalid, inputId 
   return (
     <form className={styles.form} onSubmit={submit} noValidate data-error={error || undefined}>
       <label htmlFor={id} className={styles.label}>{label}</label>
-      <div className={`gg-glass ${styles.field}`}>
+      <div className={`gg-glass gg-glass-blur ${styles.field}`}>
         <span className={styles.glint} aria-hidden />
         <input
+          ref={inputRef}
           id={id}
           className={styles.input}
           type="url"
@@ -46,6 +49,7 @@ export function GlassEntry({ label, placeholder, action, note, invalid, inputId 
           aria-invalid={error || undefined}
           aria-describedby={`${id}-note`}
         />
+        <GlowCaret input={inputRef} />
         <button type="submit" className={`gg-btn gg-btn--gold ${styles.go}`} disabled={going}>
           {action}
           <ArrowRightIcon size={16} weight="bold" aria-hidden />

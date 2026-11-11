@@ -1,11 +1,28 @@
 .footer {
   position: relative;
   z-index: var(--gg-z-content);
-  padding-top: var(--gg-s-10);
+  margin-top: var(--gg-s-9);
+  padding-top: var(--gg-s-9);
   overflow: hidden;
-  background: linear-gradient(to bottom, transparent, rgb(13 12 9 / 0.55) 30%, rgb(13 12 9 / 0.2));
+  border-radius: 44px 44px 0 0;
+  background: linear-gradient(180deg, rgb(30 28 22 / 0.72) 0%, rgb(15 14 11 / 0.62) 40%, rgb(13 12 9 / 0.3) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    inset 0 0 0 1px rgb(245 243 239 / 0.05),
+    0 -40px 90px -50px rgb(205 190 156 / 0.35);
 }
-.footer[data-compact] { padding-top: var(--gg-s-8); background: linear-gradient(to bottom, rgb(13 12 9 / 0.2), rgb(13 12 9 / 0.75) 40%); border-top: 1px solid var(--gg-line); }
+/* the horizon: a line of light along the slab's top edge */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(232 220 190 / 0.9), transparent);
+  box-shadow: 0 0 18px 2px rgb(205 190 156 / 0.45);
+}
+.footer[data-compact] { margin-top: var(--gg-s-8); padding-top: var(--gg-s-8); background: linear-gradient(180deg, rgb(30 28 22 / 0.8), rgb(13 12 9 / 0.9)); }
 .footer[data-compact] .word { font-size: clamp(4rem, 13vw, 15rem); }
 .top {
   display: grid;

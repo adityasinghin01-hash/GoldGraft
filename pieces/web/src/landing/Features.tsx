@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FEATURES, FEATURES_INTRO } from '../copy/landing';
 import { onScroll, scrollToTarget } from '../motion/scroll';
 import { PANELS } from './FeaturePanels';
+import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 const LEAD = 0.1; // must match data-world-lead below: the world and the list change together
@@ -52,7 +53,7 @@ export function Features() {
       <div className={s.featSticky}>
         <div className={`gg-wrap gg-grid ${s.featGrid}`}>
           <div className={s.featHead}>
-            <p className="gg-label">{FEATURES_INTRO.label}</p>
+            <ChapterMark n="04" label={FEATURES_INTRO.label} />
             <h2 className={`gg-h3 ${s.featTitle}`}>{FEATURES_INTRO.title} <em>{FEATURES_INTRO.titleEm}</em></h2>
           </div>
           <ol className={s.featList} data-vine="features">
@@ -72,7 +73,7 @@ export function Features() {
             ))}
           </ol>
           <div className={s.featStage}>
-            <div key={active} className={`gg-glass ${s.featPanel}`}>
+            <div key={active} className={`gg-glass ${s.featPanel}`} data-tilt>
               <Panel />
             </div>
             <div className={s.featProgress} aria-hidden>

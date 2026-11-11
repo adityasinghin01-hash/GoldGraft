@@ -166,7 +166,7 @@ void main(){
 
   // in-flight turbulence: strongest halfway through a morph
   float flight = sin(3.14159 * e);
-  pos += swirlNoise(pos * 0.6, t) * flight * (0.25 + aSeed.x * 0.55) * 0.55;
+  pos += swirlNoise(pos * 0.5, t * 0.6) * flight * (0.2 + aSeed.x * 0.5) * 0.42;
 
   // intro: dust gathers from a wide cloud
   vec3 cloud = (aSeed.xyz * 2.0 - 1.0) * vec3(uView.x * 0.75, uView.y * 0.75, 4.0);

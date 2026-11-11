@@ -49,7 +49,7 @@ export function SiteHeader() {
 
   return (
     <header className={styles.header} data-scrolled={scrolled || undefined} data-open={open || undefined}>
-      <div className={`gg-wrap ${styles.bar}`}>
+      <div className={styles.bar}>
         <Link to="/" className={styles.brand} aria-label="GoldGraft home">
           <span className={styles.mark}><Mark size={30} /></span>
           <span className={styles.word}>GoldGraft</span>

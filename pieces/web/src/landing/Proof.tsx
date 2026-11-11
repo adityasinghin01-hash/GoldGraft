@@ -1,6 +1,7 @@
 import { ArrowUpRightIcon, QuotesIcon } from '@phosphor-icons/react';
 import { PROOF } from '../copy/landing';
 import { AGENT_RESULTS, AGENT_TOTALS } from '../copy/evidence';
+import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 export function Proof() {
@@ -8,7 +9,7 @@ export function Proof() {
     <section id="proof" className={s.proof} data-world="rings">
       <div className={`gg-wrap gg-grid ${s.proofGrid}`}>
         <div className={s.proofHead}>
-          <p className="gg-label" data-rise>{PROOF.label}</p>
+          <ChapterMark n="01" label={PROOF.label} />
           <h2 className="gg-h2" data-split>
             {PROOF.title} <em>{PROOF.titleEm}</em>
           </h2>
@@ -17,8 +18,8 @@ export function Proof() {
         <div className={s.facts} data-vine="proof">
           {PROOF.facts.map((f) => (
             <article key={f.big} className={s.fact} data-rise>
-              <p className={`gg-num ${s.factBig}`}>{f.big}</p>
-              <p className={s.factText}>{f.text}</p>
+              <p className={`gg-num ${s.factBig}`} data-roll>{f.big}</p>
+              <p className={s.factText} data-flow>{f.text}</p>
               <a className={s.source} href={f.source.href} target="_blank" rel="noreferrer">
                 {f.source.label} <ArrowUpRightIcon size={12} aria-hidden />
               </a>
@@ -37,11 +38,11 @@ export function Proof() {
           </figcaption>
         </figure>
 
-        <div className={`gg-glass ${s.results}`} data-rise>
+        <div className={`gg-glass ${s.results}`} data-rise data-tilt>
           <div className={s.resultsHead}>
             <p className="gg-label">{PROOF.resultsLabel}</p>
             <p className={s.resultsBig}>
-              <span className="gg-num">{AGENT_TOTALS.passed}</span>
+              <span className="gg-num" data-roll>{AGENT_TOTALS.passed}</span>
               <span className={s.resultsOf}> of {AGENT_TOTALS.total}</span>
             </p>
             <p className={s.resultsCap}>agent test runs passed, across all 13 AI agents</p>

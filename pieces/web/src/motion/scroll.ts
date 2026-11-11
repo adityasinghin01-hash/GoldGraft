@@ -3,8 +3,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 
-gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, ScrambleTextPlugin);
 
 export const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -14,7 +15,7 @@ const listeners = new Set<(y: number) => void>();
 /** One clock for smooth scroll, ScrollTrigger and the world (Lenis drives, GSAP ticks). */
 export function startSmoothScroll(): Lenis | null {
   if (lenis || reducedMotion()) return lenis;
-  lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true });
+  lenis = new Lenis({ lerp: 0.14, wheelMultiplier: 1.05, smoothWheel: true, syncTouch: false });
   lenis.on('scroll', () => {
     ScrollTrigger.update();
     for (const l of listeners) l(window.scrollY);

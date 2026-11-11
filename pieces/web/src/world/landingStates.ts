@@ -43,7 +43,7 @@ export const LANDING_STATES: StateDef[] = [
 
   // 1 Hero — the graft union, the shop as a living tree
   { id: 'graft', source: { kind: 'image', src: img('01-graft-union'), threshold: 0.075, gamma: 1.1, depth: 0.9 },
-    layout: { cx: 0.42, cy: -0.3, h: 0.68 }, layoutNarrow: { cx: 0.15, cy: 0.38, h: 0.62 },
+    layout: { cx: 0.52, cy: -0.04, h: 0.7 }, layoutNarrow: { cx: 0.15, cy: 0.38, h: 0.62 },
     motion: { drift: 1, swirl: 0, flow: 0, fall: 0 }, silk: { intensity: 1, warm: 0.15, pointer: 0.8 } },
 
   // 2 Proof — the tree rings: time is running out

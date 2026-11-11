@@ -20,6 +20,8 @@ export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null>
     const glow = svg.querySelector<SVGPathElement>('[data-v="glow"]')!;
     const tip = svg.querySelector<SVGCircleElement>('[data-v="tip"]')!;
     const leavesG = svg.querySelector<SVGGElement>('[data-v="leaves"]')!;
+    const halo = svg.querySelector<SVGCircleElement>('[data-v="halo"]')!;
+    const sap = [...svg.querySelectorAll<SVGCircleElement>('[data-v="sap"] circle')];
     const still = reducedMotion();
 
     let total = 1;
@@ -133,12 +135,34 @@ export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null>
       const p = path.getPointAtLength(Math.max(0, shown));
       tip.setAttribute('cx', `${p.x}`);
       tip.setAttribute('cy', `${p.y}`);
-      tip.style.opacity = shown > 4 && shown < total - 4 ? '1' : '0';
+      halo.setAttribute('cx', `${p.x}`);
+      halo.setAttribute('cy', `${p.y}`);
+      const tipOn = shown > 4 && shown < total - 4 ? '1' : '0';
+      tip.style.opacity = tipOn;
+      halo.style.opacity = tipOn;
       for (const l of leaves) l.el.toggleAttribute('data-on', shown >= l.len - 2);
+    };
+
+    // sap: drops of light run down the grown part of the vine, toward the tip
+    let sapT = 0;
+    const flowSap = () => {
+      if (shown < 40) { sap.forEach((c) => (c.style.opacity = '0')); return; }
+      sapT += 1;
+      sap.forEach((c, i) => {
+        const span = Math.min(shown, 1400);
+        const off = ((sapT * (2.2 + (i % 3) * 0.6) + i * (span / sap.length)) % span);
+        const at = Math.max(0, shown - span + off);
+        const q = path.getPointAtLength(at);
+        c.setAttribute('cx', `${q.x}`);
+        c.setAttribute('cy', `${q.y}`);
+        const fade = Math.min(1, off / 120, (span - off) / 120);
+        c.style.opacity = String(Math.max(0, fade) * 0.9);
+      });
     };
 
     const tick = () => {
       if (still) return;
+      flowSap();
       const rootTop = root.getBoundingClientRect().top + window.scrollY;
       target = lenAtY(window.scrollY + window.innerHeight * 0.72 - rootTop);
       const next = shown + (target - shown) * 0.12;
@@ -160,12 +184,13 @@ export function Vine({ rootRef }: { rootRef: React.RefObject<HTMLElement | null>
           <stop offset="0.5" stopColor="#cdbe9c" />
           <stop offset="1" stopColor="#9c8c68" />
         </linearGradient>
-        <filter id="vineBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" /></filter>
       </defs>
-      <path data-v="glow" className={s.glow} filter="url(#vineBlur)" />
+      <path data-v="glow" className={s.glow} />
       <path data-v="stem" className={s.stem} stroke="url(#vineGrad)" />
       <g data-v="leaves" />
+      <g data-v="sap">{[0, 1, 2, 3, 4, 5].map((i) => <circle key={i} r={i % 2 ? 1.6 : 2.2} className={s.sap} />)}</g>
       <circle data-v="tip" r="4" className={s.tip} />
+      <circle data-v="halo" r="14" className={s.halo} />
     </svg>
   );
 }

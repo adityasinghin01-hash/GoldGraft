@@ -7,6 +7,9 @@ import '@fontsource-variable/geist-mono';
 import './styles/tokens.css';
 import './styles/base.css';
 import { App } from './App';
+import { installPress } from './motion/press';
+
+installPress();
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, refetchOnWindowFocus: false } } });
 

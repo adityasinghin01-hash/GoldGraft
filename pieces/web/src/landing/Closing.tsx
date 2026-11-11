@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRightIcon, PlusIcon } from '@phosphor-icons/react';
 import { FAQ, FINAL, STEPS } from '../copy/landing';
 import { scrollToTarget } from '../motion/scroll';
+import { ChapterMark } from './ChapterMark';
 import s from './landing.module.css';
 
 export function Steps() {
@@ -10,7 +11,7 @@ export function Steps() {
     <section id="steps" className={s.steps} data-world="sapling">
       <div className={`gg-wrap gg-grid ${s.stepsGrid}`}>
         <div className={s.stepsHead}>
-          <p className="gg-label" data-rise>{STEPS.label}</p>
+          <ChapterMark n="05" label={STEPS.label} />
           <h2 className="gg-h2" data-split>{STEPS.title} <em>{STEPS.titleEm}</em></h2>
         </div>
         <ol className={s.stepList} data-vine="steps">
@@ -19,7 +20,7 @@ export function Steps() {
               <span className={`gg-num ${s.stepN}`}>{st.n}</span>
               <div>
                 <h3 className={s.stepTitle}>{st.title}</h3>
-                <p className={s.stepText}>{st.text}</p>
+                <p className={s.stepText} data-flow>{st.text}</p>
               </div>
             </li>
           ))}
@@ -52,7 +53,7 @@ export function Faq() {
     <section id="faq" className={s.faq} data-world="canopy">
       <div className={`gg-wrap gg-grid ${s.faqGrid}`}>
         <div className={s.faqHead}>
-          <p className="gg-label" data-rise>{FAQ.label}</p>
+          <ChapterMark n="06" label={FAQ.label} />
           <h2 className="gg-h2" data-split>{FAQ.title}</h2>
         </div>
         <ul className={s.faqList} data-vine="faq" data-stagger>
@@ -73,7 +74,7 @@ export function Final() {
     <section id="start" className={s.final} data-world="bloom">
       <div className={`gg-wrap ${s.finalInner}`}>
         <h2 className={s.finalTitle} data-split>{FINAL.title} <em>{FINAL.titleEm}</em></h2>
-        <p className={`gg-lead ${s.finalLead}`} data-rise>{FINAL.lead}</p>
+        <p className={`gg-lead ${s.finalLead}`} data-flow>{FINAL.lead}</p>
         <div className={s.finalActions} data-rise data-vine="final">
           <a href="#top" onClick={checkMyShop} className="gg-btn gg-btn--gold">{FINAL.primary} <ArrowRightIcon size={16} weight="bold" aria-hidden /></a>
           <Link to="/g/demo-1" className="gg-btn gg-btn--ghost">{FINAL.secondary}</Link>

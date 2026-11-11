@@ -10,7 +10,7 @@
 .team:hover { color: var(--gg-gold); }
 .form { display: grid; gap: 8px; }
 .label { font-size: 13px; color: var(--gg-mute); }
-.field { display: flex; gap: 8px; align-items: center; padding: 6px 6px 6px 20px; height: 64px; border-radius: var(--gg-r-pill); background: rgb(13 12 9 / 0.6); box-shadow: 0 0 0 1px var(--gg-line-strong) inset; transition: box-shadow var(--gg-d-base); }
+.field { position: relative; display: flex; gap: 8px; align-items: center; padding: 6px 6px 6px 22px; height: 66px; border-radius: var(--gg-r-pill); background: linear-gradient(180deg, rgb(40 37 30 / 0.7), rgb(14 13 10 / 0.8)); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.15), inset 0 -1px 0 rgb(0 0 0 / 0.5), 0 0 0 1px rgb(0 0 0 / 0.45), 0 20px 50px -18px rgb(0 0 0 / 0.85); transition: box-shadow var(--gg-d-base); }
 .field:focus-within { box-shadow: 0 0 0 1px rgb(205 190 156 / 0.6) inset, 0 0 34px -8px rgb(205 190 156 / 0.45); }
 .field[data-error] { box-shadow: 0 0 0 1px rgb(224 144 124 / 0.6) inset; }
 .field input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent; font-size: 17px; color: var(--gg-ivory); }
