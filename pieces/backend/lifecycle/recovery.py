@@ -6,9 +6,9 @@ Ensures:
 3. Durable audit trail in foundation.ledger recording rollback triggers and cause.
 """
 
+import hashlib
 from dataclasses import dataclass
 from datetime import UTC, datetime
-import hashlib
 
 from goldgraft_contracts.common import Producer, ProducerKind, Stage
 from goldgraft_contracts.ledger import EntryType
