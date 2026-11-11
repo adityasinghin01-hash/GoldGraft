@@ -1,10 +1,11 @@
 import * as THREE from 'three';
-import { compositeFrag, dustFrag, dustVert, fullscreenVert, silkFrag } from './shaders';
+import { compositeFrag, dustFrag, dustVert, fullscreenVert, plateFrag, plateVert, silkFrag } from './shaders';
 import { buildState, type Layout, type Motion, type PointState, type StateDef } from './states';
 
 export type Blend = { from: string; to: string; mix: number };
 
-type Loaded = { def: StateDef; attr: THREE.BufferAttribute; aspect: number };
+type Loaded = { def: StateDef; attr: THREE.BufferAttribute; color: THREE.BufferAttribute; aspect: number; tex?: THREE.Texture };
+const PLATE = 0.3; // how strongly the real photo shows behind its dust
 
 const FOV = 35;
 const CAM_Z = 10;
@@ -42,6 +43,8 @@ export class World {
   private viewW = 1;
   private viewH = 1;
   private onFrameCbs: Array<(t: number) => void> = [];
+  private plates: THREE.Mesh[] = [];
+  private loader = new THREE.TextureLoader();
 
   constructor(canvas: HTMLCanvasElement) {
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
@@ -87,6 +90,9 @@ export class World {
     this.geom.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 4));
     this.geom.setAttribute('aFrom', new THREE.BufferAttribute(zero, 4));
     this.geom.setAttribute('aTo', new THREE.BufferAttribute(zero, 4));
+    const zc = new Float32Array(this.n * 3).fill(0.7);
+    this.geom.setAttribute('aFromC', new THREE.BufferAttribute(zc, 3));
+    this.geom.setAttribute('aToC', new THREE.BufferAttribute(zc, 3));
     this.dustMat = new THREE.ShaderMaterial({
       vertexShader: dustVert,
       fragmentShader: dustFrag,
@@ -101,6 +107,18 @@ export class World {
         uSize: { value: 2.1 }, uPR: { value: 1 }, uView: { value: new THREE.Vector2(1, 1) }, uOpacity: { value: 1 },
       },
     });
+    // faint real photos behind the dust (from + to), additive, so the picture reads at a glance
+    for (let i = 0; i < 2; i++) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.ShaderMaterial({
+        vertexShader: plateVert, fragmentShader: plateFrag, transparent: true, depthTest: false, depthWrite: false,
+        blending: THREE.AdditiveBlending, uniforms: { uMap: { value: null }, uOpacity: { value: 0 } },
+      }));
+      m.frustumCulled = false;
+      m.renderOrder = -0.5;
+      m.visible = false;
+      this.plates.push(m);
+      this.scene.add(m);
+    }
     const points = new THREE.Points(this.geom, this.dustMat);
     points.frustumCulled = false;
     this.scene.add(points);
@@ -122,8 +140,16 @@ export class World {
     if (this.states.has(def.id)) return Promise.resolve();
     const existing = this.pending.get(def.id);
     if (existing) return existing;
-    const p = buildState(def, this.n).then((ps: PointState) => {
-      this.states.set(def.id, { def, attr: new THREE.BufferAttribute(ps.data, 4), aspect: ps.aspect });
+    const p = buildState(def, this.n).then(async (ps: PointState) => {
+      const loaded: Loaded = { def, attr: new THREE.BufferAttribute(ps.data, 4), color: new THREE.BufferAttribute(ps.color, 3), aspect: ps.aspect };
+      if (def.source.kind === 'image' && ps.aspect !== 2.2) {
+        try {
+          const tex = await this.loader.loadAsync(def.source.src);
+          tex.colorSpace = THREE.NoColorSpace;
+          loaded.tex = tex;
+        } catch { /* no plate, dust only */ }
+      }
+      this.states.set(def.id, loaded);
       this.applyBlend();
     });
     this.pending.set(def.id, p);
@@ -172,6 +198,8 @@ export class World {
     if (!from || !to) return;
     if (this.geom.getAttribute('aFrom') !== from.attr) this.geom.setAttribute('aFrom', from.attr);
     if (this.geom.getAttribute('aTo') !== to.attr) this.geom.setAttribute('aTo', to.attr);
+    if (this.geom.getAttribute('aFromC') !== from.color) this.geom.setAttribute('aFromC', from.color);
+    if (this.geom.getAttribute('aToC') !== to.color) this.geom.setAttribute('aToC', to.color);
     const u = this.dustMat.uniforms;
     u.uMix.value = this.states.has(this.blend.to) ? this.blend.mix : 0;
     this.xform(from, u.uFromX.value);
@@ -179,6 +207,10 @@ export class World {
     this.motion(from, u.uFromMotion.value);
     this.motion(to, u.uToMotion.value);
     const e = u.uMix.value * u.uMix.value * (3 - 2 * u.uMix.value);
+    // plates fade out while the dust is in flight and back in when it lands
+    const calm = Math.pow(Math.abs(e - 0.5) * 2, 3);
+    this.placePlate(this.plates[0], from, (from === to ? 1 : 1 - e) * calm);
+    this.placePlate(this.plates[1], to, from === to ? 0 : e * calm);
     const a = from.def.silk, b = to.def.silk;
     const s = this.silkMat.uniforms;
     s.uIntensity.value = a.intensity + (b.intensity - a.intensity) * e;
@@ -186,6 +218,20 @@ export class World {
     this.pointerLight = a.pointer + (b.pointer - a.pointer) * e;
   }
   private pointerLight = 0.6;
+
+  private placePlate(m: THREE.Mesh, l: Loaded, k: number) {
+    const mat = m.material as THREE.ShaderMaterial;
+    const plate = l.def.source.kind === 'image' ? l.def.source.plate ?? PLATE : 0;
+    if (!l.tex || k <= 0.001 || plate <= 0) { m.visible = false; return; }
+    const lay = this.layoutOf(l);
+    const scale = (lay.h * this.viewH) / 2;
+    m.visible = true;
+    m.position.set((lay.cx * this.viewW) / 2, (lay.cy * this.viewH) / 2, -0.35);
+    m.scale.set(scale * 2 * l.aspect, scale * 2, 1);
+    mat.uniforms.uMap.value = l.tex;
+    mat.uniforms.uOpacity.value = plate * k * this.plateIntro;
+  }
+  private plateIntro = 0;
 
   resize() {
     const w = window.innerWidth, h = window.innerHeight;
@@ -252,6 +298,7 @@ export class World {
     const u = this.dustMat.uniforms;
     u.uTime.value = t;
     u.uIntro.value = this.intro;
+    if (Math.abs(this.plateIntro - this.intro) > 0.01) { this.plateIntro = this.intro; this.applyBlend(); }
     u.uPointer.value.set((p.x - 0.5) * this.viewW, (p.y - 0.5) * this.viewH, p.active);
     this.compMat.uniforms.uTime.value = t;
 
@@ -269,6 +316,8 @@ export class World {
   dispose() {
     this.stop();
     this.geom.dispose();
+    for (const m of this.plates) { m.geometry.dispose(); (m.material as THREE.Material).dispose(); }
+    for (const l of this.states.values()) l.tex?.dispose();
     this.dustMat.dispose();
     this.silkMat.dispose();
     this.compMat.dispose();

@@ -85,10 +85,28 @@ void main(){
   gl_FragColor = vec4(col, 1.0);
 }`;
 
+export const plateFrag = /* glsl */ `
+precision highp float;
+varying vec2 vUv;
+uniform sampler2D uMap;
+uniform float uOpacity;
+void main(){
+  vec3 c = texture2D(uMap, vUv).rgb;
+  // only the lit subject shows; black stays black (additive)
+  float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
+  gl_FragColor = vec4(c * smoothstep(0.03, 0.25, l), uOpacity);
+}`;
+
+export const plateVert = /* glsl */ `
+varying vec2 vUv;
+void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
+
 export const dustVert = /* glsl */ `
 attribute vec4 aFrom;   // xyz in state space, w = brightness
 attribute vec4 aTo;
 attribute vec4 aSeed;   // four randoms in 0..1
+attribute vec3 aFromC;  // colour in the picture it comes from
+attribute vec3 aToC;
 uniform float uMix;
 uniform vec4 uFromX;    // cx, cy (world units), scale (world units per state unit), unused
 uniform vec4 uToX;
@@ -103,6 +121,7 @@ uniform vec2 uView;     // visible world width, height at z = 0
 varying float vAlpha;
 varying float vB;
 varying float vSeed;
+varying vec3 vColor;
 
 vec3 swirlNoise(vec3 p, float t){
   return vec3(
@@ -166,6 +185,7 @@ void main(){
 
   float bri = mix(aFrom.w, aTo.w, e);
   vB = bri;
+  vColor = mix(aFromC, aToC, e);
   vSeed = aSeed.y;
   float tw = 0.75 + 0.25 * sin(t * (0.8 + aSeed.z * 1.6) + aSeed.w * 40.0);
   vAlpha = (0.10 + 0.62 * bri) * tw * (0.35 + 0.65 * ie) * (1.0 + flight * 0.25);
@@ -177,16 +197,16 @@ precision highp float;
 varying float vAlpha;
 varying float vB;
 varying float vSeed;
+varying vec3 vColor;
 uniform float uOpacity;
 void main(){
   vec2 c = gl_PointCoord - 0.5;
   float d = length(c);
   if (d > 0.5) discard;
   float core = pow(smoothstep(0.5, 0.0, d), 1.7);
-  vec3 bark = vec3(0.42, 0.33, 0.22);
   vec3 gold = vec3(0.80, 0.745, 0.61);
-  vec3 ivory = vec3(0.96, 0.95, 0.93);
-  vec3 col = mix(bark, gold, smoothstep(0.05, 0.6, vB));
-  col = mix(col, ivory, smoothstep(0.72, 1.0, vB) * (0.5 + 0.5 * vSeed));
+  // the picture's own colour, graded gently toward champagne so every chapter shares one light
+  vec3 col = mix(vColor, gold * (0.55 + 0.6 * vB), 0.28);
+  col = mix(col, vec3(0.97, 0.95, 0.91), smoothstep(0.8, 1.0, vB) * 0.5 * vSeed);
   gl_FragColor = vec4(col, core * vAlpha * uOpacity);
 }`;
