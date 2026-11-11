@@ -242,20 +242,23 @@ class Models:
         return self.brokers[name]
 
 
+RETRYABLE_SURVEY = {"MISSING_EVIDENCE", "INVALID_MODEL_OUTPUT", "TURN_LIMIT"}
+
+
 def run_store_a(directory, case, package, models, run_id, rows, outputs):
-    """Surveyor → Herald; one bounded re-attempt when the model's map was refused for
-    incomplete reading (both attempts recorded, separate budget batches, nothing reset)."""
+    """Surveyor → Herald. Up to two bounded re-attempts (the plan's two repair rounds) when the
+    model's survey was refused for an attributable model fault after real spend; every attempt is
+    recorded with its own budget batch and nothing is reset."""
     survey, payload = run_store_a_once(directory, case, package, models, run_id, rows, outputs, 0)
-    last = rows[-1] if rows and rows[-1].get("task") == "survey" else None
-    if (
-        not survey.get("accepted")
-        and last
-        and last.get("issue") == "MISSING_EVIDENCE"
-        and last.get("cost_micro_usd")
-    ):
+    for attempt in (1, 2):
+        last = rows[-1] if rows and rows[-1].get("task") == "survey" else None
+        if survey.get("accepted") or not last:
+            break
+        if last.get("issue") not in RETRYABLE_SURVEY or not last.get("cost_micro_usd"):
+            break
         last["superseded_by_retry"] = True
         survey, payload = run_store_a_once(
-            directory, case, package, models, run_id, rows, outputs, 1
+            directory, case, package, models, run_id, rows, outputs, attempt
         )
     return survey, payload
 
