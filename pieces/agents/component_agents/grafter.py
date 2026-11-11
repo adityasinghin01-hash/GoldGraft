@@ -257,7 +257,9 @@ def facts(task, data):
             "otherwise report_hold. Copy receipt snapshot_ref and patch_digest into ChangeList/2, "
             "snapshot provenance, null branch/commits, baseline=source_ref, one change covering "
             "every target_plan touchpoint (plan_item_ids exactly as given), open_item_ids empty. "
-            "Use reference_metadata. The change summary is ONE short plain sentence, at most "
+            "Use reference_metadata. submit_output's input IS the ChangeList/2 object itself: "
+            "its fields at the top level, never wrapped in a 'payload' key. "
+            "The change summary is ONE short plain sentence, at most "
             "summary_max_chars characters; avoid the words deployed, published and verified.",
         }
     return {

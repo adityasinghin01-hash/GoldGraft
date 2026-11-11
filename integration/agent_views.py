@@ -179,7 +179,9 @@ class IntegratedRunViews:
                 "stages": stages,
                 "card": {
                     "old_pieces_found": found,
-                    "pieces_upgraded": len(changes.get("changes", changes.get("files", []))),
+                    "pieces_upgraded": len(
+                        {i for c in changes.get("changes", []) for i in c.get("plan_item_ids", [])}
+                    ),
                     "scenarios_total": 0,
                     "scenarios_pass": 0,
                     "problems": sum(1 for r in rows if r.get("passed") is False),
