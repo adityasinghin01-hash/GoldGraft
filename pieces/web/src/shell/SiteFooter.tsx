@@ -33,18 +33,16 @@ export function SiteFooter({ compact = false }: { compact?: boolean }) {
           <span className={styles.mark}><Mark size={40} /></span>
           <p>{FOOTER.about}</p>
         </div>
-        {!compact && FOOTER.groups.map((g) => (
+        {FOOTER.groups.map((g) => (
           <nav key={g.title} className={styles.group} aria-label={g.title}>
-            <p className={styles.groupTitle}>{g.title}</p>
+            <p className={styles.groupTitle}>{compact && g.title === 'This page' ? 'Overview' : g.title}</p>
             <ul>{g.links.map((l) => <li key={l.label}><FooterLink l={l as L} /></li>)}</ul>
           </nav>
         ))}
       </div>
-      {!compact && (
-        <div className={styles.word} aria-hidden>
-          <span>Gold</span><em>Graft</em>
-        </div>
-      )}
+      <div className={styles.word} aria-hidden>
+        <span>Gold</span><em>Graft</em>
+      </div>
       <div className={`gg-wrap ${styles.legal}`}>
         <p>© {year} GoldGraft team · MIT</p>
         <p>{FOOTER.legal}</p>

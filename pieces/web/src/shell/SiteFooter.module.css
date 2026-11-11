@@ -5,14 +5,14 @@
   overflow: hidden;
   background: linear-gradient(to bottom, transparent, rgb(13 12 9 / 0.55) 30%, rgb(13 12 9 / 0.2));
 }
-.footer[data-compact] { padding-top: var(--gg-s-7); background: rgb(13 12 9 / 0.6); border-top: 1px solid var(--gg-line); }
+.footer[data-compact] { padding-top: var(--gg-s-8); background: linear-gradient(to bottom, rgb(13 12 9 / 0.2), rgb(13 12 9 / 0.75) 40%); border-top: 1px solid var(--gg-line); }
+.footer[data-compact] .word { font-size: clamp(4rem, 13vw, 15rem); }
 .top {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
   gap: var(--gg-s-7) var(--gg-gutter);
   padding-bottom: var(--gg-s-8);
 }
-.footer[data-compact] .top { grid-template-columns: 1fr; padding-bottom: var(--gg-s-5); }
 .about { display: grid; gap: var(--gg-s-4); align-content: start; max-width: 380px; }
 .about p { color: var(--gg-mute); font-size: 15px; line-height: 1.6; }
 .mark { color: var(--gg-gold); }
