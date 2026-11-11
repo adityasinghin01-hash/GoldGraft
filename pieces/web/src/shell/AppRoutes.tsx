@@ -29,6 +29,7 @@ const load = {
   S10: () => import('../screens/S10_Security'),
   S11: () => import('../screens/S11_Compare'),
   S12: () => import('../screens/S12_MyUpgrades'),
+  S13: () => import('../screens/S13_Changes'),
   NotFound: () => import('../screens/NotFound'),
 };
 export function prefetchScreens() {
@@ -47,6 +48,7 @@ const S09 = lazy(load.S09);
 const S10 = lazy(load.S10);
 const S11 = lazy(load.S11);
 const S12 = lazy(load.S12);
+const S13 = lazy(load.S13);
 const NotFound = lazy(load.NotFound);
 
 const CALM = ['canopy'];
@@ -130,6 +132,7 @@ export default function AppRoutes() {
           <Route path="union" element={<S04 />} />
           <Route path="proof" element={<S05 />} />
           <Route path="heal" element={<S07 />} />
+          <Route path="changes" element={<S13 />} />
         </Route>
         <Route path="/c/:certId" element={<S06 />} />
         <Route path="/bank" element={<S08 />} />

@@ -227,6 +227,7 @@ export const NAV_APP = [
 export const GRAFT_TABS = [
   { label: 'Progress', path: '' },
   { label: 'Old pieces', path: '/map' },
+  { label: 'Code changes', path: '/changes' },
   { label: 'Payment tests', path: '/union' },
   { label: 'Proof', path: '/proof' },
   { label: 'Go-live', path: '/heal' },

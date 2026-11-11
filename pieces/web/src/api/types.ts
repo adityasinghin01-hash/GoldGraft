@@ -29,3 +29,21 @@ export type Connection = S['Connection'];
 export type InjectFaultResult = S['InjectFaultResult'];
 export type Money = S['Money'];
 export type Problem = { type?: string; title: string; status: number; detail?: string; instance?: string };
+
+// Integrated agent runs (local agents service, 12 Nov). Not in the published v1 contract yet.
+export type CodeChange = { path: string; before: string; after: string; author: 'model' | 'library' };
+export type OpenItem = { touchpoint: string; family: string; location: { file: string; line: number } };
+export type ChangeSet = {
+  files: CodeChange[];
+  open_items: OpenItem[];
+  lint: Record<string, { ok: boolean; error: string | null }> | null;
+};
+export type AgentRun = {
+  run_id: string;
+  shop: string;
+  status: string;
+  roles_passed: number;
+  roles_participated: number;
+  spent_usd: number;
+  finished_at: string | null;
+};

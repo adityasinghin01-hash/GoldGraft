@@ -18,6 +18,29 @@ function StageCell({ graftId }: { graftId: string }) {
   return <Tag tone={st === 'DONE' ? 'good' : st === 'CUTBACK' || st === 'FAILED' ? 'bad' : 'gold'}>{stageName(st)}</Tag>;
 }
 
+/** Real integrated agent runs recorded by the local agents service (live mode). */
+function AgentRuns() {
+  const q = useQuery({ queryKey: ['runs'], queryFn: () => api.runs(), retry: 0, refetchInterval: 15000 });
+  if (q.isPending || q.isError || !q.data.length) return null;
+  const words = (st: string) =>
+    st === 'completed' ? 'All agents finished' : st === 'running' ? 'Running now' : st.startsWith('held_at_') ? `Held at ${st.slice(8).replace(/[-:_]/g, ' ')}` : st;
+  return (
+    <section className={s.runs} aria-label="Real agent runs">
+      <h2 className={s.runsTitle}>Real agent runs</h2>
+      <p className={s.runsSub}>Every run below used real AI calls through GoldGraft's budget gateway. Builds and payment tests use recorded runners for now.</p>
+      <ul className={s.list}>
+        {q.data.slice(0, 12).map((r, i) => (
+          <li key={r.run_id} className={`gg-glass ${s.row}`} style={{ ['--i' as string]: i }}>
+            <Link to={`/g/${r.run_id}`} className={s.name}>{r.run_id} <ArrowRightIcon size={14} /></Link>
+            <span className={s.when}>{r.shop} · {r.roles_passed} of {r.roles_participated} agents passed · ${r.spent_usd.toFixed(2)} AI cost</span>
+            <Tag tone={r.status === 'completed' ? 'good' : r.status === 'running' ? 'gold' : 'warn'}>{words(r.status)}</Tag>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function S12_MyUpgrades() {
   const [{ list, ok }, setState] = useState(() => readUpgrades());
   useEffect(() => { document.title = 'GoldGraft · My upgrades'; }, []);
@@ -29,6 +52,7 @@ export default function S12_MyUpgrades() {
       <PageHead title="My upgrades" explain="Saved in this browser only. Keys are never saved."
         sub={list.length === 1 ? '1 upgrade started in this browser' : `${list.length} upgrades started in this browser`} />
       {!ok && <p className={s.warn}>This browser can't save your list.</p>}
+      <AgentRuns />
       {sorted.length === 0 ? (
         <Empty title="No upgrades started here yet." action={<Link className="gg-btn gg-btn--gold gg-btn--sm" to="/check">Start</Link>} />
       ) : (

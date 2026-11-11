@@ -10,3 +10,6 @@
 .remove { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gg-mute); padding: 6px 10px; border-radius: var(--gg-r-pill); }
 .remove:hover { color: var(--gg-bad); background: rgb(224 144 124 / 0.08); }
 @media (max-width: 760px) { .row { grid-template-columns: 1fr auto; } .when { grid-column: 1 / -1; } }
+.runs { display: grid; gap: var(--gg-s-3); margin-bottom: var(--gg-s-6); }
+.runsTitle { font-family: var(--gg-font-display); font-size: 24px; font-weight: 420; color: var(--gg-ivory); }
+.runsSub { font-size: 14px; color: var(--gg-mute); max-width: 60ch; }

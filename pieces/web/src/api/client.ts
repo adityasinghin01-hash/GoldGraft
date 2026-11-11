@@ -2,7 +2,7 @@ import { config, isMock } from '../config';
 import type {
   CertificateVerifyResult, Certificate, CmelView, Comparison, Connection, GauntletRun, Graft, HealFrame, HealState,
   InjectFaultResult, LearningCurve, LedgerEntry, OrchardAnswer, OrchardView, Problem, ProbeResult, ProofView,
-  RecipeList, RootMap, ScenarioList, Shop,
+  RecipeList, RootMap, ScenarioList, Shop, ChangeSet, AgentRun,
 } from './types';
 import { mockApi } from './mock/mockApi';
 
@@ -32,6 +32,10 @@ export interface GoldGraftApi {
   ask(question: string, key: string): Promise<OrchardAnswer>;
   gauntlet(runId: string): Promise<GauntletRun>;
   comparison(): Promise<Comparison>;
+  /** Integrated agent runs: the code the Grafter wrote (before/after), open items, PHP check. */
+  changes(id: string): Promise<ChangeSet>;
+  /** Integrated agent runs recorded by the local agents service (newest first). */
+  runs(): Promise<AgentRun[]>;
   ledgerFeed(id: string, onEvent: (e: LedgerEntry) => void, onStatus: (s: FeedStatus) => void): Feed;
   healFeed(id: string, onFrame: (f: HealFrame) => void, onStatus: (s: FeedStatus) => void): Feed;
 }
@@ -127,6 +131,8 @@ const liveApi: GoldGraftApi = {
   ask: (question, key) => request('POST', '/orchard/ask', { body: { question }, key, limit: config.timeouts.ask }),
   gauntlet: (runId) => request('GET', `/security/gauntlet/${enc(runId)}`),
   comparison: () => request('GET', '/comparison'),
+  changes: (id) => request('GET', `/grafts/${enc(id)}/changes`),
+  runs: () => request('GET', '/runs'),
   ledgerFeed: (id, onEvent, onStatus) =>
     openFeed<LedgerEntry>(`/grafts/${enc(id)}/events`, 'ledger', onEvent, onStatus,
       (e) => e.type === 'STAGE' && (e.payload as { to_stage?: string } | undefined)?.to_stage === 'DONE'),

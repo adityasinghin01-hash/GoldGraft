@@ -3,6 +3,9 @@ import type { FeedStatus, GoldGraftApi } from '../client';
 import { ApiError } from '../errors';
 import type { HealFrame, LedgerEntry } from '../types';
 import graft from './data/GET_graft.json';
+// Recorded from a real integrated agent run (12 Nov 2026): the Grafter's own code, the run list.
+import changes from './data/GET_changes.json';
+import runs from './data/GET_runs.json';
 import rootmap from './data/GET_rootmap.json';
 import scenarios from './data/GET_scenarios.json';
 import cmelPending from './data/GET_cmel_pending.json';
@@ -113,6 +116,8 @@ export const mockApi: GoldGraftApi = {
   ask: async (question) => { await wait(1500); return { ...clone(ask), question } as never; },
   gauntlet: async (runId) => get({ ...clone(gauntlet), run_id: runId }),
   comparison: async () => get(comparison),
+  changes: async (id) => { await requireDemo(id); return get(changes); },
+  runs: async () => get(runs),
 
   ledgerFeed: (_id, onEvent, onStatus: (s: FeedStatus) => void) => {
     let i = 0;
