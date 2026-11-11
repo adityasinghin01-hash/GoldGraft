@@ -63,11 +63,19 @@ def run_sandbox_payment(*, dry_run: bool = False):
     )
     secret_ref = secret_ref_obj.ref
 
-    broker = PaymentBroker(
-        custody_broker=custody,
-        ledger=ledger,
-        live=is_live,
-    )
+    try:
+        broker = PaymentBroker(
+            custody_broker=custody,
+            ledger=ledger,
+            live=is_live,
+        )
+    except TypeError:
+        broker = PaymentBroker(
+            custody_broker=custody,
+            ledger=ledger,
+        )
+        if hasattr(broker, "live"):
+            broker.live = is_live
 
     state_dir = Path(".goldgraft/live-sandbox-run")
     state_dir.mkdir(parents=True, exist_ok=True)
