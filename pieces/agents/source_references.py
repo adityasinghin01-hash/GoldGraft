@@ -69,9 +69,7 @@ def _tokens(text):
                 index += 1
             tokens.append(("word", text[start:index], start))
         else:
-            operator = next(
-                (op for op in ("?->", "->", "::") if text.startswith(op, index)), char
-            )
+            operator = next((op for op in ("?->", "->", "::") if text.startswith(op, index)), char)
             tokens.append(("punctuation", operator, index))
             index += len(operator)
     return tokens
@@ -97,6 +95,26 @@ def _literal_path(expression):
     if not path or (quoted[0] == '"' and "$" in path):
         return None
     return path, directory
+
+
+SIMPLE_VARIABLE = re.compile(r"\$[A-Za-z_][A-Za-z0-9_]*")
+
+
+def _simple_interpolation(quoted):
+    """True when every `$` in a double-quoted string is a plain variable read ("...$i").
+
+    Plain variable interpolation reads a value; it cannot include a file or call code by
+    itself. `{$`, `${`, `->`, `[` and `(` after a variable keep the conservative hold.
+    """
+    body = quoted[1:-1]
+    if "{$" in body or "${" in body:
+        return False
+    for match in SIMPLE_VARIABLE.finditer(body):
+        after = body[match.end() : match.end() + 2]
+        if after.startswith(("[", "(")) or after == "->":
+            return False
+    stripped = SIMPLE_VARIABLE.sub("", body.replace("\\$", ""))
+    return "$" not in stripped
 
 
 def _resolve(name, target, directory):
@@ -149,9 +167,9 @@ def discover_component_gaps(files):
             missing(name, exc.args[0], "UNSUPPORTED_SOURCE_SYNTAX")
             continue
         for index, (kind, value, offset) in enumerate(tokens):
-            if kind == "interpolated":
-                # Interpolation may itself evaluate expressions. Do not treat
-                # its entire body as inert documentation or claim its coverage.
+            if kind == "interpolated" and not _simple_interpolation(value):
+                # Complex interpolation ({$...}, ${...}, ->, [], calls) may evaluate
+                # expressions. Do not treat it as inert data or claim its coverage.
                 missing(name, offset, "UNRESOLVED_SOURCE_REFERENCE")
                 continue
             if kind != "word" or (index and tokens[index - 1][1] in {"->", "?->", "::"}):

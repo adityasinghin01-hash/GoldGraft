@@ -89,3 +89,31 @@ def test_two_named_haiku_failures_move_a_shape_to_sonnet(codes, expected):
 def test_qualified_sonnet_routes_stay_sonnet():
     data = integrated.implementation("Architect").sample("architect")
     assert integrated.route("Architect", "architect", data, {}) == ("sonnet", False)
+
+
+@pytest.mark.parametrize(
+    "line,held",
+    [
+        ('$a["NAME$i"] = 1;', False),  # plain variable read: data
+        ('$a = "Total $amount for $name";', False),
+        ('$a = "x {$obj->call()}";', True),  # complex interpolation keeps the hold
+        ('$a = "x ${name}";', True),
+        ('$a = "x $obj->prop";', True),
+        ('$a = "x $arr[0]";', True),
+    ],
+)
+def test_only_plain_variable_interpolation_counts_as_data(line, held):
+    from pieces.agents.source_references import discover_component_gaps
+
+    gaps = discover_component_gaps({"a.php": "<?php\n" + line + "\n"})
+    assert bool(gaps) == held
+
+
+def test_sample_shop_package_is_complete_for_scope():
+    from pathlib import Path
+
+    from pieces.agents.source_references import discover_component_gaps
+
+    root = Path(__file__).resolve().parents[3] / "fixtures/shops/legacy-php-shop/src"
+    files = {str(p.relative_to(root)): p.read_text() for p in sorted(root.rglob("*.php"))}
+    assert discover_component_gaps(files) == []
