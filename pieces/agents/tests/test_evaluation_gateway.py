@@ -340,7 +340,7 @@ def test_real_model_ticket_above_project_phase_ceiling_is_denied_before_any_prov
     from pieces.backend.model_gateway.profile import Profile
     from scripts.live_surveyor_model_eval import compose
 
-    assert REAL_MODEL_CEILING_MICRO_USD == 10000000
+    assert REAL_MODEL_CEILING_MICRO_USD == 13000000
     provider = NativeProvider()
     gateway = Gateway(Ledger(tmp_path / "money.sqlite"), tmp_path / "signing", Profile(), provider)
     package = package_from_sources(
@@ -352,7 +352,10 @@ def test_real_model_ticket_above_project_phase_ceiling_is_denied_before_any_prov
     def over(lease):
         value = original(lease)
         budget = value.budget.model_copy(
-            update={"ceiling_micro_usd": 10000001, "target_micro_usd": 10000001}
+            update={
+                "ceiling_micro_usd": REAL_MODEL_CEILING_MICRO_USD + 1,
+                "target_micro_usd": REAL_MODEL_CEILING_MICRO_USD + 1,
+            }
         )
         return replace(value, budget=budget)
 

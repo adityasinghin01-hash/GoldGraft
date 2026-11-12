@@ -15,11 +15,12 @@ from goldgraft_contracts.work_package import OmissionManifest, SourceSnapshot
 
 from .ports import ModelPolicy
 
-# Largest declared real-model cumulative ceiling a ticket may carry: the $10
-# project phase for all13 agents (Aditya, 11 November 2026; earlier $0.05 and
-# $0.50 checkpoints superseded). The gateway ledger remains the binding money
-# authority; this is a second fail-closed bound.
-REAL_MODEL_CEILING_MICRO_USD = 10000000
+# Largest declared real-model cumulative ceiling a ticket may carry: $13, the active cap Aditya
+# approved on 12 November 2026 ("yes 13."; recorded as cap authority 4a6c4411… in the ledger) for
+# agent grounding and Phase 5. Earlier: the $10 all-13-agents phase (11 November), $0.05 and $0.50
+# checkpoints. The gateway ledger remains the binding money authority; this is a second
+# fail-closed bound.
+REAL_MODEL_CEILING_MICRO_USD = 13000000
 
 
 def reject(code):
