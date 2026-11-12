@@ -1,4 +1,4 @@
-import { CheckIcon, HourglassMediumIcon, LinkSimpleIcon } from '@phosphor-icons/react';
+import { CheckIcon, HourglassMediumIcon, LinkSimpleIcon, SealCheckIcon } from '@phosphor-icons/react';
 import { useConnected } from '../api/queries';
 import type { ConnectedCheck, ConnectedRun } from '../api/types';
 import { Explain, Tag } from './ui';
@@ -25,7 +25,10 @@ function holdText(hold: string): string {
   if (hold.startsWith('isolation:')) return 'The shop ran on a normal computer, not an isolated sandbox';
   if (hold.startsWith('image:')) return 'No container image was built, so the exact-image review waits';
   if (hold.startsWith('promotion:')) return 'No real buyers yet, so going live stays at 0%';
-  if (hold.startsWith('signer:')) return 'No signer is attached, so no certificate was signed';
+  if (hold.startsWith('signer:')) return 'No certificate is issued while checks are on hold';
+  if (hold.startsWith('state_recipe:')) return "The shop's state-keeping recipe is not plugged in yet (Vijay's piece)";
+  if (hold.startsWith('finalisation_recipe:')) return "The shop's final-setup recipe is not plugged in yet (Vijay's piece)";
+  if (hold.startsWith('exit_check_recipe:')) return "The shop's exit-check recipe is not plugged in yet (Vijay's piece)";
   return hold;
 }
 
@@ -60,7 +63,7 @@ function Panel({ run }: { run: ConnectedRun }) {
     { who: 'Start', what: run.gupta_control.status === 'operation_started' ? 'Work accepted and started' : run.gupta_control.status, ok: run.gupta_control.status === 'operation_started', explain: 'The control service accepted the work once, gave it a work id, and the worker re-read the shop source.' },
     { who: 'Run', what: `${run.checks.filter((c) => c.kind === 'baseline' || c.kind === 'candidate').length} recordings made`, ok: true, explain: 'The old shop and the AI-written code were both run on this computer under that work id.' },
     { who: 'Proof', what: `${verified} of ${run.checks.length} checks verified`, ok: run.proof_result.outcome === 'ready', explain: 'Every recording was checked against its sealed bytes and judged again.' },
-    { who: 'Certificate', what: run.certificate.issued ? 'Signed' : 'Held, not signed', ok: run.certificate.issued, explain: 'A certificate is only signed when every critical check is verified.' },
+    { who: 'Certificate', what: run.certificate.issued ? 'Issued' : 'Held: evidence incomplete', ok: run.certificate.issued, explain: 'A certificate is only issued when every critical check is verified.' },
   ];
   return (
     <section className={`gg-glass ${s.panel}`} aria-label="One connected run">
@@ -96,6 +99,14 @@ function Panel({ run }: { run: ConnectedRun }) {
         <p className={s.sandbox} data-ok={sandbox.reverified_from_recording || undefined}>
           <LinkSimpleIcon size={15} aria-hidden /> Real PayPal sandbox: order, capture and refund {sandbox.reverified_from_recording ? 'confirmed from PayPal\'s own replies' : 'not confirmed'}
           <Explain text={`A separate real run against PayPal's sandbox (play money): ${sandbox.exchanges} messages, PayPal ids ${sandbox.ids.join(', ')}. It tested GoldGraft's payment connection, not this shop's checkout.`} />
+        </p>
+      )}
+
+      {run.signing && (
+        <p className={s.sandbox} data-ok>
+          <SealCheckIcon size={15} aria-hidden /> This proof result is signed by our GitHub workflow and in the public log{' '}
+          <a className="gg-link" href={run.signing.rekor_search} target="_blank" rel="noreferrer">#{run.signing.rekor_log_index}</a>
+          <Explain text={`${run.signing.scope} Signer: ${run.signing.signer_identity}. File SHA-256 ${run.signing.payload_sha256.slice(0, 16)}…`} />
         </p>
       )}
 

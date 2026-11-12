@@ -106,4 +106,5 @@ export type ConnectedRun = {
   certificate: { issued: boolean; held_at?: string };
   holds: string[];
   checks: ConnectedCheck[];
+  signing?: { payload_sha256: string; signer_identity: string; workflow_run: string; rekor_log_index: number; rekor_search: string; scope: string };
 };
