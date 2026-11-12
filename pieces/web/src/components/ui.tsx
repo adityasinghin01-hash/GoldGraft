@@ -5,7 +5,7 @@ import { H } from '../copy/words';
 import type { Tone } from '../copy/words';
 import { ApiError, type FeedStatus } from '../api/client';
 import { formatTime, shortHash } from '../lib/format';
-import { isMock } from '../config';
+import { config, isMock } from '../config';
 import s from './ui.module.css';
 
 /* C1 ExplainNote — ⓘ with one line behind it (hover, focus or tap). */
@@ -47,8 +47,13 @@ export function SampleChip() {
 
 /* C16 MockModeBanner */
 export function MockBanner() {
+  if (config.recordingOnly) return <div className={s.mockBanner} role="note"><FlaskIcon size={14} weight="duotone" /> Recorded demo · real runs in My upgrades · sample screens are labelled · new upgrades disabled</div>;
   if (!isMock) return null;
   return <div className={s.mockBanner} role="note"><FlaskIcon size={14} weight="duotone" /> {H.mock}</div>;
+}
+
+export function RecordedDemo({ title }: { title: string }) {
+  return <div className="gg-center"><PageHead title={title} sub="This public demo shows recorded evidence. New shops, credentials and paid agent runs are not accepted here." /><Link className="gg-btn gg-btn--gold" to="/my">View real recorded runs</Link></div>;
 }
 
 /* C17 SandboxChip */

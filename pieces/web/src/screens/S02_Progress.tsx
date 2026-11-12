@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRightIcon, CheckIcon, LightningIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { api, type FeedStatus } from '../api/client';
-import { useScenarios } from '../api/queries';
+import { useConnected, useScenarios } from '../api/queries';
 import type { Graft, LedgerEntry } from '../api/types';
 import { useGraftCtx } from '../shell/GraftLayout';
 import { AGENT_JOB, ENTRY_TYPE, GRADE, GRADE_ORDER, HEAL_ACTION, LANE, MEANING, PHASES, STAGE, stageName } from '../copy/words';
@@ -47,7 +47,7 @@ function feedWords(e: LedgerEntry): string {
 }
 
 /** C5: ten phases, ticked off; repeats and switch-backs called out. */
-function Rail({ g, showCost }: { g: Graft; showCost: boolean }) {
+function Rail({ g, showCost, held = false }: { g: Graft; showCost: boolean; held?: boolean }) {
   const cur = STAGE[String(g.stage)]?.phase ?? 0;
   const done = String(g.stage) === 'DONE';
   const stages = g.stages ?? [];
@@ -65,7 +65,7 @@ function Rail({ g, showCost }: { g: Graft; showCost: boolean }) {
           <li key={ph.n} className={s.railStep} data-state={state} style={{ ['--i' as string]: i }}>
             <span className={s.railDot} aria-hidden>{state === 'done' ? <CheckIcon size={11} weight="bold" /> : ph.n}</span>
             <span className={s.railName}>{ph.name}<Explain text={ph.meaning} /></span>
-            <span className={s.railState}>{state === 'done' ? 'done' : state === 'now' ? (done ? 'done' : 'now') : 'not yet'}{extra && <b> · {extra}</b>}</span>
+            <span className={s.railState}>{state === 'done' ? 'done' : state === 'now' ? (held ? 'held' : done ? 'done' : 'now') : 'not yet'}{extra && <b> · {extra}</b>}</span>
             {showCost && <span className={s.railCost}>{formatMinutes(perPhase[i].minutes)} · {formatUsd(perPhase[i].usd)}</span>}
           </li>
         );
@@ -77,6 +77,7 @@ function Rail({ g, showCost }: { g: Graft; showCost: boolean }) {
 export default function S02_Progress() {
   const { graft: g, graftId, certId, reviewOpen, setReviewOpen } = useGraftCtx();
   const scen = useScenarios(graftId);
+  const connected = useConnected(graftId);
   const qc = useQueryClient();
   const [events, setEvents] = useState<LedgerEntry[]>([]);
   const [status, setStatus] = useState<FeedStatus>('connecting');
@@ -111,6 +112,11 @@ export default function S02_Progress() {
 
   const newest = events[events.length - 1];
   const card = g.card;
+  const checks = connected.data?.checks;
+  const situations = checks?.filter((c) => c.kind === 'scenario');
+  const mutations = checks?.filter((c) => c.kind === 'mutation');
+  const openChecks = checks?.filter((c) => c.critical && c.state !== 'verified').length;
+  const held = connected.data?.proof_result.outcome === 'hold';
   const notes = (card?.notes ?? {}) as Record<string, string>;
   const synthetic = String(notes._label ?? '').includes('SYNTHETIC');
   const brk = useMemo(() => chainBreak(events), [events]);
@@ -144,7 +150,7 @@ export default function S02_Progress() {
       <PageHead title="Progress" aside={<LiveStatus status={status} last={newest?.ts} word="step" onReconnect={() => setNonce((n) => n + 1)} />} />
 
       <section className={s.block} aria-label="Phases">
-        <Rail g={g} showCost={false} />
+        <Rail g={g} showCost={false} held={held} />
       </section>
 
       <section className={`gg-glass ${s.liveLine}`} aria-label="Newest step">
@@ -158,10 +164,10 @@ export default function S02_Progress() {
         {card ? (
           <div className={s.stats}>
             <Stat label="Old pieces" value={card.old_pieces_found} note={notes.old_pieces_found ?? MEANING.old_pieces_found} />
-            <Stat label="Upgraded" value={`${card.pieces_upgraded} of ${card.old_pieces_found}`} note={MEANING.pieces_upgraded} />
-            <Stat label="Tests passed" value={`${card.scenarios_pass} of ${card.scenarios_total}`} note={notes.scenarios_pass ?? MEANING.scenarios_pass} to={`/g/${graftId}/union`} />
-            <Stat label="Problems" value={card.problems} tone={(card.problems ?? 0) > 0 ? 'bad' : undefined} note={notes.problems ?? MEANING.problems} />
-            <Stat label="Bugs caught" value={card.proof_strength_score == null ? 'not measured yet' : formatPct(card.proof_strength_score)} note={notes.proof_strength_score ?? MEANING.proof_strength_score} to={`/g/${graftId}/proof`} />
+            <Stat label={config.recordingOnly ? 'Rewritten' : 'Upgraded'} value={`${card.pieces_upgraded} of ${card.old_pieces_found}`} note={MEANING.pieces_upgraded} />
+            <Stat label="Tests passed" value={situations ? `${situations.filter((c) => c.state === 'verified').length} of ${situations.length}` : `${card.scenarios_pass} of ${card.scenarios_total}`} note={situations ? 'Payment situations verified in the connected proof; open the Proof page for evidence scope.' : notes.scenarios_pass ?? MEANING.scenarios_pass} to={`/g/${graftId}/proof`} />
+            <Stat label={checks ? 'Open checks' : 'Problems'} value={openChecks ?? card.problems} tone={(openChecks ?? card.problems ?? 0) > 0 ? 'bad' : undefined} note={checks ? 'Critical checks without verified evidence. These keep qualification held.' : notes.problems ?? MEANING.problems} />
+            <Stat label="Bugs caught" value={mutations ? `${mutations.filter((c) => c.state === 'verified').length} of ${mutations.length}` : config.recordingOnly || card.proof_strength_score == null ? 'not measured yet' : formatPct(card.proof_strength_score)} note={mutations ? 'Executed planted bugs caught by the independent proof, not an agent estimate.' : notes.proof_strength_score ?? MEANING.proof_strength_score} to={`/g/${graftId}/proof`} />
             <Stat label="AI cost" value={formatUsd(card.cost_usd)} note={notes.cost_usd ?? MEANING.cost_usd} />
             <Stat label="Time" value={formatMinutes(card.minutes)} note={MEANING.minutes} />
           </div>
@@ -179,7 +185,7 @@ export default function S02_Progress() {
         <div className={s.detailGrid}>
           <div>
             <h2 className={s.h2}>Time and AI cost per phase</h2>
-            <Rail g={g} showCost />
+            <Rail g={g} showCost held={held} />
           </div>
           <div>
             <h2 className={s.h2}>Every step, newest first</h2>

@@ -1,5 +1,13 @@
 # Rules for coding agents working in GoldGraft
 
+## Current continuation — Aditya, 12 November 2026
+
+Aditya has now asked Codex to continue Claude's work: verify #5 hosted backend
+and #7 sandbox checkout in the browser, review/fix/integrate the remaining work,
+and prepare the demo for the later video. This supersedes the "Codex is out"
+assignment below. Work on main; preserve existing workspaces and evidence.
+Existing budget, secret, external authority and qualification rules still apply.
+
 ## Current execution ownership — Aditya, 12 November 2026
 
 Codex is out (12 November). Aditya assigned Claude **all work**: frontend

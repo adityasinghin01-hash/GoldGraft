@@ -21,7 +21,7 @@ const ORDER = ['baseline', 'candidate', 'scenario', 'mutation', 'domain_rule', '
 /** Plain words for each hold the run reports. */
 export function holdText(hold: string): string {
   if (hold.startsWith('domain_rule:')) return `Money rule ${hold.split(':')[1].split(':')[0]} has no planted bug that a test catches yet`;
-  if (hold.startsWith('payment:shop-checkout-paypal')) return "The shop's own checkout still uses simulated PayPal";
+  if (hold.startsWith('payment:shop-checkout-paypal')) return "The shop's own PayPal sandbox checkout is not independently verified yet";
   if (hold.startsWith('isolation:')) return 'The shop ran on a normal computer, not an isolated sandbox';
   if (hold.startsWith('image:')) return 'No container image was built, so the exact-image review waits';
   if (hold.startsWith('promotion:')) return 'No real buyers yet, so going live stays at 0%';
@@ -65,6 +65,7 @@ function Panel({ run }: { run: ConnectedRun }) {
   const verified = run.checks.filter((c) => c.state === 'verified').length;
   const held = run.checks.length - verified;
   const sandbox = run.provider_checks.paypal_sandbox;
+  const checkout = run.provider_checks.shop_checkout_paypal_sandbox;
   const steps = [
     { who: 'Start', what: run.gupta_control.status === 'operation_started' ? 'Work accepted and started' : run.gupta_control.status, ok: run.gupta_control.status === 'operation_started', explain: 'The control service accepted the work once, gave it a work id, and the worker re-read the shop source.' },
     { who: 'Run', what: `${run.checks.filter((c) => c.kind === 'baseline' || c.kind === 'candidate').length} recordings made`, ok: true, explain: 'The old shop and the AI-written code were both run on this computer under that work id.' },
@@ -105,6 +106,13 @@ function Panel({ run }: { run: ConnectedRun }) {
         <p className={s.sandbox} data-ok={sandbox.reverified_from_recording || undefined}>
           <LinkSimpleIcon size={15} aria-hidden /> Real PayPal sandbox: order, capture and refund {sandbox.reverified_from_recording ? 'confirmed from PayPal\'s own replies' : 'not confirmed'}
           <Explain text={`A separate real run against PayPal's sandbox (play money): ${sandbox.exchanges} messages, PayPal ids ${sandbox.ids.join(', ')}. It tested GoldGraft's payment connection, not this shop's checkout.`} />
+        </p>
+      )}
+
+      {checkout?.state === 'verified' && (
+        <p className={s.sandbox} data-ok>
+          <LinkSimpleIcon size={15} aria-hidden /> The AI-written shop checkout passed PayPal sandbox verification · {(checkout.scenarios ?? []).join(', ') || 'selected recordings'} · play money
+          <Explain text="The PHP shop's own calls were recorded, buyer approval preceded capture, and the independent PayPal re-fetch matched the recorded id, amount, currency and required status. This check covers only the listed scenarios." />
         </p>
       )}
 

@@ -1,1 +1,1 @@
-"""External composition of teammate pieces; all current profiles remain offline."""
+"""External composition of teammate pieces; provider access requires explicit live opt-in."""

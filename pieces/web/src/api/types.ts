@@ -99,7 +99,10 @@ export type ConnectedRun = {
   proof_plan: { checks: number; critical: number; digest: string };
   proof_result: { outcome: 'ready' | 'partial' | 'hold'; reason_codes: string[]; by_state: Record<string, string[]> };
   mutations_rejudged: Record<string, string>;
-  provider_checks: { paypal_sandbox?: { run_id: string; evidence_class: string; reverified_from_recording: boolean; exchanges: number; ids: string[]; scope: string } };
+  provider_checks: {
+    paypal_sandbox?: { run_id: string; evidence_class: string; reverified_from_recording: boolean; exchanges: number; ids: string[]; scope: string };
+    shop_checkout_paypal_sandbox?: { state: string; reason: string; evidence_class: string; real_money: false; scope: string; scenarios?: string[] };
+  };
   promotion: { action: 'STEP_UP' | 'HOLD' | 'CUTBACK'; reason: string; advice: string; advice_reason: string };
   lifecycle_review: { disposition: string; gaps: [string, string][] };
   public_view: { integrity: string; metrics: Record<string, string> };

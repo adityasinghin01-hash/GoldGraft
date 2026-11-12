@@ -86,7 +86,7 @@ function PlantedBugs({ check }: { check: PlantedBugCheck }) {
   return (
     <section className={s.open}>
       <h2 className={s.h2}>
-        Planted-bug check: {check.caught} of {check.planted} caught{' '}
+        Code-review planted bugs: {check.caught} of {check.planted} caught{' '}
         <Explain text="GoldGraft copies the AI-written code, plants one known money bug in each copy, and runs its code review on every copy. A caught bug means the review refused that copy. This tests the review, not the independent proof or a real payment." />
       </h2>
       <ul className={s.bugs}>

@@ -1,7 +1,8 @@
 """Local v1 API for real-model evidence; live dispatch requires explicit opt-in.
 
 Run with ``.venv/bin/python -m integration.agents_app --port 8700 [--live]``.
-All other requests retain the strictly offline fixture application's behaviour.
+The CLI serves read-only recordings unless --live is explicitly enabled.
+Embedded callers may retain the offline fixture application's behaviour.
 """
 
 import argparse
@@ -130,8 +131,15 @@ class _LiveRun:
 
 
 def create_app(
-    *, runs_dir: Path, live_enabled: bool = False, runner=None, max_live_runs: int = 3
+    *,
+    runs_dir: Path,
+    live_enabled: bool = False,
+    runner=None,
+    max_live_runs: int = 3,
+    read_only: bool = False,
 ) -> FastAPI:
+    if read_only and live_enabled:
+        raise ValueError("read-only recordings cannot enable live execution")
     if max_live_runs < 0:
         raise ValueError("max_live_runs must be nonnegative")
     runs_dir = Path(runs_dir).expanduser().resolve()
@@ -379,9 +387,28 @@ def create_app(
 
     def read_run(request, run_id, suffix):
         path = directory(run_id)
-        has_local_proof = (path / "local-proof/REPORT.json").is_file()
+        recording_path = path
+        connected_summary = path / "connected-run/CONNECTED_RUN.json"
+        if suffix in {"scenarios", "cmel"} and connected_summary.is_file():
+            summary = json.loads(connected_summary.read_bytes())
+            proof = validate(
+                "ProofResult/1", json.loads((path / "connected-run/ProofResult.json").read_bytes())
+            )
+            evidence_run = summary["evidence_run"]
+            if (
+                not re.fullmatch(r"work-[0-9a-f]{32}", evidence_run)
+                or evidence_run != summary["gupta_control"]["work_id"]
+                or evidence_run + "-local-php" != proof.run_id
+            ):
+                raise ValueError("connected recording subject mismatch")
+            candidate = path / "connected-run/runs" / evidence_run
+            if (candidate / "local-proof/REPORT.json").is_file():
+                if candidate.resolve().parent != (path / "connected-run/runs").resolve():
+                    raise ValueError("connected recording path escaped its run")
+                recording_path = candidate
+        has_local_proof = (recording_path / "local-proof/REPORT.json").is_file()
         if has_local_proof and suffix in {"scenarios", "cmel"}:
-            recorded = LocalProof(path)
+            recorded = LocalProof(recording_path)
             if suffix == "scenarios":
                 body = recorded.scenarios()
             else:
@@ -390,7 +417,7 @@ def create_app(
                 except LookupError:
                     return _problem(404, "Unknown local PHP scenario")
             return JSONResponse(
-                body.model_dump(mode="json"),
+                body.model_copy(update={"graft_id": run_id}).model_dump(mode="json"),
                 headers={"X-GoldGraft-Evidence-Class": LOCAL_PHP_EVIDENCE_CLASS},
             )
         if suffix == "connected-proof":
@@ -559,6 +586,19 @@ def create_app(
     @app.middleware("http")
     async def integrated_runs(request: Request, call_next):
         path = request.url.path
+        if read_only and request.method not in {"GET", "HEAD", "OPTIONS"}:
+            response = _problem(
+                405,
+                "This hosted demo serves recorded evidence only. "
+                "New shops, keys and upgrades are not accepted.",
+                NOT_YET,
+            )
+            response.headers["Allow"] = "GET, HEAD, OPTIONS"
+            response.headers["X-GoldGraft-Evidence-Class"] = EVIDENCE_CLASS
+            if "Origin" in request.headers:
+                response.headers["Access-Control-Allow-Origin"] = "*"
+                response.headers["Access-Control-Expose-Headers"] = "X-GoldGraft-Evidence-Class"
+            return response
         if request.method == "POST" and path == "/shops":
             body = await request.json()
             response = await call_next(request)
@@ -679,7 +719,9 @@ def main(argv=None):
     import uvicorn
 
     uvicorn.run(
-        create_app(runs_dir=args.runs_dir, live_enabled=args.live), host=args.host, port=args.port
+        create_app(runs_dir=args.runs_dir, live_enabled=args.live, read_only=not args.live),
+        host=args.host,
+        port=args.port,
     )
 
 

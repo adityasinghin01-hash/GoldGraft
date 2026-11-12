@@ -4,10 +4,10 @@ import { ArrowRightIcon, CodeIcon, GlobeHemisphereWestIcon, UsersThreeIcon } fro
 import { api } from '../api/client';
 import type { ProbeResult } from '../api/types';
 import { FAMILY } from '../copy/words';
-import { Details, NotInApiYet, PageHead, ProblemBanner, SampleChip, Tag } from '../components/ui';
+import { Details, NotInApiYet, PageHead, ProblemBanner, RecordedDemo, SampleChip, Tag } from '../components/ui';
 import { ActionButton, SecondsWait } from '../components/Loaders';
 import { GlowCaret } from '../components/GlowCaret';
-import { isMock } from '../config';
+import { config, isMock } from '../config';
 import s from './s00.module.css';
 
 const VALID = /^https?:\/\/\S+$/;
@@ -48,7 +48,7 @@ export default function S00_Check() {
   // arriving from the landing page with ?url=… runs the check once
   useEffect(() => {
     const u = params.get('url');
-    if (u && !auto.current) { auto.current = true; run(u); }
+    if (u && !auto.current && !config.recordingOnly) { auto.current = true; run(u); }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,6 +68,8 @@ export default function S00_Check() {
   const official = (res as { official_modern_module_available?: boolean | null } | null)?.official_modern_module_available;
   const notes = ((res?.deadline_notes ?? []) as string[]);
   const t = TABS[tab];
+
+  if (config.recordingOnly) return <RecordedDemo title="Check your shop" />;
 
   return (
     <div className={`gg-center ${s.screen}`}>

@@ -34,6 +34,7 @@ VITE_API_BASE=http://127.0.0.1:8700 VITE_SSE_SPEED=2 VITE_DEMO_TOOLS=true npm ru
 | Variable | Meaning |
 |---|---|
 | `VITE_API_BASE` | API base URL. Empty = sample mode with the mock banner |
+| `VITE_RECORDING_ONLY` | `true` for the hosted recorded demo; disables new shops/credential entry and labels the scope |
 | `VITE_SSE_SPEED` | stand-in only: live events per second |
 | `VITE_DEMO_TOOLS` | shows S7 **Inject** and S6 **Tampered copy** (always on in sample mode) |
 

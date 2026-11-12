@@ -50,6 +50,7 @@ export default function S15_CertStatus() {
   const criticalOpen = run.checks.filter((c) => c.critical && c.state !== 'verified').length;
   const sig = run.signing;
   const sandbox = run.provider_checks.paypal_sandbox;
+  const checkout = run.provider_checks.shop_checkout_paypal_sandbox;
 
   const check = async () => {
     if (!sig) return;
@@ -112,6 +113,14 @@ export default function S15_CertStatus() {
           <dl className={s.kv}>
             {sandbox.ids.map((id) => <Fragment key={id}><dt>PayPal id</dt><dd className="gg-mono">{id}</dd></Fragment>)}
           </dl>
+        </section>
+      )}
+
+      {checkout && checkout.state !== 'missing' && (
+        <section className={`gg-glass ${s.signed}`}>
+          <p className={s.statusTitle}>The shop's own PayPal sandbox checkout</p>
+          <p className={s.statusSub}>{checkout.state === 'verified' ? 'Independently verified' : 'Verification held'} · {(checkout.scenarios ?? []).join(', ') || 'selected recordings'} · play money.</p>
+          <p className={s.statusSub}>This covers the listed checkout scenarios only. Isolation, merchant delivery and the other open checks remain separate.</p>
         </section>
       )}
 

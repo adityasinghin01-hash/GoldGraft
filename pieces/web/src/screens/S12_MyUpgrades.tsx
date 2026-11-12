@@ -8,7 +8,7 @@ import { Empty, PageHead, Tag } from '../components/ui';
 import { SeamLoader } from '../components/Loaders';
 import { dropUpgrade, readUpgrades, type MyUpgrade } from '../lib/store';
 import { formatDate } from '../lib/format';
-import { isMock } from '../config';
+import { config, isMock } from '../config';
 import s from './s12.module.css';
 
 function StageCell({ graftId }: { graftId: string }) {
@@ -28,7 +28,7 @@ function AgentRuns() {
   return (
     <section className={s.runs} aria-label="Real agent runs">
       <h2 className={s.runsTitle}>Real agent runs</h2>
-      <p className={s.runsSub}>Every run below used real AI calls through GoldGraft's budget gateway. Builds and payment tests use recorded runners for now.{isMock ? ' This public page shows a recording; run the agents service locally to start new runs.' : ''}</p>
+      <p className={s.runsSub}>Every run below used real AI calls through GoldGraft's budget gateway. Execution and payment evidence are recorded; each run's Proof page shows its scope and holds.{(isMock || config.recordingOnly) ? ' This public page serves recordings. New runs are not started here.' : ''}</p>
       <ul className={s.list}>
         {q.data.slice(0, 12).map((r, i) => (
           <li key={r.run_id} className={`gg-glass ${s.row}`} style={{ ['--i' as string]: i }}>

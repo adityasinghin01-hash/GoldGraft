@@ -49,7 +49,9 @@ export function GraftLayout() {
   if (q.isError) return <div className={s.wrap}><ProblemBanner error={q.error} onRetry={() => q.refetch()} /></div>;
 
   const g = q.data;
-  const line = statusLine(g);
+  const line = connected.data && !connected.data.certificate.issued
+    ? { text: `Recorded run · ${g.shop_id} · qualification held`, tone: 'gold' as const }
+    : statusLine(g);
   const st = String(g.stage);
 
   return (

@@ -64,6 +64,28 @@ def assert_problem(response, status, integrated=True):
         assert response.headers["X-GoldGraft-Evidence-Class"] == LABEL
 
 
+def test_recording_only_api_refuses_writes_before_fixture_routes(runs):
+    with TestClient(create_app(runs_dir=runs, read_only=True)) as client:
+        assert client.get("/runs").status_code == 200
+        assert client.get("/grafts/sample-1").status_code == 200
+        for method, path in [
+            ("POST", "/shops"),
+            ("POST", "/shops/any/connect"),
+            ("POST", "/shops/any/graft"),
+            ("DELETE", "/shops/any"),
+        ]:
+            response = client.request(
+                method, path, json={}, headers={"Origin": "https://goldgraft.vercel.app"}
+            )
+            assert_problem(response, 405)
+            assert response.headers["Access-Control-Allow-Origin"] == "*"
+
+
+def test_recording_only_and_live_execution_are_incompatible(runs):
+    with pytest.raises(ValueError, match="read-only"):
+        create_app(runs_dir=runs, read_only=True, live_enabled=True)
+
+
 def shop(client, repo="https://example.test/legacy-php-shop", key="shop"):
     response = client.post(
         "/shops", json={"name": "Test", "repo": repo}, headers={"Idempotency-Key": key}

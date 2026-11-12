@@ -4,6 +4,7 @@ const base = ((env.VITE_API_BASE as string | undefined) ?? '').replace(/\/$/, ''
 
 export const config = {
   apiBase: base,
+  recordingOnly: env.VITE_RECORDING_ONLY === 'true',
   sseSpeed: (env.VITE_SSE_SPEED as string | undefined) || '',
   demoTools: env.VITE_DEMO_TOOLS === 'true' || !base, // sample mode shows the demo tools too
   // STAND-IN: ids the stand-in API serves; used only where the pack (10) says so

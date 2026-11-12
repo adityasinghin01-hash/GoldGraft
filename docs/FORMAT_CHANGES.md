@@ -316,3 +316,18 @@ tests. Intermediate local edits are not a published contract revision.
   explicitly synthetic/component evidence. This migration issues no qualified
   certificate and qualifies no provider, payment, isolation or merchant delivery.
   The Step 2 eight uncovered critical-rule mutation guards remain open.
+
+## 12 November 2026 — recorded reference-demo projections
+
+No shared wire schema or qualification certificate format changes here.
+The existing local `connected` HTTP projection now exposes the reference-shop
+PayPal sandbox CheckResult under `provider_checks.shop_checkout_paypal_sandbox`,
+including scenario names derived from the checked NEW recording references.
+It is `real_provider` with `real_money: false`; verified selected scenarios do
+not qualify unselected scenarios, isolation, merchant delivery or a certificate.
+The reference payment check is named `payment:shop-checkout-paypal-sandbox`.
+
+The CLI API is read-only unless `--live` is explicitly supplied. Nested connected
+PHP recordings retain their original work/run subjects; only the existing browser
+projection's `graft_id` uses its enclosing recorded-run route. Hash and subject
+validation is performed before scenario/CMEL views; no raw record is relabelled.

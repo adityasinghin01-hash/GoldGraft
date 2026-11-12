@@ -41,6 +41,7 @@ from goldgraft_foundation.ledger import Ledger
 from integration.private_certificates import issue_private_certificate
 from integration.promotion import gate_promotion
 from integration.proof_evidence import EvidenceContext, StoredArtifact, evaluate_plan
+from integration.shop_sandbox_evidence import PAYMENT_CHECK, shop_sandbox_evidence
 from integration.shop_socket import RecipeProof, ShopRecipe, load_recipe, reference_recipe
 from pieces.backend.connection.service import CaseService, Principal
 from pieces.backend.connection.work import WorkControl
@@ -168,6 +169,7 @@ def connect_run(
     state_dir: Path,
     *,
     sandbox_capture: Path | None = None,
+    shop_sandbox_dir: Path | None = None,
     php: str = "php",
     recipe: ShopRecipe | None = None,
     execute=None,
@@ -470,13 +472,47 @@ def connect_run(
             "ids": sorted({r["id"] for r in replies if isinstance(r, dict) and r.get("id")}),
             "scope": "GoldGraft sandbox app; not this shop's checkout",
         }
-    # Critical gates with no evidence on this host: they must stay visible holds.
+    # Import the shop's separate sandbox run only for this exact candidate. Keep
+    # original RawCapture run ids: the local host seals its review, not new wire ids.
+    sandbox_shop = shop_sandbox_evidence(shop_sandbox_dir, agent_run_dir)
+    if shop_sandbox_dir is not None and recipe.shop_id != "legacy-php-shop":
+        sandbox_shop = {"state": "failed", "reason": "reference shop required", "evidence_refs": []}
+    provider_checks["shop_checkout_paypal_sandbox"] = {
+        **sandbox_shop,
+        "evidence_class": "real_provider",
+        "real_money": False,
+        "scope": "reference NEW checkout; separately recorded exact candidate",
+        "scenarios": sorted(
+            {
+                ref.rsplit("/", 1)[-1].split(".NEW.json#", 1)[0]
+                for ref in sandbox_shop["evidence_refs"]
+                if ".NEW.json#sha256:" in ref
+            }
+        ),
+    }
+    if sandbox_shop["state"] != "missing":
+        host.put(
+            PAYMENT_CHECK,
+            "CheckResult/1",
+            CheckResult(
+                check_id=PAYMENT_CHECK,
+                status="pass" if sandbox_shop["state"] == "verified" else "failed",
+                evidence_refs=sandbox_shop["evidence_refs"],
+                checked_at=now,
+                expires_at=now + timedelta(minutes=30),
+                recovery_code=None,
+            ).model_dump(mode="json"),
+            role="paypal",
+            trust="collector_observed",
+            evidence_class="real_provider",
+            **put,
+        )
     checks.append(
         _check(
-            "payment:shop-checkout-paypal",
+            PAYMENT_CHECK,
             "payment",
-            schema="RawCapture/1",
-            cls="real_payment",
+            schema="CheckResult/1",
+            cls="real_provider",
             trust="collector_observed",
             critical=True,
             owner="paypal",
@@ -515,6 +551,14 @@ def connect_run(
     )
 
     def verify_check(payload, check, _subject, _context):
+        if check.check_id == PAYMENT_CHECK:
+            current = shop_sandbox_evidence(shop_sandbox_dir, agent_run_dir)
+            return (
+                payload.status == "pass"
+                and current["state"] == "verified"
+                and current["evidence_refs"] == payload.evidence_refs
+                and recipe.shop_id == "legacy-php-shop"
+            )
         scenario = check.check_id.split(":", 1)[-1]
         if check.kind in {"baseline", "candidate"}:
             variant = "OLD" if check.kind == "baseline" else "NEW"
@@ -691,6 +735,11 @@ def main(argv=None):
     parser.add_argument("--state-dir", type=Path, required=True)
     parser.add_argument("--sandbox-capture", type=Path)
     parser.add_argument(
+        "--shop-sandbox-dir",
+        type=Path,
+        help="live_shop_sandbox output for the exact candidate (read only)",
+    )
+    parser.add_argument(
         "--shop", type=Path, help="pieces/shops/<id> recipe folder (default: reference stand-in)"
     )
     args = parser.parse_args(argv)
@@ -700,6 +749,7 @@ def main(argv=None):
                 args.run_dir,
                 args.state_dir,
                 sandbox_capture=args.sandbox_capture,
+                shop_sandbox_dir=args.shop_sandbox_dir,
                 recipe=load_recipe(args.shop) if args.shop else None,
             ),
             indent=2,

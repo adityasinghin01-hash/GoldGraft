@@ -1,0 +1,2012 @@
+{
+  "run_id": "work-4b430af27d534d82933b4dd6d0c04be8",
+  "evidence_class": "local_php_execution_simulated_paypal",
+  "changes_sha256": "6aa08990c3401e0c8164b18c1f217f5bebc214e12a8b415a9ff5b9a949d3f1b0",
+  "outputs_sha256": "ed272459896db022991d610aa43b3b73da259e577c24a7f50cde56f5b9f4f7bc",
+  "normative_contract_sha256": "a9e20b3a6467736abccf77bd2251475d4430ef7f777433dba6c5b084ca266326",
+  "reference_plan_sha256": "8aaef188ce9a34b9d34408bd8ef3e2ddcb4320068a2a0df40c9477f7a702fb49",
+  "real_payment_qualified": false,
+  "isolated_execution_qualified": false,
+  "merchant_delivery_qualified": false,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "open_items": [
+    {
+      "touchpoint": "tp-checkout-v4-1",
+      "family": "CHECKOUT_JS_V4",
+      "location": {
+        "file": "index.php",
+        "line": 38
+      }
+    }
+  ],
+  "model_rule_ids_unsupported_by_judge": [],
+  "parity_extra_coverage": "actual unchanged GET /api/orders.php response",
+  "scenarios": [
+    {
+      "scenario": "HAPPY",
+      "exchange_counts": [
+        15,
+        15,
+        15
+      ],
+      "actual_model_plan": {
+        "scenario_id": "HAPPY",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "HAPPY",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "PENDING",
+      "exchange_counts": [
+        12,
+        12,
+        12
+      ],
+      "actual_model_plan": {
+        "scenario_id": "PENDING",
+        "grade": "PASS_FIXED",
+        "rule_hits": [
+          {
+            "rule": "R01",
+            "side": "OLD",
+            "evidence": [
+              "raw/PENDING.OLD.json#/exchanges/11",
+              "raw/PENDING.OLD.json#/exchanges/2",
+              "raw/PENDING.OLD.json#/exchanges/3",
+              "raw/PENDING.OLD.json#/exchanges/4",
+              "raw/PENDING.OLD.json#/exchanges/8",
+              "raw/PENDING.OLD.json#/exchanges/9"
+            ]
+          },
+          {
+            "rule": "R07",
+            "side": "OLD",
+            "evidence": [
+              "raw/PENDING.OLD.json#/exchanges/11",
+              "raw/PENDING.OLD.json#/exchanges/2",
+              "raw/PENDING.OLD.json#/exchanges/3",
+              "raw/PENDING.OLD.json#/exchanges/4",
+              "raw/PENDING.OLD.json#/exchanges/8",
+              "raw/PENDING.OLD.json#/exchanges/9"
+            ]
+          }
+        ],
+        "parity_diff": [
+          {
+            "index": 4,
+            "old": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-PENDING",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_PENDING",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-PENDING",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "PENDING",
+        "grade": "PASS_FIXED",
+        "rule_hits": [
+          {
+            "rule": "R01",
+            "side": "OLD",
+            "evidence": [
+              "raw/PENDING.OLD.json#/exchanges/11",
+              "raw/PENDING.OLD.json#/exchanges/2",
+              "raw/PENDING.OLD.json#/exchanges/3",
+              "raw/PENDING.OLD.json#/exchanges/4",
+              "raw/PENDING.OLD.json#/exchanges/8",
+              "raw/PENDING.OLD.json#/exchanges/9"
+            ]
+          },
+          {
+            "rule": "R07",
+            "side": "OLD",
+            "evidence": [
+              "raw/PENDING.OLD.json#/exchanges/11",
+              "raw/PENDING.OLD.json#/exchanges/2",
+              "raw/PENDING.OLD.json#/exchanges/3",
+              "raw/PENDING.OLD.json#/exchanges/4",
+              "raw/PENDING.OLD.json#/exchanges/8",
+              "raw/PENDING.OLD.json#/exchanges/9"
+            ]
+          }
+        ],
+        "parity_diff": [
+          {
+            "index": 4,
+            "old": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-PENDING",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_PENDING",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-PENDING",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "DECLINE",
+      "exchange_counts": [
+        9,
+        9,
+        9
+      ],
+      "actual_model_plan": {
+        "scenario_id": "DECLINE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "DECLINE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "DOUBLE",
+      "exchange_counts": [
+        20,
+        20,
+        18
+      ],
+      "actual_model_plan": {
+        "scenario_id": "DOUBLE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "DOUBLE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "REFUND",
+      "exchange_counts": [
+        21,
+        21,
+        21
+      ],
+      "actual_model_plan": {
+        "scenario_id": "REFUND",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.refund_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "REFUND",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.refund_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "REFUND_TWICE",
+      "exchange_counts": [
+        22,
+        22,
+        22
+      ],
+      "actual_model_plan": {
+        "scenario_id": "REFUND_TWICE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.refund_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "REFUND_TWICE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.refund_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "NOTIFY_DUP",
+      "exchange_counts": [
+        18,
+        18,
+        18
+      ],
+      "actual_model_plan": {
+        "scenario_id": "NOTIFY_DUP",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "NOTIFY_DUP",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "NOTIFY_FORGED",
+      "exchange_counts": [
+        7,
+        7,
+        9
+      ],
+      "actual_model_plan": {
+        "scenario_id": "NOTIFY_FORGED",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "NOTIFY_FORGED",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    },
+    {
+      "scenario": "PARITY_EXTRA",
+      "exchange_counts": [
+        16,
+        16,
+        16
+      ],
+      "actual_model_plan": {
+        "scenario_id": "PARITY_EXTRA",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "reviewed_reference_plan_diagnostic_only": {
+        "scenario_id": "PARITY_EXTRA",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      }
+    }
+  ],
+  "capture_sha256": {
+    "HAPPY.OLD.json": "992ee8e96150bd3883a1e3f2135f4a4078a4bb751f0f6dc193b9b1c39a97a785",
+    "HAPPY.OLD_TWIN.json": "02c2dc5bdb85f79d15c43dd0d29013bba0e3cbc84a0845fafc0da4bd469a2a8c",
+    "HAPPY.NEW.json": "92ec944176fba4bdf48616bc2c8803d374df67dd1688f5f9e49abfd547ff4881",
+    "PENDING.OLD.json": "13c80f1884b194914ac00e11319fc1dec1b71fdd13ae8f01fad935edb7339b81",
+    "PENDING.OLD_TWIN.json": "581a003b2f6d7e136b05e18e693c2e3673f2f22d6b9cbdb3c68b079a84a7c7ee",
+    "PENDING.NEW.json": "747a110e9869c5cc23e5c0160d4770736f5454e2ef253746fe372ec9dc724ce3",
+    "DECLINE.OLD.json": "890bf0885a0d170f85c582745edfd40406391af5726265c0789723cf89327793",
+    "DECLINE.OLD_TWIN.json": "7d94c1360cab80bd59ddf5454f759bb110c06444bff18120b9a4c5fe559f296a",
+    "DECLINE.NEW.json": "e7f108ca50d6acec868082874dc6ad09527cf7431a352edd9f842cb14488cbbc",
+    "DOUBLE.OLD.json": "f048eb12e020be816327baecf00c43b27cda74eefb37adac298f04e702a33fe1",
+    "DOUBLE.OLD_TWIN.json": "eceee63fb095cfae0e315019e952bb033ac2ca7ed739288aac699a3cce68881a",
+    "DOUBLE.NEW.json": "2aedd468fae379b4b06ee7ac1e2c0e1c5719ac5f7b89530eda064fbfa3ce02ac",
+    "REFUND.OLD.json": "c519bbce7538eba388b454c381b12423c863e48abaeb5fbf1255f2c7f291011f",
+    "REFUND.OLD_TWIN.json": "0c76ee60c8c0cff6e408da2bcf98eecfe31a592edf747c938136080c41d6b71e",
+    "REFUND.NEW.json": "88142695e14fd29994bdc2331719ab0370cb519ce6e666226c18da38b760563f",
+    "REFUND_TWICE.OLD.json": "e16fcd52f5dd331b4119e2bb6d6c7fd6be31505b694ae0f395fa53f8abee8c03",
+    "REFUND_TWICE.OLD_TWIN.json": "480cde84a719c5b58e2457c1ccd96ded974382f3892e15c6a258e189264efabd",
+    "REFUND_TWICE.NEW.json": "0588e0add6195ce79afc74624dde86b131791c36a0ca93d2e6cea365994ded6a",
+    "NOTIFY_DUP.OLD.json": "52d84c5b0202e32a731b0ecdc6b8187d4de08619110a01e8ce26f4a2bf2988d4",
+    "NOTIFY_DUP.OLD_TWIN.json": "406474100a4ea6c1a8d8d6b85d79637201e032880f042f9498a4d8836633e90d",
+    "NOTIFY_DUP.NEW.json": "d6ee3a79fe4df77a0d38fcb875b4e1ca0df8d606fc92bc1575a39643fba75f25",
+    "NOTIFY_FORGED.OLD.json": "f5117b944797b5d47556ccbfe04b32e4d996e0d354ff4d139a38cb870b1bff94",
+    "NOTIFY_FORGED.OLD_TWIN.json": "a1c0f125cbdf7948888727f61d9d0c34443068d2373234b5c77d2b25bdaa091c",
+    "NOTIFY_FORGED.NEW.json": "ce107cb6768a528035651733eb27a0e2557609afeb72c7d8a6bab87b289cfa15",
+    "PARITY_EXTRA.OLD.json": "de6eb340a48e8b7c38e3c6b0f031c6ae169d07b5d7846d87616cd720d85ba30d",
+    "PARITY_EXTRA.OLD_TWIN.json": "9ec38808c67f14a0065a5d81d0d40361a3d18ec2c7c2731b347b153257fef4b3",
+    "PARITY_EXTRA.NEW.json": "bf0643336158b938c00cf6da96f996be054c4a85c356807794063abe5fb94526"
+  },
+  "order_listing_parity_passed": true,
+  "order_listing_observations": [
+    [
+      [
+        2500,
+        "PAID"
+      ]
+    ],
+    [
+      [
+        2500,
+        "PAID"
+      ]
+    ],
+    [
+      [
+        2500,
+        "PAID"
+      ]
+    ]
+  ],
+  "unsupported_candidate_mutations": [],
+  "candidate_mutations": [
+    {
+      "mutant": {
+        "id": "PHP-PENDING",
+        "op": "M2",
+        "location": {
+          "file": "api/execute-payment.php",
+          "line": 15
+        },
+        "patch": "--- a/api/execute-payment.php\n+++ b/api/execute-payment.php\n@@ -12,7 +12,7 @@\n $pay = gg_capture_order($token, 'capture-' . $token);\n if (empty($pay['ok'])) { http_response_code(502); echo json_encode(['error' => 'payment failed']); exit; }\n \n-$order['status'] = (($pay['capture_status'] ?? '') === 'COMPLETED') ? 'PAID' : 'PENDING';\n+$order['status'] = (($pay['capture_status'] ?? '') === 'PENDING') ? 'PAID' : 'PENDING';\n $order['payer_id'] = $pay['payer_id'] ?? $payer;\n $order['transaction_id'] = $pay['capture_id'];\n $order['payer_email'] = $pay['payer_email'] ?? '';\n",
+        "rule": "R01",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "PENDING",
+      "capture_file": "PHP-PENDING.NEW.json",
+      "capture_sha256": "189353c987248abf47e73542bd3227706571ce4ce166b8fa18f9621d9b9de6f8",
+      "mutated_source_sha256": "5735a60bd944d521962c91dc3878bc9201f58d5696a6897c72cb3fde58946963",
+      "verdict": {
+        "scenario_id": "PENDING",
+        "grade": "PROBLEM",
+        "rule_hits": [
+          {
+            "rule": "R01",
+            "side": "NEW",
+            "evidence": [
+              "raw/PENDING.NEW.json#/exchanges/11",
+              "raw/PENDING.NEW.json#/exchanges/2",
+              "raw/PENDING.NEW.json#/exchanges/3",
+              "raw/PENDING.NEW.json#/exchanges/4",
+              "raw/PENDING.NEW.json#/exchanges/6",
+              "raw/PENDING.NEW.json#/exchanges/7",
+              "raw/PENDING.NEW.json#/exchanges/9"
+            ]
+          },
+          {
+            "rule": "R07",
+            "side": "NEW",
+            "evidence": [
+              "raw/PENDING.NEW.json#/exchanges/11",
+              "raw/PENDING.NEW.json#/exchanges/2",
+              "raw/PENDING.NEW.json#/exchanges/3",
+              "raw/PENDING.NEW.json#/exchanges/4",
+              "raw/PENDING.NEW.json#/exchanges/6",
+              "raw/PENDING.NEW.json#/exchanges/7",
+              "raw/PENDING.NEW.json#/exchanges/9"
+            ]
+          },
+          {
+            "rule": "R01",
+            "side": "OLD",
+            "evidence": [
+              "raw/PENDING.OLD.json#/exchanges/11",
+              "raw/PENDING.OLD.json#/exchanges/2",
+              "raw/PENDING.OLD.json#/exchanges/3",
+              "raw/PENDING.OLD.json#/exchanges/4",
+              "raw/PENDING.OLD.json#/exchanges/8",
+              "raw/PENDING.OLD.json#/exchanges/9"
+            ]
+          },
+          {
+            "rule": "R07",
+            "side": "OLD",
+            "evidence": [
+              "raw/PENDING.OLD.json#/exchanges/11",
+              "raw/PENDING.OLD.json#/exchanges/2",
+              "raw/PENDING.OLD.json#/exchanges/3",
+              "raw/PENDING.OLD.json#/exchanges/4",
+              "raw/PENDING.OLD.json#/exchanges/8",
+              "raw/PENDING.OLD.json#/exchanges/9"
+            ]
+          }
+        ],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-CURRENCY",
+        "op": "M1",
+        "location": {
+          "file": "api/create-payment.php",
+          "line": 22
+        },
+        "patch": "--- a/api/create-payment.php\n+++ b/api/create-payment.php\n@@ -22,7 +22,7 @@\n $resp = gg_create_order(\n     $items,\n     number_format($total, 2, '.', ''),\n-    SHOP_CURRENCY,\n+    'EUR',\n     SHOP_BASE_URL . '/success.php',\n     SHOP_BASE_URL . '/cancel.php',\n     'order-' . bin2hex(random_bytes(8))\n",
+        "rule": "R03",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "HAPPY",
+      "capture_file": "PHP-CURRENCY.NEW.json",
+      "capture_sha256": "35ebbbb0778e2f51e9a270572592efb5e3534780c9c459ad2f116f9d5fb85b71",
+      "mutated_source_sha256": "fb782e70ba9ce5fe508633a5394f44383fd98cdf452c669184ace9de8f9b43ea",
+      "verdict": {
+        "scenario_id": "HAPPY",
+        "grade": "PROBLEM",
+        "rule_hits": [],
+        "parity_diff": [
+          {
+            "index": 0,
+            "old": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "EUR"
+              }
+            }
+          },
+          {
+            "index": 3,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "EUR"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 5,
+            "old": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "EUR"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 7,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "EUR"
+              },
+              "status_norm": "COMPLETED"
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-AMOUNT",
+        "op": "M6",
+        "location": {
+          "file": "api/create-payment.php",
+          "line": 22
+        },
+        "patch": "--- a/api/create-payment.php\n+++ b/api/create-payment.php\n@@ -21,7 +21,7 @@\n \n $resp = gg_create_order(\n     $items,\n-    number_format($total, 2, '.', ''),\n+    number_format($total + 1, 2, '.', ''),\n     SHOP_CURRENCY,\n     SHOP_BASE_URL . '/success.php',\n     SHOP_BASE_URL . '/cancel.php',\n",
+        "rule": "R02",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "HAPPY",
+      "capture_file": "PHP-AMOUNT.NEW.json",
+      "capture_sha256": "c166f27401c96fa798933e1f912f4a3fa8de9bbcb38418646ca93ed4286ab211",
+      "mutated_source_sha256": "67f8f61aa13c58717c72b5a8c1b8954a8799c86a7c81ee57e4a4e634a7fdc6b6",
+      "verdict": {
+        "scenario_id": "HAPPY",
+        "grade": "PROBLEM",
+        "rule_hits": [],
+        "parity_diff": [
+          {
+            "index": 0,
+            "old": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 3,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 5,
+            "old": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 7,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-NOTPAID",
+        "op": "M2",
+        "location": {
+          "file": "api/execute-payment.php",
+          "line": 15
+        },
+        "patch": "--- a/api/execute-payment.php\n+++ b/api/execute-payment.php\n@@ -12,7 +12,7 @@\n $pay = gg_capture_order($token, 'capture-' . $token);\n if (empty($pay['ok'])) { http_response_code(502); echo json_encode(['error' => 'payment failed']); exit; }\n \n-$order['status'] = (($pay['capture_status'] ?? '') === 'COMPLETED') ? 'PAID' : 'PENDING';\n+$order['status'] = (($pay['capture_status'] ?? '') === 'COMPLETED') ? 'PENDING' : 'PENDING';\n $order['payer_id'] = $pay['payer_id'] ?? $payer;\n $order['transaction_id'] = $pay['capture_id'];\n $order['payer_email'] = $pay['payer_email'] ?? '';\n",
+        "rule": "R04",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "HAPPY",
+      "capture_file": "PHP-NOTPAID.NEW.json",
+      "capture_sha256": "29ec6c42756ca39644db22bd9c044828e56b94fa3d6d4f52b789c352256b1e96",
+      "mutated_source_sha256": "4ae4318ae785521d9b6bec95f8031aa89bdfa5afa9a228275b13d430e04b2c80",
+      "verdict": {
+        "scenario_id": "HAPPY",
+        "grade": "PROBLEM",
+        "rule_hits": [
+          {
+            "rule": "R04",
+            "side": "NEW",
+            "evidence": [
+              "raw/HAPPY.NEW.json#/exchanges/10",
+              "raw/HAPPY.NEW.json#/exchanges/12",
+              "raw/HAPPY.NEW.json#/exchanges/14",
+              "raw/HAPPY.NEW.json#/exchanges/2",
+              "raw/HAPPY.NEW.json#/exchanges/3",
+              "raw/HAPPY.NEW.json#/exchanges/4",
+              "raw/HAPPY.NEW.json#/exchanges/6",
+              "raw/HAPPY.NEW.json#/exchanges/7",
+              "raw/HAPPY.NEW.json#/exchanges/8"
+            ]
+          }
+        ],
+        "parity_diff": [
+          {
+            "index": 4,
+            "old": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_PENDING",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-RECAPTURE",
+        "op": "M5",
+        "location": {
+          "file": "api/execute-payment.php",
+          "line": 12
+        },
+        "patch": "--- a/api/execute-payment.php\n+++ b/api/execute-payment.php\n@@ -9,7 +9,7 @@\n $order = orders_get($token);\n if (!$order) { http_response_code(404); echo json_encode(['error' => 'unknown token']); exit; }\n \n-$pay = gg_capture_order($token, 'capture-' . $token);\n+$pay = gg_capture_order($token, 'capture-' . bin2hex(random_bytes(4)));\n if (empty($pay['ok'])) { http_response_code(502); echo json_encode(['error' => 'payment failed']); exit; }\n \n $order['status'] = (($pay['capture_status'] ?? '') === 'COMPLETED') ? 'PAID' : 'PENDING';\n",
+        "rule": "R05",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "DOUBLE",
+      "capture_file": "PHP-RECAPTURE.NEW.json",
+      "capture_sha256": "feef7e752934011a23628260033ce5a0542860e003e084617c97effe3bd3b67c",
+      "mutated_source_sha256": "08a6b6ebc959bdc68fd152f851e1998706740eaa4fea4f05bc6a7f67f4ed2087",
+      "verdict": {
+        "scenario_id": "DOUBLE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-UNAPPROVED",
+        "op": "M3",
+        "location": {
+          "file": "api/execute-payment.php",
+          "line": 13
+        },
+        "patch": "--- a/api/execute-payment.php\n+++ b/api/execute-payment.php\n@@ -10,7 +10,7 @@\n if (!$order) { http_response_code(404); echo json_encode(['error' => 'unknown token']); exit; }\n \n $pay = gg_capture_order($token, 'capture-' . $token);\n-if (empty($pay['ok'])) { http_response_code(502); echo json_encode(['error' => 'payment failed']); exit; }\n+if (false) { http_response_code(502); echo json_encode(['error' => 'payment failed']); exit; }\n \n $order['status'] = (($pay['capture_status'] ?? '') === 'COMPLETED') ? 'PAID' : 'PENDING';\n $order['payer_id'] = $pay['payer_id'] ?? $payer;\n",
+        "rule": "R06",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "DECLINE",
+      "capture_file": "PHP-UNAPPROVED.NEW.json",
+      "capture_sha256": "d46b0d66938000083d9681c53417751e0fb8abd465a2500a8ae361ba52e5221e",
+      "mutated_source_sha256": "b74bb9e7df5aea8d04253111f7bd8706ce95bdacb0f6315f76d2d24b4d4eefbd",
+      "verdict": {
+        "scenario_id": "DECLINE",
+        "grade": "UNVERIFIED",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-UNVERIFIED",
+        "op": "M8",
+        "location": {
+          "file": "ipn.php",
+          "line": 11
+        },
+        "patch": "--- a/ipn.php\n+++ b/ipn.php\n@@ -8,7 +8,7 @@\n \n $event = json_decode($raw, true) ?: [];\n $resource = $event['resource'] ?? [];\n-if ($verified && ($event['event_type'] ?? '') === 'PAYMENT.CAPTURE.COMPLETED') {\n+if (true && ($event['event_type'] ?? '') === 'PAYMENT.CAPTURE.COMPLETED') {\n     file_put_contents(__DIR__ . '/data/ipn.log', date('c') . ' ' . ($resource['id'] ?? '?') . ' ' . ($resource['amount']['value'] ?? '?') . \"\\n\", FILE_APPEND);\n }\n http_response_code(200);\n",
+        "rule": "R08",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "NOTIFY_FORGED",
+      "capture_file": "PHP-UNVERIFIED.NEW.json",
+      "capture_sha256": "77911491f6e9c38634b02ee7468b0282b2518f8eb7c326ed63b2517018789c0a",
+      "mutated_source_sha256": "686045a6c30ff759e116aed7c22b4cb04e684bf9cac2002a66c560117fd2e640",
+      "verdict": {
+        "scenario_id": "NOTIFY_FORGED",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-REFUND-AGAIN",
+        "op": "M12",
+        "location": {
+          "file": "api/refund.php",
+          "line": 9
+        },
+        "patch": "--- a/api/refund.php\n+++ b/api/refund.php\n@@ -6,7 +6,7 @@\n \n $in = json_decode(file_get_contents('php://input'), true) ?: [];\n $order = orders_get($in['token'] ?? '');\n-if (!$order || $order['status'] !== 'PAID') { http_response_code(400); echo json_encode(['error' => 'order is not paid']); exit; }\n+if (!$order || !in_array($order['status'], ['PAID', 'REFUNDED'], true)) { http_response_code(400); echo json_encode(['error' => 'order is not paid']); exit; }\n \n $resp = gg_refund_capture($order['transaction_id'], $order['amount'], SHOP_CURRENCY, 'refund-' . $order['transaction_id']);\n if (empty($resp['ok'])) { http_response_code(502); echo json_encode(['error' => 'refund failed']); exit; }\n",
+        "rule": "R11",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "REFUND_TWICE",
+      "capture_file": "PHP-REFUND-AGAIN.NEW.json",
+      "capture_sha256": "bb06f99cef96c2c41e416741e223eb2929e5d85929a796fc6f4970f0e0f4c22f",
+      "mutated_source_sha256": "4f4afd95ea888dfed6d4f740b3095feed06e49d178d212c099e4b193d1c2993d",
+      "verdict": {
+        "scenario_id": "REFUND_TWICE",
+        "grade": "PASS",
+        "rule_hits": [],
+        "parity_diff": [],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.refund_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-BROWSER-AMOUNT",
+        "op": "M7",
+        "location": {
+          "file": "api/create-payment.php",
+          "line": 20
+        },
+        "patch": "--- a/api/create-payment.php\n+++ b/api/create-payment.php\n@@ -17,7 +17,7 @@\n     ];\n     $total += $p['price'] * (int)$qty;\n }\n-if ($total <= 0) { http_response_code(400); echo json_encode(['error' => 'empty cart']); exit; }\n+$total = isset($cart['minor']) ? $cart['minor'] / 100 : $total; if ($total <= 0) { http_response_code(400); echo json_encode(['error' => 'empty cart']); exit; }\n \n $resp = gg_create_order(\n     $items,\n",
+        "rule": "R12",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "HAPPY",
+      "capture_file": "PHP-BROWSER-AMOUNT.NEW.json",
+      "capture_sha256": "b45e579be1daced69d83424ee1691c6dce505e9744a717acb2160951489868d5",
+      "mutated_source_sha256": "783c4f7ca3f59c15f5fe507f1f4b246ec1c52493ab1f7351a0205d76e31832e2",
+      "verdict": {
+        "scenario_id": "HAPPY",
+        "grade": "PROBLEM",
+        "rule_hits": [],
+        "parity_diff": [
+          {
+            "index": 0,
+            "old": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 1,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 1,
+            "old": {
+              "kind": "SHOP_UNPAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_UNPAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 1,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 3,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 1,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 4,
+            "old": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 1,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 5,
+            "old": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 1,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 7,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 1,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    },
+    {
+      "mutant": {
+        "id": "PHP-UNKNOWN-SKU",
+        "op": "M7",
+        "location": {
+          "file": "api/create-payment.php",
+          "line": 11
+        },
+        "patch": "--- a/api/create-payment.php\n+++ b/api/create-payment.php\n@@ -8,7 +8,7 @@\n $cart = json_decode(file_get_contents('php://input'), true) ?: $_POST;\n $total = 0.0; $items = [];\n foreach ($cart as $sku => $qty) {\n-    if (!isset($PRODUCTS[$sku])) continue;\n+    if (!isset($PRODUCTS[$sku])) { $total += (float)$qty; continue; }\n     $p = $PRODUCTS[$sku];\n     $items[] = [\n         'name'        => $p['name'],\n",
+        "rule": "R17",
+        "equivalent_suspect": false,
+        "killed_by": []
+      },
+      "scenario_id": "HAPPY",
+      "capture_file": "PHP-UNKNOWN-SKU.NEW.json",
+      "capture_sha256": "ebf176b3c321f7d19e48a1b5c9b80d1d84f25bab7ac854a8f4bafc54377f4e58",
+      "mutated_source_sha256": "094d2808ef6f1b30d756aa8562182c5d2e7a107284a840131c22b4c6644194e5",
+      "verdict": {
+        "scenario_id": "HAPPY",
+        "grade": "PROBLEM",
+        "rule_hits": [],
+        "parity_diff": [
+          {
+            "index": 0,
+            "old": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "INTENT",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 1,
+            "old": {
+              "kind": "SHOP_UNPAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_UNPAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 3,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_CALL",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 4,
+            "old": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              }
+            },
+            "new": {
+              "kind": "SHOP_PAID",
+              "source": "SHOP_DB",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              }
+            }
+          },
+          {
+            "index": 5,
+            "old": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "NOTIFY",
+              "source": "NOTIFICATION",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          },
+          {
+            "index": 7,
+            "old": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2500,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            },
+            "new": {
+              "kind": "CAPTURE",
+              "source": "PAYPAL_LEDGER",
+              "order_ref": "SHOP-HAPPY",
+              "pp": {},
+              "money": {
+                "minor": 2600,
+                "currency": "USD"
+              },
+              "status_norm": "COMPLETED"
+            }
+          }
+        ],
+        "noise_masked": [
+          "pp.capture_id",
+          "pp.debug_id",
+          "pp.legacy_token",
+          "pp.order_id",
+          "pp.txn_id",
+          "raw_ref",
+          "t_ms",
+          "variant"
+        ],
+        "deltas_applied": [
+          "D_APPROVE",
+          "D_LEDGER_READ",
+          "D_NOTIFY",
+          "D_REFUND",
+          "D_TOKEN_ORDER",
+          "D_TXN_CAPTURE"
+        ]
+      },
+      "evidence_class": "executed_ai_candidate_mutation_simulated_paypal"
+    }
+  ],
+  "candidate_mutations_survived": [
+    "PHP-RECAPTURE",
+    "PHP-REFUND-AGAIN",
+    "PHP-UNAPPROVED",
+    "PHP-UNVERIFIED"
+  ],
+  "candidate_mutation_strength": {
+    "total": 10,
+    "equivalent_dropped": 0,
+    "killed": 6,
+    "score": 0.6
+  },
+  "candidate_mutation_coverage": [
+    {
+      "rule_id": "R01",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-PENDING"
+      ],
+      "killed": true
+    },
+    {
+      "rule_id": "R02",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-AMOUNT"
+      ],
+      "killed": true
+    },
+    {
+      "rule_id": "R03",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-CURRENCY"
+      ],
+      "killed": true
+    },
+    {
+      "rule_id": "R04",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-NOTPAID"
+      ],
+      "killed": true
+    },
+    {
+      "rule_id": "R05",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-RECAPTURE"
+      ],
+      "killed": false
+    },
+    {
+      "rule_id": "R06",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-UNAPPROVED"
+      ],
+      "killed": false
+    },
+    {
+      "rule_id": "R07",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R08",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-UNVERIFIED"
+      ],
+      "killed": false
+    },
+    {
+      "rule_id": "R09",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R10",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R11",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-REFUND-AGAIN"
+      ],
+      "killed": false
+    },
+    {
+      "rule_id": "R12",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-BROWSER-AMOUNT"
+      ],
+      "killed": true
+    },
+    {
+      "rule_id": "R13",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R14",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R15",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R16",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [],
+      "killed": false
+    },
+    {
+      "rule_id": "R17",
+      "scenario_ids": [
+        "DECLINE",
+        "DOUBLE",
+        "HAPPY",
+        "NOTIFY_DUP",
+        "NOTIFY_FORGED",
+        "PARITY_EXTRA",
+        "PENDING",
+        "REFUND",
+        "REFUND_TWICE"
+      ],
+      "mutant_ids": [
+        "PHP-UNKNOWN-SKU"
+      ],
+      "killed": true
+    }
+  ],
+  "unguarded_critical_rule_ids": [
+    "R05",
+    "R06",
+    "R08",
+    "R11"
+  ],
+  "local_php_checks_complete": false,
+  "status": "HELD",
+  "certificate": {
+    "issued": false,
+    "reasons": [
+      "Local simulated PayPal is not authenticated sandbox evidence",
+      "Required critical-rule mutation coverage is incomplete",
+      "No qualified signing/workflow/transparency or merchant certificate binding"
+    ]
+  }
+}

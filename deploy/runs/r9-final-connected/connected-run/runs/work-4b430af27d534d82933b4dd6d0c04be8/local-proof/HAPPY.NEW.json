@@ -1,0 +1,464 @@
+{
+  "graft_id": "work-4b430af27d534d82933b4dd6d0c04be8",
+  "run_id": "work-4b430af27d534d82933b4dd6d0c04be8-local-php",
+  "variant": "NEW",
+  "scenario_id": "HAPPY",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 72,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:60156/api/create-payment.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "tee": 1,
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 77,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:60155/v2/checkout/orders",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "order-5c9044ed3203b5aa:create",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "intent": "CAPTURE",
+        "purchase_units": [
+          {
+            "reference_id": "order-5c9044ed3203b5aa",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            },
+            "items": [
+              {
+                "name": "Cutover Tee",
+                "quantity": "1",
+                "unit_amount": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            ]
+          }
+        ],
+        "application_context": {
+          "return_url": "http://127.0.0.1:60156/success.php",
+          "cancel_url": "http://127.0.0.1:60156/cancel.php",
+          "shipping_preference": "NO_SHIPPING"
+        }
+      }
+    },
+    {
+      "seq": 2,
+      "t_ms": 77,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:60155/v2/checkout/orders",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standinf85d8f6",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "id": "EA79B14158634CE8B",
+        "intent": "CAPTURE",
+        "status": "COMPLETED",
+        "purchase_units": [
+          {
+            "reference_id": "order-5c9044ed3203b5aa",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "E7074BDECBC244A48",
+                  "status": "COMPLETED",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "25.00"
+                  },
+                  "final_capture": true,
+                  "supplementary_data": {
+                    "related_ids": {
+                      "order_id": "EA79B14158634CE8B"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "payer": {
+          "payer_id": "FAKEPAYER0001",
+          "email_address": "buyer@example.invalid"
+        }
+      },
+      "status": 201
+    },
+    {
+      "seq": 3,
+      "t_ms": 78,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://legacy-php-shop/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-HAPPY"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 0,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "t_ms": 78,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:60156/api/execute-payment.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "token": "EA79B14158634CE8B",
+        "payerID": "FAKEPAYER0001",
+        "orderId": "EA79B14158634CE8B"
+      }
+    },
+    {
+      "seq": 5,
+      "t_ms": 80,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:60155/v2/checkout/orders/EA79B14158634CE8B/capture",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "capture-EA79B14158634CE8B",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 6,
+      "t_ms": 80,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:60155/v2/checkout/orders/EA79B14158634CE8B/capture",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standin10aa065",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "id": "EA79B14158634CE8B",
+        "intent": "CAPTURE",
+        "status": "COMPLETED",
+        "purchase_units": [
+          {
+            "reference_id": "order-5c9044ed3203b5aa",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "E7074BDECBC244A48",
+                  "status": "COMPLETED",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "25.00"
+                  },
+                  "final_capture": true,
+                  "supplementary_data": {
+                    "related_ids": {
+                      "order_id": "EA79B14158634CE8B"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "payer": {
+          "payer_id": "FAKEPAYER0001",
+          "email_address": "buyer@example.invalid"
+        }
+      },
+      "status": 201
+    },
+    {
+      "seq": 7,
+      "t_ms": 81,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://legacy-php-shop/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-HAPPY"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 8,
+      "t_ms": 81,
+      "direction": "PAYPAL_NOTIFY_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:60156/ipn.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "PAYPAL-AUTH-ALGO": "SHA256withRSA",
+        "PAYPAL-CERT-URL": "http://127.0.0.1:60155/v1/notifications/certs/STANDIN",
+        "PAYPAL-TRANSMISSION-ID": "T-7e0b3a6141",
+        "PAYPAL-TRANSMISSION-SIG": "standin-signature",
+        "PAYPAL-TRANSMISSION-TIME": "2026-11-12T00:00:00Z",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "id": "WH-4F5405CD791D",
+        "event_type": "PAYMENT.CAPTURE.COMPLETED",
+        "resource_type": "capture",
+        "resource": {
+          "id": "E7074BDECBC244A48",
+          "status": "COMPLETED",
+          "amount": {
+            "currency_code": "USD",
+            "value": "25.00"
+          },
+          "supplementary_data": {
+            "related_ids": {
+              "order_id": "EA79B14158634CE8B"
+            }
+          }
+        }
+      }
+    },
+    {
+      "seq": 9,
+      "t_ms": 83,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:60155/v1/notifications/verify-webhook-signature",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "auth_algo": "SHA256withRSA",
+        "cert_url": "http://127.0.0.1:60155/v1/notifications/certs/STANDIN",
+        "transmission_id": "T-7e0b3a6141",
+        "transmission_sig": "standin-signature",
+        "transmission_time": "2026-11-12T00:00:00Z",
+        "webhook_id": "WH-STANDIN",
+        "webhook_event": {
+          "id": "WH-4F5405CD791D",
+          "event_type": "PAYMENT.CAPTURE.COMPLETED",
+          "resource_type": "capture",
+          "resource": {
+            "id": "E7074BDECBC244A48",
+            "status": "COMPLETED",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00"
+            },
+            "supplementary_data": {
+              "related_ids": {
+                "order_id": "EA79B14158634CE8B"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "t_ms": 83,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:60155/v1/notifications/verify-webhook-signature",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standinfcf0030",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "verification_status": "SUCCESS"
+      },
+      "status": 200
+    },
+    {
+      "seq": 11,
+      "t_ms": 84,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "http://127.0.0.1:60155/v2/checkout/orders/EA79B14158634CE8B",
+      "headers": {
+        "X-Goldgraft-Ledger": "order",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 12,
+      "t_ms": 84,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "http://127.0.0.1:60155/v2/checkout/orders/EA79B14158634CE8B",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standinf13bd68",
+        "X-GoldGraft-Ledger": "order",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "id": "EA79B14158634CE8B",
+        "intent": "CAPTURE",
+        "status": "COMPLETED",
+        "purchase_units": [
+          {
+            "reference_id": "order-5c9044ed3203b5aa",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "E7074BDECBC244A48",
+                  "status": "COMPLETED",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "25.00"
+                  },
+                  "final_capture": true,
+                  "supplementary_data": {
+                    "related_ids": {
+                      "order_id": "EA79B14158634CE8B"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "payer": {
+          "payer_id": "FAKEPAYER0001",
+          "email_address": "buyer@example.invalid"
+        }
+      },
+      "status": 200
+    },
+    {
+      "seq": 13,
+      "t_ms": 85,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "http://127.0.0.1:60155/v2/payments/captures/E7074BDECBC244A48",
+      "headers": {
+        "X-Goldgraft-Ledger": "capture",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 14,
+      "t_ms": 85,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "http://127.0.0.1:60155/v2/payments/captures/E7074BDECBC244A48",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standind983bce",
+        "X-GoldGraft-Ledger": "capture",
+        "X-GoldGraft-Order-Ref": "SHOP-HAPPY"
+      },
+      "body_json": {
+        "id": "E7074BDECBC244A48",
+        "status": "COMPLETED",
+        "amount": {
+          "currency_code": "USD",
+          "value": "25.00"
+        },
+        "final_capture": true,
+        "supplementary_data": {
+          "related_ids": {
+            "order_id": "EA79B14158634CE8B"
+          }
+        }
+      },
+      "status": 200
+    }
+  ]
+}

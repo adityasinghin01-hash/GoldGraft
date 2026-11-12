@@ -215,7 +215,14 @@ def evaluate_plan(
                 }
                 else "INVALID"
             )
-            state, refs = "missing" if reason == "MISSING" else "unknown", []
+            state = (
+                "missing"
+                if reason == "MISSING"
+                else "failed"
+                if reason == "FAILED" and check.kind == "payment"
+                else "unknown"
+            )
+            refs = []
         results.append(
             dict(
                 check_id=check.check_id,

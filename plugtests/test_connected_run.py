@@ -81,7 +81,7 @@ def test_connected_run_binds_control_recordings_judge_and_records(agent_run, tmp
     for gate in (
         "domain_rule:R02",
         "domain_rule:R17",
-        "payment:shop-checkout-paypal",
+        "payment:shop-checkout-paypal-sandbox",
         "isolation:runner",
     ):
         assert states[gate] == "missing"
@@ -183,6 +183,31 @@ def test_app_serves_connected_run_and_fails_closed_on_edits(agent_run, tmp_path)
     assert client.get("/grafts/sample-1/connected").status_code == 503
 
 
+def test_nested_connected_recordings_supply_payment_views_and_reject_drift(agent_run, tmp_path):
+    from fastapi.testclient import TestClient
+
+    from integration.agents_app import create_app
+
+    run = tmp_path / "runs/sample-1"
+    run.mkdir(parents=True)
+    (run / "RESULT.json").write_bytes((agent_run / "RESULT.json").read_bytes())
+    summary = connect_run(agent_run, run / "connected-run", execute=fixture_execute())
+    evidence = run / "connected-run/runs" / summary["evidence_run"]
+    capture = evidence / "local-proof/HAPPY.NEW.json"
+    original = capture.read_bytes()
+    with TestClient(create_app(runs_dir=run.parent, read_only=True)) as client:
+        response = client.get("/grafts/sample-1/scenarios")
+        assert response.status_code == 200
+        assert len(response.json()["scenarios"]) == 9
+        assert all(row["verdict"] is not None for row in response.json()["scenarios"])
+        money = client.get("/grafts/sample-1/cmel?scenario=HAPPY")
+        assert money.status_code == 200
+        assert money.headers["X-GoldGraft-Evidence-Class"] == "local-php-simulated-paypal"
+        assert capture.read_bytes() == original  # Projection never relabels raw subjects.
+        capture.write_bytes(original + b" ")
+        assert client.get("/grafts/sample-1/cmel?scenario=HAPPY").status_code == 503
+
+
 def test_signature_record_must_match_the_served_proof_result(agent_run, tmp_path):
     from fastapi.testclient import TestClient
 
@@ -216,3 +241,38 @@ def test_exact_proof_bytes_are_served_for_browser_hashing(agent_run, tmp_path):
     served = client.get("/grafts/sample-1/connected-proof").content
     assert served == (run / "connected-run/ProofResult.json").read_bytes()
     assert client.get("/grafts/other/connected-proof").status_code == 404
+
+
+@pytest.mark.parametrize("failed", [False, True])
+def test_connected_shop_sandbox_gate_rechecks_imported_candidate_evidence(
+    agent_run,
+    tmp_path,
+    failed,
+):
+    from plugtests.test_shop_sandbox import update_bundle, write_bundle
+
+    bundle_root = tmp_path / "bundle"
+    bundle_root.mkdir()
+    _, evidence = write_bundle(bundle_root)
+    update_bundle(
+        evidence,
+        "REPORT.json",
+        lambda d: d.update(
+            changes_sha256=sha(agent_run / "CHANGES.json"),
+            outputs_sha256=sha(agent_run / "OUTPUTS.json"),
+        ),
+    )
+    if failed:
+        update_bundle(
+            evidence, "REFETCH.json", lambda d: d["HAPPY"][0]["body"].update(status="PENDING")
+        )
+    summary = connect_run(
+        agent_run, tmp_path / "state", execute=fixture_execute(), shop_sandbox_dir=evidence
+    )
+    key = "payment:shop-checkout-paypal-sandbox"
+    states = {c: s for s, ids in summary["proof_result"]["by_state"].items() for c in ids}
+    assert states[key] == ("failed" if failed else "verified")
+    plan = json.loads((tmp_path / "state/ProofPlan.json").read_text())
+    check = next(c for c in plan["checks"] if c["check_id"] == key)
+    assert check["required_evidence_class"] == "real_provider"
+    assert summary["certificate"]["issued"] is False

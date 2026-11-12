@@ -4,7 +4,8 @@ import { CheckIcon, LockKeyIcon, XIcon } from '@phosphor-icons/react';
 import { api } from '../api/client';
 import type { Connection, Shop } from '../api/types';
 import { H } from '../copy/words';
-import { Details, Explain, PageHead, ProblemBanner } from '../components/ui';
+import { Details, Explain, PageHead, ProblemBanner, RecordedDemo } from '../components/ui';
+import { config } from '../config';
 import { ActionButton, SecondsWait } from '../components/Loaders';
 import { addUpgrade, newIdempotencyKey } from '../lib/store';
 import s from './s01.module.css';
@@ -105,6 +106,8 @@ export default function S01_Connect() {
   };
 
   const reset = () => { setShop(null); setConn(null); setName(''); setRepo(''); setSite(''); setErr(null); startKey.current = ''; };
+
+  if (config.recordingOnly) return <RecordedDemo title="Connect your shop" />;
 
   return (
     <div className={`gg-center ${s.screen}`}>

@@ -7,9 +7,10 @@ Every exchange is recorded as RawCapture/1 in the exact shape Singhal's proof ma
 browser → shop, shop → PayPal, PayPal → shop (incl. ledger reads), PayPal notification → shop,
 and shop database writes (orders.json diffs, statuses normalised to paid/pending/unpaid).
 
-Honest limits: PayPal is a stand-in, not the PayPal sandbox; the buyer's approval at PayPal is
-simulated; no secrets exist (credentials are fixed placeholders and are redacted in recordings).
-The shop's own code is not edited: a PHP prepend file defines the PayPal endpoints first.
+By default PayPal and buyer approval are simulated. An explicitly supplied NEW-only sandbox
+proxy can forward to real PayPal; scripts/live_shop_sandbox.py owns that opt-in and re-fetches.
+PHP receives credential placeholders; the proxy owns real credentials in memory. The shop's
+own code is not edited: a PHP prepend file defines the configured PayPal endpoints first.
 """
 
 import json
@@ -465,7 +466,7 @@ class PayPalStandIn:
 
 
 class Shop:
-    """One shop tree served by `php -S`, with PayPal endpoints pointed at the stand-in."""
+    """One shop tree served by `php -S`, with PayPal endpoints pointed at the recorder."""
 
     def __init__(self, files, paypal, php="php"):
         validate_candidate(files)
@@ -479,7 +480,7 @@ class Shop:
         (self.dir / "data").mkdir(exist_ok=True)
         prepend = self.dir / ".goldgraft_prepend.php"
         prepend.write_text(
-            "<?php\n// Test harness only: the shop's PayPal endpoints go to the stand-in.\n"
+            "<?php\n// Test harness only: the shop's PayPal endpoints go to the recorder.\n"
             f"define('PAYPAL_NVP_ENDPOINT', '{paypal.base}/nvp');\n"
             f"define('PAYPAL_IPN_VERIFY_URL', '{paypal.base}/cgi-bin/webscr');\n"
             f"define('PAYPAL_REST_BASE', '{paypal.base}');\n"
@@ -546,17 +547,32 @@ def _norm(order):
     }
 
 
-def run_scenario(scenario, variant, files, *, graft_id, run_id, php="php"):
+def run_scenario(scenario, variant, files, *, graft_id, run_id, php="php", paypal=None):
     """Drive one scenario through one shop tree; return a validated RawCapture/1 dict."""
     if scenario not in SCENARIOS or variant not in {"OLD", "OLD_TWIN", "NEW"}:
         raise ValueError("unsupported local scenario or variant")
+    real = getattr(paypal, "real_sandbox", False)
+    if real and (
+        variant != "NEW"
+        or scenario
+        not in {
+            "HAPPY",
+            "REFUND",
+            "REFUND_TWICE",
+            "DOUBLE",
+            "DECLINE",
+        }
+    ):
+        raise ValueError("real sandbox requires NEW and a supported scenario")
     validate_candidate(files)
     php = str(resolve_php(php))
     ref = f"SHOP-{scenario}"
-    paypal = PayPalStandIn(scenario)
+    paypal = paypal if paypal is not None else PayPalStandIn(scenario)
     rec = Recorder(ref)
     paypal.recorder = rec
     try:
+        if real:
+            paypal.start()
         shop = Shop(files, paypal, php=php)
     except BaseException:
         paypal.close()
@@ -594,11 +610,13 @@ def run_scenario(scenario, variant, files, *, graft_id, run_id, php="php"):
         )
         req = Request(url, data=data, headers={"Content-Type": kind, **(headers or {})})
         try:
-            with urlopen(req, timeout=20) as r:
+            with urlopen(req, timeout=45 if real else 20) as r:
                 out = r.read().decode()
         except HTTPError as e:
             out = e.read().decode()
         db_diff()
+        if real and paypal.error is not None:
+            raise paypal.error
         try:
             return json.loads(out)
         except ValueError:
@@ -664,13 +682,17 @@ def run_scenario(scenario, variant, files, *, graft_id, run_id, php="php"):
             "BROWSER_TO_SHOP", "/api/create-payment.php", {"tee": 1, "minor": 1, "currency": "EUR"}
         )
         token = created.get("token")
+        if real and not token:
+            raise RuntimeError("shop returned no PayPal order id; stopping")
         if token and scenario != "NOTIFY_FORGED":
             paypal.approve(token)
-            pay = {"token": token, "payerID": "FAKEPAYER0001", "orderId": token}
+            pay = {"token": token, "orderId": token}
+            if not real:
+                pay["payerID"] = "FAKEPAYER0001"
             call("BROWSER_TO_SHOP", "/api/execute-payment.php", pay)
             if scenario == "DOUBLE":
                 call("BROWSER_TO_SHOP", "/api/execute-payment.php", pay)
-            if scenario not in {"PENDING", "DECLINE"}:
+            if not real and scenario not in {"PENDING", "DECLINE"}:
                 notify(token)
                 if scenario == "NOTIFY_DUP":
                     notify(token)
@@ -693,7 +715,15 @@ def run_scenario(scenario, variant, files, *, graft_id, run_id, php="php"):
                     status=response.status,
                     body_json=body,
                 )
-        ledger_reads(paypal, rec, token, variant)
+        if real:
+            paypal.exchange("GET", f"/v2/checkout/orders/{token}", {"X-GoldGraft-Ledger": "order"})
+            for kind, resources in (("capture", paypal.captures), ("refund", paypal.refunds)):
+                for resource_id in resources:
+                    paypal.exchange(
+                        "GET", f"/v2/payments/{kind}s/{resource_id}", {"X-GoldGraft-Ledger": kind}
+                    )
+        else:
+            ledger_reads(paypal, rec, token, variant)
     finally:
         shop.close()
         paypal.close()
