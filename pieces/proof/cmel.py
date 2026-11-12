@@ -90,7 +90,8 @@ def to_cmel(capture: RawCapture) -> list[MoneyEvent]:
             )
         elif direction == "PAYPAL_NOTIFY_TO_SHOP":
             kind, source = "NOTIFY", "NOTIFICATION"
-            if path == "/ipn.php":
+            # Content decides, not the path: a migrated shop may keep its webhook at /ipn.php.
+            if path == "/ipn.php" and "resource" not in body:
                 fields = nvp(x)
                 pp = {"legacy_token": token, "txn_id": fields["txn_id"]}
                 amount = money(fields["mc_gross"], fields["mc_currency"])
