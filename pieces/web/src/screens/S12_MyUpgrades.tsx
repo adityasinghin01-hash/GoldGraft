@@ -8,6 +8,7 @@ import { Empty, PageHead, Tag } from '../components/ui';
 import { SeamLoader } from '../components/Loaders';
 import { dropUpgrade, readUpgrades, type MyUpgrade } from '../lib/store';
 import { formatDate } from '../lib/format';
+import { isMock } from '../config';
 import s from './s12.module.css';
 
 function StageCell({ graftId }: { graftId: string }) {
@@ -27,11 +28,17 @@ function AgentRuns() {
   return (
     <section className={s.runs} aria-label="Real agent runs">
       <h2 className={s.runsTitle}>Real agent runs</h2>
-      <p className={s.runsSub}>Every run below used real AI calls through GoldGraft's budget gateway. Builds and payment tests use recorded runners for now.</p>
+      <p className={s.runsSub}>Every run below used real AI calls through GoldGraft's budget gateway. Builds and payment tests use recorded runners for now.{isMock ? ' This public page shows a recording; run the agents service locally to start new runs.' : ''}</p>
       <ul className={s.list}>
         {q.data.slice(0, 12).map((r, i) => (
           <li key={r.run_id} className={`gg-glass ${s.row}`} style={{ ['--i' as string]: i }}>
-            <Link to={`/g/${r.run_id}`} className={s.name}>{r.run_id} <ArrowRightIcon size={14} /></Link>
+            {isMock ? (
+              r.run_id === 'r2-realcode-7'
+                ? <Link to="/g/demo-1/changes" className={s.name}>{r.run_id} · see its code <ArrowRightIcon size={14} /></Link>
+                : <span className={s.name}>{r.run_id}</span>
+            ) : (
+              <Link to={`/g/${r.run_id}`} className={s.name}>{r.run_id} <ArrowRightIcon size={14} /></Link>
+            )}
             <span className={s.when}>{r.shop} · {r.roles_passed} of {r.roles_participated} agents passed · ${r.spent_usd.toFixed(2)} AI cost</span>
             <Tag tone={r.status === 'completed' ? 'good' : r.status === 'running' ? 'gold' : 'warn'}>{words(r.status)}</Tag>
           </li>

@@ -105,7 +105,9 @@ export default function S13_Changes() {
       <PageHead
         title="Code changes"
         sub={`${model.length} ${model.length === 1 ? 'file' : 'files'} rewritten by the Grafter agent, plus the GoldGraft library it calls`}
-        aside={isMock ? <SampleChip /> : <Tag tone="gold">Real AI output</Tag>}
+        aside={q.data.recorded_from
+          ? <Tag tone="gold" title="Recorded from a real integrated agent run">Real AI output · run {q.data.recorded_from}</Tag>
+          : isMock ? <SampleChip /> : <Tag tone="gold">Real AI output</Tag>}
       />
       {lintKeys.length > 0 && (
         <p className={s.check} data-ok={parsed === lintKeys.length || undefined}>

@@ -37,6 +37,8 @@ export type ChangeSet = {
   files: CodeChange[];
   open_items: OpenItem[];
   lint: Record<string, { ok: boolean; error: string | null }> | null;
+  /** Sample mode: the real run this recording comes from. */
+  recorded_from?: string;
 };
 export type AgentRun = {
   run_id: string;
