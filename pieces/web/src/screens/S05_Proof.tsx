@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BugBeetleIcon, CheckIcon, PlayIcon, StopIcon, XIcon } from '@phosphor-icons/react';
-import { useProof } from '../api/queries';
+import { useConnected, useProof } from '../api/queries';
 import { useGraftCtx } from '../shell/GraftLayout';
 import { MEANING, MUTANT, ruleText } from '../copy/words';
 import { Details, Explain, PageHead, ProblemBanner, SampleChip, Tag } from '../components/ui';
@@ -18,6 +18,7 @@ type Tri = { rule_id: string; scenario_ids: string[]; mutant_ids: string[]; kill
 export default function S05_Proof() {
   const { graftId } = useGraftCtx();
   const q = useProof(graftId);
+  const connected = useConnected(graftId);
   const [shown, setShown] = useState<number | null>(null); // null = all shown (no replay running)
   const timer = useRef(0);
 
@@ -40,7 +41,7 @@ export default function S05_Proof() {
   };
 
   if (q.isPending) return <div className={s.screen}><PageHead title="Proof" /><Skeleton what="proof" lines={4} /></div>;
-  if (q.isError || !ps) return <div className={s.screen}><PageHead title="Proof" /><ConnectedEvidence graftId={graftId} /><ProblemBanner error={q.error} onRetry={() => q.refetch()} /></div>;
+  if (q.isError || !ps) return <div className={s.screen}><PageHead title="Proof" /><ConnectedEvidence graftId={graftId} />{connected.data ? null : <ProblemBanner error={q.error} onRetry={() => q.refetch()} />}</div>;
 
   const denom = ps.total - ps.equivalent_dropped;
   const caughtSoFar = replaying ? mutants.slice(0, shown!).filter((m) => m.killed_by.length > 0).length : ps.killed;
