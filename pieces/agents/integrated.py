@@ -225,9 +225,10 @@ def _real_code(p, task_id, data, run):
             data["files"] = {path: files[path]}
             for rule in data["normative_rules"]:
                 rule["sources"]["code"] = [path]
-    elif task_id in {"adversary-guards", "adversary-mutant"}:
-        # Grounding (12 Nov): the Adversary attacks the Grafter's real code; the capture file
-        # comes first, so its planted-bug location names the file where 'paid' is decided.
+    elif task_id == "adversary-guards":
+        # Grounding (12 Nov): the Adversary reads and attacks the Grafter's real code; the capture
+        # file comes first, so its planted-bug location names the file where 'paid' is decided.
+        # (The mutant run reads no files: it only asks the runner to execute the fork.)
         written = p.artifacts.candidate_files("grafter")
         first = _capture_file(survey["inventory"])
         order = sorted(written, key=lambda path: (path != first, path))[:4]
