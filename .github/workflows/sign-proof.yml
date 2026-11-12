@@ -1,0 +1,60 @@
+# Keyless Sigstore signing of one exact proof file, by this workflow's GitHub OIDC identity.
+# Manual only. It signs the committed bytes at the dispatched ref and records the bundle;
+# it does not decide what the bytes prove. A HOLD proof result stays a HOLD when signed.
+name: sign-proof
+on:
+  workflow_dispatch:
+    inputs:
+      payload_path:
+        description: "Committed file to sign (docs/engineering/plan5/signing/<name>.json)"
+        required: true
+concurrency:
+  group: sign-proof-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PAYLOAD: ${{ inputs.payload_path }}
+      IDENTITY: https://github.com/${{ github.repository }}/.github/workflows/sign-proof.yml@${{ github.ref }}
+      ISSUER: https://token.actions.githubusercontent.com
+    steps:
+      - uses: actions/checkout@v4
+      - name: Accept only a committed signing payload
+        run: |
+          set -eu
+          printf '%s' "$PAYLOAD" | grep -Eq '^docs/engineering/plan5/signing/[A-Za-z0-9._-]+\.json$'
+          test -f "$PAYLOAD"
+          sha256sum "$PAYLOAD" | tee payload.sha256
+          git rev-parse HEAD | tee signed-commit.txt
+      - uses: sigstore/cosign-installer@v3
+      - name: Sign (keyless, public transparency log)
+        run: cosign sign-blob --yes --bundle proof.sigstore.json "$PAYLOAD"
+      - name: Verify against this workflow's identity
+        run: |
+          cosign verify-blob --bundle proof.sigstore.json \
+            --certificate-identity "$IDENTITY" --certificate-oidc-issuer "$ISSUER" "$PAYLOAD"
+      - name: A changed copy must fail verification
+        run: |
+          cp "$PAYLOAD" tampered.json
+          printf ' ' >> tampered.json
+          if cosign verify-blob --bundle proof.sigstore.json \
+               --certificate-identity "$IDENTITY" --certificate-oidc-issuer "$ISSUER" tampered.json; then
+            echo "tampered copy verified" >&2
+            exit 1
+          fi
+          echo "tampered copy rejected"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sigstore-proof
+          path: |
+            proof.sigstore.json
+            payload.sha256
+            signed-commit.txt
