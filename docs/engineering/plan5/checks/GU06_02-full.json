@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {
+    "GOLDGRAFT_PROOF": "pieces.proof.proof:Proof",
+    "GOLDGRAFT_API_APP": "integration.app:create_app"
+  },
+  "exit_code": 0,
+  "seconds": 150.616,
+  "output": "docs/engineering/plan5/checks/GU06_02-full.log",
+  "output_sha256": "8b964e53ccff15716f43b264f2abd3a8ad12ab02284684acd8bfc6b2878bcec2"
+}

@@ -36,7 +36,13 @@ class ArtifactPublisher:
         *,
         token: str | None = None,
     ) -> PublishReceipt:
-        """Publishes and remotely verifies an OCI container image digest in a private registry."""
+        """Verifies that an already-pushed OCI image digest exists in GHCR.
+
+        This does not push or build an image. It reads the registry manifest for
+        the exact digest with the supplied token and returns a receipt only when
+        the registry answers with that same digest. Merchant pull rights and
+        provenance remain separate qualification gates.
+        """
         if not re.fullmatch(r"sha256:[a-f0-9]{64}", manifest_digest):
             raise ValueError(f"Invalid image manifest digest: {manifest_digest}")
         if not token:

@@ -620,7 +620,17 @@ class PaymentBroker:
         _validate_wire_money(payload)
         creds = self.resolve_and_verify(secret_ref)
         self._authorize(graft_id, action, payload, secret_ref)
-        cache_key = self._request_key("v2", action, payload, secret_ref, graft_id, idempotency_key)
+        # Re-fetches are read-only: never cached, never journalled as a payment
+        # request and never sent with PayPal-Request-Id, so each call observes
+        # the provider's current state.
+        read_only = action.startswith("get_")
+        if read_only:
+            idempotency_key = None
+            cache_key = None
+        else:
+            cache_key = self._request_key(
+                "v2", action, payload, secret_ref, graft_id, idempotency_key
+            )
         if cache_key and cache_key in self._idempotent_cache:
             return self._idempotent_cache[cache_key]
 
@@ -650,8 +660,10 @@ class PaymentBroker:
             elif action == "refund":
                 capture_id = payload.get("capture_id") or payload.get("id", "")
                 url = f"{REST_SANDBOX}/v2/payments/captures/{capture_id}/refund"
+                # The capture id is a path parameter, not part of PayPal's refund body.
+                body = {k: v for k, v in payload.items() if k not in {"capture_id", "id"}}
                 data = self._sandbox_post(
-                    url, headers=headers, json_body=payload, operation="orders v2 refund"
+                    url, headers=headers, json_body=body, operation="orders v2 refund"
                 )
             elif action == "get_order":
                 order_id = payload.get("order_id") or payload.get("id", "")
@@ -697,15 +709,13 @@ class PaymentBroker:
         capture_id: str,
         *,
         secret_ref: str,
-        idempotency_key: str | None = None,
         graft_id: str = "default",
     ) -> BrokerResponse:
-        """Re-fetches a capture record directly from PayPal to verify final state."""
+        """Re-fetches the capture record from PayPal (read-only, uncached)."""
         return self.execute_orders_v2(
             "get_capture",
             {"capture_id": capture_id},
             secret_ref=secret_ref,
-            idempotency_key=idempotency_key or f"refetch-capture-{capture_id}",
             graft_id=graft_id,
         )
 
@@ -714,15 +724,13 @@ class PaymentBroker:
         refund_id: str,
         *,
         secret_ref: str,
-        idempotency_key: str | None = None,
         graft_id: str = "default",
     ) -> BrokerResponse:
-        """Re-fetches a refund record directly from PayPal to verify final state."""
+        """Re-fetches the refund record from PayPal (read-only, uncached)."""
         return self.execute_orders_v2(
             "get_refund",
             {"refund_id": refund_id},
             secret_ref=secret_ref,
-            idempotency_key=idempotency_key or f"refetch-refund-{refund_id}",
             graft_id=graft_id,
         )
 
@@ -731,14 +739,12 @@ class PaymentBroker:
         order_id: str,
         *,
         secret_ref: str,
-        idempotency_key: str | None = None,
         graft_id: str = "default",
     ) -> BrokerResponse:
-        """Re-fetches an order record directly from PayPal to verify final state."""
+        """Re-fetches the order record from PayPal (read-only, uncached)."""
         return self.execute_orders_v2(
             "get_order",
             {"order_id": order_id},
             secret_ref=secret_ref,
-            idempotency_key=idempotency_key or f"refetch-order-{order_id}",
             graft_id=graft_id,
         )

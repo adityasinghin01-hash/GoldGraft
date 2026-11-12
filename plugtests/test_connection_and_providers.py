@@ -356,7 +356,7 @@ def test_isolated_shop_execution_and_redaction(tmp_path):
     assert result["isolation_verified"] is False
 
 
-def test_sandboxed_process_isolation_and_blocked_egress(tmp_path):
+def test_scratch_copy_process_is_not_isolation_and_screens_egress(tmp_path):
     # Setup test file in original shop dir
     orig_file = tmp_path / "app.py"
     orig_file.write_text("print('original')", encoding="utf-8")
@@ -376,10 +376,11 @@ def test_sandboxed_process_isolation_and_blocked_egress(tmp_path):
     )
     assert result["exit_code"] == 0
     assert "isolated_ok" in result["stdout"]
-    assert result["isolation_verified"] is True
+    # A host process in a scratch copy is not isolation, and says so.
+    assert result["isolation_verified"] is False
     assert result["termination_confirmed"] is True
-    assert result["execution_boundary"] == "sandboxed_process"
-    # Original shop directory remains untouched (read-only mount)
+    assert result["execution_boundary"] == "host_process_scratch_copy"
+    # Relative writes land in the scratch copy, not the source folder
     assert not (tmp_path / "mutated.txt").exists()
     assert (tmp_path / "app.py").read_text(encoding="utf-8") == "print('original')"
 
@@ -396,7 +397,6 @@ def test_sandboxed_process_isolation_and_blocked_egress(tmp_path):
             shop_dir=tmp_path,
             command=["curl", "http://10.0.0.1/admin"],
         )
-
 
 
 def test_authenticated_callback_gateway():
@@ -648,3 +648,28 @@ def test_control_store_transactions_and_fencing(tmp_path):
     assert len(failed_case) == 0
 
     store.close()
+
+
+def test_e2b_backend_never_falls_back_to_a_host_process(tmp_path):
+    from pieces.runner.container_runner import E2BIsolationBackend, IsolationNotEstablished
+
+    marker = tmp_path / "ran.txt"
+    runner = ContainerRunner(isolation=E2BIsolationBackend(api_key="e2b_test_key"))
+    with pytest.raises(IsolationNotEstablished, match="not implemented"):
+        runner.execute_shop_process(
+            shop_dir=tmp_path,
+            command=[sys.executable, "-c", f"open({str(marker)!r}, 'w').write('x')"],
+        )
+    assert not marker.exists()
+    with pytest.raises(IsolationNotEstablished, match="E2B_API_KEY"):
+        E2BIsolationBackend(api_key="").run(["true"], cwd=tmp_path, env={}, timeout_s=1)
+
+
+def test_custody_never_hands_process_credentials_to_an_unknown_shop(monkeypatch):
+    monkeypatch.setenv("PAYPAL_CLIENT_ID", "operator-sandbox-id")
+    monkeypatch.setenv("PAYPAL_CLIENT_SECRET", "operator-sandbox-secret")
+    assert CustodyBroker().resolve_credentials("doppler://goldgraft/shops/other/secrets") == {}
+    named = "doppler://goldgraft/shops/operator-sandbox/secrets"
+    broker = CustodyBroker(env_sandbox_ref=named)
+    assert broker.resolve_credentials("doppler://goldgraft/shops/other/secrets") == {}
+    assert broker.resolve_credentials(named)["paypal_client_id"] == "operator-sandbox-id"

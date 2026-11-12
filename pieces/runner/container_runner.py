@@ -48,9 +48,7 @@ class BlockedEgressError(RuntimeError):
     """Raised when an isolated job attempts network egress to private/metadata addresses."""
 
 
-BLOCKED_METADATA_IPS = frozenset(
-    {"169.254.169.254", "100.100.100.200", "metadata.google.internal"}
-)
+BLOCKED_METADATA_IPS = frozenset({"169.254.169.254", "100.100.100.200", "metadata.google.internal"})
 BLOCKED_PRIVATE_PREFIXES = (
     "10.",
     "172.16.",
@@ -90,9 +88,16 @@ class IsolationBackend(Protocol):
 
 
 class SandboxedProcessBackend:
-    """Isolated local execution with read-only source mount and blocked private/metadata egress."""
+    """Host child process in a scratch copy, with a command-line egress screen.
 
-    name = "sandboxed_process"
+    This is NOT isolation. The process runs as the current user on the host and
+    can still reach the original files, the network and the host environment.
+    The scratch copy only keeps ordinary relative writes out of the source
+    folder, and the screen only refuses commands that name a metadata/private
+    address literally. Results therefore always report ``isolation_verified=False``.
+    """
+
+    name = "host_process_scratch_copy"
 
     def __init__(self, *, block_private_egress: bool = True):
         self.block_private_egress = block_private_egress
@@ -152,7 +157,7 @@ class SandboxedProcessBackend:
                     "stderr": f"Execution error: {exc}",
                     "duration_ms": (datetime.now(UTC) - start).total_seconds() * 1000,
                     "timed_out": False,
-                    "isolation_verified": True,
+                    "isolation_verified": False,
                     "termination_confirmed": True,
                     "termination_scope": "none_started",
                 }
@@ -173,14 +178,19 @@ class SandboxedProcessBackend:
                 "stderr": stderr or "",
                 "duration_ms": duration_ms,
                 "timed_out": timed_out,
-                "isolation_verified": True,
+                "isolation_verified": False,
                 "termination_confirmed": bool(reaped),
                 "termination_scope": "process_tree" if reaped else "unconfirmed",
             }
 
 
 class E2BIsolationBackend:
-    """E2B sandbox runner with API key authentication, read-only code, and isolated guest VM."""
+    """Placeholder for an E2B microVM backend. It never runs anything locally.
+
+    No E2B SDK integration is implemented or qualified in this repository, so
+    every run is refused. A host-process fallback labelled as E2B would be a
+    false isolation claim.
+    """
 
     name = "e2b_sandbox"
 
@@ -197,12 +207,9 @@ class E2BIsolationBackend:
     ) -> dict[str, Any]:
         if not self.api_key:
             raise IsolationNotEstablished("E2BIsolationBackend requires an E2B_API_KEY")
-        # When E2B is available in environment, run inside remote microVM
-        # Local fallback with verified containment
-        backend = SandboxedProcessBackend()
-        res = backend.run(command, cwd=cwd, env=env, timeout_s=timeout_s)
-        res["execution_boundary"] = "e2b_sandbox"
-        return res
+        raise IsolationNotEstablished(
+            "E2B execution is not implemented; refusing to fall back to a host process"
+        )
 
 
 class ContainerRunner:

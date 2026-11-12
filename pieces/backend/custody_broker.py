@@ -31,8 +31,16 @@ class SecretReference:
 class CustodyBroker:
     """Manages secure secret custody, Doppler resolution, and redaction."""
 
-    def __init__(self, prefix: str = "doppler://goldgraft/shops/"):
+    def __init__(
+        self,
+        prefix: str = "doppler://goldgraft/shops/",
+        *,
+        env_sandbox_ref: str | None = None,
+    ):
         self.prefix = prefix
+        # Only this one operator-named reference may read process environment
+        # credentials (local sandbox runs). No other shop reference ever does.
+        self.env_sandbox_ref = env_sandbox_ref
         self._vault: dict[str, dict[str, str]] = {}
 
     def store_credentials(self, shop_id: str, secrets: dict[str, str]) -> SecretReference:
@@ -54,7 +62,8 @@ class CustodyBroker:
     def resolve_credentials(self, secret_ref: str) -> dict[str, str]:
         """Resolves raw credentials inside the runner environment only."""
         if secret_ref not in self._vault:
-            # Fallback to env variables if available for sandbox execution
+            if self.env_sandbox_ref is None or secret_ref != self.env_sandbox_ref:
+                return {}
             env_creds: dict[str, str] = {}
             for name in SECRET_NAMES:
                 val = os.environ.get(name.upper()) or os.environ.get(name)
