@@ -197,3 +197,33 @@ def test_authored_code_review_rejects_old_calls_and_missing_operations():
             grafter.check_authored(data, {"api/refund.php": bad})
     with pytest.raises(ValueError):
         grafter.check_authored(data, {"config.php": good})  # outside the allowed paths
+
+
+def test_a_model_fault_hold_gets_one_retry_and_the_chain_continues_on_it(tmp_path, monkeypatch):
+    from pieces.agents.component_agents import grafter
+
+    real_review = grafter.review
+
+    def flaky(task, data, packet, outputs, observations):
+        if task.task.task_id == "grafter":  # the first attempt's answers are always refused
+            raise ValueError("DENIED simulated model slip")
+        return real_review(task, data, packet, outputs, observations)
+
+    monkeypatch.setattr(grafter, "review", flaky)
+    # Offline, a refused final is reported as DENIED; live, the same slip is INVALID_MODEL_OUTPUT.
+    monkeypatch.setattr(integrated, "MODEL_FAILURES", integrated.MODEL_FAILURES | {"DENIED"})
+    run = _real_run()
+    p, tasks = _run(tmp_path / "b.sqlite", run)
+    assert tasks["grafter"].state == "held"
+    assert tasks["grafter"].issue.code in integrated.MODEL_FAILURES
+    assert tasks["grafter" + integrated.RETRY].state == "succeeded"
+    assert tasks["candidate-build"].task.dependencies == ["grafter" + integrated.RETRY]
+    stands = {s[0]: integrated.stands_for(tasks, s[0]).state for s in integrated.ALL_STAGES}
+    assert set(stands.values()) == {"succeeded"}
+
+
+def test_deterministic_holds_are_never_retried(tmp_path):
+    run = dict(_real_run(), learning_consent=False)  # Librarian must hold (DENIED), not retry
+    _, tasks = _run(tmp_path / "b.sqlite", run)
+    assert tasks["librarian-recipe"].state == "held"
+    assert "librarian-recipe" + integrated.RETRY not in tasks

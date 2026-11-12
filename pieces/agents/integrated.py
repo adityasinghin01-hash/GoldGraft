@@ -262,45 +262,102 @@ def record_failure(routing, role, operation, profile, issue_code):
     return profile != "sonnet" and entry["haiku_failures"] >= 2
 
 
+RETRY = "-retry1"
+
+
+def stands_for(tasks, task_id):
+    """The task that stands for a stage: its single retry when the original held on a model
+    fault and the retry exists, else the original."""
+    return tasks.get(task_id + RETRY) or tasks.get(task_id)
+
+
+class AliasArtifacts:
+    """Artifacts whose stage lookups resolve to the succeeded retry of a held stage."""
+
+    def __init__(self, base, control, run_ref):
+        self._base, self._control, self._run_ref = base, control, run_ref
+
+    def _id(self, task_id):
+        tasks = {t.task.task_id: t for t in self._control.snapshot(self._run_ref).tasks}
+        retry = tasks.get(task_id + RETRY)
+        return task_id + RETRY if retry is not None and retry.state == "succeeded" else task_id
+
+    def committed(self, task_id):
+        return self._base.committed(self._id(task_id))
+
+    def candidate_files(self, task_id):
+        return self._base.candidate_files(self._id(task_id))
+
+    def __getattr__(self, name):
+        return getattr(self._base, name)
+
+
 class WithRun:
     """Ports plus this run's linked facts (survey result, consent, fleet), read by advance()."""
 
     def __init__(self, ports, run):
         self._ports, self.integrated_run = ports, run
+        self.artifacts = AliasArtifacts(ports.artifacts, ports.control, ports.run_ref)
 
     def __getattr__(self, name):
         return getattr(self._ports, name)
 
 
+def _append(p, task_id, role, operation, deps, data):
+    module = implementation(role)
+    typed = module.Input.model_validate(data)
+    p.artifacts.append_task(
+        task_id=task_id,
+        configuration=component_configuration(role),
+        operation=operation,
+        data=typed.model_dump(mode="json"),
+        schemas=module.schemas(operation, typed),
+        dependencies=list(deps),
+        output_policy="candidate_child" if role == "Grafter" else "same_subject",
+        workspace_ref=data["workspace_ref"] if role == "Grafter" else None,
+    )
+
+
 def advance(run_ref, p):
-    """Append the next admissible task. Waits for the linked survey before the baseline."""
+    """Append the next admissible task. Waits for the linked survey before the baseline.
+
+    A stage held on a named model fault gets one retry task (same inputs, recomputed; a fresh
+    Grafter workspace). Later stages depend on whichever task stands for the stage. Holds by
+    design (denials, missing evidence, budget, unknown) are never retried.
+    """
     snapshot = p.control.snapshot(run_ref)
     if snapshot.cancellation_ref is not None:
         return None
     tasks = {t.task.task_id: t for t in snapshot.tasks}
     run = getattr(p, "integrated_run", None) or {}
     for task_id, role, operation, deps in ALL_STAGES:
-        if task_id in tasks:
-            continue
-        if not all(d in tasks and tasks[d].state == "succeeded" for d in deps):
+        current = stands_for(tasks, task_id)
+        if current is not None:
+            retryable = (
+                run.get("retries", True)
+                and task_id in tasks
+                and task_id + RETRY not in tasks
+                and tasks[task_id].state == "held"
+                and tasks[task_id].issue is not None
+                and tasks[task_id].issue.code in MODEL_FAILURES
+            )
+            if not retryable:
+                continue
+            data = stage_data(p, task_id, role, operation, run)
+            if role == "Grafter":
+                data["workspace_ref"] = data["workspace_ref"] + RETRY
+            resolved = [stands_for(tasks, d).task.task_id for d in deps]
+            _append(p, task_id + RETRY, role, operation, resolved, data)
+            return task_id + RETRY
+        ready = [stands_for(tasks, d) for d in deps]
+        if not all(t is not None and t.state == "succeeded" for t in ready):
             continue
         if task_id == BASE:
             survey = run.get("survey")
             if not survey or not survey.get("accepted"):
                 return None  # Store A has not produced an accepted inventory yet
         data = stage_data(p, task_id, role, operation, run)
-        module = implementation(role)
-        typed = module.Input.model_validate(data)
-        p.artifacts.append_task(
-            task_id=task_id,
-            configuration=component_configuration(role),
-            operation=operation,
-            data=typed.model_dump(mode="json"),
-            schemas=module.schemas(operation, typed),
-            dependencies=list(deps),
-            output_policy="candidate_child" if role == "Grafter" else "same_subject",
-            workspace_ref=data["workspace_ref"] if role == "Grafter" else None,
-        )
+        _append(p, task_id, role, operation, [t.task.task_id for t in ready], data)
         return task_id
     return None
 
@@ -335,6 +392,8 @@ __all__ = [
     "ROLES",
     "SURVEY",
     "WithRun",
+    "RETRY",
+    "stands_for",
     "admitted_survey",
     "advance",
     "create",

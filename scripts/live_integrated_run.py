@@ -79,7 +79,7 @@ def php_lint(files):
 
 def write_changes(directory, p, run):
     """Before/after of each file the Grafter changed, plus the installed library."""
-    after = p.artifacts.candidate_files("grafter")
+    after = integrated.WithRun(p, run).artifacts.candidate_files("grafter")
     before = run["files"]
     rows = [
         {"path": path, "before": before.get(path, ""), "after": text, "author": "model"}
@@ -152,7 +152,9 @@ def fleet_buckets(runs_dir, minimum=5):
         r = json.loads(f.read_text())
         if r.get("status") == "running":
             continue
-        done = {t["task"] for t in r.get("tasks", []) if t.get("passed")}
+        done = {
+            t["task"].removesuffix(integrated.RETRY) for t in r.get("tasks", []) if t.get("passed")
+        }
         chain = {stage[0] for stage in integrated.CHAIN}
         counts["unverified" if chain <= done else "held"] += 1
     return [
@@ -469,7 +471,7 @@ def main(argv=None):
             "tasks": rows,
             "completed_chain": status == "completed",
             "chain_completed": {s[0] for s in integrated.CHAIN}
-            <= {r["task"] for r in rows if r.get("passed")},
+            <= {r["task"].removesuffix(integrated.RETRY) for r in rows if r.get("passed")},
             "spent_micro_usd": spent(),
             "cap_micro_usd": cap,
             "ledger": ledger.snapshot(),
@@ -512,13 +514,16 @@ def main(argv=None):
             break
         if not run_store_b_task(p, models, args.run_id, routing, rows, run, outputs):
             break
-        if rows[-1].get("task") == "grafter" and rows[-1].get("passed"):
+        if rows[-1].get("task", "").removesuffix(integrated.RETRY) == "grafter" and rows[-1].get(
+            "passed"
+        ):
             write_changes(directory, p, run)
-        if rows[-1].get("task") == "candidate-build":
+        if rows[-1].get("task", "").removesuffix(integrated.RETRY) == "candidate-build":
             write_changes(directory, p, run)  # now with the PHP check result
         write("running")
     states = {t.task.task_id: t.state for t in p.control.snapshot(RUN).tasks}
-    missing = [s[0] for s in integrated.CHAIN if states.get(s[0]) != "succeeded"]
+    stands = {s[0]: states.get(s[0] + integrated.RETRY, states.get(s[0])) for s in integrated.CHAIN}
+    missing = [k for k, v in stands.items() if v != "succeeded"]
     if status == "completed" and missing:
         status = "held_at_" + missing[0]
     edges = integrated.edges(p)

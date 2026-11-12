@@ -81,7 +81,7 @@ class IntegratedRunViews:
                 idempotency_key="created",
             )
             for row in result.get("tasks", []):
-                task = row.get("task", "")
+                task = row.get("task", "").removesuffix("-retry1")
                 if row.get("cost_micro_usd") is not None and row.get("model") in MODELS:
                     tx.append(
                         type="COST",
