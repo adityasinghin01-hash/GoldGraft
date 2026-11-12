@@ -1,0 +1,22 @@
+.vine {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+.stem { fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.glow { fill: none; stroke: rgb(205 190 156 / 0.5); stroke-width: 7; stroke-linecap: round; opacity: 0.16; }
+.tip {
+  fill: #f5f3ef;
+  filter: drop-shadow(0 0 6px rgb(205 190 156 / 0.95)) drop-shadow(0 0 16px rgb(205 190 156 / 0.6));
+  transition: opacity 0.4s;
+}
+.leaf { transform: scale(0); transform-origin: 0px 0px; transition: transform 0.9s var(--gg-ease-out); }
+.leaf[data-on] { transform: scale(1); }
+.node { fill: var(--gg-ink); stroke: #cdbe9c; stroke-width: 1.4; }
+.leafShape { fill: rgb(205 190 156 / 0.24); stroke: rgb(205 190 156 / 0.85); stroke-width: 1; }
+.sap { fill: #fff6e0; }
+.halo { fill: none; stroke: rgb(205 190 156 / 0.5); stroke-width: 1; transform-box: fill-box; transform-origin: center; animation: halo 2.4s var(--gg-ease-out) infinite; transition: opacity 0.4s; }
+@keyframes halo { from { transform: scale(0.3); opacity: 0.9; } to { transform: scale(1.4); opacity: 0; } }

@@ -1,0 +1,26 @@
+{
+  "cert_id": "cert-demo",
+  "checks": [
+    {
+      "detail": "signed digest matches",
+      "name": "SIGNATURE",
+      "ok": true
+    },
+    {
+      "detail": "stand-in: no real Rekor lookup",
+      "name": "REKOR",
+      "ok": true
+    },
+    {
+      "detail": "ledger root matches the demo graft chain",
+      "name": "LEDGER_CHAIN",
+      "ok": true
+    },
+    {
+      "detail": "stand-in: PayPal not called",
+      "name": "PAYPAL_REFETCH",
+      "ok": true
+    }
+  ],
+  "ok": true
+}

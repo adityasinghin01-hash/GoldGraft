@@ -1,0 +1,17 @@
+{
+  "label": "SYNTHETIC \u2014 stand-in data, not a recording",
+  "points": [
+    {
+      "minutes": 44.0,
+      "recipe_used": false,
+      "shop_id": "zencart-1",
+      "usd": 4.1
+    },
+    {
+      "minutes": 14.0,
+      "recipe_used": true,
+      "shop_id": "zencart-2",
+      "usd": 1.5
+    }
+  ]
+}

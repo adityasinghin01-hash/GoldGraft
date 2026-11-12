@@ -1,0 +1,69 @@
+.form { display: grid; gap: 10px; width: 100%; max-width: 600px; }
+.label { font-size: var(--gg-t-meta); font-weight: 500; color: var(--gg-body); }
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 72px;
+  padding: 8px 8px 8px 26px;
+  border-radius: var(--gg-r-pill);
+  /* liquid glass (.gg-lg), a touch more body than the header so the typing stays calm */
+  background: var(--gg-lg-body), rgb(14 13 10 / 0.42);
+  transition: box-shadow var(--gg-d-base) var(--gg-ease-out);
+}
+/* a soft underglow from the same upper-left light */
+.field::after {
+  content: '';
+  position: absolute;
+  inset: auto 12% -22px 12%;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(205 190 156 / 0.22), transparent);
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  transition: opacity var(--gg-d-slow) var(--gg-ease-out);
+}
+.field:focus-within {
+  box-shadow: var(--gg-lg-shadow), 0 0 0 1px rgb(205 190 156 / 0.5), 0 0 44px -10px rgb(205 190 156 / 0.45);
+}
+.field:focus-within::after { opacity: 1; }
+/* a light glint travels along the top edge on focus */
+.glint {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(245 243 239 / 0.9), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.field:focus-within .glint { animation: glint 1.6s var(--gg-ease-in-out) 1; }
+@keyframes glint { 0% { left: -30%; opacity: 0; } 15% { opacity: 1; } 100% { left: 110%; opacity: 0; } }
+
+.input {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 18px;
+  letter-spacing: -0.005em;
+  color: var(--gg-ivory);
+  caret-color: var(--gg-gold);
+}
+.input::placeholder { color: var(--gg-faint); }
+.input:focus-visible { outline: none; }
+.go { --h: 52px; padding-inline: 24px; flex: none; }
+.under { display: flex; align-items: center; justify-content: space-between; gap: var(--gg-s-4); padding-right: 8px; min-height: 24px; }
+.note { font-size: var(--gg-t-meta); color: var(--gg-mute); }
+.form[data-error] .note { color: var(--gg-bad); }
+.form[data-error] .field { box-shadow: var(--gg-lg-shadow), 0 0 0 1px rgb(224 144 124 / 0.6); }
+
+@media (max-width: 560px) {
+  .field { height: 60px; padding-left: 18px; }
+  .go { --h: 44px; padding-inline: 16px; }
+}

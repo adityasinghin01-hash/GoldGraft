@@ -1,0 +1,29 @@
+.screen { display: grid; gap: var(--gg-s-6); animation: screenIn 0.6s var(--gg-ease-out); }
+@keyframes screenIn { from { opacity: 0; transform: translateY(10px); } }
+.check { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--gg-r-md); color: var(--gg-warn); background: rgb(221 180 110 / 0.07); box-shadow: 0 0 0 1px rgb(221 180 110 / 0.25) inset; font-size: 14px; }
+.check[data-ok] { color: var(--gg-good); background: rgb(159 184 148 / 0.07); box-shadow: 0 0 0 1px rgb(159 184 148 / 0.25) inset; }
+.files { display: grid; gap: var(--gg-s-4); }
+.file { overflow: hidden; }
+.fileHead { width: 100%; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; text-align: left; color: var(--gg-ivory); }
+.fileHead svg { color: var(--gg-gold); flex: none; }
+.path { font-family: var(--gg-font-mono); font-size: 14px; margin-right: auto; }
+.counts { font-family: var(--gg-font-mono); font-size: 13px; }
+.plus { color: var(--gg-good); font-weight: 500; }
+.minus { color: var(--gg-bad); font-weight: 500; }
+.code {
+  margin: 0; padding: 8px 0; overflow-x: auto; border-top: 1px solid var(--gg-line);
+  font-family: var(--gg-font-mono); font-size: 13px; line-height: 1.6; background: rgb(0 0 0 / 0.28);
+}
+.code > span { display: block; white-space: pre; padding-right: 18px; }
+.no { display: inline-block; width: 3.4em; text-align: right; padding-right: 10px; color: var(--gg-faint); font-style: normal; user-select: none; }
+.sign { display: inline-block; width: 1.4em; font-style: normal; user-select: none; }
+.same { color: var(--gg-mute); }
+.add { color: #cfe2c6; background: rgb(159 184 148 / 0.12); }
+.add .sign { color: var(--gg-good); }
+.del { color: #efc4b9; background: rgb(224 144 124 / 0.12); }
+.del .sign { color: var(--gg-bad); }
+.fold { display: block; padding: 4px 18px 4px 7.4em; color: var(--gg-faint); font-family: var(--gg-font-ui); font-size: 12.5px; }
+.open { display: grid; gap: var(--gg-s-3); }
+.h2 { font-family: var(--gg-font-display); font-size: 21px; font-weight: 420; color: var(--gg-ivory); }
+.open li { color: var(--gg-body); font-size: 14px; line-height: 1.6; }
+.open code { font-family: var(--gg-font-mono); font-size: 13px; color: var(--gg-ivory); }

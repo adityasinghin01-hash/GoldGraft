@@ -1,0 +1,51 @@
+/* App screens: shared layout and the parts each screen adds. */
+.screen { display: grid; gap: var(--gg-s-6); animation: screenIn 0.6s var(--gg-ease-out); }
+@keyframes screenIn { from { opacity: 0; transform: translateY(10px); } }
+.block { display: grid; gap: var(--gg-s-4); }
+.h2 { font-family: var(--gg-font-display); font-size: 21px; font-weight: 420; color: var(--gg-ivory); margin-bottom: 12px; }
+.muted { color: var(--gg-mute); font-size: 14px; }
+.lead { font-family: var(--gg-font-display); font-size: clamp(1.4rem, 1.1rem + 0.8vw, 2rem); line-height: 1.2; color: var(--gg-ivory); }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 10px 18px; margin-top: 16px; font-size: 14px; }
+.kv dt { color: var(--gg-mute); display: inline-flex; align-items: center; }
+.kv dd { margin: 0; color: var(--gg-body); }
+
+/* ── S2 rail ── */
+.rail { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; position: relative; }
+.railStep { position: relative; display: grid; gap: 6px; padding: 14px 12px 12px; border-radius: var(--gg-r-md); background: rgb(245 243 239 / 0.025); box-shadow: 0 0 0 1px var(--gg-line) inset; animation: railIn 0.7s var(--gg-ease-out) both; animation-delay: calc(var(--i) * 45ms); }
+@keyframes railIn { from { opacity: 0; transform: translateY(8px); } }
+.railStep[data-state='done'] { background: rgb(205 190 156 / 0.06); box-shadow: 0 0 0 1px rgb(205 190 156 / 0.22) inset; }
+.railStep[data-state='now'] { background: rgb(205 190 156 / 0.12); box-shadow: 0 0 0 1px rgb(205 190 156 / 0.6) inset, 0 0 30px -10px rgb(205 190 156 / 0.6); }
+.railStep[data-state='now']::after { content: ''; position: absolute; inset: -1px; border-radius: inherit; box-shadow: 0 0 0 1px rgb(205 190 156 / 0.5); animation: nowRing 2.2s var(--gg-ease-out) infinite; pointer-events: none; }
+@keyframes nowRing { from { opacity: 0.9; transform: scale(1); } to { opacity: 0; transform: scale(1.06); } }
+.railDot { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 500 11px var(--gg-font-mono); color: var(--gg-mute); box-shadow: 0 0 0 1px var(--gg-line-strong) inset; }
+.railStep[data-state='done'] .railDot { background: var(--gg-gold); color: var(--gg-ink); box-shadow: none; }
+.railStep[data-state='now'] .railDot { color: var(--gg-ink); background: var(--gg-ivory); box-shadow: 0 0 12px rgb(245 243 239 / 0.6); }
+.railName { display: inline-flex; align-items: center; font-size: 14px; color: var(--gg-ivory); white-space: nowrap; }
+.railName > span { margin-left: 2px; }
+.railState { font-size: 12px; color: var(--gg-mute); }
+.railState b { color: var(--gg-warn); font-weight: 500; }
+.railCost { font-size: 12px; color: var(--gg-faint); font-family: var(--gg-font-mono); }
+
+.liveLine { display: flex; align-items: center; gap: 16px; padding: 20px 24px; overflow: hidden; }
+.liveIcon { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; color: var(--gg-gold); box-shadow: 0 0 0 1px var(--gg-line-gold) inset; }
+.liveText { flex: 1; font-family: var(--gg-font-display); font-size: clamp(1.25rem, 1rem + 0.7vw, 1.75rem); color: var(--gg-ivory); animation: liveIn 0.55s var(--gg-ease-out); }
+@keyframes liveIn { from { opacity: 0; transform: translateY(14px); filter: blur(3px); } }
+.liveSeq { font: 12px var(--gg-font-mono); color: var(--gg-faint); }
+
+.statsHead { display: flex; justify-content: flex-end; min-height: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.certCta { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 22px; color: var(--gg-ivory); font-family: var(--gg-font-display); font-size: 19px; transition: box-shadow var(--gg-d-base); }
+.certCta:hover { box-shadow: var(--gg-glass-shadow), 0 0 0 1px rgb(205 190 156 / 0.5); }
+
+.detailGrid { display: grid; gap: var(--gg-s-7); }
+.chain { display: inline-flex; align-items: center; color: var(--gg-good); font-size: 14px; margin-bottom: 8px; }
+.feed { display: grid; gap: 6px; max-height: 520px; overflow: auto; padding-right: 6px; }
+.feedItem { display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 10px 12px; border-radius: var(--gg-r-sm); background: rgb(245 243 239 / 0.025); animation: liveIn 0.4s var(--gg-ease-out); }
+.feedItem[data-bad] { background: rgb(224 144 124 / 0.07); box-shadow: 0 0 0 1px rgb(224 144 124 / 0.3) inset; }
+.feedSeq { font: 12px var(--gg-font-mono); color: var(--gg-faint); padding-top: 2px; }
+.feedText { color: var(--gg-ivory); font-size: 14.5px; }
+.feedMeta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px; color: var(--gg-mute); }
+.feedSub { grid-column: 2; font-size: 12px; color: var(--gg-mute); font-family: var(--gg-font-mono); }
+
+@media (max-width: 1100px) { .rail { grid-template-columns: repeat(5, minmax(0, 1fr)); } }

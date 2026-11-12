@@ -1,0 +1,48 @@
+.seam { display: inline-grid; place-items: center; color: var(--gg-gold); }
+.ring { stroke: rgb(205 190 156 / 0.25); stroke-width: 1; }
+.root, .scion { stroke: currentColor; stroke-linecap: round; fill: none; }
+.root { stroke-width: 2.6; animation: leanRoot 1.6s var(--gg-ease-in-out) infinite; transform-origin: 9.5px 26px; }
+.scion { stroke-width: 1.9; animation: leanScion 1.6s var(--gg-ease-in-out) infinite; transform-origin: 21.7px 5.6px; }
+.cut { stroke: rgb(245 243 239 / 0.35); stroke-width: 1; stroke-linecap: round; stroke-dasharray: 1.5 2; }
+.spark { fill: #f5f3ef; filter: drop-shadow(0 0 2px rgb(205 190 156 / 1)); }
+@keyframes leanRoot { 50% { transform: rotate(2.5deg); } }
+@keyframes leanScion { 50% { transform: rotate(-2.5deg); } }
+
+.skel { display: grid; gap: 12px; padding: 4px 0; }
+.skelLine, .skelBlock {
+  display: block; height: 14px; border-radius: 7px;
+  background: linear-gradient(100deg, rgb(245 243 239 / 0.04) 30%, rgb(205 190 156 / 0.12) 50%, rgb(245 243 239 / 0.04) 70%) 0 0 / 260% 100%;
+  animation: sheen 2.4s var(--gg-ease-in-out) infinite;
+}
+.skelBlock { border-radius: var(--gg-r-md); }
+@keyframes sheen { from { background-position: 100% 0; } to { background-position: -60% 0; } }
+
+.seconds { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--gg-body); }
+.seconds b { color: var(--gg-gold); font-weight: 500; }
+
+.thinking { display: inline-flex; align-items: center; gap: 12px; font-size: 14px; color: var(--gg-body); }
+.orbit { position: relative; width: 20px; height: 20px; animation: spin 1.8s linear infinite; }
+.orbit i { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--gg-gold); box-shadow: 0 0 6px rgb(205 190 156 / 0.9); }
+.orbit i:nth-child(1) { left: 8px; top: 0; }
+.orbit i:nth-child(2) { left: 1px; top: 12px; opacity: 0.6; }
+.orbit i:nth-child(3) { left: 15px; top: 12px; opacity: 0.3; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.waking {
+  position: relative; z-index: 44; display: flex; justify-content: center; align-items: center; gap: 10px;
+  padding: 8px 16px; font-size: 13px; color: var(--gg-body); background: rgb(26 24 19 / 0.9); box-shadow: 0 1px 0 var(--gg-line);
+}
+.sapling { color: var(--gg-gold); }
+.stem { stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 12; stroke-dashoffset: 12; animation: grow 2.4s var(--gg-ease-out) infinite; }
+.leafL, .leafR { fill: rgb(205 190 156 / 0.25); stroke: currentColor; stroke-width: 1; transform-box: fill-box; transform: scale(0); animation: leaf 2.4s var(--gg-ease-out) infinite; }
+.leafL { transform-origin: right bottom; animation-delay: 0.5s; }
+.leafR { transform-origin: left bottom; animation-delay: 0.8s; }
+@keyframes grow { 0% { stroke-dashoffset: 12; } 40%, 100% { stroke-dashoffset: 0; } }
+@keyframes leaf { 0%, 15% { transform: scale(0); } 45%, 85% { transform: scale(1); } 100% { transform: scale(1); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .root, .scion, .orbit, .stem, .leafL, .leafR, .skelLine, .skelBlock { animation: none; }
+  .stem { stroke-dashoffset: 0; }
+  .leafL, .leafR { transform: scale(1); }
+  .spark { display: none; }
+}

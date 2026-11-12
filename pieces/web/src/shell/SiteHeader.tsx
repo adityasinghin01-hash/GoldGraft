@@ -1,0 +1,95 @@
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRightIcon as ArrowUpRight, ListIcon as List, XIcon as X } from '@phosphor-icons/react';
+import { Mark } from '../components/Mark';
+import { useLiquidGlass } from '../components/liquidGlass';
+import { NAV } from '../copy/landing';
+import { scrollToTarget } from '../motion/scroll';
+import styles from './SiteHeader.module.css';
+
+/**
+ * Landing header: three liquid-glass islands on the page grid.
+ * Brand at the left margin, the chapter nav in the centre, actions at the right margin.
+ * The nav marks the chapter you are reading.
+ */
+export function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const brandRef = useRef<HTMLAnchorElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const actRef = useRef<HTMLDivElement>(null);
+  useLiquidGlass(brandRef);
+  useLiquidGlass(navRef);
+  useLiquidGlass(actRef);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const ids = NAV.map((n) => n.href.slice(1));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(ids.includes(e.target.id) ? e.target.id : null);
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    document.querySelectorAll('main section[id], footer').forEach((el) => io.observe(el));
+    return () => { window.removeEventListener('scroll', onScroll); io.disconnect(); };
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const go = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    scrollToTarget(href);
+  };
+
+  const checkMyShop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    scrollToTarget('#top');
+    window.setTimeout(() => document.getElementById('shop-url')?.focus({ preventScroll: true }), 700);
+  };
+
+  return (
+    <header className={styles.header} data-scrolled={scrolled || undefined} data-open={open || undefined}>
+      <div className={styles.bar}>
+        <Link ref={brandRef} to="/" className={`gg-lg ${styles.island} ${styles.brand}`} aria-label="GoldGraft home">
+          <span className={styles.mark}><Mark size={26} /></span>
+          <span className={styles.word}>GoldGraft</span>
+        </Link>
+
+        <nav ref={navRef} className={`gg-lg ${styles.island} ${styles.nav}`} aria-label="Page sections">
+          {NAV.map((n) => (
+            <a key={n.href} href={n.href} onClick={go(n.href)} className={styles.navLink}
+               aria-current={active === n.href.slice(1) ? 'true' : undefined}>
+              {n.label}
+            </a>
+          ))}
+        </nav>
+
+        <div ref={actRef} className={`gg-lg ${styles.island} ${styles.actions}`}>
+          <Link to="/my" className={styles.open}>
+            Open app <ArrowUpRight size={13} weight="bold" aria-hidden />
+          </Link>
+          <a href="#top" onClick={checkMyShop} className="gg-btn gg-btn--gold gg-btn--sm">Check my shop</a>
+          <button className={styles.menuBtn} aria-expanded={open} aria-controls="site-menu" aria-label={open ? 'Close menu' : 'Open menu'} onClick={() => setOpen((v) => !v)}>
+            {open ? <X size={20} /> : <List size={20} />}
+          </button>
+        </div>
+      </div>
+
+      <div id="site-menu" className={`gg-lg ${styles.sheet}`} hidden={!open}>
+        {NAV.map((n) => <a key={n.href} href={n.href} onClick={go(n.href)}>{n.label}</a>)}
+        <Link to="/my" onClick={() => setOpen(false)}>Open app</Link>
+      </div>
+    </header>
+  );
+}

@@ -1,0 +1,56 @@
+[
+ {
+  "run_id": "r2-realcode-7",
+  "shop": "legacy-php-shop",
+  "status": "completed",
+  "roles_passed": 13,
+  "roles_participated": 13,
+  "spent_usd": 0.375607,
+  "finished_at": "2026-11-11T23:59:26.349887+00:00"
+ },
+ {
+  "run_id": "r1-eval-nvp-noconsent",
+  "shop": "eval-nvp",
+  "status": "completed",
+  "roles_passed": 11,
+  "roles_participated": 12,
+  "spent_usd": 0.103288,
+  "finished_at": "2026-11-11T20:37:57.490433+00:00"
+ },
+ {
+  "run_id": "r1-eval-nvp",
+  "shop": "eval-nvp",
+  "status": "completed",
+  "roles_passed": 11,
+  "roles_participated": 12,
+  "spent_usd": 0.109281,
+  "finished_at": "2026-11-11T20:34:26.542654+00:00"
+ },
+ {
+  "run_id": "r1-legacy-3",
+  "shop": "legacy-php-shop",
+  "status": "completed",
+  "roles_passed": 11,
+  "roles_participated": 13,
+  "spent_usd": 0.204775,
+  "finished_at": "2026-11-11T20:32:11.920486+00:00"
+ },
+ {
+  "run_id": "r1-legacy-2",
+  "shop": "legacy-php-shop",
+  "status": "completed",
+  "roles_passed": 10,
+  "roles_participated": 12,
+  "spent_usd": 0.205836,
+  "finished_at": "2026-11-11T20:29:37.604344+00:00"
+ },
+ {
+  "run_id": "r1-legacy-1",
+  "shop": "legacy-php-shop",
+  "status": "completed",
+  "roles_passed": 11,
+  "roles_participated": 12,
+  "spent_usd": 0.241111,
+  "finished_at": "2026-11-11T20:27:05.499752+00:00"
+ }
+]

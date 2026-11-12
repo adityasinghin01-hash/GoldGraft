@@ -1,0 +1,14 @@
+.screen { display: grid; gap: var(--gg-s-5); animation: in 0.6s var(--gg-ease-out); }
+@keyframes in { from { opacity: 0; transform: translateY(10px); } }
+.table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+.table th { text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gg-mute); padding: 0 16px; }
+.table td { padding: 16px; background: rgb(16 15 12 / 0.55); border-top: 1px solid var(--gg-line); border-bottom: 1px solid var(--gg-line); }
+.table td:first-child { border-left: 1px solid var(--gg-line); border-radius: var(--gg-r-md) 0 0 var(--gg-r-md); display: flex; flex-wrap: wrap; gap: 8px; }
+.table td:last-child { border-right: 1px solid var(--gg-line); border-radius: 0 var(--gg-r-md) var(--gg-r-md) 0; }
+.table tbody tr { animation: rowIn 0.5s var(--gg-ease-out) both; animation-delay: calc(var(--i) * 80ms); }
+@keyframes rowIn { from { opacity: 0; transform: translateY(8px); } }
+.becomes { display: flex; align-items: center; gap: 10px; color: var(--gg-mute); }
+.becomes b { color: var(--gg-gold); font-weight: 500; font-family: var(--gg-font-mono); }
+.old { font-family: var(--gg-font-mono); text-decoration: line-through; text-decoration-color: rgb(224 144 124 / 0.6); }
+.detailGrid { display: grid; gap: 12px; font-size: 14px; color: var(--gg-body); }
+.dlist { display: grid; gap: 6px; }

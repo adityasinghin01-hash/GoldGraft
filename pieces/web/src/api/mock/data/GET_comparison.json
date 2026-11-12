@@ -1,0 +1,34 @@
+{
+  "arms": [
+    {
+      "arm": "HAND",
+      "minutes": 300.0,
+      "money_bugs_left": 2,
+      "pieces_missed": 1,
+      "usd": 0.0
+    },
+    {
+      "arm": "PAYPAL_AI_TOOLKIT",
+      "minutes": 90.0,
+      "money_bugs_left": 2,
+      "pieces_missed": 2,
+      "usd": 2.0
+    },
+    {
+      "arm": "PLAIN_CLAUDE_CODE",
+      "minutes": 60.0,
+      "money_bugs_left": 3,
+      "pieces_missed": 1,
+      "usd": 3.0
+    },
+    {
+      "arm": "GOLDGRAFT",
+      "minutes": 41.0,
+      "money_bugs_left": 0,
+      "pieces_missed": 0,
+      "usd": 3.85
+    }
+  ],
+  "label": "SYNTHETIC \u2014 stand-in data, not a recording \u2014 targets until measured",
+  "shop_id": "legacy-php-shop"
+}

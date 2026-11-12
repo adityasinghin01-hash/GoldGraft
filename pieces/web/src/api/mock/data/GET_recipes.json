@@ -1,0 +1,23 @@
+{
+  "recipes": [
+    {
+      "confidence": 0.5,
+      "fingerprint": {
+        "ast_shape_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "family": "EC_NVP",
+        "framework": "custom",
+        "lang": "php"
+      },
+      "id": "recipe-1",
+      "provenance": [
+        "cert-1"
+      ],
+      "scenarios": [
+        "happy"
+      ],
+      "signature": "fixture-signature",
+      "status": "QUARANTINE",
+      "transform": "rules/rewrite.yml"
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "graft_id": "demo-1",
+  "new": [
+    {
+      "graft_id": "demo-1",
+      "kind": "INTENT",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 0,
+      "source": "SHOP_HTTP",
+      "t_ms": 0,
+      "variant": "NEW"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "APPROVE",
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 1,
+      "source": "SHOP_HTTP",
+      "t_ms": 400,
+      "variant": "NEW"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "CAPTURE",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "noise": [
+        "pp.capture_id"
+      ],
+      "order_ref": "order-1",
+      "pp": {
+        "capture_id": "2GG279541U471931P"
+      },
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 2,
+      "source": "SHOP_HTTP",
+      "status_norm": "COMPLETED",
+      "t_ms": 800,
+      "variant": "NEW"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "SHOP_PAID",
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 3,
+      "source": "SHOP_HTTP",
+      "t_ms": 1200,
+      "variant": "NEW"
+    }
+  ],
+  "old": [
+    {
+      "graft_id": "demo-1",
+      "kind": "INTENT",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 0,
+      "source": "SHOP_HTTP",
+      "t_ms": 0,
+      "variant": "OLD"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "APPROVE",
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 1,
+      "source": "SHOP_HTTP",
+      "t_ms": 400,
+      "variant": "OLD"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "CAPTURE",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "noise": [
+        "pp.txn_id"
+      ],
+      "order_ref": "order-1",
+      "pp": {
+        "txn_id": "8MC585209K746392H"
+      },
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 2,
+      "source": "SHOP_HTTP",
+      "status_norm": "COMPLETED",
+      "t_ms": 800,
+      "variant": "OLD"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "SHOP_PAID",
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 3,
+      "source": "SHOP_HTTP",
+      "t_ms": 1200,
+      "variant": "OLD"
+    }
+  ],
+  "old_twin": [
+    {
+      "graft_id": "demo-1",
+      "kind": "INTENT",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 0,
+      "source": "SHOP_HTTP",
+      "t_ms": 0,
+      "variant": "OLD_TWIN"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "APPROVE",
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 1,
+      "source": "SHOP_HTTP",
+      "t_ms": 400,
+      "variant": "OLD_TWIN"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "CAPTURE",
+      "money": {
+        "currency": "USD",
+        "minor": 1999
+      },
+      "noise": [
+        "pp.txn_id"
+      ],
+      "order_ref": "order-1",
+      "pp": {
+        "txn_id": "3GG279541U471931P"
+      },
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 2,
+      "source": "SHOP_HTTP",
+      "status_norm": "COMPLETED",
+      "t_ms": 800,
+      "variant": "OLD_TWIN"
+    },
+    {
+      "graft_id": "demo-1",
+      "kind": "SHOP_PAID",
+      "noise": [],
+      "order_ref": "order-1",
+      "pp": {},
+      "raw_ref": "r2://captures/run-1",
+      "run_id": "run-1",
+      "scenario_id": "pending",
+      "seq": 3,
+      "source": "SHOP_HTTP",
+      "t_ms": 1200,
+      "variant": "OLD_TWIN"
+    }
+  ],
+  "scenario_id": "pending"
+}

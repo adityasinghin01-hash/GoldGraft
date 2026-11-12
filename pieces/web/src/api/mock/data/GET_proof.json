@@ -1,0 +1,199 @@
+{
+  "graft_id": "demo-1",
+  "mutants": [
+    {
+      "equivalent_suspect": false,
+      "id": "M01",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M1",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M02",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M2",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M03",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M3",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M04",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M4",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M05",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M5",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M06",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M6",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M07",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M7",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M08",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M8",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M09",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M9",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M10",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M10",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M11",
+      "killed_by": [],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M11",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    },
+    {
+      "equivalent_suspect": false,
+      "id": "M12",
+      "killed_by": [
+        "happy"
+      ],
+      "location": {
+        "file": "checkout.php",
+        "line": 12
+      },
+      "op": "M12",
+      "patch": "skip capture status check",
+      "rule": "R01"
+    }
+  ],
+  "proof_strength": {
+    "equivalent_dropped": 0,
+    "killed": 11,
+    "score": 0.9167,
+    "total": 12
+  },
+  "triangle": [
+    {
+      "killed": true,
+      "mutant_ids": [
+        "M02"
+      ],
+      "rule_id": "R01",
+      "scenario_ids": [
+        "happy"
+      ]
+    },
+    {
+      "killed": false,
+      "mutant_ids": [
+        "M11"
+      ],
+      "rule_id": "R14",
+      "scenario_ids": [
+        "restart"
+      ]
+    }
+  ]
+}

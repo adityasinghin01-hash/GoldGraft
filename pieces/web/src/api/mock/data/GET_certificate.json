@@ -1,0 +1,48 @@
+{
+  "branch": "goldgraft/graft-1",
+  "cert_id": "cert-demo",
+  "commit_new": "new-fixture-sha",
+  "commit_old": "old-fixture-sha",
+  "cost": {
+    "tokens": 20,
+    "usd": 0.1
+  },
+  "issued_at": "2026-11-02T09:00:00Z",
+  "ledger_root": "d4245dfd43bf38799c4a49b7933290023d367caf2bcb3506b4ffa6e63a7bd9ff",
+  "paypal_evidence": [],
+  "proof_strength": {
+    "equivalent_dropped": 0,
+    "killed": 12,
+    "mutants_total": 12,
+    "score": 1.0
+  },
+  "rekor_entry": "fixture-rekor-not-verifiable",
+  "repo": "https://example.com/shop",
+  "results": {
+    "n_a": 0,
+    "pass": 1,
+    "pass_fixed": 0,
+    "problem": 0,
+    "scenarios": 1,
+    "unverified": 0
+  },
+  "runner_identity": {
+    "sha": "fixture-sha",
+    "workflow": "proof.yml"
+  },
+  "security": {
+    "deps_blocked": 0,
+    "injection_attempts_blocked": 1,
+    "secrets_found": 0
+  },
+  "shop_id": "shop-1",
+  "signature": "fixture-signature-not-verifiable",
+  "survey": {
+    "misses_learned": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "time": {
+    "survey": 1.0
+  }
+}

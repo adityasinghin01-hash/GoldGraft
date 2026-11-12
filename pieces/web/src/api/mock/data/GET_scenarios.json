@@ -1,0 +1,365 @@
+{
+  "graft_id": "demo-1",
+  "scenarios": [
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "HAPPY",
+        "id": "happy",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PASS",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "happy"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "PENDING",
+        "id": "pending",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PROBLEM",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "pending"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "REFUND",
+        "id": "refund",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PASS",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "refund"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "REFUND_TWICE",
+        "id": "refund_twice",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PASS_FIXED",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "refund_twice"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "DOUBLE",
+        "id": "double",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PASS",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "double"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "DECLINE",
+        "id": "decline",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PASS",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "decline"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "NOTIFY_FORGED",
+        "id": "notify_forged",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "PASS",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "notify_forged"
+      }
+    },
+    {
+      "scenario": {
+        "assured": {
+          "flake_free_runs": 3,
+          "passes_on_old": true
+        },
+        "cart": {
+          "total": {
+            "currency": "USD",
+            "minor": 1999
+          }
+        },
+        "expect": {
+          "paid": true
+        },
+        "family": "NOTIFY_DUP",
+        "id": "notify_dup",
+        "rules": [
+          "R01"
+        ],
+        "steps": [
+          {
+            "driver_step": "checkout"
+          },
+          {
+            "api_step": "read ledger"
+          },
+          {
+            "paypal_mock_response_code": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "verdict": {
+        "deltas_applied": [
+          "delta-1"
+        ],
+        "grade": "UNVERIFIED",
+        "noise_masked": [
+          "pp.txn_id"
+        ],
+        "parity_diff": [],
+        "rule_hits": [],
+        "scenario_id": "notify_dup"
+      }
+    }
+  ]
+}

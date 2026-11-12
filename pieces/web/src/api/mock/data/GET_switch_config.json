@@ -1,0 +1,10 @@
+{
+  "expires_at": "2026-11-02T09:00:00Z",
+  "graft_id": "demo-1",
+  "origin_rules": [
+    "legacy refunds stay OLD"
+  ],
+  "signature": "fixture-signature",
+  "stage_pct": 10,
+  "version": 1
+}
