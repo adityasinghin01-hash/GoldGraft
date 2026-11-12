@@ -1,0 +1,351 @@
+[
+  {
+    "task": "gardener:propose_plan",
+    "role": "Gardener",
+    "state": "succeeded",
+    "dependencies": [],
+    "input_refs": [
+      "fake:input:gardener:propose_plan"
+    ],
+    "predecessor_outputs_consumed": [],
+    "output_refs": [
+      "fake:artifact:39f44f1077387c423571adea967b7c6251a89a201404f470fa9dbe608d851ae4"
+    ]
+  },
+  {
+    "task": "builder:build_baseline",
+    "role": "Builder",
+    "state": "succeeded",
+    "dependencies": [
+      "gardener:propose_plan"
+    ],
+    "input_refs": [
+      "fake:input:builder:build_baseline",
+      "fake:artifact:39f44f1077387c423571adea967b7c6251a89a201404f470fa9dbe608d851ae4"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:39f44f1077387c423571adea967b7c6251a89a201404f470fa9dbe608d851ae4"
+    ],
+    "output_refs": [
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ]
+  },
+  {
+    "task": "baseline-old",
+    "role": "Explorer",
+    "state": "succeeded",
+    "dependencies": [
+      "builder:build_baseline"
+    ],
+    "input_refs": [
+      "fake:input:baseline-old",
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "output_refs": [
+      "fake:artifact:36ebe6624ad85d9e8451d3e5b35502220b5992072a980a0ac5e6545364926abe"
+    ]
+  },
+  {
+    "task": "baseline-old-twin",
+    "role": "Explorer",
+    "state": "succeeded",
+    "dependencies": [
+      "builder:build_baseline"
+    ],
+    "input_refs": [
+      "fake:input:baseline-old-twin",
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "output_refs": [
+      "fake:artifact:57e7abbd6d094ad93d01ee25261abf3d405959de4bdd9119abbe9d900e3f15aa"
+    ]
+  },
+  {
+    "task": "scribe-draft",
+    "role": "Scribe",
+    "state": "succeeded",
+    "dependencies": [
+      "baseline-old",
+      "baseline-old-twin"
+    ],
+    "input_refs": [
+      "fake:input:scribe-draft",
+      "fake:artifact:36ebe6624ad85d9e8451d3e5b35502220b5992072a980a0ac5e6545364926abe",
+      "fake:artifact:57e7abbd6d094ad93d01ee25261abf3d405959de4bdd9119abbe9d900e3f15aa"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:36ebe6624ad85d9e8451d3e5b35502220b5992072a980a0ac5e6545364926abe",
+      "fake:artifact:57e7abbd6d094ad93d01ee25261abf3d405959de4bdd9119abbe9d900e3f15aa"
+    ],
+    "output_refs": [
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a"
+    ]
+  },
+  {
+    "task": "followup-0",
+    "role": "Explorer",
+    "state": "succeeded",
+    "dependencies": [
+      "scribe-draft",
+      "builder:build_baseline"
+    ],
+    "input_refs": [
+      "fake:input:followup-0",
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+      "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "output_refs": [
+      "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+    ]
+  },
+  {
+    "task": "scribe-final",
+    "role": "Scribe",
+    "state": "held",
+    "dependencies": [
+      "scribe-draft",
+      "followup-0"
+    ],
+    "input_refs": [
+      "fake:input:scribe-final",
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+      "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+      "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+    ],
+    "output_refs": []
+  },
+  {
+    "task": "scribe-final-retry1",
+    "role": "Scribe",
+    "state": "succeeded",
+    "dependencies": [
+      "scribe-draft",
+      "followup-0"
+    ],
+    "input_refs": [
+      "fake:input:scribe-final-retry1",
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+      "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+      "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+      "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+    ],
+    "output_refs": [
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ]
+  },
+  {
+    "task": "architect",
+    "role": "Architect",
+    "state": "succeeded",
+    "dependencies": [
+      "scribe-final-retry1"
+    ],
+    "input_refs": [
+      "fake:input:architect",
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "output_refs": [
+      "fake:artifact:879e10261e994f88f7a19f85b442f82b95ad457aaf95f7c2cda12eb05be3644c"
+    ]
+  },
+  {
+    "task": "grafter",
+    "role": "Grafter",
+    "state": "succeeded",
+    "dependencies": [
+      "architect"
+    ],
+    "input_refs": [
+      "fake:input:grafter",
+      "fake:artifact:879e10261e994f88f7a19f85b442f82b95ad457aaf95f7c2cda12eb05be3644c"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:879e10261e994f88f7a19f85b442f82b95ad457aaf95f7c2cda12eb05be3644c"
+    ],
+    "output_refs": [
+      "fake:artifact:9e6346ff2d0d69e0ad80eaf02a8849226067d1d5a004bd39916da3e598becf45"
+    ]
+  },
+  {
+    "task": "candidate-build",
+    "role": "Builder",
+    "state": "succeeded",
+    "dependencies": [
+      "grafter"
+    ],
+    "input_refs": [
+      "fake:input:candidate-build",
+      "fake:artifact:9e6346ff2d0d69e0ad80eaf02a8849226067d1d5a004bd39916da3e598becf45"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:9e6346ff2d0d69e0ad80eaf02a8849226067d1d5a004bd39916da3e598becf45"
+    ],
+    "output_refs": [
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e"
+    ]
+  },
+  {
+    "task": "candidate-new",
+    "role": "Explorer",
+    "state": "succeeded",
+    "dependencies": [
+      "candidate-build",
+      "scribe-final-retry1"
+    ],
+    "input_refs": [
+      "fake:input:candidate-new",
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "output_refs": [
+      "fake:artifact:a94111546311dc12118a69fe16249035788392aed1fbbaf8f86bd2b0b0419e6d"
+    ]
+  },
+  {
+    "task": "adversary-guards",
+    "role": "Adversary",
+    "state": "succeeded",
+    "dependencies": [
+      "candidate-build",
+      "scribe-final-retry1"
+    ],
+    "input_refs": [
+      "fake:input:adversary-guards",
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+      "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "output_refs": [
+      "fake:artifact:5c616249c9e372d974c09275dbac4b8f2381c71f3f20072c348987be005d6fa9",
+      "fake:artifact:1185611f98a25ab3f2fafb28629b5beafdf4b538f6167325bd103f835f053a84"
+    ]
+  },
+  {
+    "task": "adversary-mutant",
+    "role": "Adversary",
+    "state": "succeeded",
+    "dependencies": [
+      "adversary-guards",
+      "candidate-build"
+    ],
+    "input_refs": [
+      "fake:input:adversary-mutant",
+      "fake:artifact:5c616249c9e372d974c09275dbac4b8f2381c71f3f20072c348987be005d6fa9",
+      "fake:artifact:1185611f98a25ab3f2fafb28629b5beafdf4b538f6167325bd103f835f053a84",
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:5c616249c9e372d974c09275dbac4b8f2381c71f3f20072c348987be005d6fa9",
+      "fake:artifact:1185611f98a25ab3f2fafb28629b5beafdf4b538f6167325bd103f835f053a84",
+      "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e"
+    ],
+    "output_refs": [
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ]
+  },
+  {
+    "task": "healer-golive",
+    "role": "Healer",
+    "state": "succeeded",
+    "dependencies": [
+      "candidate-new"
+    ],
+    "input_refs": [
+      "fake:input:healer-golive",
+      "fake:artifact:a94111546311dc12118a69fe16249035788392aed1fbbaf8f86bd2b0b0419e6d"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:a94111546311dc12118a69fe16249035788392aed1fbbaf8f86bd2b0b0419e6d"
+    ],
+    "output_refs": [
+      "fake:artifact:9eb5ad0b3c254c4882a79fb16bec66880dad389b0c8741a9f52b0f7db93e0326"
+    ]
+  },
+  {
+    "task": "sentinel-audit",
+    "role": "Sentinel",
+    "state": "succeeded",
+    "dependencies": [
+      "adversary-mutant"
+    ],
+    "input_refs": [
+      "fake:input:sentinel-audit",
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "output_refs": [
+      "fake:artifact:0ca7397271075247d9906f371e277c0e1d0a392228cf0e5284daee39eaa42ef1"
+    ]
+  },
+  {
+    "task": "librarian-recipe",
+    "role": "Librarian",
+    "state": "succeeded",
+    "dependencies": [
+      "adversary-mutant"
+    ],
+    "input_refs": [
+      "fake:input:librarian-recipe",
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "output_refs": [
+      "fake:artifact:34baffe43c9902b9eda819e970fbd40c5276bde6dd1a432d4b2e2bb03a9be692",
+      "fake:artifact:cd492ed59eab44a53ac530a9218f106dd329d181e534e285e3eb58ad0ceffa87"
+    ]
+  },
+  {
+    "task": "orchard-aggregate",
+    "role": "Orchard Analyst",
+    "state": "succeeded",
+    "dependencies": [
+      "adversary-mutant"
+    ],
+    "input_refs": [
+      "fake:input:orchard-aggregate",
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "predecessor_outputs_consumed": [
+      "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "output_refs": [
+      "fake:artifact:421a34bc49973837a0dc706de37247aec1784409b92794f206b131e33d2f27a2"
+    ]
+  }
+]

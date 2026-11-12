@@ -1,0 +1,35 @@
+{
+  "case_id": "case-553d7e9344ed4a0590d091729118f873",
+  "run_id": "work-0ef1b1567a574f87bae7ef542f1e1a72-local-php",
+  "generation": 1,
+  "resource_epochs": {
+    "local-shop": 1
+  },
+  "scope_digest": "a9e20b3a6467736abccf77bd2251475d4430ef7f777433dba6c5b084ca266326",
+  "work_package_digest": "434395469e6ea7744bc8d56066d82e868cf5f1aeb45c5420dc0b28faae07d79a",
+  "policy_digest": "85a0f2f8c4a4e410f3fff86ba56d027cfabe21290d2a6163515b7a6f3dcef763",
+  "advice": {
+    "graft_id": "work-0ef1b1567a574f87bae7ef542f1e1a72-local-php",
+    "from_stage_pct": 0,
+    "action": "HOLD",
+    "to_stage_pct": 0,
+    "reason": "Thin data",
+    "stats": {
+      "n_old": 0,
+      "n_new": 0,
+      "success_old": 0,
+      "success_new": 0,
+      "prob_new_not_worse": 0.5198,
+      "threshold": 0.95
+    },
+    "hard_stop": null
+  },
+  "advice_digest": "178588d7ea98cc51d598570e30ffa6c33114d6854335ee88eda6fe323061ce05",
+  "proof_plan_digest": "d8bd29c349c336ebfee5ff3d3aca305ef981c3f57524b9d4d9008a5584d1afa6",
+  "proof_result_ref": "proof-679d1cf6d609bde6c3164b8ba4ffeacc",
+  "proof_result_digest": "4b3d466e595428e5add35e9f714373abeb803fad5e188f47e15132b1e6a00784",
+  "action": "HOLD",
+  "reason_code": "ADVICE_HOLD",
+  "checked_at": "2026-11-12T12:04:06Z",
+  "expires_at": "2026-11-12T12:09:06Z"
+}

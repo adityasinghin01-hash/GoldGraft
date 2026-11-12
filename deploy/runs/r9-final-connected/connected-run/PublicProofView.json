@@ -1,0 +1,28 @@
+{
+  "public_id": "afa935695e3d4574b5a561f5f60f71c4",
+  "scope_text": "Scoped lifecycle evidence review",
+  "evidence_class": "component_offline",
+  "summary_metrics": [
+    {
+      "name": "disposition",
+      "value": "HOLD",
+      "evidence_ref": "public:local-summary"
+    },
+    {
+      "name": "verified_checks",
+      "value": "0",
+      "evidence_ref": "public:local-summary"
+    },
+    {
+      "name": "gaps",
+      "value": "2",
+      "evidence_ref": "public:local-summary"
+    }
+  ],
+  "integrity": "unknown",
+  "limitations": [
+    "Scoped review requires authenticated current inputs.",
+    "Payment, deployment and independent exit qualification are separate."
+  ],
+  "checked_at": "2026-11-12T12:52:01Z"
+}

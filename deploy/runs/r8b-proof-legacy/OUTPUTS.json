@@ -1,0 +1,897 @@
+{
+ "gardener:propose_plan": [
+  {
+   "schema": "PlanProposal/1",
+   "payload": {
+    "case_id": "case-demo",
+    "generation": 1,
+    "parent_request_id": "fake:request:gardener:propose_plan",
+    "reason_refs": [
+     "fake:input:gardener:propose_plan"
+    ],
+    "run_id": "run-demo",
+    "tasks": [
+     {
+      "allowed_tool_ids": [
+       "source.read"
+      ],
+      "dependencies": [],
+      "expected_schemas": [
+       "RootMap/1"
+      ],
+      "expected_subject": "f52794efeb7ba4ac60041ba20deb1f2558cdf3090c7ef7507f6527c52b4f52ec",
+      "input_refs": [
+       "fake:input:gardener:propose_plan"
+      ],
+      "operation": "survey",
+      "output_slot": "survey_root_map",
+      "output_subject_policy": "same_subject",
+      "required": true,
+      "role": "Surveyor",
+      "task_id": "survey",
+      "workspace_ref": null
+     }
+    ]
+   }
+  }
+ ],
+ "survey": [
+  {
+   "schema": "RootMap/1",
+   "payload": {
+    "lenses_run": [
+     "code"
+    ],
+    "money_flow": {
+     "approve": [
+      {
+       "file": "index.php",
+       "line": 38
+      }
+     ],
+     "capture": [
+      {
+       "file": "api/execute-payment.php",
+       "line": 2
+      },
+      {
+       "file": "api/execute-payment.php",
+       "line": 15
+      }
+     ],
+     "create": [
+      {
+       "file": "api/create-payment.php",
+       "line": 2
+      },
+      {
+       "file": "api/create-payment.php",
+       "line": 20
+      }
+     ],
+     "mark_paid": [],
+     "notify": [
+      {
+       "file": "ipn.php",
+       "line": 9
+      }
+     ],
+     "recurring": [],
+     "refund": [
+      {
+       "file": "api/refund.php",
+       "line": 2
+      },
+      {
+       "file": "api/refund.php",
+       "line": 11
+      }
+     ]
+    },
+    "recall_evidence": {
+     "matched_by_static": 0,
+     "misses": [],
+     "runtime_calls_total": 0
+    },
+    "shop_id": "legacy-php-shop",
+    "stack": {
+     "db": "none",
+     "framework": "none",
+     "lang": "synthetic",
+     "versions": {}
+    },
+    "touchpoints": [
+     {
+      "confidence": 0.4,
+      "family": "EC_NVP",
+      "id": "tp-nvp-create-2",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "api/create-payment.php",
+       "line": 2
+      },
+      "operation": "SetExpressCheckout",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "nvp-create",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.5,
+      "family": "EC_NVP",
+      "id": "tp-nvp-create-20",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "api/create-payment.php",
+       "line": 20
+      },
+      "operation": "SetExpressCheckout",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "nvp-create",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.4,
+      "family": "EC_NVP",
+      "id": "tp-nvp-capture-2",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "api/execute-payment.php",
+       "line": 2
+      },
+      "operation": "DoExpressCheckoutPayment",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "nvp-capture",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.5,
+      "family": "EC_NVP",
+      "id": "tp-nvp-capture-15",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "api/execute-payment.php",
+       "line": 15
+      },
+      "operation": "DoExpressCheckoutPayment",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "nvp-capture",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.4,
+      "family": "EC_NVP",
+      "id": "tp-nvp-refund-2",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "api/refund.php",
+       "line": 2
+      },
+      "operation": "RefundTransaction",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "nvp-refund",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.5,
+      "family": "EC_NVP",
+      "id": "tp-nvp-refund-11",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "api/refund.php",
+       "line": 11
+      },
+      "operation": "RefundTransaction",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "nvp-refund",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.5,
+      "family": "CHECKOUT_JS_V4",
+      "id": "tp-checkout-v4-38",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "index.php",
+       "line": 38
+      },
+      "operation": "paypal.Button.render",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "checkout-v4",
+       "rest_op": "unqualified"
+      }
+     },
+     {
+      "confidence": 0.5,
+      "family": "IPN",
+      "id": "tp-ipn-notify-9",
+      "lenses": [
+       "code"
+      ],
+      "live": false,
+      "location": {
+       "file": "ipn.php",
+       "line": 9
+      },
+      "operation": "IPN validation indicator",
+      "paypal_only": false,
+      "target": {
+       "paypal_mapping_id": "ipn-notify",
+       "rest_op": "unqualified"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "herald": [
+  {
+   "schema": "HeraldText",
+   "payload": {
+    "created_at": "2026-11-12T08:29:44.488600Z",
+    "graft_id": "run-demo",
+    "id": "herald-925365b8985360a4",
+    "kind": "GRAFT_CARD",
+    "numbers_used": [
+     {
+      "entry_hash": "370b8cb2cea1dd881b9c6a4270854be22981de925afc6b802bf9e5333aa2d085",
+      "json_pointer": "/payload/source_indicators",
+      "value": 8
+     }
+    ],
+    "producer": {
+     "kind": "agent",
+     "model": "claude-haiku-5-5",
+     "name": "Herald",
+     "version": "1"
+    },
+    "text": "The source inventory is accepted for further analysis. Inventory contains 8 source indicators. Source-only offline evidence; runtime, payment and live-site outcomes remain unverified."
+   }
+  }
+ ],
+ "builder:build_baseline": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:builder:build_baseline",
+     "fake:artifact:39f44f1077387c423571adea967b7c6251a89a201404f470fa9dbe608d851ae4"
+    ],
+    "expected_subject": "69a7cc6de5a795e13b8c7caef030cb861e4318ba895de900767f253ca968f4f2",
+    "operation": "build_baseline",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RunnableShop/1",
+     "ArtifactBuild/1"
+    ],
+    "scenario_ref": null,
+    "subject_ref": "fixture:baseline",
+    "task_id": "builder:build_baseline",
+    "variant": null
+   }
+  }
+ ],
+ "baseline-old": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:baseline-old",
+     "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "expected_subject": "9775a3927f1615b33d287183d6709cae5f2095a4179b48f1f7999b79c249cd1f",
+    "operation": "run_scenario",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RawCapture/1"
+    ],
+    "scenario_ref": "fixture:scenario-capture",
+    "subject_ref": "fixture:baseline",
+    "task_id": "baseline-old",
+    "variant": "OLD"
+   }
+  }
+ ],
+ "baseline-old-twin": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:baseline-old-twin",
+     "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "expected_subject": "9775a3927f1615b33d287183d6709cae5f2095a4179b48f1f7999b79c249cd1f",
+    "operation": "run_scenario",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RawCapture/1"
+    ],
+    "scenario_ref": "fixture:scenario-capture",
+    "subject_ref": "fixture:baseline",
+    "task_id": "baseline-old-twin",
+    "variant": "OLD_TWIN"
+   }
+  }
+ ],
+ "scribe-draft": [
+  {
+   "schema": "Contract/1",
+   "payload": {
+    "rules": [
+     {
+      "agreement": "CODE_ONLY",
+      "correct_flow": [
+       "capture completed",
+       "mark paid"
+      ],
+      "counter_examples": [
+       "pending capture marked paid"
+      ],
+      "id": "R01",
+      "predicate": "paid implies capture_status == COMPLETED",
+      "severity": "CRITICAL",
+      "sources": {
+       "code": [
+        "api/execute-payment.php"
+       ],
+       "traces": []
+      },
+      "title": "Payment requires completed capture",
+      "triangle": {
+       "killed": false,
+       "mutants": [],
+       "scenarios": []
+      }
+     }
+    ],
+    "shop_id": "legacy-php-shop"
+   }
+  },
+  {
+   "schema": "TriangleRequest/1",
+   "payload": {
+    "created_at": "2026-11-12T08:30:15.476265+00:00",
+    "graft_id": "run-demo",
+    "id": "tri-req-R01-trace-baseline",
+    "mutant_ids": [],
+    "producer": {
+     "kind": "agent",
+     "model": "claude-haiku-5-5",
+     "name": "Scribe",
+     "version": "1"
+    },
+    "reason": "Mapped baseline trace evidence for R01 is missing; source-only evidence is recorded as CODE_ONLY pending trace capture.",
+    "rule_id": "R01",
+    "scenario_ids": [
+     "trace-R01"
+    ]
+   }
+  }
+ ],
+ "followup-0": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:followup-0",
+     "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+     "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+     "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+    ],
+    "expected_subject": "b788df4c7bc713a349d3767445933f225951c72956554ae78835e1821180f9c9",
+    "operation": "run_scenario",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RawCapture/1"
+    ],
+    "scenario_ref": "fixture:pending-rule-followup",
+    "subject_ref": "fixture:baseline",
+    "task_id": "followup-0",
+    "variant": "OLD"
+   }
+  }
+ ],
+ "scribe-final-retry1": [
+  {
+   "schema": "Contract/1",
+   "payload": {
+    "rules": [
+     {
+      "agreement": "BOTH",
+      "correct_flow": [
+       "capture completed",
+       "mark paid"
+      ],
+      "counter_examples": [
+       "pending capture marked paid"
+      ],
+      "id": "R01",
+      "predicate": "paid implies capture_status == COMPLETED",
+      "severity": "CRITICAL",
+      "sources": {
+       "code": [
+        "api/execute-payment.php"
+       ],
+       "traces": [
+        "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+       ]
+      },
+      "title": "Payment requires completed capture",
+      "triangle": {
+       "killed": false,
+       "mutants": [],
+       "scenarios": []
+      }
+     }
+    ],
+    "shop_id": "legacy-php-shop"
+   }
+  }
+ ],
+ "architect": [
+  {
+   "schema": "TargetPlan/1",
+   "payload": {
+    "deltas": [
+     {
+      "description": "Map approved token/PayerID to orderId; preserve approval and causal order.",
+      "id": "D_APPROVE",
+      "mapping_id": "https://developer.paypal.com/docs/api/orders/v2/"
+     },
+     {
+      "description": "Coalesce repeated same-id ledger reads only when money and status agree.",
+      "id": "D_LEDGER_READ",
+      "mapping_id": "https://developer.paypal.com/docs/api/orders/v2/"
+     },
+     {
+      "description": "Map IPN to webhook; preserve notification, verification, money and causal order.",
+      "id": "D_NOTIFY",
+      "mapping_id": "https://developer.paypal.com/docs/api/webhooks/v1/"
+     },
+     {
+      "description": "Map refund transaction to refund id; preserve parent capture, money and status.",
+      "id": "D_REFUND",
+      "mapping_id": "https://developer.paypal.com/docs/api/payments/v2/"
+     },
+     {
+      "description": "Map legacy token to order id; preserve the logical order and money.",
+      "id": "D_TOKEN_ORDER",
+      "mapping_id": "https://developer.paypal.com/docs/api/orders/v2/"
+     },
+     {
+      "description": "Map transaction id to capture id; preserve distinct captures and money.",
+      "id": "D_TXN_CAPTURE",
+      "mapping_id": "https://developer.paypal.com/docs/api/orders/v2/"
+     }
+    ],
+    "handoff": [
+     "independent proof required",
+     "Plan covers each of the 7 mappings exactly once using installed symbols gg_create_order, gg_capture_order, gg_refund_capture, gg_verify_webhook from recipe:php-ec-nvp-to-orders-v2:1",
+     "Preserve rule R01: paid implies capture_status == COMPLETED",
+     "No apply authority; no account change"
+    ],
+    "items": [
+     {
+      "delta_ids": [
+       "D_TOKEN_ORDER",
+       "D_TXN_CAPTURE",
+       "D_APPROVE",
+       "D_LEDGER_READ"
+      ],
+      "mapping_id": "nvp-create",
+      "paypal_only": true,
+      "target_op": "gg_create_order",
+      "touchpoint": "tp-nvp-create-2"
+     },
+     {
+      "delta_ids": [
+       "D_TOKEN_ORDER",
+       "D_TXN_CAPTURE",
+       "D_APPROVE",
+       "D_LEDGER_READ"
+      ],
+      "mapping_id": "nvp-create",
+      "paypal_only": true,
+      "target_op": "gg_create_order",
+      "touchpoint": "tp-nvp-create-20"
+     },
+     {
+      "delta_ids": [
+       "D_TOKEN_ORDER",
+       "D_TXN_CAPTURE",
+       "D_APPROVE",
+       "D_LEDGER_READ"
+      ],
+      "mapping_id": "nvp-capture",
+      "paypal_only": true,
+      "target_op": "gg_capture_order",
+      "touchpoint": "tp-nvp-capture-2"
+     },
+     {
+      "delta_ids": [
+       "D_TOKEN_ORDER",
+       "D_TXN_CAPTURE",
+       "D_APPROVE",
+       "D_LEDGER_READ"
+      ],
+      "mapping_id": "nvp-capture",
+      "paypal_only": true,
+      "target_op": "gg_capture_order",
+      "touchpoint": "tp-nvp-capture-15"
+     },
+     {
+      "delta_ids": [
+       "D_REFUND"
+      ],
+      "mapping_id": "nvp-refund",
+      "paypal_only": true,
+      "target_op": "gg_refund_capture",
+      "touchpoint": "tp-nvp-refund-2"
+     },
+     {
+      "delta_ids": [
+       "D_REFUND"
+      ],
+      "mapping_id": "nvp-refund",
+      "paypal_only": true,
+      "target_op": "gg_refund_capture",
+      "touchpoint": "tp-nvp-refund-11"
+     },
+     {
+      "delta_ids": [
+       "D_NOTIFY"
+      ],
+      "mapping_id": "ipn-notify",
+      "paypal_only": true,
+      "target_op": "gg_verify_webhook",
+      "touchpoint": "tp-ipn-notify-9"
+     }
+    ],
+    "order": [
+     "READ_BOTH",
+     "NEW_FLOWS_BEHIND_SWITCH",
+     "CLEANUP"
+    ],
+    "origin_rules": [
+     "R01"
+    ],
+    "path": "REWRITE",
+    "target_experience": [
+     "ORDERS_V2",
+     "WEBHOOKS"
+    ]
+   }
+  }
+ ],
+ "grafter": [
+  {
+   "schema": "ChangeList/2",
+   "payload": {
+    "baseline_snapshot_ref": "fixture:baseline",
+    "branch": null,
+    "candidate_snapshot_ref": "fake:blob:6ae83986f3a8e919e51509b33ee6e609abd013a28fb60c2fecc0bfd889124290",
+    "changes": [
+     {
+      "commit": null,
+      "plan_item_ids": [
+       "tp-ipn-notify-9",
+       "tp-nvp-capture-15",
+       "tp-nvp-capture-2",
+       "tp-nvp-create-2",
+       "tp-nvp-create-20",
+       "tp-nvp-refund-11",
+       "tp-nvp-refund-2"
+      ],
+      "summary": "Replace legacy NVP checkout, refund and IPN calls with the installed Orders v2 and webhook library operations, marking orders PAID only on COMPLETED captures."
+     }
+    ],
+    "created_at": "2026-11-12T08:30:52.930514+00:00",
+    "graft_id": "run-demo",
+    "id": "draft-206c48a2a492d18c",
+    "open_item_ids": [],
+    "patch_digest": "d7daed8f395aa54d70107ffc498655171ac6201f6ab242d4a9073ccc5074e6fe",
+    "producer": {
+     "kind": "agent",
+     "model": "claude-sonnet-5-5",
+     "name": "Grafter",
+     "version": "1"
+    },
+    "provenance": "snapshot"
+   }
+  }
+ ],
+ "candidate-build": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:candidate-build",
+     "fake:artifact:9e6346ff2d0d69e0ad80eaf02a8849226067d1d5a004bd39916da3e598becf45"
+    ],
+    "expected_subject": "4ee6ae1ef885ca86b651792aba83e7c525a90506595de0964a4ad80a76d41106",
+    "operation": "build_candidate",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RunnableShop/1",
+     "ArtifactBuild/1"
+    ],
+    "scenario_ref": null,
+    "subject_ref": "fake:blob:6ae83986f3a8e919e51509b33ee6e609abd013a28fb60c2fecc0bfd889124290",
+    "task_id": "candidate-build",
+    "variant": null
+   }
+  }
+ ],
+ "candidate-new": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:candidate-new",
+     "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+     "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+    ],
+    "expected_subject": "dd31be850bd51e404799b864567f826aad0ebc39e11aae327033b6f26fe65b05",
+    "operation": "run_scenario",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RawCapture/1"
+    ],
+    "scenario_ref": "fixture:scenario-capture",
+    "subject_ref": "fake:blob:6ae83986f3a8e919e51509b33ee6e609abd013a28fb60c2fecc0bfd889124290",
+    "task_id": "candidate-new",
+    "variant": "NEW"
+   }
+  }
+ ],
+ "adversary-guards": [
+  {
+   "schema": "ScenarioSet/1",
+   "payload": {
+    "created_at": "2026-11-12T08:31:40.040017+00:00",
+    "graft_id": "run-demo",
+    "id": "draft-303339afc6b76a87",
+    "producer": {
+     "kind": "agent",
+     "model": "claude-sonnet-5-5",
+     "name": "Adversary",
+     "version": "1"
+    },
+    "scenarios": [
+     {
+      "assured": {
+       "flake_free_runs": 0,
+       "passes_on_old": false
+      },
+      "cart": {
+       "fixture": true
+      },
+      "expect": {
+       "predicate": "paid implies capture_status == COMPLETED"
+      },
+      "family": "PENDING",
+      "id": "guard-R01",
+      "rules": [
+       "R01"
+      ],
+      "steps": [
+       {
+        "driver_step": "capture_pending"
+       }
+      ]
+     }
+    ],
+    "unguarded_rule_ids": []
+   }
+  },
+  {
+   "schema": "MutantSet/1",
+   "payload": {
+    "created_at": "2026-11-12T08:31:40.040017+00:00",
+    "graft_id": "run-demo",
+    "id": "draft-0fdeea9a2417936f",
+    "mutants": [
+     {
+      "equivalent_suspect": false,
+      "id": "mutant-R01",
+      "killed_by": [],
+      "location": {
+       "file": "api/create-payment.php",
+       "line": 1
+      },
+      "op": "M1",
+      "patch": "SYNTHETIC_OPERATOR: allow mark_paid on PENDING capture",
+      "rule": "R01"
+     }
+    ],
+    "producer": {
+     "kind": "agent",
+     "model": "claude-sonnet-5-5",
+     "name": "Adversary",
+     "version": "1"
+    },
+    "unguarded_rule_ids": []
+   }
+  }
+ ],
+ "adversary-mutant": [
+  {
+   "schema": "ExecutionProposal/1",
+   "payload": {
+    "evidence_refs": [
+     "fake:input:adversary-mutant",
+     "fake:artifact:5c616249c9e372d974c09275dbac4b8f2381c71f3f20072c348987be005d6fa9",
+     "fake:artifact:1185611f98a25ab3f2fafb28629b5beafdf4b538f6167325bd103f835f053a84",
+     "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e"
+    ],
+    "expected_subject": "405604f0108248beda15ce3637c6ff29ff5fe5009606bb543690592aaa9cfcac",
+    "operation": "run_mutant",
+    "recipe_ref": "fixture:recipe",
+    "requested_output_schemas": [
+     "RawCapture/1"
+    ],
+    "scenario_ref": "fixture:mutant-scenario",
+    "subject_ref": "fixture:fork:d7daed8f395aa54d70107ffc498655171ac6201f6ab242d4a9073ccc5074e6fe",
+    "task_id": "adversary-mutant",
+    "variant": "NEW"
+   }
+  }
+ ],
+ "healer-golive": [
+  {
+   "schema": "HealNote/1",
+   "payload": {
+    "created_at": "2026-11-12T08:32:04.737752+00:00",
+    "cutback_requested": false,
+    "evidence_refs": [
+     "fake:artifact:a94111546311dc12118a69fe16249035788392aed1fbbaf8f86bd2b0b0419e6d"
+    ],
+    "graft_id": "run-demo",
+    "id": "draft-7ec9af5e7152c88b",
+    "pause_requested": true,
+    "producer": {
+     "kind": "agent",
+     "model": "claude-sonnet-5-5",
+     "name": "Healer",
+     "version": "1"
+    },
+    "stage_pct": 0,
+    "text": "Anomaly current_state_incompatible observed. Status is operational_review at generation 1. Evidence shows new_economic_state is true and legacy_restore_safe is false, so the current state is not compatible with legacy state even though legacy code is available. Availability of old code does not authorise old-state restoration. A hold was requested (receipt requested:true, termination pending); this is not confirmed termination. Pause is requested. Independent trusted evidence and reviewed authority are required before any current-state compatible recovery. Recovery remains unperformed; no traffic change, rollout increase or compensation was made."
+   }
+  }
+ ],
+ "sentinel-audit": [
+  {
+   "schema": "Alert/1",
+   "payload": {
+    "created_at": "2026-11-12T08:32:16.365731+00:00",
+    "evidence_refs": [
+     "fake:input:sentinel-audit",
+     "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448",
+     "fake:hold:invocation:a58a2a83d6a5b2ad1eb8348511e8566c15e8f52ec4ba9857f2fa385241d5e560"
+    ],
+    "graft_id": "run-demo",
+    "id": "draft-1624b47eb5c93ed8",
+    "message": "Audit window for case-demo run-demo generation 1 shows a denied_tool event (sequence 1) and a secret_attempt event (sequence 2), both policy breaches. A hold has been requested; termination is pending and not confirmed. Safety is not established.",
+    "producer": {
+     "kind": "agent",
+     "model": "claude-haiku-5-5",
+     "name": "Sentinel",
+     "version": "1"
+    },
+    "severity": "CRITICAL"
+   }
+  }
+ ],
+ "librarian-recipe": [
+  {
+   "schema": "Recipe/1",
+   "payload": {
+    "confidence": 0,
+    "env": null,
+    "fingerprint": {
+     "ast_shape_hash": "d251303d5493ac3441544f58fb49d340c38624c5361f5dfde0c2bfbb9f5cffdf",
+     "family": "EC_NVP",
+     "framework": "fixture",
+     "lang": "php"
+    },
+    "id": "quarantine-95f095bc0fccde1d",
+    "provenance": [
+     "fake:input:librarian-recipe",
+     "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "scenarios": [
+     "guard-captured-before-paid"
+    ],
+    "signature": "UNSIGNED_SYNTHETIC_QUARANTINE",
+    "status": "QUARANTINE",
+    "transform": "template:pending-capture-guard:1"
+   }
+  },
+  {
+   "schema": "DetectionRule/1",
+   "payload": {
+    "created_at": "2026-11-12T08:32:24.372314+00:00",
+    "evidence_refs": [
+     "fake:input:librarian-recipe",
+     "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+    ],
+    "graft_id": "run-demo",
+    "id": "draft-92d99b99f7cd76ea",
+    "language": "php",
+    "operation": "capture",
+    "pattern": "literal:legacy_capture",
+    "producer": {
+     "kind": "agent",
+     "model": "claude-sonnet-5-5",
+     "name": "Librarian",
+     "version": "1"
+    }
+   }
+  }
+ ],
+ "orchard-aggregate": [
+  {
+   "schema": "DashboardSpec/1",
+   "payload": {
+    "created_at": "2026-11-12T08:32:38.676778+00:00",
+    "evidence_refs": [
+     "projection:offline:upgrade:1"
+    ],
+    "filters": {
+     "tenant": "offline"
+    },
+    "graft_id": "run-demo",
+    "group_by": [
+     "stage"
+    ],
+    "id": "draft-854bd60ae684ac1d",
+    "metrics": [
+     "cases",
+     "unverified"
+    ],
+    "producer": {
+     "kind": "agent",
+     "model": "claude-haiku-5-5",
+     "name": "Orchard Analyst",
+     "version": "1"
+    },
+    "question": "How are authorized synthetic upgrade audit cases distributed across stages?",
+    "title": "Upgrade audit stage counts (authorized synthetic cohort)"
+   }
+  }
+ ]
+}

@@ -1,0 +1,144 @@
+{
+  "profile": "local_component_this_mac",
+  "shop": {
+    "shop_id": "legacy-php-shop",
+    "recipe": "reference_stand_in",
+    "later_gates": [
+      "state_recipe: not supplied by this recipe",
+      "finalisation_recipe: not supplied by this recipe",
+      "exit_check_recipe: not supplied by this recipe"
+    ]
+  },
+  "evidence_run": "work-0ef1b1567a574f87bae7ef542f1e1a72",
+  "gupta_control": {
+    "case_id": "case-553d7e9344ed4a0590d091729118f873",
+    "work_id": "work-0ef1b1567a574f87bae7ef542f1e1a72",
+    "generation": 1,
+    "baseline_read_accepted": "baseline-read",
+    "status": "operation_started"
+  },
+  "proof_plan": {
+    "checks": 39,
+    "critical": 39,
+    "digest": "d8bd29c349c336ebfee5ff3d3aca305ef981c3f57524b9d4d9008a5584d1afa6"
+  },
+  "proof_result": {
+    "outcome": "hold",
+    "reason_codes": [
+      "MISSING",
+      "VERIFIED"
+    ],
+    "by_state": {
+      "verified": [
+        "baseline:HAPPY",
+        "candidate:HAPPY",
+        "scenario:HAPPY",
+        "baseline:PENDING",
+        "candidate:PENDING",
+        "scenario:PENDING",
+        "baseline:REFUND",
+        "candidate:REFUND",
+        "scenario:REFUND",
+        "baseline:REFUND_TWICE",
+        "candidate:REFUND_TWICE",
+        "scenario:REFUND_TWICE",
+        "baseline:DOUBLE",
+        "candidate:DOUBLE",
+        "scenario:DOUBLE",
+        "baseline:DECLINE",
+        "candidate:DECLINE",
+        "scenario:DECLINE",
+        "baseline:NOTIFY_FORGED",
+        "candidate:NOTIFY_FORGED",
+        "scenario:NOTIFY_FORGED",
+        "baseline:NOTIFY_DUP",
+        "candidate:NOTIFY_DUP",
+        "scenario:NOTIFY_DUP",
+        "baseline:PARITY_EXTRA",
+        "candidate:PARITY_EXTRA",
+        "scenario:PARITY_EXTRA",
+        "mutation:PHP-PENDING",
+        "mutation:PHP-CURRENCY"
+      ],
+      "missing": [
+        "domain_rule:R02",
+        "domain_rule:R04",
+        "domain_rule:R05",
+        "domain_rule:R06",
+        "domain_rule:R08",
+        "domain_rule:R11",
+        "domain_rule:R12",
+        "domain_rule:R17",
+        "payment:shop-checkout-paypal",
+        "isolation:runner"
+      ]
+    }
+  },
+  "mutations_rejudged": {
+    "PHP-PENDING": "PROBLEM",
+    "PHP-CURRENCY": "PROBLEM"
+  },
+  "provider_checks": {
+    "paypal_sandbox": {
+      "run_id": "run-bd9dd40e1e79",
+      "evidence_class": "real_provider",
+      "reverified_from_recording": true,
+      "exchanges": 12,
+      "ids": [
+        "4HP47932H07497904",
+        "4JN01011WL703525P",
+        "89784014675460948"
+      ],
+      "scope": "GoldGraft sandbox app; not this shop's checkout"
+    }
+  },
+  "promotion": {
+    "action": "HOLD",
+    "reason": "ADVICE_HOLD",
+    "advice": "HOLD",
+    "advice_reason": "Thin data"
+  },
+  "lifecycle_review": {
+    "disposition": "HOLD",
+    "gaps": [
+      [
+        "baseline",
+        "SUBJECT_MISMATCH"
+      ],
+      [
+        "candidate",
+        "SUBJECT_MISMATCH"
+      ]
+    ]
+  },
+  "public_view": {
+    "integrity": "unknown",
+    "metrics": {
+      "disposition": "HOLD",
+      "verified_checks": "0",
+      "gaps": "2"
+    }
+  },
+  "certificate": {
+    "issued": false,
+    "held_at": "EVIDENCE_HOLD"
+  },
+  "holds": [
+    "domain_rule:R02: no evidence on this host",
+    "domain_rule:R04: no evidence on this host",
+    "domain_rule:R05: no evidence on this host",
+    "domain_rule:R06: no evidence on this host",
+    "domain_rule:R08: no evidence on this host",
+    "domain_rule:R11: no evidence on this host",
+    "domain_rule:R12: no evidence on this host",
+    "domain_rule:R17: no evidence on this host",
+    "payment:shop-checkout-paypal: no evidence on this host",
+    "isolation:runner: no evidence on this host",
+    "image: no OCI image built (Docker not on this host), so the lifecycle review holds",
+    "promotion: no live buyer traffic, so the rollout advice is HOLD",
+    "signer: no qualified signer attached to this run",
+    "state_recipe: not supplied by this recipe",
+    "finalisation_recipe: not supplied by this recipe",
+    "exit_check_recipe: not supplied by this recipe"
+  ]
+}

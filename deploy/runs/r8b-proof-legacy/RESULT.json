@@ -1,0 +1,556 @@
+{
+  "run_id": "r8b-proof-legacy",
+  "shop": "legacy-php-shop",
+  "status": "completed",
+  "evidence_class": "real_models_connected_graph_scripted_runner",
+  "roles_participated": [
+    "Adversary",
+    "Architect",
+    "Builder",
+    "Explorer",
+    "Gardener",
+    "Grafter",
+    "Healer",
+    "Herald",
+    "Librarian",
+    "Orchard Analyst",
+    "Scribe",
+    "Sentinel",
+    "Surveyor"
+  ],
+  "roles_passed": [
+    "Adversary",
+    "Architect",
+    "Builder",
+    "Explorer",
+    "Gardener",
+    "Grafter",
+    "Healer",
+    "Herald",
+    "Librarian",
+    "Orchard Analyst",
+    "Scribe",
+    "Sentinel",
+    "Surveyor"
+  ],
+  "tasks": [
+    {
+      "task": "gardener:propose_plan",
+      "role": "Gardener",
+      "operation": "propose_plan",
+      "store": "B",
+      "model": "haiku",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:gardener:propose_plan"
+      ],
+      "output_refs": [
+        "fake:artifact:39f44f1077387c423571adea967b7c6251a89a201404f470fa9dbe608d851ae4"
+      ],
+      "cost_micro_usd": 1046,
+      "batch": "ag-int-r8b-proof-legacy-gardener-propose-plan",
+      "seconds": 4.7,
+      "admitted": "survey"
+    },
+    {
+      "task": "survey",
+      "attempt": 1,
+      "role": "Surveyor",
+      "store": "A",
+      "model": "sonnet",
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "cost_micro_usd": 136140,
+      "batch": "ag-int-r8b-proof-legacy-surveyor",
+      "check": {
+        "case_id": "integrated-legacy-php-shop",
+        "passed": true,
+        "failed_checks": [],
+        "scope": "artifact_quality_only",
+        "case_digest": "b2bfdff1eab6338f55db37d8083decaea7302d944ab053cfda3b8ed2cf1f0ec3"
+      },
+      "output_ref": "fake:artifact:4ab864e5a1a297a016c314dc788ba43447dbb3c1f238bb41b087bb4ee8dbdef7",
+      "touchpoints": 8,
+      "passed": true
+    },
+    {
+      "task": "herald",
+      "role": "Herald",
+      "store": "A",
+      "model": "haiku",
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:artifact:4ab864e5a1a297a016c314dc788ba43447dbb3c1f238bb41b087bb4ee8dbdef7"
+      ],
+      "consumed": [
+        "fake:artifact:4ab864e5a1a297a016c314dc788ba43447dbb3c1f238bb41b087bb4ee8dbdef7"
+      ],
+      "cost_micro_usd": 1504,
+      "batch": "ag-int-r8b-proof-legacy-herald",
+      "text": "The source inventory is accepted for further analysis. Inventory contains 8 source indicators. Source-only offline evidence; runtime, payment and live-site outcomes remain unverified."
+    },
+    {
+      "task": "builder:build_baseline",
+      "role": "Builder",
+      "operation": "build_baseline",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:builder:build_baseline",
+        "fake:artifact:39f44f1077387c423571adea967b7c6251a89a201404f470fa9dbe608d851ae4"
+      ],
+      "output_refs": [
+        "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+      ],
+      "cost_micro_usd": 3015,
+      "batch": "ag-int-r8b-proof-legacy-builder-build-baseline",
+      "seconds": 10.0
+    },
+    {
+      "task": "baseline-old",
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:baseline-old",
+        "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+      ],
+      "output_refs": [
+        "fake:artifact:36ebe6624ad85d9e8451d3e5b35502220b5992072a980a0ac5e6545364926abe"
+      ],
+      "cost_micro_usd": 2108,
+      "batch": "ag-int-r8b-proof-legacy-baseline-old",
+      "seconds": 7.5
+    },
+    {
+      "task": "baseline-old-twin",
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:baseline-old-twin",
+        "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+      ],
+      "output_refs": [
+        "fake:artifact:57e7abbd6d094ad93d01ee25261abf3d405959de4bdd9119abbe9d900e3f15aa"
+      ],
+      "cost_micro_usd": 2105,
+      "batch": "ag-int-r8b-proof-legacy-baseline-old-twin",
+      "seconds": 7.6
+    },
+    {
+      "task": "scribe-draft",
+      "role": "Scribe",
+      "operation": "scribe_draft",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:scribe-draft",
+        "fake:artifact:36ebe6624ad85d9e8451d3e5b35502220b5992072a980a0ac5e6545364926abe",
+        "fake:artifact:57e7abbd6d094ad93d01ee25261abf3d405959de4bdd9119abbe9d900e3f15aa"
+      ],
+      "output_refs": [
+        "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+        "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a"
+      ],
+      "cost_micro_usd": 1569,
+      "batch": "ag-int-r8b-proof-legacy-scribe-draft",
+      "seconds": 5.4
+    },
+    {
+      "task": "followup-0",
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:followup-0",
+        "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+        "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+        "fake:artifact:79f7bf7faaf8c992637b68369b67c2e05b6a30a95a9b906cac386a5cd3330ee4"
+      ],
+      "output_refs": [
+        "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+      ],
+      "cost_micro_usd": 2306,
+      "batch": "ag-int-r8b-proof-legacy-followup-0",
+      "seconds": 8.8
+    },
+    {
+      "task": "scribe-final",
+      "role": "Scribe",
+      "operation": "scribe_final",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "blocked",
+      "state": "held",
+      "issue": "DENIED",
+      "passed": false,
+      "input_refs": [
+        "fake:input:scribe-final",
+        "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+        "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+        "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+      ],
+      "output_refs": [],
+      "cost_micro_usd": 1577,
+      "batch": "ag-int-r8b-proof-legacy-scribe-final",
+      "seconds": 5.9
+    },
+    {
+      "task": "scribe-final-retry1",
+      "role": "Scribe",
+      "operation": "scribe_final",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:scribe-final-retry1",
+        "fake:artifact:3c2154988794c29f200576736dffcd26d816479b6a36ec392d77d2a5fe97c6c7",
+        "fake:artifact:ddf5b04bdf751675dbb7773d756304fb21d7668f88f48f0215b4d13a958e4a8a",
+        "fake:artifact:65e4ed10be6797cb91a1a5d5183e25972e68cfc78ea642f8785c40df6ffec175"
+      ],
+      "output_refs": [
+        "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+      ],
+      "cost_micro_usd": 1459,
+      "batch": "ag-int-r8b-proof-legacy-scribe-final-retry1",
+      "seconds": 4.8
+    },
+    {
+      "task": "architect",
+      "role": "Architect",
+      "operation": "architect",
+      "store": "B",
+      "model": "sonnet",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:architect",
+        "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+      ],
+      "output_refs": [
+        "fake:artifact:879e10261e994f88f7a19f85b442f82b95ad457aaf95f7c2cda12eb05be3644c"
+      ],
+      "cost_micro_usd": 44360,
+      "batch": "ag-int-r8b-proof-legacy-architect",
+      "seconds": 12.3
+    },
+    {
+      "task": "grafter",
+      "role": "Grafter",
+      "operation": "candidate_patch",
+      "store": "B",
+      "model": "sonnet",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:grafter",
+        "fake:artifact:879e10261e994f88f7a19f85b442f82b95ad457aaf95f7c2cda12eb05be3644c"
+      ],
+      "output_refs": [
+        "fake:artifact:9e6346ff2d0d69e0ad80eaf02a8849226067d1d5a004bd39916da3e598becf45"
+      ],
+      "cost_micro_usd": 126314,
+      "batch": "ag-int-r8b-proof-legacy-grafter",
+      "seconds": 27.9
+    },
+    {
+      "task": "candidate-build",
+      "role": "Builder",
+      "operation": "build_candidate",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:candidate-build",
+        "fake:artifact:9e6346ff2d0d69e0ad80eaf02a8849226067d1d5a004bd39916da3e598becf45"
+      ],
+      "output_refs": [
+        "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e"
+      ],
+      "cost_micro_usd": 3195,
+      "batch": "ag-int-r8b-proof-legacy-candidate-build",
+      "seconds": 10.5
+    },
+    {
+      "task": "candidate-new",
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:candidate-new",
+        "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+        "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+      ],
+      "output_refs": [
+        "fake:artifact:a94111546311dc12118a69fe16249035788392aed1fbbaf8f86bd2b0b0419e6d"
+      ],
+      "cost_micro_usd": 2257,
+      "batch": "ag-int-r8b-proof-legacy-candidate-new",
+      "seconds": 8.4
+    },
+    {
+      "task": "adversary-guards",
+      "role": "Adversary",
+      "operation": "derive_guards",
+      "store": "B",
+      "model": "sonnet",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:adversary-guards",
+        "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e",
+        "fake:artifact:52e04a6daa6a2bb6706f3acf4b58b70c444aa262b1dc5fa7ce54a98630aba7e6"
+      ],
+      "output_refs": [
+        "fake:artifact:5c616249c9e372d974c09275dbac4b8f2381c71f3f20072c348987be005d6fa9",
+        "fake:artifact:1185611f98a25ab3f2fafb28629b5beafdf4b538f6167325bd103f835f053a84"
+      ],
+      "cost_micro_usd": 76742,
+      "batch": "ag-int-r8b-proof-legacy-adversary-guards",
+      "seconds": 15.8
+    },
+    {
+      "task": "adversary-mutant",
+      "role": "Adversary",
+      "operation": "run_mutant",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:adversary-mutant",
+        "fake:artifact:5c616249c9e372d974c09275dbac4b8f2381c71f3f20072c348987be005d6fa9",
+        "fake:artifact:1185611f98a25ab3f2fafb28629b5beafdf4b538f6167325bd103f835f053a84",
+        "fake:artifact:7ea65c962b10735905f99bda5f20251027c887309e9ae5952d6139c1183d125e"
+      ],
+      "output_refs": [
+        "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+      ],
+      "cost_micro_usd": 3220,
+      "batch": "ag-int-r8b-proof-legacy-adversary-mutant",
+      "seconds": 8.8
+    },
+    {
+      "task": "healer-golive",
+      "role": "Healer",
+      "operation": "diagnose",
+      "store": "B",
+      "model": "sonnet",
+      "escalated": true,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:healer-golive",
+        "fake:artifact:a94111546311dc12118a69fe16249035788392aed1fbbaf8f86bd2b0b0419e6d"
+      ],
+      "output_refs": [
+        "fake:artifact:9eb5ad0b3c254c4882a79fb16bec66880dad389b0c8741a9f52b0f7db93e0326"
+      ],
+      "cost_micro_usd": 28060,
+      "batch": "ag-int-r8b-proof-legacy-healer-golive",
+      "seconds": 11.6
+    },
+    {
+      "task": "sentinel-audit",
+      "role": "Sentinel",
+      "operation": "audit",
+      "store": "B",
+      "model": "haiku",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:sentinel-audit",
+        "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+      ],
+      "output_refs": [
+        "fake:artifact:0ca7397271075247d9906f371e277c0e1d0a392228cf0e5284daee39eaa42ef1"
+      ],
+      "cost_micro_usd": 1727,
+      "batch": "ag-int-r8b-proof-legacy-sentinel-audit",
+      "seconds": 8.0
+    },
+    {
+      "task": "librarian-recipe",
+      "role": "Librarian",
+      "operation": "learn",
+      "store": "B",
+      "model": "sonnet",
+      "escalated": true,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:librarian-recipe",
+        "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+      ],
+      "output_refs": [
+        "fake:artifact:34baffe43c9902b9eda819e970fbd40c5276bde6dd1a432d4b2e2bb03a9be692",
+        "fake:artifact:cd492ed59eab44a53ac530a9218f106dd329d181e534e285e3eb58ad0ceffa87"
+      ],
+      "cost_micro_usd": 34818,
+      "batch": "ag-int-r8b-proof-legacy-librarian-recipe",
+      "seconds": 14.3
+    },
+    {
+      "task": "orchard-aggregate",
+      "role": "Orchard Analyst",
+      "operation": "aggregate",
+      "store": "B",
+      "model": "haiku8",
+      "escalated": false,
+      "outcome": "completed",
+      "state": "succeeded",
+      "issue": null,
+      "passed": true,
+      "input_refs": [
+        "fake:input:orchard-aggregate",
+        "fake:artifact:f5db8896f935e4ae5cb9cd56df99615ca0821cf39ad8f46cf1534774b0285448"
+      ],
+      "output_refs": [
+        "fake:artifact:421a34bc49973837a0dc706de37247aec1784409b92794f206b131e33d2f27a2"
+      ],
+      "cost_micro_usd": 1044,
+      "batch": "ag-int-r8b-proof-legacy-orchard-aggregate",
+      "seconds": 5.0
+    }
+  ],
+  "completed_chain": true,
+  "chain_completed": true,
+  "spent_micro_usd": 474566,
+  "cap_micro_usd": 950000,
+  "ledger": {
+    "spent_micro_usd": 9747283,
+    "reserved_micro_usd": 0,
+    "unknown_micro_usd": 0,
+    "outstanding_micro_usd": 0,
+    "active_cap_micro_usd": 13000000,
+    "hard_cap_micro_usd": 20000000,
+    "frozen": false,
+    "available_micro_usd": 3252717
+  },
+  "routing": {
+    "Orchard Analyst:aggregate": {
+      "haiku_failures": 0,
+      "sonnet_failures": 0,
+      "codes": []
+    },
+    "Librarian:learn": {
+      "haiku_failures": 2,
+      "sonnet_failures": 0,
+      "codes": [
+        "INVALID_MODEL_OUTPUT",
+        "INVALID_MODEL_OUTPUT"
+      ]
+    },
+    "Healer:diagnose": {
+      "haiku_failures": 2,
+      "sonnet_failures": 0,
+      "codes": [
+        "INVALID_MODEL_OUTPUT",
+        "INVALID_MODEL_OUTPUT"
+      ]
+    },
+    "Explorer:run_scenario": {
+      "haiku_failures": 1,
+      "sonnet_failures": 0,
+      "codes": [
+        "INVALID_MODEL_OUTPUT"
+      ]
+    },
+    "Scribe:scribe_final": {
+      "haiku_failures": 0,
+      "sonnet_failures": 0,
+      "codes": []
+    },
+    "Grafter:candidate_patch": {
+      "haiku_failures": 0,
+      "sonnet_failures": 3,
+      "codes": [
+        "INVALID_MODEL_OUTPUT",
+        "INVALID_MODEL_OUTPUT",
+        "INVALID_MODEL_OUTPUT"
+      ]
+    },
+    "Gardener:propose_plan": {
+      "haiku_failures": 0,
+      "sonnet_failures": 0,
+      "codes": []
+    },
+    "Adversary:run_mutant": {
+      "haiku_failures": 0,
+      "sonnet_failures": 0,
+      "codes": []
+    }
+  },
+  "finished_at": "2026-11-12T08:32:43.670306+00:00"
+}

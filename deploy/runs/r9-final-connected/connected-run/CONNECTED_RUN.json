@@ -1,0 +1,151 @@
+{
+  "profile": "local_component_this_mac",
+  "shop": {
+    "shop_id": "legacy-php-shop",
+    "recipe": "reference_stand_in",
+    "later_gates": [
+      "state_recipe: not supplied by this recipe",
+      "finalisation_recipe: not supplied by this recipe",
+      "exit_check_recipe: not supplied by this recipe"
+    ]
+  },
+  "evidence_run": "work-4b430af27d534d82933b4dd6d0c04be8",
+  "gupta_control": {
+    "case_id": "case-fd37f36776cf4229b7f4b1540d0ed193",
+    "work_id": "work-4b430af27d534d82933b4dd6d0c04be8",
+    "generation": 1,
+    "baseline_read_accepted": "baseline-read",
+    "status": "operation_started"
+  },
+  "proof_plan": {
+    "checks": 39,
+    "critical": 39,
+    "digest": "82481c38c1484f32f715108be751cec210f660d12f254570aff353e08e1ce420"
+  },
+  "proof_result": {
+    "outcome": "hold",
+    "reason_codes": [
+      "FAILED",
+      "MISSING",
+      "VERIFIED"
+    ],
+    "by_state": {
+      "verified": [
+        "baseline:HAPPY",
+        "candidate:HAPPY",
+        "scenario:HAPPY",
+        "baseline:PENDING",
+        "candidate:PENDING",
+        "scenario:PENDING",
+        "baseline:REFUND",
+        "candidate:REFUND",
+        "scenario:REFUND",
+        "baseline:REFUND_TWICE",
+        "candidate:REFUND_TWICE",
+        "scenario:REFUND_TWICE",
+        "baseline:DOUBLE",
+        "candidate:DOUBLE",
+        "scenario:DOUBLE",
+        "baseline:DECLINE",
+        "candidate:DECLINE",
+        "scenario:DECLINE",
+        "baseline:NOTIFY_FORGED",
+        "candidate:NOTIFY_FORGED",
+        "scenario:NOTIFY_FORGED",
+        "baseline:NOTIFY_DUP",
+        "candidate:NOTIFY_DUP",
+        "scenario:NOTIFY_DUP",
+        "baseline:PARITY_EXTRA",
+        "candidate:PARITY_EXTRA",
+        "scenario:PARITY_EXTRA",
+        "mutation:PHP-PENDING",
+        "mutation:PHP-CURRENCY",
+        "mutation:PHP-AMOUNT",
+        "mutation:PHP-NOTPAID",
+        "mutation:PHP-BROWSER-AMOUNT",
+        "mutation:PHP-UNKNOWN-SKU"
+      ],
+      "unknown": [
+        "mutation:PHP-RECAPTURE",
+        "mutation:PHP-UNAPPROVED",
+        "mutation:PHP-UNVERIFIED",
+        "mutation:PHP-REFUND-AGAIN"
+      ],
+      "missing": [
+        "payment:shop-checkout-paypal",
+        "isolation:runner"
+      ]
+    }
+  },
+  "mutations_rejudged": {
+    "PHP-PENDING": "PROBLEM",
+    "PHP-CURRENCY": "PROBLEM",
+    "PHP-AMOUNT": "PROBLEM",
+    "PHP-NOTPAID": "PROBLEM",
+    "PHP-RECAPTURE": "PASS",
+    "PHP-UNAPPROVED": "UNVERIFIED",
+    "PHP-UNVERIFIED": "PASS",
+    "PHP-REFUND-AGAIN": "PASS",
+    "PHP-BROWSER-AMOUNT": "PROBLEM",
+    "PHP-UNKNOWN-SKU": "PROBLEM"
+  },
+  "provider_checks": {
+    "paypal_sandbox": {
+      "run_id": "run-bd9dd40e1e79",
+      "evidence_class": "real_provider",
+      "reverified_from_recording": true,
+      "exchanges": 12,
+      "ids": [
+        "4HP47932H07497904",
+        "4JN01011WL703525P",
+        "89784014675460948"
+      ],
+      "scope": "GoldGraft sandbox app; not this shop's checkout"
+    }
+  },
+  "promotion": {
+    "action": "HOLD",
+    "reason": "ADVICE_HOLD",
+    "advice": "HOLD",
+    "advice_reason": "Thin data"
+  },
+  "lifecycle_review": {
+    "disposition": "HOLD",
+    "gaps": [
+      [
+        "baseline",
+        "SUBJECT_MISMATCH"
+      ],
+      [
+        "candidate",
+        "SUBJECT_MISMATCH"
+      ]
+    ]
+  },
+  "public_view": {
+    "integrity": "unknown",
+    "metrics": {
+      "disposition": "HOLD",
+      "verified_checks": "0",
+      "gaps": "2"
+    }
+  },
+  "certificate": {
+    "issued": false,
+    "held_at": "EVIDENCE_HOLD"
+  },
+  "holds": [
+    "payment:shop-checkout-paypal: no evidence on this host",
+    "isolation:runner: no evidence on this host",
+    "mutation:PHP-RECAPTURE:R05: planted bug was not caught",
+    "mutation:PHP-UNAPPROVED:R06: planted bug was not caught",
+    "mutation:PHP-UNVERIFIED:R08: planted bug was not caught",
+    "mutation:PHP-REFUND-AGAIN:R11: planted bug was not caught",
+    "image: no OCI image built (Docker not on this host), so the lifecycle review holds",
+    "promotion: no live buyer traffic, so the rollout advice is HOLD",
+    "signer: no qualified signer attached to this run",
+    "state_recipe: not supplied by this recipe",
+    "finalisation_recipe: not supplied by this recipe",
+    "exit_check_recipe: not supplied by this recipe"
+  ]
+}

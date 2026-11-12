@@ -1,0 +1,73 @@
+{
+  "run_id": "r9-final-connected",
+  "original_passes_review": true,
+  "original_refusal": null,
+  "planted": 7,
+  "caught": 7,
+  "mutants": [
+    {
+      "id": "M1",
+      "rule": "paid-only-when-completed",
+      "what": "A PENDING capture is marked PAID",
+      "file": "api/execute-payment.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "DENIED money rule: PAID set without a completed check in api/execute-payment.php"
+    },
+    {
+      "id": "M2",
+      "rule": "no-old-paypal",
+      "what": "The old NVP capture call is left in",
+      "file": "api/execute-payment.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "DENIED old PayPal call left in api/execute-payment.php"
+    },
+    {
+      "id": "M3",
+      "rule": "verify-webhooks",
+      "what": "The webhook signature check is removed",
+      "file": "ipn.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "MISSING_EVIDENCE planned operations not called: gg_verify_webhook"
+    },
+    {
+      "id": "M4",
+      "rule": "refund-only-paid",
+      "what": "An order that was never paid can be refunded",
+      "file": "api/refund.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "DENIED money rule: refund without a paid-order check in api/refund.php"
+    },
+    {
+      "id": "M5",
+      "rule": "library-loaded",
+      "what": "The Orders v2 library is no longer loaded",
+      "file": "api/execute-payment.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "MISSING_EVIDENCE installed library not loaded in api/execute-payment.php"
+    },
+    {
+      "id": "M6",
+      "rule": "no-secrets-in-code",
+      "what": "A PayPal client secret is pasted into the code",
+      "file": "api/execute-payment.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "DENIED credential literal in api/execute-payment.php"
+    },
+    {
+      "id": "M7",
+      "rule": "verify-webhooks",
+      "what": "The webhook is checked but the result is ignored",
+      "file": "ipn.php",
+      "applied": true,
+      "caught": true,
+      "refusal": "DENIED money rule: webhook handled without its check in ipn.php"
+    }
+  ],
+  "note": "Planted bugs in the Grafter's real code, judged by the deterministic code review only (not the independent proof, not a payment run)."
+}

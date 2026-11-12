@@ -672,13 +672,14 @@ def create_app(
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8700)
+    parser.add_argument("--host", default="127.0.0.1", help="0.0.0.0 on a hosted server")
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--runs-dir", type=Path, default=DEFAULT_RUNS_DIR)
     args = parser.parse_args(argv)
     import uvicorn
 
     uvicorn.run(
-        create_app(runs_dir=args.runs_dir, live_enabled=args.live), host="127.0.0.1", port=args.port
+        create_app(runs_dir=args.runs_dir, live_enabled=args.live), host=args.host, port=args.port
     )
 
 
