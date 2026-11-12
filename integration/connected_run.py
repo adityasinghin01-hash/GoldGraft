@@ -41,7 +41,7 @@ from goldgraft_foundation.ledger import Ledger
 from integration.private_certificates import issue_private_certificate
 from integration.promotion import gate_promotion
 from integration.proof_evidence import EvidenceContext, StoredArtifact, evaluate_plan
-from integration.shop_socket import RecipeProof, ShopRecipe, reference_recipe
+from integration.shop_socket import RecipeProof, ShopRecipe, load_recipe, reference_recipe
 from pieces.backend.connection.service import CaseService, Principal
 from pieces.backend.connection.work import WorkControl
 from pieces.proof.lifecycle_evidence import (
@@ -433,7 +433,14 @@ def connect_run(
                 **common,
             )
         )
-    unguarded = report.get("unguarded_critical_rule_ids", [])
+    mutated_rules = {item["mutant"]["rule"] for item in report.get("candidate_mutations", [])}
+    # A rule with an executed planted bug is represented by that mutation check
+    # (verified only if caught); only rules with none get a missing rule check.
+    unguarded = [r for r in report.get("unguarded_critical_rule_ids", []) if r not in mutated_rules]
+    mutant_rule = {
+        item["mutant"]["id"]: item["mutant"]["rule"]
+        for item in report.get("candidate_mutations", [])
+    }
     for rule in unguarded:  # Nothing stored: no executed mutation guards this rule yet.
         checks.append(
             _check(
@@ -659,6 +666,13 @@ def connect_run(
         "certificate": certificate,
         "holds": [
             *(f"{c}: no evidence on this host" for c in by_state.get("missing", [])),
+            *(
+                f"{c}:{mutant_rule.get(c.split(':', 1)[1], '?')}: planted bug was not caught"
+                for state, ids in by_state.items()
+                if state not in {"verified", "missing", "excluded"}
+                for c in ids
+                if c.startswith("mutation:")
+            ),
             "image: no OCI image built (Docker not on this host), so the lifecycle review holds",
             "promotion: no live buyer traffic, so the rollout advice is HOLD",
             "signer: no qualified signer attached to this run",
@@ -676,10 +690,18 @@ def main(argv=None):
     parser.add_argument("run_dir", type=Path)
     parser.add_argument("--state-dir", type=Path, required=True)
     parser.add_argument("--sandbox-capture", type=Path)
+    parser.add_argument(
+        "--shop", type=Path, help="pieces/shops/<id> recipe folder (default: reference stand-in)"
+    )
     args = parser.parse_args(argv)
     print(
         json.dumps(
-            connect_run(args.run_dir, args.state_dir, sandbox_capture=args.sandbox_capture),
+            connect_run(
+                args.run_dir,
+                args.state_dir,
+                sandbox_capture=args.sandbox_capture,
+                recipe=load_recipe(args.shop) if args.shop else None,
+            ),
             indent=2,
         )
     )

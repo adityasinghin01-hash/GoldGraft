@@ -11,7 +11,7 @@ from pathlib import Path
 
 from goldgraft_contracts.registry import validate
 
-from integration.local_mutants import build_mutants
+from integration.local_mutants import build_mutants, scenario_for
 from integration.local_proof import output_payload
 from integration.local_shop import (
     ROOT,
@@ -134,7 +134,7 @@ def check(directory, output, *, php="php"):
     (output / "mutants").mkdir()
     verdicts = {row["scenario"]: row["actual_model_plan"] for row in report["scenarios"]}
     for mutant in mutants:
-        scenario = "PENDING" if mutant.rule == "R01" else "HAPPY"
+        scenario = scenario_for(mutant.rule)
         if verdicts[scenario]["grade"] not in {"PASS", "PASS_FIXED"}:
             report["unsupported_candidate_mutations"].append(
                 {"id": mutant.id, "reason": "baseline does not pass; no kill can be attributed"}
@@ -173,6 +173,10 @@ def check(directory, output, *, php="php"):
         )
         print("MUTANT", mutant.id, scenario, verdict.grade, flush=True)
     executed = [m for m in mutants if m.id in mutation_runs]
+    # Only a PROBLEM verdict is a kill; PASS/UNVERIFIED/anything else survived.
+    report["candidate_mutations_survived"] = sorted(
+        m.id for m in executed if str(mutation_runs[m.id][scenario_for(m.rule)]) != "PROBLEM"
+    )
     strength = proof.proof_strength(executed, mutation_runs)
     report["candidate_mutation_strength"] = strength.model_dump(mode="json")
     scenarios = [
@@ -192,8 +196,8 @@ def check(directory, output, *, php="php"):
         and report.get("order_listing_parity_passed") is True
         and not report["unsupported_candidate_mutations"]
         and all(v["grade"] in {"PASS", "PASS_FIXED"} for v in verdicts.values())
-        and len(executed) == 2
-        and strength.killed == 2
+        and len(executed) == len(mutants)
+        and not report["candidate_mutations_survived"]
     )
     report["status"] = (
         "LOCAL_PHP_CHECKS_COMPLETE" if report["local_php_checks_complete"] else "HELD"
