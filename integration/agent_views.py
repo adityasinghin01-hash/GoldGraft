@@ -42,6 +42,92 @@ WORDS = {
     "adversary-guards": "Adversary planned the attacks",
     "adversary-mutant": "Adversary ran a planted bug",
 }
+# What each step's input really was (shown beside every agent in the app). "real" = this shop's
+# own data; "mixed" = real run data plus a recorded/controlled part; "sample" = qualified sample.
+RECORDED = "recorded runner, not a live shop"
+INPUTS = {
+    "gardener:propose_plan": ("mixed", "Admits this run's first stage; plan ids are the sample's"),
+    "survey": ("real", "The submitted shop's own source files"),
+    "herald": ("real", "The Surveyor's committed map of this shop"),
+    "builder:build_baseline": ("mixed", f"This shop's surveyed source; the build is a {RECORDED}"),
+    "baseline-old": ("sample", f"Old-shop payment capture from the {RECORDED}"),
+    "baseline-old-twin": ("sample", f"Second old-shop capture from the {RECORDED}"),
+    "followup-0": ("sample", f"Follow-up capture asked for by the Scribe, {RECORDED}"),
+    "scribe-draft": ("mixed", "Recorded traces and the sample checkout's facts"),
+    "scribe-final": ("mixed", "Recorded traces and the sample checkout's facts"),
+    "architect": ("real", "The Surveyor's real map, scoped to the supported PayPal calls"),
+    "grafter": ("real", "The shop's real payment files and the Architect's plan"),
+    "candidate-build": ("mixed", f"The AI-written files (PHP checked); build is a {RECORDED}"),
+    "candidate-new": ("sample", f"New-checkout capture from the {RECORDED}"),
+    "adversary-guards": ("sample", "The sample checkout's money rule, not yet the AI-written code"),
+    "adversary-mutant": ("sample", "A planted bug in the sample checkout, recorded runner"),
+    "healer-golive": ("mixed", "A controlled go-live fault on this run's new-checkout capture"),
+    "sentinel-audit": ("mixed", "This run's real step outcomes plus one controlled hostile event"),
+    "librarian-recipe": ("sample", "The qualified de-identified recipe template (quarantined)"),
+    "orchard-aggregate": ("mixed", "Counts over this machine's test runs, small groups hidden"),
+}
+
+
+def _clip(text, n=420):
+    text = " ".join(str(text or "").split())
+    return text if len(text) <= n else text[: n - 1].rstrip() + "…"
+
+
+def summarize(schema, p):
+    """One plain sentence for an agent output (the app shows it beside the agent)."""
+    name = schema.split("/")[0]
+    if name == "PlanProposal":
+        steps = [t.get("task_id") or t.get("role") for t in p.get("tasks", [])]
+        return f"Plan of {len(steps)} step(s): {', '.join(map(str, steps))}"
+    if name == "RootMap":
+        spots = p.get("touchpoints", [])
+        files = {t.get("location", {}).get("file") for t in spots}
+        return f"Found {len(spots)} old PayPal spots in {len(files)} files"
+    if name == "HeraldText":
+        return _clip(p.get("text"))
+    if name == "ExecutionProposal":
+        variant = f" ({p['variant']})" if p.get("variant") else ""
+        return f"Asked the runner to {str(p.get('operation', '')).replace('_', ' ')}{variant}"
+    if name == "Contract":
+        rules = p.get("rules", [])
+        titles = "; ".join(f"{r.get('title')} [{r.get('severity')}]" for r in rules)
+        return f"{len(rules)} money rule(s): {titles}"
+    if name == "TriangleRequest":
+        return _clip(f"Asked for more evidence on rule {p.get('rule_id')}: {p.get('reason')}")
+    if name == "TargetPlan":
+        items = p.get("items", [])
+        ops = sorted({i.get("target_op") for i in items if i.get("target_op")})
+        return f"Planned {len(items)} change(s) to {', '.join(ops)}"
+    if name == "ChangeList":
+        changes = p.get("changes", [])
+        ids = {i for c in changes for i in c.get("plan_item_ids", [])}
+        lead = _clip(changes[0].get("summary"), 220) if changes else ""
+        return f"Wrote code for {len(ids)} planned item(s). {lead}".strip()
+    if name == "ScenarioSet":
+        sc = p.get("scenarios", [])
+        preds = "; ".join(s.get("expect", {}).get("predicate", s.get("id", "")) for s in sc)
+        return f"{len(sc)} attack scenario(s): {preds}"
+    if name == "MutantSet":
+        ms = p.get("mutants", [])
+        return f"{len(ms)} planted bug(s): " + "; ".join(str(m.get("patch")) for m in ms)
+    if name == "HealNote":
+        asks = [
+            w
+            for w, k in (("pause", "pause_requested"), ("cut back", "cutback_requested"))
+            if p.get(k)
+        ]
+        ask = f" Asked to {' and '.join(asks)} go-live." if asks else ""
+        return _clip(p.get("text"), 360) + ask
+    if name == "Alert":
+        return _clip(p.get("message"))
+    if name == "Recipe":
+        fp = p.get("fingerprint", {})
+        return f"Recipe for {fp.get('lang')} {fp.get('family')}: {p.get('status')} (not activated)"
+    if name == "DetectionRule":
+        return f"Detection rule for {p.get('language')} {p.get('operation')}: {p.get('pattern')}"
+    if name == "DashboardSpec":
+        return f"{p.get('title')}: {p.get('question')}"
+    return name
 
 
 class IntegratedRunViews:
@@ -209,6 +295,45 @@ class IntegratedRunViews:
     def summary_text(self):
         herald = (self._outputs().get("herald") or [None])[0]
         return (herald or {}).get("payload")
+
+    def agents(self):
+        """Every agent step of the run: model, cost, outcome, what its input was, what it made."""
+        result, outputs = self._result(), self._outputs()
+        rows = []
+        for t in result.get("tasks", []):
+            task = t["task"]
+            base = task.removesuffix("-retry1")
+            source, note = INPUTS.get(base, ("sample", "Qualified sample input"))
+            rows.append(
+                {
+                    "task": base,
+                    "attempt": 2 if task.endswith("-retry1") else 1,
+                    "role": t["role"],
+                    "operation": t.get("operation"),
+                    "model": MODELS.get(t.get("model"), t.get("model")),
+                    "escalated": bool(t.get("escalated")),
+                    "passed": bool(t.get("passed")),
+                    "issue": t.get("issue"),
+                    "cost_usd": round((t.get("cost_micro_usd") or 0) / 1e6, 6),
+                    "seconds": t.get("seconds"),
+                    "input": source,
+                    "input_note": note,
+                    "outputs": [
+                        {"schema": o["schema"], "summary": summarize(o["schema"], o["payload"])}
+                        for o in outputs.get(task, [])
+                    ],
+                }
+            )
+        return {"graft_id": self.graft_id, "status": result.get("status"), "agents": rows}
+
+    def outputs_of(self, schema):
+        """Committed payloads of one schema across the run's steps (latest attempt wins)."""
+        found = {}
+        for task, items in self._outputs().items():
+            for item in items:
+                if item["schema"] == schema:
+                    found[task.removesuffix("-retry1")] = item["payload"]
+        return list(found.values())
 
     def scenarios(self):
         raise LookupError("scenario evidence comes from the scripted runner; not served")

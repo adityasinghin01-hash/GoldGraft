@@ -43,6 +43,11 @@ def runs(tmp_path, monkeypatch):
     outputs = {
         "survey": [{"schema": "RootMap/1", "payload": data.example("RootMap")}],
         "sentinel-audit": [{"schema": "Alert/1", "payload": data.example("Alert")}],
+        "adversary-guards": [{"schema": "ScenarioSet/1", "payload": data.example("ScenarioSet")}],
+        "librarian-recipe": [{"schema": "Recipe/1", "payload": data.example("Recipe")}],
+        "orchard-aggregate": [
+            {"schema": "DashboardSpec/1", "payload": data.example("DashboardSpec")}
+        ],
     }
     for values in outputs.values():
         for item in values:
@@ -122,11 +127,38 @@ def test_graft_rootmap_and_sse_reconnect(runs):
     assert {p.name for p in (runs / "sample-1").iterdir()} == {"RESULT.json", "OUTPUTS.json"}
 
 
-def test_real_runs_list_no_payment_scenarios_yet(runs):
+def test_real_agent_outputs_reach_their_screens(runs):
+    scenarios = data.example("ScenarioSet")["scenarios"]
     with TestClient(create_app(runs_dir=runs)) as client:
-        response = client.get("/grafts/sample-1/scenarios")
-        assert response.status_code == 200
-        assert response.json() == {"graft_id": "sample-1", "scenarios": []}
+        # Payment tests: the Adversary's real scenarios, never an invented verdict.
+        listed = client.get("/grafts/sample-1/scenarios").json()
+        assert [row["scenario"]["id"] for row in listed["scenarios"]] == [
+            s["id"] for s in scenarios
+        ]
+        assert all(row["verdict"] is None for row in listed["scenarios"])
+        # Agents tab: every step with its model, cost and an honest input label.
+        agents = client.get("/grafts/sample-1/agents").json()
+        assert [a["role"] for a in agents["agents"]] == ["Gardener", "Surveyor", "Sentinel"]
+        by_role = {a["role"]: a for a in agents["agents"]}
+        assert by_role["Surveyor"]["input"] == "real"
+        assert by_role["Sentinel"]["input"] == "mixed"
+        assert by_role["Surveyor"]["outputs"][0]["summary"].startswith("Found ")
+        assert by_role["Surveyor"]["model"] == "claude-haiku-5-5"
+        # Go-live never shows the sample's data for a real run.
+        assert_problem(client.get("/heal/sample-1"), 404)
+        assert client.get("/heal/demo-1").status_code == 200
+        # Security: Sentinel's real alerts for a real run; the stand-in says it is a sample.
+        gauntlet = client.get("/security/gauntlet/sample-1").json()
+        assert gauntlet["attempts"] == [] and gauntlet["alerts"] == [data.example("Alert")]
+        stand_in = client.get("/security/gauntlet/run-1")
+        assert "SYNTHETIC" in stand_in.json()["label"]
+        assert int(stand_in.headers["content-length"]) == len(stand_in.content)
+        # Recipes and PayPal team come from the Librarian's and Orchard Analyst's real outputs.
+        assert client.get("/recipes").json()["recipes"] == [data.example("Recipe")]
+        orchard = client.get("/orchard").json()
+        assert [s["shop_id"] for s in orchard["shops"]] == ["legacy-php-shop"]
+        assert orchard["dashboards"] == [data.example("DashboardSpec")]
+        assert orchard["label"].startswith("Real Orchard Analyst output")
 
 
 @pytest.mark.parametrize("suffix", ["cmel", "proof"])
@@ -134,7 +166,7 @@ def test_independent_proof_is_not_claimed(runs, suffix):
     with TestClient(create_app(runs_dir=runs)) as client:
         response = client.get(f"/grafts/sample-1/{suffix}")
         assert_problem(response, 404)
-        assert "independent proof not run yet" in response.json()["detail"]
+        assert "independent proof has not run" in response.json()["detail"]
 
 
 def test_changes_and_unknown_backend_fallthrough(runs):

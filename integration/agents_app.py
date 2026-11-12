@@ -21,7 +21,14 @@ from threading import Lock, Thread
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, StreamingResponse
-from goldgraft_contracts.api import Graft, StartGraftRequest
+from goldgraft_contracts.api import (
+    GauntletRun,
+    Graft,
+    OrchardView,
+    RecipeList,
+    ScenarioList,
+    StartGraftRequest,
+)
 from starlette.concurrency import run_in_threadpool
 
 from integration.agent_views import IntegratedRunViews
@@ -32,7 +39,12 @@ DEFAULT_RUNS_DIR = Path.home() / "reports/goldgraft-agents-integration-20261112/
 GATEWAY_PYTHON = Path("/Users/aditya/reports/goldgraft-model-gateway-20261111/venv/bin/python")
 EVIDENCE_CLASS = "real-models-scripted-runner"
 NO_PROOF = (
-    "scripted runner evidence is not served for real agent runs; independent proof not run yet"
+    "Money events here come from the recorded runner and are not served for real agent runs; "
+    "the independent proof has not run on AI-written code yet"
+)
+NO_GOLIVE = (
+    "Go-live has not run for this upgrade. The Healer's diagnosis of a controlled fault is on "
+    "the Agents tab"
 )
 log = logging.getLogger(__name__)
 
@@ -289,11 +301,87 @@ def create_app(
 
         return sorted(rows, key=order, reverse=True)
 
+    def is_run(run_id):
+        folder = directory(run_id)
+        return folder is not None and (folder / "RESULT.json").is_file()
+
+    def finished_runs():
+        """Runs with committed results, newest first."""
+        rows = list_runs()
+        return [r["run_id"] for r in rows if r["status"] != "running" and is_run(r["run_id"])]
+
+    def gauntlet(run_id):
+        """Sentinel's real audit alerts for this run (no hidden-instruction test shop ran here)."""
+        alerts = get_view(run_id).outputs_of("Alert/1")
+        run = GauntletRun.model_validate({"run_id": run_id, "attempts": [], "alerts": alerts})
+        return dict(
+            run.model_dump(mode="json"),
+            label="Real Sentinel output for this agent run; it audited a controlled hostile event",
+        )
+
+    def fleet_recipes():
+        """The Librarian's real (quarantined) recipes across runs; newest copy of each id wins."""
+        found = {}
+        for run_id in reversed(finished_runs()):
+            for recipe in get_view(run_id).outputs_of("Recipe/1"):
+                found[recipe["id"]] = recipe
+        return RecipeList.model_validate({"recipes": list(found.values())}).model_dump(mode="json")
+
+    def fleet_orchard():
+        """PayPal-team view from real runs: latest surveyed run per shop + Orchard dashboards."""
+        runs = finished_runs()
+        latest = {}
+        # Each shop's newest completed run (a held run would understate how far it got).
+        for want_completed in (True, False):
+            for run_id in runs:
+                view = get_view(run_id)
+                completed = view.agents()["status"] == "completed"
+                if view.shop_id not in latest and view.outputs_of("RootMap/1"):
+                    if completed or not want_completed:
+                        latest[view.shop_id] = view
+        shops = []
+        for shop_id, view in latest.items():
+            spots = view.rootmap().get("touchpoints", [])
+            plans = view.outputs_of("TargetPlan/1")
+            items = plans[0].get("items", []) if plans else []
+            shops.append(
+                {
+                    "shop_id": shop_id,
+                    "stage": str(view.graft().stage),
+                    "old_families": sorted({t["family"] for t in spots}),
+                    "deadline_risk": "Not assessed in test runs",
+                    "paypal_only_items": sum(1 for i in items if i.get("paypal_only")),
+                }
+            )
+        dashboards = {}
+        for run_id in reversed(runs):
+            for spec in get_view(run_id).outputs_of("DashboardSpec/1"):
+                dashboards[spec.get("title") or spec["id"]] = spec
+        view = OrchardView.model_validate(
+            {
+                "shops": shops,
+                "dashboards": list(dashboards.values()),
+                "label": f"Real Orchard Analyst output over {len(runs)} local test runs",
+            }
+        )
+        return view.model_dump(mode="json")
+
     def read_run(request, run_id, suffix):
         path = directory(run_id)
+        if suffix == "agents":
+            return JSONResponse(get_view(run_id).agents())
         if suffix == "scenarios":
-            # Honest and quiet: no payment scenarios have run on real agent code yet.
-            return JSONResponse({"graft_id": run_id, "scenarios": []})
+            # The Adversary's real attack scenarios; no independent verdict exists yet.
+            rows = [
+                {"scenario": sc, "verdict": None}
+                for sset in get_view(run_id).outputs_of("ScenarioSet/1")
+                for sc in sset.get("scenarios", [])
+            ]
+            try:
+                listed = ScenarioList.model_validate({"graft_id": run_id, "scenarios": rows})
+            except ValueError:
+                listed = ScenarioList(graft_id=run_id, scenarios=[])
+            return JSONResponse(listed.model_dump(mode="json"))
         if suffix in {"cmel", "proof"}:
             return _problem(404, NO_PROOF)
         if suffix == "changes":
@@ -397,7 +485,7 @@ def create_app(
             return rebuilt
         start_match = re.fullmatch(r"/shops/([^/]+)/graft", path)
         run_match = re.fullmatch(
-            r"/grafts/([^/]+)(?:/(events|rootmap|scenarios|cmel|proof|changes))?", path
+            r"/grafts/([^/]+)(?:/(events|rootmap|scenarios|cmel|proof|changes|agents))?", path
         )
         is_start = (
             request.method == "POST"
@@ -423,11 +511,37 @@ def create_app(
             )
         )
         is_listing = request.method == "GET" and path == "/runs"
-        if not (is_listing or is_start or is_read):
+        heal_match = re.fullmatch(r"/heal/([^/]+)(?:/inject-fault)?", path)
+        gauntlet_match = re.fullmatch(r"/security/gauntlet/([^/]+)", path)
+        special = None
+        if heal_match and is_run(heal_match[1]):
+            special = lambda: _problem(404, NO_GOLIVE)  # noqa: E731
+        elif request.method == "GET" and gauntlet_match and is_run(gauntlet_match[1]):
+            special = lambda: JSONResponse(gauntlet(gauntlet_match[1]))  # noqa: E731
+        elif request.method == "GET" and path == "/recipes":
+            special = lambda: JSONResponse(fleet_recipes())  # noqa: E731
+        elif request.method == "GET" and path == "/orchard":
+            special = lambda: JSONResponse(fleet_orchard())  # noqa: E731
+        elif request.method == "GET" and gauntlet_match:
+            # The stand-in security test stays, but says it is a sample in live mode.
+            response = await call_next(request)
+            content = b"".join([chunk async for chunk in response.body_iterator])
+            if response.status_code == 200:
+                data = json.loads(content)
+                data.setdefault("label", "SYNTHETIC — stand-in security test, not a recording")
+                content = json.dumps(data).encode()
+            rebuilt = Response(content, status_code=response.status_code)
+            rebuilt.raw_headers = [
+                (k, v) for k, v in response.raw_headers if k.lower() != b"content-length"
+            ] + [(b"content-length", str(len(content)).encode())]
+            return rebuilt
+        if not (is_listing or is_start or is_read or special):
             return await call_next(request)
         try:
             if is_listing:
                 response = JSONResponse(await run_in_threadpool(list_runs))
+            elif special:
+                response = await run_in_threadpool(special)
             elif is_start:
                 try:
                     body = await request.json()
