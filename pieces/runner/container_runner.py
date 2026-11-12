@@ -30,6 +30,9 @@ from goldgraft_contracts.registry import validate
 from goldgraft_contracts.runner import SECRET_HEADERS, JobResult, JobSpec, RawCapture
 from goldgraft_foundation.blobs import BlobStore, LocalBlobStore
 
+from .e2b_backend import E2BIsolationBackend as E2BIsolationBackend
+from .e2b_backend import IsolationNotEstablished
+
 log = logging.getLogger("goldgraft.runner")
 
 # Reference prefix for stored capture blobs
@@ -38,10 +41,6 @@ PREFIX = "fixtures://proof/legacy-php-shop/raw/"
 # Vendored upstream Cutover sample pin; fixture provenance, not a run identity.
 FIXTURE_SOURCE_PIN = "aedc11dde1a8793285665ca2188aff62ab5aab65"
 FIXTURE_WORKFLOW = "offline-fixture-capture-replay"
-
-
-class IsolationNotEstablished(RuntimeError):
-    """Raised when a caller asks for isolated execution without an isolation backend."""
 
 
 class BlockedEgressError(RuntimeError):
@@ -182,34 +181,6 @@ class SandboxedProcessBackend:
                 "termination_confirmed": bool(reaped),
                 "termination_scope": "process_tree" if reaped else "unconfirmed",
             }
-
-
-class E2BIsolationBackend:
-    """Placeholder for an E2B microVM backend. It never runs anything locally.
-
-    No E2B SDK integration is implemented or qualified in this repository, so
-    every run is refused. A host-process fallback labelled as E2B would be a
-    false isolation claim.
-    """
-
-    name = "e2b_sandbox"
-
-    def __init__(self, api_key: str | None = None):
-        self.api_key = api_key or os.environ.get("E2B_API_KEY")
-
-    def run(
-        self,
-        command: list[str],
-        *,
-        cwd: Path,
-        env: dict[str, str],
-        timeout_s: float,
-    ) -> dict[str, Any]:
-        if not self.api_key:
-            raise IsolationNotEstablished("E2BIsolationBackend requires an E2B_API_KEY")
-        raise IsolationNotEstablished(
-            "E2B execution is not implemented; refusing to fall back to a host process"
-        )
 
 
 class ContainerRunner:
@@ -376,6 +347,7 @@ class ContainerRunner:
         if self.isolation is not None:
             raw = self.isolation.run(command, cwd=shop_dir, env=safe_env, timeout_s=timeout_s)
             return {
+                **raw,
                 "exit_code": raw.get("exit_code", -1),
                 "stdout": self._redact_output(raw.get("stdout") or ""),
                 "stderr": self._redact_output(raw.get("stderr") or ""),
@@ -385,7 +357,7 @@ class ContainerRunner:
                 "isolation_verified": bool(raw.get("isolation_verified")),
                 "termination_confirmed": bool(raw.get("termination_confirmed")),
                 "termination_scope": raw.get("termination_scope"),
-                "env_digest": env_digest,
+                "env_digest": raw.get("env_digest", env_digest),
             }
 
         if not allow_host_process:

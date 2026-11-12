@@ -1,0 +1,2 @@
+# Optional remote command backend; the core test suite uses fake SDK objects.
+e2b==2.63.0

@@ -655,7 +655,7 @@ def test_e2b_backend_never_falls_back_to_a_host_process(tmp_path):
 
     marker = tmp_path / "ran.txt"
     runner = ContainerRunner(isolation=E2BIsolationBackend(api_key="e2b_test_key"))
-    with pytest.raises(IsolationNotEstablished, match="not implemented"):
+    with pytest.raises(IsolationNotEstablished, match="authorize_remote"):
         runner.execute_shop_process(
             shop_dir=tmp_path,
             command=[sys.executable, "-c", f"open({str(marker)!r}, 'w').write('x')"],
