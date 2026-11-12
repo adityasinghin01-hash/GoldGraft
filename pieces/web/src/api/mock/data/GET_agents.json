@@ -1,0 +1,399 @@
+{
+  "graft_id": "demo-1",
+  "status": "completed",
+  "agents": [
+    {
+      "task": "gardener:propose_plan",
+      "attempt": 1,
+      "role": "Gardener",
+      "operation": "propose_plan",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.001047,
+      "seconds": 4.2,
+      "input": "mixed",
+      "input_note": "Admits this run's first stage; plan ids are the sample's",
+      "outputs": [
+        {
+          "schema": "PlanProposal/1",
+          "summary": "Plan of 1 step(s): survey"
+        }
+      ]
+    },
+    {
+      "task": "survey",
+      "attempt": 1,
+      "role": "Surveyor",
+      "operation": null,
+      "model": "claude-sonnet-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.13598,
+      "seconds": null,
+      "input": "real",
+      "input_note": "The submitted shop's own source files",
+      "outputs": [
+        {
+          "schema": "RootMap/1",
+          "summary": "Found 8 old PayPal spots in 5 files"
+        }
+      ]
+    },
+    {
+      "task": "herald",
+      "attempt": 1,
+      "role": "Herald",
+      "operation": null,
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.001486,
+      "seconds": null,
+      "input": "real",
+      "input_note": "The Surveyor's committed map of this shop",
+      "outputs": [
+        {
+          "schema": "HeraldText",
+          "summary": "The source inventory is accepted for further analysis. Inventory contains 8 source indicators. Source-only offline evidence; runtime, payment and live-site outcomes remain unverified."
+        }
+      ]
+    },
+    {
+      "task": "builder:build_baseline",
+      "attempt": 1,
+      "role": "Builder",
+      "operation": "build_baseline",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.003064,
+      "seconds": 8.5,
+      "input": "mixed",
+      "input_note": "This shop's surveyed source; the build is a recorded runner, not a live shop",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to build baseline"
+        }
+      ]
+    },
+    {
+      "task": "baseline-old",
+      "attempt": 1,
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.002009,
+      "seconds": 6.5,
+      "input": "sample",
+      "input_note": "Old-shop payment capture from the recorded runner, not a live shop",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to run scenario (OLD)"
+        }
+      ]
+    },
+    {
+      "task": "baseline-old-twin",
+      "attempt": 1,
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.002083,
+      "seconds": 6.6,
+      "input": "sample",
+      "input_note": "Second old-shop capture from the recorded runner, not a live shop",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to run scenario (OLD_TWIN)"
+        }
+      ]
+    },
+    {
+      "task": "scribe-draft",
+      "attempt": 1,
+      "role": "Scribe",
+      "operation": "scribe_draft",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.001359,
+      "seconds": 4.3,
+      "input": "mixed",
+      "input_note": "Recorded traces and the sample checkout's facts",
+      "outputs": [
+        {
+          "schema": "Contract/1",
+          "summary": "1 money rule(s): Payment requires completed capture [CRITICAL]"
+        },
+        {
+          "schema": "TriangleRequest/1",
+          "summary": "Asked for more evidence on rule captured-before-paid: Mapped baseline trace evidence is missing for the captured-before-paid rule; request bounded Explorer followup."
+        }
+      ]
+    },
+    {
+      "task": "followup-0",
+      "attempt": 1,
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.002258,
+      "seconds": 7.7,
+      "input": "sample",
+      "input_note": "Follow-up capture asked for by the Scribe, recorded runner, not a live shop",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to run scenario (OLD)"
+        }
+      ]
+    },
+    {
+      "task": "scribe-final",
+      "attempt": 1,
+      "role": "Scribe",
+      "operation": "scribe_final",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.001265,
+      "seconds": 4.5,
+      "input": "mixed",
+      "input_note": "Recorded traces and the sample checkout's facts",
+      "outputs": [
+        {
+          "schema": "Contract/1",
+          "summary": "1 money rule(s): Payment requires completed capture [CRITICAL]"
+        }
+      ]
+    },
+    {
+      "task": "architect",
+      "attempt": 1,
+      "role": "Architect",
+      "operation": "architect",
+      "model": "claude-sonnet-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.052043,
+      "seconds": 15.9,
+      "input": "real",
+      "input_note": "The Surveyor's real map, scoped to the supported PayPal calls",
+      "outputs": [
+        {
+          "schema": "TargetPlan/1",
+          "summary": "Planned 7 change(s) to gg_capture_order, gg_create_order, gg_refund_capture, gg_verify_webhook"
+        }
+      ]
+    },
+    {
+      "task": "grafter",
+      "attempt": 1,
+      "role": "Grafter",
+      "operation": "candidate_patch",
+      "model": "claude-sonnet-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.122892,
+      "seconds": 27.7,
+      "input": "real",
+      "input_note": "The shop's real payment files and the Architect's plan",
+      "outputs": [
+        {
+          "schema": "ChangeList/2",
+          "summary": "Wrote code for 7 planned item(s). Replace the legacy PayPal NVP and IPN calls with the installed Orders v2 create, capture, refund and webhook-verify operations, marking PAID only on COMPLETED captures."
+        }
+      ]
+    },
+    {
+      "task": "candidate-build",
+      "attempt": 1,
+      "role": "Builder",
+      "operation": "build_candidate",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.003204,
+      "seconds": 9.7,
+      "input": "mixed",
+      "input_note": "The AI-written files (PHP checked); build is a recorded runner, not a live shop",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to build candidate"
+        }
+      ]
+    },
+    {
+      "task": "candidate-new",
+      "attempt": 1,
+      "role": "Explorer",
+      "operation": "run_scenario",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.002249,
+      "seconds": 7.8,
+      "input": "sample",
+      "input_note": "New-checkout capture from the recorded runner, not a live shop",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to run scenario (NEW)"
+        }
+      ]
+    },
+    {
+      "task": "adversary-guards",
+      "attempt": 1,
+      "role": "Adversary",
+      "operation": "derive_guards",
+      "model": "claude-sonnet-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.050748,
+      "seconds": 11.5,
+      "input": "sample",
+      "input_note": "The sample checkout's money rule, not yet the AI-written code",
+      "outputs": [
+        {
+          "schema": "ScenarioSet/1",
+          "summary": "1 attack scenario(s): paid implies capture_status == COMPLETED"
+        },
+        {
+          "schema": "MutantSet/1",
+          "summary": "1 planted bug(s): SYNTHETIC_OPERATOR: allow mark_paid on PENDING capture"
+        }
+      ]
+    },
+    {
+      "task": "adversary-mutant",
+      "attempt": 1,
+      "role": "Adversary",
+      "operation": "run_mutant",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.003251,
+      "seconds": 8.1,
+      "input": "sample",
+      "input_note": "A planted bug in the sample checkout, recorded runner",
+      "outputs": [
+        {
+          "schema": "ExecutionProposal/1",
+          "summary": "Asked the runner to run mutant (NEW)"
+        }
+      ]
+    },
+    {
+      "task": "healer-golive",
+      "attempt": 1,
+      "role": "Healer",
+      "operation": "diagnose",
+      "model": "claude-sonnet-5-5",
+      "escalated": true,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.028096,
+      "seconds": 11.4,
+      "input": "mixed",
+      "input_note": "A controlled go-live fault on this run's new-checkout capture",
+      "outputs": [
+        {
+          "schema": "HealNote/1",
+          "summary": "Anomaly observed: current_state_incompatible. Status is operational_review at generation 1. Evidence shows new_economic_state is true and legacy_restore_safe is false, so current state is not compatible with the legacy path even though legacy code is available. Availability of old code does not authorise old-state restoration. A hold was requested (receipt\u2026 Asked to pause go-live."
+        }
+      ]
+    },
+    {
+      "task": "sentinel-audit",
+      "attempt": 1,
+      "role": "Sentinel",
+      "operation": "audit",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.001647,
+      "seconds": 6.6,
+      "input": "mixed",
+      "input_note": "This run's real step outcomes plus one controlled hostile event",
+      "outputs": [
+        {
+          "schema": "Alert/1",
+          "summary": "Audit window for case-demo run-demo generation 1 contains a policy breach: one secret_attempt event at sequence 1. Safety is not established; a hold has been requested (request_id recorded in evidence) and termination is pending/not confirmed."
+        }
+      ]
+    },
+    {
+      "task": "librarian-recipe",
+      "attempt": 1,
+      "role": "Librarian",
+      "operation": "learn",
+      "model": "claude-sonnet-5-5",
+      "escalated": true,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.03456,
+      "seconds": 13.2,
+      "input": "sample",
+      "input_note": "The qualified de-identified recipe template (quarantined)",
+      "outputs": [
+        {
+          "schema": "Recipe/1",
+          "summary": "Recipe for php EC_NVP: QUARANTINE (not activated)"
+        },
+        {
+          "schema": "DetectionRule/1",
+          "summary": "Detection rule for php capture: literal:legacy_capture"
+        }
+      ]
+    },
+    {
+      "task": "orchard-aggregate",
+      "attempt": 1,
+      "role": "Orchard Analyst",
+      "operation": "aggregate",
+      "model": "claude-haiku-5-5",
+      "escalated": false,
+      "passed": true,
+      "issue": null,
+      "cost_usd": 0.001085,
+      "seconds": 5.4,
+      "input": "mixed",
+      "input_note": "Counts over this machine's test runs, small groups hidden",
+      "outputs": [
+        {
+          "schema": "DashboardSpec/1",
+          "summary": "Authorized synthetic stage counts: How are authorized synthetic upgrade cases distributed across stages?"
+        }
+      ]
+    }
+  ],
+  "recorded_from": "r4-final-legacy"
+}

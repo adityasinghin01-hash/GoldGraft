@@ -59,18 +59,20 @@ export function SandboxChip({ text = H.sandboxTop }: { text?: string }) {
 /* C12 ProblemBanner — the pack's error words, with Retry where it helps. */
 export function ProblemBanner({ error, onRetry }: { error: unknown; onRetry?: () => void }) {
   const e = error instanceof ApiError ? error : new ApiError('unexpected', 0, 'Something went wrong.', String((error as Error)?.message ?? ''));
-  const canRetry = onRetry && (e.kind !== 'problem' || e.status >= 500);
+  // The agents service answers "Not available yet" for steps that have not run: a note, not an error.
+  const notYet = e.kind === 'problem' && e.title === 'Not available yet';
+  const canRetry = onRetry && !notYet && (e.kind !== 'problem' || e.status >= 500);
   return (
-    <div className={s.problem} role="alert">
-      <XIcon size={16} weight="bold" className={s.problemIcon} />
+    <div className={s.problem} role={notYet ? 'status' : 'alert'} data-tone={notYet ? 'note' : undefined}>
+      {notYet ? <InfoIcon size={16} weight="bold" className={s.problemIcon} /> : <XIcon size={16} weight="bold" className={s.problemIcon} />}
       <div>
         <p className={s.problemTitle}>{e.title}</p>
         {e.detail && <p className={s.problemDetail}>{e.detail}</p>}
-        {e.status > 0 && <p className={s.problemStatus}>Error {e.status}</p>}
+        {e.status > 0 && !notYet && <p className={s.problemStatus}>Error {e.status}</p>}
       </div>
       <div className={s.problemActions}>
         {canRetry && <button className="gg-btn gg-btn--ghost gg-btn--sm" onClick={onRetry}><ArrowClockwiseIcon size={14} /> Retry</button>}
-        {e.status === 404 && <Link className="gg-btn gg-btn--ghost gg-btn--sm" to="/check">Start</Link>}
+        {e.status === 404 && !notYet && <Link className="gg-btn gg-btn--ghost gg-btn--sm" to="/check">Start</Link>}
       </div>
     </div>
   );

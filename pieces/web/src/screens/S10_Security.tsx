@@ -33,19 +33,31 @@ export default function S10_Security() {
     }, reducedMotion() ? 50 : 1100);
   };
 
+  const label = String((q.data as { label?: string } | undefined)?.label ?? '');
+  const alertList = (
+    <ul className={s.alerts}>
+      {((q.data?.alerts ?? []) as Alert[]).map((al) => (
+        <li key={al.id}><Tag tone={al.severity === 'CRITICAL' ? 'bad' : 'warn'}>{al.severity}</Tag> {al.message} · {al.producer?.name} · <time title={al.created_at}>{formatDate(al.created_at)}</time></li>
+      ))}
+    </ul>
+  );
+
   return (
     <div className={`gg-center ${s.screen}`}>
       <PageHead title="Security" explain="Test shops hide orders for the AI. GoldGraft treats them as data."
-        sub={q.data ? <span className={s.top}>{blocked} of {attempts.length} tricks blocked{blocked < attempts.length && <b> · {attempts.length - blocked} NOT blocked</b>}</span> : undefined}
-        aside={isMock ? <SampleChip /> : undefined} />
+        sub={!q.data ? undefined : attempts.length === 0
+          ? <span className={s.top}>Sentinel's audit of this agent run</span>
+          : <span className={s.top}>{blocked} of {attempts.length} tricks blocked{blocked < attempts.length && <b> · {attempts.length - blocked} NOT blocked</b>}</span>}
+        aside={isMock || label.includes('SYNTHETIC') ? <SampleChip /> : undefined} />
       {q.isPending ? <Skeleton what="security run" lines={3} /> : q.isError ? <ProblemBanner error={q.error} onRetry={() => q.refetch()} /> : (
         <>
-          <div className={s.bar}>
+          {label && <p className={s.label}>{label}</p>}
+          {attempts.length > 0 && <div className={s.bar}>
             <button className="gg-btn gg-btn--ghost gg-btn--sm" onClick={replay} aria-pressed={replaying}>
               {replaying ? <><StopIcon size={14} weight="fill" /> Stop</> : <><PlayIcon size={14} weight="fill" /> Replay</>}
             </button>
             {replaying && <Tag tone="gold">Replaying the saved run</Tag>}
-          </div>
+          </div>}
           <ol className={s.cards}>
             {attempts.map((a, i) => {
               const hidden = replaying && i >= shown!;
@@ -66,13 +78,7 @@ export default function S10_Security() {
               );
             })}
           </ol>
-          <Details>
-            <ul className={s.alerts}>
-              {((q.data.alerts ?? []) as Alert[]).map((al) => (
-                <li key={al.id}><Tag tone={al.severity === 'CRITICAL' ? 'bad' : 'warn'}>{al.severity}</Tag> {al.message} · {al.producer?.name} · <time title={al.created_at}>{formatDate(al.created_at)}</time></li>
-              ))}
-            </ul>
-          </Details>
+          {attempts.length === 0 ? alertList : <Details>{alertList}</Details>}
         </>
       )}
     </div>

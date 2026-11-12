@@ -24,3 +24,4 @@
 .alerts { display: grid; gap: 8px; font-size: 14px; color: var(--gg-body); }
 .alerts li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 @media (max-width: 700px) { .stamp { display: none; } }
+.label { color: var(--gg-mute); font-size: 13.5px; }
