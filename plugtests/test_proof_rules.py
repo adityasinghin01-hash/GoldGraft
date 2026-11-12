@@ -3,6 +3,7 @@
 import json
 from copy import deepcopy
 
+import pytest
 from goldgraft_contracts.registry import validate
 
 from pieces.proof.judge import judge, rule_hits
@@ -176,3 +177,78 @@ def test_not_applicable_is_explicit_and_preserves_unverified_precedence():
         judge(old, twin, new, contract, plan, new_capture=raw, not_applicable_reason=reason).grade
         == "UNVERIFIED"
     )
+
+
+@pytest.mark.parametrize("field,value", [("graft_id", "foreign"), ("run_id", "mixed"),
+                                         ("variant", "OLD"), ("seq", 99)])
+def test_judge_rejects_mixed_or_misordered_subject_stream(field, value):
+    old, twin, new, contract, plan, _ = judge_inputs()
+    raw = new[-1].model_dump(mode="json")
+    raw[field] = value
+    new[-1] = validate("CMEL/1", raw)
+    with pytest.raises(ValueError, match="subject|sequence"):
+        judge(old, twin, new, contract, plan)
+
+
+def test_judge_rejects_candidate_from_another_graft():
+    old, twin, new, contract, plan, _ = judge_inputs()
+    for event in new:
+        event.graft_id = "foreign"
+    with pytest.raises(ValueError, match="subject"):
+        judge(old, twin, new, contract, plan)
+
+
+def test_not_applicable_cannot_hide_a_normative_breach():
+    old, twin, new, contract, plan, _ = judge_inputs()
+    # All three streams share the defect: parity is not normative correctness.
+    for stream in (old, twin, new):
+        for event in stream:
+            if event.kind == "CAPTURE":
+                event.money.minor = 1
+    result = judge(old, twin, new, contract, plan, not_applicable_reason="Skipped checkout")
+    assert result.grade == "PROBLEM"
+    assert {(hit.side, hit.rule) for hit in result.rule_hits} >= {("OLD", "R02"), ("NEW", "R02")}
+
+
+def test_json_webhook_retained_at_ipn_path_uses_resource_content():
+    from pieces.proof.cmel import to_cmel
+
+    raw = json.loads((CMEL.parent / "raw/NOTIFY_DUP.NEW.json").read_text())
+    for exchange in raw["exchanges"]:
+        if exchange["direction"] == "PAYPAL_NOTIFY_TO_SHOP":
+            exchange["url"] = "https://shop.example/ipn.php"
+    events = to_cmel(validate("RawCapture/1", raw))
+    notifications = [event for event in events if event.kind == "NOTIFY"]
+    assert len(notifications) == 2
+    assert all(event.status_norm == "COMPLETED" for event in notifications)
+    assert all(event.pp.capture_id and event.pp.order_id for event in notifications)
+    assert all(event.money.minor == 2500 and event.money.currency == "USD"
+               for event in notifications)
+
+
+def test_late_pending_notification_cannot_regress_a_completed_order():
+    events = json.loads((CMEL / "HAPPY.NEW.json").read_text())
+    assert not rule_hits(events, None)
+    paid = deepcopy(next(event for event in events if event["kind"] == "SHOP_PAID"))
+    capture = next(event for event in events if event["kind"] == "CAPTURE")
+    notify = {**deepcopy(capture), "kind": "NOTIFY", "source": "NOTIFICATION",
+              "status_norm": "PENDING"}
+    for event in (notify, {**paid, "kind": "SHOP_PENDING"}):
+        event["seq"] = len(events)
+        events.append(event)
+    assert "R04" in rule_hits(events, None)
+
+
+@pytest.mark.parametrize("origin,route,equivalence", [
+    ("UNKNOWN", "REST", None), ("LEGACY", "UNKNOWN", None), ("LEGACY", "REST", " "),
+])
+def test_unknown_or_unsubstantiated_refund_origin_does_not_pass(origin, route, equivalence):
+    from pieces.proof.lifecycle import LifecycleEvidence, RefundRoute, lifecycle_hits
+
+    events = [validate("CMEL/1", event)
+              for event in json.loads((CMEL / "REFUND.NEW.json").read_text())]
+    refund = next(event for event in events if event.kind == "REFUND")
+    evidence = LifecycleEvidence(refund.run_id, refunds=(RefundRoute(
+        refund.order_ref, refund.pp.refund_id, origin, route, equivalence, "runner/refund"),))
+    hits, incomplete = lifecycle_hits(events, evidence)
+    assert "R15" in hits or "R15" in incomplete

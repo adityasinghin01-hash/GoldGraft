@@ -134,7 +134,8 @@ def rule_hits(events, capture: RawCapture | None):
                 hit("R02")
             if intents and observation["money"]["currency"] != intents[0]["money"]["currency"]:
                 hit("R03")
-        if completed and not paid:
+        shop_states = [e for e in items if e["source"] == "SHOP_DB"]
+        if completed and (not paid or (shop_states and shop_states[-1]["kind"] != "SHOP_PAID")):
             hit("R04")
         if len({identity(e) for e in completed}) > 1:
             hit("R05")
@@ -299,6 +300,16 @@ def judge(
     if len(ids) != 1:
         raise ValueError("Judge needs evidence for exactly one scenario")
     scenario = ids.pop()
+    grafts = {event.graft_id for stream in streams for event in stream}
+    if len(grafts) != 1:
+        raise ValueError("Judge subject must belong to one graft")
+    for stream, variant in zip(streams, ("OLD", "OLD_TWIN", "NEW"), strict=True):
+        if any(event.variant != variant for event in stream) or len(
+            {event.run_id for event in stream}
+        ) > 1:
+            raise ValueError("Judge subject requires one run and the expected variant per stream")
+        if any(event.seq != index for index, event in enumerate(stream)):
+            raise ValueError("Judge requires a complete ordered event sequence")
     baseline, twin, candidate = [
         [event.model_dump(mode="json", exclude_none=True) for event in stream] for stream in streams
     ]
@@ -351,7 +362,6 @@ def judge(
     if not_applicable_reason is not None:
         if not not_applicable_reason.strip():
             raise ValueError("A non-applicable scenario needs a reason")
-        return verdict("N/A")
     if projection(baseline, noise=noise, old=False, deltas=deltas) != projection(
         twin, noise=noise, old=False, deltas=deltas
     ):
@@ -387,4 +397,6 @@ def judge(
         return verdict("PROBLEM", hits, diff)
     if hits and not diff:
         return verdict("PASS_FIXED", hits)
+    if not_applicable_reason is not None and not hits and not diff:
+        return verdict("N/A")
     return verdict("PROBLEM" if diff else "PASS", hits, diff)

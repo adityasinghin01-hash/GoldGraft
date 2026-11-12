@@ -102,14 +102,18 @@ def lifecycle_hits(
             hit("R14", watch.reference)
 
     for route in evidence.refunds:
-        if not any(
+        if route.origin not in {"LEGACY", "REST"} or route.route not in {"LEGACY", "REST"}:
+            incomplete.add("R15")
+        elif not any(
             event.order_ref == route.order_ref
             and event.kind == "REFUND"
             and event.pp.refund_id == route.refund_id
             for event in events
         ):
             incomplete.add("R15")
-        elif route.origin == "LEGACY" and route.route == "REST" and not route.equivalence_ref:
+        elif route.origin == "LEGACY" and route.route == "REST" and not (
+            isinstance(route.equivalence_ref, str) and route.equivalence_ref.strip()
+        ):
             hit("R15", route.reference)
 
     for quote in evidence.quotes:
