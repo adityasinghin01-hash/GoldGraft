@@ -48,72 +48,150 @@ export default function S05_Proof() {
   const pctShown = replaying ? caughtSoFar / Math.max(1, denom) : ps.score;
   const strong = ps.score >= config.CERT_MIN_PROOF_STRENGTH;
   const tri = (q.data?.triangle ?? []) as Tri[];
+  const cd = connected.data;
+  const real = cd ? {
+    bugs: cd.checks.filter((c) => c.kind === 'mutation' && c.state === 'verified').length,
+    bugsTotal: cd.checks.filter((c) => c.kind === 'mutation').length,
+    verified: cd.checks.filter((c) => c.state === 'verified').length,
+    total: cd.checks.length,
+  } : null;
 
   return (
     <div className={s.screen}>
-      <PageHead title="Proof" sub={<span className={s.top}>Caught {ps.killed} of {denom} planted bugs · needs 95%</span>} aside={isMock ? <SampleChip /> : undefined} />
+      {real ? (
+        <PageHead title="Proof" sub={<span className={s.top}>Caught {real.bugs} of {real.bugsTotal} planted bugs in the AI-written code · {real.verified} of {real.total} checks verified</span>} />
+      ) : (
+        <PageHead title="Proof" sub={<span className={s.top}>Caught {ps.killed} of {denom} planted bugs · needs 95%</span>} aside={isMock ? <SampleChip /> : undefined} />
+      )}
 
       <ConnectedEvidence graftId={graftId} />
 
-      <section className={`gg-glass ${s.barPanel}`}>
-        <p className={s.barTitle}>Our tests caught {formatPct(pctShown)} of planted bugs <Explain text="We plant money bugs in a test copy; strong tests catch them." /></p>
-        <div className={s.bar} role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pctShown * 100)} aria-label="Bugs caught">
-          <span className={s.fill} style={{ width: `${pctShown * 100}%` }} data-strong={strong || undefined} />
-          <i className={s.mark} style={{ left: '95%' }}><b>needs 95%</b></i>
+      {real ? (
+        <details className={s.sample}>
+          <summary>Reference sample: the full {denom}-bug set on recorded fixtures, not this run <SampleChip /></summary>
+        <section className={`gg-glass ${s.barPanel}`}>
+          <p className={s.barTitle}>Our tests caught {formatPct(pctShown)} of planted bugs <Explain text="We plant money bugs in a test copy; strong tests catch them." /></p>
+          <div className={s.bar} role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pctShown * 100)} aria-label="Bugs caught">
+            <span className={s.fill} style={{ width: `${pctShown * 100}%` }} data-strong={strong || undefined} />
+            <i className={s.mark} style={{ left: '95%' }}><b>needs 95%</b></i>
+          </div>
+          <p className={s.verdict} data-strong={strong || undefined}>{strong ? 'Strong enough for a certificate' : 'Below the 95% a certificate needs'}</p>
+        </section>
+
+        <div className={s.tilesHead}>
+          <button className="gg-btn gg-btn--ghost gg-btn--sm" onClick={replay} aria-pressed={replaying}>
+            {replaying ? <><StopIcon size={14} weight="fill" /> Stop</> : <><PlayIcon size={14} weight="fill" /> Replay</>}
+          </button>
+          {replaying && <Tag tone="gold">Replaying the saved result</Tag>}
         </div>
-        <p className={s.verdict} data-strong={strong || undefined}>{strong ? 'Strong enough for a certificate' : 'Below the 95% a certificate needs'}</p>
-      </section>
 
-      <div className={s.tilesHead}>
-        <button className="gg-btn gg-btn--ghost gg-btn--sm" onClick={replay} aria-pressed={replaying}>
-          {replaying ? <><StopIcon size={14} weight="fill" /> Stop</> : <><PlayIcon size={14} weight="fill" /> Replay</>}
-        </button>
-        {replaying && <Tag tone="gold">Replaying the saved result</Tag>}
-      </div>
-
-      <ol className={s.tiles}>
-        {mutants.map((m, i) => {
-          const caught = m.killed_by.length > 0;
-          const hidden = replaying && i >= shown!;
-          return (
-            <li key={m.id} className={s.tile} data-caught={caught || undefined} data-hidden={hidden || undefined} data-flip={replaying && i === shown! - 1 ? 'now' : undefined}>
-              <span className={s.tileIcon} aria-hidden><BugBeetleIcon size={18} weight="duotone" /></span>
-              <span className={s.tileText}>{MUTANT[m.op]?.text ?? m.op}</span>
-              <span className={s.tileState}>{hidden ? '…' : caught ? <><CheckIcon size={13} weight="bold" /> Caught</> : <><XIcon size={13} weight="bold" /> Missed</>}</span>
-            </li>
-          );
-        })}
-      </ol>
-
-      <Details>
-        <div className={s.detailGrid}>
-          <p className={s.muted}>{ps.equivalent_dropped} dropped: they change nothing visible <Explain text={MEANING.equivalent_dropped} /></p>
-          <ul className={s.mList}>
-            {mutants.map((m) => (
-              <li key={m.id}>
-                <b>{m.op}</b> · <code>{m.location ? `${m.location.file}:${m.location.line}` : ''}</code>
-                {m.rule && <> · Checks {m.rule} {ruleText(m.rule)}</>}
-                {' · '}Caught by: {m.killed_by.length ? m.killed_by.map((sc) => <Link key={sc} className="gg-link" to={`/g/${graftId}/union?scenario=${sc}`}>{sc}</Link>) : 'nothing'}
-                {m.equivalent_suspect && <> <Tag tone="warn">may change nothing</Tag></>}
-                {m.patch && <pre className={s.patch}>What was changed: {m.patch}</pre>}
-                <span className={s.muted}> {m.id}</span>
+        <ol className={s.tiles}>
+          {mutants.map((m, i) => {
+            const caught = m.killed_by.length > 0;
+            const hidden = replaying && i >= shown!;
+            return (
+              <li key={m.id} className={s.tile} data-caught={caught || undefined} data-hidden={hidden || undefined} data-flip={replaying && i === shown! - 1 ? 'now' : undefined}>
+                <span className={s.tileIcon} aria-hidden><BugBeetleIcon size={18} weight="duotone" /></span>
+                <span className={s.tileText}>{MUTANT[m.op]?.text ?? m.op}</span>
+                <span className={s.tileState}>{hidden ? '…' : caught ? <><CheckIcon size={13} weight="bold" /> Caught</> : <><XIcon size={13} weight="bold" /> Missed</>}</span>
               </li>
-            ))}
-          </ul>
-          <table className={s.table}>
-            <caption>Each rule needs a test and a planted bug that test catches.</caption>
-            <thead><tr><th>Rule</th><th>Tests that check it</th><th>Planted bugs</th><th>Guarded?</th></tr></thead>
-            <tbody>{tri.map((t) => (
-              <tr key={t.rule_id}>
-                <td>{t.rule_id} {ruleText(t.rule_id)}</td>
-                <td>{t.scenario_ids.map((sc) => <Link key={sc} className="gg-link" to={`/g/${graftId}/union?scenario=${sc}`}>{sc} </Link>)}</td>
-                <td className="gg-mono">{t.mutant_ids.join(', ')}</td>
-                <td data-bad={!t.killed || undefined}>{t.killed ? 'Guarded' : 'Not guarded'}</td>
-              </tr>
-            ))}</tbody>
-          </table>
+            );
+          })}
+        </ol>
+
+        <Details>
+          <div className={s.detailGrid}>
+            <p className={s.muted}>{ps.equivalent_dropped} dropped: they change nothing visible <Explain text={MEANING.equivalent_dropped} /></p>
+            <ul className={s.mList}>
+              {mutants.map((m) => (
+                <li key={m.id}>
+                  <b>{m.op}</b> · <code>{m.location ? `${m.location.file}:${m.location.line}` : ''}</code>
+                  {m.rule && <> · Checks {m.rule} {ruleText(m.rule)}</>}
+                  {' · '}Caught by: {m.killed_by.length ? m.killed_by.map((sc) => <Link key={sc} className="gg-link" to={`/g/${graftId}/union?scenario=${sc}`}>{sc}</Link>) : 'nothing'}
+                  {m.equivalent_suspect && <> <Tag tone="warn">may change nothing</Tag></>}
+                  {m.patch && <pre className={s.patch}>What was changed: {m.patch}</pre>}
+                  <span className={s.muted}> {m.id}</span>
+                </li>
+              ))}
+            </ul>
+            <table className={s.table}>
+              <caption>Each rule needs a test and a planted bug that test catches.</caption>
+              <thead><tr><th>Rule</th><th>Tests that check it</th><th>Planted bugs</th><th>Guarded?</th></tr></thead>
+              <tbody>{tri.map((t) => (
+                <tr key={t.rule_id}>
+                  <td>{t.rule_id} {ruleText(t.rule_id)}</td>
+                  <td>{t.scenario_ids.map((sc) => <Link key={sc} className="gg-link" to={`/g/${graftId}/union?scenario=${sc}`}>{sc} </Link>)}</td>
+                  <td className="gg-mono">{t.mutant_ids.join(', ')}</td>
+                  <td data-bad={!t.killed || undefined}>{t.killed ? 'Guarded' : 'Not guarded'}</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </Details>
+        </details>
+      ) : (
+        <>
+        <section className={`gg-glass ${s.barPanel}`}>
+          <p className={s.barTitle}>Our tests caught {formatPct(pctShown)} of planted bugs <Explain text="We plant money bugs in a test copy; strong tests catch them." /></p>
+          <div className={s.bar} role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pctShown * 100)} aria-label="Bugs caught">
+            <span className={s.fill} style={{ width: `${pctShown * 100}%` }} data-strong={strong || undefined} />
+            <i className={s.mark} style={{ left: '95%' }}><b>needs 95%</b></i>
+          </div>
+          <p className={s.verdict} data-strong={strong || undefined}>{strong ? 'Strong enough for a certificate' : 'Below the 95% a certificate needs'}</p>
+        </section>
+
+        <div className={s.tilesHead}>
+          <button className="gg-btn gg-btn--ghost gg-btn--sm" onClick={replay} aria-pressed={replaying}>
+            {replaying ? <><StopIcon size={14} weight="fill" /> Stop</> : <><PlayIcon size={14} weight="fill" /> Replay</>}
+          </button>
+          {replaying && <Tag tone="gold">Replaying the saved result</Tag>}
         </div>
-      </Details>
+
+        <ol className={s.tiles}>
+          {mutants.map((m, i) => {
+            const caught = m.killed_by.length > 0;
+            const hidden = replaying && i >= shown!;
+            return (
+              <li key={m.id} className={s.tile} data-caught={caught || undefined} data-hidden={hidden || undefined} data-flip={replaying && i === shown! - 1 ? 'now' : undefined}>
+                <span className={s.tileIcon} aria-hidden><BugBeetleIcon size={18} weight="duotone" /></span>
+                <span className={s.tileText}>{MUTANT[m.op]?.text ?? m.op}</span>
+                <span className={s.tileState}>{hidden ? '…' : caught ? <><CheckIcon size={13} weight="bold" /> Caught</> : <><XIcon size={13} weight="bold" /> Missed</>}</span>
+              </li>
+            );
+          })}
+        </ol>
+
+        <Details>
+          <div className={s.detailGrid}>
+            <p className={s.muted}>{ps.equivalent_dropped} dropped: they change nothing visible <Explain text={MEANING.equivalent_dropped} /></p>
+            <ul className={s.mList}>
+              {mutants.map((m) => (
+                <li key={m.id}>
+                  <b>{m.op}</b> · <code>{m.location ? `${m.location.file}:${m.location.line}` : ''}</code>
+                  {m.rule && <> · Checks {m.rule} {ruleText(m.rule)}</>}
+                  {' · '}Caught by: {m.killed_by.length ? m.killed_by.map((sc) => <Link key={sc} className="gg-link" to={`/g/${graftId}/union?scenario=${sc}`}>{sc}</Link>) : 'nothing'}
+                  {m.equivalent_suspect && <> <Tag tone="warn">may change nothing</Tag></>}
+                  {m.patch && <pre className={s.patch}>What was changed: {m.patch}</pre>}
+                  <span className={s.muted}> {m.id}</span>
+                </li>
+              ))}
+            </ul>
+            <table className={s.table}>
+              <caption>Each rule needs a test and a planted bug that test catches.</caption>
+              <thead><tr><th>Rule</th><th>Tests that check it</th><th>Planted bugs</th><th>Guarded?</th></tr></thead>
+              <tbody>{tri.map((t) => (
+                <tr key={t.rule_id}>
+                  <td>{t.rule_id} {ruleText(t.rule_id)}</td>
+                  <td>{t.scenario_ids.map((sc) => <Link key={sc} className="gg-link" to={`/g/${graftId}/union?scenario=${sc}`}>{sc} </Link>)}</td>
+                  <td className="gg-mono">{t.mutant_ids.join(', ')}</td>
+                  <td data-bad={!t.killed || undefined}>{t.killed ? 'Guarded' : 'Not guarded'}</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </Details>
+        </>
+      )}
     </div>
   );
 }
