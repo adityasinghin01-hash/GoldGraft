@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { CheckIcon, CodeIcon, PackageIcon, WarningIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../api/client';
-import type { CodeChange } from '../api/types';
+import type { CodeChange, PlantedBugCheck } from '../api/types';
 import { useGraftCtx } from '../shell/GraftLayout';
-import { PageHead, ProblemBanner, SampleChip, Tag } from '../components/ui';
+import { Explain, PageHead, ProblemBanner, SampleChip, Tag } from '../components/ui';
 import { Skeleton } from '../components/Loaders';
 import { isMock } from '../config';
 import s from './s13.module.css';
@@ -81,6 +81,27 @@ function FileDiff({ change, lintOk }: { change: CodeChange; lintOk?: boolean }) 
   );
 }
 
+function PlantedBugs({ check }: { check: PlantedBugCheck }) {
+  const applied = check.mutants.filter((m) => m.applied);
+  return (
+    <section className={s.open}>
+      <h2 className={s.h2}>
+        Planted-bug check: {check.caught} of {check.planted} caught{' '}
+        <Explain text="GoldGraft copies the AI-written code, plants one known money bug in each copy, and runs its code review on every copy. A caught bug means the review refused that copy. This tests the review, not the independent proof or a real payment." />
+      </h2>
+      <ul className={s.bugs}>
+        {applied.map((m) => (
+          <li key={m.id}>
+            <Tag tone={m.caught ? 'good' : 'bad'}>{m.caught ? 'Caught' : 'Missed'}</Tag>
+            <span>{m.what}</span>
+            {m.file && <code>{m.file}</code>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export default function S13_Changes() {
   const { graftId } = useGraftCtx();
   const q = useQuery({ queryKey: ['changes', graftId], queryFn: () => api.changes(graftId), retry: 0 });
@@ -118,6 +139,7 @@ export default function S13_Changes() {
       <div className={s.files}>
         {files.map((f) => <FileDiff key={f.path} change={f} lintOk={lint[f.path]?.ok} />)}
       </div>
+      {q.data.mutations && q.data.mutations.planted > 0 && <PlantedBugs check={q.data.mutations} />}
       {(q.data.open_items ?? []).length > 0 && (
         <section className={s.open}>
           <h2 className={s.h2}>Not changed in this upgrade</h2>

@@ -33,8 +33,18 @@ export type Problem = { type?: string; title: string; status: number; detail?: s
 // Integrated agent runs (local agents service, 12 Nov). Not in the published v1 contract yet.
 export type CodeChange = { path: string; before: string; after: string; author: 'model' | 'library' };
 export type OpenItem = { touchpoint: string; family: string; location: { file: string; line: number } };
+/** A money bug GoldGraft planted in the AI-written code, and whether its code review caught it. */
+export type PlantedBug = {
+  id: string; rule: string; what: string; file: string | null; applied: boolean;
+  caught?: boolean; refusal?: string | null;
+};
+export type PlantedBugCheck = {
+  run_id: string; original_passes_review: boolean; planted: number; caught: number;
+  mutants: PlantedBug[]; note: string;
+};
 export type ChangeSet = {
   files: CodeChange[];
+  mutations?: PlantedBugCheck;
   open_items: OpenItem[];
   lint: Record<string, { ok: boolean; error: string | null }> | null;
   /** Sample mode: the real run this recording comes from. */
