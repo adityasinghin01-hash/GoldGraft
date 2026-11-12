@@ -59,6 +59,30 @@ python3 -m scripts.integrated_results > docs/engineering/plan5/INTEGRATED_RESULT
 Model keys and the gateway signing key live in `~/.config/goldgraft/` (never in the repo). Port 8700 is the old stand-in API.
 With $1.91 left under the active cap, about 4 more full legacy runs fit before the cap must be raised (Aditya's call).
 
+## API pack (agents API, `integration/agents_app.py`)
+
+Shapes are the existing v1 contract types (`contracts/`, TS types in `pieces/web/src/api/types.ts`); errors are
+problem+json. Every other path falls through to the offline stand-in app.
+
+| Request | Answer |
+|---|---|
+| `GET /runs` | Every run on disk, newest first: `run_id`, `shop`, `status` (`running`, `completed`, `failed`), `roles_passed`, `roles_participated`, `spent_usd`, `finished_at` |
+| `GET /grafts/{run}` | `Graft` (stage, card: old pieces, upgraded, AI cost, time) |
+| `GET /grafts/{run}/rootmap` | `RootMap/1` from the Surveyor (404 until committed) |
+| `GET /grafts/{run}/changes` | `CHANGES.json`: per file `path`, `author` (`model` or `library`), `before`, `after`; `lint` per file; `open_items` (404 until the Grafter commits) |
+| `GET /grafts/{run}/events` | Server-sent events. Browser (`Accept: text/event-stream`): live while running (polls every 1.5 s, `: still running` keep-alive), then `event: end`. Plain GET: the ledger so far, once. `Last-Event-ID` resumes |
+| `GET /grafts/{run}/scenarios` | `{"graft_id": …, "scenarios": []}` (payment scenarios are recorded, not served yet); `cmel`, `proof` → 404 |
+| `POST /shops` then `POST /shops/{id}/graft` (with `Idempotency-Key`) | Starts a real run when the repo contains `legacy-php-shop` or `eval-nvp` and the server runs with `--live`; one at a time (409), at most 3 per server start (429) |
+
+```
+id: 12
+event: ledger
+data: {"seq":12,"graft_id":"r4-final-legacy","type":"COST","schema":"BudgetRecord/1","payload":{...},...}
+
+event: end
+data: {}
+```
+
 ## What is real and what is not (say this in the demo)
 
 | Real | Not real yet (labelled in the app) |

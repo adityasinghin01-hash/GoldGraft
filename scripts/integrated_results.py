@@ -50,7 +50,24 @@ def main(argv=None):
                 p["models"].add(t["model"])
             if not t.get("passed") and t.get("issue"):
                 p["issues"].append(t["issue"])
-    out += ["", f"Total AI cost of these runs: ${total / 1e6:.3f}", ""]
+    models = collections.defaultdict(lambda: [0, 0])
+    for r in results:
+        for t in r.get("tasks", []):
+            m = models[t.get("model") or "none"]
+            m[0] += 1
+            m[1] += t.get("cost_micro_usd") or 0
+    out += ["", f"Total AI cost of these runs: ${total / 1e6:.6f}", ""]
+    out += ["| Model | Agent steps | AI cost | Share |", "|---|---|---|---|"]
+    for name, (steps, micro) in sorted(models.items(), key=lambda kv: -kv[1][1]):
+        share = micro / total if total else 0
+        out.append(f"| {name} | {steps} | ${micro / 1e6:.3f} | {share:.0%} |")
+    out += [
+        "",
+        "(haiku = claude-haiku-5-5 with up to 4 turns; haiku8 = the same model with up to 8 turns;",
+        "sonnet = claude-sonnet-5-5. Run totals equal the sum of step costs, which equal the",
+        "ledger's change over these runs.)",
+        "",
+    ]
     out += [
         "| Agent | Passed / attempts | Models | AI cost | Holds (codes) |",
         "|---|---|---|---|---|",

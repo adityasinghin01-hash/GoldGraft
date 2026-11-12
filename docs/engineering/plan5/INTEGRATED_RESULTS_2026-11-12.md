@@ -28,7 +28,17 @@ payment scenarios). Status follows the agent chain; side branches are reported p
 | web-eval-nvp-20261112-001734 | eval-nvp | held_at_followup-0 | 6 of 6 | $0.016 | no |
 | web-legacy-php-shop-20261112-001347 | legacy-php-shop | completed | 13 of 13 | $0.374 | yes |
 
-Total AI cost of these runs: $4.739
+Total AI cost of these runs: $4.739361
+
+| Model | Agent steps | AI cost | Share |
+|---|---|---|---|
+| sonnet | 66 | $4.301 | 91% |
+| haiku8 | 167 | $0.358 | 8% |
+| haiku | 56 | $0.080 | 2% |
+
+(haiku = claude-haiku-5-5 with up to 4 turns; haiku8 = the same model with up to 8 turns;
+sonnet = claude-sonnet-5-5. Run totals equal the sum of step costs, which equal the
+ledger's change over these runs.)
 
 | Agent | Passed / attempts | Models | AI cost | Holds (codes) |
 |---|---|---|---|---|
