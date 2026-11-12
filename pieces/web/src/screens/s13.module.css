@@ -27,3 +27,6 @@
 .h2 { font-family: var(--gg-font-display); font-size: 21px; font-weight: 420; color: var(--gg-ivory); }
 .open li { color: var(--gg-body); font-size: 14px; line-height: 1.6; }
 .open code { font-family: var(--gg-font-mono); font-size: 13px; color: var(--gg-ivory); }
+.bugs { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.bugs li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--gg-body); font-size: 14px; }
+.bugs code { font-family: var(--gg-font-mono); font-size: 12.5px; color: var(--gg-mute); }
