@@ -17,6 +17,7 @@ present; ordinary tests inject a transport.
 
 import hashlib
 import os
+import re
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any, Literal
@@ -60,10 +61,16 @@ class RenderDeployer:
         api_key: str | None = None,
         deploy_hook_url: str | None = None,
         transport: Any | None = None,
+        authorize=None,
+        authorize_health=None,
+        verify_runtime=None,
     ):
         self._api_key = api_key
         self._deploy_hook_url = deploy_hook_url
         self.transport = transport if transport is not None else httpx
+        self.authorize = authorize
+        self.authorize_health = authorize_health
+        self.verify_runtime = verify_runtime
 
     @property
     def api_key(self) -> str | None:
@@ -90,6 +97,19 @@ class RenderDeployer:
             created_at=now,
         )
         hook, key = self.deploy_hook_url, self.api_key
+
+        if not hook and not key:
+            receipt.error = "no Render credential or deploy hook configured"
+            return receipt
+        if hook:
+            receipt.error = "deploy hooks cannot bind the approved exact image; qualification held"
+            return receipt
+        if not re.fullmatch(r"[^\s@]+@sha256:[a-f0-9]{64}", image_tag):
+            receipt.error = "immutable OCI manifest reference required"
+            return receipt
+        if self.authorize is None or self.authorize(service_id, image_tag) is not True:
+            receipt.error = "exact current deployment authority required"
+            return receipt
 
         if hook:
             dispatch = self._submit_hook(hook)
@@ -189,14 +209,23 @@ class RenderDeployer:
             )
             return receipt
 
-        service_body = service.json()
-        deploy_rows = deploys.json()
+        try:
+            service_body = service.json()
+            deploy_rows = deploys.json()
+        except (ValueError, TypeError):
+            receipt.status = "unknown"
+            receipt.error = "malformed provider observation"
+            return receipt
         if not isinstance(service_body, dict):
             receipt.status = "unknown"
             receipt.error = "service observation was not an object"
             return receipt
 
         details = service_body.get("serviceDetails") or {}
+        if not isinstance(details, dict):
+            receipt.status = "unknown"
+            receipt.error = "malformed service details"
+            return receipt
         # The URL comes from the provider, never from a guessed hostname.
         base_url = details.get("url") or service_body.get("url")
         if not isinstance(deploy_rows, list):
@@ -217,6 +246,8 @@ class RenderDeployer:
 
         deploy_status = str(current.get("status", ""))
         commit = current.get("commit") or {}
+        if not isinstance(commit, dict):
+            commit = {}
         observed_image = commit.get("imageUrl") or commit.get("image_url")
         receipt.observed.update(
             {
@@ -234,7 +265,7 @@ class RenderDeployer:
         if deploy_status not in LIVE_DEPLOY_STATUSES:
             receipt.status = "submitted"
             return receipt
-        if observed_image and str(observed_image) != receipt.image_tag:
+        if not observed_image or str(observed_image) != receipt.image_tag:
             receipt.status = "unknown"
             receipt.error = "live deploy image differs from the submitted exact image"
             return receipt
@@ -244,6 +275,10 @@ class RenderDeployer:
             return receipt
 
         receipt.health_url = f"{str(base_url).rstrip('/')}{health_path}"
+        if self.authorize_health is None or self.authorize_health(receipt.health_url) is not True:
+            receipt.status = "unknown"
+            receipt.error = "qualified public health network policy required"
+            return receipt
         try:
             health = self.transport.get(receipt.health_url, timeout=15.0)
         except Exception as exc:
@@ -256,6 +291,10 @@ class RenderDeployer:
         if health.status_code != 200:
             receipt.status = "unknown"
             receipt.error = f"health check HTTP {health.status_code}"
+            return receipt
+        if self.verify_runtime is None or self.verify_runtime(receipt, health) is not True:
+            receipt.status = "unknown"
+            receipt.error = "exact current runtime/config/state observation required"
             return receipt
         receipt.status = "live"
         receipt.live = True

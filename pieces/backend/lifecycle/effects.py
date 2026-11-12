@@ -112,6 +112,31 @@ class EffectManager:
         status = EffectStatus.EXECUTED if success else EffectStatus.FAILED
         return self._record(slot_id, status, note, attempt=True)
 
+    def allocate_plan_slot(self, plan, slot_id: str) -> EffectSlot:
+        """A caller retry key cannot buy a second effect for an immutable plan slot.
+
+        Current independent authorities/approvals/reservations must be verified
+        by the accepting service before dispatch; allocation alone is no grant.
+        """
+        from goldgraft_contracts.lifecycle import ActionPlan, canonical_target_id
+        from goldgraft_contracts.plan5_common import content_digest
+
+        plan = ActionPlan.model_validate(plan.model_dump(mode="json"))
+        if (
+            content_digest(plan.model_dump(mode="json", exclude={"plan_digest"}))
+            != plan.plan_digest
+        ):
+            raise ValueError("Action plan digest mismatch")
+        slot = next((s for s in plan.slots if s.slot_id == slot_id), None)
+        if slot is None:
+            raise ValueError("Unknown action plan slot")
+        return self.allocate_slot(
+            plan.case_id,
+            slot.operation,
+            canonical_target_id(slot.target_key),
+            content_digest([plan.plan_digest, slot_id]),
+        )
+
     def mark_unknown(self, slot_id: str, reason: str) -> EffectSlot:
         return self._record(slot_id, EffectStatus.UNKNOWN, reason)
 

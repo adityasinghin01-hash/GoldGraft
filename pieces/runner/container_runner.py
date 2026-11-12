@@ -192,8 +192,27 @@ class ContainerRunner:
             "TEMP": os.environ.get("TEMP", ""),
         }
         if env:
-            safe_env.update({k: v for k, v in env.items() if k not in SECRET_HEADERS})
-        sensitive = ("secret", "token", "key")
+            if any(
+                any(
+                    term in key.lower()
+                    for term in (
+                        "secret",
+                        "token",
+                        "key",
+                        "password",
+                        "authorization",
+                        "credential",
+                        "nvp_user",
+                        "signature",
+                    )
+                )
+                for key in env
+            ):
+                raise IsolationNotEstablished(
+                    "Guest credential injection is forbidden; use a broker"
+                )
+            safe_env.update(env)
+        sensitive = ("secret", "token", "key", "password", "credential")
         env_digest = {
             key: ("[REDACTED]" if any(t in key.lower() for t in sensitive) else value)
             for key, value in sorted(safe_env.items())

@@ -93,10 +93,20 @@ class ExitReceipt:
 class ExitController:
     """Orchestrates merchant exit and records what was actually observed."""
 
-    def __init__(self, ledger: Ledger | None = None, custody_broker=None, container_runner=None):
+    def __init__(
+        self,
+        ledger: Ledger | None = None,
+        custody_broker=None,
+        container_runner=None,
+        *,
+        authorize_exit=None,
+        authenticate_result=None,
+    ):
         self.ledger = ledger or Ledger()
         self.custody_broker = custody_broker
         self.container_runner = container_runner
+        self.authorize_exit = authorize_exit
+        self.authenticate_result = authenticate_result
         self._revoked_tokens: set[str] = set()
         self._cleaned_containers: set[str] = set()
 
@@ -113,11 +123,11 @@ class ExitController:
         container_ids: list[str] | None = None,
         from_stage: str = Stage.LIVE_100.value,
     ) -> ExitReceipt:
-        tokens = list(token_keys or [])
-        containers = list(container_ids or [])
-        exit_id = "exit-" + hashlib.sha256(
-            f"{graft_id}:{idempotency_key}".encode()
-        ).hexdigest()[:12]
+        tokens = list(dict.fromkeys(token_keys or []))
+        containers = list(dict.fromkeys(container_ids or []))
+        exit_id = (
+            "exit-" + hashlib.sha256(f"{graft_id}:{idempotency_key}".encode()).hexdigest()[:12]
+        )
         now = datetime.now(UTC).isoformat()
         phases = dict.fromkeys(("Q0", "Q1", "Q2", "Q3", "Q4"), "pending")
 
@@ -134,19 +144,28 @@ class ExitController:
                 timestamp=now,
                 holds=["no qualified independent exit-check executor; exit held"],
             )
+        # Host must validate the current ExitCheckPlan, reservation, assets,
+        # shared references and cleanup authority before any revocation/cleanup.
+        if (
+            self.authorize_exit is None
+            or self.authorize_exit(graft_id, executor.identity_ref, tokens, containers) is not True
+        ):
+            return ExitReceipt(
+                exit_id=exit_id,
+                graft_id=graft_id,
+                outcome="held",
+                phases=phases,
+                revoked_tokens_count=0,
+                cleaned_containers_count=0,
+                verified_clean=False,
+                timestamp=now,
+                holds=["current exit plan and exclusive cleanup authority required"],
+            )
         phases["Q0"] = "confirmed"
 
         # Q1 - fence and revoke ordinary capabilities, acknowledged individually.
         acked = {a.capability: a for a in (revocations or []) if a.acknowledged}
         missing = [c for c in ORDINARY_CAPABILITIES if c not in acked]
-        for token_key in tokens:
-            self._revoked_tokens.add(token_key)
-            if self.custody_broker and hasattr(self.custody_broker, "revoke_token"):
-                self.custody_broker.revoke_token(token_key)
-        for container_id in containers:
-            self._cleaned_containers.add(container_id)
-            if self.container_runner and hasattr(self.container_runner, "cleanup_container"):
-                self.container_runner.cleanup_container(container_id)
         if missing:
             phases["Q1"] = "revocation_pending"
             return ExitReceipt(
@@ -154,18 +173,52 @@ class ExitController:
                 graft_id=graft_id,
                 outcome="pending",
                 phases=phases,
-                revoked_tokens_count=len(tokens),
-                cleaned_containers_count=len(containers),
+                revoked_tokens_count=0,
+                cleaned_containers_count=0,
                 verified_clean=False,
                 timestamp=now,
                 holds=[f"revocation not acknowledged: {', '.join(missing)}"],
             )
+        # Cleanup methods return explicit observed acknowledgements. A call or
+        # an absent adapter never counts as deletion/revocation evidence.
+        for token_key in tokens:
+            if token_key not in self._revoked_tokens:
+                method = getattr(self.custody_broker, "revoke_token", None)
+                if method is None or method(token_key) is not True:
+                    return ExitReceipt(
+                        exit_id=exit_id,
+                        graft_id=graft_id,
+                        outcome="pending",
+                        phases=phases,
+                        revoked_tokens_count=len(set(tokens) & self._revoked_tokens),
+                        cleaned_containers_count=len(set(containers) & self._cleaned_containers),
+                        verified_clean=False,
+                        timestamp=now,
+                        holds=["token revocation not acknowledged"],
+                    )
+                self._revoked_tokens.add(token_key)
+        for container_id in containers:
+            if container_id not in self._cleaned_containers:
+                method = getattr(self.container_runner, "cleanup_container", None)
+                if method is None or method(container_id) is not True:
+                    return ExitReceipt(
+                        exit_id=exit_id,
+                        graft_id=graft_id,
+                        outcome="pending",
+                        phases=phases,
+                        revoked_tokens_count=len(set(tokens) & self._revoked_tokens),
+                        cleaned_containers_count=len(set(containers) & self._cleaned_containers),
+                        verified_clean=False,
+                        timestamp=now,
+                        holds=["container cleanup not acknowledged"],
+                    )
+                self._cleaned_containers.add(container_id)
         phases["Q1"] = "confirmed"
 
         # Q2 - the independent executor acts while GoldGraft cannot.
         try:
             result = executor.run_exit_check()
-        except Exception as exc:
+        except Exception:
             phases["Q2"] = "unknown"
             return ExitReceipt(
                 exit_id=exit_id,
@@ -176,9 +229,20 @@ class ExitController:
                 cleaned_containers_count=len(containers),
                 verified_clean=False,
                 timestamp=now,
-                holds=[f"exit check did not report: {exc}"],
+                holds=["exit check did not report; reconcile through independent evidence"],
             )
-        if not result.signed:
+        authenticated = False
+        if self.authenticate_result is not None:
+            try:
+                authenticated = self.authenticate_result(graft_id, result) is True
+            except Exception:
+                pass
+        if (
+            not result.signed
+            or not result.restart_performed
+            or result.executor_identity_ref != executor.identity_ref
+            or not authenticated
+        ):
             phases["Q2"] = "unverified"
             return ExitReceipt(
                 exit_id=exit_id,

@@ -1,9 +1,7 @@
-"""Tests for real sandbox Payment Broker, Callback Gateway, and Isolated Sandbox Recorder.
+"""Offline broker/callback/recorder checks, despite the historical filename.
 
-Verifies:
-1. PaymentBroker resolves Doppler secrets, rejects missing/empty secrets, and enforces limits.
-2. CallbackGateway parses IPN/webhooks, checks signatures, and records receipts in ledger.
-3. SandboxRecorder executes JobSpec in isolation, records exchanges, and sanitizes headers.
+Injected verifiers test adapter plumbing only. SandboxRecorder produces scripted
+exchanges and never executes or isolates a shop or authenticates to PayPal.
 """
 
 import pytest
@@ -61,16 +59,14 @@ def test_callback_gateway_ipn_and_webhook():
         def verify(self, *args, **kwargs):
             return "verified"
 
-    gateway = CallbackGateway(
-        ledger, ipn_verifier=MockVerifier(), webhook_verifier=MockVerifier()
-    )
+    gateway = CallbackGateway(ledger, ipn_verifier=MockVerifier(), webhook_verifier=MockVerifier())
 
     # 1. IPN postback receipt
     receipt = gateway.handle_ipn(
         ipn_body, {"paypal-delivery-id": "deliv-001"}, graft_id="graft-cb-1"
     )
     assert receipt.verified is True
-    assert receipt.status == "APPLIED"
+    assert receipt.status == "VERIFIED"
     assert receipt.ledger_seq > 0
 
     # Deduplication test
@@ -88,7 +84,7 @@ def test_callback_gateway_ipn_and_webhook():
         graft_id="graft-cb-1",
     )
     assert wh_receipt.verified is True
-    assert wh_receipt.status == "APPLIED"
+    assert wh_receipt.status == "VERIFIED"
 
 
 def test_sandbox_recorder_live_execution():

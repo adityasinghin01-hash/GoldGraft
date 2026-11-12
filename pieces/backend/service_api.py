@@ -76,6 +76,7 @@ def create_service_app(
     authenticate: Callable[[Request], Principal | None] | None = None,
     allowed_origins=(),
     max_json_bytes=8 * 1024 * 1024,
+    work_control=None,
 ):
     if type(max_json_bytes) is not int or not 1 <= max_json_bytes <= 8 * 1024 * 1024:
         raise ValueError("INVALID service request limit")
@@ -84,6 +85,8 @@ def create_service_app(
         raise ValueError("Wildcard credential origin forbidden")
     app = FastAPI(title="GoldGraft case service", version="2")
     app.state.case_service = service
+    if work_control is not None and work_control.cases is not service:
+        raise ValueError("Work control must share the same case service")
     app.state.implemented_service_routes = frozenset(
         {
             "create_draft",
@@ -95,6 +98,14 @@ def create_service_app(
             "case_events",
         }
     )
+    if work_control is not None:
+        app.state.implemented_service_routes |= {
+            "create_action_intent",
+            "start_work",
+            "action_status",
+            "cancel_work",
+            "worker_operation",
+        }
     app.add_middleware(
         CORSMiddleware,
         allow_origins=sorted(origins),
@@ -178,6 +189,18 @@ def create_service_app(
                     result = service.get_case(principal, params["case_id"])
                 elif route.name == "case_view":
                     result = service.view(principal, params["case_id"])
+                elif work_control is not None and route.name == "create_action_intent":
+                    result = work_control.create_intent(principal, params["case_id"], body, key)
+                elif work_control is not None and route.name == "start_work":
+                    result = work_control.start(principal, params["case_id"], body, key)
+                elif work_control is not None and route.name == "action_status":
+                    result = work_control.status(principal, params["case_id"], params["action_id"])
+                elif work_control is not None and route.name == "cancel_work":
+                    result = work_control.cancel(
+                        principal, params["case_id"], params["action_id"], body.cancel_id
+                    )
+                elif work_control is not None and route.name == "worker_operation":
+                    result = work_control.operation(principal, body)
                 elif route.name == "case_events":
                     value = request.query_params.get(
                         "after", request.headers.get("last-event-id", "0")

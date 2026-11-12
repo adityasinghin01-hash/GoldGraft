@@ -217,16 +217,13 @@ class ControlStore:
         self.path = str(path)
         if self.path == ":memory:":
             self._conn = sqlite3.connect(
-                "file:goldgraft-control?mode=memory&cache=shared",
-                uri=True,
+                ":memory:",
                 check_same_thread=False,
                 isolation_level=None,
             )
         else:
             Path(self.path).parent.mkdir(parents=True, exist_ok=True)
-            self._conn = sqlite3.connect(
-                self.path, check_same_thread=False, isolation_level=None
-            )
+            self._conn = sqlite3.connect(self.path, check_same_thread=False, isolation_level=None)
         self._conn.row_factory = sqlite3.Row
         self._lock = threading.RLock()
         cursor = self._conn.cursor()

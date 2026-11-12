@@ -91,12 +91,10 @@ def test_provider_adapters_and_resource_graph():
             return Resp()
 
     live_adapter = ProviderAdapter(transport=MockTransport())
-    gh_live = live_adapter.observe_github_repo(
-        "https://github.com/merchant/shop", token="ghp_test"
-    )
+    gh_live = live_adapter.observe_github_repo("https://github.com/merchant/shop", token="ghp_test")
     assert gh_live.verified is True
     assert gh_live.evidence_class == "live"
-    assert gh_live.read_only is True
+    assert gh_live.read_only is False  # metadata read alone does not qualify Reader scope
 
     graph = ResourceGraph()
     graph.add_resource("res-1", "repository", "github.com/org/repo", selected=True)
@@ -238,11 +236,15 @@ def test_artifact_build_and_providers(tmp_path):
                 status_code = 201
 
                 def json(self):
-                    return {"number": 42, "html_url": "https://github.com/org/repo/pull/42"}
+                    return {
+                        "number": 42,
+                        "html_url": "https://github.com/org/repo/pull/42",
+                        "head": {"sha": "abcd1234ef"},
+                    }
 
             return Resp()
 
-    gh_pub_live = GitHubPublisher(transport=MockPRTransport())
+    gh_pub_live = GitHubPublisher(transport=MockPRTransport(), authorize=lambda *args: True)
     pr_live = gh_pub_live.publish_pull_request(
         "https://github.com/org/repo",
         "feat/upgrade",
@@ -351,7 +353,7 @@ def test_authenticated_callback_gateway():
         graft_id="graft-wh-2",
     )
     assert wh_ok.verified is True
-    assert wh_ok.status == "APPLIED"
+    assert wh_ok.status == "VERIFIED"
 
     ipn_ok = verified_gateway.handle_ipn(
         raw_body="cmd=_notify-validate&payment_status=Completed&txn_id=TXN123",
@@ -359,7 +361,7 @@ def test_authenticated_callback_gateway():
         graft_id="graft-ipn-2",
     )
     assert ipn_ok.verified is True
-    assert ipn_ok.status == "APPLIED"
+    assert ipn_ok.status == "VERIFIED"
 
 
 def test_interrupted_operation_recovery(tmp_path):
