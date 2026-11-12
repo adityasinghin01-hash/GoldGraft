@@ -255,6 +255,12 @@ class IntegratedRunViews:
         )
         changes = (outputs.get("grafter") or [{}])[0].get("payload") or {}
         started = (self.directory / "RESULT.json").stat().st_ctime if rows else None
+        planted = self.mutations()
+        caught = (
+            round(planted["caught"] / planted["planted"], 4)
+            if planted and planted["planted"]
+            else None
+        )
         return Graft.model_validate(
             {
                 "graft_id": self.graft_id,
@@ -271,7 +277,7 @@ class IntegratedRunViews:
                     "scenarios_total": 0,
                     "scenarios_pass": 0,
                     "problems": sum(1 for r in rows if r.get("passed") is False),
-                    "proof_strength_score": None,
+                    "proof_strength_score": caught,
                     "cost_usd": round(result.get("spent_micro_usd", 0) / 1_000_000, 6),
                     "minutes": round(sum(r.get("seconds", 0) for r in rows) / 60, 2),
                     "notes": {
@@ -280,11 +286,37 @@ class IntegratedRunViews:
                         "old_pieces_found": "Old PayPal code spots the Surveyor found",
                         "problems": "Agent steps that held instead of finishing",
                         "cost_usd": "Real AI cost of this run",
+                        "proof_strength_score": (
+                            f"{planted['caught']} of {planted['planted']} bugs planted in the "
+                            "AI-written code were caught by GoldGraft's code review (not the "
+                            "independent proof)"
+                            if caught is not None
+                            else "Measured once the Grafter has written code"
+                        ),
+                        "scenarios_pass": "No payment test has been judged on the AI-written "
+                        "code yet (recorded runner, no independent proof)",
                     },
                 },
                 "ledger_root": entries[-1].entry_hash if entries else "0" * 64,
             }
         )
+
+    def mutations(self):
+        """Planted-bug check on the Grafter's real code; saved once the run has finished."""
+        saved = self.directory / "MUTATIONS.json"
+        if saved.is_file():
+            return json.loads(saved.read_text())
+        if not (self.directory / "CHANGES.json").is_file():
+            return None
+        from scripts.mutation_check import check_run
+
+        try:
+            result = check_run(self.directory)
+        except (KeyError, TypeError, ValueError, IndexError):
+            return None  # the run lacks the Architect plan or authored files the check needs
+        if self._result().get("status") != "running":
+            saved.write_text(json.dumps(result, indent=2) + "\n")
+        return result
 
     def rootmap(self):
         survey = (self._outputs().get("survey") or [None])[0]

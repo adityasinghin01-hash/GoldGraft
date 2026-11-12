@@ -395,7 +395,11 @@ def create_app(
             changes = path / "CHANGES.json"
             if not changes.is_file():
                 return _problem(404, "The Grafter has not written code for this run yet", NOT_YET)
-            return Response(changes.read_bytes(), media_type="application/json")
+            body = json.loads(changes.read_text())
+            planted = get_view(run_id).mutations() if is_run(run_id) else None
+            if planted is not None:
+                body["mutations"] = planted
+            return JSONResponse(body)
         if suffix == "events":
             after = request.headers.get("Last-Event-ID", "0")
             if not after.isascii() or not after.isdecimal():

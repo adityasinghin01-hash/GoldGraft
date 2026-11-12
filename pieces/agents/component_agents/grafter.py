@@ -154,6 +154,45 @@ def synthesize(task, data, packet, observations):
     return [dict(schema="ChangeList/2", payload=value)]
 
 
+# Money rules every AI-written payment file must keep (12 Nov upgrade: planted-bug measurement
+# showed a present-anywhere "COMPLETED" check let 4 of 7 planted money bugs through).
+_SETS_PAID = re.compile(r"""(?:(?<![=!<>])=|\?)\s*['"]PAID['"]""")
+_COMPLETED_OK = re.compile(r"""===?\s*['"](?:PAYMENT\.CAPTURE\.)?COMPLETED['"]""")
+_COMPLETED_NOT = re.compile(r"""!==?\s*['"](?:PAYMENT\.CAPTURE\.)?COMPLETED['"]""")
+_PAID_CHECK = re.compile(r"""(?:!==?|===?)\s*['"]PAID['"]""")
+_LITERAL_CREDENTIAL = re.compile(
+    r"""(?i)(?:secret|password|passwd|api_?key|client_?id)\w*['"]?\s*(?:=>|=|,)\s*['"][A-Za-z0-9_\-]{16,}['"]"""
+)
+
+
+def check_money_rules(path, text, before=""):
+    """Deterministic money-rule review of one AI-written PHP file; raises on a broken rule.
+
+    `before` is the shop's original file: a guard the original had may not be dropped.
+    """
+    lines = text.splitlines()
+    for n, line in enumerate(lines):
+        if _SETS_PAID.search(line):
+            window = "\n".join(lines[max(0, n - 6) : n + 1])
+            if not _COMPLETED_OK.search(window) or _COMPLETED_NOT.search(window):
+                raise ValueError(f"DENIED money rule: PAID set without a completed check in {path}")
+    call = text.find("gg_refund_capture(")
+    if call >= 0 and _PAID_CHECK.search(before) and not _PAID_CHECK.search(text[:call]):
+        raise ValueError(f"DENIED money rule: refund without a paid-order check in {path}")
+    if "gg_verify_webhook(" in text:
+        bound = re.search(r"(\$\w+)\s*=\s*gg_verify_webhook\s*\(", text)
+        if bound:
+            used = re.search(
+                rf"if\s*\([^{{;]*?{re.escape(bound.group(1))}(?!\w)", text[bound.end() :]
+            )
+        else:
+            used = re.search(r"if\s*\([^{;]*gg_verify_webhook\s*\(", text)
+        if not used:
+            raise ValueError(f"DENIED money rule: webhook handled without its check in {path}")
+    if _LITERAL_CREDENTIAL.search(text):
+        raise ValueError(f"DENIED credential literal in {path}")
+
+
 def check_authored(data, patch):
     """Deterministic judgement of model-written code (no equality to an answer key)."""
     from ..source_inventory import reject_secret
@@ -166,6 +205,7 @@ def check_authored(data, patch):
         if not isinstance(text, str) or not text.lstrip().startswith("<?php") or len(text) > 8192:
             raise ValueError("DENIED authored file shape " + path)
         reject_secret(text)
+        check_money_rules(path, text, data.files.get(path, ""))
         if any(bad in text for bad in data.forbidden_calls):
             raise ValueError("DENIED old PayPal call left in " + path)
         if any(s + "(" in text for s in symbols) and "paypal_orders.php" not in text:

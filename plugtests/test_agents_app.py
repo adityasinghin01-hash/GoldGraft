@@ -187,8 +187,7 @@ def test_changes_and_unknown_backend_fallthrough(runs):
         (runs / "sample-1" / "CHANGES.json").write_text(raw)
         response = client.get("/grafts/sample-1/changes")
         assert response.status_code == 200
-        assert response.content == raw.encode()
-        assert response.json() == changes
+        assert response.json() == changes  # no plan to check against: no planted-bug result
         assert response.headers["X-GoldGraft-Evidence-Class"] == LABEL
 
 

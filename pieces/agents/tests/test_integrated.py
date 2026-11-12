@@ -183,13 +183,16 @@ def test_authored_code_review_rejects_old_calls_and_missing_operations():
             ),
         )
     )
+    lib = "<?php\nrequire_once __DIR__ . '/../lib/paypal_orders.php';\n"
     good = (
-        "<?php\nrequire_once __DIR__ . '/../lib/paypal_orders.php';\n"
+        lib + "if ($order['status'] !== 'PAID') { exit; }\n"
         "$r = gg_refund_capture($c, $a, 'USD', 'x');\n"
     )
     assert grafter.check_authored(data, {"api/refund.php": good})
     for bad, _why in [
         (good + "paypal_nvp('RefundTransaction', []);\n", "old call left"),
+        (lib + "$r = gg_refund_capture($c, $a, 'USD', 'x');\n", "original paid guard dropped"),
+        (good + "define('PAYPAL_CLIENT_SECRET', 'EKq9xV3mN7pL2wR8tY4uB6');\n", "secret literal"),
         ("<?php\nrequire_once __DIR__ . '/../lib/paypal_orders.php';\n", "operation missing"),
         ("<?php\n$r = gg_refund_capture($c);\n", "library not loaded"),
     ]:
@@ -197,6 +200,31 @@ def test_authored_code_review_rejects_old_calls_and_missing_operations():
             grafter.check_authored(data, {"api/refund.php": bad})
     with pytest.raises(ValueError):
         grafter.check_authored(data, {"config.php": good})  # outside the allowed paths
+
+
+def test_money_rules_catch_planted_bugs_but_not_faithful_rewrites():
+    from pieces.agents.component_agents.grafter import check_money_rules
+
+    paid = "<?php\n$s = ($cap['capture_status'] === 'COMPLETED') ? 'PAID' : 'PENDING';\n"
+    check_money_rules("x.php", paid)
+    block = "<?php\nif ($c['capture_status'] === 'COMPLETED') {\n    $o['status'] = 'PAID';\n}\n"
+    check_money_rules("x.php", block)
+    hook = "<?php\n$ok = gg_verify_webhook($h, $raw);\nif ($ok && $t === 'X') { log_it(); }\n"
+    check_money_rules("ipn.php", hook)
+    # A shop whose original refund had no paid check is not failed for keeping it that way.
+    check_money_rules("refund.php", "<?php\ngg_refund_capture($c, $a, 'USD', 'r');\n", "<?php\n")
+    for bad, before in [
+        (paid.replace("===", "!=="), ""),  # a PENDING capture marked PAID
+        ("<?php\n$o['status'] = 'PAID';\n", ""),  # PAID with no check at all
+        (hook.replace("if ($ok &&", "if (true &&"), ""),  # webhook result ignored
+        (
+            "<?php\ngg_refund_capture($c, $a, 'USD', 'r');\n",
+            "<?php\nif ($o['status'] !== 'PAID') exit;\n",  # original guard dropped
+        ),
+        ("<?php\n$cfg = ['client_secret' => 'EKq9xV3mN7pL2wR8tY4uB6cD'];\n", ""),
+    ]:
+        with pytest.raises(ValueError, match="DENIED"):
+            check_money_rules("x.php", bad, before)
 
 
 def test_a_model_fault_hold_gets_one_retry_and_the_chain_continues_on_it(tmp_path, monkeypatch):
