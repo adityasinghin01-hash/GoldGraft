@@ -45,20 +45,37 @@ def test_payment_broker_secret_enforcement():
 
 def test_callback_gateway_ipn_and_webhook():
     ledger = Ledger()
-    gateway = CallbackGateway(ledger)
+
+    # Default gateway without verifiers: honest unverified receipt
+    unverified_gw = CallbackGateway(ledger)
+    ipn_body = "cmd=_notify-validate&payment_status=Completed&txn_id=TXN12345&mc_gross=15.00"
+    unverified_receipt = unverified_gw.handle_ipn(
+        ipn_body, {"paypal-delivery-id": "deliv-unverified"}, graft_id="graft-cb-unv"
+    )
+    assert unverified_receipt.verified is False
+    assert unverified_receipt.status == "UNVERIFIED"
+    assert "no IPN postback verifier configured" in unverified_receipt.holds
+
+    # Qualified gateway with injected verifiers
+    class MockVerifier:
+        def verify(self, *args, **kwargs):
+            return "verified"
+
+    gateway = CallbackGateway(
+        ledger, ipn_verifier=MockVerifier(), webhook_verifier=MockVerifier()
+    )
 
     # 1. IPN postback receipt
-    ipn_body = "cmd=_notify-validate&payment_status=Completed&txn_id=TXN12345&mc_gross=15.00"
     receipt = gateway.handle_ipn(
         ipn_body, {"paypal-delivery-id": "deliv-001"}, graft_id="graft-cb-1"
     )
     assert receipt.verified is True
-    assert receipt.status == "VERIFIED"
+    assert receipt.status == "APPLIED"
     assert receipt.ledger_seq > 0
 
     # Deduplication test
     dup = gateway.handle_ipn(ipn_body, {"paypal-delivery-id": "deliv-001"}, graft_id="graft-cb-1")
-    assert dup.status == "DEDUPLICATED"
+    assert dup.status == "DUPLICATE"
 
     # 2. Webhook verification
     wh_payload = {"id": "WH-999", "event_type": "PAYMENT.CAPTURE.COMPLETED"}
@@ -71,7 +88,7 @@ def test_callback_gateway_ipn_and_webhook():
         graft_id="graft-cb-1",
     )
     assert wh_receipt.verified is True
-    assert wh_receipt.status == "VERIFIED"
+    assert wh_receipt.status == "APPLIED"
 
 
 def test_sandbox_recorder_live_execution():

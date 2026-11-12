@@ -1,36 +1,59 @@
-"""GitHub Publisher Provider (GU04).
+"""GitHub publication provider (GU04).
 
-Implements:
-1. Protected branch checks preventing direct push to main/master.
-2. Verified PR creation proposal with delivery receipts.
-3. Cryptographic digest binding between committed PR and test artifact.
+Honest outcome boundary
+-----------------------
+A failed or uncertain API call never returns a made-up pull-request identifier.
+``pr_id`` and ``pr_url`` are populated only from a provider response, and
+``state`` says what actually happened: ``not_attempted``, ``created``,
+``failed`` or ``unknown``.
+
+A commit that does not look like a real object id is rejected instead of being
+digested into a plausible-looking receipt.
+
+No network call happens without a token or an injected transport.
 """
 
 import hashlib
 import os
+import re
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from typing import Any, Literal
 from urllib.parse import urlparse
 
 import httpx
 
+PublishState = Literal["not_attempted", "created", "failed", "unknown"]
+COMMIT_SHA = re.compile(r"^[0-9a-f]{7,40}$")
+
 
 @dataclass
 class PullRequestReceipt:
-    pr_id: str
     repo_url: str
     branch_name: str
     target_branch: str
     title: str
     commit_sha: str
-    receipt_digest: str
+    state: PublishState
     created_at: str
+    receipt_digest: str
+    pr_id: str | None = None
     pr_url: str | None = None
     live: bool = False
+    error: str | None = None
+
+    def __post_init__(self):
+        if self.pr_id is not None and self.state != "created":
+            raise ValueError("a pull-request identity only exists after a provider response")
+        if self.live != (self.state == "created"):
+            raise ValueError("live flag must match provider creation")
 
 
 class GitHubPublisher:
-    """Manages pull request creation and delivery receipts under merchant authorization."""
+    """Creates merchant pull requests and reports only observed results."""
+
+    def __init__(self, *, transport: Any | None = None):
+        self.transport = transport if transport is not None else httpx
 
     def publish_pull_request(
         self,
@@ -45,51 +68,85 @@ class GitHubPublisher:
     ) -> PullRequestReceipt:
         if target_branch == branch_name:
             raise ValueError("Target branch cannot be identical to source branch")
+        if not COMMIT_SHA.match(commit_sha or ""):
+            raise ValueError(
+                "Publication requires a real provider commit id, not a fabricated digest"
+            )
 
-        raw = f"{repo_url}:{branch_name}:{commit_sha}".encode()
-        receipt_digest = hashlib.sha256(raw).hexdigest()
-        pr_id = f"pr-{receipt_digest[:8]}"
+        receipt_digest = hashlib.sha256(
+            f"{repo_url}:{branch_name}:{commit_sha}".encode()
+        ).hexdigest()
         created_at = datetime.now(UTC).isoformat()
-        pr_url = None
-        is_live = False
+        base = {
+            "repo_url": repo_url,
+            "branch_name": branch_name,
+            "target_branch": target_branch,
+            "title": title,
+            "commit_sha": commit_sha,
+            "created_at": created_at,
+            "receipt_digest": receipt_digest,
+        }
 
         auth_token = token or os.getenv("GITHUB_TOKEN")
         parsed = urlparse(repo_url)
         path_parts = [p for p in parsed.path.strip("/").split("/") if p]
-        if auth_token and len(path_parts) >= 2:
-            owner, name = path_parts[-2], path_parts[-1].removesuffix(".git")
-            try:
-                resp = httpx.post(
-                    f"https://api.github.com/repos/{owner}/{name}/pulls",
-                    headers={
-                        "Authorization": f"Bearer {auth_token}",
-                        "Accept": "application/vnd.github.v3+json",
-                    },
-                    json={
-                        "title": title,
-                        "head": branch_name,
-                        "base": target_branch,
-                        "body": body or f"GoldGraft verified migration commit {commit_sha}",
-                    },
-                    timeout=15.0,
-                )
-                if resp.status_code in (200, 201):
-                    data = resp.json()
-                    pr_id = str(data.get("number", pr_id))
-                    pr_url = data.get("html_url")
-                    is_live = True
-            except Exception:
-                pass
+        if parsed.hostname not in {"github.com", "www.github.com"} or len(path_parts) < 2:
+            raise ValueError(f"Not a GitHub repository URL: {repo_url!r}")
+        if not auth_token:
+            return PullRequestReceipt(
+                **base, state="not_attempted", error="no GitHub token configured"
+            )
 
+        owner, name = path_parts[-2], path_parts[-1].removesuffix(".git")
+        try:
+            response = self.transport.post(
+                f"https://api.github.com/repos/{owner}/{name}/pulls",
+                headers={
+                    "Authorization": f"Bearer {auth_token}",
+                    "Accept": "application/vnd.github.v3+json",
+                },
+                json={
+                    "title": title,
+                    "head": branch_name,
+                    "base": target_branch,
+                    "body": body or f"GoldGraft verified migration commit {commit_sha}",
+                },
+                timeout=15.0,
+            )
+        except Exception as exc:
+            return PullRequestReceipt(
+                **base, state="unknown", error=f"publication transport failed: {exc}"
+            )
+
+        if response.status_code == 429 or response.status_code >= 500:
+            return PullRequestReceipt(
+                **base, state="unknown", error=f"publication HTTP {response.status_code}"
+            )
+        if response.status_code >= 400:
+            return PullRequestReceipt(
+                **base, state="failed", error=f"publication HTTP {response.status_code}"
+            )
+        try:
+            data = response.json()
+        except Exception:
+            return PullRequestReceipt(
+                **base, state="unknown", error="publication response was not JSON"
+            )
+        if not isinstance(data, dict) or "number" not in data:
+            return PullRequestReceipt(
+                **base, state="unknown", error="publication response omitted the PR number"
+            )
+        head_sha = str((data.get("head") or {}).get("sha") or "")
+        if head_sha and head_sha != commit_sha:
+            return PullRequestReceipt(
+                **base,
+                state="failed",
+                error="provider head sha differs from the approved commit",
+            )
         return PullRequestReceipt(
-            pr_id=pr_id,
-            repo_url=repo_url,
-            branch_name=branch_name,
-            target_branch=target_branch,
-            title=title,
-            commit_sha=commit_sha,
-            receipt_digest=receipt_digest,
-            created_at=created_at,
-            pr_url=pr_url,
-            live=is_live,
+            **base,
+            state="created",
+            pr_id=str(data["number"]),
+            pr_url=data.get("html_url"),
+            live=True,
         )

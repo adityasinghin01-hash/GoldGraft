@@ -1,18 +1,24 @@
-"""Safe State Migration, Zero-Downtime Rollback & Recovery (GU05).
+"""Safe recovery and cutback (GU05).
 
-Ensures:
-1. Safe rollback: instantly reverts runtime traffic to legacy NVP if health checks fail.
-2. Financial preservation: orders and payments are never reverted or double-captured.
-3. Durable audit trail in foundation.ledger recording rollback triggers and cause.
+Compensation is not rollback, and restoring an old database is never a
+financial rollback. A cutback here is only *prepared* when a consistent export
+exists, the restore into a disposable copy was verified, no external effect is
+unknown, and no attempt is made to undo money.
+
+A missing prerequisite returns a held receipt without touching the ledger, so a
+claimed stage transition is never fabricated.
 """
 
 import hashlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
+from typing import Literal
 
 from goldgraft_contracts.common import Producer, ProducerKind, Stage
 from goldgraft_contracts.ledger import EntryType
 from goldgraft_foundation.ledger import Ledger
+
+RecoveryOutcome = Literal["prepared", "held", "unknown"]
 
 
 @dataclass
@@ -20,14 +26,26 @@ class RollbackReceipt:
     rollback_id: str
     graft_id: str
     prior_stage: str
-    reverted_to: str
+    reverted_to: str | None
     reason: str
-    retained_orders_count: int
+    inventory_order_count: int
     timestamp: str
+    outcome: RecoveryOutcome
+    state_preservation_ref: str | None = None
+    holds: list[str] = field(default_factory=list)
+    ledger_seq: int | None = None
+
+    @property
+    def retained_orders_count(self) -> int:
+        return self.inventory_order_count
+
+    def __post_init__(self):
+        if self.outcome == "prepared" and self.reverted_to is None:
+            raise ValueError("a prepared cutback has a committed target stage")
 
 
 class RecoveryManager:
-    """Manages safe zero-downtime cutback and financial integrity preservation."""
+    """Prepares a code/config cutback while preserving current economic state."""
 
     def __init__(self, ledger: Ledger | None = None):
         self.ledger = ledger or Ledger()
@@ -40,45 +58,70 @@ class RecoveryManager:
         reason: str,
         idempotency_key: str,
         processed_orders: list[str] | None = None,
+        export_manifest_ref: str | None = None,
+        restore_verified_ref: str | None = None,
+        pending_effect_refs: list[str] | None = None,
+        financial_undo: bool = False,
     ) -> RollbackReceipt:
-        """Rolls back traffic to legacy NVP while safeguarding all captured customer orders."""
-        raw_id = f"{graft_id}:{reason}".encode()
-        rollback_id = f"rb-{hashlib.sha256(raw_id).hexdigest()[:12]}"
+        if financial_undo:
+            raise ValueError(
+                "Restoring prior financial state is not a supported rollback; it needs its own "
+                "separate financial compensation authority"
+            )
+        orders = list(processed_orders or [])
+        rollback_id = f"rb-{hashlib.sha256(f'{graft_id}:{reason}'.encode()).hexdigest()[:12]}"
         now = datetime.now(UTC).isoformat()
-        orders = processed_orders or []
 
-        # Commit rollback event into cryptographic ledger
-        service_producer = Producer(
-            kind=ProducerKind.SERVICE,
-            name="RecoveryManager",
-            version="1.0.0",
-        )
+        holds: list[str] = []
+        if export_manifest_ref is None:
+            holds.append("no consistent state export; a cutback would lose state")
+        if restore_verified_ref is None:
+            holds.append("restore into a disposable copy was not verified")
+        if pending_effect_refs:
+            holds.extend(f"unresolved effect: {ref}" for ref in pending_effect_refs)
+        if holds:
+            return RollbackReceipt(
+                rollback_id=rollback_id,
+                graft_id=graft_id,
+                prior_stage=current_stage,
+                reverted_to=None,
+                reason=reason,
+                inventory_order_count=len(orders),
+                timestamp=now,
+                outcome="held",
+                holds=holds,
+            )
 
-        msg = f"Safe rollback: {reason}. Preserved {len(orders)} live orders."
-
-        self.ledger.append(
+        producer = Producer(kind=ProducerKind.SERVICE, name="RecoveryManager", version="2.0.0")
+        entry = self.ledger.append(
             graft_id=graft_id,
             type=EntryType.STAGE.value,
-            producer=service_producer.model_dump(),
+            producer=producer.model_dump(),
             schema="StageChange/1",
             payload={
                 "graft_id": graft_id,
                 "from_stage": current_stage,
                 "to_stage": Stage.CUTBACK.value,
                 "attempt": 1,
-                "reason": msg,
-                "actor": {"kind": service_producer.kind.value, "name": service_producer.name},
-                "evidence_refs": [f"blob://rollback/{rollback_id}"],
+                "reason": (
+                    f"Code cutback prepared: {reason}. State preserved via "
+                    f"{export_manifest_ref}; no financial effect was undone."
+                ),
+                "actor": {"kind": producer.kind.value, "name": producer.name},
+                "evidence_refs": [export_manifest_ref, restore_verified_ref],
             },
             idempotency_key=idempotency_key,
         )
-
         return RollbackReceipt(
             rollback_id=rollback_id,
             graft_id=graft_id,
             prior_stage=current_stage,
             reverted_to=Stage.CUTBACK.value,
             reason=reason,
-            retained_orders_count=len(orders),
+            inventory_order_count=len(orders),
             timestamp=now,
+            outcome="prepared",
+            state_preservation_ref=export_manifest_ref,
+            holds=["cutback prepared; restored-state verification remains a separate gate"],
+            ledger_seq=entry.seq,
         )

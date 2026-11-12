@@ -1,4 +1,15 @@
-"""Effect intent and outcome records; external execution belongs to the caller."""
+"""Effect intents and unknown-effect reconciliation (GU04); the caller runs the effect itself.
+
+A failed effect is not a rolled-back effect. Compensation needs its own
+authority and its own record, and an unknown effect keeps retrying the *same*
+identity rather than spending a second slot.
+
+Slot identity is derived from the case, operation, target and idempotency key,
+so a duplicate request returns the original slot instead of creating cardinality
+beyond one. Intents and outcomes are stored transactionally (pass a private
+database path to keep them across a restart); a recorded terminal outcome is
+never overwritten, and resolving an unknown outcome needs a reconciliation note.
+"""
 
 import hashlib
 import sqlite3
@@ -12,8 +23,10 @@ from threading import Lock
 class EffectStatus(StrEnum):
     PENDING = "PENDING"
     EXECUTED = "EXECUTED"
+    FAILED = "FAILED"
     UNKNOWN = "UNKNOWN"
-    ROLLED_BACK = "ROLLED_BACK"
+    COMPENSATED = "COMPENSATED"
+    ROLLED_BACK = "ROLLED_BACK"  # legacy value; compensation uses COMPENSATED
 
 
 @dataclass
@@ -26,10 +39,20 @@ class EffectSlot:
     created_at: str
     executed_at: str | None = None
     reconciliation_note: str | None = None
+    attempts: int = 0
+    compensation_ref: str | None = None
+
+    def __post_init__(self):
+        if self.status == EffectStatus.COMPENSATED and not self.compensation_ref:
+            raise ValueError("compensation requires its own authority reference")
+
+
+# Outcomes that later records may not change (FAILED may be retried on the same slot).
+TERMINAL = {EffectStatus.EXECUTED, EffectStatus.COMPENSATED, EffectStatus.ROLLED_BACK}
 
 
 class EffectManager:
-    """Store idempotent intents and preserve unknown outcomes across restart."""
+    """One durable slot per effect identity, with explicit unknown handling across restart."""
 
     def __init__(self, *, database: Path | None = None):
         self._lock = Lock()
@@ -42,7 +65,8 @@ class EffectManager:
             CREATE TABLE IF NOT EXISTS effects (
                 slot_id TEXT PRIMARY KEY, case_id TEXT NOT NULL, action_type TEXT NOT NULL,
                 target_resource TEXT NOT NULL, status TEXT NOT NULL, created_at TEXT NOT NULL,
-                executed_at TEXT, reconciliation_note TEXT
+                executed_at TEXT, reconciliation_note TEXT,
+                attempts INTEGER NOT NULL DEFAULT 0, compensation_ref TEXT
             )
         """)
 
@@ -55,10 +79,11 @@ class EffectManager:
         return EffectSlot(**values)
 
     def _view(self, slot: EffectSlot) -> EffectSlot:
+        """Keep one object per slot so callers holding it see later outcomes."""
         view = self._views.setdefault(slot.slot_id, slot)
-        view.status = slot.status
-        view.executed_at = slot.executed_at
-        view.reconciliation_note = slot.reconciliation_note
+        changing = ("status", "executed_at", "reconciliation_note", "attempts", "compensation_ref")
+        for name in changing:
+            setattr(view, name, getattr(slot, name))
         return view
 
     def allocate_slot(
@@ -69,40 +94,80 @@ class EffectManager:
         with self._lock:
             with self._db:
                 self._db.execute(
-                    "INSERT OR IGNORE INTO effects VALUES (?, ?, ?, ?, ?, ?, NULL, NULL)",
-                    (slot_id, case_id, action_type, target_resource, EffectStatus.PENDING,
-                     datetime.now(UTC).isoformat()),
+                    "INSERT OR IGNORE INTO effects "
+                    "(slot_id, case_id, action_type, target_resource, status, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (
+                        slot_id,
+                        case_id,
+                        action_type,
+                        target_resource,
+                        EffectStatus.PENDING,
+                        datetime.now(UTC).isoformat(),
+                    ),
                 )
             return self._view(self._read_slot(slot_id))
 
     def record_execution(self, slot_id: str, success: bool, note: str = "") -> EffectSlot:
-        status = EffectStatus.EXECUTED if success else EffectStatus.ROLLED_BACK
-        return self._record(slot_id, status, note)
+        status = EffectStatus.EXECUTED if success else EffectStatus.FAILED
+        return self._record(slot_id, status, note, attempt=True)
 
     def mark_unknown(self, slot_id: str, reason: str) -> EffectSlot:
         return self._record(slot_id, EffectStatus.UNKNOWN, reason)
 
-    def _record(self, slot_id: str, status: EffectStatus, note: str) -> EffectSlot:
+    def reconcile(self, slot_id: str, *, observed: bool, note: str) -> EffectSlot:
+        """Resolve an unknown effect without creating a new slot."""
+        status = EffectStatus.EXECUTED if observed else EffectStatus.FAILED
+        return self._record(slot_id, status, note, only_from={EffectStatus.UNKNOWN})
+
+    def record_compensation(
+        self, slot_id: str, *, authority_ref: str, note: str = ""
+    ) -> EffectSlot:
+        """Compensation is a separate financial action with its own authority."""
+        if not authority_ref:
+            raise ValueError("compensation requires separate financial authority")
+        return self._record(
+            slot_id,
+            EffectStatus.COMPENSATED,
+            note,
+            only_from={EffectStatus.EXECUTED},
+            compensation_ref=authority_ref,
+        )
+
+    def _record(
+        self,
+        slot_id: str,
+        status: EffectStatus,
+        note: str,
+        *,
+        attempt: bool = False,
+        only_from: set[EffectStatus] | None = None,
+        compensation_ref: str | None = None,
+    ) -> EffectSlot:
         with self._lock:
             with self._db:
                 self._db.execute("BEGIN IMMEDIATE")
                 previous = self._read_slot(slot_id)
-                if previous.status != status:
-                    if previous.status in {EffectStatus.EXECUTED, EffectStatus.ROLLED_BACK}:
-                        raise ValueError(
-                            "A recorded terminal effect outcome cannot be overwritten"
-                        )
-                    if previous.status == EffectStatus.UNKNOWN and not note.strip():
-                        raise ValueError(
-                            "Resolving an unknown effect requires a reconciliation note"
-                        )
-                    executed_at = (
-                        None if status == EffectStatus.UNKNOWN else datetime.now(UTC).isoformat()
-                    )
-                    self._db.execute(
-                        "UPDATE effects SET status = ?, executed_at = ?, reconciliation_note = ? "
-                        "WHERE slot_id = ?", (status, executed_at, note, slot_id)
-                    )
+                if previous.status == status:
+                    return self._view(previous)  # idempotent replay of the same outcome
+                if only_from is not None and previous.status not in only_from:
+                    allowed = ", ".join(sorted(only_from))
+                    raise ValueError(f"only a {allowed} effect can move to {status}")
+                if previous.status in TERMINAL and status != EffectStatus.COMPENSATED:
+                    raise ValueError("A recorded terminal effect outcome cannot be overwritten")
+                if previous.status == EffectStatus.UNKNOWN and not note.strip():
+                    raise ValueError("Resolving an unknown effect requires a reconciliation note")
+                executed_at = (
+                    previous.executed_at
+                    if status in {EffectStatus.UNKNOWN, EffectStatus.COMPENSATED}
+                    else datetime.now(UTC).isoformat()
+                )
+                self._db.execute(
+                    "UPDATE effects SET status = ?, executed_at = ?, reconciliation_note = ?, "
+                    "attempts = attempts + ?, compensation_ref = COALESCE(?, compensation_ref) "
+                    "WHERE slot_id = ?",
+                    (status, executed_at, note, int(attempt), compensation_ref, slot_id),
+                )
             return self._view(self._read_slot(slot_id))
 
     def close(self) -> None:
