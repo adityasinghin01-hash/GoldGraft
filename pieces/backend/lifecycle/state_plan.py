@@ -109,10 +109,12 @@ class StatePlanner:
             approvals=list(approvals or []),
         )
 
-        holds = [reason for name, reason in REQUIRED_EVIDENCE if getattr(plan, name) is None]
-        if plan.high_water_mark is None:
+        holds = [reason for name, reason in REQUIRED_EVIDENCE if not getattr(plan, name)]
+        if type(plan.high_water_mark) is not int or plan.high_water_mark < 0:
             holds.append("no durable event high-water mark")
-        if not plan.fence_epochs:
+        if not plan.fence_epochs or any(
+            type(v) is not int or v <= 0 for v in plan.fence_epochs.values()
+        ):
             holds.append("no writer fence epochs")
         if not plan.approvals:
             holds.append("no current controller approval for the cutover")

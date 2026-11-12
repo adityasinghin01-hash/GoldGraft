@@ -110,8 +110,12 @@ class AuthorityManager:
                 f"Reader escalation denied: Actor {grant.actor_id} cannot perform write operations"
             )
 
-        # Enforce scope boundaries
-        if grant.target_scope != "*" and not resource_path.startswith(grant.target_scope):
+        if grant.role != CaseRole.ADMIN and required_role not in {CaseRole.READER, grant.role}:
+            raise PermissionDeniedError("Role does not cover the requested operation")
+
+        # A repository named repo-extra is not a child of repo.
+        scope = grant.target_scope.rstrip("/")
+        if scope == "*" or not (resource_path == scope or resource_path.startswith(scope + "/")):
             msg = (
                 f"Scope boundary violated: resource {resource_path} "
                 f"outside grant {grant.target_scope}"

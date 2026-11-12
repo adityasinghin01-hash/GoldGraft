@@ -1,8 +1,7 @@
-"""Artifact Publisher Provider (GU04).
+"""Immutable local artifact export; remote OCI publication requires qualification.
 
-Implements:
-1. Direct artifact publishing to local or remote OCI registries.
-2. Content digest sealing and immutability receipts.
+A generic HTTP PUT is not an OCI registry push or proof of private pull rights.
+This local adapter never returns live provider evidence.
 """
 
 import hashlib
@@ -10,8 +9,6 @@ import os
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-
-import httpx
 
 
 @dataclass
@@ -25,46 +22,29 @@ class PublishReceipt:
 
 
 class ArtifactPublisher:
-    """Publishes tested and verified container artifacts."""
-
     def publish_artifact(
-        self,
-        artifact_id: str,
-        destination: str,
-        content_bytes: bytes,
-        *,
-        token: str | None = None,
+        self, artifact_id: str, destination: str, content_bytes: bytes, *, token: str | None = None
     ) -> PublishReceipt:
+        if destination.startswith(("https://", "http://")):
+            raise ValueError("Qualified private OCI publisher and merchant pull authority required")
+        if "://" in destination and not destination.startswith("file://"):
+            raise ValueError("Unsupported artifact destination")
+        target = Path(destination.removeprefix("file://"))
         digest = hashlib.sha256(content_bytes).hexdigest()
-        pub_id = f"pub-{digest[:10]}"
-        is_live = False
-
-        if destination.startswith("http://") or destination.startswith("https://"):
-            auth_token = token or os.getenv("REGISTRY_AUTH_TOKEN")
-            headers = {"Content-Type": "application/octet-stream"}
-            if auth_token:
-                headers["Authorization"] = f"Bearer {auth_token}"
-            try:
-                resp = httpx.put(destination, headers=headers, content=content_bytes, timeout=30.0)
-                if resp.status_code in (200, 201, 202, 204):
-                    is_live = True
-            except Exception:
-                pass
-        elif destination.startswith("file://") or "/" in destination or "\\" in destination:
-            clean_path = destination.removeprefix("file://")
-            target_path = Path(clean_path)
-            try:
-                target_path.parent.mkdir(parents=True, exist_ok=True)
-                target_path.write_bytes(content_bytes)
-                is_live = True
-            except Exception:
-                pass
-
+        target.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        except FileExistsError:
+            if target.is_symlink() or not target.is_file() or target.read_bytes() != content_bytes:
+                raise ValueError("Immutable artifact destination collision") from None
+        else:
+            with os.fdopen(fd, "wb") as stream:
+                stream.write(content_bytes)
         return PublishReceipt(
-            publish_id=pub_id,
-            artifact_id=artifact_id,
-            destination=destination,
-            digest=digest,
-            created_at=datetime.now(UTC).isoformat(),
-            live=is_live,
+            "pub-" + digest[:24],
+            artifact_id,
+            destination,
+            digest,
+            datetime.now(UTC).isoformat(),
+            live=False,
         )

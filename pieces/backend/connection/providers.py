@@ -51,8 +51,9 @@ def _offline(provider: str, resource_id: str, metadata: dict[str, Any], error: s
 class ProviderAdapter:
     """Discovers and verifies external platform identities and resources."""
 
-    def __init__(self, *, transport: Any | None = None):
+    def __init__(self, *, transport: Any | None = None, qualify_reader=None):
         self.transport = transport if transport is not None else httpx
+        self.qualify_reader = qualify_reader
 
     def observe_github_repo(
         self,
@@ -80,7 +81,7 @@ class ProviderAdapter:
                 },
                 timeout=10.0,
             )
-        except Exception as exc:
+        except Exception:
             return ProviderObservation(
                 provider="github",
                 resource_id=repo_url,
@@ -88,7 +89,7 @@ class ProviderAdapter:
                 read_only=True,
                 evidence_class="unknown",
                 metadata={"repo_name": name},
-                error=f"github read failed: {exc}",
+                error="github read transport failed",
             )
         if response.status_code != 200:
             return ProviderObservation(
@@ -100,10 +101,28 @@ class ProviderAdapter:
                 metadata={"repo_name": name},
                 error=f"github read HTTP {response.status_code}",
             )
-        data = response.json()
+        try:
+            data = response.json()
+            if not isinstance(data, dict):
+                raise ValueError("provider object required")
+        except (ValueError, TypeError):
+            return ProviderObservation(
+                provider="github",
+                resource_id=repo_url,
+                verified=False,
+                read_only=False,
+                evidence_class="unknown",
+                error="malformed provider response",
+            )
         permissions = data.get("permissions") or {}
         # Read-only is established by the provider denying push, not by assuming it.
-        read_only = permissions.get("push") is False
+        if not isinstance(permissions, dict):
+            permissions = {}
+        read_only = (
+            permissions.get("push") is False
+            and self.qualify_reader is not None
+            and self.qualify_reader("github", repo_url, data) is True
+        )
         return ProviderObservation(
             provider="github",
             resource_id=repo_url,
@@ -133,7 +152,7 @@ class ProviderAdapter:
                 headers={"Authorization": f"Bearer {key}", "Accept": "application/json"},
                 timeout=10.0,
             )
-        except Exception as exc:
+        except Exception:
             return ProviderObservation(
                 provider="render",
                 resource_id=service_id,
@@ -141,7 +160,7 @@ class ProviderAdapter:
                 read_only=True,
                 evidence_class="unknown",
                 metadata={"service_id": service_id},
-                error=f"render read failed: {exc}",
+                error="render read transport failed",
             )
         if response.status_code != 200:
             return ProviderObservation(
@@ -153,13 +172,28 @@ class ProviderAdapter:
                 metadata={"service_id": service_id},
                 error=f"render read HTTP {response.status_code}",
             )
-        data = response.json()
-        details = data.get("serviceDetails") or {}
+        try:
+            data = response.json()
+            details = data.get("serviceDetails") or {}
+            if not isinstance(data, dict) or not isinstance(details, dict):
+                raise ValueError("provider object required")
+        except (ValueError, TypeError, AttributeError):
+            return ProviderObservation(
+                provider="render",
+                resource_id=service_id,
+                verified=False,
+                read_only=False,
+                evidence_class="unknown",
+                error="malformed provider response",
+            )
         return ProviderObservation(
             provider="render",
             resource_id=service_id,
             verified=True,
-            read_only=True,
+            read_only=(
+                self.qualify_reader is not None
+                and self.qualify_reader("render", service_id, data) is True
+            ),
             evidence_class="live",
             metadata={
                 "service_type": data.get("type"),
@@ -188,7 +222,7 @@ class ProviderAdapter:
                 headers={"Authorization": f"Bearer {key}", "Accept": "application/json"},
                 timeout=10.0,
             )
-        except Exception as exc:
+        except Exception:
             return ProviderObservation(
                 provider="workos",
                 resource_id=user_id,
@@ -196,7 +230,7 @@ class ProviderAdapter:
                 read_only=True,
                 evidence_class="unknown",
                 metadata={"org_id": organization_id},
-                error=f"workos read failed: {exc}",
+                error="workos read transport failed",
             )
         if response.status_code != 200:
             return ProviderObservation(
@@ -208,9 +242,24 @@ class ProviderAdapter:
                 metadata={"org_id": organization_id},
                 error=f"workos read HTTP {response.status_code}",
             )
-        data = response.json()
-        observed_org = data.get("organization_id") or (data.get("organization") or {}).get("id")
-        if observed_org != organization_id:
+        try:
+            data = response.json()
+            if not isinstance(data, dict):
+                raise ValueError("provider object required")
+        except (ValueError, TypeError):
+            return ProviderObservation(
+                provider="workos",
+                resource_id=user_id,
+                verified=False,
+                read_only=False,
+                evidence_class="unknown",
+                error="malformed provider response",
+            )
+        organization = data.get("organization")
+        observed_org = data.get("organization_id") or (
+            organization.get("id") if isinstance(organization, dict) else None
+        )
+        if observed_org != organization_id or data.get("id") != user_id:
             return ProviderObservation(
                 provider="workos",
                 resource_id=user_id,

@@ -52,8 +52,9 @@ class PullRequestReceipt:
 class GitHubPublisher:
     """Creates merchant pull requests and reports only observed results."""
 
-    def __init__(self, *, transport: Any | None = None):
+    def __init__(self, *, transport: Any | None = None, authorize=None):
         self.transport = transport if transport is not None else httpx
+        self.authorize = authorize
 
     def publish_pull_request(
         self,
@@ -97,6 +98,14 @@ class GitHubPublisher:
                 **base, state="not_attempted", error="no GitHub token configured"
             )
 
+        if (
+            self.authorize is None
+            or self.authorize(repo_url, branch_name, target_branch, commit_sha) is not True
+        ):
+            return PullRequestReceipt(
+                **base, state="not_attempted", error="exact current publication authority required"
+            )
+
         owner, name = path_parts[-2], path_parts[-1].removesuffix(".git")
         try:
             response = self.transport.post(
@@ -113,9 +122,11 @@ class GitHubPublisher:
                 },
                 timeout=15.0,
             )
-        except Exception as exc:
+        except Exception:
             return PullRequestReceipt(
-                **base, state="unknown", error=f"publication transport failed: {exc}"
+                **base,
+                state="unknown",
+                error="publication transport failed; reconcile before retry",
             )
 
         if response.status_code == 429 or response.status_code >= 500:
@@ -137,7 +148,7 @@ class GitHubPublisher:
                 **base, state="unknown", error="publication response omitted the PR number"
             )
         head_sha = str((data.get("head") or {}).get("sha") or "")
-        if head_sha and head_sha != commit_sha:
+        if not head_sha or head_sha != commit_sha:
             return PullRequestReceipt(
                 **base,
                 state="failed",

@@ -1,11 +1,7 @@
-"""Artifact build descriptors with honest provenance.
+"""Artifact descriptors with separate source, metadata and image-config digests.
 
-A hash over build *inputs* is a metadata digest. It is not an OCI image
-manifest digest, an image config digest or an export-tar digest, and this module
-never presents one as another. ``image_digest`` is populated only from an image
-id the builder actually observed (Docker's ``--iidfile``); otherwise the build
-is reported as ``not_built`` or ``built_unverified`` and cannot be deployed as
-an exact artifact.
+Docker's iidfile identifies image CONFIG, not the OCI manifest. A host build
+therefore remains built_unverified and has no deployable image_digest here.
 
 Building on the host is not an isolated builder. Callers that need the reviewed
 isolated builder must supply a backend whose result this module records rather
@@ -13,6 +9,7 @@ than infers.
 """
 
 import hashlib
+import re
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -32,11 +29,14 @@ class ArtifactDescriptor:
     created_at: str
     outcome: BuildOutcome = "not_built"
     image_digest: str | None = None
+    image_config_digest: str | None = None
     reproducible: bool = False
     build_output: str | None = None
 
     def __post_init__(self):
-        if self.image_digest is not None and not self.image_digest.startswith("sha256:"):
+        if self.image_digest is not None and not re.fullmatch(
+            r"sha256:[a-f0-9]{64}", self.image_digest
+        ):
             raise ValueError("an image digest must be an observed sha256 reference")
         if self.outcome == "built_observed" and self.image_digest is None:
             raise ValueError("an observed build requires the observed image digest")
@@ -48,11 +48,21 @@ class ArtifactBuilder:
     def calculate_source_digest(self, root_dir: Path) -> str:
         """Calculates a deterministic digest across source files in a directory."""
         hasher = hashlib.sha256()
+        if not root_dir.is_dir() or root_dir.is_symlink():
+            raise ValueError("Source root must be a real directory")
         for path in sorted(root_dir.rglob("*")):
-            if path.is_file() and not path.name.startswith("."):
+            if path.is_symlink():
+                raise ValueError("Source links require resolved snapshot acquisition")
+            if path.is_file():
                 relative = path.relative_to(root_dir).as_posix()
+                content = path.read_bytes()
+                hasher.update(len(relative.encode()).to_bytes(8, "big"))
                 hasher.update(relative.encode())
-                hasher.update(path.read_bytes())
+                hasher.update((path.stat().st_mode & 0o111).to_bytes(2, "big"))
+                hasher.update(len(content).to_bytes(8, "big"))
+                hasher.update(content)
+            elif not path.is_dir():
+                raise ValueError("Unsupported source file type")
         return hasher.hexdigest()
 
     def create_artifact_build(
@@ -83,6 +93,8 @@ class ArtifactBuilder:
         tag: str,
         dockerfile: Path | None = None,
         timeout_s: float = 120.0,
+        *,
+        allow_host_build: bool = False,
     ) -> ArtifactDescriptor:
         """Builds an image and records the image id the builder reported."""
         source_digest = self.calculate_source_digest(root_dir)
@@ -95,6 +107,12 @@ class ArtifactBuilder:
             source_digest=source_digest,
             created_at=datetime.now(UTC).isoformat(),
         )
+
+        if not allow_host_build:
+            descriptor.build_output = (
+                "qualified isolated builder required; host build not authorised"
+            )
+            return descriptor
 
         docker_bin = shutil.which("docker")
         dockerfile_path = root_dir / (dockerfile.name if dockerfile else "Dockerfile")
@@ -142,9 +160,10 @@ class ArtifactBuilder:
         finally:
             iidfile.unlink(missing_ok=True)
 
-        if observed and observed.startswith("sha256:"):
-            descriptor.image_digest = observed
-            descriptor.outcome = "built_observed"
+        if observed and re.fullmatch(r"sha256:[a-f0-9]{64}", observed):
+            # Docker iid is a CONFIG digest, never the deployable OCI manifest.
+            descriptor.image_config_digest = observed
+            descriptor.outcome = "built_unverified"
             descriptor.reproducible = False
         else:
             descriptor.outcome = "built_unverified"

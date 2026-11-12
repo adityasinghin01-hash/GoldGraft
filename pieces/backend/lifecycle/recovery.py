@@ -73,9 +73,9 @@ class RecoveryManager:
         now = datetime.now(UTC).isoformat()
 
         holds: list[str] = []
-        if export_manifest_ref is None:
+        if not export_manifest_ref:
             holds.append("no consistent state export; a cutback would lose state")
-        if restore_verified_ref is None:
+        if not restore_verified_ref:
             holds.append("restore into a disposable copy was not verified")
         if pending_effect_refs:
             holds.extend(f"unresolved effect: {ref}" for ref in pending_effect_refs)

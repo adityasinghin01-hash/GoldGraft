@@ -108,6 +108,7 @@ def test_exit_controller_teardown_and_verification():
 
         def revoke_token(self, token_key: str):
             self.revoked.append(token_key)
+            return True
 
         def active_sessions_count(self, graft_id: str) -> int:
             return 0
@@ -118,6 +119,7 @@ def test_exit_controller_teardown_and_verification():
 
         def cleanup_container(self, cid: str):
             self.cleaned.append(cid)
+            return True
 
     broker = FakeCustodyBroker()
     runner = FakeContainerRunner()
@@ -126,6 +128,8 @@ def test_exit_controller_teardown_and_verification():
         ledger=ledger,
         custody_broker=broker,
         container_runner=runner,
+        authorize_exit=lambda *args: True,
+        authenticate_result=lambda *args: True,
     )
 
     # Missing independent executor: must hold

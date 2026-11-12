@@ -1,20 +1,23 @@
-"""Cross-case target reservations, epochs and leases (GU04 / IR02).
+"""Durable cross-case/run target locks and fencing, with atomic group acquisition.
 
-Tenant or case identity does not partition a physical target. A reservation
-owns the canonical target for exactly one case/run, carries a monotonic fencing
-epoch, and cannot be released while an external effect is unknown.
-
-An expired lease fences the old executor. It does not hand the target to a new
-case while unresolved effects exist; that requires reconciliation first.
+Use canonical TargetKey records for provider resources. Legacy string keys stay
+exact; a caller must not invent aliases for the same physical resource.
 """
 
-import hashlib
+import json
+import sqlite3
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from threading import Lock
+from uuid import uuid4
+
+from goldgraft_contracts.lifecycle import TargetKey, canonical_target_id
 
 
 class ReservationConflictError(Exception):
-    """Raised when a target resource is currently reserved under another case."""
+    """A target cannot be transferred until its previous effects are known."""
 
 
 @dataclass
@@ -34,112 +37,176 @@ class TargetReservation:
 
 
 class TargetReservationManager:
-    """Manages mutual exclusion, fencing epochs and leases across targets."""
-
-    def __init__(self, default_lease_seconds: int = 300):
+    def __init__(self, default_lease_seconds: int = 300, *, database: Path | None = None):
+        self._ttl(default_lease_seconds)
         self.default_lease_seconds = default_lease_seconds
-        self._reservations: dict[str, TargetReservation] = {}
+        self._lock = Lock()
+        self._views: dict[str, TargetReservation] = {}
+        self._db = sqlite3.connect(
+            database if database is not None else ":memory:", check_same_thread=False
+        )
+        self._db.row_factory = sqlite3.Row
+        self._db.execute("""CREATE TABLE IF NOT EXISTS target_reservations (
+            reservation_id TEXT PRIMARY KEY, target_resource TEXT NOT NULL,
+            case_id TEXT NOT NULL, granted_at TEXT NOT NULL, expires_at TEXT NOT NULL,
+            owner_run_id TEXT, fence_epoch INTEGER NOT NULL,
+            unresolved_effect_refs TEXT NOT NULL, released INTEGER NOT NULL
+        )""")
 
-    def _active_for(self, target_resource: str, now: datetime) -> TargetReservation | None:
-        for reservation in self._reservations.values():
-            if reservation.target_resource == target_resource and reservation.active(now):
-                return reservation
-        return None
+    @staticmethod
+    def _ttl(value):
+        if type(value) is not int or value <= 0:
+            raise ValueError("Lease must be a positive integer")
+        return value
 
-    def reserve(
-        self,
-        target_resource: str,
-        case_id: str,
-        *,
-        lease_seconds: int | None = None,
-        run_id: str | None = None,
-    ) -> TargetReservation:
+    @staticmethod
+    def _key(value):
+        if isinstance(value, TargetKey):
+            return canonical_target_id(value)
+        if not isinstance(value, str) or not value.strip() or "*" in value:
+            raise ValueError("Canonical target required")
+        return value
+
+    @contextmanager
+    def _write(self):
+        with self._lock, self._db:
+            self._db.execute("BEGIN IMMEDIATE")
+            yield
+
+    def _read(self, reservation_id):
+        row = self._db.execute(
+            "SELECT * FROM target_reservations WHERE reservation_id = ?", (reservation_id,)
+        ).fetchone()
+        if row is None:
+            raise ReservationConflictError("Reservation not found")
+        body = dict(row)
+        body["unresolved_effect_refs"] = json.loads(body["unresolved_effect_refs"])
+        body["released"] = bool(body["released"])
+        return TargetReservation(**body)
+
+    def _view(self, value):
+        view = self._views.setdefault(value.reservation_id, value)
+        view.__dict__.update(value.__dict__)
+        return view
+
+    def reserve(self, target_resource, case_id, *, lease_seconds=None, run_id=None):
+        return self.reserve_many(
+            [target_resource], case_id, lease_seconds=lease_seconds, run_id=run_id
+        )[0]
+
+    def reserve_many(self, targets, case_id, *, lease_seconds=None, run_id=None):
+        keys = sorted({self._key(t) for t in targets})
+        if not keys:
+            raise ValueError("At least one target required")
+        ttl = self._ttl(self.default_lease_seconds if lease_seconds is None else lease_seconds)
         now = datetime.now(UTC)
-        ttl = lease_seconds or self.default_lease_seconds
-        existing = self._active_for(target_resource, now)
+        with self._write():
+            values = [self._reserve(key, case_id, run_id, ttl, now) for key in keys]
+        # Do not update caller views for a partially rolled back group.
+        return [self._view(v) for v in values]
 
-        if existing is not None:
-            if existing.case_id != case_id:
-                raise ReservationConflictError(
-                    f"Target {target_resource} reserved by case {existing.case_id} "
-                    f"until {existing.expires_at}"
+    def _reserve(self, key, case_id, run_id, ttl, now):
+        rows = self._db.execute(
+            "SELECT reservation_id FROM target_reservations WHERE target_resource = ? "
+            "ORDER BY fence_epoch DESC",
+            (key,),
+        ).fetchall()
+        previous = self._read(rows[0][0]) if rows else None
+        if previous and not previous.released:
+            if previous.active(now):
+                if previous.case_id != case_id or previous.owner_run_id != run_id:
+                    raise ReservationConflictError(f"Target {key} reserved by case/run")
+                previous.expires_at = (now + timedelta(seconds=ttl)).isoformat()
+                self._db.execute(
+                    "UPDATE target_reservations SET expires_at = ? WHERE reservation_id = ?",
+                    (previous.expires_at, previous.reservation_id),
                 )
-            # Same case re-acquires its own reservation; the epoch is unchanged.
-            existing.expires_at = (now + timedelta(seconds=ttl)).isoformat()
-            if run_id is not None:
-                existing.owner_run_id = run_id
-            return existing
-
-        # A different case may only take over when no effect is unresolved.
-        for reservation in self._reservations.values():
-            if reservation.target_resource == target_resource and not reservation.released:
-                if reservation.unresolved_effect_refs:
-                    raise ReservationConflictError(
-                        f"Target {target_resource} has unresolved effects under case "
-                        f"{reservation.case_id}; reconcile before transfer"
-                    )
-
-        prior_epoch = max(
+                return previous
+            if previous.unresolved_effect_refs:
+                raise ReservationConflictError("Target has unresolved effects; reconcile first")
+            self._db.execute(
+                "UPDATE target_reservations SET released = 1 WHERE reservation_id = ?",
+                (previous.reservation_id,),
+            )
+        value = TargetReservation(
+            "res-" + uuid4().hex,
+            key,
+            case_id,
+            now.isoformat(),
+            (now + timedelta(seconds=ttl)).isoformat(),
+            run_id,
+            previous.fence_epoch + 1 if previous else 1,
+        )
+        self._db.execute(
+            "INSERT INTO target_reservations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
-                r.fence_epoch
-                for r in self._reservations.values()
-                if r.target_resource == target_resource
+                value.reservation_id,
+                key,
+                case_id,
+                value.granted_at,
+                value.expires_at,
+                run_id,
+                value.fence_epoch,
+                "[]",
+                0,
             ),
-            default=0,
         )
-        raw = f"{target_resource}:{case_id}:{now.isoformat()}".encode()
-        reservation = TargetReservation(
-            reservation_id=f"res-{hashlib.sha256(raw).hexdigest()[:12]}",
-            target_resource=target_resource,
-            case_id=case_id,
-            granted_at=now.isoformat(),
-            expires_at=(now + timedelta(seconds=ttl)).isoformat(),
-            owner_run_id=run_id,
-            fence_epoch=prior_epoch + 1,
+        return value
+
+    def current_epoch(self, reservation_id):
+        with self._lock:
+            value = self._read(reservation_id)
+            if not value.active(datetime.now(UTC)):
+                raise ReservationConflictError("Reservation is not active")
+            return value.fence_epoch
+
+    def require_current(self, reservation_id, *, case_id, epoch, run_id=None):
+        with self._lock:
+            value = self._read(reservation_id)
+            if (
+                value.case_id != case_id
+                or value.fence_epoch != epoch
+                or value.owner_run_id != run_id
+                or not value.active(datetime.now(UTC))
+            ):
+                raise ReservationConflictError("Stale reservation owner, fencing epoch or lease")
+
+    def add_unresolved(self, reservation_id, effect_ref):
+        with self._write():
+            value = self._read(reservation_id)
+            if not value.active(datetime.now(UTC)):
+                raise ReservationConflictError("Cannot dispatch under inactive reservation")
+            if effect_ref not in value.unresolved_effect_refs:
+                value.unresolved_effect_refs.append(effect_ref)
+            self._save_refs(value)
+        self._view(value)
+
+    def resolve_unresolved(self, reservation_id, effect_ref):
+        with self._write():
+            value = self._read(reservation_id)
+            if effect_ref in value.unresolved_effect_refs:
+                value.unresolved_effect_refs.remove(effect_ref)
+            self._save_refs(value)
+        self._view(value)
+
+    def _save_refs(self, value):
+        self._db.execute(
+            "UPDATE target_reservations SET unresolved_effect_refs = ? WHERE reservation_id = ?",
+            (json.dumps(value.unresolved_effect_refs), value.reservation_id),
         )
-        self._reservations[reservation.reservation_id] = reservation
-        return reservation
 
-    def current_epoch(self, reservation_id: str) -> int:
-        reservation = self._reservations.get(reservation_id)
-        if reservation is None or reservation.released:
-            raise ReservationConflictError(f"Reservation {reservation_id} is not active")
-        return reservation.fence_epoch
-
-    def require_current(self, reservation_id: str, *, case_id: str, epoch: int) -> None:
-        """Fence a stale executor before it touches the target."""
-        reservation = self._reservations.get(reservation_id)
-        if reservation is None or reservation.released:
-            raise ReservationConflictError(f"Reservation {reservation_id} is not active")
-        if reservation.case_id != case_id:
-            raise ReservationConflictError("Reservation belongs to another case")
-        if reservation.fence_epoch != epoch:
-            raise ReservationConflictError(
-                f"Stale fencing epoch {epoch}; current is {reservation.fence_epoch}"
+    def release(self, reservation_id):
+        with self._write():
+            value = self._read(reservation_id)
+            if value.unresolved_effect_refs:
+                raise ReservationConflictError("Cannot release target with unresolved effects")
+            self._db.execute(
+                "UPDATE target_reservations SET released = 1 WHERE reservation_id = ?",
+                (reservation_id,),
             )
-        if not reservation.active(datetime.now(UTC)):
-            raise ReservationConflictError("Reservation lease expired")
+            value.released = True
+        self._view(value)
 
-    def add_unresolved(self, reservation_id: str, effect_ref: str) -> None:
-        reservation = self._reservations.get(reservation_id)
-        if reservation is None:
-            raise ReservationConflictError(f"Reservation {reservation_id} not found")
-        if effect_ref not in reservation.unresolved_effect_refs:
-            reservation.unresolved_effect_refs.append(effect_ref)
-
-    def resolve_unresolved(self, reservation_id: str, effect_ref: str) -> None:
-        reservation = self._reservations.get(reservation_id)
-        if reservation is None:
-            raise ReservationConflictError(f"Reservation {reservation_id} not found")
-        if effect_ref in reservation.unresolved_effect_refs:
-            reservation.unresolved_effect_refs.remove(effect_ref)
-
-    def release(self, reservation_id: str) -> None:
-        reservation = self._reservations.get(reservation_id)
-        if reservation is None:
-            return
-        if reservation.unresolved_effect_refs:
-            raise ReservationConflictError(
-                "Cannot release a target reservation with unresolved effects"
-            )
-        reservation.released = True
+    def close(self):
+        with self._lock:
+            self._db.close()

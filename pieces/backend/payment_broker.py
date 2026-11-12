@@ -22,9 +22,11 @@ transport is configured. Ordinary tests inject a transport or stay synthetic.
 
 import base64
 import hashlib
+import sqlite3
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
+from threading import RLock
 from typing import Any, Literal
 from urllib.parse import parse_qsl, urlencode
 
@@ -87,6 +89,8 @@ def to_minor_units(amount: str, currency: str) -> int:
         value = Decimal(str(amount))
     except (InvalidOperation, ValueError) as exc:
         raise BrokerRefused(f"Unparseable provider amount: {amount!r}") from exc
+    if not value.is_finite():
+        raise BrokerRefused("Non-finite money is forbidden")
     scaled = value.scaleb(exponent)
     if scaled != scaled.to_integral_value():
         raise BrokerRefused(f"Amount {amount!r} has more precision than {currency} allows")
@@ -130,6 +134,46 @@ def _success_ack(value: Any) -> bool:
     return str(value or "").split("/")[0] == "Success"
 
 
+def _validate_wire_money(value):
+    """Provider amounts are exact strings at this boundary, never floats/NaN."""
+    if isinstance(value, float):
+        raise BrokerRefused("Money must never use floating point")
+    if isinstance(value, dict):
+        if "currency_code" in value and "value" in value:
+            to_minor_units(value["value"], value["currency_code"])
+        if "AMT" in value:
+            to_minor_units(value["AMT"], value.get("CURRENCYCODE", "USD"))
+        for item in value.values():
+            _validate_wire_money(item)
+    elif isinstance(value, list):
+        for item in value:
+            _validate_wire_money(item)
+
+
+# Locks cover validation, dispatch and cache commit. Unknown in-process requests
+# cannot be blindly dispatched again; process-restart reconciliation is still a
+# required live-profile prerequisite (this cache is deliberately not a ledger).
+def _serialized_operation(method):
+    from functools import wraps
+
+    @wraps(method)
+    def call(self, *args, **kwargs):
+        with self._lock:
+            try:
+                return method(self, *args, **kwargs)
+            except BrokerOutcomeUnknown:
+                # The family/key was validated and registered before dispatch.
+                key = kwargs.get("idempotency_key")
+                secret_ref = kwargs.get("secret_ref")
+                graft_id = kwargs.get("graft_id", "default")
+                if key is not None:
+                    family = "nvp" if method.__name__ == "execute_nvp" else "v2"
+                    self._unknown_requests.add(repr((self.mode, family, graft_id, secret_ref, key)))
+                raise
+
+    return call
+
+
 class PaymentBroker:
     """Typed NVP and Orders v2 broker with a strict evidence boundary."""
 
@@ -142,11 +186,26 @@ class PaymentBroker:
         *,
         mode: BrokerMode | None = None,
         transport: Any | None = None,
+        authorize=None,
+        database=None,
         **kwargs: Any,
     ):
         self.custody = custody_broker or CustodyBroker()
         self.ledger = ledger or Ledger()
+        if type(rate_limit_per_min) is not int or not 1 <= rate_limit_per_min <= 50:
+            raise ValueError("Sandbox rate limit must be between 1 and 50")
         self.rate_limit_per_min = rate_limit_per_min
+        self.authorize = authorize
+        self._lock = RLock()
+        self._request_digests = {}
+        self._unknown_requests = set()
+        self._journal = None
+        if database is not None:
+            self._journal = sqlite3.connect(database, check_same_thread=False)
+            self._journal.execute(
+                "CREATE TABLE IF NOT EXISTS payment_requests "
+                "(request_id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL)"
+            )
         if mode is None:
             mode = "sandbox" if live else "synthetic"
         if mode not in ("synthetic", "sandbox"):
@@ -155,6 +214,52 @@ class PaymentBroker:
         self.transport = transport if transport is not None else httpx
         self._request_history: list[float] = []
         self._idempotent_cache: dict[str, BrokerResponse] = {}
+
+    def _authorize(self, graft_id, operation, payload, secret_ref):
+        if self.mode == "sandbox":
+            if self._journal is None:
+                raise BrokerRefused("Durable sandbox request journal required")
+            if (
+                self.authorize is None
+                or self.authorize(graft_id, operation, payload, secret_ref) is not True
+            ):
+                raise BrokerRefused("Current accepted-work/payment/origin authority required")
+
+    def _request_key(self, family, operation, payload, secret_ref, graft_id, key):
+        if self.mode == "sandbox" and not key:
+            raise BrokerRefused("Sandbox operations require a stable logical request identity")
+        if key is None:
+            return None
+        import json
+
+        cache_key = repr((self.mode, family, graft_id, secret_ref, key))
+        fingerprint = hashlib.sha256(
+            json.dumps(
+                [operation, payload], sort_keys=True, separators=(",", ":"), allow_nan=False
+            ).encode()
+        ).hexdigest()
+        if self._request_digests.setdefault(cache_key, fingerprint) != fingerprint:
+            raise BrokerRefused("Idempotency identity reused with different operation/payload")
+        if cache_key in self._unknown_requests:
+            raise BrokerOutcomeUnknown("Prior request outcome unknown; reconcile before retry")
+        if self.mode == "sandbox" and cache_key not in self._idempotent_cache:
+            request_id = hashlib.sha256(cache_key.encode()).hexdigest()
+            with self._journal:
+                prior = self._journal.execute(
+                    "SELECT fingerprint FROM payment_requests WHERE request_id = ?", (request_id,)
+                ).fetchone()
+                if prior:
+                    if prior[0] != fingerprint:
+                        raise BrokerRefused("Durable payment idempotency conflict")
+                    raise BrokerOutcomeUnknown("Recorded sandbox request requires reconciliation")
+                self._journal.execute(
+                    "INSERT INTO payment_requests VALUES (?, ?)", (request_id, fingerprint)
+                )
+        return cache_key
+
+    def close(self):
+        if self._journal is not None:
+            self._journal.close()
 
     @property
     def live(self) -> bool:
@@ -202,9 +307,9 @@ class PaymentBroker:
             "VERSION": NVP_VERSION,
         }
         if operation == "SetExpressCheckout":
-            resp_data["TOKEN"] = "EC-" + hashlib.sha256(
-                f"tok:{start_time}".encode()
-            ).hexdigest()[:17].upper()
+            resp_data["TOKEN"] = (
+                "EC-" + hashlib.sha256(f"tok:{start_time}".encode()).hexdigest()[:17].upper()
+            )
         elif operation == "GetExpressCheckoutDetails":
             resp_data["TOKEN"] = params.get("TOKEN", "EC-UNKNOWN")
             resp_data["CHECKOUTSTATUS"] = "PaymentActionNotInitiated"
@@ -311,9 +416,7 @@ class PaymentBroker:
         self._check_rate_limit(datetime.now(UTC).timestamp())
         try:
             if content is not None:
-                response = self.transport.post(
-                    url, headers=headers, content=content, timeout=15.0
-                )
+                response = self.transport.post(url, headers=headers, content=content, timeout=15.0)
             else:
                 response = self.transport.post(url, headers=headers, json=json_body, timeout=15.0)
         except Exception as exc:  # transport uncertainty, never a synthetic success
@@ -326,7 +429,10 @@ class PaymentBroker:
             )
         if response.status_code >= 400:
             raise BrokerRequestFailed(f"{operation}: HTTP {response.status_code}")
-        return response.text if content is not None else response.json()
+        try:
+            return response.text if content is not None else response.json()
+        except (ValueError, TypeError):
+            raise BrokerOutcomeUnknown(f"{operation}: malformed provider response") from None
 
     def _sandbox_token(self, client_id: str, client_secret: str) -> str:
         if not client_id or not client_secret:
@@ -347,11 +453,16 @@ class PaymentBroker:
             raise BrokerRequestFailed("sandbox token request failed") from exc
         if response.status_code != 200:
             raise BrokerRequestFailed(f"sandbox token request HTTP {response.status_code}")
-        token = response.json().get("access_token")
+        try:
+            data = response.json()
+            token = data.get("access_token") if isinstance(data, dict) else None
+        except (ValueError, TypeError):
+            raise BrokerRequestFailed("sandbox token response malformed") from None
         if not token:
             raise BrokerRequestFailed("sandbox token response omitted access_token")
         return str(token)
 
+    @_serialized_operation
     def execute_nvp(
         self,
         operation: str,
@@ -362,8 +473,21 @@ class PaymentBroker:
         graft_id: str = "default",
     ) -> BrokerResponse:
         """Executes one typed NVP operation for the configured mode."""
+        if operation not in {
+            "SetExpressCheckout",
+            "GetExpressCheckoutDetails",
+            "DoExpressCheckoutPayment",
+            "RefundTransaction",
+        }:
+            raise BrokerRefused("Unsupported NVP operation")
+        if {k.upper() for k in params} & {"METHOD", "VERSION", "USER", "PWD", "SIGNATURE"}:
+            raise BrokerRefused("NVP credential/method override forbidden")
+        _validate_wire_money(params)
         creds = self.resolve_and_verify(secret_ref)
-        cache_key = f"{self.mode}:nvp:{graft_id}:{idempotency_key}" if idempotency_key else None
+        self._authorize(graft_id, operation, params, secret_ref)
+        cache_key = self._request_key(
+            "nvp", operation, params, secret_ref, graft_id, idempotency_key
+        )
         if cache_key and cache_key in self._idempotent_cache:
             return self._idempotent_cache[cache_key]
 
@@ -414,6 +538,7 @@ class PaymentBroker:
             self._idempotent_cache[cache_key] = response
         return response
 
+    @_serialized_operation
     def execute_orders_v2(
         self,
         action: str,
@@ -424,8 +549,24 @@ class PaymentBroker:
         graft_id: str = "default",
     ) -> BrokerResponse:
         """Executes one typed Orders v2 REST operation for the configured mode."""
+        if action not in {"create", "capture", "refund"}:
+            raise BrokerRefused("Unsupported Orders v2 operation")
+        if action != "create":
+            import re
+
+            identifier = (
+                payload.get("order_id")
+                if action == "capture"
+                else (payload.get("capture_id") or payload.get("id"))
+            )
+            if not isinstance(identifier, str) or not re.fullmatch(
+                r"[A-Za-z0-9-]{1,128}", identifier
+            ):
+                raise BrokerRefused("Invalid payment resource identifier")
+        _validate_wire_money(payload)
         creds = self.resolve_and_verify(secret_ref)
-        cache_key = f"{self.mode}:v2:{graft_id}:{idempotency_key}" if idempotency_key else None
+        self._authorize(graft_id, action, payload, secret_ref)
+        cache_key = self._request_key("v2", action, payload, secret_ref, graft_id, idempotency_key)
         if cache_key and cache_key in self._idempotent_cache:
             return self._idempotent_cache[cache_key]
 
