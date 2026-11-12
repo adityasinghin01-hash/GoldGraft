@@ -1,6 +1,44 @@
 # GoldGraft agents — handoff (12 Nov 2026)
 
-## Latest: Step 2 local PHP execution and proof
+## Latest (evening): three pieces connected, Vijay socket, live checks
+
+Codex ran out at 15:27; Claude finished the rest and owns all work (see AGENTS.md).
+Sections below are earlier history where they differ.
+
+| Piece | State on main |
+|---|---|
+| SI01 formats | ProofPlan/1, ProofResult/1, PromotionDecision/1, Certificate/2, CertificateVerification/1, ExitCheckResult/1, ExitEvidenceReconciliation/1 (`5b81e1e`) |
+| Gupta | `feat/gupta-live-completion` merged; its five unsupported claims corrected (`525c22d`): E2B refuses without a real integration, scratch-copy runner reports `isolation_verified=False`, custody env fallback only for one named sandbox ref, PayPal re-fetch is read-only and uncached, live script uses real buyer approval and invents nothing |
+| Connected run | `integration/connected_run.py`: WorkControl case→start→claim→authenticated BASELINE_READ → recipe executes the agents' candidate under the work id → Singhal judge + mutant re-judging → SI01 plan/result/promotion → Certificate/2 attempt. API `GET /grafts/{id}/connected` re-validates records (503 on edits); Proof screen shows it |
+| Vijay socket | `integration/shop_socket.py` + `pieces/shops/README.md`: one folder per shop, existing formats only, `conformance()`; the vendored legacy PHP shop is wired through it as `reference_stand_in` |
+
+Live results (all real, 12 Nov):
+
+- PayPal sandbox via the broker: order `4JN01011WL703525P` → capture `4HP47932H07497904` →
+  refund `89784014675460948`, each COMPLETED and re-fetched from PayPal (GoldGraft's own sandbox
+  app, buyer-approved in a browser; not a merchant shop). Evidence in `~/reports/goldgraft-live-20261112/`.
+- `r9-final-connected`: 13/13 agents on real models, $0.475004. Connected run on its AI-written
+  code: 29/39 verified (9/9 scenarios, 2/2 planted bugs), 10 held, certificate held at EVIDENCE_HOLD.
+- Its ProofResult signed by `.github/workflows/sign-proof.yml` (run 43215822128): Rekor log index
+  3832106644; changed copy rejected; hash and workflow identity re-checked by `scripts/live_verify_rekor.py`.
+
+Holds, by design: 8 critical rules without an executed mutation guard (R02 R04 R05 R06 R08 R11 R12 R17),
+the shop's own checkout on real PayPal, isolation (no Docker/E2B), exact OCI image, real buyer
+traffic for promotion, Vijay's state/finalisation/exit recipes, PayPal webhooks (no public listener),
+Render deploy, merchant exit, real login, PostgreSQL.
+
+Commands (this Mac's `uv` is an Intel build whose child `git` breaks; call `.venv/bin/python` directly):
+
+```sh
+.venv/bin/python -m integration.connected_run <run dir> --state-dir <run dir>/connected-run \
+  [--sandbox-capture <paypal recording>]
+.venv/bin/python -m integration.shop_socket --agent-run <run dir> --workdir <new folder>
+.venv/bin/python -m scripts.live_paypal_sandbox_payment --authorize-sandbox-payment   # needs a US sandbox buyer
+gh workflow run sign-proof.yml -f payload_path=docs/engineering/plan5/signing/<file>.json
+.venv/bin/python scripts/live_verify_rekor.py <file> <bundle> --identity <workflow identity>
+```
+
+## Step 2 local PHP execution and proof
 
 The morning snapshot below is historical where this update differs. Codex completed the
 bounded local plain-PHP check: this is **not** provider/isolation/merchant-delivery qualification.
