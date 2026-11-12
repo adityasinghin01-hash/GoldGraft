@@ -12,6 +12,19 @@ execution, payment behaviour, merchant isolation, complete source intake or
 working-site delivery. It does not clear the existing `isolation:runner` proof
 gate, modify a certificate or replace earlier PHP evidence.
 
+**Live smoke, 12 November 2026 (e2b 2.63.0): PASSED.** Report
+`/Users/aditya/reports/goldgraft-e2b-smoke/e2b-smoke-5y7lx6z2.json` (private,
+not committed). Three disposable VMs, each with internet disabled and
+termination confirmed: `success` exit 0 with the expected stdout; `nonzero`
+exit 7 with the deliberate stderr; `timeout` (`sleep 5` under a one-second
+deadline) `timed_out=true` via typed `DEADLINE_EXCEEDED` provenance. The first
+attempt (`e2b-smoke-agejl6qa.json`) held correctly before any upload: live E2B
+reports `network={"allow_public_traffic": False}` for an internet-off VM, a
+shape the policy check did not yet accept. It is now accepted only when that
+value is exactly `False`; any allow-list, rules, proxy or DNS override still
+holds (see `plugtests/test_e2b_backend.py`). `php_merchant_qualification`
+remains `false`.
+
 ## Install and explicit smoke
 
 From the repository root, using the existing Python 3.12 environment:
@@ -84,7 +97,8 @@ The explicit `base` alias is **not an immutable image pin**. The observed
 `template_id` is retained, with `immutable_image_verified=False`.
 
 Before upload or candidate execution the adapter checks `get_info()` for matching
-sandbox ID, running state, disabled internet, no custom network exception, the
+sandbox ID, running state, disabled internet, no custom network exception
+(`allow_public_traffic` may appear only as `False`), the
 kill/no-resume lifecycle and an observed lifetime no longer than 180 seconds.
 Missing, unsupported or changed observations hold the job. It then sends a fresh
 nonce and reads `E2B_SANDBOX_ID` through the guest command transport, requiring an

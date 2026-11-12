@@ -295,6 +295,39 @@ def test_policy_and_identity_mismatches_fail_closed_and_cleanup(setup, mutation)
     assert not setup.box.calls
 
 
+def test_observed_live_policy_shape_is_accepted(setup):
+    """Shape returned by live E2B 2.63.0 for an internet-off, kill-on-timeout VM."""
+
+    class SandboxOnTimeout(str, Enum):  # noqa: UP042 - mirrors e2b; SDK optional in CI
+        KILL = "kill"
+
+    class SandboxState(str, Enum):  # noqa: UP042
+        RUNNING = "running"
+
+    setup.box.info.network = {"allow_public_traffic": False}
+    setup.box.info.lifecycle = {"on_timeout": SandboxOnTimeout.KILL, "auto_resume": False}
+    setup.box.info.state = SandboxState.RUNNING
+    result = run(setup)
+    assert result["exit_code"] == 0 and result["termination_confirmed"]
+
+
+@pytest.mark.parametrize(
+    "network",
+    [
+        {"allow_public_traffic": True},
+        {"allow_public_traffic": None},
+        {"allow_public_traffic": False, "allow_out": ["example.com"]},
+        {"allow_public_traffic": False, "dns_servers": ["1.1.1.1"]},
+        {"allow_public_traffic": False, "rules": {}},
+    ],
+)
+def test_public_traffic_or_extra_network_fields_fail_closed(setup, network):
+    setup.box.info.network = network
+    with pytest.raises(IsolationNotEstablished, match="network or lifecycle"):
+        run(setup)
+    assert setup.box.killed and not setup.box.calls
+
+
 def test_transport_probe_mismatch_refuses_candidate_and_cleanup(setup):
     setup.box.probe_mismatch = True
     with pytest.raises(IsolationNotEstablished, match="identity"):

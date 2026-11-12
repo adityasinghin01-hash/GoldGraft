@@ -8,6 +8,7 @@
 | Connected backend → PHP execution → independent proof | 34/39 critical checks verified; result **HOLD** |
 | Executed planted bugs | 6/10 caught; four remain unverified |
 | PayPal sandbox | AI-written PHP checkout's HAPPY flow independently verified against real sandbox; additional refund/duplicate flows recorded separately |
+| E2B sandbox runner | Live-tested on 3 real E2B VMs (normal run, deliberate failure, timeout), internet off, each VM confirmed killed. The PHP proof does not run inside it yet, so runner isolation stays held |
 | Proof signature | ProofResult signed by the GitHub workflow; public Rekor entry **3833925707** |
 | Qualification certificate | **Not issued**; a signed held result is not a qualification certificate |
 

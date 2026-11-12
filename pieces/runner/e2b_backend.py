@@ -412,9 +412,15 @@ class E2BIsolationBackend:
     def _check_info(info, sandbox_id):
         if info.sandbox_id != sandbox_id:
             _refuse("E2B control-plane identity mismatch")
+        # Live E2B (12 Nov 2026) reports {"allow_public_traffic": False} for an
+        # internet-off VM: stricter, so accepted only when exactly False. Any
+        # allow-list, rules, proxy or DNS override stays a mismatch.
+        network = dict(info.network) if isinstance(info.network, dict) else info.network
+        if isinstance(network, dict) and network.get("allow_public_traffic", False) is False:
+            network.pop("allow_public_traffic", None)
         if (
             info.allow_internet_access is not False
-            or info.network not in (None, {}, {"deny_out": ["0.0.0.0/0"]})
+            or network not in (None, {}, {"deny_out": ["0.0.0.0/0"]})
             or info.lifecycle != {"on_timeout": "kill", "auto_resume": False}
             or info.state != "running"
         ):
