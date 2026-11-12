@@ -282,3 +282,17 @@ def test_missing_evidence_after_the_model_ran_is_retried_once(tmp_path, monkeypa
     _, tasks = _run(tmp_path / "b.sqlite", run)
     assert tasks["grafter"].issue.code == "MISSING_EVIDENCE"
     assert tasks["grafter" + integrated.RETRY].state == "succeeded"
+
+
+@pytest.mark.parametrize(
+    "role,issue,spent,expected",
+    [
+        ("Explorer", "MISSING_EVIDENCE", True, True),
+        ("Explorer", "MISSING_EVIDENCE", False, False),  # nothing ran: supply the input instead
+        ("Scribe", "DENIED", True, True),  # exact-copy review refused the model's copy
+        ("Librarian", "DENIED", True, False),  # a gate denial (e.g. no consent) never retries
+        ("Scribe", "DENIED", False, False),
+    ],
+)
+def test_only_model_mistakes_after_a_paid_turn_are_retried(role, issue, spent, expected):
+    assert integrated.retry_after_model(role, issue, spent) is expected

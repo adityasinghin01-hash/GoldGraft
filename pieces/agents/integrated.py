@@ -269,6 +269,17 @@ def _real_code(p, task_id, data, run):
 # qualified profile; a role+operation shape with two terminal, attributable Haiku failures starts
 # on Sonnet next time. Holds by design, denials, missing data, budget and unknowns never escalate.
 MODEL_FAILURES = frozenset({"INVALID_MODEL_OUTPUT", "TURN_LIMIT", "INVALID", "TOOL_LIMIT"})
+# Roles whose review only checks that the model copied normative content exactly: a DENIED there,
+# after the model really ran, is the model's copy mistake (12 Nov: Scribe kept CODE_ONLY although
+# traces existed), so it gets the one bounded retry. Gate denials elsewhere are never retried.
+EXACT_COPY_ROLES = frozenset({"Scribe"})
+
+
+def retry_after_model(role, issue, model_spent):
+    """Whether a hold that happened after a paid model turn deserves the one bounded retry."""
+    if not model_spent:
+        return False
+    return issue == "MISSING_EVIDENCE" or (issue == "DENIED" and role in EXACT_COPY_ROLES)
 
 
 def route(role, operation, data, routing):

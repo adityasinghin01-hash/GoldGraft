@@ -385,7 +385,7 @@ def run_store_b_task(p, models, run_id, routing, rows, run, outputs=None):
     issue = task.issue.code if task.issue else None
     if task.state != "succeeded":
         integrated.record_failure(routing, role, operation, profile, issue)
-        if issue == "MISSING_EVIDENCE" and batch_cost(models.ledger, batch) > 0:
+        if integrated.retry_after_model(role, issue, batch_cost(models.ledger, batch) > 0):
             run.setdefault("model_ran_holds", set()).add(lease.task_id)
     elif outputs is not None:
         outputs[lease.task_id] = p.artifacts.committed(lease.task_id)[1]
