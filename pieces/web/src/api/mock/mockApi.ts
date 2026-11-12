@@ -123,6 +123,13 @@ export const mockApi: GoldGraftApi = {
   runs: async () => get(runs),
   agents: async (id) => { await requireDemo(id); return get(agents); },
   connected: async (id) => { await requireDemo(id); return get(connected) as never; },
+  connectedProof: async (id) => {
+    await requireDemo(id);
+    // The exact signed bytes of the recorded run, shipped as a static file.
+    const r = await fetch('/evidence/connected-proof.json');
+    if (!r.ok) throw new ApiError('problem', r.status, 'Signed proof file unavailable', `HTTP ${r.status}`);
+    return r.arrayBuffer();
+  },
 
   ledgerFeed: (_id, onEvent, onStatus: (s: FeedStatus) => void) => {
     let i = 0;

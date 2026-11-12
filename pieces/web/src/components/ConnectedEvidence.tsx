@@ -19,7 +19,7 @@ const KIND: Record<string, { name: string; meaning: string }> = {
 const ORDER = ['baseline', 'candidate', 'scenario', 'mutation', 'domain_rule', 'payment', 'isolation', 'security', 'exit'];
 
 /** Plain words for each hold the run reports. */
-function holdText(hold: string): string {
+export function holdText(hold: string): string {
   if (hold.startsWith('domain_rule:')) return `Money rule ${hold.split(':')[1].split(':')[0]} has no planted bug that a test catches yet`;
   if (hold.startsWith('payment:shop-checkout-paypal')) return "The shop's own checkout still uses simulated PayPal";
   if (hold.startsWith('isolation:')) return 'The shop ran on a normal computer, not an isolated sandbox';
@@ -33,7 +33,7 @@ function holdText(hold: string): string {
 }
 
 /** One line for all unguarded money rules, then each other hold in plain words. */
-function foldRules(holds: string[]): string[] {
+export function foldRules(holds: string[]): string[] {
   const rules = holds.filter((h) => h.startsWith('domain_rule:')).map((h) => h.split(':')[1]);
   const rest = holds.filter((h) => !h.startsWith('domain_rule:')).map(holdText);
   if (rules.length === 0) return rest;

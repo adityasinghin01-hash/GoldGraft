@@ -40,6 +40,8 @@ export interface GoldGraftApi {
   agents(id: string): Promise<AgentsView>;
   /** One connected run across Gupta's control, the executed PHP, Singhal's proof and the SI01 records. */
   connected(id: string): Promise<ConnectedRun>;
+  /** The connected run's exact ProofResult bytes (the signed file), for hashing in the browser. */
+  connectedProof(id: string): Promise<ArrayBuffer>;
   ledgerFeed(id: string, onEvent: (e: LedgerEntry) => void, onStatus: (s: FeedStatus) => void): Feed;
   healFeed(id: string, onFrame: (f: HealFrame) => void, onStatus: (s: FeedStatus) => void): Feed;
 }
@@ -141,6 +143,11 @@ const liveApi: GoldGraftApi = {
   runs: () => request('GET', '/runs'),
   agents: (id) => request('GET', `/grafts/${enc(id)}/agents`),
   connected: (id) => request('GET', `/grafts/${enc(id)}/connected`),
+  connectedProof: async (id) => {
+    const r = await fetch(`${config.apiBase}/grafts/${enc(id)}/connected-proof`);
+    if (!r.ok) throw new ApiError('problem', r.status, 'Signed proof file unavailable', `HTTP ${r.status}`);
+    return r.arrayBuffer();
+  },
   ledgerFeed: (id, onEvent, onStatus) =>
     openFeed<LedgerEntry>(`/grafts/${enc(id)}/events`, 'ledger', onEvent, onStatus,
       (e) => e.type === 'STAGE' && (e.payload as { to_stage?: string } | undefined)?.to_stage === 'DONE'),
