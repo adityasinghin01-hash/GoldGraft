@@ -202,10 +202,37 @@ def scope(inventory):
     return root_map, mappings, open_items
 
 
+def _capture_file(inventory):
+    """The shop file holding the old capture call: where 'paid' is decided."""
+    return next(
+        (
+            t["location"]["file"]
+            for t in inventory["touchpoints"]
+            if t["target"]["paypal_mapping_id"] == "nvp-capture"
+        ),
+        None,
+    )
+
+
 def _real_code(p, task_id, data, run):
     survey, files = run["survey"], run["files"]
     if task_id in {"scribe-draft", "scribe-final"}:
         data["shop_id"] = survey["shop_id"]
+        # Grounding (12 Nov): the Scribe reads this shop's real capture file, and the money
+        # rule's code source names it, instead of the qualified one-line sample checkout.
+        path = _capture_file(survey["inventory"])
+        if path in files:
+            data["files"] = {path: files[path]}
+            for rule in data["normative_rules"]:
+                rule["sources"]["code"] = [path]
+    elif task_id in {"adversary-guards", "adversary-mutant"}:
+        # Grounding (12 Nov): the Adversary attacks the Grafter's real code; the capture file
+        # comes first, so its planted-bug location names the file where 'paid' is decided.
+        written = p.artifacts.candidate_files("grafter")
+        first = _capture_file(survey["inventory"])
+        order = sorted(written, key=lambda path: (path != first, path))[:4]
+        if order:
+            data["files"] = {path: written[path] for path in order}
     elif task_id == "architect":
         root_map, mappings, _ = scope(survey["inventory"])
         data["root_map"] = root_map

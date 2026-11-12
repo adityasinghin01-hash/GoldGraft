@@ -153,6 +153,16 @@ def test_real_code_chain_plans_from_the_survey_and_authors_the_shop_files(tmp_pa
         "ipn.php",
     }
     assert not any("paypal_nvp(" in text for text in after.values())
+    # Grounding: the Scribe reads the shop's real capture file and its rule names it; the
+    # Adversary attacks the Grafter's real code, capture file first.
+    scribe = integrated.stage_data(p, "scribe-final", "Scribe", "scribe_final", run)
+    assert scribe["files"] == {"api/execute-payment.php": run["files"]["api/execute-payment.php"]}
+    assert {tuple(r["sources"]["code"]) for r in scribe["normative_rules"]} == {
+        ("api/execute-payment.php",)
+    }
+    adversary = integrated.stage_data(p, "adversary-guards", "Adversary", "derive_guards", run)
+    assert next(iter(adversary["files"])) == "api/execute-payment.php"
+    assert adversary["files"] == {path: after[path] for path in adversary["files"]}
 
 
 def test_authored_code_review_rejects_old_calls_and_missing_operations():
