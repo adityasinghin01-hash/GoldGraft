@@ -56,6 +56,11 @@ PATH=/Library/Developer/CommandLineTools/usr/bin:$PATH \
 python3 -m scripts.integrated_results > docs/engineering/plan5/INTEGRATED_RESULTS_2026-11-12.md
 ```
 
+Fresh clone (rehearsed 12 Nov ~06:30 from GitHub branch `integration/agents-12-nov`): `uv sync`, then
+`cd pieces/web && npm ci && npx vite build`, then tests offline. On an Apple-silicon Mac whose `uv` is the
+Intel (Rosetta) Homebrew build, `uv sync` tries to compile `cryptography` from source and fails; pass a
+native Python: `uv sync --python ~/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12`.
+
 Model keys and the gateway signing key live in `~/.config/goldgraft/` (never in the repo). Port 8700 is the old stand-in API.
 With $1.91 left under the active cap, about 4 more full legacy runs fit before the cap must be raised (Aditya's call).
 

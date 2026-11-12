@@ -37,6 +37,18 @@ NO_PROOF = (
 log = logging.getLogger(__name__)
 
 
+def _shop_label(body):
+    """A readable name for an unnamed shop: the repo's last path part, else the site host."""
+    repo = str(body.get("repo") or "").rstrip("/")
+    if repo:
+        name = repo.rsplit("/", 1)[-1].removesuffix(".git")
+        if name:
+            return name
+    site = str(body.get("site") or "")
+    host = re.sub(r"^[a-z]+://", "", site).split("/", 1)[0]
+    return host or None
+
+
 def _problem(status, detail):
     return JSONResponse(
         {"type": "about:blank", "title": "Request Failed", "status": status, "detail": detail},
@@ -371,10 +383,17 @@ def create_app(
             if 200 <= response.status_code < 300:
                 created = json.loads(content)
                 shops[created["shop_id"]] = {k: body.get(k) for k in ("name", "repo", "site")}
+                label = None if body.get("name") else _shop_label(body)
+                if label:
+                    # The stand-in names every unnamed shop "Legacy Shop"; name it after its repo.
+                    created["name"] = label
+                    content = json.dumps(created).encode()
             rebuilt = Response(
                 content, status_code=response.status_code, background=response.background
             )
-            rebuilt.raw_headers = response.raw_headers
+            rebuilt.raw_headers = [
+                (k, v) for k, v in response.raw_headers if k.lower() != b"content-length"
+            ] + [(b"content-length", str(len(content)).encode())]
             return rebuilt
         start_match = re.fullmatch(r"/shops/([^/]+)/graft", path)
         run_match = re.fullmatch(

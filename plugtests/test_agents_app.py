@@ -196,6 +196,24 @@ def test_disabled_or_unqualified_start_passes_through(runs, enabled, repo):
         assert response.headers["X-GoldGraft-Evidence-Class"] == "scripted"
 
 
+def test_unnamed_shop_is_named_after_its_repo(runs):
+    with TestClient(create_app(runs_dir=runs)) as client:
+        made = client.post(
+            "/shops",
+            json={"repo": "https://github.com/goldgraft/eval-nvp.git/"},
+            headers={"Idempotency-Key": "unnamed"},
+        )
+        assert made.status_code == 200
+        assert made.json()["name"] == "eval-nvp"
+        assert int(made.headers["content-length"]) == len(made.content)
+        named = client.post(
+            "/shops",
+            json={"name": "Corner Shop", "repo": "https://github.com/goldgraft/eval-nvp"},
+            headers={"Idempotency-Key": "named"},
+        )
+        assert named.json()["name"] == "Corner Shop"
+
+
 @pytest.mark.parametrize("admitted", ["legacy-php-shop", "eval-nvp"])
 def test_live_start_busy_replay_and_starting_views(runs, admitted):
     entered, release, exited = Event(), Event(), Event()
