@@ -65,8 +65,14 @@ FORMATS = {}
 PURPOSES = {}
 # Hand-written files (not produced by write()); keep their index wording on regeneration.
 PURPOSES.update({
-    'switch-libs/php/API.md': 'API notes for the GoldGraft Orders v2 PHP library (given to the Grafter when it writes code)',
-    'switch-libs/php/paypal_orders.php': 'Hand-written GoldGraft Orders v2 PHP library the AI-written checkout calls (not AI-written)',
+    'switch-libs/php/API.md': (
+        'API notes for the GoldGraft Orders v2 PHP library '
+        '(given to the Grafter when it writes code)'
+    ),
+    'switch-libs/php/paypal_orders.php': (
+        'Hand-written GoldGraft Orders v2 PHP library '
+        'the AI-written checkout calls (not AI-written)'
+    ),
 })
 
 

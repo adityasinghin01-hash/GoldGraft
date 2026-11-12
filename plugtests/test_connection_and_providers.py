@@ -30,7 +30,11 @@ from pieces.backend.lifecycle import (
 )
 from pieces.backend.payment_broker import PaymentBroker
 from pieces.runner.artifact_build import ArtifactBuilder
-from pieces.runner.container_runner import ContainerRunner
+from pieces.runner.container_runner import (
+    BlockedEgressError,
+    ContainerRunner,
+    SandboxedProcessBackend,
+)
 from pieces.runner.sandbox_recorder import SandboxRecorder
 from providers import ArtifactPublisher, GitHubPublisher, RenderDeployer
 
@@ -268,6 +272,36 @@ def test_artifact_build_and_providers(tmp_path):
     )
     assert pub_rcpt.publish_id.startswith("pub-")
 
+    # GHCR remote container image publication
+    digest = "sha256:" + "a" * 64
+
+    # Requires token
+    with pytest.raises(ValueError, match="authority required"):
+        pub.publish_container_image(
+            artifact.artifact_id, "goldgraft:v1", digest, "ghcr.io/org/goldgraft", token=None
+        )
+
+    # Injected transport matching remote digest
+    class MockGhcrTransport:
+        def get(self, url, headers=None):
+            class Response:
+                status_code = 200
+                headers = {"Docker-Content-Digest": digest}
+
+            return Response()
+
+    live_pub = ArtifactPublisher(transport=MockGhcrTransport())
+    rcpt = live_pub.publish_container_image(
+        artifact.artifact_id,
+        "goldgraft:v1",
+        digest,
+        "ghcr.io/org/goldgraft",
+        token="ghp_test_token_123",
+    )
+    assert rcpt.live is True
+    assert rcpt.digest == digest
+    assert "ghcr.io/org/goldgraft@" in rcpt.destination
+
 
 def test_upload_session_limits_and_traversal_guards():
     upload_mgr = UploadSessionManager(max_size_bytes=1000)
@@ -320,6 +354,49 @@ def test_isolated_shop_execution_and_redaction(tmp_path):
     assert "[REDACTED]" in result["stdout"]
     assert "NORMAL_LINE=hello_world" in result["stdout"]
     assert result["isolation_verified"] is False
+
+
+def test_sandboxed_process_isolation_and_blocked_egress(tmp_path):
+    # Setup test file in original shop dir
+    orig_file = tmp_path / "app.py"
+    orig_file.write_text("print('original')", encoding="utf-8")
+
+    runner = ContainerRunner(isolation=SandboxedProcessBackend())
+
+    # 1. Successful isolated execution modifies scratch copy, preserving original directory
+    result = runner.execute_shop_process(
+        shop_dir=tmp_path,
+        command=[
+            sys.executable,
+            "-c",
+            "import pathlib\n"
+            "pathlib.Path('mutated.txt').write_text('mutated')\n"
+            "print('isolated_ok')",
+        ],
+    )
+    assert result["exit_code"] == 0
+    assert "isolated_ok" in result["stdout"]
+    assert result["isolation_verified"] is True
+    assert result["termination_confirmed"] is True
+    assert result["execution_boundary"] == "sandboxed_process"
+    # Original shop directory remains untouched (read-only mount)
+    assert not (tmp_path / "mutated.txt").exists()
+    assert (tmp_path / "app.py").read_text(encoding="utf-8") == "print('original')"
+
+    # 2. Blocked egress to metadata endpoint
+    with pytest.raises(BlockedEgressError, match="metadata"):
+        runner.execute_shop_process(
+            shop_dir=tmp_path,
+            command=["curl", "http://169.254.169.254/latest/meta-data/"],
+        )
+
+    # 3. Blocked egress to private network
+    with pytest.raises(BlockedEgressError, match="private network"):
+        runner.execute_shop_process(
+            shop_dir=tmp_path,
+            command=["curl", "http://10.0.0.1/admin"],
+        )
+
 
 
 def test_authenticated_callback_gateway():

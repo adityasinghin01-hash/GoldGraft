@@ -9,7 +9,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from threading import Lock
 
-
 MAX_INLINE_SIZE_BYTES = 16 * 1024
 MAX_CHUNK_SIZE_BYTES = 1024 * 1024
 
