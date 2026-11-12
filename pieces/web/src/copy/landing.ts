@@ -158,8 +158,8 @@ export const FOOTER = {
       { label: 'PayPal team view', href: '/orchard' }, { label: 'Security', href: '/security/run-1' }, { label: 'Compare', href: '/compare' },
     ] },
     { title: 'Project', links: [
-      { label: 'GitHub repository (team access)', href: SOURCES.repo.href, external: true },
-      { label: 'MIT licence (team access)', href: SOURCES.licence.href, external: true },
+      { label: 'GitHub repository', href: SOURCES.repo.href, external: true },
+      { label: 'MIT licence', href: SOURCES.licence.href, external: true },
       { label: 'PayPal AI Hackathon 2026', href: SOURCES.devpost.href, external: true },
     ] },
   ],

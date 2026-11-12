@@ -9,7 +9,20 @@ npm install
 npm run dev                      # http://127.0.0.1:8780 — sample mode (labelled sample data)
 ```
 
-Live mode against the stand-in API (what the demo video uses):
+To read the checked-in real run recordings, start the recorded-run API from the
+repository root, then start the frontend in a second terminal:
+
+```bash
+# terminal 1, repo root
+uv run python -m integration.agents_app --runs-dir deploy/runs --port 8700
+# terminal 2, pieces/web
+VITE_API_BASE=http://127.0.0.1:8700 npm run dev
+```
+
+This serves existing evidence; it does not execute a fresh agent run. The public
+recorded-run API is at `https://goldgraft-api.onrender.com`.
+
+For the separate synthetic stand-in API:
 
 ```bash
 # terminal 1, repo root with its venv

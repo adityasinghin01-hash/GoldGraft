@@ -1,12 +1,21 @@
 # GoldGraft — “Don't cut the tree. Graft.”
 
-> **Current pushed-code integration, 11 November 2026:** the [integration guide](docs/engineering/integration/README.md) combines every current GitHub branch and provides one working backend → runner → independent proof → ledger → API reference flow. Its supported scope is the published synthetic fixtures. [Fresh checks and source pins](docs/engineering/integration/VERIFICATION.md) supersede older status claims for this branch.
+**Reference demo, 12 November 2026:** [open the app](https://goldgraft.vercel.app) or [read the hosted runs API](https://goldgraft-api.onrender.com/runs). The public API serves recorded evidence; it does not start paid model jobs. The hosted setup is described in [deploy/README.md](deploy/README.md).
 
-> **Team update, 10 November 2026:** read the [sponsor ownership register](docs/engineering/work/SPONSOR_UTILISATION_AND_OWNERSHIP.md), [GitHub / Drive / chat workflow](docs/engineering/work/TEAM_CHANNELS_AND_SPONSOR_ACTIONS.md) and [Vijay integration reply](docs/engineering/work/VIJAY_TEAM_INPUTS_REPLY.md). Each owner researches/configures the assigned tools and applicable free/event/student access, records actual readiness and preserves all existing authority, privacy and qualification gates. This is documentation publication, not a product build or a real-payment PASS.
+| Recorded evidence (`r9-final-connected`) | Result |
+|---|---|
+| Agents on real models | 13/13 roles passed |
+| Connected backend → PHP execution → independent proof | 33/39 critical checks verified; result **HOLD** |
+| Executed planted bugs | 6/10 caught; four remain unverified |
+| PayPal sandbox | Separate order/capture/refund evidence, rechecked from its recording; the shop checkout still uses simulated PayPal |
+| Proof signature | ProofResult signed by the GitHub workflow; public Rekor entry **3832763566** |
+| Qualification certificate | **Not issued**; a signed held result is not a qualification certificate |
+
+These are the checked-in [connected-run records](deploy/runs/r9-final-connected/connected-run/). They describe the recorded run, not a new execution when a visitor opens the app. The six open checks are four planted-bug gaps, real shop-checkout payment evidence and runner isolation. Merchant deployment, state transfer and independent exit remain separate qualification work. Work in progress on other branches is not included in these results.
 
 GoldGraft is being designed as a browser connector service that upgrades a shop's older PayPal integration and leaves the approved upgraded shop running under the merchant's control. The service obtains authorised code/context, verifies the actual shop, reproduces an unchanged baseline, tests an isolated upgrade, obtains separate publication/deployment approval and verifies handover/recovery/exit. A PR or sandbox pass alone is not completion.
 
-**Current status:** reviewed paper engineering and shared team build instructions; the complete service is not built or operationally qualified. [Start with the engineering baseline](docs/engineering/START_HERE.md), [inspected current support](docs/engineering/BASELINE_AND_STATUS.md) and [current versus proposed contracts](docs/engineering/CURRENT_VS_PROPOSED.md). MIT licence.
+**Current scope:** an implemented reference demo with real model runs, executed PHP checks and a signed held proof result. The complete merchant delivery service is not operationally qualified. The [engineering baseline](docs/engineering/START_HERE.md), [inspected support](docs/engineering/BASELINE_AND_STATUS.md) and [current versus proposed contracts](docs/engineering/CURRENT_VS_PROPOSED.md) contain dated design snapshots; current code and run records establish what is implemented. MIT licence.
 
 ## Fixed journey, variable connections
 
@@ -30,28 +39,38 @@ Render is the first reference adapter, selected by Aditya. It is not mandatory m
 | Folder | Authority / purpose |
 |---|---|
 | `contracts/` | Current Python wire models and generated schemas/types/OpenAPI; proposals are not existing fields. |
-| `foundation/` | Shared ledger and step tracker; new lifecycle semantics still require implementation. |
+| `foundation/` | Shared ledger, step tracker and evidence helpers. |
 | `fakes/`, `fixtures/`, `plugtests/` | Offline stand-ins, labelled examples and compatibility checks. These do not prove real account/payment/isolation flows. |
 | `pieces/` | Independent team implementations; never import another piece's code. |
-| `docs/engineering/` | Reviewed proposed target build, controls, lifecycle, acceptance and all-four work baseline. |
+| `integration/` | Composition of the pieces, connected proof execution and recorded-run API. |
+| `deploy/` | Public, recorded evidence served by the hosted API. |
+| `docs/engineering/` | Target design, controls, acceptance criteria and dated implementation audits. |
 | `docs/design/` | Historical original design, with supersession notices; compatible data descriptions interpreted against current Python. |
 | `docs/FORMAT_CHANGES.md` | Existing coded format history and explicitly unimplemented proposal records. |
 
-## Future local development
+## Local development
 
-Existing setup uses Python3.12/uv, Node22 and git. Commands below are reference instructions, not work performed or authorised by this documentation update:
+Use Python 3.12/uv, Node 22 and git:
 
 ```bash
 uv sync
 npm ci
-uv run pytest -q
-uv run python -m goldgraft_fakes.api --port 8700
+GOLDGRAFT_PROOF=pieces.proof.proof:Proof GOLDGRAFT_API_APP=integration.app:create_app uv run pytest -q
+uv run python -m integration.agents_app --runs-dir deploy/runs --port 8700
 ```
 
-Ordinary tests stay offline. No secrets in code/logs/docs/fixtures. Payment amounts are integer minor units plus currency. Follow [AGENTS.md](AGENTS.md). Only approved versioned shared changes regenerate contracts alongside examples/fakes/fixtures/tests.
+In a second terminal, from the repository root:
+
+```bash
+cd pieces/web
+npm ci
+VITE_API_BASE=http://127.0.0.1:8700 npm run dev
+```
+
+The API command serves recorded runs without enabling paid model execution. See [pieces/web/README.md](pieces/web/README.md) for frontend data modes. For the offline synthetic fixture API, use `uv run python -m goldgraft_fakes.api --port 8700` instead. Ordinary tests stay offline; PHP is required for the executed shop checks. No secrets in code/logs/docs/fixtures. Payment amounts are integer minor units plus currency. Follow [AGENTS.md](AGENTS.md). Only approved versioned shared changes regenerate contracts alongside examples/fakes/fixtures/tests.
 
 ## Publication and external sources
 
-This documentation-only publication contains the reviewed engineering baseline and all four people’s work plans. GitHub is the shared engineering authority. Team Drive remains idea/research/pitch context. On 6 November 2026 the 21 affected shared Drive Markdown files in the [Team Pack](https://drive.google.com/drive/folders/10NZ56zh6UlveQTsi7rIrUA9K4GY8uv7a) and [GoldGraft](https://drive.google.com/drive/folders/1Sw-6KObSswVPHMgYdedOitltdpUAcjqR) folders were updated in place (same file links) with supersession and authority notices that point here; their original bodies are preserved, and the saved content was read back and hash-verified. Other Drive research, evidence and archive files were not changed and remain historical reference. No team messages were sent.
+GitHub is the shared engineering authority and this repository is public. Team Drive remains idea/research/pitch context. On 6 November 2026 the 21 affected shared Drive Markdown files in the [Team Pack](https://drive.google.com/drive/folders/10NZ56zh6UlveQTsi7rIrUA9K4GY8uv7a) and [GoldGraft](https://drive.google.com/drive/folders/1Sw-6KObSswVPHMgYdedOitltdpUAcjqR) folders were updated in place with supersession notices pointing here. Other Drive research and archive files remain historical reference.
 
-Programme order: 1 → 3 → 4 → 2 → 5 → 6. Paper Plans1/3/4 are closed; Plan2 publishes the shared engineering docs and the affected shared Drive files are synchronised and verified. Plans5/6 are Singh's future build/tests and integration/qualification, requiring explicit start. Agent internals, production deployment and merchant financial actions are not authorised by these docs.
+Programme order: 1 → 3 → 4 → 2 → 5 → 6. The paper plans and publication preceded the current build and reference integration. Engineering proposals and these instructions do not themselves authorise new external access, paid runs, production deployment or merchant financial actions.

@@ -1,5 +1,12 @@
 # GoldGraft reviewed engineering baseline — 6 November 2026
 
+> **Current entry point, 12 November 2026:** start with the repository
+> [README](../../README.md) and [hosted recorded-run setup](../../deploy/README.md).
+> Main includes the 13-role reference integration and signed held proof results.
+> Earlier ownership and NOT STARTED banners below are dated history; current
+> [AGENTS.md](../../AGENTS.md) governs execution. Reference evidence does not
+> establish complete merchant delivery or operational qualification.
+
 > **Latest execution ownership, Aditya, 11 November 2026:** Claude owns frontend
 > only. Codex owns all non-frontend completion, including backend/runner/domain/
 > proof, agent APIs/tools, integration, review, commits/pushes on main and handoff.
