@@ -170,8 +170,13 @@ class SourceAcquisition:
                     kind = stat.S_IFMT(mode)
                     if member.flag_bits & 1 or kind not in {0, stat.S_IFREG, stat.S_IFDIR}:
                         raise ValueError("UNSUPPORTED_ARCHIVE_ENTRY")
+                    name = (
+                        member.orig_filename
+                        if getattr(member, "orig_filename", None) and "\\" in member.orig_filename
+                        else member.filename
+                    )
                     with archive.open(member) as stream:
-                        accept(member.filename, member.file_size, member.is_dir(), stream.read)
+                        accept(name, member.file_size, member.is_dir(), stream.read)
         else:
             try:
                 with tarfile.open(fileobj=io.BytesIO(data), mode="r:*") as archive:

@@ -126,7 +126,17 @@ class ArtifactBuilder:
             return descriptor
 
         iidfile = root_dir / f".goldgraft-iid-{metadata_digest[:8]}"
-        command = [docker_bin, "build", "-t", f"{image_name}:{tag}", "--iidfile", str(iidfile), "."]
+        command = [
+            docker_bin,
+            "build",
+            "--platform",
+            "linux/amd64",
+            "-t",
+            f"{image_name}:{tag}",
+            "--iidfile",
+            str(iidfile),
+            ".",
+        ]
         if dockerfile:
             command.extend(["-f", str(dockerfile)])
         try:

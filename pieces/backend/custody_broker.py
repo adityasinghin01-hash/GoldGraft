@@ -6,6 +6,7 @@ ensuring credentials are never leaked in logs or stdout.
 """
 
 import hashlib
+import os
 from dataclasses import dataclass
 
 SECRET_NAMES = {
@@ -53,7 +54,15 @@ class CustodyBroker:
     def resolve_credentials(self, secret_ref: str) -> dict[str, str]:
         """Resolves raw credentials inside the runner environment only."""
         if secret_ref not in self._vault:
-            # Fallback to env/fake vault if ref matches pattern
+            # Fallback to env variables if available for sandbox execution
+            env_creds: dict[str, str] = {}
+            for name in SECRET_NAMES:
+                val = os.environ.get(name.upper()) or os.environ.get(name)
+                if val:
+                    env_creds[name] = val
+            if env_creds:
+                self._vault[secret_ref] = env_creds
+                return dict(env_creds)
             return {}
         return dict(self._vault[secret_ref])
 

@@ -387,6 +387,28 @@ class PaymentBroker:
                 "status": "COMPLETED",
                 "amount": payload.get("amount", {"currency_code": "USD", "value": "10.00"}),
             }
+        elif action == "get_order":
+            order_id = payload.get("order_id") or payload.get("id", "ORD-UNKNOWN")
+            resp_data = {
+                "id": order_id,
+                "status": "COMPLETED",
+                "intent": "CAPTURE",
+                "purchase_units": payload.get("purchase_units", []),
+            }
+        elif action == "get_capture":
+            capture_id = payload.get("capture_id") or payload.get("id", "CAP-UNKNOWN")
+            resp_data = {
+                "id": capture_id,
+                "status": "COMPLETED",
+                "amount": payload.get("amount", {"currency_code": "USD", "value": "10.00"}),
+            }
+        elif action == "get_refund":
+            refund_id = payload.get("refund_id") or payload.get("id", "REF-UNKNOWN")
+            resp_data = {
+                "id": refund_id,
+                "status": "COMPLETED",
+                "amount": payload.get("amount", {"currency_code": "USD", "value": "10.00"}),
+            }
         else:
             raise BrokerRefused(f"Unknown orders v2 action: {action}")
         resp_data["_evidence_class"] = "scripted"
@@ -403,6 +425,31 @@ class PaymentBroker:
     # ------------------------------------------------------------------
     # Sandbox path (real exchanges only; raises instead of substituting)
     # ------------------------------------------------------------------
+
+    def _sandbox_get(
+        self,
+        url: str,
+        *,
+        headers: dict[str, str],
+        operation: str,
+    ) -> dict[str, Any]:
+        self._check_rate_limit(datetime.now(UTC).timestamp())
+        try:
+            response = self.transport.get(url, headers=headers, timeout=15.0)
+        except Exception as exc:  # transport uncertainty, never a synthetic success
+            raise BrokerOutcomeUnknown(
+                f"{operation}: transport failed after dispatch; provider state unknown"
+            ) from exc
+        if response.status_code == 429 or response.status_code >= 500:
+            raise BrokerOutcomeUnknown(
+                f"{operation}: HTTP {response.status_code}; provider state unknown"
+            )
+        if response.status_code >= 400:
+            raise BrokerRequestFailed(f"{operation}: HTTP {response.status_code}")
+        try:
+            return response.json()
+        except (ValueError, TypeError):
+            raise BrokerOutcomeUnknown(f"{operation}: malformed provider response") from None
 
     def _sandbox_post(
         self,
@@ -549,15 +596,22 @@ class PaymentBroker:
         graft_id: str = "default",
     ) -> BrokerResponse:
         """Executes one typed Orders v2 REST operation for the configured mode."""
-        if action not in {"create", "capture", "refund"}:
+        if action not in {
+            "create",
+            "capture",
+            "refund",
+            "get_order",
+            "get_capture",
+            "get_refund",
+        }:
             raise BrokerRefused("Unsupported Orders v2 operation")
         if action != "create":
             import re
 
             identifier = (
                 payload.get("order_id")
-                if action == "capture"
-                else (payload.get("capture_id") or payload.get("id"))
+                if action in ("capture", "get_order")
+                else (payload.get("capture_id") or payload.get("refund_id") or payload.get("id"))
             )
             if not isinstance(identifier, str) or not re.fullmatch(
                 r"[A-Za-z0-9-]{1,128}", identifier
@@ -584,20 +638,36 @@ class PaymentBroker:
                 headers["PayPal-Request-Id"] = idempotency_key
             if action == "create":
                 url = f"{REST_SANDBOX}/v2/checkout/orders"
-                body: Any = payload
+                data = self._sandbox_post(
+                    url, headers=headers, json_body=payload, operation="orders v2 create"
+                )
             elif action == "capture":
-                url = f"{REST_SANDBOX}/v2/checkout/orders/{payload.get('order_id', '')}/capture"
-                body = {}
+                order_id = payload.get("order_id", "")
+                url = f"{REST_SANDBOX}/v2/checkout/orders/{order_id}/capture"
+                data = self._sandbox_post(
+                    url, headers=headers, json_body={}, operation="orders v2 capture"
+                )
             elif action == "refund":
                 capture_id = payload.get("capture_id") or payload.get("id", "")
                 url = f"{REST_SANDBOX}/v2/payments/captures/{capture_id}/refund"
-                body = payload
+                data = self._sandbox_post(
+                    url, headers=headers, json_body=payload, operation="orders v2 refund"
+                )
+            elif action == "get_order":
+                order_id = payload.get("order_id") or payload.get("id", "")
+                url = f"{REST_SANDBOX}/v2/checkout/orders/{order_id}"
+                data = self._sandbox_get(url, headers=headers, operation="orders v2 get_order")
+            elif action == "get_capture":
+                capture_id = payload.get("capture_id") or payload.get("id", "")
+                url = f"{REST_SANDBOX}/v2/payments/captures/{capture_id}"
+                data = self._sandbox_get(url, headers=headers, operation="orders v2 get_capture")
+            elif action == "get_refund":
+                refund_id = payload.get("refund_id") or payload.get("id", "")
+                url = f"{REST_SANDBOX}/v2/payments/refunds/{refund_id}"
+                data = self._sandbox_get(url, headers=headers, operation="orders v2 get_refund")
             else:
                 raise BrokerRefused(f"Unknown orders v2 action: {action}")
 
-            data = self._sandbox_post(
-                url, headers=headers, json_body=body, operation=f"orders v2 {action}"
-            )
             if not isinstance(data, dict):
                 raise BrokerOutcomeUnknown(f"orders v2 {action}: non-object response")
             correlation = str(data.get("id") or "")
@@ -621,3 +691,54 @@ class PaymentBroker:
         if cache_key:
             self._idempotent_cache[cache_key] = response
         return response
+
+    def refetch_capture(
+        self,
+        capture_id: str,
+        *,
+        secret_ref: str,
+        idempotency_key: str | None = None,
+        graft_id: str = "default",
+    ) -> BrokerResponse:
+        """Re-fetches a capture record directly from PayPal to verify final state."""
+        return self.execute_orders_v2(
+            "get_capture",
+            {"capture_id": capture_id},
+            secret_ref=secret_ref,
+            idempotency_key=idempotency_key or f"refetch-capture-{capture_id}",
+            graft_id=graft_id,
+        )
+
+    def refetch_refund(
+        self,
+        refund_id: str,
+        *,
+        secret_ref: str,
+        idempotency_key: str | None = None,
+        graft_id: str = "default",
+    ) -> BrokerResponse:
+        """Re-fetches a refund record directly from PayPal to verify final state."""
+        return self.execute_orders_v2(
+            "get_refund",
+            {"refund_id": refund_id},
+            secret_ref=secret_ref,
+            idempotency_key=idempotency_key or f"refetch-refund-{refund_id}",
+            graft_id=graft_id,
+        )
+
+    def refetch_order(
+        self,
+        order_id: str,
+        *,
+        secret_ref: str,
+        idempotency_key: str | None = None,
+        graft_id: str = "default",
+    ) -> BrokerResponse:
+        """Re-fetches an order record directly from PayPal to verify final state."""
+        return self.execute_orders_v2(
+            "get_order",
+            {"order_id": order_id},
+            secret_ref=secret_ref,
+            idempotency_key=idempotency_key or f"refetch-order-{order_id}",
+            graft_id=graft_id,
+        )

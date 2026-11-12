@@ -94,7 +94,12 @@ def zip_bytes(entries):
     with zipfile.ZipFile(stream, "w", zipfile.ZIP_DEFLATED) as archive:
         for name, content in entries:
             archive.writestr(name, content)
-    return stream.getvalue()
+    data = stream.getvalue()
+    for name, _ in entries:
+        if "\\" in name:
+            normalized = name.replace("\\", "/")
+            data = data.replace(normalized.encode("utf-8"), name.encode("utf-8"))
+    return data
 
 
 @pytest.mark.parametrize(
@@ -233,7 +238,10 @@ def test_source_digest_includes_hidden_inputs_boundaries_and_refuses_links(tmp_p
     before = builder.calculate_source_digest(tmp_path)
     (tmp_path / ".config").write_bytes(b"one")
     assert builder.calculate_source_digest(tmp_path) != before
-    (tmp_path / "link").symlink_to(tmp_path / "src")
+    try:
+        (tmp_path / "link").symlink_to(tmp_path / "src")
+    except OSError:
+        pytest.skip("Symlink creation requires elevated privileges on Windows")
     with pytest.raises(ValueError, match="links"):
         builder.calculate_source_digest(tmp_path)
 
