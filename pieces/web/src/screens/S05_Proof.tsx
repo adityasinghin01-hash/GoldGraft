@@ -41,7 +41,9 @@ export default function S05_Proof() {
   };
 
   if (q.isPending) return <div className={s.screen}><PageHead title="Proof" /><Skeleton what="proof" lines={4} /></div>;
-  if (q.isError || !ps) return <div className={s.screen}><PageHead title="Proof" /><ConnectedEvidence graftId={graftId} />{connected.data ? null : <ProblemBanner error={q.error} onRetry={() => q.refetch()} />}</div>;
+  const cdEarly = connected.data;
+  const realHead = cdEarly ? `Caught ${cdEarly.checks.filter((c) => c.kind === 'mutation' && c.state === 'verified').length} of ${cdEarly.checks.filter((c) => c.kind === 'mutation').length} planted bugs in the AI-written code · ${cdEarly.checks.filter((c) => c.state === 'verified').length} of ${cdEarly.checks.length} checks verified` : undefined;
+  if (q.isError || !ps) return <div className={s.screen}><PageHead title="Proof" sub={realHead ? <span className={s.top}>{realHead}</span> : undefined} /><ConnectedEvidence graftId={graftId} />{connected.data ? null : <ProblemBanner error={q.error} onRetry={() => q.refetch()} />}</div>;
 
   const denom = ps.total - ps.equivalent_dropped;
   const caughtSoFar = replaying ? mutants.slice(0, shown!).filter((m) => m.killed_by.length > 0).length : ps.killed;
