@@ -29,6 +29,7 @@ from goldgraft_contracts.api import (
     ScenarioList,
     StartGraftRequest,
 )
+from goldgraft_contracts.registry import validate
 from starlette.concurrency import run_in_threadpool
 
 from integration.agent_views import IntegratedRunViews
@@ -391,6 +392,42 @@ def create_app(
                 body.model_dump(mode="json"),
                 headers={"X-GoldGraft-Evidence-Class": LOCAL_PHP_EVIDENCE_CLASS},
             )
+        if suffix == "connected":
+            connected = path / "connected-run"
+            if not (connected / "CONNECTED_RUN.json").is_file():
+                return _problem(404, "No connected run has been recorded for this run yet", NOT_YET)
+            # Re-validate every stored record on read; a changed file fails closed (503).
+            records = {
+                name: validate(schema, json.loads((connected / f"{name}.json").read_bytes()))
+                for name, schema in (
+                    ("ProofPlan", "ProofPlan/1"),
+                    ("ProofResult", "ProofResult/1"),
+                    ("PromotionDecision", "PromotionDecision/1"),
+                    ("PublicProofView", "PublicProofView/1"),
+                )
+            }
+            summary = json.loads((connected / "CONNECTED_RUN.json").read_bytes())
+            result = records["ProofResult"]
+            if (
+                summary["proof_plan"]["digest"] != records["ProofPlan"].plan_digest
+                or result.plan_digest != records["ProofPlan"].plan_digest
+                or summary["proof_result"]["outcome"] != result.outcome
+            ):
+                raise ValueError("connected run summary does not match its records")
+            summary["checks"] = [
+                {
+                    "check_id": c.check_id,
+                    "kind": c.kind,
+                    "critical": c.critical,
+                    "evidence_class": c.required_evidence_class,
+                    "state": r.state,
+                    "reason": r.reason_code,
+                }
+                for c, r in zip(records["ProofPlan"].checks, result.results, strict=True)
+            ]
+            return JSONResponse(
+                summary, headers={"X-GoldGraft-Evidence-Class": "local_component_connected"}
+            )
         if suffix == "agents":
             return JSONResponse(get_view(run_id).agents())
         if suffix == "scenarios":
@@ -520,7 +557,8 @@ def create_app(
             return rebuilt
         start_match = re.fullmatch(r"/shops/([^/]+)/graft", path)
         run_match = re.fullmatch(
-            r"/grafts/([^/]+)(?:/(events|rootmap|scenarios|cmel|proof|changes|agents))?", path
+            r"/grafts/([^/]+)(?:/(events|rootmap|scenarios|cmel|proof|changes|agents|connected))?",
+            path,
         )
         is_start = (
             request.method == "POST"

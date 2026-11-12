@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "plugtests/test_proof.py",
+    "plugtests/test_proof_certificate.py",
+    "plugtests/test_proof_mutations.py",
+    "plugtests/test_proof_posterior.py",
+    "plugtests/test_proof_rules.py"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {
+    "GOLDGRAFT_PROOF": "pieces.proof.proof:Proof",
+    "GOLDGRAFT_PHP": "php"
+  },
+  "exit_code": 0,
+  "seconds": 1.316,
+  "output": "docs/engineering/plan5/checks/CR01_05-proof-php.log",
+  "output_sha256": "0693511f29f8a40b64dc41208cc6f5762da5c72d7db84bff265cf83a0657a2d2"
+}
