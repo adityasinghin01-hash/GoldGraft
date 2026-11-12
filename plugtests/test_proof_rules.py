@@ -179,8 +179,9 @@ def test_not_applicable_is_explicit_and_preserves_unverified_precedence():
     )
 
 
-@pytest.mark.parametrize("field,value", [("graft_id", "foreign"), ("run_id", "mixed"),
-                                         ("variant", "OLD"), ("seq", 99)])
+@pytest.mark.parametrize(
+    "field,value", [("graft_id", "foreign"), ("run_id", "mixed"), ("variant", "OLD"), ("seq", 99)]
+)
 def test_judge_rejects_mixed_or_misordered_subject_stream(field, value):
     old, twin, new, contract, plan, _ = judge_inputs()
     raw = new[-1].model_dump(mode="json")
@@ -210,6 +211,38 @@ def test_not_applicable_cannot_hide_a_normative_breach():
     assert {(hit.side, hit.rule) for hit in result.rule_hits} >= {("OLD", "R02"), ("NEW", "R02")}
 
 
+def pending_repair_inputs():
+    fixture = CMEL.parent
+    streams = []
+    for variant in ("OLD", "OLD_TWIN", "NEW"):
+        events = json.loads((CMEL / f"HAPPY.{variant}.json").read_text())
+        events = [e for e in events if e["kind"] not in {"NOTIFY", "NOTIFY_VERIFIED"}]
+        for seq, event in enumerate(events):
+            event["seq"] = seq
+            event["scenario_id"] = "PENDING"
+            if event["kind"] == "CAPTURE":
+                event["status_norm"] = "PENDING"
+            if variant == "NEW" and event["kind"] == "SHOP_PAID":
+                event["kind"] = "SHOP_PENDING"
+        streams.append([validate("CMEL/1", event) for event in events])
+    return (
+        *streams,
+        validate("Contract/1", json.loads((fixture / "contract.json").read_text())),
+        validate("TargetPlan/1", json.loads((fixture / "target_plan.json").read_text())),
+    )
+
+
+def test_fixing_old_paid_on_pending_is_reported_without_waiving_unrelated_parity():
+    old, twin, new, contract, plan = pending_repair_inputs()
+    fixed = judge(old, twin, new, contract, plan)
+    assert fixed.grade == "PASS_FIXED"
+    assert {(hit.side, hit.rule) for hit in fixed.rule_hits} == {("OLD", "R01"), ("OLD", "R07")}
+    # Retain the exact repair difference rather than erasing it as noise.
+    assert fixed.parity_diff
+    next(event for event in new if event.kind == "SHOP_PENDING").money.currency = "EUR"
+    assert judge(old, twin, new, contract, plan).grade == "PROBLEM"
+
+
 def test_json_webhook_retained_at_ipn_path_uses_resource_content():
     from pieces.proof.cmel import to_cmel
 
@@ -222,8 +255,9 @@ def test_json_webhook_retained_at_ipn_path_uses_resource_content():
     assert len(notifications) == 2
     assert all(event.status_norm == "COMPLETED" for event in notifications)
     assert all(event.pp.capture_id and event.pp.order_id for event in notifications)
-    assert all(event.money.minor == 2500 and event.money.currency == "USD"
-               for event in notifications)
+    assert all(
+        event.money.minor == 2500 and event.money.currency == "USD" for event in notifications
+    )
 
 
 def test_late_pending_notification_cannot_regress_a_completed_order():
@@ -231,24 +265,40 @@ def test_late_pending_notification_cannot_regress_a_completed_order():
     assert not rule_hits(events, None)
     paid = deepcopy(next(event for event in events if event["kind"] == "SHOP_PAID"))
     capture = next(event for event in events if event["kind"] == "CAPTURE")
-    notify = {**deepcopy(capture), "kind": "NOTIFY", "source": "NOTIFICATION",
-              "status_norm": "PENDING"}
+    notify = {
+        **deepcopy(capture),
+        "kind": "NOTIFY",
+        "source": "NOTIFICATION",
+        "status_norm": "PENDING",
+    }
     for event in (notify, {**paid, "kind": "SHOP_PENDING"}):
         event["seq"] = len(events)
         events.append(event)
     assert "R04" in rule_hits(events, None)
 
 
-@pytest.mark.parametrize("origin,route,equivalence", [
-    ("UNKNOWN", "REST", None), ("LEGACY", "UNKNOWN", None), ("LEGACY", "REST", " "),
-])
+@pytest.mark.parametrize(
+    "origin,route,equivalence",
+    [
+        ("UNKNOWN", "REST", None),
+        ("LEGACY", "UNKNOWN", None),
+        ("LEGACY", "REST", " "),
+    ],
+)
 def test_unknown_or_unsubstantiated_refund_origin_does_not_pass(origin, route, equivalence):
     from pieces.proof.lifecycle import LifecycleEvidence, RefundRoute, lifecycle_hits
 
-    events = [validate("CMEL/1", event)
-              for event in json.loads((CMEL / "REFUND.NEW.json").read_text())]
+    events = [
+        validate("CMEL/1", event) for event in json.loads((CMEL / "REFUND.NEW.json").read_text())
+    ]
     refund = next(event for event in events if event.kind == "REFUND")
-    evidence = LifecycleEvidence(refund.run_id, refunds=(RefundRoute(
-        refund.order_ref, refund.pp.refund_id, origin, route, equivalence, "runner/refund"),))
+    evidence = LifecycleEvidence(
+        refund.run_id,
+        refunds=(
+            RefundRoute(
+                refund.order_ref, refund.pp.refund_id, origin, route, equivalence, "runner/refund"
+            ),
+        ),
+    )
     hits, incomplete = lifecycle_hits(events, evidence)
     assert "R15" in hits or "R15" in incomplete

@@ -156,6 +156,7 @@ def test_real_code_chain_plans_from_the_survey_and_authors_the_shop_files(tmp_pa
     # Grounding: the Scribe reads the shop's real capture file and its rule names it; the
     # Adversary attacks the Grafter's real code, capture file first.
     scribe = integrated.stage_data(p, "scribe-final", "Scribe", "scribe_final", run)
+    assert {r["id"] for r in scribe["normative_rules"]} == {"R01"}
     assert scribe["files"] == {"api/execute-payment.php": run["files"]["api/execute-payment.php"]}
     assert {tuple(r["sources"]["code"]) for r in scribe["normative_rules"]} == {
         ("api/execute-payment.php",)

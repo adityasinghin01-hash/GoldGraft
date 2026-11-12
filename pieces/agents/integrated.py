@@ -216,6 +216,10 @@ def _capture_file(inventory):
 
 def _real_code(p, task_id, data, run):
     survey, files = run["survey"], run["files"]
+    if task_id in {"adversary-guards", "adversary-mutant"}:
+        data["mutation_rule_ids"] = [
+            "R01" if rule == "captured-before-paid" else rule for rule in data["mutation_rule_ids"]
+        ]
     if task_id in {"scribe-draft", "scribe-final"}:
         data["shop_id"] = survey["shop_id"]
         # Grounding (12 Nov): the Scribe reads this shop's real capture file, and the money
@@ -225,6 +229,13 @@ def _real_code(p, task_id, data, run):
             data["files"] = {path: files[path]}
             for rule in data["normative_rules"]:
                 rule["sources"]["code"] = [path]
+                if rule["id"] == "captured-before-paid":
+                    rule["id"] = "R01"
+                    if "captured-before-paid" in data["trace_rules"]:
+                        data["trace_rules"]["R01"] = data["trace_rules"].pop("captured-before-paid")
+                    for evidence in data["evidence"].values():
+                        if evidence.get("rule_id") == "captured-before-paid":
+                            evidence["rule_id"] = "R01"
     elif task_id == "adversary-guards":
         # Grounding (12 Nov): the Adversary reads and attacks the Grafter's real code; the capture
         # file comes first, so its planted-bug location names the file where 'paid' is decided.

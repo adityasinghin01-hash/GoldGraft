@@ -173,6 +173,43 @@ def test_independent_proof_is_not_claimed(runs, suffix):
         assert "independent proof has not run" in response.json()["detail"]
 
 
+def test_successful_retry_resolves_problem_but_keeps_both_cost_receipts(runs):
+    path = runs / "sample-1/RESULT.json"
+    result = json.loads(path.read_text())
+    result["tasks"].extend(
+        [
+            {
+                "task": "scribe-final",
+                "role": "Scribe",
+                "passed": False,
+                "model": "haiku8",
+                "cost_micro_usd": 20,
+            },
+            {
+                "task": "scribe-final-retry1",
+                "role": "Scribe",
+                "passed": True,
+                "model": "haiku8",
+                "cost_micro_usd": 30,
+            },
+        ]
+    )
+    result["spent_micro_usd"] = 80
+    path.write_text(json.dumps(result))
+    with TestClient(create_app(runs_dir=runs)) as client:
+        card = client.get("/grafts/sample-1").json()["card"]
+        assert card["problems"] == 0
+        assert card["cost_usd"] == 0.00008
+        feed = client.get("/grafts/sample-1/events").text
+        entries = [json.loads(line[6:]) for line in feed.splitlines() if line.startswith("data: ")]
+        charges = [
+            entry["payload"]["usd"]
+            for entry in entries
+            if entry["schema"] == "BudgetRecord/1" and entry["payload"]["agent"] == "Scribe"
+        ]
+        assert charges == [0.00002, 0.00003]
+
+
 def test_changes_and_unknown_backend_fallthrough(runs):
     with TestClient(create_app(runs_dir=runs)) as client:
         response = client.get("/grafts/unknown")

@@ -282,6 +282,40 @@ def projection(events, *, noise, old, deltas):
     return projected
 
 
+def pending_state_repair(baseline, candidate, before, after, hits):
+    """Recognise only the old paid-on-pending defect's exact local state repair.
+
+    Keep the diff in the verdict. No amount/currency/count/order/approval change
+    is excused, and the caller has already required complete evidence and no NEW breach.
+    """
+    if (
+        not hits
+        or any(hit.side != "OLD" or hit.rule not in {"R01", "R07"} for hit in hits)
+        or len(before) != len(after)
+    ):
+        return False
+    repaired = set()
+    for left, right in zip(before, after, strict=True):
+        if left == right:
+            continue
+        if (
+            left["kind"] != "SHOP_PAID"
+            or right["kind"] != "SHOP_PENDING"
+            or left["source"] != "SHOP_DB"
+            or {**left, "kind": "SHOP_PENDING"} != right
+        ):
+            return False
+        repaired.add(left["order_ref"])
+    if not repaired:
+        return False
+    for order in repaired:
+        for stream in (baseline, candidate):
+            captures = [e for e in stream if e["order_ref"] == order and e["kind"] == "CAPTURE"]
+            if not captures or any(e.get("status_norm") != "PENDING" for e in captures):
+                return False
+    return True
+
+
 def judge(
     old: Sequence[MoneyEvent],
     old_twin: Sequence[MoneyEvent],
@@ -304,9 +338,10 @@ def judge(
     if len(grafts) != 1:
         raise ValueError("Judge subject must belong to one graft")
     for stream, variant in zip(streams, ("OLD", "OLD_TWIN", "NEW"), strict=True):
-        if any(event.variant != variant for event in stream) or len(
-            {event.run_id for event in stream}
-        ) > 1:
+        if (
+            any(event.variant != variant for event in stream)
+            or len({event.run_id for event in stream}) > 1
+        ):
             raise ValueError("Judge subject requires one run and the expected variant per stream")
         if any(event.seq != index for index, event in enumerate(stream)):
             raise ValueError("Judge requires a complete ordered event sequence")
@@ -397,6 +432,8 @@ def judge(
         return verdict("PROBLEM", hits, diff)
     if hits and not diff:
         return verdict("PASS_FIXED", hits)
+    if pending_state_repair(baseline, candidate, before, after, hits):
+        return verdict("PASS_FIXED", hits, diff)
     if not_applicable_reason is not None and not hits and not diff:
         return verdict("N/A")
     return verdict("PROBLEM" if diff else "PASS", hits, diff)

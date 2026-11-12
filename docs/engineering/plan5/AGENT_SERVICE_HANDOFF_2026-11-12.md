@@ -1,4 +1,47 @@
-# GoldGraft agents — handoff (12 Nov 2026, morning)
+# GoldGraft agents — handoff (12 Nov 2026)
+
+## Latest: Step 2 local PHP execution and proof
+
+The morning snapshot below is historical where this update differs. Codex completed the
+bounded local plain-PHP check: this is **not** provider/isolation/merchant-delivery qualification.
+
+- Native ARM64 PHP 8.4.27 is installed at `~/.local/bin/php` without Homebrew.
+- Architect declares the pinned Orders-library comparison mappings; Scribe's capture rule
+  is bound to `R01`. Unknown mappings and unrelated money changes remain rejected.
+- Fresh real-model run `r8b-proof-legacy`: all 13 roles completed, $0.474566, with one
+  recorded Scribe retry. Earlier `r8a-proof-legacy` held at Explorer's prohibited mixed
+  tool batch ($0.148880); its failed evidence is retained. Runtime guards are unchanged.
+- Actual PHP execution, using local simulated PayPal: eight PASS and one PASS_FIXED.
+  The pending repair preserves the OLD R01/R07 findings and its exact repair diff.
+  PARITY_EXTRA now checks the actual unchanged order-listing endpoint.
+- Two mutations of the AI-written candidate were executed and caught by independent proof.
+  These two are separate from the twelve executable fixture mutations, which also pass.
+  No claim of complete critical-rule mutation coverage is made.
+- `/grafts/{run}/scenarios` and `/cmel` replay digest-bound actual local recordings;
+  the progress card for this run reports 9/9 accepted, zero unresolved problems.
+  A successful retry clears the active problem while both paid attempts remain in the ledger.
+- The qualified certificate is **not issued**. Eight critical rules remain unguarded by
+  executed candidate mutations; authenticated sandbox/payment, signing/transparency and
+  the merchant certificate binding remain separate prerequisites. The run stays PROVING.
+- The checkout.js v4 browser item is still explicit and open; it is outside this PHP profile.
+
+Evidence on this Mac:
+`~/reports/goldgraft-agents-integration-20261112/runs/r8b-proof-legacy/local-proof/REPORT.json`.
+It includes the captured inputs' digests, verdicts, actual mutation diffs/recordings,
+coverage gaps and certificate hold reasons. Local digests do not authenticate a provider.
+
+Repeat on a **new output directory** after an admitted model run:
+
+```bash
+.venv/bin/python -m scripts.live_local_shop_proof --execute-local \
+  --run-dir ~/reports/goldgraft-agents-integration-20261112/runs/RUN_ID \
+  --output-dir ~/reports/goldgraft-agents-integration-20261112/runs/RUN_ID/local-proof
+```
+
+This explicitly executes the reviewed MIT sample on the host against loopback services;
+it is not an isolated runner and never contacts PayPal or a model. No budget cap was raised.
+
+## Historical morning snapshot
 
 Owner of this work: Aditya (built by Claude overnight; Codex built the API layer `integration/agents_app.py`).
 Local main: `a290a56` → merge `dc6aeff` (frontend `aditya/web` merged into main) → this handoff. See `git log`.

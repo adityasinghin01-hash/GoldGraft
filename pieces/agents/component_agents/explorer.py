@@ -60,7 +60,9 @@ def facts(task, data):
         "1) execution.request alone, with proposal = ExecutionProposal/1 {task_id, "
         "operation, subject_ref: subject_ref, recipe_ref: catalog.recipe_ref, scenario_ref: "
         "scenario_ref, variant: variant, requested_output_schemas: ['RawCapture/1'], "
-        "expected_subject, evidence_refs}. 2) execution.status(request_id). 3) If the "
+        "expected_subject, evidence_refs}. Call execution.request exactly ONCE. After its "
+        "receipt, NEVER send execution.request again, including alongside a status read. "
+        "2) execution.status(request_id) ALONE in the next response. 3) If the "
         "receipt passes receipt_rule, submit that same proposal; else report_hold. A "
         "missing or partial capture is never proof."
     )

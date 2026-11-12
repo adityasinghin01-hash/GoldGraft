@@ -10,6 +10,71 @@ from pydantic import Field, StrictBool
 from .execution import Catalog, catalog_sample
 from .scribe import sample as scribe_sample
 
+# Closed vocabulary for the pinned local Orders library. These are comparison
+# mappings, never waivers of money, status, identity multiplicity or authority.
+ORDERS_PROFILE = "catalog:goldgraft-orders-v2-php:1"
+PARITY_BY_MAPPING = {
+    "nvp-create": ["D_TOKEN_ORDER", "D_TXN_CAPTURE", "D_APPROVE", "D_LEDGER_READ"],
+    "nvp-capture": ["D_TOKEN_ORDER", "D_TXN_CAPTURE", "D_APPROVE", "D_LEDGER_READ"],
+    "nvp-refund": ["D_REFUND"],
+    "ipn-notify": ["D_NOTIFY"],
+}
+PARITY_DESCRIPTIONS = {
+    "D_TOKEN_ORDER": (
+        "orders",
+        "Map legacy token to order id; preserve the logical order and money.",
+    ),
+    "D_TXN_CAPTURE": (
+        "orders",
+        "Map transaction id to capture id; preserve distinct captures and money.",
+    ),
+    "D_APPROVE": (
+        "orders",
+        "Map approved token/PayerID to orderId; preserve approval and causal order.",
+    ),
+    "D_LEDGER_READ": (
+        "orders",
+        "Coalesce repeated same-id ledger reads only when money and status agree.",
+    ),
+    "D_REFUND": (
+        "payments",
+        "Map refund transaction to refund id; preserve parent capture, money and status.",
+    ),
+    "D_NOTIFY": (
+        "webhooks",
+        "Map IPN to webhook; preserve notification, verification, money and causal order.",
+    ),
+}
+
+
+def parity(data):
+    if data.catalog.ref != ORDERS_PROFILE:
+        return {}, []
+    if (
+        data.catalog.version != "1"
+        or data.catalog.recipe_ref != "recipe:php-ec-nvp-to-orders-v2:1"
+        or data.catalog.package != "goldgraft/switch-paypal-orders-php"
+        or any(mapping.mapping_id not in PARITY_BY_MAPPING for mapping in data.mappings)
+    ):
+        raise ValueError("DENIED pinned comparison profile mismatch")
+    by_touchpoint = {
+        mapping.touchpoint_id: PARITY_BY_MAPPING[mapping.mapping_id] for mapping in data.mappings
+    }
+    ids = sorted({item for values in by_touchpoint.values() for item in values})
+    docs = {
+        "orders": "https://developer.paypal.com/docs/api/orders/v2/",
+        "payments": "https://developer.paypal.com/docs/api/payments/v2/",
+        "webhooks": "https://developer.paypal.com/docs/api/webhooks/v1/",
+    }
+    return by_touchpoint, [
+        {
+            "id": key,
+            "mapping_id": docs[PARITY_DESCRIPTIONS[key][0]],
+            "description": PARITY_DESCRIPTIONS[key][1],
+        }
+        for key in ids
+    ]
+
 
 class Mapping(P5Record):
     touchpoint_id: str
@@ -28,6 +93,7 @@ class Input(P5Record):
 
 
 def admit(task, data):
+    parity(data)
     if (
         not data.final_contract
         or not data.contract.rules
@@ -73,6 +139,7 @@ def requests(task, data):
 
 
 def draft(data):
+    by_touchpoint, deltas = parity(data)
     return TargetPlan(
         path="REWRITE",
         items=[
@@ -80,7 +147,7 @@ def draft(data):
                 touchpoint=m.touchpoint_id,
                 target_op=m.symbol,
                 mapping_id=m.mapping_id,
-                delta_ids=[],
+                delta_ids=by_touchpoint.get(m.touchpoint_id, []),
                 paypal_only=True,
             )
             for m in data.mappings
@@ -89,7 +156,7 @@ def draft(data):
         origin_rules=[r.id for r in data.contract.rules],
         order=["READ_BOTH", "NEW_FLOWS_BEHIND_SWITCH", "CLEANUP"],
         handoff=["Synthetic pinned docs " + data.catalog.version + "; independent proof required"],
-        deltas=[],
+        deltas=deltas,
     ).model_dump(mode="json")
 
 
@@ -110,7 +177,8 @@ def review(task, data, packet, outputs, observations):
         or sorted(got["target_experience"]) != sorted(want["target_experience"])
         or sorted(got["origin_rules"]) != sorted(want["origin_rules"])
         or got["order"] != want["order"]
-        or got["deltas"]
+        or sorted(got["deltas"], key=lambda d: d["id"])
+        != sorted(want["deltas"], key=lambda d: d["id"])
         or not 1 <= len(text) <= 800
         or "independent proof required" not in text.lower()
         or re.search(
@@ -130,16 +198,22 @@ def route(data):
 
 
 def facts(task, data):
+    by_touchpoint, deltas = parity(data)
     return {
+        "parity_by_touchpoint": by_touchpoint,
+        "parity_deltas": deltas,
         "max_bytes": 4096,
         "call_policy": "Read recipe.lookup and docs.lookup using the pinned catalog fields, "
         "and every evidence ref with evidence.read(max_bytes=4096). Follow unread_reads; "
         "at most four reads per response. A final_contract flag cannot override conflicting "
         "final evidence: hold if required evidence is missing or contradictory. Otherwise "
         "produce a REWRITE TargetPlan covering every mapping exactly once: touchpoint, "
-        "target_op=symbol, mapping_id; paypal_only true, delta_ids empty. Preserve Contract "
+        "target_op=symbol, mapping_id; paypal_only true, delta_ids from parity_by_touchpoint "
+        "for that touchpoint (or empty). Preserve Contract "
         "origin rule ids; target_experience ORDERS_V2 and WEBHOOKS; order READ_BOTH, "
-        "NEW_FLOWS_BEHIND_SWITCH, CLEANUP; deltas empty. Handoff must state 'independent "
+        "NEW_FLOWS_BEHIND_SWITCH, CLEANUP; deltas must copy parity_deltas exactly "
+        "(empty unless a pinned comparison profile is supplied). Never invent or broaden "
+        "a mapping. Handoff must state 'independent "
         "proof required'. Literal wording guard ignores negation: avoid deployed, published, "
         "verified, migrate accounts and switch accounts. No apply authority or account change.",
     }

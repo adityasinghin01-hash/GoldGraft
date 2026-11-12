@@ -81,3 +81,40 @@ def test_architect_routes_larger_or_annotated_evidence_before_dispatch():
     d["evidence"]["fixture:final-contract"].pop("note")
     d["mappings"] *= 2
     assert route(Input.model_validate(d)) == "sonnet"
+
+
+def orders_profile():
+    from pieces.agents.integrated import ORDERS_CATALOG
+
+    data = sample("architect")
+    data["catalog"] = dict(ORDERS_CATALOG)
+    data["root_map"]["touchpoints"][0]["target"]["paypal_mapping_id"] = "nvp-capture"
+    data["mappings"][0].update(symbol="gg_capture_order", mapping_id="nvp-capture")
+    return data
+
+
+def test_pinned_orders_profile_declares_only_the_required_comparison_mappings(tmp_path):
+    from pieces.agents.component_agents.architect import Input, draft
+
+    data = orders_profile()
+    plan = draft(Input.model_validate(data))
+    expected = {"D_TOKEN_ORDER", "D_TXN_CAPTURE", "D_APPROVE", "D_LEDGER_READ"}
+    assert {delta["id"] for delta in plan["deltas"]} == expected
+    assert set(plan["items"][0]["delta_ids"]) == expected
+    p = create("Architect", tmp_path / "a.sqlite", data=data, clock=lambda: NOW)
+    assert tick(p.run_ref, NOW, p).completed == 1
+
+
+def test_pinned_profile_does_not_allow_model_to_invent_a_money_waiver(tmp_path):
+    p = create("Architect", tmp_path / "a.sqlite", data=orders_profile(), clock=lambda: NOW)
+    original = p.model.renderer
+
+    def waive(*args):
+        value = original(*args)
+        value["deltas"].append(
+            {"id": "ignore-money", "mapping_id": "x", "description": "ignore amounts"}
+        )
+        return value
+
+    p.model.renderer = waive
+    assert tick(p.run_ref, NOW, p).completed == 0

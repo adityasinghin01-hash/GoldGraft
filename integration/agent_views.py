@@ -18,6 +18,8 @@ from goldgraft_contracts.api import Graft
 from goldgraft_foundation.blobs import LocalBlobStore
 from goldgraft_foundation.ledger import Ledger
 
+from integration.local_proof import LocalProof
+
 PRODUCER = {"kind": "service", "name": "integrated-agent-run", "version": "1"}
 MODELS = {"haiku": "claude-haiku-5-5", "haiku8": "claude-haiku-5-5", "sonnet": "claude-sonnet-5-5"}
 # Task → lifecycle stage it completes (only the published Stage names; nothing past PROVING
@@ -167,7 +169,8 @@ class IntegratedRunViews:
                 idempotency_key="created",
             )
             for row in result.get("tasks", []):
-                task = row.get("task", "").removesuffix("-retry1")
+                task_id = row.get("task", "")
+                task = task_id.removesuffix("-retry1")
                 if row.get("cost_micro_usd") is not None and row.get("model") in MODELS:
                     tx.append(
                         type="COST",
@@ -183,7 +186,7 @@ class IntegratedRunViews:
                             "usd": round(row["cost_micro_usd"] / 1_000_000, 6),
                             "cap_usd": round(result.get("cap_micro_usd", 0) / 1_000_000, 6),
                         },
-                        idempotency_key="cost:" + task,
+                        idempotency_key="cost:" + task_id,
                     )
                 if task == "sentinel-audit" and row.get("passed"):
                     for out in outputs.get(task, []):
@@ -237,6 +240,14 @@ class IntegratedRunViews:
         self._sync()
         result, outputs = self._result(), self._outputs()
         rows = result.get("tasks", [])
+        succeeded = {
+            row.get("task", "").removesuffix("-retry1") for row in rows if row.get("passed")
+        }
+        unresolved = {
+            row.get("task", "").removesuffix("-retry1")
+            for row in rows
+            if row.get("passed") is False
+        } - succeeded
         entries = self.ledger.read(self.graft_id)
         stages, last = [], "CREATED"
         for e in entries:
@@ -244,7 +255,7 @@ class IntegratedRunViews:
                 last = e.payload["to_stage"]
                 stages.append({"stage": last, "minutes": 0.0, "usd": 0.0})
         for row in rows:
-            target = STAGE_OF.get(row.get("task"))
+            target = STAGE_OF.get(row.get("task", "").removesuffix("-retry1"))
             for s in stages:
                 if s["stage"] == target:
                     s["minutes"] = round(s["minutes"] + row.get("seconds", 0) / 60, 2)
@@ -261,7 +272,7 @@ class IntegratedRunViews:
             if planted and planted["planted"]
             else None
         )
-        return Graft.model_validate(
+        graft = Graft.model_validate(
             {
                 "graft_id": self.graft_id,
                 "shop_id": self.shop_id,
@@ -276,7 +287,7 @@ class IntegratedRunViews:
                     ),
                     "scenarios_total": 0,
                     "scenarios_pass": 0,
-                    "problems": sum(1 for r in rows if r.get("passed") is False),
+                    "problems": len(unresolved),
                     "proof_strength_score": caught,
                     "cost_usd": round(result.get("spent_micro_usd", 0) / 1_000_000, 6),
                     "minutes": round(sum(r.get("seconds", 0) for r in rows) / 60, 2),
@@ -300,6 +311,24 @@ class IntegratedRunViews:
                 "ledger_root": entries[-1].entry_hash if entries else "0" * 64,
             }
         )
+        if (self.directory / "local-proof/REPORT.json").is_file():
+            local = LocalProof(self.directory).scenarios().scenarios
+            graft.card.scenarios_total = len(local)
+            graft.card.scenarios_pass = sum(
+                row.verdict.grade in {"PASS", "PASS_FIXED"} for row in local
+            )
+            graft.card.problems += sum(row.verdict.grade == "PROBLEM" for row in local)
+            graft.card.notes.update(
+                {
+                    "_label": "REAL MODELS · local PHP proof · simulated PayPal; delivery held",
+                    "scenarios_pass": "Actual local PHP recordings with simulated PayPal, checked "
+                    "against the saved AI plan and reviewed reference money rules; "
+                    "not sandbox qualification",
+                    "problems": "Agent holds plus failed local proof comparisons; "
+                    "inspect Payment tests",
+                }
+            )
+        return graft
 
     def mutations(self):
         """Planted-bug check on the Grafter's real code; saved once the run has finished."""

@@ -33,6 +33,8 @@ from starlette.concurrency import run_in_threadpool
 
 from integration.agent_views import IntegratedRunViews
 from integration.app import create_app as offline_app
+from integration.local_proof import EVIDENCE_CLASS as LOCAL_PHP_EVIDENCE_CLASS
+from integration.local_proof import LocalProof
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RUNS_DIR = Path.home() / "reports/goldgraft-agents-integration-20261112/runs"
@@ -375,6 +377,20 @@ def create_app(
 
     def read_run(request, run_id, suffix):
         path = directory(run_id)
+        has_local_proof = (path / "local-proof/REPORT.json").is_file()
+        if has_local_proof and suffix in {"scenarios", "cmel"}:
+            recorded = LocalProof(path)
+            if suffix == "scenarios":
+                body = recorded.scenarios()
+            else:
+                try:
+                    body = recorded.cmel(request.query_params.get("scenario", "HAPPY").upper())
+                except LookupError:
+                    return _problem(404, "Unknown local PHP scenario")
+            return JSONResponse(
+                body.model_dump(mode="json"),
+                headers={"X-GoldGraft-Evidence-Class": LOCAL_PHP_EVIDENCE_CLASS},
+            )
         if suffix == "agents":
             return JSONResponse(get_view(run_id).agents())
         if suffix == "scenarios":
@@ -390,6 +406,14 @@ def create_app(
                 listed = ScenarioList(graft_id=run_id, scenarios=[])
             return JSONResponse(listed.model_dump(mode="json"))
         if suffix in {"cmel", "proof"}:
+            if has_local_proof:
+                return _problem(
+                    404,
+                    "Local PHP verdicts and bounded candidate mutation checks are available; "
+                    "complete critical-rule coverage and a qualified certificate "
+                    "remain unavailable",
+                    NOT_YET,
+                )
             return _problem(404, NO_PROOF, NOT_YET)
         if suffix == "changes":
             changes = path / "CHANGES.json"
@@ -574,7 +598,7 @@ def create_app(
                 response = read_run(request, run_match[1], run_match[2])
         except (ValueError, OSError, TypeError, KeyError):
             response = _problem(503, "Integrated run evidence is unavailable or failed validation")
-        response.headers["X-GoldGraft-Evidence-Class"] = EVIDENCE_CLASS
+        response.headers.setdefault("X-GoldGraft-Evidence-Class", EVIDENCE_CLASS)
         # Intercepted responses bypass the base application's CORS middleware.
         if "Origin" in request.headers:
             response.headers["Access-Control-Allow-Origin"] = "*"
