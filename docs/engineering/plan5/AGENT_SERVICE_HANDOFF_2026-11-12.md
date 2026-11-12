@@ -1,17 +1,27 @@
 # GoldGraft agents — handoff (12 Nov 2026, morning)
 
-Owner of this work: Aditya (built by Claude overnight, Codex built the API layer).
-Main branch commits: `a290a56` → `3a8082e` (see `git log`); frontend on `aditya/web` (`be49723`+).
+Owner of this work: Aditya (built by Claude overnight; Codex built the API layer `integration/agents_app.py`).
+Main branch: `a290a56` → merge `dc6aeff` (frontend `aditya/web` merged into main) → this handoff. See `git log`.
 
 ## What works now
 
 | Piece | State |
 |---|---|
 | All 13 agents in one connected run | Gardener → Surveyor → Herald → Builder → Explorer ×4 → Scribe ×2 → Architect → Grafter → Builder → Explorer → Adversary ×2, plus Healer, Sentinel, Librarian, Orchard Analyst on the same run. Every edge carries the previous agent's committed output (`EDGES.json` per run). |
-| Real AI calls | Every agent turn goes through the budget gateway (ledger, receipts, caps). Haiku for simple tasks, Sonnet for complex ones (Surveyor on ≥3 files, Architect, Adversary guard design, Grafter writing code, Gardener >5 nodes). Two scored Haiku failures on a task shape move it to Sonnet automatically (`ROUTING.json`). |
-| Real code fixing | The Surveyor maps the submitted shop's real files; the Architect plans from that map; the Grafter (Sonnet) **writes the new PHP itself** for the shop's real payment files against the GoldGraft Orders v2 library; deterministic review refuses old NVP/IPN calls left behind, missing planned operations, a missing library include, secrets, or marking an order paid on a non-COMPLETED capture; a real PHP parser checks every candidate file. |
-| Frontend | Live mode shows real runs: Progress (real stages and per-agent AI cost), Old pieces (the Surveyor's real map), **Code changes** (line diff of the AI-written code), My upgrades → **Real agent runs**. Starting an upgrade for a repo containing `legacy-php-shop` or `eval-nvp` starts a real run. |
-| Tests | Offline (no network): agents + gateway + fakes suites green; `pieces/agents/tests/test_integrated.py` (19), `plugtests/test_agents_app.py` (13). |
+| Real AI calls | Every agent turn goes through the budget gateway (ledger, receipts, caps). Haiku for simple tasks, Sonnet for complex ones (Surveyor on ≥3 files, Architect, Adversary guard design, Grafter writing code, Gardener >5 nodes). Two scored Haiku failures on a task shape move it to Sonnet automatically (`ROUTING.json`; Healer and Librarian moved this way overnight). |
+| Real code fixing | The Surveyor maps the submitted shop's real files; the Architect plans from that map; the Grafter (Sonnet) **writes the new PHP itself** for the shop's real payment files against the GoldGraft Orders v2 library (`fixtures/switch-libs/php/`). A deterministic review refuses old NVP/IPN calls left behind, missing planned operations, a missing library include, secrets, or marking an order paid on a non-COMPLETED capture; a real PHP parser (`tools/php-lint`) checks every candidate file. |
+| Bounded retries | Survey: up to 2 re-attempts on incomplete reading or a refused answer. Chain stages: one retry (`<stage>-retry1`) when the model's answer was refused or the model ran but evidence was missing. Deterministic refusals (DENIED) are never retried. |
+| Frontend | Live mode shows real runs: Progress (real stages and per-agent AI cost, live while a run is running), Old pieces (the Surveyor's real map), **Code changes** (line diff of the AI-written code + PHP check), My upgrades → **Real agent runs**. Starting an upgrade for a repo containing `legacy-php-shop` or `eval-nvp` starts a real run (one at a time, ≤3 per server start). |
+| Tests | Full offline regression on merged main: **2972 passed, 18 skipped** (no network). New: `pieces/agents/tests/test_integrated.py` (22), `plugtests/test_agents_app.py` (13). |
+
+## Results (real runs, see `INTEGRATED_RESULTS_2026-11-12.md`)
+
+| Check | Result |
+|---|---|
+| Final run on the final code (`r4-final-legacy`) | **completed, 13 of 13 agents, 19 of 19 steps, $0.450**; Grafter rewrote 4 PHP files, all 5 files parse; checkout.js v4 button left as an open item |
+| Runs since the Grafter fixes (7) | 6 completed with all 13 agents (`r2-realcode-7`, `r3-legacy-1`, `r3-legacy-2`, `r3-eval-nvp-1`, the UI-started `web-legacy-php-shop-20261112-001347`, `r4-final-legacy`); 1 held (UI-started eval-nvp, Explorer missing evidence) → fixed by the model-ran retry (`1957631`), verified by r4 |
+| Typical cost | legacy-php-shop ≈ $0.38–0.45 per full run; eval-nvp ≈ $0.21 |
+| Ledger (read 12 Nov ~06:10 IST) | $8.092648 spent in total, 0 reserved, 0 unknown, $1.91 left under the $10 active cap (hard cap $20, approved by Aditya; active cap not raised). Tonight's runs: $4.739 |
 
 ## Run it (on this Mac)
 
@@ -21,19 +31,23 @@ cd ~/dev/GoldGraft-plan5-build
 PATH=/Library/Developer/CommandLineTools/usr/bin:$PATH .venv/bin/python -m integration.agents_app --port 8710 --live
 
 # 2. frontend in live mode
-cd ~/dev/GoldGraft-web/pieces/web
+cd ~/dev/GoldGraft-web/pieces/web        # (same code is now in main: pieces/web)
 VITE_API_BASE=http://127.0.0.1:8710 VITE_DEMO_TOOLS=true npx vite --port 8782
 #    open http://127.0.0.1:8782/my  → Real agent runs → pick a run → Progress / Old pieces / Code changes
-#    or  /connect with repo https://github.com/goldgraft/legacy-php-shop → Start → watch a real run (~4 min, ≈$0.35)
+#    or  /connect with repo https://github.com/goldgraft/legacy-php-shop → Start → watch a real run (~4–5 min, ≈$0.40)
 
-# 3. one real run from the command line (≈$0.35, cap with --max-usd)
+# 3. one real run from the command line (≈$0.40, cap with --max-usd)
 PATH=/Library/Developer/CommandLineTools/usr/bin:$PATH \
   ~/reports/goldgraft-model-gateway-20261111/venv/bin/python -m scripts.live_integrated_run \
   --live --run-id my-run-1 --shop legacy-php-shop --max-usd 0.95
 #    evidence: ~/reports/goldgraft-agents-integration-20261112/runs/my-run-1/{RESULT,OUTPUTS,EDGES,CHANGES}.json
+
+# 4. results table from all run evidence (offline)
+python3 -m scripts.integrated_results > docs/engineering/plan5/INTEGRATED_RESULTS_2026-11-12.md
 ```
 
 Model keys and the gateway signing key live in `~/.config/goldgraft/` (never in the repo). Port 8700 is the old stand-in API.
+With $1.91 left under the active cap, about 4 more full legacy runs fit before the cap must be raised (Aditya's call).
 
 ## What is real and what is not (say this in the demo)
 
@@ -42,12 +56,8 @@ Model keys and the gateway signing key live in `~/.config/goldgraft/` (never in 
 | All agent reasoning and outputs (real Haiku/Sonnet calls, ledgered) | Builds and payment scenario runs use recorded runner counterparts ("scripted runner"): no Docker/PHP on this Mac |
 | The shop's real source, the Surveyor's real map, the Architect's real plan, the Grafter's real code | No independent SH proof/certificate on the AI-written candidate yet (the app stops at "Proving every payment") |
 | PHP syntax check of the AI-written files | The new code has not been run against PayPal's sandbox |
-| Budget, receipts, two-strike Sonnet escalation, bounded survey re-attempts | Librarian learns from its qualified de-identified template (consent recorded as an assumption for the MIT sample shop) |
-
-## Results
-
-See `ROUND1_RESULTS.md` next to this file for per-run and per-agent numbers, and
-`~/reports/goldgraft-agents-integration-20261112/PROGRESS.md` for the overnight log.
+| Budget, receipts, two-strike Sonnet escalation, bounded retries | Librarian learns from its qualified de-identified template (consent recorded as an assumption for the MIT sample shop) |
+| | One code-fixing profile: plain PHP with Express Checkout NVP + IPN (`legacy-php-shop`, `eval-nvp`) |
 
 ## For the team today
 
