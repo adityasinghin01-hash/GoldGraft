@@ -1,14 +1,14 @@
 # Rules for coding agents working in GoldGraft
 
-## Current execution ownership — Aditya, 11 November 2026
+## Current execution ownership — Aditya, 12 November 2026
 
-Aditya explicitly assigned Claude **frontend only** and Codex **all non-frontend
-work**: agents, backend/runner/domain/proof, sponsor integrations, testing,
-integration, Git commits/pushes and operating handoff. Work directly on `main`
-in `/Users/aditya/dev/GoldGraft-plan5-build`. Do not recreate integration branches
-or wait for Claude to review/commit non-frontend changes. Reuse and preserve
-teammates' work; inspect their current PRs before duplicating changes. Keep
-`pieces/web` exclusively Claude-owned and report after every phase.
+Codex is out (12 November). Aditya assigned Claude **all work**: frontend
+(`pieces/web`), agents, backend/runner/domain/proof, sponsor integrations,
+testing, integration, Git commits/pushes and operating handoff. Work directly on
+`main` in `/Users/aditya/dev/GoldGraft-plan5-build`. Do not recreate integration
+branches. Reuse and preserve teammates' work; inspect their current branches/PRs
+before duplicating changes. Vijay's `pieces/shops`/`pieces/switch-libs` recipes
+plug in through a documented socket and conformance test. Report after every step.
 
 This execution assignment supersedes older owner-only edit restrictions and
 the old Claude-driver rule below. Existing budget, secret, format-change,
@@ -39,7 +39,7 @@ Paper Plans1/3/4 completion and Plan2 docs do not authorise product jobs, Plans5
 5. Never write secrets, keys or tokens into code, fixtures, logs or docs. Use `.env.example` with empty values.
 6. Licences: our code is MIT. Do NOT copy code from Diffy (CC BY-NC-ND) or Juspay Decision Engine (AGPL) — ideas only. Do NOT copy code from the PayPal AG Grid boilerplate (no licence file). Cutover's `samples/legacy-php-shop` (MIT) may be vendored with its licence notice.
 7. PayPal response shapes in fixtures must follow PayPal's public docs; put the doc URL in a comment or a `_source` field.
-8. Codex runs required checks and commits/pushes non-frontend work on main under Aditya's current assignment. No force push, stash, destructive reset or publication of secrets/private evidence. Claude owns frontend only.
+8. Claude runs required checks and commits/pushes on main under Aditya's current assignment. No force push, stash, destructive reset or publication of secrets/private evidence.
 9. Python 3.12, managed by `uv`; lint with `ruff`; test with `pytest`. Node 22 for TypeScript tooling.
 10. When something in the design is ambiguous, choose the simplest reading, write it down in your final report under "Decisions", and keep going.
 

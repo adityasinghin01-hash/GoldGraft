@@ -1,0 +1,82 @@
+{
+  "$id": "https://goldgraft.dev/schemas/CertificateVerification.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "cert_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Cert Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "qualification_scope": {
+      "enum": [
+        "component_only",
+        "sandbox_payment",
+        "merchant_delivery"
+      ],
+      "title": "Qualification Scope",
+      "type": "string"
+    },
+    "qualification_state": {
+      "enum": [
+        "verified",
+        "held"
+      ],
+      "title": "Qualification State",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "signature_integrity": {
+      "enum": [
+        "verified",
+        "unverified",
+        "invalid"
+      ],
+      "title": "Signature Integrity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cert_id",
+    "case_id",
+    "run_id",
+    "signature_integrity",
+    "qualification_scope",
+    "qualification_state",
+    "reason_codes",
+    "checked_at"
+  ],
+  "title": "CertificateVerificationV1",
+  "type": "object"
+}

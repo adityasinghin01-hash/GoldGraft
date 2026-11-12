@@ -211,6 +211,12 @@ def model_sample(model):
 
 
 NEGATIVES = [
+    ("si01_snapshot_fake_git", "Certificate/2", {"source_route": "git"}),
+    ("si01_fake_workflow", "Certificate/2", {"workflow_sha": "b" * 40}),
+    ("si01_missing_workflow", "Certificate/2", {"signer_kind": "github_actions"}),
+    ("si01_plan_tamper", "ProofPlan/1", {"plan_digest": "b" * 64}),
+    ("si01_result_tamper", "ProofResult/1", {"result_digest": "b" * 64}),
+    ("si01_multiple_restarts", "ExitCheckResult/1", {"restart_count": 2}),
     ("bool_generation", "TaskContext/1", {"generation": True}),
     ("float_generation", "TaskContext/1", {"generation": 1.0}),
     ("naive_time", "TaskContext/1", {"deadline": "2026-11-10T12:00:00"}),
@@ -254,6 +260,11 @@ NEGATIVES = [
 
 
 def main(check=False):
+    if __package__:
+        from .si01_examples import samples
+    else:
+        from si01_examples import samples
+
     output = ROOT / "contracts/examples"
     entries = []
     values = {}
@@ -266,8 +277,9 @@ def main(check=False):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(data)
 
+    si01_values = samples()
     for schema, model in sorted(PLAN5_REGISTRY.items()):
-        value = model_sample(model)
+        value = si01_values[schema] if schema in si01_values else model_sample(model)
         values[schema] = value
         try:
             validate(schema, value)

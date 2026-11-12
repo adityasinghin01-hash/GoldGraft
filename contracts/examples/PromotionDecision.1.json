@@ -1,0 +1,35 @@
+{
+  "action": "HOLD",
+  "advice": {
+    "action": "HOLD",
+    "from_stage_pct": 0,
+    "graft_id": "run-demo",
+    "hard_stop": null,
+    "reason": "Enough successful samples",
+    "stats": {
+      "n_new": 100,
+      "n_old": 100,
+      "prob_new_not_worse": 0.99,
+      "success_new": 100,
+      "success_old": 100,
+      "threshold": 0.95
+    },
+    "to_stage_pct": 0
+  },
+  "advice_digest": "853cddc5448f13cd0387604dd048beb8802310dc4cf931e6309b4db49802cdb3",
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "generation": 1,
+  "policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "proof_plan_digest": "cf04e38dbb7ed54efeb4a6c75d8643b326f462413fc08415f543591b8094ad79",
+  "proof_result_digest": "9e6fb5cf56da7a89484b378e98bca9e94e3a50354de4018e948219bbee618300",
+  "proof_result_ref": "fixture:proof-result",
+  "reason_code": "EVIDENCE_HOLD",
+  "resource_epochs": {
+    "synthetic-resource": 1
+  },
+  "run_id": "run-demo",
+  "scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "work_package_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

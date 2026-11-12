@@ -22,6 +22,7 @@ from typing import Literal
 from . import api
 from . import connection_control as p5
 from . import lifecycle as lc
+from .certificate_v2 import CertificateV2, CertificateVerification
 from .common import Format
 from .delivery import SwitchConfig
 from .ledger import LedgerEntry
@@ -288,6 +289,13 @@ PLAN5_ROUTES = (
         p5.WorkerOperation,
         201,
         "service",
+    ),
+    R("GET", C + "/{case_id}/certificates/{cert_id}", "private_certificate", (CertificateV2,)),
+    R(
+        "GET",
+        C + "/{case_id}/certificates/{cert_id}/verification",
+        "private_certificate_verification",
+        (CertificateVerification,),
     ),
 )
 

@@ -1,0 +1,220 @@
+{
+  "$defs": {
+    "ProofCheckResult": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Check Id",
+          "type": "string"
+        },
+        "evidence_refs": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "reason_code": {
+          "enum": [
+            "VERIFIED",
+            "MISSING",
+            "AUTHENTICATION",
+            "INVALID",
+            "SUBJECT_MISMATCH",
+            "STALE",
+            "INVENTORY_MISMATCH",
+            "EXCLUDED",
+            "FAILED",
+            "UNKNOWN",
+            "UNSUPPORTED"
+          ],
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "verified",
+            "missing",
+            "failed",
+            "unknown",
+            "unsupported",
+            "excluded"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "subject_manifest_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Manifest Digest",
+          "type": "string"
+        },
+        "subject_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Subject Manifest Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "subject_manifest_ref",
+        "subject_manifest_digest",
+        "state",
+        "evidence_refs",
+        "reason_code"
+      ],
+      "title": "ProofCheckResult",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ProofResult.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "outcome": {
+      "enum": [
+        "ready",
+        "partial",
+        "hold"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Plan Ref",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "enum": [
+          "VERIFIED",
+          "MISSING",
+          "AUTHENTICATION",
+          "INVALID",
+          "SUBJECT_MISMATCH",
+          "STALE",
+          "INVENTORY_MISMATCH",
+          "EXCLUDED",
+          "FAILED",
+          "UNKNOWN",
+          "UNSUPPORTED"
+        ],
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "result_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Result Digest",
+      "type": "string"
+    },
+    "result_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Result Id",
+      "type": "string"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/ProofCheckResult"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Results",
+      "type": "array"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "run_id",
+    "generation",
+    "resource_epochs",
+    "scope_digest",
+    "work_package_digest",
+    "policy_digest",
+    "result_id",
+    "plan_ref",
+    "plan_digest",
+    "results",
+    "outcome",
+    "reason_codes",
+    "checked_at",
+    "result_digest"
+  ],
+  "title": "ProofResultV1",
+  "type": "object"
+}

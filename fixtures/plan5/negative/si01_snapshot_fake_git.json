@@ -1,0 +1,40 @@
+{
+  "case_id": "case-demo",
+  "cert_id": "synthetic-private-cert",
+  "expires_at": "2026-11-11T00:00:00Z",
+  "generation": 1,
+  "git_source": null,
+  "issued_at": "2026-11-10T00:00:00Z",
+  "ledger_root": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "proof_plan_digest": "cf04e38dbb7ed54efeb4a6c75d8643b326f462413fc08415f543591b8094ad79",
+  "proof_plan_ref": "fixture:proof-plan",
+  "proof_result_digest": "9e6fb5cf56da7a89484b378e98bca9e94e3a50354de4018e948219bbee618300",
+  "proof_result_ref": "fixture:proof-result",
+  "qualification_evidence_refs": [
+    "fixture:synthetic-only"
+  ],
+  "qualification_scope": "component_only",
+  "resource_epochs": {
+    "synthetic-resource": 1
+  },
+  "review_bundle_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "review_bundle_ref": "fixture:review-bundle",
+  "run_id": "run-demo",
+  "scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "signature": {
+    "authenticity_ref": "fixture:authenticity",
+    "signature_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature_ref": "fixture:signature",
+    "transparency_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "transparency_ref": "fixture:transparency"
+  },
+  "signer_identity_ref": "fixture:signer",
+  "signer_kind": "trusted_service",
+  "source_route": "git",
+  "subject_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "subject_manifest_ref": "fixture:subject",
+  "work_package_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "workflow_identity": null,
+  "workflow_sha": null
+}

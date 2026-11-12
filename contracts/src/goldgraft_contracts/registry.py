@@ -5,14 +5,17 @@ from typing import Any
 from . import (
     agent_runtime,
     agents,
+    certificate_v2,
     connection_control,
     connector_adapters,
     delivery,
+    exit_evidence,
     ledger,
     lifecycle,
     money,
     plan5_tools,
     proof,
+    proof_evidence,
     runner,
     stages,
     survey,
@@ -91,6 +94,17 @@ for _module in (
             if _key in REGISTRY or _key in PLAN5_REGISTRY:
                 raise RuntimeError(f"duplicate schema: {_key}")
             PLAN5_REGISTRY[_key] = _candidate
+PLAN5_REGISTRY.update(
+    {
+        "ProofPlan/1": proof_evidence.ProofPlan,
+        "ProofResult/1": proof_evidence.ProofResult,
+        "PromotionDecision/1": proof_evidence.PromotionDecision,
+        "Certificate/2": certificate_v2.CertificateV2,
+        "CertificateVerification/1": certificate_v2.CertificateVerification,
+        "ExitCheckResult/1": exit_evidence.ExitCheckResult,
+        "ExitEvidenceReconciliation/1": exit_evidence.ExitEvidenceReconciliation,
+    }
+)
 REGISTRY.update(PLAN5_REGISTRY)
 for _name, _model in REGISTRY.items():
     _model.schema_name = _name

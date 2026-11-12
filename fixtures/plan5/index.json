@@ -327,6 +327,30 @@
       "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
     },
     {
+      "schema": "Certificate/2",
+      "path": "contracts/examples/Certificate.2.json",
+      "sha256": "e667f33da6cac9bb9fff923d0228ff470f56c53b960c25f4fd5126434de6e807",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
+      "schema": "CertificateVerification/1",
+      "path": "contracts/examples/CertificateVerification.1.json",
+      "sha256": "92fca31b603706cc81549f00aee701ab542d0af485a422e8a5e7fbbaf844aab4",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
       "schema": "ChangeList/2",
       "path": "contracts/examples/ChangeList.2.json",
       "sha256": "1cf9c033918af525721608a00e540ea264d96c0518d1234644a6f8b53adeeb78",
@@ -771,6 +795,30 @@
       "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
     },
     {
+      "schema": "ExitCheckResult/1",
+      "path": "contracts/examples/ExitCheckResult.1.json",
+      "sha256": "0948bdd2b23aa971e98a6ed1b5d3439d7c487bd89793ec8800652baade9d8d04",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
+      "schema": "ExitEvidenceReconciliation/1",
+      "path": "contracts/examples/ExitEvidenceReconciliation.1.json",
+      "sha256": "aa67bc73ba64e6e345c12257c72d4b031f0c1e213202d711226c0cd69a070f56",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
       "schema": "ExitItem/1",
       "path": "contracts/examples/ExitItem.1.json",
       "sha256": "ba59503aa4c7379604c4faa6547c93ffa3be7097a3afdf50ea33ed82b12b0e48",
@@ -1050,6 +1098,42 @@
       "schema": "ProcessingRecipient/1",
       "path": "contracts/examples/ProcessingRecipient.1.json",
       "sha256": "0b78d8fbf7aa677a366971345df999fc9af774177d80de5fdfbb7001ad9cf065",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
+      "schema": "PromotionDecision/1",
+      "path": "contracts/examples/PromotionDecision.1.json",
+      "sha256": "71b226443ef03bd219f1794c093d853b79223c06db713750dda0d2cba9c06727",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
+      "schema": "ProofPlan/1",
+      "path": "contracts/examples/ProofPlan.1.json",
+      "sha256": "e0de9bf775411ee22897565294ba1b4c2438b183ae13692eb74b4a5e0796431c",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "strict_schema_example",
+      "generator": "make_plan5_examples",
+      "expected": "valid",
+      "input_refs": [],
+      "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
+      "schema": "ProofResult/1",
+      "path": "contracts/examples/ProofResult.1.json",
+      "sha256": "0fbe101d57fb547de1322031442a67996534520461ce6e79782cf7391d445a70",
       "evidence_class": "scripted",
       "owner": "SI01",
       "scenario": "strict_schema_example",
@@ -1621,6 +1705,90 @@
       "expected": "valid",
       "input_refs": [],
       "limitation": "Synthetic data and provenance; no real authority or behavior qualified"
+    },
+    {
+      "schema": "Certificate/2",
+      "path": "fixtures/plan5/negative/si01_snapshot_fake_git.json",
+      "sha256": "1f14051614d995b89fd96bbcf88761dd2e1e40a4875f2d3d565d21383e722bf5",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "si01_snapshot_fake_git",
+      "expected": "validation_error",
+      "generator": "make_plan5_examples",
+      "input_refs": [
+        "fixture:Certificate/2"
+      ],
+      "limitation": "Deliberately invalid synthetic boundary input"
+    },
+    {
+      "schema": "Certificate/2",
+      "path": "fixtures/plan5/negative/si01_fake_workflow.json",
+      "sha256": "75baa414857a41b8645e1b1bcef629ba9568bfdf34710d40568b68dd88d63abf",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "si01_fake_workflow",
+      "expected": "validation_error",
+      "generator": "make_plan5_examples",
+      "input_refs": [
+        "fixture:Certificate/2"
+      ],
+      "limitation": "Deliberately invalid synthetic boundary input"
+    },
+    {
+      "schema": "Certificate/2",
+      "path": "fixtures/plan5/negative/si01_missing_workflow.json",
+      "sha256": "8ff0defcf9b15ff118aa974f340ce2765b744660f1b26b58bd2f995d52fa88c4",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "si01_missing_workflow",
+      "expected": "validation_error",
+      "generator": "make_plan5_examples",
+      "input_refs": [
+        "fixture:Certificate/2"
+      ],
+      "limitation": "Deliberately invalid synthetic boundary input"
+    },
+    {
+      "schema": "ProofPlan/1",
+      "path": "fixtures/plan5/negative/si01_plan_tamper.json",
+      "sha256": "8381809bc8c75ed3346c8d76e5ea32bc0d8bc0e0c1d44cf27719f1e771dc83bd",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "si01_plan_tamper",
+      "expected": "validation_error",
+      "generator": "make_plan5_examples",
+      "input_refs": [
+        "fixture:ProofPlan/1"
+      ],
+      "limitation": "Deliberately invalid synthetic boundary input"
+    },
+    {
+      "schema": "ProofResult/1",
+      "path": "fixtures/plan5/negative/si01_result_tamper.json",
+      "sha256": "e5b73f8e19c2a7697ab30b82210cfb652ffa9dae37bbb00d0284e9086a03cda6",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "si01_result_tamper",
+      "expected": "validation_error",
+      "generator": "make_plan5_examples",
+      "input_refs": [
+        "fixture:ProofResult/1"
+      ],
+      "limitation": "Deliberately invalid synthetic boundary input"
+    },
+    {
+      "schema": "ExitCheckResult/1",
+      "path": "fixtures/plan5/negative/si01_multiple_restarts.json",
+      "sha256": "3693c0bb77da4862a9f2b0caafaa4bf4b2416076f1de9d1d4100fd1c9b070975",
+      "evidence_class": "scripted",
+      "owner": "SI01",
+      "scenario": "si01_multiple_restarts",
+      "expected": "validation_error",
+      "generator": "make_plan5_examples",
+      "input_refs": [
+        "fixture:ExitCheckResult/1"
+      ],
+      "limitation": "Deliberately invalid synthetic boundary input"
     },
     {
       "schema": "TaskContext/1",

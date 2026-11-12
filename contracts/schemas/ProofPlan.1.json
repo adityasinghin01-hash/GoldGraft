@@ -1,0 +1,269 @@
+{
+  "$defs": {
+    "ProofCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Check Id",
+          "type": "string"
+        },
+        "critical": {
+          "title": "Critical",
+          "type": "boolean"
+        },
+        "flow_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Flow Id",
+          "type": "string"
+        },
+        "input_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Input Digest",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "baseline",
+            "candidate",
+            "scenario",
+            "domain_rule",
+            "security",
+            "mutation",
+            "payment",
+            "isolation",
+            "exit"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "owner_role": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Owner Role",
+          "type": "string"
+        },
+        "required_evidence_class": {
+          "enum": [
+            "scripted",
+            "component_offline",
+            "real_model",
+            "real_provider",
+            "real_payment",
+            "isolation_qualified",
+            "merchant_exit"
+          ],
+          "title": "Required Evidence Class",
+          "type": "string"
+        },
+        "required_schema": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Required Schema",
+          "type": "string"
+        },
+        "required_trust": {
+          "enum": [
+            "collector_observed",
+            "deterministic_result"
+          ],
+          "title": "Required Trust",
+          "type": "string"
+        },
+        "rule_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^\\S+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "title": "Rule Ids",
+          "type": "array"
+        },
+        "subject_manifest_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Subject Manifest Digest",
+          "type": "string"
+        },
+        "subject_manifest_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Subject Manifest Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "flow_id",
+        "kind",
+        "rule_ids",
+        "subject_manifest_ref",
+        "subject_manifest_digest",
+        "input_digest",
+        "required_schema",
+        "required_evidence_class",
+        "required_trust",
+        "critical",
+        "owner_role"
+      ],
+      "title": "ProofCheck",
+      "type": "object"
+    },
+    "ProofExclusion": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Approval Digest",
+          "type": "string"
+        },
+        "approval_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Approval Ref",
+          "type": "string"
+        },
+        "check_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Check Id",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "reason",
+        "approval_ref",
+        "approval_digest"
+      ],
+      "title": "ProofExclusion",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ProofPlan.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/ProofCheck"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "title": "Checks",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "exclusions": {
+      "items": {
+        "$ref": "#/$defs/ProofExclusion"
+      },
+      "maxItems": 256,
+      "title": "Exclusions",
+      "type": "array"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Digest",
+      "type": "string"
+    },
+    "plan_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "run_id",
+    "generation",
+    "resource_epochs",
+    "scope_digest",
+    "work_package_digest",
+    "policy_digest",
+    "plan_id",
+    "checks",
+    "exclusions",
+    "created_at",
+    "expires_at",
+    "plan_digest"
+  ],
+  "title": "ProofPlanV1",
+  "type": "object"
+}

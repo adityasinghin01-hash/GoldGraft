@@ -267,3 +267,52 @@ changes. Existing `Graft`, `ScenarioList`, `CmelView`, `ProofView`, `JobSpec/1`,
 `RawCapture/1`, `CMEL/1`, `Verdict/1` and `CertificateVerifyResult` shapes are reused.
 The repository-level integration composes pieces; the recorder uses shared ports
 instead of importing backend internals. See [integration](engineering/integration/README.md).
+
+## P5-C2 — SI01 evidence, certificate and exit binding, 12 November 2026
+
+Authorised by Aditya's Step 3 execution instruction. This migration is delivered
+as one checked change: models, registry, accepting adapters, routes, generated
+schemas/TypeScript/OpenAPI, examples, indexed fixtures, fakes and compatibility
+tests. Intermediate local edits are not a published contract revision.
+
+- Add `ProofPlan/1`, `ProofResult/1`, `PromotionDecision/1` and
+  `ExitCheckResult/1`; add private `Certificate/2`. Helpers stay nested unless
+  they are independently stored boundary artifacts. No existing `/1` key is
+  rebound, and unversioned fixture lookup continues to mean `/1`.
+  `CertificateVerification/1` separates signature integrity from qualification.
+  `ExitEvidenceReconciliation/1` authenticates the later evidence-read/revocation
+  receipt and manifest link, after the executor has signed its result. This
+  avoids having the executor pre-sign a future service revocation.
+- Reuse `ReviewBundle/1`, `PrivateReviewView/1`, `PublicProofView/1`,
+  `SubjectManifest/1`, `ArtifactDescriptor/1`, `StateCutover/1`,
+  `ArtifactBuild/1`, `ExitCheckPlan/1` and `ExitManifest/1`. Authenticate resolved
+  bytes and current tenant/case/run/generation/resource fences before mapping
+  these records to proof requirements. Digests and declared evidence classes
+  alone do not authenticate a collector or prove completeness.
+- Plans identify exact checks/flows/subjects, required schemas/evidence classes,
+  criticality and approved exclusions. Results bind the exact plan and subjects.
+  Only the current complete authenticated critical inventory may support a
+  service promotion. Existing `HealDecision/1` posterior arithmetic is unchanged;
+  its STEP_UP is advisory until wrapped by the current evidence gate. Separate
+  apply authority, reservations and effect-slot checks still apply.
+- `Certificate/2` is a private, scoped attestation bound to the review bundle,
+  subjects, plan/result, current epochs, policy and ledger root. Source Git
+  fields and GitHub workflow signer fields are conditional, never invented for
+  snapshots or another signer. Signature/transparency references require trusted
+  verification outside the model. Existing `Certificate/1` remains legacy/demo;
+  neither its route nor its payload may enter the v2 service. Public access uses
+  only `PublicProofView/1`, with public aliases and redacted evidence references.
+- The exit result links the existing bounded plan/manifest to the exact executor,
+  trusted code, reservation/fences, final image/config/state and timed criterion
+  observations. Ordinary capability denial and separately disclosed temporary
+  evidence-read/revocation receipts are reconciled explicitly. No boolean signed
+  flag, revoked ordinary grant, or missing executor can establish exit completion.
+- New private certificate read/verify routes require current case authorization;
+  verification is read-only. Proof plans/results and exit results are service
+  artifacts, not browser authority endpoints. Missing host adapters fail closed.
+  Both use GET under `/v2/connection-cases/{case_id}/certificates/{cert_id}`,
+  with `/verification` for the separate integrity/qualification answer.
+- Fixture positives, fake verifier results and local simulated PayPal remain
+  explicitly synthetic/component evidence. This migration issues no qualified
+  certificate and qualifies no provider, payment, isolation or merchant delivery.
+  The Step 2 eight uncovered critical-rule mutation guards remain open.

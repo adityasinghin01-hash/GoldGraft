@@ -1,0 +1,194 @@
+{
+  "$defs": {
+    "ExitEvidenceReadReceipt": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Authority Ref",
+          "type": "string"
+        },
+        "disclosure_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Disclosure Ref",
+          "type": "string"
+        },
+        "read_at": {
+          "format": "date-time",
+          "title": "Read At",
+          "type": "string"
+        },
+        "read_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Read Digest",
+          "type": "string"
+        },
+        "read_evidence_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Read Evidence Ref",
+          "type": "string"
+        },
+        "revocation_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Revocation Digest",
+          "type": "string"
+        },
+        "revocation_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Revocation Ref",
+          "type": "string"
+        },
+        "revoked_at": {
+          "format": "date-time",
+          "title": "Revoked At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_ref",
+        "disclosure_ref",
+        "read_evidence_ref",
+        "read_digest",
+        "read_at",
+        "revocation_ref",
+        "revocation_digest",
+        "revoked_at"
+      ],
+      "title": "ExitEvidenceReadReceipt",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/ExitEvidenceReconciliation.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authenticity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Authenticity Ref",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "evidence_read_receipt": {
+      "$ref": "#/$defs/ExitEvidenceReadReceipt"
+    },
+    "exit_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Exit Manifest Digest",
+      "type": "string"
+    },
+    "exit_manifest_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Exit Manifest Ref",
+      "type": "string"
+    },
+    "exit_plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Exit Plan Digest",
+      "type": "string"
+    },
+    "exit_plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Exit Plan Ref",
+      "type": "string"
+    },
+    "exit_result_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Exit Result Digest",
+      "type": "string"
+    },
+    "exit_result_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Exit Result Ref",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "run_id",
+    "generation",
+    "resource_epochs",
+    "scope_digest",
+    "work_package_digest",
+    "policy_digest",
+    "exit_plan_ref",
+    "exit_plan_digest",
+    "exit_result_ref",
+    "exit_result_digest",
+    "exit_manifest_ref",
+    "exit_manifest_digest",
+    "evidence_read_receipt",
+    "authenticity_ref",
+    "checked_at"
+  ],
+  "title": "ExitEvidenceReconciliationV1",
+  "type": "object"
+}

@@ -25,7 +25,29 @@ def decorate(schema: dict, name: str, collection_limit: int) -> dict:
         return {"properties": {tag: {**properties[tag], **discriminator}, **fields}}
 
     null = {"type": "null"}
-    if name == "ModelTurnResult":
+    if name in {"CertificateClaims", "CertificateV2"}:
+        schema["oneOf"] = []
+        for route in ["git", ["local_folder", "cloud_files", "host_export"]]:
+            for signer in ["github_actions", "trusted_service"]:
+                form = branch(
+                    "source_route",
+                    route,
+                    git_source=nonnull("git_source") if route == "git" else null,
+                )
+                form["properties"].update(
+                    branch(
+                        "signer_kind",
+                        signer,
+                        workflow_identity=nonnull("workflow_identity")
+                        if signer == "github_actions"
+                        else null,
+                        workflow_sha=nonnull("workflow_sha")
+                        if signer == "github_actions"
+                        else null,
+                    )["properties"]
+                )
+                schema["oneOf"].append(form)
+    elif name == "ModelTurnResult":
         schema["oneOf"] = [
             branch(
                 "kind",

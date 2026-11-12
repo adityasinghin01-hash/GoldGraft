@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python",
+    "scripts/check_spec_coverage.py"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {},
+  "exit_code": 0,
+  "seconds": 0.236,
+  "output": "docs/engineering/plan5/checks/SI01_06-spec.log",
+  "output_sha256": "45c951f2237dd5d8a1436891e22ae8ca9f11bcc9a08275207f6302b7e0465d39"
+}

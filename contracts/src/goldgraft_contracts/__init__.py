@@ -15,11 +15,14 @@ from .agent_runtime import (
     ToolInvocation,
     ToolPort,
 )
+from .certificate_v2 import CertificateV2, CertificateVerification, PrivateCertificatePort
 from .connection_control import ConnectionCase, P5Problem, WorkAcceptance, WorkStatus
+from .exit_evidence import ExitCheckResult, ExitEvidenceReconciliation
 from .lifecycle import DeliveryPort
 from .money import CMEL, Money, MoneyEvent
 from .plan5_common import Issue
 from .proof import Contract, MoneyContract
+from .proof_evidence import PromotionDecision, ProofPlan, ProofResult
 from .registry import PLAN5_REGISTRY, REGISTRY, validate
 
 __all__ = [
@@ -50,4 +53,12 @@ __all__ = [
     "P5Problem",
     "WorkAcceptance",
     "WorkStatus",
+    "CertificateV2",
+    "CertificateVerification",
+    "PrivateCertificatePort",
+    "ExitCheckResult",
+    "ExitEvidenceReconciliation",
+    "ProofPlan",
+    "ProofResult",
+    "PromotionDecision",
 ]

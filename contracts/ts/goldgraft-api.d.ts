@@ -532,6 +532,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v2/connection-cases/{case_id}/certificates/{cert_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** private certificate */
+        get: operations["private_certificate"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/connection-cases/{case_id}/certificates/{cert_id}/verification": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** private certificate verification */
+        get: operations["private_certificate_verification"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v2/connection-cases/{case_id}/events": {
         parameters: {
             query?: never;
@@ -2004,6 +2038,23 @@ export interface components {
             /** Workspace Ref */
             workspace_ref: string;
         };
+        /** CapabilityDenial */
+        P5_CapabilityDenial: {
+            /**
+             * Capability
+             * @enum {string}
+             */
+            capability: "source_read" | "model_execution" | "host_mutation" | "worker_dispatch";
+            /**
+             * Denied At
+             * Format: date-time
+             */
+            denied_at: string;
+            /** Evidence Ref */
+            evidence_ref: string;
+            /** Payload Digest */
+            payload_digest: string;
+        };
         /** CaseEvent */
         P5_CaseEvent: {
             /** Case Id */
@@ -2094,6 +2145,184 @@ export interface components {
             resources: components["schemas"]["P5_ResourceSummary"][];
             /** State Version */
             state_version: number;
+        };
+        /** CertificateGitSource */
+        P5_CertificateGitSource: {
+            /** Branch */
+            branch: string;
+            /** Commit New */
+            commit_new: string;
+            /** Commit Old */
+            commit_old: string;
+            /** Repository Ref */
+            repository_ref: string;
+        };
+        /** CertificateV2 */
+        P5_CertificateV2: {
+            /** Case Id */
+            case_id: string;
+            /** Cert Id */
+            cert_id: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Generation */
+            generation: number;
+            git_source: components["schemas"]["P5_CertificateGitSource"] | null;
+            /**
+             * Issued At
+             * Format: date-time
+             */
+            issued_at: string;
+            /** Ledger Root */
+            ledger_root: string;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Proof Plan Digest */
+            proof_plan_digest: string;
+            /** Proof Plan Ref */
+            proof_plan_ref: string;
+            /** Proof Result Digest */
+            proof_result_digest: string;
+            /** Proof Result Ref */
+            proof_result_ref: string;
+            /** Qualification Evidence Refs */
+            qualification_evidence_refs: string[];
+            /**
+             * Qualification Scope
+             * @enum {string}
+             */
+            qualification_scope: "component_only" | "sandbox_payment" | "merchant_delivery";
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Review Bundle Digest */
+            review_bundle_digest: string;
+            /** Review Bundle Ref */
+            review_bundle_ref: string;
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            signature: components["schemas"]["P5_SignatureMaterial"];
+            /** Signer Identity Ref */
+            signer_identity_ref: string;
+            /**
+             * Signer Kind
+             * @enum {string}
+             */
+            signer_kind: "github_actions" | "trusted_service";
+            /**
+             * Source Route
+             * @enum {string}
+             */
+            source_route: "git" | "local_folder" | "cloud_files" | "host_export";
+            /** Subject Manifest Digest */
+            subject_manifest_digest: string;
+            /** Subject Manifest Ref */
+            subject_manifest_ref: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+            /** Workflow Identity */
+            workflow_identity: string | null;
+            /** Workflow Sha */
+            workflow_sha: string | null;
+        } & ({
+            git_source?: components["schemas"]["P5_CertificateGitSource"];
+            /**
+             * Signer Kind
+             * @constant
+             * @enum {string}
+             */
+            signer_kind?: "github_actions";
+            /**
+             * Source Route
+             * @constant
+             * @enum {string}
+             */
+            source_route?: "git";
+            workflow_identity?: string;
+            workflow_sha?: string;
+        } | {
+            git_source?: components["schemas"]["P5_CertificateGitSource"];
+            /**
+             * Signer Kind
+             * @constant
+             * @enum {string}
+             */
+            signer_kind?: "trusted_service";
+            /**
+             * Source Route
+             * @constant
+             * @enum {string}
+             */
+            source_route?: "git";
+            workflow_identity?: null;
+            workflow_sha?: null;
+        } | {
+            git_source?: null;
+            /**
+             * Signer Kind
+             * @constant
+             * @enum {string}
+             */
+            signer_kind?: "github_actions";
+            /**
+             * Source Route
+             * @enum {string}
+             */
+            source_route?: "local_folder" | "cloud_files" | "host_export";
+            workflow_identity?: string;
+            workflow_sha?: string;
+        } | {
+            git_source?: null;
+            /**
+             * Signer Kind
+             * @constant
+             * @enum {string}
+             */
+            signer_kind?: "trusted_service";
+            /**
+             * Source Route
+             * @enum {string}
+             */
+            source_route?: "local_folder" | "cloud_files" | "host_export";
+            workflow_identity?: null;
+            workflow_sha?: null;
+        });
+        /** CertificateVerification */
+        P5_CertificateVerification: {
+            /** Case Id */
+            case_id: string;
+            /** Cert Id */
+            cert_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /**
+             * Qualification Scope
+             * @enum {string}
+             */
+            qualification_scope: "component_only" | "sandbox_payment" | "merchant_delivery";
+            /**
+             * Qualification State
+             * @enum {string}
+             */
+            qualification_state: "verified" | "held";
+            /** Reason Codes */
+            reason_codes: string[];
+            /** Run Id */
+            run_id: string;
+            /**
+             * Signature Integrity
+             * @enum {string}
+             */
+            signature_integrity: "verified" | "unverified" | "invalid";
         };
         /** ChangeListV2 */
         P5_ChangeListV2: {
@@ -2858,6 +3087,152 @@ export interface components {
             /** Trusted Code Digest */
             trusted_code_digest: string;
         };
+        /** ExitCheckResult */
+        P5_ExitCheckResult: {
+            /** Case Id */
+            case_id: string;
+            /** Evidence Read Authority Ref */
+            evidence_read_authority_ref: string;
+            /** Executor Identity Ref */
+            executor_identity_ref: string;
+            /** Exit Plan Digest */
+            exit_plan_digest: string;
+            /** Exit Plan Ref */
+            exit_plan_ref: string;
+            /** Final Artifact Digest */
+            final_artifact_digest: string;
+            /** Final Config Digest */
+            final_config_digest: string;
+            /**
+             * Finished At
+             * Format: date-time
+             */
+            finished_at: string;
+            /** Generation */
+            generation: number;
+            /** Observations */
+            observations: components["schemas"]["P5_ExitCriterionObservation"][];
+            /** Ordinary Denials */
+            ordinary_denials: components["schemas"]["P5_CapabilityDenial"][];
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "verified" | "held" | "failed" | "unknown";
+            /** Policy Digest */
+            policy_digest: string;
+            /** Reservation Ref */
+            reservation_ref: string;
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Restart Count */
+            restart_count: number;
+            /** Result Digest */
+            result_digest: string;
+            /** Result Id */
+            result_id: string;
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            signature: components["schemas"]["P5_SignatureMaterial"];
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** State Digest */
+            state_digest: string;
+            /** Trusted Code Digest */
+            trusted_code_digest: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
+        /** ExitCriterionObservation */
+        P5_ExitCriterionObservation: {
+            /** Criterion Ref */
+            criterion_ref: string;
+            /** Evidence Ref */
+            evidence_ref: string;
+            /**
+             * Observed At
+             * Format: date-time
+             */
+            observed_at: string;
+            /** Payload Digest */
+            payload_digest: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "verified" | "failed" | "unknown";
+        };
+        /** ExitEvidenceReadReceipt */
+        P5_ExitEvidenceReadReceipt: {
+            /** Authority Ref */
+            authority_ref: string;
+            /** Disclosure Ref */
+            disclosure_ref: string;
+            /**
+             * Read At
+             * Format: date-time
+             */
+            read_at: string;
+            /** Read Digest */
+            read_digest: string;
+            /** Read Evidence Ref */
+            read_evidence_ref: string;
+            /** Revocation Digest */
+            revocation_digest: string;
+            /** Revocation Ref */
+            revocation_ref: string;
+            /**
+             * Revoked At
+             * Format: date-time
+             */
+            revoked_at: string;
+        };
+        /** ExitEvidenceReconciliation */
+        P5_ExitEvidenceReconciliation: {
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            evidence_read_receipt: components["schemas"]["P5_ExitEvidenceReadReceipt"];
+            /** Exit Manifest Digest */
+            exit_manifest_digest: string;
+            /** Exit Manifest Ref */
+            exit_manifest_ref: string;
+            /** Exit Plan Digest */
+            exit_plan_digest: string;
+            /** Exit Plan Ref */
+            exit_plan_ref: string;
+            /** Exit Result Digest */
+            exit_result_digest: string;
+            /** Exit Result Ref */
+            exit_result_ref: string;
+            /** Generation */
+            generation: number;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
         /** ExitItem */
         P5_ExitItem: {
             /** Evidence Refs */
@@ -2931,6 +3306,50 @@ export interface components {
         P5_FinaliseUploadRequest: {
             /** Expected Manifest Digest */
             expected_manifest_digest: string;
+        };
+        /**
+         * HealAction
+         * @enum {string}
+         */
+        P5_HealAction: "HOLD" | "STEP_UP" | "CUTBACK";
+        /** HealDecision */
+        P5_HealDecision: {
+            action: components["schemas"]["P5_HealAction"];
+            /**
+             * From Stage Pct
+             * @enum {integer}
+             */
+            from_stage_pct: 0 | 1 | 10 | 50 | 100;
+            /** Graft Id */
+            graft_id: string;
+            /**
+             * Hard Stop
+             * @default null
+             */
+            hard_stop: string | null;
+            /** Reason */
+            reason: string;
+            stats: components["schemas"]["P5_HealStats"];
+            /**
+             * To Stage Pct
+             * @enum {integer}
+             */
+            to_stage_pct: 0 | 1 | 10 | 50 | 100;
+        };
+        /** HealStats */
+        P5_HealStats: {
+            /** N New */
+            n_new: number;
+            /** N Old */
+            n_old: number;
+            /** Prob New Not Worse */
+            prob_new_not_worse: number;
+            /** Success New */
+            success_new: number;
+            /** Success Old */
+            success_old: number;
+            /** Threshold */
+            threshold: number;
         };
         /** Issue */
         P5_Issue: {
@@ -3408,6 +3827,197 @@ export interface components {
          * @enum {string}
          */
         P5_ProducerKind: "agent" | "service";
+        /** PromotionDecision */
+        P5_PromotionDecision: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "STEP_UP" | "HOLD" | "CUTBACK";
+            advice: components["schemas"]["P5_HealDecision"];
+            /** Advice Digest */
+            advice_digest: string;
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Expires At */
+            expires_at: string | null;
+            /** Generation */
+            generation: number;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Proof Plan Digest */
+            proof_plan_digest: string;
+            /** Proof Result Digest */
+            proof_result_digest: string;
+            /** Proof Result Ref */
+            proof_result_ref: string;
+            /**
+             * Reason Code
+             * @enum {string}
+             */
+            reason_code: "EVIDENCE_READY" | "EVIDENCE_HOLD" | "ADVICE_HOLD" | "CUTBACK";
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
+        /** ProofCheck */
+        P5_ProofCheck: {
+            /** Check Id */
+            check_id: string;
+            /** Critical */
+            critical: boolean;
+            /** Flow Id */
+            flow_id: string;
+            /** Input Digest */
+            input_digest: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "baseline" | "candidate" | "scenario" | "domain_rule" | "security" | "mutation" | "payment" | "isolation" | "exit";
+            /** Owner Role */
+            owner_role: string;
+            /**
+             * Required Evidence Class
+             * @enum {string}
+             */
+            required_evidence_class: "scripted" | "component_offline" | "real_model" | "real_provider" | "real_payment" | "isolation_qualified" | "merchant_exit";
+            /** Required Schema */
+            required_schema: string;
+            /**
+             * Required Trust
+             * @enum {string}
+             */
+            required_trust: "collector_observed" | "deterministic_result";
+            /** Rule Ids */
+            rule_ids: string[];
+            /** Subject Manifest Digest */
+            subject_manifest_digest: string;
+            /** Subject Manifest Ref */
+            subject_manifest_ref: string;
+        };
+        /** ProofCheckResult */
+        P5_ProofCheckResult: {
+            /** Check Id */
+            check_id: string;
+            /** Evidence Refs */
+            evidence_refs: string[];
+            /**
+             * Reason Code
+             * @enum {string}
+             */
+            reason_code: "VERIFIED" | "MISSING" | "AUTHENTICATION" | "INVALID" | "SUBJECT_MISMATCH" | "STALE" | "INVENTORY_MISMATCH" | "EXCLUDED" | "FAILED" | "UNKNOWN" | "UNSUPPORTED";
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "verified" | "missing" | "failed" | "unknown" | "unsupported" | "excluded";
+            /** Subject Manifest Digest */
+            subject_manifest_digest: string;
+            /** Subject Manifest Ref */
+            subject_manifest_ref: string;
+        };
+        /** ProofExclusion */
+        P5_ProofExclusion: {
+            /** Approval Digest */
+            approval_digest: string;
+            /** Approval Ref */
+            approval_ref: string;
+            /** Check Id */
+            check_id: string;
+            /** Reason */
+            reason: string;
+        };
+        /** ProofPlan */
+        P5_ProofPlan: {
+            /** Case Id */
+            case_id: string;
+            /** Checks */
+            checks: components["schemas"]["P5_ProofCheck"][];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Exclusions */
+            exclusions: components["schemas"]["P5_ProofExclusion"][];
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Generation */
+            generation: number;
+            /** Plan Digest */
+            plan_digest: string;
+            /** Plan Id */
+            plan_id: string;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
+        /** ProofResult */
+        P5_ProofResult: {
+            /** Case Id */
+            case_id: string;
+            /**
+             * Checked At
+             * Format: date-time
+             */
+            checked_at: string;
+            /** Generation */
+            generation: number;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "ready" | "partial" | "hold";
+            /** Plan Digest */
+            plan_digest: string;
+            /** Plan Ref */
+            plan_ref: string;
+            /** Policy Digest */
+            policy_digest: string;
+            /** Reason Codes */
+            reason_codes: ("VERIFIED" | "MISSING" | "AUTHENTICATION" | "INVALID" | "SUBJECT_MISMATCH" | "STALE" | "INVENTORY_MISMATCH" | "EXCLUDED" | "FAILED" | "UNKNOWN" | "UNSUPPORTED")[];
+            /** Resource Epochs */
+            resource_epochs: {
+                [key: string]: number;
+            };
+            /** Result Digest */
+            result_digest: string;
+            /** Result Id */
+            result_id: string;
+            /** Results */
+            results: components["schemas"]["P5_ProofCheckResult"][];
+            /** Run Id */
+            run_id: string;
+            /** Scope Digest */
+            scope_digest: string;
+            /** Work Package Digest */
+            work_package_digest: string;
+        };
         /** ProviderIntent */
         P5_ProviderIntent: {
             /** Case Id */
@@ -3788,6 +4398,19 @@ export interface components {
             mutant_set_ref: string;
             /** Scenario Set Ref */
             scenario_set_ref: string;
+        };
+        /** SignatureMaterial */
+        P5_SignatureMaterial: {
+            /** Authenticity Ref */
+            authenticity_ref: string;
+            /** Signature Digest */
+            signature_digest: string;
+            /** Signature Ref */
+            signature_ref: string;
+            /** Transparency Digest */
+            transparency_digest: string;
+            /** Transparency Ref */
+            transparency_ref: string;
         };
         /** SnapshotChange */
         P5_SnapshotChange: {
@@ -6553,6 +7176,232 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["P5_ApplyApproval"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    private_certificate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                cert_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_CertificateV2"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            412: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+            /** @description Typed bounded problem; unknown submission reconciles original identity */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["P5_P5Problem"];
+                };
+            };
+        };
+    };
+    private_certificate_verification: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                cert_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Committed receipt or current authorised projection; synthetic examples are not real evidence */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["P5_CertificateVerification"];
                 };
             };
             /** @description Typed bounded problem; unknown submission reconciles original identity */

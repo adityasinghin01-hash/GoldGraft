@@ -57,3 +57,22 @@ def test_legacy_tool_and_lane_do_not_fit_new_task():
     value["lane"] = "NO-CODE"
     with pytest.raises(ValidationError):
         validate("AgentTask/1", value)
+
+
+def test_certificate_v1_cannot_silently_acquire_service_evidence_fields():
+    from goldgraft_contracts.proof import Certificate
+
+    assert REGISTRY["Certificate/1"] is Certificate
+    value = example("Certificate/1")
+    validate("Certificate/1", value)
+    with pytest.raises(ValidationError):
+        validate("Certificate/1", {**value, "proof_plan_digest": "a" * 64})
+
+
+@pytest.mark.parametrize("name", ["get_certificate", "verify_certificate", "get_heal"])
+def test_legacy_certificate_and_rollout_routes_are_demo_only(name):
+    from goldgraft_contracts.api_routes import route, service_route
+
+    with pytest.raises(ValueError, match="legacy"):
+        service_route(name, mode="service")
+    assert service_route(name, mode="legacy_demo") == route(name)

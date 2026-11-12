@@ -951,7 +951,184 @@ export type Signature = string;
 export type MissesLearned = number;
 export type Precision = number;
 export type Recall = number;
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "CertificateV2".
+ */
+export type CertificateV2 =
+  | {
+      case_id: CaseId17;
+      cert_id: CertId1;
+      expires_at: ExpiresAt8;
+      generation: Generation9;
+      git_source: CertificateGitSource;
+      issued_at: IssuedAt4;
+      ledger_root: LedgerRoot1;
+      policy_digest: PolicyDigest4;
+      proof_plan_digest: ProofPlanDigest;
+      proof_plan_ref: ProofPlanRef;
+      proof_result_digest: ProofResultDigest;
+      proof_result_ref: ProofResultRef;
+      qualification_evidence_refs: QualificationEvidenceRefs;
+      qualification_scope: QualificationScope;
+      resource_epochs: ResourceEpochs;
+      review_bundle_digest: ReviewBundleDigest1;
+      review_bundle_ref: ReviewBundleRef;
+      run_id: RunId10;
+      scope_digest: ScopeDigest4;
+      signature: SignatureMaterial;
+      signer_identity_ref: SignerIdentityRef;
+      signer_kind: SignerKind;
+      source_route: SourceRoute;
+      subject_manifest_digest: SubjectManifestDigest;
+      subject_manifest_ref: SubjectManifestRef;
+      work_package_digest: WorkPackageDigest2;
+      workflow_identity: string;
+      workflow_sha: string;
+    }
+  | {
+      case_id: CaseId17;
+      cert_id: CertId1;
+      expires_at: ExpiresAt8;
+      generation: Generation9;
+      git_source: CertificateGitSource;
+      issued_at: IssuedAt4;
+      ledger_root: LedgerRoot1;
+      policy_digest: PolicyDigest4;
+      proof_plan_digest: ProofPlanDigest;
+      proof_plan_ref: ProofPlanRef;
+      proof_result_digest: ProofResultDigest;
+      proof_result_ref: ProofResultRef;
+      qualification_evidence_refs: QualificationEvidenceRefs;
+      qualification_scope: QualificationScope;
+      resource_epochs: ResourceEpochs;
+      review_bundle_digest: ReviewBundleDigest1;
+      review_bundle_ref: ReviewBundleRef;
+      run_id: RunId10;
+      scope_digest: ScopeDigest4;
+      signature: SignatureMaterial;
+      signer_identity_ref: SignerIdentityRef;
+      signer_kind: SignerKind1;
+      source_route: SourceRoute1;
+      subject_manifest_digest: SubjectManifestDigest;
+      subject_manifest_ref: SubjectManifestRef;
+      work_package_digest: WorkPackageDigest2;
+      workflow_identity: null;
+      workflow_sha: null;
+    }
+  | {
+      case_id: CaseId17;
+      cert_id: CertId1;
+      expires_at: ExpiresAt8;
+      generation: Generation9;
+      git_source: null;
+      issued_at: IssuedAt4;
+      ledger_root: LedgerRoot1;
+      policy_digest: PolicyDigest4;
+      proof_plan_digest: ProofPlanDigest;
+      proof_plan_ref: ProofPlanRef;
+      proof_result_digest: ProofResultDigest;
+      proof_result_ref: ProofResultRef;
+      qualification_evidence_refs: QualificationEvidenceRefs;
+      qualification_scope: QualificationScope;
+      resource_epochs: ResourceEpochs;
+      review_bundle_digest: ReviewBundleDigest1;
+      review_bundle_ref: ReviewBundleRef;
+      run_id: RunId10;
+      scope_digest: ScopeDigest4;
+      signature: SignatureMaterial;
+      signer_identity_ref: SignerIdentityRef;
+      signer_kind: SignerKind2;
+      source_route: SourceRoute2;
+      subject_manifest_digest: SubjectManifestDigest;
+      subject_manifest_ref: SubjectManifestRef;
+      work_package_digest: WorkPackageDigest2;
+      workflow_identity: string;
+      workflow_sha: string;
+    }
+  | {
+      case_id: CaseId17;
+      cert_id: CertId1;
+      expires_at: ExpiresAt8;
+      generation: Generation9;
+      git_source: null;
+      issued_at: IssuedAt4;
+      ledger_root: LedgerRoot1;
+      policy_digest: PolicyDigest4;
+      proof_plan_digest: ProofPlanDigest;
+      proof_plan_ref: ProofPlanRef;
+      proof_result_digest: ProofResultDigest;
+      proof_result_ref: ProofResultRef;
+      qualification_evidence_refs: QualificationEvidenceRefs;
+      qualification_scope: QualificationScope;
+      resource_epochs: ResourceEpochs;
+      review_bundle_digest: ReviewBundleDigest1;
+      review_bundle_ref: ReviewBundleRef;
+      run_id: RunId10;
+      scope_digest: ScopeDigest4;
+      signature: SignatureMaterial;
+      signer_identity_ref: SignerIdentityRef;
+      signer_kind: SignerKind3;
+      source_route: SourceRoute3;
+      subject_manifest_digest: SubjectManifestDigest;
+      subject_manifest_ref: SubjectManifestRef;
+      work_package_digest: WorkPackageDigest2;
+      workflow_identity: null;
+      workflow_sha: null;
+    };
+export type CaseId17 = string;
+export type CertId1 = string;
+export type ExpiresAt8 = string;
+export type Generation9 = number;
 export type Branch1 = string;
+export type CommitNew1 = string;
+export type CommitOld1 = string;
+export type RepositoryRef = string;
+export type IssuedAt4 = string;
+export type LedgerRoot1 = string;
+export type PolicyDigest4 = string;
+export type ProofPlanDigest = string;
+export type ProofPlanRef = string;
+export type ProofResultDigest = string;
+export type ProofResultRef = string;
+/**
+ * @maxItems 256
+ */
+export type QualificationEvidenceRefs = string[];
+export type QualificationScope = "component_only" | "sandbox_payment" | "merchant_delivery";
+export type ReviewBundleDigest1 = string;
+export type ReviewBundleRef = string;
+export type RunId10 = string;
+export type ScopeDigest4 = string;
+export type AuthenticityRef2 = string;
+export type SignatureDigest = string;
+export type SignatureRef = string;
+export type TransparencyDigest = string;
+export type TransparencyRef = string;
+export type SignerIdentityRef = string;
+export type SignerKind = "github_actions";
+export type SourceRoute = "git";
+export type SubjectManifestDigest = string;
+export type SubjectManifestRef = string;
+export type WorkPackageDigest2 = string;
+export type SignerKind1 = "trusted_service";
+export type SourceRoute1 = "git";
+export type SignerKind2 = "github_actions";
+export type SourceRoute2 = "local_folder" | "cloud_files" | "host_export";
+export type SignerKind3 = "trusted_service";
+export type SourceRoute3 = "local_folder" | "cloud_files" | "host_export";
+export type CaseId18 = string;
+export type CertId2 = string;
+export type CheckedAt6 = string;
+export type QualificationScope1 = "component_only" | "sandbox_payment" | "merchant_delivery";
+export type QualificationState = "verified" | "held";
+/**
+ * @maxItems 256
+ */
+export type ReasonCodes = string[];
+export type RunId11 = string;
+export type SignatureIntegrity = "verified" | "unverified" | "invalid";
+export type Branch2 = string;
 export type Commit = string;
 export type PlanItemIds = string[];
 export type Summary = string;
@@ -1028,12 +1205,12 @@ export type Changes2 = [
 ];
 export type Provenance1 = "git";
 export type CheckId1 = string;
-export type CheckedAt6 = string;
+export type CheckedAt7 = string;
 /**
  * @maxItems 256
  */
 export type EvidenceRefs11 = string[];
-export type ExpiresAt8 = string | null;
+export type ExpiresAt9 = string | null;
 export type RecoveryCode1 = string | null;
 export type Status6 = "pass" | "missing" | "unsupported" | "failed" | "stale" | "unknown";
 export type BlobRef = string;
@@ -1054,7 +1231,7 @@ export type Offset2 = number;
 export type Sha2562 = string;
 export type ContinuationRef = string;
 export type AcceptedAt = string;
-export type Generation9 = number;
+export type Generation10 = number;
 export type OperationId = string;
 export type ReceiptRef = string;
 export type WorkId2 = string;
@@ -1166,7 +1343,7 @@ export type Site = string | null;
  * @maxItems 256
  */
 export type BindingRefs1 = string[];
-export type CaseId17 = string;
+export type CaseId19 = string;
 export type CreatedAt8 = string;
 export type GraphRef1 = string | null;
 export type RequesterId1 = string;
@@ -1174,26 +1351,26 @@ export type ShopUrl3 = string;
 export type Status7 = "draft" | "waiting_controller" | "checking" | "setup_needed" | "ready" | "accepted" | "closed";
 export type TenantId1 = string;
 export type ActorId2 = string;
-export type CaseId18 = string;
+export type CaseId20 = string;
 /**
  * @maxItems 256
  */
 export type Checks1 = CheckResult[];
-export type ExpiresAt9 = string;
+export type ExpiresAt10 = string;
 export type FixtureProfileDigest1 = string;
-export type IssuedAt4 = string;
+export type IssuedAt5 = string;
 export type ProcessingPolicyDigest1 = string;
 export type ReadinessDigest2 = string;
 export type ReadinessId2 = string;
 export type ResourceGraphDigest2 = string;
 export type RuntimeProfileDigest2 = string;
-export type ScopeDigest4 = string;
+export type ScopeDigest5 = string;
 export type SourceManifestDigest1 = string;
 /**
  * @maxItems 256
  */
 export type SourceSnapshotRefs2 = string[];
-export type WorkPackageDigest2 = string;
+export type WorkPackageDigest3 = string;
 export type WorkPackageRef2 = string;
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -1229,9 +1406,9 @@ export type Code2 =
  */
 export type EvidenceRefs14 = string[];
 export type RetryClass = "none" | "safe_read" | "reconcile" | "reauthorise";
-export type CaseId19 = string;
+export type CaseId21 = string;
 export type CopyUrl = string;
-export type ExpiresAt10 = string;
+export type ExpiresAt11 = string;
 export type InvitationId = string;
 export type RecipientHint = string | null;
 export type RequesterId2 = string;
@@ -1308,10 +1485,10 @@ export type Title1 = string;
  */
 export type DeliveryDecisionV1 =
   | {
-      case_id: CaseId20;
+      case_id: CaseId22;
       existing_effect_ref: ExistingEffectRef;
       expected_state_version: ExpectedStateVersion;
-      generation: Generation10;
+      generation: Generation11;
       input_refs: InputRefs2;
       kind: Kind9;
       next_wake_at: NextWakeAt1;
@@ -1334,26 +1511,26 @@ export type DeliveryDecisionV1 =
         | "revoke_exit_evidence"
         | "reconcile_cleanup";
       reason_code: ReasonCode1;
-      run_id: RunId10;
+      run_id: RunId12;
       slot_id: SlotId1;
     }
   | {
-      case_id: CaseId20;
+      case_id: CaseId22;
       existing_effect_ref: null;
       expected_state_version: ExpectedStateVersion;
-      generation: Generation10;
+      generation: Generation11;
       input_refs: InputRefs3;
       kind: Kind10;
       next_wake_at: NextWakeAt1;
       operation: null;
       reason_code: ReasonCode1;
-      run_id: RunId10;
+      run_id: RunId12;
       slot_id: null;
     };
-export type CaseId20 = string;
+export type CaseId22 = string;
 export type ExistingEffectRef = string | null;
 export type ExpectedStateVersion = number;
-export type Generation10 = number;
+export type Generation11 = number;
 /**
  * @minItems 1
  * @maxItems 256
@@ -1362,7 +1539,7 @@ export type InputRefs2 = [string, ...string[]];
 export type Kind9 = "request";
 export type NextWakeAt1 = string | null;
 export type ReasonCode1 = string;
-export type RunId10 = string;
+export type RunId12 = string;
 export type SlotId1 = string | null;
 /**
  * @maxItems 256
@@ -1372,8 +1549,8 @@ export type Kind10 = "wait" | "hold" | "incident" | "complete";
 export type ActionPlanRef = string | null;
 export type ApprovalSetRef = string | null;
 export type CancellationRef = string | null;
-export type CaseId21 = string;
-export type CheckedAt7 = string;
+export type CaseId23 = string;
+export type CheckedAt8 = string;
 /**
  * @maxItems 256
  */
@@ -1382,7 +1559,7 @@ export type DeploymentRef = string | null;
 export type ExitManifestRef = string | null;
 export type ExitPlanRef1 = string | null;
 export type FinalAssetManifestRef = string | null;
-export type Generation11 = number;
+export type Generation12 = number;
 export type GraphRef2 = string;
 export type LifecycleRef = string;
 /**
@@ -1391,7 +1568,7 @@ export type LifecycleRef = string;
 export type PendingEffectRefs = string[];
 export type ReservationRef = string | null;
 export type ReviewRef = string | null;
-export type RunId11 = string;
+export type RunId13 = string;
 export type StateCutoverRef = string | null;
 export type StateVersion3 = number;
 export type AccessMode = "fixture" | "sandbox_broker" | "read_evidence" | "unavailable";
@@ -1421,8 +1598,8 @@ export type TestIdentityRef1 = string | null;
  * @maxItems 256
  */
 export type Dependencies1 = Dependency[];
-export type CaseId22 = string;
-export type CheckedAt8 = string;
+export type CaseId24 = string;
+export type CheckedAt9 = string;
 /**
  * @maxItems 256
  */
@@ -1450,7 +1627,7 @@ export type Version2 = string;
 export type ContinuationRef1 = string;
 export type CreatedAt11 = string;
 export type DraftId = string;
-export type ExpiresAt11 = string;
+export type ExpiresAt12 = string;
 export type ShopUrl6 = string;
 export type State6 = "unclaimed" | "claimed" | "expired";
 export type ProvenRuns = number;
@@ -1461,13 +1638,13 @@ export type Steps = (DriverStep | ApiStep | MockStep)[];
 export type ActionGroupId1 = string;
 export type ActorId3 = string;
 export type ApprovalSetId1 = string;
-export type CaseId23 = string;
+export type CaseId25 = string;
 export type CreatedAt12 = string;
 export type EffectClass1 = "E0" | "E1" | "E2" | "E3" | "EU";
 export type EffectId1 = string;
 export type EnvironmentId2 = string;
 export type ExpectedVersion = string;
-export type Generation12 = number;
+export type Generation13 = number;
 export type Operation3 =
   | "preserve_state"
   | "publish_artifact"
@@ -1492,7 +1669,7 @@ export type ProviderReceiptRef = string | null;
 export type ReconciliationRef = string | null;
 export type RequestDigest = string;
 export type ResourceId3 = string;
-export type RunId12 = string;
+export type RunId14 = string;
 export type SlotId2 = string;
 export type State7 = "intended" | "submitted" | "acknowledged" | "observed" | "failed" | "unknown" | "compensated";
 export type ArtifactDigest2 = string | null;
@@ -1562,7 +1739,7 @@ export type AllowedRestartCount = number;
  */
 export type AuthorityRefs3 = string[];
 export type BudgetRef1 = string;
-export type CaseId24 = string;
+export type CaseId26 = string;
 /**
  * @maxItems 256
  */
@@ -1574,14 +1751,74 @@ export type ExitPlanId = string;
 export type FailureRouteRef = string;
 export type FinalArtifactDigest1 = string;
 export type FinalConfigDigest1 = string;
-export type Generation13 = number;
+export type Generation14 = number;
 export type PlanDigest3 = string;
 export type PrivateEvidenceDestinationRef = string;
 export type RecoveryPlanRef1 = string;
 export type ReservationRef1 = string;
-export type RunId13 = string;
+export type RunId15 = string;
 export type StateDigest = string;
 export type TrustedCodeDigest = string;
+export type CaseId27 = string;
+export type EvidenceReadAuthorityRef1 = string;
+export type ExecutorIdentityRef1 = string;
+export type ExitPlanDigest = string;
+export type ExitPlanRef2 = string;
+export type FinalArtifactDigest2 = string;
+export type FinalConfigDigest2 = string;
+export type FinishedAt = string;
+export type Generation15 = number;
+export type CriterionRef = string;
+export type EvidenceRef = string;
+export type ObservedAt = string;
+export type PayloadDigest2 = string;
+export type State8 = "verified" | "failed" | "unknown";
+/**
+ * @maxItems 256
+ */
+export type Observations = ExitCriterionObservation[];
+export type Capability1 = "source_read" | "model_execution" | "host_mutation" | "worker_dispatch";
+export type DeniedAt = string;
+export type EvidenceRef1 = string;
+export type PayloadDigest3 = string;
+/**
+ * @maxItems 256
+ */
+export type OrdinaryDenials = CapabilityDenial[];
+export type Outcome5 = "verified" | "held" | "failed" | "unknown";
+export type PolicyDigest5 = string;
+export type ReservationRef2 = string;
+export type RestartCount = number;
+export type ResultDigest = string;
+export type ResultId = string;
+export type RunId16 = string;
+export type ScopeDigest6 = string;
+export type StartedAt = string;
+export type StateDigest1 = string;
+export type TrustedCodeDigest1 = string;
+export type WorkPackageDigest4 = string;
+export type AuthenticityRef3 = string;
+export type CaseId28 = string;
+export type CheckedAt10 = string;
+export type AuthorityRef2 = string;
+export type DisclosureRef = string;
+export type ReadAt = string;
+export type ReadDigest = string;
+export type ReadEvidenceRef = string;
+export type RevocationDigest = string;
+export type RevocationRef = string;
+export type RevokedAt2 = string;
+export type ExitManifestDigest = string;
+export type ExitManifestRef1 = string;
+export type ExitPlanDigest1 = string;
+export type ExitPlanRef3 = string;
+export type ExitResultDigest = string;
+export type ExitResultRef = string;
+export type Generation16 = number;
+export type PolicyDigest6 = string;
+export type RunId17 = string;
+export type ScopeDigest7 = string;
+export type WorkPackageDigest5 = string;
 /**
  * @maxItems 256
  */
@@ -1589,7 +1826,7 @@ export type EvidenceRefs18 = string[];
 export type ItemId = string;
 export type Owner = string;
 export type RequiredForExit = boolean;
-export type State8 =
+export type State9 =
   | "preserved"
   | "local_denied"
   | "termination_pending"
@@ -1600,7 +1837,7 @@ export type State8 =
   | "exported_unrecallable"
   | "confirmed"
   | "unknown";
-export type CaseId25 = string;
+export type CaseId29 = string;
 /**
  * @maxItems 256
  */
@@ -1608,7 +1845,7 @@ export type EvidenceRefs19 = string[];
 export type ItemId1 = string;
 export type Owner1 = string;
 export type RequiredForExit1 = boolean;
-export type State9 =
+export type State10 =
   | "preserved"
   | "local_denied"
   | "termination_pending"
@@ -1626,7 +1863,7 @@ export type CleanupItems = ExitItem[];
 export type ExitId = string;
 export type LegacyObligationsRef1 = string;
 export type MerchantAssetsRef = string;
-export type Outcome5 = "complete" | "pending" | "failed_safe" | "unknown";
+export type Outcome6 = "complete" | "pending" | "failed_safe" | "unknown";
 /**
  * @maxItems 256
  */
@@ -1635,10 +1872,10 @@ export type PersistentRuntimeEvidenceRefs = string[];
  * @maxItems 256
  */
 export type PostDenialObservationRefs = string[];
-export type RunId14 = string;
+export type RunId18 = string;
 export type TemporaryAssetsRef = string;
 export type CandidateChangeRequired = boolean;
-export type CaseId26 = string;
+export type CaseId30 = string;
 /**
  * @maxItems 256
  */
@@ -1646,7 +1883,7 @@ export type DependencyCheckRefs = string[];
 export type DesiredAssetManifestRef = string;
 export type FinalCandidateRef = string | null;
 export type FinalisationId = string;
-export type Generation14 = number;
+export type Generation17 = number;
 /**
  * @maxItems 256
  */
@@ -1656,7 +1893,7 @@ export type PlanDigest4 = string;
  * @maxItems 256
  */
 export type RequiredActionSlotIds = string[];
-export type RunId15 = string;
+export type RunId19 = string;
 /**
  * @maxItems 256
  */
@@ -1818,7 +2055,7 @@ export type JobId = string;
 export type LogsRef = string;
 export type RateLimitPauses = number;
 export type RawCaptureRefs = string[];
-export type RunId16 = string;
+export type RunId20 = string;
 export type Sha1 = string;
 export type Workflow1 = string;
 export type Started = string;
@@ -1914,15 +2151,15 @@ export type EntryType = "STAGE" | "ARTIFACT" | "MESSAGE" | "VERDICT" | "SWITCH" 
  */
 export type ActiveEffectRefs1 = string[];
 export type Attempt3 = number;
-export type CaseId27 = string;
+export type CaseId31 = string;
 /**
  * @maxItems 256
  */
 export type EvidenceRefs22 = string[];
-export type Generation15 = number;
+export type Generation18 = number;
 export type ResourceGraphDigest3 = string;
-export type RunId17 = string;
-export type ScopeDigest5 = string;
+export type RunId21 = string;
+export type ScopeDigest8 = string;
 export type Stage2 =
   | "BASELINE_VERIFY"
   | "BASELINE_RUN"
@@ -1943,7 +2180,7 @@ export type Stage2 =
   | "INCIDENT_UNKNOWN";
 export type UpdatedAt3 = string;
 export type WorkId3 = string;
-export type WorkPackageDigest3 = string;
+export type WorkPackageDigest6 = string;
 export type WorkPackageRef3 = string;
 export type BudgetRef2 = string;
 export type Deadline2 = string;
@@ -1952,7 +2189,7 @@ export type ExpectedOutputSchema = string;
  * @maxItems 256
  */
 export type ForbiddenEffectCodes = string[];
-export type Generation16 = number;
+export type Generation19 = number;
 /**
  * @maxItems 256
  */
@@ -1968,34 +2205,34 @@ export type OperationKind =
   | "selfcheck_recipe";
 export type PackageDigest1 = string;
 export type PackageRef = string;
-export type PolicyDigest4 = string;
+export type PolicyDigest7 = string;
 export type RequestId3 = string;
-export type RunId18 = string;
+export type RunId22 = string;
 export type RuntimeProfileDigest3 = string;
 export type AcceptedAt1 = string;
-export type Generation17 = number;
+export type Generation20 = number;
 export type RequestDigest1 = string;
 export type RequestId4 = string;
-export type RunId19 = string;
-export type AuthenticityRef2 = string;
+export type RunId23 = string;
+export type AuthenticityRef4 = string;
 export type CompletedAt1 = string;
 /**
  * @maxItems 256
  */
 export type EvidenceRefs23 = string[];
-export type Generation18 = number;
+export type Generation21 = number;
 export type InputsDigest = string;
 /**
  * @maxItems 256
  */
 export type LimitationCodes = string[];
-export type Outcome6 = "completed" | "failed" | "blocked" | "unknown";
+export type Outcome7 = "completed" | "failed" | "blocked" | "unknown";
 /**
  * @maxItems 256
  */
 export type OutputArtifactRefs = string[];
 export type RequestId5 = string;
-export type RunId20 = string;
+export type RunId24 = string;
 export type SourceUnchanged = boolean;
 export type WorkerIdentityRef = string;
 export type HostedButtonId = string | null;
@@ -2055,7 +2292,7 @@ export type BudgetReservationRef = string;
 export type ContextDigest = string;
 export type ContextRef = string;
 export type Deadline3 = string;
-export type Generation19 = number;
+export type Generation22 = number;
 export type InputTokenCap = number;
 export type LeaseEpoch2 = number;
 export type ModelProfileRef1 = string;
@@ -2122,9 +2359,9 @@ export type Kind12 = "final";
  */
 export type Calls2 = ToolCall[];
 export type Kind13 = "blocked";
-export type CheckedAt9 = string;
+export type CheckedAt11 = string;
 export type ResultRef = string | null;
-export type State10 = "intended" | "submitted" | "observed" | "failed" | "unknown";
+export type State11 = "intended" | "submitted" | "observed" | "failed" | "unknown";
 export type TaskId5 = string;
 export type TurnId2 = string;
 export type UsageReceiptRef1 = string | null;
@@ -2213,27 +2450,27 @@ export type Retry = "never" | "status_only" | "safe_read" | "reauthorise";
 export type Status11 = number;
 export type Title2 = string;
 export type Type = string;
-export type CheckedAt10 = string;
+export type CheckedAt12 = string;
 /**
  * @maxItems 256
  */
 export type EvidenceRefs27 = string[];
 export type RequestId7 = string;
-export type State11 = "queued" | "running" | "waiting" | "unknown";
-export type CaseId28 = string;
-export type Generation20 = number;
+export type State12 = "queued" | "running" | "waiting" | "unknown";
+export type CaseId32 = string;
+export type Generation23 = number;
 export type ParentRequestId = string;
 /**
  * @maxItems 256
  */
 export type ReasonRefs = string[];
-export type RunId21 = string;
+export type RunId25 = string;
 /**
  * @minItems 1
  * @maxItems 32
  */
 export type Tasks = [TaskSpec, ...TaskSpec[]];
-export type CheckedAt11 = string;
+export type CheckedAt13 = string;
 /**
  * @maxItems 256
  */
@@ -2247,16 +2484,16 @@ export type SubjectDigest1 = string;
  */
 export type ApprovalRefs1 = string[];
 export type ApprovalSetId2 = string;
-export type CaseId29 = string;
-export type CheckedAt12 = string;
-export type Generation21 = number;
+export type CaseId33 = string;
+export type CheckedAt14 = string;
+export type Generation24 = number;
 export type PlanDigest6 = string;
 /**
  * @maxItems 256
  */
 export type RequiredControllerIds3 = string[];
-export type RunId22 = string;
-export type State12 = "complete" | "missing" | "stale" | "revoked";
+export type RunId26 = string;
+export type State13 = "complete" | "missing" | "stale" | "revoked";
 export type ArtifactDigest3 = string;
 /**
  * @maxItems 256
@@ -2268,7 +2505,7 @@ export type BundleId = string;
  * @maxItems 256
  */
 export type CandidateSnapshotRefs = string[];
-export type CaseId30 = string;
+export type CaseId34 = string;
 export type CreatedAt17 = string;
 /**
  * @maxItems 256
@@ -2282,7 +2519,7 @@ export type MissingEvidenceRefs = string[];
 export type PatchDigest2 = string;
 export type ProposedApplyPlanRef = string;
 export type RecoveryPlanRef2 = string;
-export type RunId23 = string;
+export type RunId27 = string;
 /**
  * @maxItems 256
  */
@@ -2295,7 +2532,7 @@ export type SecurityResultRefs = string[];
  * @maxItems 256
  */
 export type UnsupportedPaths = string[];
-export type WorkPackageDigest4 = string;
+export type WorkPackageDigest7 = string;
 /**
  * @maxItems 256
  */
@@ -2305,19 +2542,19 @@ export type EvidenceSummaryRefs = string[];
  */
 export type Missing = Issue[];
 export type BudgetRef3 = string;
-export type CaseId31 = string;
-export type ExitPlanRef2 = string;
-export type ExpiresAt12 = string;
+export type CaseId35 = string;
+export type ExitPlanRef4 = string;
+export type ExpiresAt13 = string;
 export type FinalisationPlanRef1 = string;
-export type Generation22 = number;
+export type Generation25 = number;
 export type GraphDigest2 = string;
 export type PlanDigest7 = string;
 export type PlanId1 = string;
-export type PolicyDigest5 = string;
+export type PolicyDigest8 = string;
 export type RecoveryPlanRef3 = string;
-export type ReviewBundleDigest1 = string;
-export type RunId24 = string;
-export type ScopeDigest6 = string;
+export type ReviewBundleDigest2 = string;
+export type RunId28 = string;
+export type ScopeDigest9 = string;
 /**
  * @minItems 1
  * @maxItems 32
@@ -2348,13 +2585,13 @@ export type FamiliesFound = Family[];
 export type FilesOrPages = string[];
 export type NextStep = string;
 export type OfficialModernModuleAvailable = boolean | null;
-export type CheckedAt13 = string;
+export type CheckedAt15 = string;
 export type CopyScope1 = string;
 /**
  * @maxItems 256
  */
 export type Limits1 = string[];
-export type PolicyDigest6 = string;
+export type PolicyDigest9 = string;
 /**
  * @maxItems 256
  */
@@ -2368,13 +2605,147 @@ export type RetentionText1 = string;
  * @maxItems 256
  */
 export type TermsEvidenceRefs1 = string[];
+export type Action = "STEP_UP" | "HOLD" | "CUTBACK";
+export type FromStagePct1 = 0 | 1 | 10 | 50 | 100;
+export type GraftId16 = string;
+export type HardStop1 = string | null;
+export type Reason2 = string;
+export type ToStagePct1 = 0 | 1 | 10 | 50 | 100;
+export type AdviceDigest = string;
+export type CaseId36 = string;
+export type CheckedAt16 = string;
+export type ExpiresAt14 = string | null;
+export type Generation26 = number;
+export type PolicyDigest10 = string;
+export type ProofPlanDigest1 = string;
+export type ProofResultDigest1 = string;
+export type ProofResultRef1 = string;
+export type ReasonCode5 = "EVIDENCE_READY" | "EVIDENCE_HOLD" | "ADVICE_HOLD" | "CUTBACK";
+export type RunId29 = string;
+export type ScopeDigest10 = string;
+export type WorkPackageDigest8 = string;
+export type CaseId37 = string;
+/**
+ * @minItems 1
+ * @maxItems 256
+ */
+export type Checks2 = [ProofCheck, ...ProofCheck[]];
+export type CheckId2 = string;
+export type Critical = boolean;
+export type FlowId = string;
+export type InputDigest3 = string;
+export type Kind14 =
+  "baseline" | "candidate" | "scenario" | "domain_rule" | "security" | "mutation" | "payment" | "isolation" | "exit";
+export type OwnerRole2 = string;
+export type RequiredEvidenceClass =
+  | "scripted"
+  | "component_offline"
+  | "real_model"
+  | "real_provider"
+  | "real_payment"
+  | "isolation_qualified"
+  | "merchant_exit";
+export type RequiredSchema = string;
+export type RequiredTrust = "collector_observed" | "deterministic_result";
+/**
+ * @maxItems 256
+ */
+export type RuleIds = string[];
+export type SubjectManifestDigest1 = string;
+export type SubjectManifestRef1 = string;
+export type CreatedAt18 = string;
+export type ApprovalDigest = string;
+export type ApprovalRef = string;
+export type CheckId3 = string;
+export type Reason3 = string;
+/**
+ * @maxItems 256
+ */
+export type Exclusions = ProofExclusion[];
+export type ExpiresAt15 = string;
+export type Generation27 = number;
+export type PlanDigest8 = string;
+export type PlanId2 = string;
+export type PolicyDigest11 = string;
+export type RunId30 = string;
+export type ScopeDigest11 = string;
+export type WorkPackageDigest9 = string;
+export type CaseId38 = string;
+export type CheckedAt17 = string;
+export type Generation28 = number;
+export type Outcome8 = "ready" | "partial" | "hold";
+export type PlanDigest9 = string;
+export type PlanRef1 = string;
+export type PolicyDigest12 = string;
+/**
+ * @minItems 1
+ * @maxItems 256
+ */
+export type ReasonCodes1 = [
+  (
+    | "VERIFIED"
+    | "MISSING"
+    | "AUTHENTICATION"
+    | "INVALID"
+    | "SUBJECT_MISMATCH"
+    | "STALE"
+    | "INVENTORY_MISMATCH"
+    | "EXCLUDED"
+    | "FAILED"
+    | "UNKNOWN"
+    | "UNSUPPORTED"
+  ),
+  ...(
+    | "VERIFIED"
+    | "MISSING"
+    | "AUTHENTICATION"
+    | "INVALID"
+    | "SUBJECT_MISMATCH"
+    | "STALE"
+    | "INVENTORY_MISMATCH"
+    | "EXCLUDED"
+    | "FAILED"
+    | "UNKNOWN"
+    | "UNSUPPORTED"
+  )[]
+];
+export type ResultDigest1 = string;
+export type ResultId1 = string;
+/**
+ * @minItems 1
+ * @maxItems 256
+ */
+export type Results = [ProofCheckResult, ...ProofCheckResult[]];
+export type CheckId4 = string;
+/**
+ * @maxItems 256
+ */
+export type EvidenceRefs29 = string[];
+export type ReasonCode6 =
+  | "VERIFIED"
+  | "MISSING"
+  | "AUTHENTICATION"
+  | "INVALID"
+  | "SUBJECT_MISMATCH"
+  | "STALE"
+  | "INVENTORY_MISMATCH"
+  | "EXCLUDED"
+  | "FAILED"
+  | "UNKNOWN"
+  | "UNSUPPORTED";
+export type State14 = "verified" | "missing" | "failed" | "unknown" | "unsupported" | "excluded";
+export type SubjectManifestDigest2 = string;
+export type SubjectManifestRef2 = string;
+export type RunId31 = string;
+export type ScopeDigest12 = string;
+export type WorkPackageDigest10 = string;
 export type EquivalentDropped1 = number;
 export type Killed2 = number;
 export type Score1 = number;
 export type Total = number;
-export type CaseId32 = string;
+export type CaseId39 = string;
 export type ContinuationRef2 = string;
-export type ExpiresAt13 = string;
+export type ExpiresAt16 = string;
 export type IntentId = string;
 export type ProviderId3 = string;
 export type Purpose7 = "read_connect" | "apply_connect";
@@ -2383,10 +2754,10 @@ export type ResourceId4 = string | null;
 export type AccountId2 = string | null;
 export type AdapterVersion1 = string;
 export type ProviderId4 = string;
-export type EvidenceRef = string;
+export type EvidenceRef2 = string;
 export type Name5 = string;
 export type Value1 = string;
-export type CheckedAt14 = string;
+export type CheckedAt18 = string;
 export type EvidenceClass2 =
   | "scripted"
   | "component_offline"
@@ -2402,7 +2773,7 @@ export type Integrity = "verified" | "unverified" | "invalid" | "unknown";
 export type Limitations1 = string[];
 export type PublicId = string;
 export type ScopeText = string;
-export type EvidenceRef1 = string;
+export type EvidenceRef3 = string;
 export type Name6 = string;
 export type Value2 = string;
 /**
@@ -2477,8 +2848,8 @@ export type Status14 = number | null;
 export type TMs1 = number;
 export type Url = string;
 export type Exchanges = RawExchange[];
-export type GraftId16 = string;
-export type RunId25 = string;
+export type GraftId17 = string;
+export type RunId32 = string;
 export type ScenarioId1 = string;
 export type Confidence = number;
 export type Compose = string;
@@ -2510,7 +2881,7 @@ export type AffectedEffectRefs = string[];
  * @maxItems 256
  */
 export type BaselineRefs = string[];
-export type CaseId33 = string;
+export type CaseId40 = string;
 export type ChosenRoute = "code_cutback" | "config_cutback" | "forward_repair" | "safe_hold";
 /**
  * @maxItems 256
@@ -2521,8 +2892,8 @@ export type CompensatableEffects = string[];
  */
 export type IrreversibleEffects = string[];
 export type OriginalTransactionRoutesRef = string;
-export type PlanDigest8 = string;
-export type PlanId2 = string;
+export type PlanDigest10 = string;
+export type PlanId3 = string;
 /**
  * @maxItems 256
  */
@@ -2542,8 +2913,8 @@ export type UnknownEffects = string[];
  */
 export type VerificationCaseRefs = string[];
 export type Enabled1 = boolean;
-export type Kind14 = string;
-export type ReasonCode5 = string | null;
+export type Kind15 = string;
+export type ReasonCode7 = string | null;
 /**
  * @maxItems 256
  */
@@ -2552,7 +2923,7 @@ export type ResourceIds3 = string[];
  * @maxItems 256
  */
 export type AcceptanceRuleIds = string[];
-export type FlowId = string;
+export type FlowId1 = string;
 export type Limitation2 = string | null;
 /**
  * @maxItems 256
@@ -2568,7 +2939,7 @@ export type ScenarioRefs = string[];
  * @maxItems 256
  */
 export type AcceptanceRuleIds1 = string[];
-export type FlowId1 = string;
+export type FlowId2 = string;
 export type Limitation3 = string | null;
 /**
  * @maxItems 256
@@ -2585,8 +2956,8 @@ export type ScenarioRefs1 = string[];
  */
 export type Flows = RequiredFlow[];
 export type DeliveryRoute1 = "git_protected" | "direct_artifact";
-export type CaseId34 = string;
-export type CheckedAt15 = string;
+export type CaseId41 = string;
+export type CheckedAt19 = string;
 /**
  * @maxItems 256
  */
@@ -2595,13 +2966,13 @@ export type EffectId2 = string;
 export type EnvironmentId3 = string;
 export type ObservedArtifactDigest1 = string | null;
 export type ObservedConfigDigest1 = string | null;
-export type Outcome7 = "pending" | "verified" | "failed" | "unknown";
+export type Outcome9 = "pending" | "verified" | "failed" | "unknown";
 export type Provider1 = string;
 export type ProviderDeployId1 = string | null;
 export type ProviderStatus1 = string;
 export type ResourceId5 = string;
 export type SubmittedArtifactDigest1 = string;
-export type CaseId35 = string;
+export type CaseId42 = string;
 /**
  * @maxItems 256
  */
@@ -2609,7 +2980,7 @@ export type CleanupItems1 = ExitItem[];
 export type ExitId1 = string;
 export type LegacyObligationsRef2 = string;
 export type MerchantAssetsRef1 = string;
-export type Outcome8 = "complete" | "pending" | "failed_safe" | "unknown";
+export type Outcome10 = "complete" | "pending" | "failed_safe" | "unknown";
 /**
  * @maxItems 256
  */
@@ -2618,7 +2989,7 @@ export type PersistentRuntimeEvidenceRefs1 = string[];
  * @maxItems 256
  */
 export type PostDenialObservationRefs1 = string[];
-export type RunId26 = string;
+export type RunId33 = string;
 export type TemporaryAssetsRef1 = string;
 export type AllowedRestartCount1 = number;
 /**
@@ -2626,42 +2997,42 @@ export type AllowedRestartCount1 = number;
  */
 export type AuthorityRefs4 = string[];
 export type BudgetRef4 = string;
-export type CaseId36 = string;
+export type CaseId43 = string;
 /**
  * @maxItems 256
  */
 export type CriteriaRefs1 = string[];
 export type Deadline4 = string;
-export type EvidenceReadAuthorityRef1 = string;
-export type ExecutorIdentityRef1 = string;
+export type EvidenceReadAuthorityRef2 = string;
+export type ExecutorIdentityRef2 = string;
 export type ExitPlanId1 = string;
 export type FailureRouteRef1 = string;
-export type FinalArtifactDigest2 = string;
-export type FinalConfigDigest2 = string;
-export type Generation23 = number;
-export type PlanDigest9 = string;
+export type FinalArtifactDigest3 = string;
+export type FinalConfigDigest3 = string;
+export type Generation29 = number;
+export type PlanDigest11 = string;
 export type PrivateEvidenceDestinationRef1 = string;
 export type RecoveryPlanRef4 = string;
-export type ReservationRef2 = string;
-export type RunId27 = string;
-export type StateDigest1 = string;
-export type TrustedCodeDigest1 = string;
+export type ReservationRef3 = string;
+export type RunId34 = string;
+export type StateDigest2 = string;
+export type TrustedCodeDigest2 = string;
 /**
  * @maxItems 256
  */
 export type Assets1 = Asset[];
-export type CaseId37 = string;
-export type FinalArtifactDigest3 = string;
-export type FinalConfigDigest3 = string;
+export type CaseId44 = string;
+export type FinalArtifactDigest4 = string;
+export type FinalConfigDigest4 = string;
 export type LegacyObligationsRef3 = string;
 export type ManifestDigest1 = string;
 export type ManifestId1 = string;
-export type RunId28 = string;
-export type CheckedAt16 = string;
+export type RunId35 = string;
+export type CheckedAt20 = string;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs29 = string[];
+export type EvidenceRefs30 = string[];
 export type Predicate2 = "can_review" | "can_prepare_apply" | "can_submit_slot" | "upgrade_verified" | "exit_complete";
 export type SlotId5 = string | null;
 export type Status15 = "pass" | "missing" | "stale" | "failed" | "unknown";
@@ -2671,15 +3042,15 @@ export type SubjectDigest2 = string;
  */
 export type PredicateResults = PredicateResult[];
 export type ActionPlanRef1 = string;
-export type CaseId38 = string;
+export type CaseId45 = string;
 /**
  * @maxItems 256
  */
 export type ExpectedVersionRefs = string[];
 export type LeaseUntil1 = string;
 export type ReservationId = string;
-export type RunId29 = string;
-export type State13 = "held" | "reconciling" | "releasable" | "released";
+export type RunId36 = string;
+export type State15 = "held" | "reconciling" | "releasable" | "released";
 /**
  * @maxItems 256
  */
@@ -2691,30 +3062,30 @@ export type UnresolvedEffectRefs = string[];
 export type ActionPlanRef2 = string | null;
 export type ApprovalSetRef1 = string | null;
 export type CancellationRef1 = string | null;
-export type CaseId39 = string;
-export type CheckedAt17 = string;
+export type CaseId46 = string;
+export type CheckedAt21 = string;
 /**
  * @maxItems 256
  */
 export type CurrentEvidenceRefs1 = string[];
 export type DeploymentRef1 = string | null;
-export type ExitManifestRef1 = string | null;
-export type ExitPlanRef3 = string | null;
+export type ExitManifestRef2 = string | null;
+export type ExitPlanRef5 = string | null;
 export type FinalAssetManifestRef1 = string | null;
-export type Generation24 = number;
+export type Generation30 = number;
 export type GraphRef3 = string;
 export type LifecycleRef1 = string;
 /**
  * @maxItems 256
  */
 export type PendingEffectRefs1 = string[];
-export type ReservationRef3 = string | null;
+export type ReservationRef4 = string | null;
 export type ReviewRef1 = string | null;
-export type RunId30 = string;
+export type RunId37 = string;
 export type StateCutoverRef1 = string | null;
 export type StateVersion4 = number;
 export type AdmissionRef = string;
-export type CaseId40 = string;
+export type CaseId47 = string;
 export type CutoverId = string;
 /**
  * @maxItems 256
@@ -2723,23 +3094,23 @@ export type DrainEvidenceRefs = string[];
 /**
  * @maxItems 256
  */
-export type EvidenceRefs30 = string[];
+export type EvidenceRefs31 = string[];
 export type ExportManifestRef = string;
-export type Generation25 = number;
+export type Generation31 = number;
 export type HandlerInventoryRef = string;
 export type HighWaterRef = string;
 export type IngressRef = string;
 export type OriginRouteRef = string;
-export type Outcome9 = "prepared" | "fenced" | "exported" | "restored" | "replayed" | "verified" | "held" | "unknown";
+export type Outcome11 = "prepared" | "fenced" | "exported" | "restored" | "replayed" | "verified" | "held" | "unknown";
 /**
  * @maxItems 256
  */
 export type PendingExternalEffectRefs = string[];
 export type ReplayManifestRef = string;
 export type RestoreManifestRef = string;
-export type RunId31 = string;
+export type RunId38 = string;
 export type SchemaDigest = string;
-export type StateDigest2 = string;
+export type StateDigest3 = string;
 export type WriterInventoryRef = string;
 export type ApprovedAt = string;
 export type AuthorityBasis = "provider_verified" | "controller_attested";
@@ -2748,8 +3119,8 @@ export type AuthorityBasis = "provider_verified" | "controller_attested";
  */
 export type AuthorityEvidenceRefs = string[];
 export type BindingId = string;
-export type CaseId41 = string;
-export type CheckedAt18 = string;
+export type CaseId48 = string;
+export type CheckedAt22 = string;
 export type ControllerId2 = string;
 export type Epoch = number;
 /**
@@ -2765,22 +3136,22 @@ export type Role1 = "requester" | "controller" | "reviewer";
 export type Recipients2 = ResourceRecipient[];
 export type RelationDigest = string;
 export type RequesterId3 = string;
-export type RevokedAt2 = string | null;
+export type RevokedAt3 = string | null;
 export type EdgeId = string;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs31 = string[];
+export type EvidenceRefs32 = string[];
 export type FromNode = string;
 export type Relation = "builds_from" | "routes_to" | "stores_state_in" | "receives_callback_from" | "depends_on";
 export type RequiredForScope2 = boolean;
 export type ToNode = string;
-export type CaseId42 = string;
+export type CaseId49 = string;
 export type EdgeId1 = string;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs32 = string[];
+export type EvidenceRefs33 = string[];
 export type FromNode1 = string;
 export type Relation1 = "builds_from" | "routes_to" | "stores_state_in" | "receives_callback_from" | "depends_on";
 export type RequiredForScope3 = boolean;
@@ -2799,13 +3170,13 @@ export type EnvironmentId4 = string | null;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs33 = string[];
-export type Kind15 =
+export type EvidenceRefs34 = string[];
+export type Kind16 =
   "source" | "frontend" | "backend" | "datastore" | "callback" | "scheduled_job" | "external_service" | "artifact";
 export type NodeId5 = string;
 export type ProviderResourceId = string | null;
 export type RequiredForScope4 = boolean;
-export type Kind16 = "git_commit" | "provider_revision_set" | "capture";
+export type Kind17 = "git_commit" | "provider_revision_set" | "capture";
 export type Value3 = string;
 /**
  * @maxItems 256
@@ -2819,8 +3190,8 @@ export type EnvironmentId5 = string | null;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs34 = string[];
-export type Kind17 =
+export type EvidenceRefs35 = string[];
+export type Kind18 =
   "source" | "frontend" | "backend" | "datastore" | "callback" | "scheduled_job" | "external_service" | "artifact";
 export type NodeId6 = string;
 export type ProviderResourceId1 = string | null;
@@ -2842,7 +3213,7 @@ export type PermittedActions1 = string[];
 export type ReadScopeText1 = string;
 export type SourceSnapshotRef3 = string | null;
 export type ExpectedStateVersion1 = number;
-export type ScopeDigest7 = string;
+export type ScopeDigest13 = string;
 export type ArtifactDigest4 = string;
 /**
  * @maxItems 256
@@ -2854,8 +3225,8 @@ export type BundleId1 = string;
  * @maxItems 256
  */
 export type CandidateSnapshotRefs1 = string[];
-export type CaseId43 = string;
-export type CreatedAt18 = string;
+export type CaseId50 = string;
+export type CreatedAt19 = string;
 /**
  * @maxItems 256
  */
@@ -2868,7 +3239,7 @@ export type MissingEvidenceRefs1 = string[];
 export type PatchDigest3 = string;
 export type ProposedApplyPlanRef1 = string;
 export type RecoveryPlanRef5 = string;
-export type RunId32 = string;
+export type RunId39 = string;
 /**
  * @maxItems 256
  */
@@ -2881,7 +3252,7 @@ export type SecurityResultRefs1 = string[];
  * @maxItems 256
  */
 export type UnsupportedPaths1 = string[];
-export type WorkPackageDigest5 = string;
+export type WorkPackageDigest11 = string;
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "Lens".
@@ -2921,18 +3292,18 @@ export type Id17 = string;
 export type Predicate3 = string;
 export type Title3 = string;
 export type CancellationRef2 = string | null;
-export type CaseId44 = string;
-export type Generation26 = number;
+export type CaseId51 = string;
+export type Generation32 = number;
 export type LastEventSeq2 = number;
-export type RunId33 = string;
+export type RunId40 = string;
 export type StateVersion5 = number;
 export type Attempt4 = number;
-export type CaseId45 = string;
+export type CaseId52 = string;
 export type CheckpointRef1 = string | null;
-export type CreatedAt19 = string;
+export type CreatedAt20 = string;
 export type Deadline5 = string;
-export type Generation27 = number;
-export type InputDigest3 = string;
+export type Generation33 = number;
+export type InputDigest4 = string;
 export type LeaseEpoch3 = number;
 export type LeaseOwner1 = string | null;
 export type LeaseUntil2 = string | null;
@@ -2942,13 +3313,13 @@ export type NextWakeAt2 = string | null;
  * @maxItems 256
  */
 export type OutputRefs3 = string[];
-export type PolicyDigest7 = string;
+export type PolicyDigest13 = string;
 export type PolicyRef1 = string;
 export type PromptDigest1 = string;
 export type PromptRef1 = string;
 export type RequestId8 = string;
-export type RunId34 = string;
-export type State14 =
+export type RunId41 = string;
+export type State16 =
   | "pending"
   | "ready"
   | "leased"
@@ -2972,8 +3343,8 @@ export type Seed1 = string;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs35 = string[];
-export type ReasonCode6 = string;
+export type EvidenceRefs36 = string[];
+export type ReasonCode8 = string;
 export type RunRef2 = string;
 export type FlakeFreeRuns = number;
 export type PassesOnOld = boolean;
@@ -3001,8 +3372,8 @@ export type ScenarioFamily =
 export type Id18 = string;
 export type Rules1 = string[];
 export type Steps1 = (DriverStep | ApiStep | MockStep)[];
-export type CreatedAt20 = string;
-export type GraftId17 = string;
+export type CreatedAt21 = string;
+export type GraftId18 = string;
 export type Id19 = string;
 export type Id20 = string;
 export type Rules2 = string[];
@@ -3030,14 +3401,14 @@ export type Command = string;
 export type MaxBytes1 = number;
 export type Path2 = string;
 export type SnapshotRef1 = string;
-export type Kind18 = "git_commit" | "provider_revision_set" | "capture";
+export type Kind19 = "git_commit" | "provider_revision_set" | "capture";
 export type Value4 = string;
 /**
  * @maxItems 256
  */
 export type AuthorityBindingRefs = string[];
 export type CapturedAt = string;
-export type CaseId46 = string;
+export type CaseId53 = string;
 export type Completeness = "complete_for_declared_scope" | "incomplete" | "unknown";
 export type FileCount = number;
 export type ManifestDigest2 = string;
@@ -3049,19 +3420,19 @@ export type SourceResourceId = string | null;
 export type TotalBytes = number;
 export type Name8 = string;
 export type Attempt5 = number;
-export type EvidenceRefs36 = string[];
+export type EvidenceRefs37 = string[];
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "StageName".
  */
 export type StageName = Stage | ("LANE_NO_CODE" | "LANE_NO_RUNTIME" | "LANE_MAP_ONLY");
-export type GraftId18 = string;
-export type Reason2 = string;
+export type GraftId19 = string;
+export type Reason4 = string;
 export type ActionId2 = string;
 export type ReadinessDigest4 = string;
 export type ReadinessId4 = string;
 export type AdmissionRef1 = string;
-export type CaseId47 = string;
+export type CaseId54 = string;
 export type CutoverId1 = string;
 /**
  * @maxItems 256
@@ -3070,30 +3441,30 @@ export type DrainEvidenceRefs1 = string[];
 /**
  * @maxItems 256
  */
-export type EvidenceRefs37 = string[];
+export type EvidenceRefs38 = string[];
 export type ExportManifestRef1 = string;
-export type Generation28 = number;
+export type Generation34 = number;
 export type HandlerInventoryRef1 = string;
 export type HighWaterRef1 = string;
 export type IngressRef1 = string;
 export type OriginRouteRef1 = string;
-export type Outcome10 = "prepared" | "fenced" | "exported" | "restored" | "replayed" | "verified" | "held" | "unknown";
+export type Outcome12 = "prepared" | "fenced" | "exported" | "restored" | "replayed" | "verified" | "held" | "unknown";
 /**
  * @maxItems 256
  */
 export type PendingExternalEffectRefs1 = string[];
 export type ReplayManifestRef1 = string;
 export type RestoreManifestRef1 = string;
-export type RunId35 = string;
+export type RunId42 = string;
 export type SchemaDigest1 = string;
-export type StateDigest3 = string;
+export type StateDigest4 = string;
 export type WriterInventoryRef1 = string;
 export type RunRef3 = string;
-export type AuthenticityRef3 = string;
-export type CaseId48 = string;
+export type AuthenticityRef5 = string;
+export type CaseId55 = string;
 export type CollectorIdentityRef1 = string;
 export type DerivationId = string;
-export type Generation29 = number;
+export type Generation35 = number;
 export type Operation7 = "candidate_patch" | "artifact_build" | "evidence_derivation";
 /**
  * @maxItems 256
@@ -3106,19 +3477,19 @@ export type OutputSubject = string;
 export type ParentRefs = string[];
 export type ParentSubject = string;
 export type RecipeOrPatchDigest = string;
-export type RunId36 = string;
+export type RunId43 = string;
 export type TaskId6 = string;
 export type ConfigDigest3 = string | null;
 export type OciManifestDigest1 = string | null;
 export type RuntimeProfileDigest4 = string;
-export type ScopeDigest8 = string;
+export type ScopeDigest14 = string;
 /**
  * @maxItems 256
  */
 export type SourceSnapshotRefs3 = string[];
 export type SourceTreeDigest1 = string | null;
-export type ExpiresAt14 = string;
-export type GraftId19 = string;
+export type ExpiresAt17 = string;
+export type GraftId20 = string;
 export type OriginRules = string[];
 export type Signature4 = string;
 export type StagePct1 = 0 | 1 | 10 | 50 | 100;
@@ -3159,15 +3530,15 @@ export type TargetExperience1 =
   "V6" | "ORDERS_V2" | "WEBHOOKS" | "VAULT" | "PAY_LATER_MSG" | "PLACEMENT" | "AGENT_READY_CHECK";
 export type TargetExperience = TargetExperience1[];
 export type ActionPlanRef3 = string;
-export type CaseId49 = string;
+export type CaseId56 = string;
 /**
  * @maxItems 256
  */
 export type ExpectedVersionRefs1 = string[];
 export type LeaseUntil3 = string;
 export type ReservationId1 = string;
-export type RunId37 = string;
-export type State15 = "held" | "reconciling" | "releasable" | "released";
+export type RunId44 = string;
+export type State17 = "held" | "reconciling" | "releasable" | "released";
 /**
  * @maxItems 256
  */
@@ -3185,15 +3556,15 @@ export type BudgetReservationRefs = string[];
  */
 export type CommittedMessageRefs = string[];
 export type ContextDigest1 = string;
-export type CreatedAt21 = string;
-export type Generation30 = number;
+export type CreatedAt22 = string;
+export type Generation36 = number;
 /**
  * @maxItems 24
  */
 export type InvocationRefs = string[];
 export type LeaseEpoch4 = number;
 export type NextStep1 = "model_turn" | "await_tool" | "validate_output";
-export type PolicyDigest8 = string;
+export type PolicyDigest14 = string;
 /**
  * @maxItems 256
  */
@@ -3206,7 +3577,7 @@ export type WakeConditionRef2 = string | null;
  */
 export type AllowedToolIds2 = string[];
 export type BudgetRef5 = string;
-export type CaseId50 = string;
+export type CaseId57 = string;
 export type CheckpointRef2 = string | null;
 export type Deadline6 = string;
 /**
@@ -3214,7 +3585,7 @@ export type Deadline6 = string;
  */
 export type ExpectedSchemas1 = string[];
 export type ExpectedSubject2 = string;
-export type Generation31 = number;
+export type Generation37 = number;
 /**
  * @maxItems 256
  */
@@ -3256,14 +3627,14 @@ export type Role3 =
   | "Herald"
   | "Orchard Analyst"
   | "Sentinel";
-export type RunId38 = string;
+export type RunId45 = string;
 export type TaskRef = string;
-export type CaseId51 = string;
+export type CaseId58 = string;
 export type CausationId = string;
 export type CorrelationId = string;
 export type EventId1 = string;
-export type Generation32 = number;
-export type Kind19 =
+export type Generation38 = number;
+export type Kind20 =
   | "task_ready"
   | "task_changed"
   | "tool_observed"
@@ -3272,16 +3643,16 @@ export type Kind19 =
   | "timer_due"
   | "evidence_changed";
 export type OccurredAt1 = string;
-export type PayloadDigest2 = string;
+export type PayloadDigest4 = string;
 export type PayloadRef1 = string;
-export type RunId39 = string;
+export type RunId46 = string;
 export type Sequence1 = number;
 export type TaskId8 = string | null;
 export type ContextRef1 = string;
-export type Generation33 = number;
+export type Generation39 = number;
 export type LeaseEpoch6 = number;
 export type LeaseUntil4 = string;
-export type RunId40 = string;
+export type RunId47 = string;
 export type TaskId9 = string;
 export type TaskVersion = number;
 export type WorkerId = string;
@@ -3350,26 +3721,26 @@ export type ArgumentsDigest2 = string;
 export type ArgumentsRef2 = string;
 export type BudgetReservationRef1 = string;
 export type CapabilityRef = string;
-export type CaseId52 = string;
+export type CaseId59 = string;
 export type Deadline7 = string;
 export type EffectRef = string | null;
-export type Generation34 = number;
-export type InputDigest4 = string;
+export type Generation40 = number;
+export type InputDigest5 = string;
 export type InvocationId = string;
 export type LeaseEpoch7 = number;
 /**
  * @maxItems 256
  */
 export type ResultRefs = string[];
-export type RunId41 = string;
-export type State16 = "intended" | "submitted" | "observed" | "denied" | "failed" | "unknown";
+export type RunId48 = string;
+export type State18 = "intended" | "submitted" | "observed" | "denied" | "failed" | "unknown";
 export type TaskId11 = string;
 export type ToolId = string;
-export type CreatedAt22 = string;
-export type GraftId20 = string;
+export type CreatedAt23 = string;
+export type GraftId21 = string;
 export type Id22 = string;
 export type MutantIds1 = string[];
-export type Reason3 = string;
+export type Reason5 = string;
 export type RuleId = string;
 export type ScenarioIds1 = string[];
 /**
@@ -3383,46 +3754,46 @@ export type Items3 = Issue[];
 export type UploadSessionV1 =
   | {
       binding_epochs: BindingEpochs3;
-      case_id: CaseId53;
+      case_id: CaseId60;
       contributor_id: ContributorId;
-      created_at: CreatedAt23;
+      created_at: CreatedAt24;
       expected_manifest_digest: ExpectedManifestDigest2;
       expected_manifest_ref: ExpectedManifestRef;
       expected_total_bytes: ExpectedTotalBytes1;
-      expires_at: ExpiresAt15;
+      expires_at: ExpiresAt18;
       finalised_snapshot_ref: string;
       received_chunk_refs: ReceivedChunkRefs;
-      state: State17;
+      state: State19;
       upload_id: UploadId2;
     }
   | {
       binding_epochs: BindingEpochs3;
-      case_id: CaseId53;
+      case_id: CaseId60;
       contributor_id: ContributorId;
-      created_at: CreatedAt23;
+      created_at: CreatedAt24;
       expected_manifest_digest: ExpectedManifestDigest2;
       expected_manifest_ref: ExpectedManifestRef;
       expected_total_bytes: ExpectedTotalBytes1;
-      expires_at: ExpiresAt15;
+      expires_at: ExpiresAt18;
       finalised_snapshot_ref: null;
       received_chunk_refs: ReceivedChunkRefs;
-      state: State18;
+      state: State20;
       upload_id: UploadId2;
     };
-export type CaseId53 = string;
+export type CaseId60 = string;
 export type ContributorId = string;
-export type CreatedAt23 = string;
+export type CreatedAt24 = string;
 export type ExpectedManifestDigest2 = string;
 export type ExpectedManifestRef = string;
 export type ExpectedTotalBytes1 = number;
-export type ExpiresAt15 = string;
+export type ExpiresAt18 = string;
 /**
  * @maxItems 100000
  */
 export type ReceivedChunkRefs = string[];
-export type State17 = "finalised";
+export type State19 = "finalised";
 export type UploadId2 = string;
-export type State18 = "pending" | "receiving" | "cancelled" | "expired";
+export type State20 = "pending" | "receiving" | "cancelled" | "expired";
 export type DeltasApplied = string[];
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -3435,34 +3806,34 @@ export type Evidence = string[];
 export type Rule3 = string;
 export type RuleHits = RuleHit[];
 export type ScenarioId2 = string;
-export type CaseId54 = string;
+export type CaseId61 = string;
 export type ConditionId = string;
 export type DueAt = string | null;
 export type ExpectedDigest = string | null;
-export type ExpiresAt16 = string;
-export type Generation35 = number;
-export type Kind20 = "timer" | "task_result" | "authority" | "approval" | "counterpart" | "tool_reconcile";
+export type ExpiresAt19 = string;
+export type Generation41 = number;
+export type Kind21 = "timer" | "task_result" | "authority" | "approval" | "counterpart" | "tool_reconcile";
 export type MinimumVersion = number;
 export type Owner2 = string;
-export type RunId42 = string;
+export type RunId49 = string;
 export type SubjectRef1 = string;
 export type AcceptedAt2 = string;
 export type ActionId3 = string;
-export type CaseId55 = string;
+export type CaseId62 = string;
 export type ReadinessDigest5 = string;
 export type ReceiptRef1 = string;
 export type ResourceGraphDigest4 = string;
-export type ScopeDigest9 = string;
+export type ScopeDigest15 = string;
 export type SourceManifestDigest2 = string;
 export type WorkId4 = string;
-export type WorkPackageDigest6 = string;
+export type WorkPackageDigest12 = string;
 export type ActionId4 = string;
 export type CancelId1 = string;
-export type CaseId56 = string;
-export type Generation36 = number | null;
+export type CaseId63 = string;
+export type Generation42 = number | null;
 export type RequestedAt = string;
 export type RequestedBy = string;
-export type State19 = "intent_recorded" | "fenced" | "termination_pending" | "confirmed" | "unknown";
+export type State21 = "intent_recorded" | "fenced" | "termination_pending" | "confirmed" | "unknown";
 /**
  * @maxItems 256
  */
@@ -3470,7 +3841,7 @@ export type TerminationEvidenceRefs = string[];
 export type WorkId5 = string | null;
 export type AcquisitionExpiresAt = string;
 export type BaselineManifestDigest = string;
-export type CaseId57 = string;
+export type CaseId64 = string;
 export type Completeness1 = "sufficient_for_declared_static_scope" | "incomplete" | "unknown";
 export type ComponentsRef = string;
 export type CustodyPolicyDigest = string;
@@ -3486,7 +3857,7 @@ export type RequiredFlowRefs = string[];
 export type ResourceGraphDigest5 = string;
 export type ResourceGraphRef = string;
 export type RuntimeProfileDigest5 = string;
-export type ScopeDigest10 = string;
+export type ScopeDigest16 = string;
 /**
  * @maxItems 256
  */
@@ -3508,87 +3879,87 @@ export type WorkPackageId = string;
 export type WorkStatusV1 =
   | {
       action_id: ActionId5;
-      case_id: CaseId58;
-      checked_at: CheckedAt19;
-      evidence_refs: EvidenceRefs38;
-      generation: Generation37;
+      case_id: CaseId65;
+      checked_at: CheckedAt23;
+      evidence_refs: EvidenceRefs39;
+      generation: Generation43;
       last_event_seq: LastEventSeq3;
-      state: State20;
+      state: State22;
       work_id: WorkId6;
     }
   | {
       action_id: ActionId5;
-      case_id: CaseId58;
-      checked_at: CheckedAt19;
-      evidence_refs: EvidenceRefs38;
-      generation: Generation37;
-      last_event_seq: LastEventSeq3;
-      state: State21;
-      work_id: string;
-    }
-  | {
-      action_id: ActionId5;
-      case_id: CaseId58;
-      checked_at: CheckedAt19;
+      case_id: CaseId65;
+      checked_at: CheckedAt23;
       evidence_refs: EvidenceRefs39;
-      generation: number;
-      last_event_seq: LastEventSeq3;
-      state: State22;
-      work_id: string;
-    }
-  | {
-      action_id: ActionId5;
-      case_id: CaseId58;
-      checked_at: CheckedAt19;
-      evidence_refs: EvidenceRefs40;
-      generation: Generation37;
+      generation: Generation43;
       last_event_seq: LastEventSeq3;
       state: State23;
       work_id: string;
+    }
+  | {
+      action_id: ActionId5;
+      case_id: CaseId65;
+      checked_at: CheckedAt23;
+      evidence_refs: EvidenceRefs40;
+      generation: number;
+      last_event_seq: LastEventSeq3;
+      state: State24;
+      work_id: string;
+    }
+  | {
+      action_id: ActionId5;
+      case_id: CaseId65;
+      checked_at: CheckedAt23;
+      evidence_refs: EvidenceRefs41;
+      generation: Generation43;
+      last_event_seq: LastEventSeq3;
+      state: State25;
+      work_id: string;
     };
 export type ActionId5 = string;
-export type CaseId58 = string;
-export type CheckedAt19 = string;
+export type CaseId65 = string;
+export type CheckedAt23 = string;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs38 = string[];
-export type Generation37 = number | null;
+export type EvidenceRefs39 = string[];
+export type Generation43 = number | null;
 export type LastEventSeq3 = number;
-export type State20 = "submitting" | "held" | "unknown" | "cancellation_pending" | "cancelled" | "failed";
+export type State22 = "submitting" | "held" | "unknown" | "cancellation_pending" | "cancelled" | "failed";
 export type WorkId6 = string | null;
-export type State21 = "accepted" | "queued" | "provisioning";
-/**
- * @minItems 1
- * @maxItems 256
- */
-export type EvidenceRefs39 = [string, ...string[]];
-export type State22 = "operation_started";
+export type State23 = "accepted" | "queued" | "provisioning";
 /**
  * @minItems 1
  * @maxItems 256
  */
 export type EvidenceRefs40 = [string, ...string[]];
-export type State23 = "stopped";
+export type State24 = "operation_started";
+/**
+ * @minItems 1
+ * @maxItems 256
+ */
+export type EvidenceRefs41 = [string, ...string[]];
+export type State25 = "stopped";
 export type AssignmentDigest = string;
-export type AuthenticityRef4 = string;
+export type AuthenticityRef6 = string;
 /**
  * @maxItems 256
  */
-export type EvidenceRefs41 = string[];
-export type FinishedAt = string;
-export type Generation38 = number;
-export type Kind21 = "BASELINE_READ";
+export type EvidenceRefs42 = string[];
+export type FinishedAt1 = string;
+export type Generation44 = number;
+export type Kind22 = "BASELINE_READ";
 export type ObservedDigest = string;
 export type OperationId1 = string;
 export type ResourceGraphDigest6 = string;
 export type Result = "verified" | "failed";
 export type RuntimeProfileDigest6 = string;
-export type ScopeDigest11 = string;
+export type ScopeDigest17 = string;
 export type SourceManifestDigest3 = string;
-export type StartedAt = string;
+export type StartedAt1 = string;
 export type WorkId7 = string;
-export type WorkPackageDigest7 = string;
+export type WorkPackageDigest13 = string;
 export type WorkerId1 = string;
 
 export interface GoldGraftContracts {
@@ -3624,6 +3995,8 @@ export interface GoldGraftContracts {
   CaseSummaryV1: CaseSummaryV1;
   CaseViewV1: CaseViewV1;
   CertificateV1: CertificateV1;
+  CertificateV2: CertificateV2;
+  CertificateVerificationV1: CertificateVerificationV1;
   ChangeListV1: ChangeListV1;
   ChangeListV2: ChangeListV2;
   CheckResultV1: CheckResultV1;
@@ -3667,6 +4040,8 @@ export interface GoldGraftContracts {
   ExecutionRequestArgsV1: ExecutionRequestArgsV1;
   ExecutionStatusArgsV1: ExecutionStatusArgsV1;
   ExitCheckPlanV1: ExitCheckPlanV1;
+  ExitCheckResultV1: ExitCheckResultV1;
+  ExitEvidenceReconciliationV1: ExitEvidenceReconciliationV1;
   ExitItemV1: ExitItemV1;
   ExitManifestV1: ExitManifestV1;
   FinalisationPlanV1: FinalisationPlanV1;
@@ -3708,6 +4083,9 @@ export interface GoldGraftContracts {
   ProbeResultV1: ProbeResultV1;
   ProcessingDisclosureV1: ProcessingDisclosureV1;
   ProcessingRecipientV1: ProcessingRecipientV1;
+  PromotionDecisionV1: PromotionDecisionV1;
+  ProofPlanV1: ProofPlanV1;
+  ProofResultV1: ProofResultV1;
   ProofStrengthV1: ProofStrengthV1;
   ProviderIntentV1: ProviderIntentV1;
   ProviderRefV1: ProviderRefV1;
@@ -4583,13 +4961,55 @@ export interface Time {
   [k: string]: number;
 }
 /**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "CertificateGitSource".
+ */
+export interface CertificateGitSource {
+  branch: Branch1;
+  commit_new: CommitNew1;
+  commit_old: CommitOld1;
+  repository_ref: RepositoryRef;
+}
+export interface ResourceEpochs {
+  /**
+   * This interface was referenced by `ResourceEpochs`'s JSON-Schema definition
+   * via the `patternProperty` "^\S+$".
+   */
+  [k: string]: number;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "SignatureMaterial".
+ */
+export interface SignatureMaterial {
+  authenticity_ref: AuthenticityRef2;
+  signature_digest: SignatureDigest;
+  signature_ref: SignatureRef;
+  transparency_digest: TransparencyDigest;
+  transparency_ref: TransparencyRef;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "CertificateVerificationV1".
+ */
+export interface CertificateVerificationV1 {
+  case_id: CaseId18;
+  cert_id: CertId2;
+  checked_at: CheckedAt6;
+  qualification_scope: QualificationScope1;
+  qualification_state: QualificationState;
+  reason_codes: ReasonCodes;
+  run_id: RunId11;
+  signature_integrity: SignatureIntegrity;
+}
+/**
  * minimal v1, owner Aditya may extend
  *
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "ChangeListV1".
  */
 export interface ChangeListV1 {
-  branch: Branch1;
+  branch: Branch2;
   changes: Changes;
   created_at: CreatedAt6;
   graft_id: GraftId4;
@@ -4621,9 +5041,9 @@ export interface SnapshotChange {
  */
 export interface CheckResultV1 {
   check_id: CheckId1;
-  checked_at: CheckedAt6;
+  checked_at: CheckedAt7;
   evidence_refs: EvidenceRefs11;
-  expires_at: ExpiresAt8;
+  expires_at: ExpiresAt9;
   recovery_code: RecoveryCode1;
   status: Status6;
 }
@@ -4678,7 +5098,7 @@ export interface ClaimDraftV1 {
  */
 export interface CollectorAcceptanceV1 {
   accepted_at: AcceptedAt;
-  generation: Generation9;
+  generation: Generation10;
   operation_id: OperationId;
   receipt_ref: ReceiptRef;
   work_id: WorkId2;
@@ -4754,7 +5174,7 @@ export interface ConnectionChecks {
  */
 export interface ConnectionCaseV1 {
   binding_refs: BindingRefs1;
-  case_id: CaseId17;
+  case_id: CaseId19;
   created_at: CreatedAt8;
   graph_ref: GraphRef1;
   requester_id: RequesterId1;
@@ -4769,21 +5189,21 @@ export interface ConnectionCaseV1 {
 export interface ConnectionReadinessV1 {
   actor_id: ActorId2;
   binding_epochs: BindingEpochs1;
-  case_id: CaseId18;
+  case_id: CaseId20;
   checks: Checks1;
-  expires_at: ExpiresAt9;
+  expires_at: ExpiresAt10;
   fixture_profile_digest: FixtureProfileDigest1;
-  issued_at: IssuedAt4;
+  issued_at: IssuedAt5;
   processing_policy_digest: ProcessingPolicyDigest1;
   readiness_digest: ReadinessDigest2;
   readiness_id: ReadinessId2;
   resource_evidence_digests: ResourceEvidenceDigests1;
   resource_graph_digest: ResourceGraphDigest2;
   runtime_profile_digest: RuntimeProfileDigest2;
-  scope_digest: ScopeDigest4;
+  scope_digest: ScopeDigest5;
   source_manifest_digest: SourceManifestDigest1;
   source_snapshot_refs: SourceSnapshotRefs2;
-  work_package_digest: WorkPackageDigest2;
+  work_package_digest: WorkPackageDigest3;
   work_package_ref: WorkPackageRef2;
 }
 export interface BindingEpochs1 {
@@ -4854,9 +5274,9 @@ export interface ControlErrorV1 {
  * via the `definition` "ControllerInvitationV1".
  */
 export interface ControllerInvitationV1 {
-  case_id: CaseId19;
+  case_id: CaseId21;
   copy_url: CopyUrl;
-  expires_at: ExpiresAt10;
+  expires_at: ExpiresAt11;
   invitation_id: InvitationId;
   recipient_hint: RecipientHint;
   requester_id: RequesterId2;
@@ -4948,21 +5368,21 @@ export interface DeliverySnapshotV1 {
   action_plan_ref: ActionPlanRef;
   approval_set_ref: ApprovalSetRef;
   cancellation_ref: CancellationRef;
-  case_id: CaseId21;
-  checked_at: CheckedAt7;
+  case_id: CaseId23;
+  checked_at: CheckedAt8;
   current_evidence_refs: CurrentEvidenceRefs;
   deployment_ref: DeploymentRef;
   exit_manifest_ref: ExitManifestRef;
   exit_plan_ref: ExitPlanRef1;
   final_asset_manifest_ref: FinalAssetManifestRef;
-  generation: Generation11;
+  generation: Generation12;
   graph_ref: GraphRef2;
   issue: Issue | null;
   lifecycle_ref: LifecycleRef;
   pending_effect_refs: PendingEffectRefs;
   reservation_ref: ReservationRef;
   review_ref: ReviewRef;
-  run_id: RunId11;
+  run_id: RunId13;
   state_cutover_ref: StateCutoverRef;
   state_version: StateVersion3;
 }
@@ -5013,8 +5433,8 @@ export interface Dependency {
  * via the `definition` "DeploymentObservationV1".
  */
 export interface DeploymentObservationV1 {
-  case_id: CaseId22;
-  checked_at: CheckedAt8;
+  case_id: CaseId24;
+  checked_at: CheckedAt9;
   current_runtime_evidence_refs: CurrentRuntimeEvidenceRefs;
   effect_id: EffectId;
   environment_id: EnvironmentId1;
@@ -5060,7 +5480,7 @@ export interface DraftCaseV1 {
   continuation_ref: ContinuationRef1;
   created_at: CreatedAt11;
   draft_id: DraftId;
-  expires_at: ExpiresAt11;
+  expires_at: ExpiresAt12;
   shop_url: ShopUrl6;
   state: State6;
 }
@@ -5105,28 +5525,28 @@ export interface EffectIntentV1 {
   action_group_id: ActionGroupId1;
   actor_id: ActorId3;
   approval_set_id: ApprovalSetId1;
-  case_id: CaseId23;
+  case_id: CaseId25;
   created_at: CreatedAt12;
   effect_class: EffectClass1;
   effect_id: EffectId1;
   environment_id: EnvironmentId2;
   expected_version: ExpectedVersion;
-  generation: Generation12;
+  generation: Generation13;
   operation: Operation3;
   plan_digest: PlanDigest2;
   provider_idempotency_ref: ProviderIdempotencyRef;
   provider_receipt_ref: ProviderReceiptRef;
   reconciliation_ref: ReconciliationRef;
   request_digest: RequestDigest;
-  resource_epochs: ResourceEpochs;
+  resource_epochs: ResourceEpochs1;
   resource_id: ResourceId3;
-  run_id: RunId12;
+  run_id: RunId14;
   slot_id: SlotId2;
   state: State7;
 }
-export interface ResourceEpochs {
+export interface ResourceEpochs1 {
   /**
-   * This interface was referenced by `ResourceEpochs`'s JSON-Schema definition
+   * This interface was referenced by `ResourceEpochs1`'s JSON-Schema definition
    * via the `patternProperty` "^\S+$".
    */
   [k: string]: number;
@@ -5204,7 +5624,7 @@ export interface ExitCheckPlanV1 {
   allowed_restart_count: AllowedRestartCount;
   authority_refs: AuthorityRefs3;
   budget_ref: BudgetRef1;
-  case_id: CaseId24;
+  case_id: CaseId26;
   criteria_refs: CriteriaRefs;
   deadline: Deadline1;
   evidence_read_authority_ref: EvidenceReadAuthorityRef;
@@ -5213,14 +5633,116 @@ export interface ExitCheckPlanV1 {
   failure_route_ref: FailureRouteRef;
   final_artifact_digest: FinalArtifactDigest1;
   final_config_digest: FinalConfigDigest1;
-  generation: Generation13;
+  generation: Generation14;
   plan_digest: PlanDigest3;
   private_evidence_destination_ref: PrivateEvidenceDestinationRef;
   recovery_plan_ref: RecoveryPlanRef1;
   reservation_ref: ReservationRef1;
-  run_id: RunId13;
+  run_id: RunId15;
   state_digest: StateDigest;
   trusted_code_digest: TrustedCodeDigest;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ExitCheckResultV1".
+ */
+export interface ExitCheckResultV1 {
+  case_id: CaseId27;
+  evidence_read_authority_ref: EvidenceReadAuthorityRef1;
+  executor_identity_ref: ExecutorIdentityRef1;
+  exit_plan_digest: ExitPlanDigest;
+  exit_plan_ref: ExitPlanRef2;
+  final_artifact_digest: FinalArtifactDigest2;
+  final_config_digest: FinalConfigDigest2;
+  finished_at: FinishedAt;
+  generation: Generation15;
+  observations: Observations;
+  ordinary_denials: OrdinaryDenials;
+  outcome: Outcome5;
+  policy_digest: PolicyDigest5;
+  reservation_ref: ReservationRef2;
+  resource_epochs: ResourceEpochs2;
+  restart_count: RestartCount;
+  result_digest: ResultDigest;
+  result_id: ResultId;
+  run_id: RunId16;
+  scope_digest: ScopeDigest6;
+  signature: SignatureMaterial;
+  started_at: StartedAt;
+  state_digest: StateDigest1;
+  trusted_code_digest: TrustedCodeDigest1;
+  work_package_digest: WorkPackageDigest4;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ExitCriterionObservation".
+ */
+export interface ExitCriterionObservation {
+  criterion_ref: CriterionRef;
+  evidence_ref: EvidenceRef;
+  observed_at: ObservedAt;
+  payload_digest: PayloadDigest2;
+  state: State8;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "CapabilityDenial".
+ */
+export interface CapabilityDenial {
+  capability: Capability1;
+  denied_at: DeniedAt;
+  evidence_ref: EvidenceRef1;
+  payload_digest: PayloadDigest3;
+}
+export interface ResourceEpochs2 {
+  /**
+   * This interface was referenced by `ResourceEpochs2`'s JSON-Schema definition
+   * via the `patternProperty` "^\S+$".
+   */
+  [k: string]: number;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ExitEvidenceReconciliationV1".
+ */
+export interface ExitEvidenceReconciliationV1 {
+  authenticity_ref: AuthenticityRef3;
+  case_id: CaseId28;
+  checked_at: CheckedAt10;
+  evidence_read_receipt: ExitEvidenceReadReceipt;
+  exit_manifest_digest: ExitManifestDigest;
+  exit_manifest_ref: ExitManifestRef1;
+  exit_plan_digest: ExitPlanDigest1;
+  exit_plan_ref: ExitPlanRef3;
+  exit_result_digest: ExitResultDigest;
+  exit_result_ref: ExitResultRef;
+  generation: Generation16;
+  policy_digest: PolicyDigest6;
+  resource_epochs: ResourceEpochs3;
+  run_id: RunId17;
+  scope_digest: ScopeDigest7;
+  work_package_digest: WorkPackageDigest5;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ExitEvidenceReadReceipt".
+ */
+export interface ExitEvidenceReadReceipt {
+  authority_ref: AuthorityRef2;
+  disclosure_ref: DisclosureRef;
+  read_at: ReadAt;
+  read_digest: ReadDigest;
+  read_evidence_ref: ReadEvidenceRef;
+  revocation_digest: RevocationDigest;
+  revocation_ref: RevocationRef;
+  revoked_at: RevokedAt2;
+}
+export interface ResourceEpochs3 {
+  /**
+   * This interface was referenced by `ResourceEpochs3`'s JSON-Schema definition
+   * via the `patternProperty` "^\S+$".
+   */
+  [k: string]: number;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -5231,22 +5753,22 @@ export interface ExitItemV1 {
   item_id: ItemId;
   owner: Owner;
   required_for_exit: RequiredForExit;
-  state: State8;
+  state: State9;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "ExitManifestV1".
  */
 export interface ExitManifestV1 {
-  case_id: CaseId25;
+  case_id: CaseId29;
   cleanup_items: CleanupItems;
   exit_id: ExitId;
   legacy_obligations_ref: LegacyObligationsRef1;
   merchant_assets_ref: MerchantAssetsRef;
-  outcome: Outcome5;
+  outcome: Outcome6;
   persistent_runtime_evidence_refs: PersistentRuntimeEvidenceRefs;
   post_denial_observation_refs: PostDenialObservationRefs;
-  run_id: RunId14;
+  run_id: RunId18;
   temporary_assets_ref: TemporaryAssetsRef;
 }
 /**
@@ -5258,7 +5780,7 @@ export interface ExitItem {
   item_id: ItemId1;
   owner: Owner1;
   required_for_exit: RequiredForExit1;
-  state: State9;
+  state: State10;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -5266,16 +5788,16 @@ export interface ExitItem {
  */
 export interface FinalisationPlanV1 {
   candidate_change_required: CandidateChangeRequired;
-  case_id: CaseId26;
+  case_id: CaseId30;
   dependency_check_refs: DependencyCheckRefs;
   desired_asset_manifest_ref: DesiredAssetManifestRef;
   final_candidate_ref: FinalCandidateRef;
   finalisation_id: FinalisationId;
-  generation: Generation14;
+  generation: Generation17;
   independence_criteria_refs: IndependenceCriteriaRefs;
   plan_digest: PlanDigest4;
   required_action_slot_ids: RequiredActionSlotIds;
-  run_id: RunId15;
+  run_id: RunId19;
   validation_request_refs: ValidationRequestRefs;
 }
 /**
@@ -5461,7 +5983,7 @@ export interface JobResultV1 {
  * via the `definition` "JobRunnerIdentity".
  */
 export interface JobRunnerIdentity {
-  run_id: RunId16;
+  run_id: RunId20;
   sha: Sha1;
   workflow: Workflow1;
 }
@@ -5512,16 +6034,16 @@ export interface LaneChangeV1 {
 export interface LifecycleRunV1 {
   active_effect_refs: ActiveEffectRefs1;
   attempt: Attempt3;
-  case_id: CaseId27;
+  case_id: CaseId31;
   evidence_refs: EvidenceRefs22;
-  generation: Generation15;
+  generation: Generation18;
   resource_graph_digest: ResourceGraphDigest3;
-  run_id: RunId17;
-  scope_digest: ScopeDigest5;
+  run_id: RunId21;
+  scope_digest: ScopeDigest8;
   stage: Stage2;
   updated_at: UpdatedAt3;
   work_id: WorkId3;
-  work_package_digest: WorkPackageDigest3;
+  work_package_digest: WorkPackageDigest6;
   work_package_ref: WorkPackageRef3;
 }
 /**
@@ -5534,14 +6056,14 @@ export interface LifecycleWorkRequestV1 {
   deadline: Deadline2;
   expected_output_schema: ExpectedOutputSchema;
   forbidden_effect_codes: ForbiddenEffectCodes;
-  generation: Generation16;
+  generation: Generation19;
   input_artifact_refs: InputArtifactRefs;
   operation_kind: OperationKind;
   package_digest: PackageDigest1;
   package_ref: PackageRef;
-  policy_digest: PolicyDigest4;
+  policy_digest: PolicyDigest7;
   request_id: RequestId3;
-  run_id: RunId18;
+  run_id: RunId22;
   runtime_profile_digest: RuntimeProfileDigest3;
 }
 export interface AuthorityBindingEpochs1 {
@@ -5557,26 +6079,26 @@ export interface AuthorityBindingEpochs1 {
  */
 export interface LifecycleWorkRequestReceiptV1 {
   accepted_at: AcceptedAt1;
-  generation: Generation17;
+  generation: Generation20;
   request_digest: RequestDigest1;
   request_id: RequestId4;
-  run_id: RunId19;
+  run_id: RunId23;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "LifecycleWorkResultV1".
  */
 export interface LifecycleWorkResultV1 {
-  authenticity_ref: AuthenticityRef2;
+  authenticity_ref: AuthenticityRef4;
   completed_at: CompletedAt1;
   evidence_refs: EvidenceRefs23;
-  generation: Generation18;
+  generation: Generation21;
   inputs_digest: InputsDigest;
   limitation_codes: LimitationCodes;
-  outcome: Outcome6;
+  outcome: Outcome7;
   output_artifact_refs: OutputArtifactRefs;
   request_id: RequestId5;
-  run_id: RunId20;
+  run_id: RunId24;
   source_unchanged: SourceUnchanged;
   worker_identity_ref: WorkerIdentityRef;
 }
@@ -5644,7 +6166,7 @@ export interface ModelTurnRequestV1 {
   context_digest: ContextDigest;
   context_ref: ContextRef;
   deadline: Deadline3;
-  generation: Generation19;
+  generation: Generation22;
   input_token_cap: InputTokenCap;
   lease_epoch: LeaseEpoch2;
   model_profile_ref: ModelProfileRef1;
@@ -5668,10 +6190,10 @@ export interface ToolCall {
  * via the `definition` "ModelTurnStatusV1".
  */
 export interface ModelTurnStatusV1 {
-  checked_at: CheckedAt9;
+  checked_at: CheckedAt11;
   issue: Issue | null;
   result_ref: ResultRef;
-  state: State10;
+  state: State11;
   task_id: TaskId5;
   turn_id: TurnId2;
   usage_receipt_ref: UsageReceiptRef1;
@@ -5792,10 +6314,10 @@ export interface P5ProblemV1 {
  * via the `definition` "PendingResultV1".
  */
 export interface PendingResultV1 {
-  checked_at: CheckedAt10;
+  checked_at: CheckedAt12;
   evidence_refs: EvidenceRefs27;
   request_id: RequestId7;
-  state: State11;
+  state: State12;
 }
 /**
  * Untrusted seed/extension proposal; full dependency resolution requires admission.
@@ -5804,11 +6326,11 @@ export interface PendingResultV1 {
  * via the `definition` "PlanProposalV1".
  */
 export interface PlanProposalV1 {
-  case_id: CaseId28;
-  generation: Generation20;
+  case_id: CaseId32;
+  generation: Generation23;
   parent_request_id: ParentRequestId;
   reason_refs: ReasonRefs;
-  run_id: RunId21;
+  run_id: RunId25;
   tasks: Tasks;
 }
 /**
@@ -5816,7 +6338,7 @@ export interface PlanProposalV1 {
  * via the `definition` "PredicateResultV1".
  */
 export interface PredicateResultV1 {
-  checked_at: CheckedAt11;
+  checked_at: CheckedAt13;
   evidence_refs: EvidenceRefs28;
   predicate: Predicate1;
   slot_id: SlotId4;
@@ -5843,13 +6365,13 @@ export interface ApprovalSet {
   approval_refs: ApprovalRefs1;
   approval_set_id: ApprovalSetId2;
   authority_epochs: AuthorityEpochs1;
-  case_id: CaseId29;
-  checked_at: CheckedAt12;
-  generation: Generation21;
+  case_id: CaseId33;
+  checked_at: CheckedAt14;
+  generation: Generation24;
   plan_digest: PlanDigest6;
   required_controller_ids: RequiredControllerIds3;
-  run_id: RunId22;
-  state: State12;
+  run_id: RunId26;
+  state: State13;
 }
 export interface AuthorityEpochs1 {
   /**
@@ -5868,7 +6390,7 @@ export interface ReviewBundle {
   bundle_digest: BundleDigest;
   bundle_id: BundleId;
   candidate_snapshot_refs: CandidateSnapshotRefs;
-  case_id: CaseId30;
+  case_id: CaseId34;
   created_at: CreatedAt17;
   domain_rule_result_refs: DomainRuleResultRefs;
   effective_config_digest: EffectiveConfigDigest;
@@ -5876,11 +6398,11 @@ export interface ReviewBundle {
   patch_digest: PatchDigest2;
   proposed_apply_plan_ref: ProposedApplyPlanRef;
   recovery_plan_ref: RecoveryPlanRef2;
-  run_id: RunId23;
+  run_id: RunId27;
   scenario_result_refs: ScenarioResultRefs;
   security_result_refs: SecurityResultRefs;
   unsupported_paths: UnsupportedPaths;
-  work_package_digest: WorkPackageDigest4;
+  work_package_digest: WorkPackageDigest7;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -5888,19 +6410,19 @@ export interface ReviewBundle {
  */
 export interface ActionPlan {
   budget_ref: BudgetRef3;
-  case_id: CaseId31;
-  exit_plan_ref: ExitPlanRef2;
-  expires_at: ExpiresAt12;
+  case_id: CaseId35;
+  exit_plan_ref: ExitPlanRef4;
+  expires_at: ExpiresAt13;
   finalisation_plan_ref: FinalisationPlanRef1;
-  generation: Generation22;
+  generation: Generation25;
   graph_digest: GraphDigest2;
   plan_digest: PlanDigest7;
   plan_id: PlanId1;
-  policy_digest: PolicyDigest5;
+  policy_digest: PolicyDigest8;
   recovery_plan_ref: RecoveryPlanRef3;
-  review_bundle_digest: ReviewBundleDigest1;
-  run_id: RunId24;
-  scope_digest: ScopeDigest6;
+  review_bundle_digest: ReviewBundleDigest2;
+  run_id: RunId28;
+  scope_digest: ScopeDigest9;
   slots: Slots1;
   state_plan_ref: StatePlanRef1;
 }
@@ -5920,10 +6442,10 @@ export interface ProbeResultV1 {
  * via the `definition` "ProcessingDisclosureV1".
  */
 export interface ProcessingDisclosureV1 {
-  checked_at: CheckedAt13;
+  checked_at: CheckedAt15;
   copy_scope: CopyScope1;
   limits: Limits1;
-  policy_digest: PolicyDigest6;
+  policy_digest: PolicyDigest9;
   recipients: Recipients1;
   status: Status13;
 }
@@ -5940,6 +6462,142 @@ export interface ProcessingRecipientV1 {
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "PromotionDecisionV1".
+ */
+export interface PromotionDecisionV1 {
+  action: Action;
+  advice: HealDecision;
+  advice_digest: AdviceDigest;
+  case_id: CaseId36;
+  checked_at: CheckedAt16;
+  expires_at: ExpiresAt14;
+  generation: Generation26;
+  policy_digest: PolicyDigest10;
+  proof_plan_digest: ProofPlanDigest1;
+  proof_result_digest: ProofResultDigest1;
+  proof_result_ref: ProofResultRef1;
+  reason_code: ReasonCode5;
+  resource_epochs: ResourceEpochs4;
+  run_id: RunId29;
+  scope_digest: ScopeDigest10;
+  work_package_digest: WorkPackageDigest8;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "HealDecision".
+ */
+export interface HealDecision {
+  action: HealAction;
+  from_stage_pct: FromStagePct1;
+  graft_id: GraftId16;
+  hard_stop?: HardStop1;
+  reason: Reason2;
+  stats: HealStats;
+  to_stage_pct: ToStagePct1;
+}
+export interface ResourceEpochs4 {
+  /**
+   * This interface was referenced by `ResourceEpochs4`'s JSON-Schema definition
+   * via the `patternProperty` "^\S+$".
+   */
+  [k: string]: number;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ProofPlanV1".
+ */
+export interface ProofPlanV1 {
+  case_id: CaseId37;
+  checks: Checks2;
+  created_at: CreatedAt18;
+  exclusions: Exclusions;
+  expires_at: ExpiresAt15;
+  generation: Generation27;
+  plan_digest: PlanDigest8;
+  plan_id: PlanId2;
+  policy_digest: PolicyDigest11;
+  resource_epochs: ResourceEpochs5;
+  run_id: RunId30;
+  scope_digest: ScopeDigest11;
+  work_package_digest: WorkPackageDigest9;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ProofCheck".
+ */
+export interface ProofCheck {
+  check_id: CheckId2;
+  critical: Critical;
+  flow_id: FlowId;
+  input_digest: InputDigest3;
+  kind: Kind14;
+  owner_role: OwnerRole2;
+  required_evidence_class: RequiredEvidenceClass;
+  required_schema: RequiredSchema;
+  required_trust: RequiredTrust;
+  rule_ids: RuleIds;
+  subject_manifest_digest: SubjectManifestDigest1;
+  subject_manifest_ref: SubjectManifestRef1;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ProofExclusion".
+ */
+export interface ProofExclusion {
+  approval_digest: ApprovalDigest;
+  approval_ref: ApprovalRef;
+  check_id: CheckId3;
+  reason: Reason3;
+}
+export interface ResourceEpochs5 {
+  /**
+   * This interface was referenced by `ResourceEpochs5`'s JSON-Schema definition
+   * via the `patternProperty` "^\S+$".
+   */
+  [k: string]: number;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ProofResultV1".
+ */
+export interface ProofResultV1 {
+  case_id: CaseId38;
+  checked_at: CheckedAt17;
+  generation: Generation28;
+  outcome: Outcome8;
+  plan_digest: PlanDigest9;
+  plan_ref: PlanRef1;
+  policy_digest: PolicyDigest12;
+  reason_codes: ReasonCodes1;
+  resource_epochs: ResourceEpochs6;
+  result_digest: ResultDigest1;
+  result_id: ResultId1;
+  results: Results;
+  run_id: RunId31;
+  scope_digest: ScopeDigest12;
+  work_package_digest: WorkPackageDigest10;
+}
+export interface ResourceEpochs6 {
+  /**
+   * This interface was referenced by `ResourceEpochs6`'s JSON-Schema definition
+   * via the `patternProperty` "^\S+$".
+   */
+  [k: string]: number;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
+ * via the `definition` "ProofCheckResult".
+ */
+export interface ProofCheckResult {
+  check_id: CheckId4;
+  evidence_refs: EvidenceRefs29;
+  reason_code: ReasonCode6;
+  state: State14;
+  subject_manifest_digest: SubjectManifestDigest2;
+  subject_manifest_ref: SubjectManifestRef2;
+}
+/**
+ * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "ProofStrengthV1".
  */
 export interface ProofStrengthV1 {
@@ -5953,9 +6611,9 @@ export interface ProofStrengthV1 {
  * via the `definition` "ProviderIntentV1".
  */
 export interface ProviderIntentV1 {
-  case_id: CaseId32;
+  case_id: CaseId39;
   continuation_ref: ContinuationRef2;
-  expires_at: ExpiresAt13;
+  expires_at: ExpiresAt16;
   intent_id: IntentId;
   provider_id: ProviderId3;
   purpose: Purpose7;
@@ -5976,7 +6634,7 @@ export interface ProviderRefV1 {
  * via the `definition` "PublicMetricV1".
  */
 export interface PublicMetricV1 {
-  evidence_ref: EvidenceRef;
+  evidence_ref: EvidenceRef2;
   name: Name5;
   value: Value1;
 }
@@ -5985,7 +6643,7 @@ export interface PublicMetricV1 {
  * via the `definition` "PublicProofViewV1".
  */
 export interface PublicProofViewV1 {
-  checked_at: CheckedAt14;
+  checked_at: CheckedAt18;
   evidence_class: EvidenceClass2;
   integrity: Integrity;
   limitations: Limitations1;
@@ -5998,7 +6656,7 @@ export interface PublicProofViewV1 {
  * via the `definition` "PublicMetric".
  */
 export interface PublicMetric {
-  evidence_ref: EvidenceRef1;
+  evidence_ref: EvidenceRef3;
   name: Name6;
   value: Value2;
 }
@@ -6008,8 +6666,8 @@ export interface PublicMetric {
  */
 export interface RawCaptureV1 {
   exchanges: Exchanges;
-  graft_id: GraftId16;
-  run_id: RunId25;
+  graft_id: GraftId17;
+  run_id: RunId32;
   scenario_id: ScenarioId1;
   variant: Variant1;
 }
@@ -6087,13 +6745,13 @@ export interface RecipeStageArgsV1 {
 export interface RecoveryPlanV1 {
   affected_effect_refs: AffectedEffectRefs;
   baseline_refs: BaselineRefs;
-  case_id: CaseId33;
+  case_id: CaseId40;
   chosen_route: ChosenRoute;
   compensatable_effects: CompensatableEffects;
   irreversible_effects: IrreversibleEffects;
   original_transaction_routes_ref: OriginalTransactionRoutesRef;
-  plan_digest: PlanDigest8;
-  plan_id: PlanId2;
+  plan_digest: PlanDigest10;
+  plan_id: PlanId3;
   required_current_authority: RequiredCurrentAuthority;
   restore_preconditions_ref: RestorePreconditionsRef;
   reversible_effects: ReversibleEffects;
@@ -6107,8 +6765,8 @@ export interface RecoveryPlanV1 {
  */
 export interface RequiredActionV1 {
   enabled: Enabled1;
-  kind: Kind14;
-  reason_code: ReasonCode5;
+  kind: Kind15;
+  reason_code: ReasonCode7;
   resource_ids: ResourceIds3;
 }
 /**
@@ -6117,7 +6775,7 @@ export interface RequiredActionV1 {
  */
 export interface RequiredFlowV1 {
   acceptance_rule_ids: AcceptanceRuleIds;
-  flow_id: FlowId;
+  flow_id: FlowId1;
   limitation: Limitation2;
   origin_routes: OriginRoutes;
   payment_family: PaymentFamily;
@@ -6137,7 +6795,7 @@ export interface RequiredFlowManifestV1 {
  */
 export interface RequiredFlow {
   acceptance_rule_ids: AcceptanceRuleIds1;
-  flow_id: FlowId1;
+  flow_id: FlowId2;
   limitation: Limitation3;
   origin_routes: OriginRoutes1;
   payment_family: PaymentFamily1;
@@ -6168,14 +6826,14 @@ export interface ResolvedDeliveryViewV1 {
  * via the `definition` "DeploymentObservation".
  */
 export interface DeploymentObservation {
-  case_id: CaseId34;
-  checked_at: CheckedAt15;
+  case_id: CaseId41;
+  checked_at: CheckedAt19;
   current_runtime_evidence_refs: CurrentRuntimeEvidenceRefs1;
   effect_id: EffectId2;
   environment_id: EnvironmentId3;
   observed_artifact_digest: ObservedArtifactDigest1;
   observed_config_digest: ObservedConfigDigest1;
-  outcome: Outcome7;
+  outcome: Outcome9;
   provider: Provider1;
   provider_deploy_id: ProviderDeployId1;
   provider_status: ProviderStatus1;
@@ -6187,15 +6845,15 @@ export interface DeploymentObservation {
  * via the `definition` "ExitManifest".
  */
 export interface ExitManifest {
-  case_id: CaseId35;
+  case_id: CaseId42;
   cleanup_items: CleanupItems1;
   exit_id: ExitId1;
   legacy_obligations_ref: LegacyObligationsRef2;
   merchant_assets_ref: MerchantAssetsRef1;
-  outcome: Outcome8;
+  outcome: Outcome10;
   persistent_runtime_evidence_refs: PersistentRuntimeEvidenceRefs1;
   post_denial_observation_refs: PostDenialObservationRefs1;
-  run_id: RunId26;
+  run_id: RunId33;
   temporary_assets_ref: TemporaryAssetsRef1;
 }
 /**
@@ -6206,23 +6864,23 @@ export interface ExitCheckPlan {
   allowed_restart_count: AllowedRestartCount1;
   authority_refs: AuthorityRefs4;
   budget_ref: BudgetRef4;
-  case_id: CaseId36;
+  case_id: CaseId43;
   criteria_refs: CriteriaRefs1;
   deadline: Deadline4;
-  evidence_read_authority_ref: EvidenceReadAuthorityRef1;
-  executor_identity_ref: ExecutorIdentityRef1;
+  evidence_read_authority_ref: EvidenceReadAuthorityRef2;
+  executor_identity_ref: ExecutorIdentityRef2;
   exit_plan_id: ExitPlanId1;
   failure_route_ref: FailureRouteRef1;
-  final_artifact_digest: FinalArtifactDigest2;
-  final_config_digest: FinalConfigDigest2;
-  generation: Generation23;
-  plan_digest: PlanDigest9;
+  final_artifact_digest: FinalArtifactDigest3;
+  final_config_digest: FinalConfigDigest3;
+  generation: Generation29;
+  plan_digest: PlanDigest11;
   private_evidence_destination_ref: PrivateEvidenceDestinationRef1;
   recovery_plan_ref: RecoveryPlanRef4;
-  reservation_ref: ReservationRef2;
-  run_id: RunId27;
-  state_digest: StateDigest1;
-  trusted_code_digest: TrustedCodeDigest1;
+  reservation_ref: ReservationRef3;
+  run_id: RunId34;
+  state_digest: StateDigest2;
+  trusted_code_digest: TrustedCodeDigest2;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -6230,21 +6888,21 @@ export interface ExitCheckPlan {
  */
 export interface AssetManifest {
   assets: Assets1;
-  case_id: CaseId37;
-  final_artifact_digest: FinalArtifactDigest3;
-  final_config_digest: FinalConfigDigest3;
+  case_id: CaseId44;
+  final_artifact_digest: FinalArtifactDigest4;
+  final_config_digest: FinalConfigDigest4;
   legacy_obligations_ref: LegacyObligationsRef3;
   manifest_digest: ManifestDigest1;
   manifest_id: ManifestId1;
-  run_id: RunId28;
+  run_id: RunId35;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
  * via the `definition` "PredicateResult".
  */
 export interface PredicateResult {
-  checked_at: CheckedAt16;
-  evidence_refs: EvidenceRefs29;
+  checked_at: CheckedAt20;
+  evidence_refs: EvidenceRefs30;
   predicate: Predicate2;
   slot_id: SlotId5;
   status: Status15;
@@ -6256,19 +6914,19 @@ export interface PredicateResult {
  */
 export interface TargetReservation {
   action_plan_ref: ActionPlanRef1;
-  case_id: CaseId38;
+  case_id: CaseId45;
   expected_version_refs: ExpectedVersionRefs;
   lease_until: LeaseUntil1;
   reservation_id: ReservationId;
-  resource_epochs: ResourceEpochs1;
-  run_id: RunId29;
-  state: State13;
+  resource_epochs: ResourceEpochs7;
+  run_id: RunId36;
+  state: State15;
   target_keys: TargetKeys;
   unresolved_effect_refs: UnresolvedEffectRefs;
 }
-export interface ResourceEpochs1 {
+export interface ResourceEpochs7 {
   /**
-   * This interface was referenced by `ResourceEpochs1`'s JSON-Schema definition
+   * This interface was referenced by `ResourceEpochs7`'s JSON-Schema definition
    * via the `patternProperty` "^\S+$".
    */
   [k: string]: number;
@@ -6281,21 +6939,21 @@ export interface DeliverySnapshot {
   action_plan_ref: ActionPlanRef2;
   approval_set_ref: ApprovalSetRef1;
   cancellation_ref: CancellationRef1;
-  case_id: CaseId39;
-  checked_at: CheckedAt17;
+  case_id: CaseId46;
+  checked_at: CheckedAt21;
   current_evidence_refs: CurrentEvidenceRefs1;
   deployment_ref: DeploymentRef1;
-  exit_manifest_ref: ExitManifestRef1;
-  exit_plan_ref: ExitPlanRef3;
+  exit_manifest_ref: ExitManifestRef2;
+  exit_plan_ref: ExitPlanRef5;
   final_asset_manifest_ref: FinalAssetManifestRef1;
-  generation: Generation24;
+  generation: Generation30;
   graph_ref: GraphRef3;
   issue: Issue | null;
   lifecycle_ref: LifecycleRef1;
   pending_effect_refs: PendingEffectRefs1;
-  reservation_ref: ReservationRef3;
+  reservation_ref: ReservationRef4;
   review_ref: ReviewRef1;
-  run_id: RunId30;
+  run_id: RunId37;
   state_cutover_ref: StateCutoverRef1;
   state_version: StateVersion4;
 }
@@ -6305,24 +6963,24 @@ export interface DeliverySnapshot {
  */
 export interface StateCutover {
   admission_ref: AdmissionRef;
-  case_id: CaseId40;
+  case_id: CaseId47;
   cutover_id: CutoverId;
   drain_evidence_refs: DrainEvidenceRefs;
-  evidence_refs: EvidenceRefs30;
+  evidence_refs: EvidenceRefs31;
   export_manifest_ref: ExportManifestRef;
   fence_epochs: FenceEpochs;
-  generation: Generation25;
+  generation: Generation31;
   handler_inventory_ref: HandlerInventoryRef;
   high_water_ref: HighWaterRef;
   ingress_ref: IngressRef;
   origin_route_ref: OriginRouteRef;
-  outcome: Outcome9;
+  outcome: Outcome11;
   pending_external_effect_refs: PendingExternalEffectRefs;
   replay_manifest_ref: ReplayManifestRef;
   restore_manifest_ref: RestoreManifestRef;
-  run_id: RunId31;
+  run_id: RunId38;
   schema_digest: SchemaDigest;
-  state_digest: StateDigest2;
+  state_digest: StateDigest3;
   writer_inventory_ref: WriterInventoryRef;
 }
 export interface FenceEpochs {
@@ -6341,8 +6999,8 @@ export interface ResourceBindingV1 {
   authority_basis: AuthorityBasis;
   authority_evidence_refs: AuthorityEvidenceRefs;
   binding_id: BindingId;
-  case_id: CaseId41;
-  checked_at: CheckedAt18;
+  case_id: CaseId48;
+  checked_at: CheckedAt22;
   controller_id: ControllerId2;
   epoch: Epoch;
   granted_actions: GrantedActions;
@@ -6350,7 +7008,7 @@ export interface ResourceBindingV1 {
   recipients: Recipients2;
   relation_digest: RelationDigest;
   requester_id: RequesterId3;
-  revoked_at: RevokedAt2;
+  revoked_at: RevokedAt3;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -6366,7 +7024,7 @@ export interface ResourceRecipient {
  */
 export interface ResourceEdgeV1 {
   edge_id: EdgeId;
-  evidence_refs: EvidenceRefs31;
+  evidence_refs: EvidenceRefs32;
   from_node: FromNode;
   relation: Relation;
   required_for_scope: RequiredForScope2;
@@ -6377,7 +7035,7 @@ export interface ResourceEdgeV1 {
  * via the `definition` "ResourceGraphV1".
  */
 export interface ResourceGraphV1 {
-  case_id: CaseId42;
+  case_id: CaseId49;
   edges: Edges;
   graph_digest: GraphDigest3;
   graph_id: GraphId;
@@ -6389,7 +7047,7 @@ export interface ResourceGraphV1 {
  */
 export interface ResourceEdge {
   edge_id: EdgeId1;
-  evidence_refs: EvidenceRefs32;
+  evidence_refs: EvidenceRefs33;
   from_node: FromNode1;
   relation: Relation1;
   required_for_scope: RequiredForScope3;
@@ -6402,8 +7060,8 @@ export interface ResourceEdge {
 export interface ResourceNode {
   binding_refs: BindingRefs2;
   environment_id: EnvironmentId4;
-  evidence_refs: EvidenceRefs33;
-  kind: Kind15;
+  evidence_refs: EvidenceRefs34;
+  kind: Kind16;
   node_id: NodeId5;
   provider: ProviderRef;
   provider_resource_id: ProviderResourceId;
@@ -6415,7 +7073,7 @@ export interface ResourceNode {
  * via the `definition` "SourceRevision".
  */
 export interface SourceRevision {
-  kind: Kind16;
+  kind: Kind17;
   value: Value3;
 }
 /**
@@ -6425,8 +7083,8 @@ export interface SourceRevision {
 export interface ResourceNodeV1 {
   binding_refs: BindingRefs3;
   environment_id: EnvironmentId5;
-  evidence_refs: EvidenceRefs34;
-  kind: Kind17;
+  evidence_refs: EvidenceRefs35;
+  kind: Kind18;
   node_id: NodeId6;
   provider: ProviderRef;
   provider_resource_id: ProviderResourceId1;
@@ -6462,7 +7120,7 @@ export interface ResourceSummaryV1 {
  */
 export interface ResumeRunRequestV1 {
   expected_state_version: ExpectedStateVersion1;
-  scope_digest: ScopeDigest7;
+  scope_digest: ScopeDigest13;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -6474,19 +7132,19 @@ export interface ReviewBundleV1 {
   bundle_digest: BundleDigest1;
   bundle_id: BundleId1;
   candidate_snapshot_refs: CandidateSnapshotRefs1;
-  case_id: CaseId43;
-  created_at: CreatedAt18;
+  case_id: CaseId50;
+  created_at: CreatedAt19;
   domain_rule_result_refs: DomainRuleResultRefs1;
   effective_config_digest: EffectiveConfigDigest1;
   missing_evidence_refs: MissingEvidenceRefs1;
   patch_digest: PatchDigest3;
   proposed_apply_plan_ref: ProposedApplyPlanRef1;
   recovery_plan_ref: RecoveryPlanRef5;
-  run_id: RunId32;
+  run_id: RunId39;
   scenario_result_refs: ScenarioResultRefs1;
   security_result_refs: SecurityResultRefs1;
   unsupported_paths: UnsupportedPaths1;
-  work_package_digest: WorkPackageDigest5;
+  work_package_digest: WorkPackageDigest11;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -6595,10 +7253,10 @@ export interface RuleV1 {
  */
 export interface RunTaskSnapshotV1 {
   cancellation_ref: CancellationRef2;
-  case_id: CaseId44;
-  generation: Generation26;
+  case_id: CaseId51;
+  generation: Generation32;
   last_event_seq: LastEventSeq2;
-  run_id: RunId33;
+  run_id: RunId40;
   state_version: StateVersion5;
   tasks: Tasks1;
 }
@@ -6608,12 +7266,12 @@ export interface RunTaskSnapshotV1 {
  */
 export interface AgentTask {
   attempt: Attempt4;
-  case_id: CaseId45;
+  case_id: CaseId52;
   checkpoint_ref: CheckpointRef1;
-  created_at: CreatedAt19;
+  created_at: CreatedAt20;
   deadline: Deadline5;
-  generation: Generation27;
-  input_digest: InputDigest3;
+  generation: Generation33;
+  input_digest: InputDigest4;
   issue: Issue | null;
   lease_epoch: LeaseEpoch3;
   lease_owner: LeaseOwner1;
@@ -6621,13 +7279,13 @@ export interface AgentTask {
   model_profile_ref: ModelProfileRef2;
   next_wake_at: NextWakeAt2;
   output_refs: OutputRefs3;
-  policy_digest: PolicyDigest7;
+  policy_digest: PolicyDigest13;
   policy_ref: PolicyRef1;
   prompt_digest: PromptDigest1;
   prompt_ref: PromptRef1;
   request_id: RequestId8;
-  run_id: RunId34;
-  state: State14;
+  run_id: RunId41;
+  state: State16;
   state_version: StateVersion6;
   task: TaskSpec;
   wake_condition_ref: WakeConditionRef1;
@@ -6654,8 +7312,8 @@ export interface ImageDigests {
  * via the `definition` "SafetyRequestHoldArgsV1".
  */
 export interface SafetyRequestHoldArgsV1 {
-  evidence_refs: EvidenceRefs35;
-  reason_code: ReasonCode6;
+  evidence_refs: EvidenceRefs36;
+  reason_code: ReasonCode8;
   run_ref: RunRef2;
 }
 /**
@@ -6692,8 +7350,8 @@ export interface Expect {
  * via the `definition` "ScenarioSetV1".
  */
 export interface ScenarioSetV1 {
-  created_at: CreatedAt20;
-  graft_id: GraftId17;
+  created_at: CreatedAt21;
+  graft_id: GraftId18;
   id: Id19;
   producer: Producer;
   scenarios: Scenarios3;
@@ -6789,7 +7447,7 @@ export interface SourceReadArgsV1 {
  * via the `definition` "SourceRevisionV1".
  */
 export interface SourceRevisionV1 {
-  kind: Kind18;
+  kind: Kind19;
   value: Value4;
 }
 /**
@@ -6799,7 +7457,7 @@ export interface SourceRevisionV1 {
 export interface SourceSnapshotV1 {
   authority_binding_refs: AuthorityBindingRefs;
   captured_at: CapturedAt;
-  case_id: CaseId46;
+  case_id: CaseId53;
   completeness: Completeness;
   file_count: FileCount;
   manifest_digest: ManifestDigest2;
@@ -6819,10 +7477,10 @@ export interface SourceSnapshotV1 {
 export interface StageChangeV1 {
   actor: StageActor;
   attempt: Attempt5;
-  evidence_refs: EvidenceRefs36;
+  evidence_refs: EvidenceRefs37;
   from_stage: StageName | null;
-  graft_id: GraftId18;
-  reason: Reason2;
+  graft_id: GraftId19;
+  reason: Reason4;
   to_stage: StageName;
 }
 /**
@@ -6848,24 +7506,24 @@ export interface StartWorkRequestV1 {
  */
 export interface StateCutoverV1 {
   admission_ref: AdmissionRef1;
-  case_id: CaseId47;
+  case_id: CaseId54;
   cutover_id: CutoverId1;
   drain_evidence_refs: DrainEvidenceRefs1;
-  evidence_refs: EvidenceRefs37;
+  evidence_refs: EvidenceRefs38;
   export_manifest_ref: ExportManifestRef1;
   fence_epochs: FenceEpochs1;
-  generation: Generation28;
+  generation: Generation34;
   handler_inventory_ref: HandlerInventoryRef1;
   high_water_ref: HighWaterRef1;
   ingress_ref: IngressRef1;
   origin_route_ref: OriginRouteRef1;
-  outcome: Outcome10;
+  outcome: Outcome12;
   pending_external_effect_refs: PendingExternalEffectRefs1;
   replay_manifest_ref: ReplayManifestRef1;
   restore_manifest_ref: RestoreManifestRef1;
-  run_id: RunId35;
+  run_id: RunId42;
   schema_digest: SchemaDigest1;
-  state_digest: StateDigest3;
+  state_digest: StateDigest4;
   writer_inventory_ref: WriterInventoryRef1;
 }
 export interface FenceEpochs1 {
@@ -6887,18 +7545,18 @@ export interface StatusReadArgsV1 {
  * via the `definition` "SubjectDerivationV1".
  */
 export interface SubjectDerivationV1 {
-  authenticity_ref: AuthenticityRef3;
-  case_id: CaseId48;
+  authenticity_ref: AuthenticityRef5;
+  case_id: CaseId55;
   collector_identity_ref: CollectorIdentityRef1;
   derivation_id: DerivationId;
-  generation: Generation29;
+  generation: Generation35;
   operation: Operation7;
   output_refs: OutputRefs4;
   output_subject: OutputSubject;
   parent_refs: ParentRefs;
   parent_subject: ParentSubject;
   recipe_or_patch_digest: RecipeOrPatchDigest;
-  run_id: RunId36;
+  run_id: RunId43;
   task_id: TaskId6;
 }
 /**
@@ -6909,7 +7567,7 @@ export interface SubjectManifestV1 {
   config_digest: ConfigDigest3;
   oci_manifest_digest: OciManifestDigest1;
   runtime_profile_digest: RuntimeProfileDigest4;
-  scope_digest: ScopeDigest8;
+  scope_digest: ScopeDigest14;
   source_snapshot_refs: SourceSnapshotRefs3;
   source_tree_digest: SourceTreeDigest1;
 }
@@ -6918,8 +7576,8 @@ export interface SubjectManifestV1 {
  * via the `definition` "SwitchConfigV1".
  */
 export interface SwitchConfigV1 {
-  expires_at: ExpiresAt14;
-  graft_id: GraftId19;
+  expires_at: ExpiresAt17;
+  graft_id: GraftId20;
   origin_rules: OriginRules;
   signature: Signature4;
   stage_pct: StagePct1;
@@ -6975,19 +7633,19 @@ export interface PlanItem {
  */
 export interface TargetReservationV1 {
   action_plan_ref: ActionPlanRef3;
-  case_id: CaseId49;
+  case_id: CaseId56;
   expected_version_refs: ExpectedVersionRefs1;
   lease_until: LeaseUntil3;
   reservation_id: ReservationId1;
-  resource_epochs: ResourceEpochs2;
-  run_id: RunId37;
-  state: State15;
+  resource_epochs: ResourceEpochs8;
+  run_id: RunId44;
+  state: State17;
   target_keys: TargetKeys1;
   unresolved_effect_refs: UnresolvedEffectRefs1;
 }
-export interface ResourceEpochs2 {
+export interface ResourceEpochs8 {
   /**
-   * This interface was referenced by `ResourceEpochs2`'s JSON-Schema definition
+   * This interface was referenced by `ResourceEpochs8`'s JSON-Schema definition
    * via the `patternProperty` "^\S+$".
    */
   [k: string]: number;
@@ -7000,12 +7658,12 @@ export interface TaskCheckpointV1 {
   budget_reservation_refs: BudgetReservationRefs;
   committed_message_refs: CommittedMessageRefs;
   context_digest: ContextDigest1;
-  created_at: CreatedAt21;
-  generation: Generation30;
+  created_at: CreatedAt22;
+  generation: Generation36;
   invocation_refs: InvocationRefs;
   lease_epoch: LeaseEpoch4;
   next_step: NextStep1;
-  policy_digest: PolicyDigest8;
+  policy_digest: PolicyDigest14;
   staged_output_refs: StagedOutputRefs;
   task_id: TaskId7;
   turn: Turn;
@@ -7018,19 +7676,19 @@ export interface TaskCheckpointV1 {
 export interface TaskContextV1 {
   allowed_tool_ids: AllowedToolIds2;
   budget_ref: BudgetRef5;
-  case_id: CaseId50;
+  case_id: CaseId57;
   checkpoint_ref: CheckpointRef2;
   deadline: Deadline6;
   expected_schemas: ExpectedSchemas1;
   expected_subject: ExpectedSubject2;
-  generation: Generation31;
+  generation: Generation37;
   input_refs: InputRefs4;
   lease_epoch: LeaseEpoch5;
   operation: Operation8;
   policy_ref: PolicyRef2;
   prompt_ref: PromptRef2;
   role: Role3;
-  run_id: RunId38;
+  run_id: RunId45;
   task_ref: TaskRef;
 }
 /**
@@ -7038,16 +7696,16 @@ export interface TaskContextV1 {
  * via the `definition` "TaskEventV1".
  */
 export interface TaskEventV1 {
-  case_id: CaseId51;
+  case_id: CaseId58;
   causation_id: CausationId;
   correlation_id: CorrelationId;
   event_id: EventId1;
-  generation: Generation32;
-  kind: Kind19;
+  generation: Generation38;
+  kind: Kind20;
   occurred_at: OccurredAt1;
-  payload_digest: PayloadDigest2;
+  payload_digest: PayloadDigest4;
   payload_ref: PayloadRef1;
-  run_id: RunId39;
+  run_id: RunId46;
   sequence: Sequence1;
   task_id: TaskId8;
 }
@@ -7057,10 +7715,10 @@ export interface TaskEventV1 {
  */
 export interface TaskLeaseV1 {
   context_ref: ContextRef1;
-  generation: Generation33;
+  generation: Generation39;
   lease_epoch: LeaseEpoch6;
   lease_until: LeaseUntil4;
-  run_id: RunId40;
+  run_id: RunId47;
   task_id: TaskId9;
   task_version: TaskVersion;
   worker_id: WorkerId;
@@ -7102,17 +7760,17 @@ export interface ToolInvocationV1 {
   arguments_ref: ArgumentsRef2;
   budget_reservation_ref: BudgetReservationRef1;
   capability_ref: CapabilityRef;
-  case_id: CaseId52;
+  case_id: CaseId59;
   deadline: Deadline7;
   effect_ref: EffectRef;
-  generation: Generation34;
-  input_digest: InputDigest4;
+  generation: Generation40;
+  input_digest: InputDigest5;
   invocation_id: InvocationId;
   issue: Issue | null;
   lease_epoch: LeaseEpoch7;
   result_refs: ResultRefs;
-  run_id: RunId41;
-  state: State16;
+  run_id: RunId48;
+  state: State18;
   task_id: TaskId11;
   tool_id: ToolId;
 }
@@ -7123,12 +7781,12 @@ export interface ToolInvocationV1 {
  * via the `definition` "TriangleRequestV1".
  */
 export interface TriangleRequestV1 {
-  created_at: CreatedAt22;
-  graft_id: GraftId20;
+  created_at: CreatedAt23;
+  graft_id: GraftId21;
   id: Id22;
   mutant_ids: MutantIds1;
   producer: Producer;
-  reason: Reason3;
+  reason: Reason5;
   rule_id: RuleId;
   scenario_ids: ScenarioIds1;
 }
@@ -7172,16 +7830,16 @@ export interface RuleHit {
  * via the `definition` "WakeConditionV1".
  */
 export interface WakeConditionV1 {
-  case_id: CaseId54;
+  case_id: CaseId61;
   condition_id: ConditionId;
   due_at: DueAt;
   expected_digest: ExpectedDigest;
-  expires_at: ExpiresAt16;
-  generation: Generation35;
-  kind: Kind20;
+  expires_at: ExpiresAt19;
+  generation: Generation41;
+  kind: Kind21;
   minimum_version: MinimumVersion;
   owner: Owner2;
-  run_id: RunId42;
+  run_id: RunId49;
   subject_ref: SubjectRef1;
 }
 /**
@@ -7191,14 +7849,14 @@ export interface WakeConditionV1 {
 export interface WorkAcceptanceV1 {
   accepted_at: AcceptedAt2;
   action_id: ActionId3;
-  case_id: CaseId55;
+  case_id: CaseId62;
   readiness_digest: ReadinessDigest5;
   receipt_ref: ReceiptRef1;
   resource_graph_digest: ResourceGraphDigest4;
-  scope_digest: ScopeDigest9;
+  scope_digest: ScopeDigest15;
   source_manifest_digest: SourceManifestDigest2;
   work_id: WorkId4;
-  work_package_digest: WorkPackageDigest6;
+  work_package_digest: WorkPackageDigest12;
 }
 /**
  * This interface was referenced by `GoldGraftContracts`'s JSON-Schema
@@ -7207,11 +7865,11 @@ export interface WorkAcceptanceV1 {
 export interface WorkCancellationV1 {
   action_id: ActionId4;
   cancel_id: CancelId1;
-  case_id: CaseId56;
-  generation: Generation36;
+  case_id: CaseId63;
+  generation: Generation42;
   requested_at: RequestedAt;
   requested_by: RequestedBy;
-  state: State19;
+  state: State21;
   termination_evidence_refs: TerminationEvidenceRefs;
   work_id: WorkId5;
 }
@@ -7222,7 +7880,7 @@ export interface WorkCancellationV1 {
 export interface WorkPackageV1 {
   acquisition_expires_at: AcquisitionExpiresAt;
   baseline_manifest_digest: BaselineManifestDigest;
-  case_id: CaseId57;
+  case_id: CaseId64;
   completeness: Completeness1;
   components_ref: ComponentsRef;
   custody_policy_digest: CustodyPolicyDigest;
@@ -7235,7 +7893,7 @@ export interface WorkPackageV1 {
   resource_graph_digest: ResourceGraphDigest5;
   resource_graph_ref: ResourceGraphRef;
   runtime_profile_digest: RuntimeProfileDigest5;
-  scope_digest: ScopeDigest10;
+  scope_digest: ScopeDigest16;
   source_snapshot_refs: SourceSnapshotRefs4;
   state_recipe_refs: StateRecipeRefs;
   synthetic_seed_refs: SyntheticSeedRefs;
@@ -7248,20 +7906,20 @@ export interface WorkPackageV1 {
  */
 export interface WorkerOperationV1 {
   assignment_digest: AssignmentDigest;
-  authenticity_ref: AuthenticityRef4;
-  evidence_refs: EvidenceRefs41;
-  finished_at: FinishedAt;
-  generation: Generation38;
-  kind: Kind21;
+  authenticity_ref: AuthenticityRef6;
+  evidence_refs: EvidenceRefs42;
+  finished_at: FinishedAt1;
+  generation: Generation44;
+  kind: Kind22;
   observed_digest: ObservedDigest;
   operation_id: OperationId1;
   resource_graph_digest: ResourceGraphDigest6;
   result: Result;
   runtime_profile_digest: RuntimeProfileDigest6;
-  scope_digest: ScopeDigest11;
+  scope_digest: ScopeDigest17;
   source_manifest_digest: SourceManifestDigest3;
-  started_at: StartedAt;
+  started_at: StartedAt1;
   work_id: WorkId7;
-  work_package_digest: WorkPackageDigest7;
+  work_package_digest: WorkPackageDigest13;
   worker_id: WorkerId1;
 }

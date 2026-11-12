@@ -1,0 +1,261 @@
+{
+  "$defs": {
+    "HealAction": {
+      "enum": [
+        "HOLD",
+        "STEP_UP",
+        "CUTBACK"
+      ],
+      "title": "HealAction",
+      "type": "string"
+    },
+    "HealDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/HealAction"
+        },
+        "from_stage_pct": {
+          "enum": [
+            0,
+            1,
+            10,
+            50,
+            100
+          ],
+          "title": "From Stage Pct",
+          "type": "integer"
+        },
+        "graft_id": {
+          "minLength": 1,
+          "title": "Graft Id",
+          "type": "string"
+        },
+        "hard_stop": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hard Stop"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "stats": {
+          "$ref": "#/$defs/HealStats"
+        },
+        "to_stage_pct": {
+          "enum": [
+            0,
+            1,
+            10,
+            50,
+            100
+          ],
+          "title": "To Stage Pct",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "graft_id",
+        "from_stage_pct",
+        "action",
+        "to_stage_pct",
+        "reason",
+        "stats"
+      ],
+      "title": "HealDecision",
+      "type": "object"
+    },
+    "HealStats": {
+      "additionalProperties": false,
+      "properties": {
+        "n_new": {
+          "minimum": 0,
+          "title": "N New",
+          "type": "integer"
+        },
+        "n_old": {
+          "minimum": 0,
+          "title": "N Old",
+          "type": "integer"
+        },
+        "prob_new_not_worse": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Prob New Not Worse",
+          "type": "number"
+        },
+        "success_new": {
+          "minimum": 0,
+          "title": "Success New",
+          "type": "integer"
+        },
+        "success_old": {
+          "minimum": 0,
+          "title": "Success Old",
+          "type": "integer"
+        },
+        "threshold": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Threshold",
+          "type": "number"
+        }
+      },
+      "required": [
+        "n_old",
+        "n_new",
+        "success_old",
+        "success_new",
+        "prob_new_not_worse",
+        "threshold"
+      ],
+      "title": "HealStats",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/PromotionDecision.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "STEP_UP",
+        "HOLD",
+        "CUTBACK"
+      ],
+      "title": "Action",
+      "type": "string"
+    },
+    "advice": {
+      "$ref": "#/$defs/HealDecision"
+    },
+    "advice_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Advice Digest",
+      "type": "string"
+    },
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "expires_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Expires At"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "proof_plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Proof Plan Digest",
+      "type": "string"
+    },
+    "proof_result_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Proof Result Digest",
+      "type": "string"
+    },
+    "proof_result_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Proof Result Ref",
+      "type": "string"
+    },
+    "reason_code": {
+      "enum": [
+        "EVIDENCE_READY",
+        "EVIDENCE_HOLD",
+        "ADVICE_HOLD",
+        "CUTBACK"
+      ],
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "run_id",
+    "generation",
+    "resource_epochs",
+    "scope_digest",
+    "work_package_digest",
+    "policy_digest",
+    "advice",
+    "advice_digest",
+    "proof_plan_digest",
+    "proof_result_ref",
+    "proof_result_digest",
+    "action",
+    "reason_code",
+    "checked_at",
+    "expires_at"
+  ],
+  "title": "PromotionDecisionV1",
+  "type": "object"
+}

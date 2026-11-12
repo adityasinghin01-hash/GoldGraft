@@ -1,0 +1,29 @@
+{
+  "authenticity_ref": "fixture:closure-auth",
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "evidence_read_receipt": {
+    "authority_ref": "fixture:evidence-read",
+    "disclosure_ref": "fixture:disclosure",
+    "read_at": "2026-11-10T00:00:00Z",
+    "read_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "read_evidence_ref": "fixture:read",
+    "revocation_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "revocation_ref": "fixture:read-revocation",
+    "revoked_at": "2026-11-10T00:00:00Z"
+  },
+  "exit_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "exit_manifest_ref": "fixture:exit-manifest",
+  "exit_plan_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "exit_plan_ref": "fixture:exit-plan",
+  "exit_result_digest": "2e5649f18e89ec28f560da3acb410716133e5d60341cd29a14d7a1b78a012166",
+  "exit_result_ref": "fixture:exit-result",
+  "generation": 1,
+  "policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "resource_epochs": {
+    "synthetic-resource": 1
+  },
+  "run_id": "run-demo",
+  "scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "work_package_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

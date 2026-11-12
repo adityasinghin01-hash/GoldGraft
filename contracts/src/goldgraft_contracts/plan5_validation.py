@@ -126,6 +126,8 @@ def validate_artifact(
         "BaselineEvidence/1",
         "DeploymentObservation/1",
         "ExitManifest/1",
+        "ExitCheckResult/1",
+        "ExitEvidenceReconciliation/1",
     }
     if descriptor.schema_id in observed_only and descriptor.trust != "collector_observed":
         raise ValueError("model cannot issue observed records")

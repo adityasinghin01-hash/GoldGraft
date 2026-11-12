@@ -1,0 +1,38 @@
+{
+  "case_id": "case-demo",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "generation": 1,
+  "outcome": "hold",
+  "plan_digest": "cf04e38dbb7ed54efeb4a6c75d8643b326f462413fc08415f543591b8094ad79",
+  "plan_ref": "fixture:proof-plan",
+  "policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "reason_codes": [
+    "UNKNOWN"
+  ],
+  "resource_epochs": {
+    "synthetic-resource": 1
+  },
+  "result_digest": "9e6fb5cf56da7a89484b378e98bca9e94e3a50354de4018e948219bbee618300",
+  "result_id": "fixture:proof-result",
+  "results": [
+    {
+      "check_id": "fixture:baseline",
+      "evidence_refs": [],
+      "reason_code": "UNKNOWN",
+      "state": "unknown",
+      "subject_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "subject_manifest_ref": "fixture:subject"
+    },
+    {
+      "check_id": "fixture:candidate",
+      "evidence_refs": [],
+      "reason_code": "UNKNOWN",
+      "state": "unknown",
+      "subject_manifest_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "subject_manifest_ref": "fixture:subject"
+    }
+  ],
+  "run_id": "run-demo",
+  "scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "work_package_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

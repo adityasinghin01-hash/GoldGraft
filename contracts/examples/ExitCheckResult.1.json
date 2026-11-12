@@ -1,0 +1,35 @@
+{
+  "case_id": "case-demo",
+  "evidence_read_authority_ref": "fixture:evidence-read",
+  "executor_identity_ref": "fixture:executor",
+  "exit_plan_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "exit_plan_ref": "fixture:exit-plan",
+  "final_artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "final_config_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "finished_at": "2026-11-10T00:00:00Z",
+  "generation": 1,
+  "observations": [],
+  "ordinary_denials": [],
+  "outcome": "held",
+  "policy_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "reservation_ref": "fixture:reservation",
+  "resource_epochs": {
+    "synthetic-resource": 1
+  },
+  "restart_count": 0,
+  "result_digest": "9e027ac565c1a0d4387133c4566d6d6356d9938c9f27eb0a67d60528d6209371",
+  "result_id": "fixture:exit-result",
+  "run_id": "run-demo",
+  "scope_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "signature": {
+    "authenticity_ref": "fixture:authenticity",
+    "signature_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "signature_ref": "fixture:signature",
+    "transparency_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "transparency_ref": "fixture:transparency"
+  },
+  "started_at": "2026-11-10T00:00:00Z",
+  "state_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "trusted_code_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "work_package_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

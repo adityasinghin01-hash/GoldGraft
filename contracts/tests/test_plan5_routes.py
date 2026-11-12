@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def test_v2_routes_exist_separately_from_legacy():
     assert hasattr(api_routes, "PLAN5_ROUTES"), "new namespace absent"
     routes = api_routes.PLAN5_ROUTES
-    assert len({(r.method, r.path) for r in routes}) == len(routes) == 23
+    assert len({(r.method, r.path) for r in routes}) == len(routes) == 25
     assert all(r.path.startswith("/v2/") for r in routes)
     assert all(not r.path.startswith("/v2/") for r in api_routes.ROUTES)
 

@@ -14,6 +14,11 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from goldgraft_contracts.api_routes import PLAN5_ROUTES
+from goldgraft_contracts.certificate_v2 import (
+    CertificateV2,
+    CertificateVerification,
+    PrivateCertificatePort,
+)
 from goldgraft_contracts.connection_control import P5Problem
 from goldgraft_contracts.plan5_common import Id, reject_secret
 from pydantic import TypeAdapter, ValidationError
@@ -77,6 +82,7 @@ def create_service_app(
     allowed_origins=(),
     max_json_bytes=8 * 1024 * 1024,
     work_control=None,
+    certificate_views: PrivateCertificatePort | None = None,
 ):
     if type(max_json_bytes) is not int or not 1 <= max_json_bytes <= 8 * 1024 * 1024:
         raise ValueError("INVALID service request limit")
@@ -105,6 +111,11 @@ def create_service_app(
             "action_status",
             "cancel_work",
             "worker_operation",
+        }
+    if certificate_views is not None:
+        app.state.implemented_service_routes |= {
+            "private_certificate",
+            "private_certificate_verification",
         }
     app.add_middleware(
         CORSMiddleware,
@@ -201,6 +212,39 @@ def create_service_app(
                     )
                 elif work_control is not None and route.name == "worker_operation":
                     result = work_control.operation(principal, body)
+                elif route.name in {"private_certificate", "private_certificate_verification"}:
+                    if certificate_views is None:
+                        raise ServiceError("CAPABILITY_NOT_QUALIFIED", 503)
+                    try:
+                        verifying = route.name == "private_certificate_verification"
+                        method = certificate_views.verify if verifying else certificate_views.read
+                        result = method(
+                            principal.tenant_id,
+                            principal.actor_id,
+                            params["case_id"],
+                            params["cert_id"],
+                        )
+                        if result is None:
+                            raise ServiceError("EVIDENCE_UNAVAILABLE", 404)
+                        model = CertificateVerification if verifying else CertificateV2
+                        result = model.model_validate(result.model_dump(mode="json"))
+                        if (
+                            result.cert_id != params["cert_id"]
+                            or result.case_id != params["case_id"]
+                        ):
+                            raise ServiceError("EVIDENCE_UNAVAILABLE", 404)
+                    except ServiceError:
+                        raise
+                    except Exception:
+                        raise ServiceError("EVIDENCE_UNAVAILABLE", 503) from None
+                    # Recheck current session/case after private resolution, too.
+                    current = identity(request, route)
+                    if (current.tenant_id, current.actor_id) != (
+                        principal.tenant_id,
+                        principal.actor_id,
+                    ):
+                        raise ServiceError("EVIDENCE_UNAVAILABLE", 404)
+                    service.get_case(current, params["case_id"])
                 elif route.name == "case_events":
                     value = request.query_params.get(
                         "after", request.headers.get("last-event-id", "0")

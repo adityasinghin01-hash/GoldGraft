@@ -1,0 +1,12 @@
+{
+  "case_id": "case-demo",
+  "cert_id": "synthetic-private-cert",
+  "checked_at": "2026-11-10T00:00:00Z",
+  "qualification_scope": "component_only",
+  "qualification_state": "held",
+  "reason_codes": [
+    "SYNTHETIC_ONLY"
+  ],
+  "run_id": "run-demo",
+  "signature_integrity": "unverified"
+}

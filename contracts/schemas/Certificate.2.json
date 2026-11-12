@@ -1,0 +1,460 @@
+{
+  "$defs": {
+    "CertificateGitSource": {
+      "additionalProperties": false,
+      "properties": {
+        "branch": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "title": "Branch",
+          "type": "string"
+        },
+        "commit_new": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Commit New",
+          "type": "string"
+        },
+        "commit_old": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "title": "Commit Old",
+          "type": "string"
+        },
+        "repository_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Repository Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository_ref",
+        "branch",
+        "commit_old",
+        "commit_new"
+      ],
+      "title": "CertificateGitSource",
+      "type": "object"
+    },
+    "SignatureMaterial": {
+      "additionalProperties": false,
+      "properties": {
+        "authenticity_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Authenticity Ref",
+          "type": "string"
+        },
+        "signature_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Signature Digest",
+          "type": "string"
+        },
+        "signature_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Signature Ref",
+          "type": "string"
+        },
+        "transparency_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Transparency Digest",
+          "type": "string"
+        },
+        "transparency_ref": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "title": "Transparency Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "signature_ref",
+        "signature_digest",
+        "transparency_ref",
+        "transparency_digest",
+        "authenticity_ref"
+      ],
+      "title": "SignatureMaterial",
+      "type": "object"
+    }
+  },
+  "$id": "https://goldgraft.dev/schemas/Certificate.2.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "git_source": {
+          "$ref": "#/$defs/CertificateGitSource"
+        },
+        "signer_kind": {
+          "const": "github_actions",
+          "enum": [
+            "github_actions",
+            "trusted_service"
+          ],
+          "title": "Signer Kind",
+          "type": "string"
+        },
+        "source_route": {
+          "const": "git",
+          "enum": [
+            "git",
+            "local_folder",
+            "cloud_files",
+            "host_export"
+          ],
+          "title": "Source Route",
+          "type": "string"
+        },
+        "workflow_identity": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "type": "string"
+        },
+        "workflow_sha": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "git_source": {
+          "$ref": "#/$defs/CertificateGitSource"
+        },
+        "signer_kind": {
+          "const": "trusted_service",
+          "enum": [
+            "github_actions",
+            "trusted_service"
+          ],
+          "title": "Signer Kind",
+          "type": "string"
+        },
+        "source_route": {
+          "const": "git",
+          "enum": [
+            "git",
+            "local_folder",
+            "cloud_files",
+            "host_export"
+          ],
+          "title": "Source Route",
+          "type": "string"
+        },
+        "workflow_identity": {
+          "type": "null"
+        },
+        "workflow_sha": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "properties": {
+        "git_source": {
+          "type": "null"
+        },
+        "signer_kind": {
+          "const": "github_actions",
+          "enum": [
+            "github_actions",
+            "trusted_service"
+          ],
+          "title": "Signer Kind",
+          "type": "string"
+        },
+        "source_route": {
+          "enum": [
+            "local_folder",
+            "cloud_files",
+            "host_export"
+          ],
+          "title": "Source Route",
+          "type": "string"
+        },
+        "workflow_identity": {
+          "maxLength": 8192,
+          "minLength": 1,
+          "type": "string"
+        },
+        "workflow_sha": {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "git_source": {
+          "type": "null"
+        },
+        "signer_kind": {
+          "const": "trusted_service",
+          "enum": [
+            "github_actions",
+            "trusted_service"
+          ],
+          "title": "Signer Kind",
+          "type": "string"
+        },
+        "source_route": {
+          "enum": [
+            "local_folder",
+            "cloud_files",
+            "host_export"
+          ],
+          "title": "Source Route",
+          "type": "string"
+        },
+        "workflow_identity": {
+          "type": "null"
+        },
+        "workflow_sha": {
+          "type": "null"
+        }
+      }
+    }
+  ],
+  "properties": {
+    "case_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "cert_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Cert Id",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "generation": {
+      "exclusiveMinimum": 0,
+      "title": "Generation",
+      "type": "integer"
+    },
+    "git_source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CertificateGitSource"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "issued_at": {
+      "format": "date-time",
+      "title": "Issued At",
+      "type": "string"
+    },
+    "ledger_root": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Ledger Root",
+      "type": "string"
+    },
+    "policy_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Policy Digest",
+      "type": "string"
+    },
+    "proof_plan_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Proof Plan Digest",
+      "type": "string"
+    },
+    "proof_plan_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Proof Plan Ref",
+      "type": "string"
+    },
+    "proof_result_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Proof Result Digest",
+      "type": "string"
+    },
+    "proof_result_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Proof Result Ref",
+      "type": "string"
+    },
+    "qualification_evidence_refs": {
+      "items": {
+        "maxLength": 1024,
+        "minLength": 1,
+        "pattern": "^\\S+$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "title": "Qualification Evidence Refs",
+      "type": "array"
+    },
+    "qualification_scope": {
+      "enum": [
+        "component_only",
+        "sandbox_payment",
+        "merchant_delivery"
+      ],
+      "title": "Qualification Scope",
+      "type": "string"
+    },
+    "resource_epochs": {
+      "maxProperties": 256,
+      "patternProperties": {
+        "^\\S+$": {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Resource Epochs",
+      "type": "object"
+    },
+    "review_bundle_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Review Bundle Digest",
+      "type": "string"
+    },
+    "review_bundle_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Review Bundle Ref",
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Scope Digest",
+      "type": "string"
+    },
+    "signature": {
+      "$ref": "#/$defs/SignatureMaterial"
+    },
+    "signer_identity_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Signer Identity Ref",
+      "type": "string"
+    },
+    "signer_kind": {
+      "enum": [
+        "github_actions",
+        "trusted_service"
+      ],
+      "title": "Signer Kind",
+      "type": "string"
+    },
+    "source_route": {
+      "enum": [
+        "git",
+        "local_folder",
+        "cloud_files",
+        "host_export"
+      ],
+      "title": "Source Route",
+      "type": "string"
+    },
+    "subject_manifest_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Subject Manifest Digest",
+      "type": "string"
+    },
+    "subject_manifest_ref": {
+      "maxLength": 1024,
+      "minLength": 1,
+      "pattern": "^\\S+$",
+      "title": "Subject Manifest Ref",
+      "type": "string"
+    },
+    "work_package_digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Work Package Digest",
+      "type": "string"
+    },
+    "workflow_identity": {
+      "anyOf": [
+        {
+          "maxLength": 8192,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Workflow Identity"
+    },
+    "workflow_sha": {
+      "anyOf": [
+        {
+          "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Workflow Sha"
+    }
+  },
+  "required": [
+    "case_id",
+    "run_id",
+    "generation",
+    "resource_epochs",
+    "scope_digest",
+    "work_package_digest",
+    "policy_digest",
+    "cert_id",
+    "review_bundle_ref",
+    "review_bundle_digest",
+    "subject_manifest_ref",
+    "subject_manifest_digest",
+    "proof_plan_ref",
+    "proof_plan_digest",
+    "proof_result_ref",
+    "proof_result_digest",
+    "ledger_root",
+    "source_route",
+    "git_source",
+    "signer_kind",
+    "signer_identity_ref",
+    "workflow_identity",
+    "workflow_sha",
+    "qualification_scope",
+    "qualification_evidence_refs",
+    "issued_at",
+    "expires_at",
+    "signature"
+  ],
+  "title": "CertificateV2",
+  "type": "object"
+}

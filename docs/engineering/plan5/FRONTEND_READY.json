@@ -1,153 +1,56 @@
 {
-  "base_revision": "0365c5e1adcb1875a7f72c99dc7c63631501e131",
+  "base_revision": "25e21594841ae527024854a7267dd707d37584ea",
   "checks": [
     {
-      "command": "uv run --locked --no-sync python -m pytest -q pieces/agents/tests/test_herald.py",
-      "exit_code": 0,
-      "evidence_file": "docs/engineering/plan5/checks/B4_Herald_16-accepted-herald.json"
+      "command": "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/ruff check .",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_01-lint.json",
+      "exit_code": 0
     },
     {
-      "command": "uv run --locked --no-sync python -m pytest -q",
-      "exit_code": 0,
-      "evidence_file": "docs/engineering/plan5/checks/B4_Herald_17-accepted-full.json"
+      "command": "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python -m pytest -q -p no:cacheprovider",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_02-full.json",
+      "exit_code": 0
     },
     {
-      "command": "uv run --locked --no-sync ruff check .",
-      "exit_code": 0,
-      "evidence_file": "docs/engineering/plan5/checks/B4_Herald_18-accepted-lint.json"
+      "command": "node pieces/switch-libs/node/run_cases.mjs",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_03-node-switch.json",
+      "exit_code": 0
     },
     {
-      "command": "npm run check:types",
-      "exit_code": 0,
-      "evidence_file": "docs/engineering/plan5/checks/B4_Herald_12-final-types.json"
+      "command": "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python -m integration.check --state-dir .goldgraft/pushed-integration-ci",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_04-integration.json",
+      "exit_code": 0
+    },
+    {
+      "command": "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python -m pytest -q -p no:cacheprovider plugtests/test_proof.py plugtests/test_proof_certificate.py plugtests/test_proof_mutations.py plugtests/test_proof_posterior.py plugtests/test_proof_rules.py",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_05-proof-php.json",
+      "exit_code": 0
+    },
+    {
+      "command": "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python scripts/check_spec_coverage.py",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_06-spec.json",
+      "exit_code": 0
     },
     {
       "command": "sh scripts/check_generated.sh",
-      "exit_code": 0,
-      "evidence_file": "docs/engineering/plan5/checks/B4_Herald_13-final-generated.json"
+      "evidence_file": "docs/engineering/plan5/checks/SI01_07-generated.json",
+      "exit_code": 0
     },
     {
-      "command": "/Library/Developer/CommandLineTools/usr/bin/git diff --check",
-      "exit_code": 0,
-      "evidence_file": "docs/engineering/plan5/checks/B4_Herald_14-final-diff.json"
+      "command": "npm run check:types",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_08-types.json",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "evidence_file": "docs/engineering/plan5/checks/SI01_09-diff.json",
+      "exit_code": 0
     }
   ],
   "contract_files": [
     {
-      "path": "contracts/src/goldgraft_contracts/__init__.py",
-      "sha256": "cddc546716a4727ca99ad48df2dcd8cd0dd2672258229826bd4317608b561e5c"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/agent_runtime.py",
-      "sha256": "a6d8a7bd5758a95f8f8ad2b4674aa23111fe62853cf22802c442ca7e085b7d34"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/agents.py",
-      "sha256": "73bf023ddffc94c53aa6fb93eabc48663009a8578ce891e169f7dd0f823441ae"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/api.py",
-      "sha256": "8e5aca50c70a8838b1742c5c5633c459c7eb24020d6e75b12e903c08c02ce987"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/api_routes.py",
-      "sha256": "d6f5e73692ce42bb038d03100ae8fd7e356d78d081168384be31154ab7c00fb5"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/base_rules.py",
-      "sha256": "12a4b8522984b8ffc902396a717ba21ced6f8162c66a1a5f4849b9c46e85ac0a"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/cmel_mapping.py",
-      "sha256": "313001d39cc8fbe98b2b7f6b6d961f1b6ec3594dd27df10fc644d135c29ebdee"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/common.py",
-      "sha256": "2d978e12441a3d838356ff1401c9eb2ff5610dd353cf0a2bd128080920cb6b83"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/connection_control.py",
-      "sha256": "780e352e20f798152f384e7fd4ce19f181a8096fd2e4f57020cd776ad698f60f"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/connector_adapters.py",
-      "sha256": "907f2b7fec077b1e39ea64190b24fc9bc64e9f64a169aa0b76ac3e0bc80c8edd"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/currencies.py",
-      "sha256": "bfb23a7b514c709c805d3f59d213b4d8a00c9684daf93261ba2ce9c5ddeb7306"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/delivery.py",
-      "sha256": "f5c3ea1ec8ee1817191d7c530e0f0053890ceffd578ad230980b9952ccc713e5"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/interfaces.py",
-      "sha256": "1ea8188f0c721b55f19fd18124a21e36bf09b3cf830837760257ce67798e3ff3"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/ledger.py",
-      "sha256": "70c8c552ac047ae88f1b39b06c35a8f539dbc8ee6818952cb2911b444160ed4c"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/lifecycle.py",
-      "sha256": "e9d69da45e8cb77b4940bd31c42a2b4aa5bcc1e5464ce49c864415e8c28f7577"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/money.py",
-      "sha256": "1d9867eb834e03db4b25d6b27ae0879333c8d52f05a5b069c07062df1c9c4116"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/mutant_ops.py",
-      "sha256": "fd3254fe1a7b41e372421e0b19aee41a4df214a8050a6264ab6591b6db29f421"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/plan5_common.py",
-      "sha256": "7facad47b5c11cf385bc827f7904a3075edfe3f3847635a9de5a3948815ba3d6"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/plan5_openapi.py",
-      "sha256": "b075f8e6426d6285b03d17dccc0f295755742c5879740979ff93647718a552a9"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/plan5_schema.py",
-      "sha256": "400a53ab8fe4f52d8f502d3ec71fed7b6b5e8bd73096f1a490c2cf29820dc1b6"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/plan5_tools.py",
-      "sha256": "8e514ea99a0cc435ec6d1b61a94f8c82446f4601cf50a2b64996a97240707fe1"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/plan5_validation.py",
-      "sha256": "5694aba127c718bbfd95df3c76a9f9cc7c7f8884dcf2786284bc4c1228fc2340"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/proof.py",
-      "sha256": "dbe12578aff313c885dace4b3e06ea3cf1c72cae18afee28869d012dad8c50ab"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/registry.py",
-      "sha256": "35cd3c329e408199e5cf948884120313bdbbb3edf8b9258a85b1d7f36e6bd554"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/runner.py",
-      "sha256": "37262931f8df90eef8819cff11dbed13e63f5411ff19a24e057df86af3b44896"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/stages.py",
-      "sha256": "63e5df2abbd54f18b8a83f8096ded948f6e49af2227a6e6b4dfab1f77b2f8b66"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/survey.py",
-      "sha256": "098c7665ce1e495336e5fdfe9e64d96abc30d9e151580cba053b8eccc2c3201b"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/tools.py",
-      "sha256": "bbf6feaf04994f46c5d9adee0cf9e66b733280017965b00847fe8e8b5e1222d3"
-    },
-    {
-      "path": "contracts/src/goldgraft_contracts/work_package.py",
-      "sha256": "6c0b81d47a8f746fe30ed68e0ee3b867012306d89480ee16707fed66dbe00786"
+      "path": "contracts/api/openapi.json",
+      "sha256": "8d8669dcc90849d8199989e35bb4195f6883bd86849d7a26841d20f1e8517d48"
     },
     {
       "path": "contracts/schemas/ActionIntent.1.json",
@@ -276,6 +179,14 @@
     {
       "path": "contracts/schemas/Certificate.1.json",
       "sha256": "da177ae26df74ac8d8bed31e80344dfc6655ebcccf8843ac84ed30bee8953326"
+    },
+    {
+      "path": "contracts/schemas/Certificate.2.json",
+      "sha256": "878761413eeb2b4b0d6d6a8d3030c41b7f6002cdc04dea2c2ca0140032d08738"
+    },
+    {
+      "path": "contracts/schemas/CertificateVerification.1.json",
+      "sha256": "722dd01a2ccd2d3e261c2d993fe9071749c185cd95f72b4d025aef549c30020b"
     },
     {
       "path": "contracts/schemas/ChangeList.1.json",
@@ -450,6 +361,14 @@
       "sha256": "fe586cc7e3b4c5c61c83985e8ea2b361c67147d709b7e87dcdef458b69d0b743"
     },
     {
+      "path": "contracts/schemas/ExitCheckResult.1.json",
+      "sha256": "6dcf2ecf5d36bc59c25e4cd0098fecf36ac0fed0153ab26faac66a963a50d282"
+    },
+    {
+      "path": "contracts/schemas/ExitEvidenceReconciliation.1.json",
+      "sha256": "a64d8b06ae64591cb882b3c7aead77c222defdbbda2fbd0da38eb5988303e8ca"
+    },
+    {
       "path": "contracts/schemas/ExitItem.1.json",
       "sha256": "3e1d1fe823afe6888f63cdf247863225db0ed5159c5113ad09236baa224ee440"
     },
@@ -612,6 +531,18 @@
     {
       "path": "contracts/schemas/ProcessingRecipient.1.json",
       "sha256": "83b197f1640ac9dc32500eb0855ce57ed24a7c1a96d644d1d6dd48db3427fc68"
+    },
+    {
+      "path": "contracts/schemas/PromotionDecision.1.json",
+      "sha256": "22df7af3de59f3c4bdceb8ca4d272d7a5179d91ecee648da613e1b8cfb9afb34"
+    },
+    {
+      "path": "contracts/schemas/ProofPlan.1.json",
+      "sha256": "cdb674c4032d27c4874d31e4f37aece8f0f81c170eb301cbfa5889abcfbf0a87"
+    },
+    {
+      "path": "contracts/schemas/ProofResult.1.json",
+      "sha256": "2635b5446fcda7367ae4d693ca6bd76cce349110f7b8d526ac0a2044aa859113"
     },
     {
       "path": "contracts/schemas/ProofStrength.1.json",
@@ -858,269 +789,153 @@
       "sha256": "fd27a5b3e624e3175323f563c14c5f6ede3f6365cae728bc99718e715f6806e7"
     },
     {
-      "path": "contracts/api/openapi.json",
-      "sha256": "ecac5d7ceddf720a82c8f09b57ac4d2797fcdb6fdb48e9fd5301e53747b065c6"
+      "path": "contracts/src/goldgraft_contracts/__init__.py",
+      "sha256": "3e1091422f51bbe97bef5bd5455c41093da83996eff7936e409ad049cbbf6555"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/agent_runtime.py",
+      "sha256": "a6d8a7bd5758a95f8f8ad2b4674aa23111fe62853cf22802c442ca7e085b7d34"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/agents.py",
+      "sha256": "73bf023ddffc94c53aa6fb93eabc48663009a8578ce891e169f7dd0f823441ae"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/api.py",
+      "sha256": "8e5aca50c70a8838b1742c5c5633c459c7eb24020d6e75b12e903c08c02ce987"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/api_routes.py",
+      "sha256": "a32352f36aa99014fbc77ac5c14d4be9a95cd8a2b2d32fceb4a2c183fd113aec"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/base_rules.py",
+      "sha256": "12a4b8522984b8ffc902396a717ba21ced6f8162c66a1a5f4849b9c46e85ac0a"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/certificate_v2.py",
+      "sha256": "378e38fa453077d35c9dbe1b7f319e396b133ae8b570905d48e63514f7ea8071"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/cmel_mapping.py",
+      "sha256": "313001d39cc8fbe98b2b7f6b6d961f1b6ec3594dd27df10fc644d135c29ebdee"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/common.py",
+      "sha256": "2d978e12441a3d838356ff1401c9eb2ff5610dd353cf0a2bd128080920cb6b83"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/connection_control.py",
+      "sha256": "780e352e20f798152f384e7fd4ce19f181a8096fd2e4f57020cd776ad698f60f"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/connector_adapters.py",
+      "sha256": "907f2b7fec077b1e39ea64190b24fc9bc64e9f64a169aa0b76ac3e0bc80c8edd"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/currencies.py",
+      "sha256": "bfb23a7b514c709c805d3f59d213b4d8a00c9684daf93261ba2ce9c5ddeb7306"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/delivery.py",
+      "sha256": "f5c3ea1ec8ee1817191d7c530e0f0053890ceffd578ad230980b9952ccc713e5"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/exit_evidence.py",
+      "sha256": "5835a920bdb8dfeff70eb6df2ffd957ccaba9730c33c9150bea7ff712818cded"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/interfaces.py",
+      "sha256": "1ea8188f0c721b55f19fd18124a21e36bf09b3cf830837760257ce67798e3ff3"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/ledger.py",
+      "sha256": "70c8c552ac047ae88f1b39b06c35a8f539dbc8ee6818952cb2911b444160ed4c"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/lifecycle.py",
+      "sha256": "e9d69da45e8cb77b4940bd31c42a2b4aa5bcc1e5464ce49c864415e8c28f7577"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/money.py",
+      "sha256": "1d9867eb834e03db4b25d6b27ae0879333c8d52f05a5b069c07062df1c9c4116"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/mutant_ops.py",
+      "sha256": "fd3254fe1a7b41e372421e0b19aee41a4df214a8050a6264ab6591b6db29f421"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/offline_payments.py",
+      "sha256": "0cd9e2cddb5e1061faad31ffd1796307c8cc30f9cd66e99d6d6c9c3b46bd5ef2"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/plan5_common.py",
+      "sha256": "7facad47b5c11cf385bc827f7904a3075edfe3f3847635a9de5a3948815ba3d6"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/plan5_openapi.py",
+      "sha256": "b075f8e6426d6285b03d17dccc0f295755742c5879740979ff93647718a552a9"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/plan5_schema.py",
+      "sha256": "444ec8b339e1e75a9709b4afa4af7d28c77f48eca41f7bd7e7616a4333b7592a"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/plan5_tools.py",
+      "sha256": "8e514ea99a0cc435ec6d1b61a94f8c82446f4601cf50a2b64996a97240707fe1"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/plan5_validation.py",
+      "sha256": "3ae31923deac68c631943a28c20e751198410e0ab803489e211ddaa948fc8001"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/proof.py",
+      "sha256": "dbe12578aff313c885dace4b3e06ea3cf1c72cae18afee28869d012dad8c50ab"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/proof_evidence.py",
+      "sha256": "9e50a3d48af1a4b9a278d57fe9cec97424b1dfc8729de96aec16e3931e7cf8ec"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/registry.py",
+      "sha256": "9817cb26595f5db3e04e6c1d377256ee314bd11aba5d5010e1173ab3a743c9dc"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/run_views.py",
+      "sha256": "748c87aac29c98719a4db7c53f88baeff0031c77773fca9f4704b6afbdbc7bb4"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/runner.py",
+      "sha256": "37262931f8df90eef8819cff11dbed13e63f5411ff19a24e057df86af3b44896"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/stages.py",
+      "sha256": "63e5df2abbd54f18b8a83f8096ded948f6e49af2227a6e6b4dfab1f77b2f8b66"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/survey.py",
+      "sha256": "098c7665ce1e495336e5fdfe9e64d96abc30d9e151580cba053b8eccc2c3201b"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/tools.py",
+      "sha256": "bbf6feaf04994f46c5d9adee0cf9e66b733280017965b00847fe8e8b5e1222d3"
+    },
+    {
+      "path": "contracts/src/goldgraft_contracts/work_package.py",
+      "sha256": "6c0b81d47a8f746fe30ed68e0ee3b867012306d89480ee16707fed66dbe00786"
     },
     {
       "path": "contracts/ts/goldgraft-api.d.ts",
-      "sha256": "66f340162e508e5c279d825c32f3608b9fc1fbda46698734d34eea63f02a7649"
+      "sha256": "ae80fdab5804699260d18dcd1231265b399241689254f9f59be389446a852054"
     },
     {
       "path": "contracts/ts/goldgraft-contracts.d.ts",
-      "sha256": "63ac74672f37538816699b9c1c2e08bcf55428933fa678374250bed9dc10b2a9"
+      "sha256": "be04bda4b8e49996c58ddf8a73a96441658a8650a12bffa0b553c2ee1e78ec95"
     }
   ],
-  "created_at": "2026-11-10T15:46:26.728754+00:00",
+  "created_at": "2026-11-12T11:22:56.667012+00:00",
   "evidence_class": "offline_component",
   "fixture_files": [
-    {
-      "path": "fixtures/plan5/frontend/apply_split_controllers/CaseView.1.json",
-      "sha256": "1f936a0cd68398723265f8d27e04d00b34dab43144c4dca0104bb91b8e205136"
-    },
-    {
-      "path": "fixtures/plan5/frontend/apply_split_controllers/PrivateReviewView.1.json",
-      "sha256": "4ac263dafdcebad76d4d67249aedcfd01d73228c83114a636ebd07eafd7d7c17"
-    },
-    {
-      "path": "fixtures/plan5/frontend/apply_split_controllers/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cancel_before_accept/CaseView.1.json",
-      "sha256": "5229a0f048722db4bbe7dffc7838e59c838f8e517977140bb37525079d4b861f"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cancel_before_accept/WorkCancellation.1.json",
-      "sha256": "58f331c61d50516d6bd92a0c4ced22ccacd8eec12efabce8ddffdbb4baf2f770"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cancel_pending/CaseView.1.json",
-      "sha256": "d99ec9a0367a1b529f0900fde56f96e788ed2bc153dc468b7917ccc8781a20aa"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cancel_pending/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cancel_pending/WorkCancellation.1.json",
-      "sha256": "d9011eb71ef3faec7b50c62cb3b533996b6c36b70d70aa54eb252b1d2c65a5b7"
-    },
-    {
-      "path": "fixtures/plan5/frontend/claimed_no_operation/CaseView.1.json",
-      "sha256": "b13680b377afe214144783490cb0ecc2c9bcd08b3add27effb60362113909761"
-    },
-    {
-      "path": "fixtures/plan5/frontend/claimed_no_operation/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cleanup_pending/CaseView.1.json",
-      "sha256": "ec6a3a440b4bf229aec329aacab2e03612732106afa1a221eda09ef7b9a8baf7"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cleanup_pending/DeliverySnapshot.1.json",
-      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cleanup_pending/ExitManifest.1.json",
-      "sha256": "cbf279e53d0fa05c560d7d17171e2d955052dc049969b0d85bcb5e8ba0948e72"
-    },
-    {
-      "path": "fixtures/plan5/frontend/cleanup_pending/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/controller_wait/CaseView.1.json",
-      "sha256": "4a1371f35bed71223efffc908a25b802c50aa0f659e87d87efdfd78a472b1c90"
-    },
-    {
-      "path": "fixtures/plan5/frontend/controller_wait/ControllerInvitation.1.json",
-      "sha256": "d5f509d2d96c34dbf68fa12d13724944968ee08e19fb24472d0fdc0fc2ebc629"
-    },
-    {
-      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/CaseView.1.json",
-      "sha256": "591fed6b7104114ab3ce0e0d4b17259490f9451f816f1caf851fd233183ec69c"
-    },
-    {
-      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/DeliverySnapshot.1.json",
-      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661"
-    },
-    {
-      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/DeploymentObservation.1.json",
-      "sha256": "b72171c7c02361ec3297c0efde63a271e36a4ff6c2bf50684e43237e972315bd"
-    },
-    {
-      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/event_gap/CaseEvent.1.json",
-      "sha256": "6b08141a33cc90e3fc7f7060ea4f07e48a68bf4f6ad18df35b9f2a09e6300396"
-    },
-    {
-      "path": "fixtures/plan5/frontend/event_gap/CaseView.1.json",
-      "sha256": "01fbb42903e967d8c79b563dbbe0314a77da9aa07d428bb4311630fb0186e828"
-    },
-    {
-      "path": "fixtures/plan5/frontend/event_gap/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/exit_executor_missing/CaseView.1.json",
-      "sha256": "3638b19a09f78b43a09fab7f83e4b99d0e4fadcaf0d33aaa99bf31be1fb7587e"
-    },
-    {
-      "path": "fixtures/plan5/frontend/exit_executor_missing/DeliverySnapshot.1.json",
-      "sha256": "3502a0a0b4fe41f5c6431ea2d5d4f58e33ed99a15f035f9823f2aeb1bcc37276"
-    },
-    {
-      "path": "fixtures/plan5/frontend/exit_executor_missing/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/missing_source/CaseView.1.json",
-      "sha256": "a00392e5404bd0dd6c964ecd0665a8d71f13564ea3aa2a1c8e48e5b2781d32fa"
-    },
-    {
-      "path": "fixtures/plan5/frontend/persistent_config_mismatch/CaseView.1.json",
-      "sha256": "33f18e50bebde30141309d2dd65354f7b56ea678fea718db2ebf1807cc271fc5"
-    },
-    {
-      "path": "fixtures/plan5/frontend/persistent_config_mismatch/DeliverySnapshot.1.json",
-      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661"
-    },
-    {
-      "path": "fixtures/plan5/frontend/persistent_config_mismatch/DeploymentObservation.1.json",
-      "sha256": "c9292262fb201ca08d2b85693f7e138d3010b29ed5f881be2b8c1941763e76f1"
-    },
-    {
-      "path": "fixtures/plan5/frontend/persistent_config_mismatch/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/proof_missing/CaseView.1.json",
-      "sha256": "e39c17a9bf27c7adac9f0d7b4a42fed9cba665692b680c68473bc482b2527d14"
-    },
-    {
-      "path": "fixtures/plan5/frontend/proof_missing/PrivateReviewView.1.json",
-      "sha256": "9a3b48c15c9c4087d880ff5678f7053da0ae3d5486fc6b3436b7abe1382f70aa"
-    },
-    {
-      "path": "fixtures/plan5/frontend/proof_missing/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/ready/CaseView.1.json",
-      "sha256": "3035bf9af0a2c4d9319dc665eb53cd63b4ca4ad7858c605e6c86e2634a4c9033"
-    },
-    {
-      "path": "fixtures/plan5/frontend/start_response_lost/CaseView.1.json",
-      "sha256": "74100664769b0a123034f38f152de862f143086364e8ecd529782ee0cba24bbc"
-    },
-    {
-      "path": "fixtures/plan5/frontend/start_response_lost/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/frontend/synthetic_complete/CaseView.1.json",
-      "sha256": "cec0146e4996a3cd14c8ee46fc9d58fb22d95a79df7e27ed11955640c397abe4"
-    },
-    {
-      "path": "fixtures/plan5/frontend/synthetic_complete/DeliverySnapshot.1.json",
-      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
-    },
-    {
-      "path": "fixtures/plan5/frontend/synthetic_complete/ExitManifest.1.json",
-      "sha256": "d5d8166b503b371da8d59686011de992a3bf8a794e60c34d9d7777c1b0a0390e"
-    },
-    {
-      "path": "fixtures/plan5/frontend/synthetic_complete/PublicProofView.1.json",
-      "sha256": "671596ef91236f9200b5ca709f3af7a38ac2504d7bf6cedb6eeb25ee350f12c6"
-    },
-    {
-      "path": "fixtures/plan5/frontend/synthetic_complete/WorkAcceptance.1.json",
-      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
-    },
-    {
-      "path": "fixtures/plan5/index.json",
-      "sha256": "5e81fd67d24e6508f95960fc880431ffedd68ebd10b068fbbfe8025d11eab21a"
-    },
-    {
-      "path": "fixtures/plan5/negative/absolute_path.json",
-      "sha256": "7a63b872405fc4a82c080c008e7d0891ac1ec4388cf175ba2af63273838336fd"
-    },
-    {
-      "path": "fixtures/plan5/negative/bool_generation.json",
-      "sha256": "a583c33efc2b7bb61d486da25b360f1948c4c8d415f407114163e0407a0759cf"
-    },
-    {
-      "path": "fixtures/plan5/negative/complete_with_deploy.json",
-      "sha256": "9c7f9c3754a15d2c09b32ca4952cb6c686e3724b7fc93716dcf34cb1dee54a42"
-    },
-    {
-      "path": "fixtures/plan5/negative/empty_completed_output.json",
-      "sha256": "093ba99c5b423fcb2b6b980bcbd6907985fcf6c34514eb5e84ab41d7b5e0d39c"
-    },
-    {
-      "path": "fixtures/plan5/negative/extra_authority.json",
-      "sha256": "bb0ad7eaa13d0f156a4bd5927142ac1559b1bad07d11375f050545211c174998"
-    },
-    {
-      "path": "fixtures/plan5/negative/fake_snapshot_git.json",
-      "sha256": "3cf470cc28d64b695e74978159f47272ca16ba854657fa87f12167c49fd4a25c"
-    },
-    {
-      "path": "fixtures/plan5/negative/float_generation.json",
-      "sha256": "1176bcb375a8e81a2d261f21872a88aa46fb7298a5b37e3babdc4c29158cb955"
-    },
-    {
-      "path": "fixtures/plan5/negative/float_micro_cost.json",
-      "sha256": "f0dcab696fae5f49e3aec0bec021c33beae01fe648115cb93824d1038f50aa8a"
-    },
-    {
-      "path": "fixtures/plan5/negative/missing_changed_final_candidate.json",
-      "sha256": "8715268c25a01b5f8fc986a689b340fd5866dbf3f745766a3b55ed125015db1c"
-    },
-    {
-      "path": "fixtures/plan5/negative/mixed_model_form.json",
-      "sha256": "93bcc1dceea2e99e905a2ec3a8810983266286b5637279cb430a69cb24db984d"
-    },
-    {
-      "path": "fixtures/plan5/negative/multiple_exit_restarts.json",
-      "sha256": "86e3a5bb448b57cb7cddd8d58e077811b87bbe5dd3f8fef930e7da56a5666d20"
-    },
-    {
-      "path": "fixtures/plan5/negative/naive_time.json",
-      "sha256": "a81b99fbd9d31da7b4e1b5c696fdf55b645234c74e37a5bb692df72ec2ade5c2"
-    },
-    {
-      "path": "fixtures/plan5/negative/non_utc_time.json",
-      "sha256": "17cad6c0c0df83fab6480707df335990f1ea3ee3d03567578ec580f08bca956a"
-    },
-    {
-      "path": "fixtures/plan5/negative/oci_is_not_tar.json",
-      "sha256": "5b0b5f7715902efbfb7d93b26bbeba79fe1f358db045ca9a97ce96b47e04c325"
-    },
-    {
-      "path": "fixtures/plan5/negative/path_escape.json",
-      "sha256": "639c9d4df92a24acedbb87bfece0594cd1cd4a3ee4c445bb85ed749b6babec39"
-    },
-    {
-      "path": "fixtures/plan5/negative/unknown_role.json",
-      "sha256": "8472586ae01180733721ca362b164859af950cf3c1c96bb997c3080c71712441"
-    },
-    {
-      "path": "fixtures/plan5/negative/unknown_without_issue.json",
-      "sha256": "ac262512520832ca34051557372e80cc3fa15b641e75c35963deee876f7c60b5"
-    },
-    {
-      "path": "fixtures/plan5/negative/unreserved_micro_cost.json",
-      "sha256": "6a80269871fe009f66ce247d8856e6fb4118bdea62ce28ad3197a06060baad77"
-    },
-    {
-      "path": "fixtures/plan5/negative/unresolved_reservation_release.json",
-      "sha256": "6e6e2e023b3fafae99248c7e42a06ad637cd5d7680dc651c4335b6b5af6d6a71"
-    },
     {
       "path": "contracts/examples/ActionIntent.1.json",
       "sha256": "251ddea3da0fc180b946c523873207f2d404b15288d2e322bdb4c885f724dea8"
@@ -1248,6 +1063,14 @@
     {
       "path": "contracts/examples/Certificate.1.json",
       "sha256": "74571cda205f325406840bd136f18fc6660bc7e7e65bff76d634095390ab9bb0"
+    },
+    {
+      "path": "contracts/examples/Certificate.2.json",
+      "sha256": "e667f33da6cac9bb9fff923d0228ff470f56c53b960c25f4fd5126434de6e807"
+    },
+    {
+      "path": "contracts/examples/CertificateVerification.1.json",
+      "sha256": "92fca31b603706cc81549f00aee701ab542d0af485a422e8a5e7fbbaf844aab4"
     },
     {
       "path": "contracts/examples/ChangeList.1.json",
@@ -1422,6 +1245,14 @@
       "sha256": "51074770464b0e09b7531aaa26269fbb3652cf449af72846b02935ecb94df651"
     },
     {
+      "path": "contracts/examples/ExitCheckResult.1.json",
+      "sha256": "0948bdd2b23aa971e98a6ed1b5d3439d7c487bd89793ec8800652baade9d8d04"
+    },
+    {
+      "path": "contracts/examples/ExitEvidenceReconciliation.1.json",
+      "sha256": "aa67bc73ba64e6e345c12257c72d4b031f0c1e213202d711226c0cd69a070f56"
+    },
+    {
       "path": "contracts/examples/ExitItem.1.json",
       "sha256": "ba59503aa4c7379604c4faa6547c93ffa3be7097a3afdf50ea33ed82b12b0e48"
     },
@@ -1584,6 +1415,18 @@
     {
       "path": "contracts/examples/ProcessingRecipient.1.json",
       "sha256": "0b78d8fbf7aa677a366971345df999fc9af774177d80de5fdfbb7001ad9cf065"
+    },
+    {
+      "path": "contracts/examples/PromotionDecision.1.json",
+      "sha256": "71b226443ef03bd219f1794c093d853b79223c06db713750dda0d2cba9c06727"
+    },
+    {
+      "path": "contracts/examples/ProofPlan.1.json",
+      "sha256": "e0de9bf775411ee22897565294ba1b4c2438b183ae13692eb74b4a5e0796431c"
+    },
+    {
+      "path": "contracts/examples/ProofResult.1.json",
+      "sha256": "0fbe101d57fb547de1322031442a67996534520461ce6e79782cf7391d445a70"
     },
     {
       "path": "contracts/examples/ProofStrength.1.json",
@@ -1828,6 +1671,278 @@
     {
       "path": "contracts/examples/WorkerOperation.1.json",
       "sha256": "a4fdffdd753f194690d5b96a34ba0993db3c5b3816082cedbee358710d1b3c3e"
+    },
+    {
+      "path": "fixtures/plan5/index.json",
+      "sha256": "64d0ed854244b9106debdf177b1a963c310a58c2a3f15b45da18810930086915"
+    },
+    {
+      "path": "fixtures/plan5/frontend/apply_split_controllers/CaseView.1.json",
+      "sha256": "1f936a0cd68398723265f8d27e04d00b34dab43144c4dca0104bb91b8e205136"
+    },
+    {
+      "path": "fixtures/plan5/frontend/apply_split_controllers/PrivateReviewView.1.json",
+      "sha256": "4ac263dafdcebad76d4d67249aedcfd01d73228c83114a636ebd07eafd7d7c17"
+    },
+    {
+      "path": "fixtures/plan5/frontend/apply_split_controllers/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cancel_before_accept/CaseView.1.json",
+      "sha256": "5229a0f048722db4bbe7dffc7838e59c838f8e517977140bb37525079d4b861f"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cancel_before_accept/WorkCancellation.1.json",
+      "sha256": "58f331c61d50516d6bd92a0c4ced22ccacd8eec12efabce8ddffdbb4baf2f770"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cancel_pending/CaseView.1.json",
+      "sha256": "d99ec9a0367a1b529f0900fde56f96e788ed2bc153dc468b7917ccc8781a20aa"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cancel_pending/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cancel_pending/WorkCancellation.1.json",
+      "sha256": "d9011eb71ef3faec7b50c62cb3b533996b6c36b70d70aa54eb252b1d2c65a5b7"
+    },
+    {
+      "path": "fixtures/plan5/frontend/claimed_no_operation/CaseView.1.json",
+      "sha256": "b13680b377afe214144783490cb0ecc2c9bcd08b3add27effb60362113909761"
+    },
+    {
+      "path": "fixtures/plan5/frontend/claimed_no_operation/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cleanup_pending/CaseView.1.json",
+      "sha256": "ec6a3a440b4bf229aec329aacab2e03612732106afa1a221eda09ef7b9a8baf7"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cleanup_pending/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cleanup_pending/ExitManifest.1.json",
+      "sha256": "cbf279e53d0fa05c560d7d17171e2d955052dc049969b0d85bcb5e8ba0948e72"
+    },
+    {
+      "path": "fixtures/plan5/frontend/cleanup_pending/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/controller_wait/CaseView.1.json",
+      "sha256": "4a1371f35bed71223efffc908a25b802c50aa0f659e87d87efdfd78a472b1c90"
+    },
+    {
+      "path": "fixtures/plan5/frontend/controller_wait/ControllerInvitation.1.json",
+      "sha256": "d5f509d2d96c34dbf68fa12d13724944968ee08e19fb24472d0fdc0fc2ebc629"
+    },
+    {
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/CaseView.1.json",
+      "sha256": "591fed6b7104114ab3ce0e0d4b17259490f9451f816f1caf851fd233183ec69c"
+    },
+    {
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/DeliverySnapshot.1.json",
+      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661"
+    },
+    {
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/DeploymentObservation.1.json",
+      "sha256": "b72171c7c02361ec3297c0efde63a271e36a4ff6c2bf50684e43237e972315bd"
+    },
+    {
+      "path": "fixtures/plan5/frontend/deploy_unknown_no_id/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/event_gap/CaseEvent.1.json",
+      "sha256": "6b08141a33cc90e3fc7f7060ea4f07e48a68bf4f6ad18df35b9f2a09e6300396"
+    },
+    {
+      "path": "fixtures/plan5/frontend/event_gap/CaseView.1.json",
+      "sha256": "01fbb42903e967d8c79b563dbbe0314a77da9aa07d428bb4311630fb0186e828"
+    },
+    {
+      "path": "fixtures/plan5/frontend/event_gap/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/exit_executor_missing/CaseView.1.json",
+      "sha256": "3638b19a09f78b43a09fab7f83e4b99d0e4fadcaf0d33aaa99bf31be1fb7587e"
+    },
+    {
+      "path": "fixtures/plan5/frontend/exit_executor_missing/DeliverySnapshot.1.json",
+      "sha256": "3502a0a0b4fe41f5c6431ea2d5d4f58e33ed99a15f035f9823f2aeb1bcc37276"
+    },
+    {
+      "path": "fixtures/plan5/frontend/exit_executor_missing/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/missing_source/CaseView.1.json",
+      "sha256": "a00392e5404bd0dd6c964ecd0665a8d71f13564ea3aa2a1c8e48e5b2781d32fa"
+    },
+    {
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/CaseView.1.json",
+      "sha256": "33f18e50bebde30141309d2dd65354f7b56ea678fea718db2ebf1807cc271fc5"
+    },
+    {
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/DeliverySnapshot.1.json",
+      "sha256": "dbff78558b6991f9d5fe4cb31281ed68e8876be582a8509bef52c4dd1df7a661"
+    },
+    {
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/DeploymentObservation.1.json",
+      "sha256": "c9292262fb201ca08d2b85693f7e138d3010b29ed5f881be2b8c1941763e76f1"
+    },
+    {
+      "path": "fixtures/plan5/frontend/persistent_config_mismatch/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/proof_missing/CaseView.1.json",
+      "sha256": "e39c17a9bf27c7adac9f0d7b4a42fed9cba665692b680c68473bc482b2527d14"
+    },
+    {
+      "path": "fixtures/plan5/frontend/proof_missing/PrivateReviewView.1.json",
+      "sha256": "9a3b48c15c9c4087d880ff5678f7053da0ae3d5486fc6b3436b7abe1382f70aa"
+    },
+    {
+      "path": "fixtures/plan5/frontend/proof_missing/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/ready/CaseView.1.json",
+      "sha256": "3035bf9af0a2c4d9319dc665eb53cd63b4ca4ad7858c605e6c86e2634a4c9033"
+    },
+    {
+      "path": "fixtures/plan5/frontend/start_response_lost/CaseView.1.json",
+      "sha256": "74100664769b0a123034f38f152de862f143086364e8ecd529782ee0cba24bbc"
+    },
+    {
+      "path": "fixtures/plan5/frontend/start_response_lost/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/frontend/synthetic_complete/CaseView.1.json",
+      "sha256": "cec0146e4996a3cd14c8ee46fc9d58fb22d95a79df7e27ed11955640c397abe4"
+    },
+    {
+      "path": "fixtures/plan5/frontend/synthetic_complete/DeliverySnapshot.1.json",
+      "sha256": "602dd3d61c31048bb49703509790b075634e70af71df9ce6025b1e4ba484d11e"
+    },
+    {
+      "path": "fixtures/plan5/frontend/synthetic_complete/ExitManifest.1.json",
+      "sha256": "d5d8166b503b371da8d59686011de992a3bf8a794e60c34d9d7777c1b0a0390e"
+    },
+    {
+      "path": "fixtures/plan5/frontend/synthetic_complete/PublicProofView.1.json",
+      "sha256": "671596ef91236f9200b5ca709f3af7a38ac2504d7bf6cedb6eeb25ee350f12c6"
+    },
+    {
+      "path": "fixtures/plan5/frontend/synthetic_complete/WorkAcceptance.1.json",
+      "sha256": "4d0ef4c3550a595709707d7d34840a226ddfec405a9badef5b9d1b943660f789"
+    },
+    {
+      "path": "fixtures/plan5/negative/absolute_path.json",
+      "sha256": "7a63b872405fc4a82c080c008e7d0891ac1ec4388cf175ba2af63273838336fd"
+    },
+    {
+      "path": "fixtures/plan5/negative/bool_generation.json",
+      "sha256": "a583c33efc2b7bb61d486da25b360f1948c4c8d415f407114163e0407a0759cf"
+    },
+    {
+      "path": "fixtures/plan5/negative/complete_with_deploy.json",
+      "sha256": "9c7f9c3754a15d2c09b32ca4952cb6c686e3724b7fc93716dcf34cb1dee54a42"
+    },
+    {
+      "path": "fixtures/plan5/negative/empty_completed_output.json",
+      "sha256": "093ba99c5b423fcb2b6b980bcbd6907985fcf6c34514eb5e84ab41d7b5e0d39c"
+    },
+    {
+      "path": "fixtures/plan5/negative/extra_authority.json",
+      "sha256": "bb0ad7eaa13d0f156a4bd5927142ac1559b1bad07d11375f050545211c174998"
+    },
+    {
+      "path": "fixtures/plan5/negative/fake_snapshot_git.json",
+      "sha256": "3cf470cc28d64b695e74978159f47272ca16ba854657fa87f12167c49fd4a25c"
+    },
+    {
+      "path": "fixtures/plan5/negative/float_generation.json",
+      "sha256": "1176bcb375a8e81a2d261f21872a88aa46fb7298a5b37e3babdc4c29158cb955"
+    },
+    {
+      "path": "fixtures/plan5/negative/float_micro_cost.json",
+      "sha256": "f0dcab696fae5f49e3aec0bec021c33beae01fe648115cb93824d1038f50aa8a"
+    },
+    {
+      "path": "fixtures/plan5/negative/missing_changed_final_candidate.json",
+      "sha256": "8715268c25a01b5f8fc986a689b340fd5866dbf3f745766a3b55ed125015db1c"
+    },
+    {
+      "path": "fixtures/plan5/negative/mixed_model_form.json",
+      "sha256": "93bcc1dceea2e99e905a2ec3a8810983266286b5637279cb430a69cb24db984d"
+    },
+    {
+      "path": "fixtures/plan5/negative/multiple_exit_restarts.json",
+      "sha256": "86e3a5bb448b57cb7cddd8d58e077811b87bbe5dd3f8fef930e7da56a5666d20"
+    },
+    {
+      "path": "fixtures/plan5/negative/naive_time.json",
+      "sha256": "a81b99fbd9d31da7b4e1b5c696fdf55b645234c74e37a5bb692df72ec2ade5c2"
+    },
+    {
+      "path": "fixtures/plan5/negative/non_utc_time.json",
+      "sha256": "17cad6c0c0df83fab6480707df335990f1ea3ee3d03567578ec580f08bca956a"
+    },
+    {
+      "path": "fixtures/plan5/negative/oci_is_not_tar.json",
+      "sha256": "5b0b5f7715902efbfb7d93b26bbeba79fe1f358db045ca9a97ce96b47e04c325"
+    },
+    {
+      "path": "fixtures/plan5/negative/path_escape.json",
+      "sha256": "639c9d4df92a24acedbb87bfece0594cd1cd4a3ee4c445bb85ed749b6babec39"
+    },
+    {
+      "path": "fixtures/plan5/negative/si01_fake_workflow.json",
+      "sha256": "75baa414857a41b8645e1b1bcef629ba9568bfdf34710d40568b68dd88d63abf"
+    },
+    {
+      "path": "fixtures/plan5/negative/si01_missing_workflow.json",
+      "sha256": "8ff0defcf9b15ff118aa974f340ce2765b744660f1b26b58bd2f995d52fa88c4"
+    },
+    {
+      "path": "fixtures/plan5/negative/si01_multiple_restarts.json",
+      "sha256": "3693c0bb77da4862a9f2b0caafaa4bf4b2416076f1de9d1d4100fd1c9b070975"
+    },
+    {
+      "path": "fixtures/plan5/negative/si01_plan_tamper.json",
+      "sha256": "8381809bc8c75ed3346c8d76e5ea32bc0d8bc0e0c1d44cf27719f1e771dc83bd"
+    },
+    {
+      "path": "fixtures/plan5/negative/si01_result_tamper.json",
+      "sha256": "e5b73f8e19c2a7697ab30b82210cfb652ffa9dae37bbb00d0284e9086a03cda6"
+    },
+    {
+      "path": "fixtures/plan5/negative/si01_snapshot_fake_git.json",
+      "sha256": "1f14051614d995b89fd96bbcf88761dd2e1e40a4875f2d3d565d21383e722bf5"
+    },
+    {
+      "path": "fixtures/plan5/negative/unknown_role.json",
+      "sha256": "8472586ae01180733721ca362b164859af950cf3c1c96bb997c3080c71712441"
+    },
+    {
+      "path": "fixtures/plan5/negative/unknown_without_issue.json",
+      "sha256": "ac262512520832ca34051557372e80cc3fa15b641e75c35963deee876f7c60b5"
+    },
+    {
+      "path": "fixtures/plan5/negative/unreserved_micro_cost.json",
+      "sha256": "6a80269871fe009f66ce247d8856e6fb4118bdea62ce28ad3197a06060baad77"
+    },
+    {
+      "path": "fixtures/plan5/negative/unresolved_reservation_release.json",
+      "sha256": "6e6e2e023b3fafae99248c7e42a06ad637cd5d7680dc651c4335b6b5af6d6a71"
     }
   ],
   "format": "GoldGraftFrontendReady/1",
@@ -1841,9 +1956,11 @@
     "No active frontend source/status existed during revision; pieces/web was not edited.",
     "One existing Starlette TestClient/httpx deprecation warning remains.",
     "No Git staging/commit/push/merge, external notification, publication or deployment.",
-    "All agents and all project API checks share a $20 total ceiling; initial cumulative checkpoint $5. Current profile spends $0."
+    "All agents and all project API checks share a $20 total ceiling; initial cumulative checkpoint $5. Current profile spends $0.",
+    "SI01 Step 3 shared evidence/certificate/exit contracts published; no qualified certificate issued.",
+    "SI01 Step 3 shared evidence/certificate/exit contracts published; no qualified certificate issued."
   ],
-  "revision": 2,
+  "revision": 3,
   "spec_files": [
     {
       "path": "docs/engineering/plan5/FRONTEND_SPEC.md",
