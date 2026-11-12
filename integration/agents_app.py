@@ -393,6 +393,14 @@ def create_app(
                 body.model_dump(mode="json"),
                 headers={"X-GoldGraft-Evidence-Class": LOCAL_PHP_EVIDENCE_CLASS},
             )
+        if suffix == "connected-proof":
+            # The exact signed bytes, so a browser can hash them and compare with the log.
+            stored = path / "connected-run/ProofResult.json"
+            if not stored.is_file():
+                return _problem(404, "No connected run has been recorded for this run yet", NOT_YET)
+            raw = stored.read_bytes()
+            validate("ProofResult/1", json.loads(raw))
+            return Response(raw, media_type="application/json")
         if suffix == "connected":
             connected = path / "connected-run"
             if not (connected / "CONNECTED_RUN.json").is_file():
@@ -572,7 +580,7 @@ def create_app(
             return rebuilt
         start_match = re.fullmatch(r"/shops/([^/]+)/graft", path)
         run_match = re.fullmatch(
-            r"/grafts/([^/]+)(?:/(events|rootmap|scenarios|cmel|proof|changes|agents|connected))?",
+            r"/grafts/([^/]+)(?:/(events|rootmap|scenarios|cmel|proof|changes|agents|connected|connected-proof))?",
             path,
         )
         is_start = (

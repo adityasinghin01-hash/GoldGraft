@@ -200,3 +200,19 @@ def test_signature_record_must_match_the_served_proof_result(agent_run, tmp_path
     assert "signing" in client.get("/grafts/sample-1/connected").json()
     signing.write_text(json.dumps({"payload_sha256": "0" * 64}))
     assert client.get("/grafts/sample-1/connected").status_code == 503
+
+
+def test_exact_proof_bytes_are_served_for_browser_hashing(agent_run, tmp_path):
+    from fastapi.testclient import TestClient
+
+    from integration.agents_app import create_app
+
+    runs = tmp_path / "runs"
+    run = runs / "sample-1"
+    run.mkdir(parents=True)
+    (run / "RESULT.json").write_bytes((agent_run / "RESULT.json").read_bytes())
+    connect_run(agent_run, run / "connected-run", execute=fixture_execute())
+    client = TestClient(create_app(runs_dir=runs))
+    served = client.get("/grafts/sample-1/connected-proof").content
+    assert served == (run / "connected-run/ProofResult.json").read_bytes()
+    assert client.get("/grafts/other/connected-proof").status_code == 404
