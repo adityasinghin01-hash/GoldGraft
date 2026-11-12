@@ -35,7 +35,13 @@ export function holdText(hold: string): string {
 /** One line for all unguarded money rules, then each other hold in plain words. */
 export function foldRules(holds: string[]): string[] {
   const rules = holds.filter((h) => h.startsWith('domain_rule:')).map((h) => h.split(':')[1]);
-  const rest = holds.filter((h) => !h.startsWith('domain_rule:')).map(holdText);
+  const survived = holds.filter((h) => h.startsWith('mutation:')).map((h) => h.split(':')[2]);
+  const rest = holds.filter((h) => !h.startsWith('domain_rule:') && !h.startsWith('mutation:')).map(holdText);
+  if (survived.length) {
+    rest.unshift(survived.length === 1
+      ? `A planted bug breaking money rule ${survived[0]} was not caught by the tests yet`
+      : `${survived.length} planted bugs (rules ${survived.join(', ')}) were not caught by the tests yet`);
+  }
   if (rules.length === 0) return rest;
   const head = rules.length === 1
     ? `Money rule ${rules[0]} has no planted bug that a test catches yet`
