@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { CheckIcon, CodeIcon, PackageIcon, WarningIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+import { useConnected } from '../api/queries';
 import { api } from '../api/client';
 import type { CodeChange, PlantedBugCheck } from '../api/types';
 import { useGraftCtx } from '../shell/GraftLayout';
@@ -105,6 +107,7 @@ function PlantedBugs({ check }: { check: PlantedBugCheck }) {
 export default function S13_Changes() {
   const { graftId } = useGraftCtx();
   const q = useQuery({ queryKey: ['changes', graftId], queryFn: () => api.changes(graftId), retry: 0 });
+  const connected = useConnected(graftId);
   useEffect(() => { document.title = 'GoldGraft · Code changes'; }, []);
 
   if (q.isPending) return <div className={s.screen}><PageHead title="Code changes" /><Skeleton what="code changes" lines={4} /></div>;
@@ -133,7 +136,9 @@ export default function S13_Changes() {
       {lintKeys.length > 0 && (
         <p className={s.check} data-ok={parsed === lintKeys.length || undefined}>
           {parsed === lintKeys.length ? <CheckIcon size={16} weight="bold" aria-hidden /> : <WarningIcon size={16} weight="fill" aria-hidden />}
-          PHP syntax check: {parsed} of {lintKeys.length} files parse. Running the new checkout against PayPal's sandbox is the next step and is not done here.
+          PHP syntax check: {parsed} of {lintKeys.length} files parse. {connected.data?.provider_checks.shop_checkout_paypal_sandbox?.state === 'verified'
+            ? <>The shop's own PayPal sandbox checkout is independently verified for {(connected.data.provider_checks.shop_checkout_paypal_sandbox.scenarios ?? []).join(', ') || 'the selected recordings'}. <Link className="gg-link" to={`/g/${graftId}/proof`}>See scope and proof</Link>.</>
+            : "Running the new checkout against PayPal's sandbox is not verified for this run yet."}
         </p>
       )}
       <div className={s.files}>
