@@ -1,0 +1,319 @@
+{
+  "path": "REWRITE",
+  "items": [
+    {
+      "touchpoint": "TP01",
+      "target_op": "POST /v2/checkout/orders",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP02",
+      "target_op": "REST HTTP client",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP03",
+      "target_op": "REST HTTP client",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP04",
+      "target_op": "POST /v2/checkout/orders",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP05",
+      "target_op": "v6 onApprove",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP06",
+      "target_op": "v6 onCancel",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP07",
+      "target_op": "GET /v2/checkout/orders/{id}",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP08",
+      "target_op": "POST /v2/checkout/orders/{id}/capture",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP09",
+      "target_op": "POST /v2/payments/captures/{id}/refund",
+      "mapping_id": "https://developer.paypal.com/api/payments/v2/",
+      "delta_ids": [
+        "D_REFUND"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP10",
+      "target_op": "POST /v1/notifications/verify-webhook-signature",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "delta_ids": [
+        "D_NOTIFY"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP11",
+      "target_op": "webhook input handler",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "delta_ids": [
+        "D_NOTIFY"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP12",
+      "target_op": "POST /v1/notifications/verify-webhook-signature",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "delta_ids": [
+        "D_NOTIFY"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP13",
+      "target_op": "POST /v1/notifications/verify-webhook-signature",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "delta_ids": [
+        "D_NOTIFY"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP14",
+      "target_op": "SUCCESS / PAYMENT.CAPTURE.COMPLETED gate",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "delta_ids": [
+        "D_NOTIFY"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP15",
+      "target_op": "deduplicated webhook persistence",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "delta_ids": [
+        "D_NOTIFY"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP16",
+      "target_op": "v6 core script",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP17",
+      "target_op": "v6 paypal-button",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP18",
+      "target_op": "v6 createPayPalOneTimePaymentSession",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP19",
+      "target_op": "server create order / session start",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP20",
+      "target_op": "v6 onApprove",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP21",
+      "target_op": "server capture from v6 onApprove",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP22",
+      "target_op": "v6 onCancel",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP23",
+      "target_op": "v6 onApprove result UI",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    },
+    {
+      "touchpoint": "TP24",
+      "target_op": "v6 onCancel result UI",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "delta_ids": [
+        "D_TOKEN_ORDER",
+        "D_TXN_CAPTURE",
+        "D_APPROVE",
+        "D_LEDGER_READ"
+      ],
+      "paypal_only": false
+    }
+  ],
+  "target_experience": [
+    "V6",
+    "ORDERS_V2",
+    "WEBHOOKS"
+  ],
+  "origin_rules": [
+    "Old transaction refunds remain NVP RefundTransaction; REST refunds apply only to new captures. No cross-generation refund equivalence is claimed.",
+    "Keep the IPN listener for old objects; keep in-flight sessions on their birth rail."
+  ],
+  "order": [
+    "READ_BOTH",
+    "NEW_FLOWS_BEHIND_SWITCH",
+    "CLEANUP"
+  ],
+  "handoff": [],
+  "deltas": [
+    {
+      "id": "D_TOKEN_ORDER",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "description": "Map pp.legacy_token to pp.order_id for the same logical order; preserve order_ref and money. Different run IDs are noise, not a new order."
+    },
+    {
+      "id": "D_TXN_CAPTURE",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "description": "Map NVP PAYMENTINFO_0_TRANSACTIONID / ledger TRANSACTIONID to REST capture_id, preserving distinct captures, amount, currency and status."
+    },
+    {
+      "id": "D_APPROVE",
+      "mapping_id": "https://developer.paypal.com/sdk/js/reference/",
+      "description": "Map checkout.js onAuthorize/approved token+PayerID return to v6 onApprove orderId. Preserve APPROVE and its causal position."
+    },
+    {
+      "id": "D_NOTIFY",
+      "mapping_id": "https://developer.paypal.com/api/webhooks/v1/",
+      "description": "IPN Completed becomes webhook PAYMENT.CAPTURE.COMPLETED. VERIFIED/INVALID becomes verification_status SUCCESS/FAILURE. Preserve NOTIFY and verification result, amounts and causal order."
+    },
+    {
+      "id": "D_LEDGER_READ",
+      "mapping_id": "https://developer.paypal.com/api/orders/v2/",
+      "description": "One NVP GetTransactionDetails capture lookup becomes GET order plus GET capture. Coalesce repeated ledger observations with the same economic ID, status and money; preserve different IDs and state revisions. Renumber observation seq after this read fan-out."
+    },
+    {
+      "id": "D_REFUND",
+      "mapping_id": "https://developer.paypal.com/api/payments/v2/",
+      "description": "Map successful NVP RefundTransaction instant refund and GetTransactionDetails refund ledger to REST refund COMPLETED / GET refund. IDs differ, REFUND amount and REFUNDED status do not."
+    }
+  ]
+}

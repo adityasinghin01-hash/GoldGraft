@@ -17,7 +17,7 @@ dev = ["pytest>=8", "ruff>=0.9", "pydantic>=2,<3", "hypothesis>=6", "jsonschema>
 
 [tool.pytest.ini_options]
 markers = ["live: requires real external services; opt in with GOLDGRAFT_LIVE=1"]
-testpaths = ["contracts/tests", "foundation/tests", "fakes/tests", "fixtures/tests", "plugtests", "pieces/agents/tests", "pieces/backend/model_gateway/tests", "pieces/backend/notifications/tests"]
+testpaths = ["contracts/tests", "foundation/tests", "fakes/tests", "fixtures/tests", "plugtests", "pieces/agents/tests", "pieces/backend/model_gateway/tests", "pieces/backend/notifications/tests", "tests", "integration_tests"]
 
 [tool.ruff]
 target-version = "py312"

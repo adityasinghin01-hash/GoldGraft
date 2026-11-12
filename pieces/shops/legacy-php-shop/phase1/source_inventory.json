@@ -1,0 +1,97 @@
+{
+  "document_kind": "local_source_review_not_shared_wire_contract",
+  "team_revision": "da2b5f02d5559c510de6b3b9d81e58400bdf6c89",
+  "upstream_revision": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+  "reference_root": "fixtures/shops/legacy-php-shop",
+  "files": [
+    {
+      "path": "Dockerfile",
+      "git_blob_sha1": "f4d6eb93ef9f1f038a4bb502ca5d04f23fac03dc"
+    },
+    {
+      "path": "LICENSE.cutover",
+      "git_blob_sha1": "e74c9e96609d62a91b445c76b46d24a40a7613d0"
+    },
+    {
+      "path": "NOTICE.md",
+      "git_blob_sha1": "c053964ac745566c86594a8cc3cadb9037179466"
+    },
+    {
+      "path": "buyer.spec.ts",
+      "git_blob_sha1": "2daebade6161f8a86a65289c2890a66a8d6950c8"
+    },
+    {
+      "path": "docker-compose.yml",
+      "git_blob_sha1": "e0c0bbfd8575e411556d02e45c45efdb87e519bc"
+    },
+    {
+      "path": "goldgraft-shop.yaml",
+      "git_blob_sha1": "66cbc849802b117c90a86d8e18fb9a06d3c52c8d"
+    },
+    {
+      "path": "src/api/create-payment.php",
+      "git_blob_sha1": "e37f64eb7e8622c5fc2754ad437918dceeb14501"
+    },
+    {
+      "path": "src/api/execute-payment.php",
+      "git_blob_sha1": "eae5a43e6ad33817385103a3b8c51bc009df89c7"
+    },
+    {
+      "path": "src/api/orders.php",
+      "git_blob_sha1": "1daebafcad1a0becc923d931c63826441d4d2fdd"
+    },
+    {
+      "path": "src/api/refund.php",
+      "git_blob_sha1": "7f2df35896981fc0d7b37dee1290062ff62cb981"
+    },
+    {
+      "path": "src/assets/mug.svg",
+      "git_blob_sha1": "faaa3cc550f1c9009699c8520e016b7b020d0a81"
+    },
+    {
+      "path": "src/assets/poster.svg",
+      "git_blob_sha1": "fce6697aaeff18b7f42df5ba51fa61c3890c0f19"
+    },
+    {
+      "path": "src/assets/shop.css",
+      "git_blob_sha1": "126cf3dc6c870b9f665b11628b269b28e9ef9041"
+    },
+    {
+      "path": "src/assets/tee.svg",
+      "git_blob_sha1": "ee0cfee99f9ceef2868dab72d2549707644e19c6"
+    },
+    {
+      "path": "src/cancel.php",
+      "git_blob_sha1": "0f1aa1dc1aee1f2ce5889ec9106bd42f0b424714"
+    },
+    {
+      "path": "src/config.php",
+      "git_blob_sha1": "64a2d28f6057deb5330c6fb2aac7b44fcb531f91"
+    },
+    {
+      "path": "src/index.php",
+      "git_blob_sha1": "ae311ef5b66bafe630eb65d92b821fd9680e712b"
+    },
+    {
+      "path": "src/ipn.php",
+      "git_blob_sha1": "224e8587c128b234604090c57131ed3bcee391ed"
+    },
+    {
+      "path": "src/lib/orders_store.php",
+      "git_blob_sha1": "0c2a2f5d054216d0ad305f6aafc595920eaaf152"
+    },
+    {
+      "path": "src/lib/paypal_nvp.php",
+      "git_blob_sha1": "2eba11c21dc2bb238e2de4cfb8ea389ab33d5651"
+    },
+    {
+      "path": "src/success.php",
+      "git_blob_sha1": "140acadf3dc6aac72f358c2b946e6985852203f7"
+    },
+    {
+      "path": "vendor_hashes.json",
+      "git_blob_sha1": "779bc203a8dbb6512dc736337e77eebb1f34fec9"
+    }
+  ],
+  "runtime_qualified": false
+}

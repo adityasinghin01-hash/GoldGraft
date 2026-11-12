@@ -1,0 +1,150 @@
+{
+  "document_kind": "local_kernel_scenario_preparation_not_executable_vendor_job",
+  "status": "BLOCKED",
+  "owner": "Vijay VJ02 with Gupta GU02/GU03",
+  "scenario_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S14"
+  ],
+  "vendor_sdk_reference": "@onkernel/sdk (not installed or invoked)",
+  "account_approval": "NOT_ESTABLISHED",
+  "event_credit_redemption": "NOT_VERIFIED",
+  "credit_expiry": null,
+  "incident_review_source": "https://www.kernel.sh/blog/public-notice-of-security-incident-nov-4-2026",
+  "guarded_browser_profile_qualified": false,
+  "permitted_external_sessions": 0,
+  "scope": "same fourteen one-time USD sandbox scenarios; browser replay is not money proof",
+  "required_from_backend": [
+    "qualified browser/session/target policy",
+    "approved sandbox credential refs and retention",
+    "actual case/run/scenario/subject correlation",
+    "recorder evidence references",
+    "bounded session cleanup and unknown outcome handling"
+  ],
+  "scenarios": [
+    {
+      "id": "S01",
+      "title": "Create, approve, capture and return",
+      "expected_domain_observation": "Reconcile shop order, provider capture and amounts; HTTP success alone is insufficient.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S02",
+      "title": "Buyer cancellation",
+      "expected_domain_observation": "No paid/fulfilled state or replacement payment inferred from browser cancellation.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S03",
+      "title": "Declined payment",
+      "expected_domain_observation": "No fulfillment; preserve observed provider outcome and associated intent.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S04",
+      "title": "Pending then completed",
+      "expected_domain_observation": "Pending is not paid; later verified completion produces one transition.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S05",
+      "title": "Payer action when supported",
+      "expected_domain_observation": "Record actual account/product support; unavailable required flow is a hold, not a silent skip.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S06",
+      "title": "Duplicate submit / two tabs",
+      "expected_domain_observation": "One logical payment intent and one economic effect; losing response cannot overwrite winner.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S07",
+      "title": "Lost response / restart / retry",
+      "expected_domain_observation": "Preserve original API-specific idempotency identity; reconcile unknown effects without fresh-key retry.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S08",
+      "title": "Full refund / repeated refund",
+      "expected_domain_observation": "Use original API/account/object IDs; check remaining amount; distinguish pending and completed; no excess refund.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S09",
+      "title": "IPN authenticity and business checks",
+      "expected_domain_observation": "Preserve raw bytes; verified identity, recipient, amount and currency before financial effects.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S10",
+      "title": "IPN pending/completed/duplicate/late pending",
+      "expected_domain_observation": "State-aware dedupe; one fulfillment; no state regression; later legitimate financial events retained.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S11",
+      "title": "Webhook authenticity / duplicate / wrong listener",
+      "expected_domain_observation": "Bind raw-body verification to sandbox app/listener; mock simulator evidence stays separate.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S12",
+      "title": "Callback outage / reconciliation",
+      "expected_domain_observation": "Durable receipt before acknowledgement; no effect before verification; absent reporting is not proof of no charge.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S13",
+      "title": "Order persistence and restart",
+      "expected_domain_observation": "Retain order/payment correspondence and state; no concurrent flat-file writers or restoration over new payments.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    },
+    {
+      "id": "S14",
+      "title": "Amount / currency tampering",
+      "expected_domain_observation": "USD shop charge must equal trusted order amount and intended recipient; no multicurrency support inferred.",
+      "status": "BLOCKED",
+      "actual_browser_replay": null,
+      "actual_payment_capture": null
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "info": {
+    "name": "GoldGraft local shop safety checks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "LOCAL OFFLINE HTTP CHECKS ONLY. No real sandbox payment evidence or cloud upload."
+  },
+  "item": [
+    {
+      "name": "Health is not payment readiness",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/__lab/health",
+        "header": []
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Expected HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Payments disabled\", function () { pm.expect(pm.response.json().payments).to.eql(\"disabled\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unauthenticated shop denied",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/",
+        "header": []
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Expected HTTP 401\", function () { pm.response.to.have.status(401); });",
+              "pm.test(\"Access required\", function () { pm.expect(pm.response.json().error).to.eql(\"lab_access_required\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authorized original shop HTML",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/",
+        "header": [
+          {
+            "key": "X-GoldGraft-Lab-Key",
+            "value": "{{lab_key}}"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Expected HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Original fixture HTML\", function () { pm.expect(pm.response.text()).to.include(\"Cutover\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Private config denied",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/config.php",
+        "header": [
+          {
+            "key": "X-GoldGraft-Lab-Key",
+            "value": "{{lab_key}}"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Expected HTTP 404\", function () { pm.response.to.have.status(404); });",
+              "pm.test(\"No private route\", function () { pm.expect(pm.response.json().error).to.eql(\"route_not_available\"); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment execution disabled",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/create-payment.php",
+        "header": [
+          {
+            "key": "X-GoldGraft-Lab-Key",
+            "value": "{{lab_key}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"tee\": 1}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Expected HTTP 503\", function () { pm.response.to.have.status(503); });",
+              "pm.test(\"No payment effect\", function () { pm.expect(pm.response.json().error).to.eql(\"payment_and_callback_execution_disabled\"); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

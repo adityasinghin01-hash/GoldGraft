@@ -1,0 +1,60 @@
+{
+  "id": "PARITY_EXTRA",
+  "family": "PROPERTY",
+  "cart": {
+    "items": [
+      {
+        "sku": "tee",
+        "qty": 1,
+        "unit_minor": 2500
+      }
+    ],
+    "total": {
+      "minor": 2500,
+      "currency": "USD"
+    },
+    "browser_quote": {
+      "minor": 1,
+      "currency": "EUR"
+    }
+  },
+  "steps": [
+    {
+      "driver_step": "Post tee=1 cart with untrusted browser minor=1,currency=EUR; server uses catalogue 2500 USD"
+    },
+    {
+      "api_step": "Create PayPal order, approve through checkout callback, follow scenario raw exchanges in order"
+    },
+    {
+      "api_step": "Read PayPal ledger after run; preserve failures as evidence"
+    }
+  ],
+  "rules": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R14",
+    "R15",
+    "R16",
+    "R17"
+  ],
+  "expect": {
+    "grade": "PROBLEM",
+    "synthetic_only": true,
+    "description": "NEW adds an unapproved 1250 USD-minor catalogue mug intent, never captured; all contract rules hold, parity fails."
+  },
+  "assured": {
+    "passes_on_old": true,
+    "flake_free_runs": 0
+  }
+}

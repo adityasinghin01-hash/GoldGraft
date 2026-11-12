@@ -1,0 +1,3510 @@
+{
+ "_label": "SYNTHETIC \u2014 shared conformance cases for every Graft Switch library",
+ "_rules": "see fakes/src/goldgraft_fakes/switch.py",
+ "cases": [
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order0",
+   "order_ref": "order-0",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order1",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order2",
+   "order_ref": "order-2",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order3",
+   "order_ref": "order-3",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order4",
+   "order_ref": "order-4",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order5",
+   "order_ref": "order-5",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order6",
+   "order_ref": "order-6",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order7",
+   "order_ref": "order-7",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order8",
+   "order_ref": "order-8",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order9",
+   "order_ref": "order-9",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order10",
+   "order_ref": "order-10",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order11",
+   "order_ref": "order-11",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order12",
+   "order_ref": "order-12",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order13",
+   "order_ref": "order-13",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order14",
+   "order_ref": "order-14",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order15",
+   "order_ref": "order-15",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order16",
+   "order_ref": "order-16",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order17",
+   "order_ref": "order-17",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order18",
+   "order_ref": "order-18",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order19",
+   "order_ref": "order-19",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order20",
+   "order_ref": "order-20",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order21",
+   "order_ref": "order-21",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order22",
+   "order_ref": "order-22",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order23",
+   "order_ref": "order-23",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order24",
+   "order_ref": "order-24",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order25",
+   "order_ref": "order-25",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order26",
+   "order_ref": "order-26",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order27",
+   "order_ref": "order-27",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order28",
+   "order_ref": "order-28",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order29",
+   "order_ref": "order-29",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order30",
+   "order_ref": "order-30",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order31",
+   "order_ref": "order-31",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order32",
+   "order_ref": "order-32",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order33",
+   "order_ref": "order-33",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order34",
+   "order_ref": "order-34",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order35",
+   "order_ref": "order-35",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order36",
+   "order_ref": "order-36",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order37",
+   "order_ref": "order-37",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order38",
+   "order_ref": "order-38",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct0-order39",
+   "order_ref": "order-39",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order0",
+   "order_ref": "order-0",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order1",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order2",
+   "order_ref": "order-2",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order3",
+   "order_ref": "order-3",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order4",
+   "order_ref": "order-4",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order5",
+   "order_ref": "order-5",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order6",
+   "order_ref": "order-6",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order7",
+   "order_ref": "order-7",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order8",
+   "order_ref": "order-8",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order9",
+   "order_ref": "order-9",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order10",
+   "order_ref": "order-10",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order11",
+   "order_ref": "order-11",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order12",
+   "order_ref": "order-12",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order13",
+   "order_ref": "order-13",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order14",
+   "order_ref": "order-14",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order15",
+   "order_ref": "order-15",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order16",
+   "order_ref": "order-16",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order17",
+   "order_ref": "order-17",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order18",
+   "order_ref": "order-18",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order19",
+   "order_ref": "order-19",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order20",
+   "order_ref": "order-20",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order21",
+   "order_ref": "order-21",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order22",
+   "order_ref": "order-22",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order23",
+   "order_ref": "order-23",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order24",
+   "order_ref": "order-24",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order25",
+   "order_ref": "order-25",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order26",
+   "order_ref": "order-26",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order27",
+   "order_ref": "order-27",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order28",
+   "order_ref": "order-28",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order29",
+   "order_ref": "order-29",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order30",
+   "order_ref": "order-30",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order31",
+   "order_ref": "order-31",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order32",
+   "order_ref": "order-32",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order33",
+   "order_ref": "order-33",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order34",
+   "order_ref": "order-34",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order35",
+   "order_ref": "order-35",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order36",
+   "order_ref": "order-36",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order37",
+   "order_ref": "order-37",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order38",
+   "order_ref": "order-38",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "+5x7OYPRTVpeAReJyrJjKTsUst5DxRlXKKwkhimeuDGID4LthhdpaKqy6J7OUiewud13/EvbjdH5NamKThj7DQ==",
+    "stage_pct": 1,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct1-order39",
+   "order_ref": "order-39",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order0",
+   "order_ref": "order-0",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order1",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order2",
+   "order_ref": "order-2",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order3",
+   "order_ref": "order-3",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order4",
+   "order_ref": "order-4",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order5",
+   "order_ref": "order-5",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order6",
+   "order_ref": "order-6",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order7",
+   "order_ref": "order-7",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order8",
+   "order_ref": "order-8",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order9",
+   "order_ref": "order-9",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order10",
+   "order_ref": "order-10",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order11",
+   "order_ref": "order-11",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order12",
+   "order_ref": "order-12",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order13",
+   "order_ref": "order-13",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order14",
+   "order_ref": "order-14",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order15",
+   "order_ref": "order-15",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order16",
+   "order_ref": "order-16",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order17",
+   "order_ref": "order-17",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order18",
+   "order_ref": "order-18",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order19",
+   "order_ref": "order-19",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order20",
+   "order_ref": "order-20",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order21",
+   "order_ref": "order-21",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order22",
+   "order_ref": "order-22",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order23",
+   "order_ref": "order-23",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order24",
+   "order_ref": "order-24",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order25",
+   "order_ref": "order-25",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order26",
+   "order_ref": "order-26",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order27",
+   "order_ref": "order-27",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order28",
+   "order_ref": "order-28",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order29",
+   "order_ref": "order-29",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order30",
+   "order_ref": "order-30",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order31",
+   "order_ref": "order-31",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order32",
+   "order_ref": "order-32",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order33",
+   "order_ref": "order-33",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order34",
+   "order_ref": "order-34",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order35",
+   "order_ref": "order-35",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order36",
+   "order_ref": "order-36",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order37",
+   "order_ref": "order-37",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct10-order38",
+   "order_ref": "order-38",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "qHmRF5ennvjwzaQMDWByDd/biruT9LoN9qFCreic7q7Ud157DuX4KWaOLSAbGTS4SK2iWG1ZEawxZ4aARfQZBA==",
+    "stage_pct": 10,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct10-order39",
+   "order_ref": "order-39",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order0",
+   "order_ref": "order-0",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order1",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order2",
+   "order_ref": "order-2",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order3",
+   "order_ref": "order-3",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order4",
+   "order_ref": "order-4",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order5",
+   "order_ref": "order-5",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order6",
+   "order_ref": "order-6",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order7",
+   "order_ref": "order-7",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order8",
+   "order_ref": "order-8",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order9",
+   "order_ref": "order-9",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order10",
+   "order_ref": "order-10",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order11",
+   "order_ref": "order-11",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order12",
+   "order_ref": "order-12",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order13",
+   "order_ref": "order-13",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order14",
+   "order_ref": "order-14",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order15",
+   "order_ref": "order-15",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order16",
+   "order_ref": "order-16",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order17",
+   "order_ref": "order-17",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order18",
+   "order_ref": "order-18",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order19",
+   "order_ref": "order-19",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order20",
+   "order_ref": "order-20",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order21",
+   "order_ref": "order-21",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order22",
+   "order_ref": "order-22",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order23",
+   "order_ref": "order-23",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order24",
+   "order_ref": "order-24",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order25",
+   "order_ref": "order-25",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order26",
+   "order_ref": "order-26",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order27",
+   "order_ref": "order-27",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order28",
+   "order_ref": "order-28",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order29",
+   "order_ref": "order-29",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order30",
+   "order_ref": "order-30",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order31",
+   "order_ref": "order-31",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order32",
+   "order_ref": "order-32",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order33",
+   "order_ref": "order-33",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order34",
+   "order_ref": "order-34",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order35",
+   "order_ref": "order-35",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "pct50-order36",
+   "order_ref": "order-36",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order37",
+   "order_ref": "order-37",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order38",
+   "order_ref": "order-38",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "GsLsLNc2hKs/cU4Aq7hjnNxoW68ftRlp6xxCL+NrE89mTlT6Oxs4VBE3z8uf0GsGYVRZyTgyHbwYetpmX/yoAA==",
+    "stage_pct": 50,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct50-order39",
+   "order_ref": "order-39",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order0",
+   "order_ref": "order-0",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order1",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order2",
+   "order_ref": "order-2",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order3",
+   "order_ref": "order-3",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order4",
+   "order_ref": "order-4",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order5",
+   "order_ref": "order-5",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order6",
+   "order_ref": "order-6",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order7",
+   "order_ref": "order-7",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order8",
+   "order_ref": "order-8",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order9",
+   "order_ref": "order-9",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order10",
+   "order_ref": "order-10",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order11",
+   "order_ref": "order-11",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order12",
+   "order_ref": "order-12",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order13",
+   "order_ref": "order-13",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order14",
+   "order_ref": "order-14",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order15",
+   "order_ref": "order-15",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order16",
+   "order_ref": "order-16",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order17",
+   "order_ref": "order-17",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order18",
+   "order_ref": "order-18",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order19",
+   "order_ref": "order-19",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order20",
+   "order_ref": "order-20",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order21",
+   "order_ref": "order-21",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order22",
+   "order_ref": "order-22",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order23",
+   "order_ref": "order-23",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order24",
+   "order_ref": "order-24",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order25",
+   "order_ref": "order-25",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order26",
+   "order_ref": "order-26",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order27",
+   "order_ref": "order-27",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order28",
+   "order_ref": "order-28",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order29",
+   "order_ref": "order-29",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order30",
+   "order_ref": "order-30",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order31",
+   "order_ref": "order-31",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order32",
+   "order_ref": "order-32",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order33",
+   "order_ref": "order-33",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order34",
+   "order_ref": "order-34",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order35",
+   "order_ref": "order-35",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order36",
+   "order_ref": "order-36",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order37",
+   "order_ref": "order-37",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order38",
+   "order_ref": "order-38",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "pct100-order39",
+   "order_ref": "order-39",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": null,
+   "expect": "OLD",
+   "name": "no-config",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-05T11:59:59+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "SDCwI7irThQLrspMFOy2bCzMy6gZn7ZZkgzx8n8r+3gqjynvt0AbZqup+cYkkrYi5rxNcrUU0Cte6t49IK3mCA==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "expired",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "tampered-pct",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "PAY",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "other",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "OjHCKCnQZRHxIFAqK+5R8OAzWtppGlsEeOIOYzRwEfK4spIU0Zxax98F7tTKpaQ0j3nb0i/5/qeyyd+wi7X1BQ==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "other-graft",
+   "order_ref": "order-1",
+   "origin": null
+  },
+  {
+   "action": "REFUND",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "nUCO1dfj0jfhUzNL27rBuLaw8ADpqICZwWNh2nnQBU50X9Gi3bnq32rjEijer6w2dF0IRU/STGFZm3V9UCFPCg==",
+    "stage_pct": 100,
+    "version": 3
+   },
+   "expect": "OLD",
+   "name": "legacy-refund-at-100",
+   "order_ref": "order-9",
+   "origin": "OLD"
+  },
+  {
+   "action": "REFUND",
+   "config": {
+    "expires_at": "2026-11-06T00:00:00+00:00",
+    "graft_id": "demo-1",
+    "origin_rules": [
+     "legacy refunds stay OLD"
+    ],
+    "signature": "xbcWRmj5/klHDsUhi3lUqWt5G3pWMBNiYkLzV/MXcgauRgNEFE9tWqojuI9ptO3E4QjrNyLvmfSTh4BtjJ2WBg==",
+    "stage_pct": 0,
+    "version": 3
+   },
+   "expect": "NEW",
+   "name": "new-refund-at-0",
+   "order_ref": "order-9",
+   "origin": "NEW"
+  },
+  {
+   "action": "REFUND",
+   "config": null,
+   "expect": "OLD",
+   "name": "legacy-refund-invalid-config",
+   "order_ref": "order-9",
+   "origin": "OLD"
+  }
+ ],
+ "graft_id": "demo-1",
+ "now": "2026-11-05T12:00:00+00:00",
+ "public_key_b64": "c9gJztLLFwzQidkreC3wZPQzDG2YAYhdnzgNQi5uVHo="
+}

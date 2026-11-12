@@ -1,0 +1,48 @@
+{
+  "document_kind": "local_sdk_grounding_not_shared_contract",
+  "sdk_package": "@paypal/paypal-server-sdk",
+  "sdk_version": "2.5.0",
+  "context_plugin_version": "0.1.0",
+  "context_revision": "6aa057126f0d4709a42e15002aab832a94935d92",
+  "context_source": "https://github.com/paypaldev/server-sdk-context-plugin-preview/tree/6aa057126f0d4709a42e15002aab832a94935d92",
+  "plugin_installed_in_agent": false,
+  "private_keys_or_accounts_used": false,
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/v2/checkout/orders",
+      "symbol": "OrdersController.createOrder",
+      "required_arguments": [
+        "body"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/checkout/orders/{id}/capture",
+      "symbol": "OrdersController.captureOrder",
+      "required_arguments": [
+        "id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/payments/captures/{capture_id}/refund",
+      "symbol": "PaymentsController.refundCapturedPayment",
+      "required_arguments": [
+        "captureId"
+      ]
+    }
+  ],
+  "source_hashes": {
+    "src\\controllers\\ordersController.ts": "03330a79bf128c59ca7bff96a218ab0fb3380ee45580e63359a440556aba1fb9",
+    "src\\controllers\\paymentsController.ts": "c5e45d416e6406912f1602a487966a1aab0ff3d3ab52046a498f3cdde2908fe4",
+    "src\\models\\orderRequest.ts": "feb323fe7c55adc2b5c01381b92ad90b448d37635267c3cbb4dfc10d8e0ca3ab",
+    "src\\models\\money.ts": "22e9545243ef83a1b75d63580fb51bdda5bc86514d624b86094e4d6dc1757635"
+  },
+  "limitations": [
+    "SDK types are behind domain adapters; current team contracts retain wire authority",
+    "Not an NVP-to-v2 refund conversion",
+    "No authenticated SDK client or provider operation constructed",
+    "Request ID policy requires endpoint-specific qualification"
+  ]
+}

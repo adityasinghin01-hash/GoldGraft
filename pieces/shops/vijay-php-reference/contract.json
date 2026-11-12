@@ -1,0 +1,592 @@
+{
+  "shop_id": "legacy-php-shop",
+  "rules": [
+    {
+      "id": "R01",
+      "title": "paid only if PayPal shows one COMPLETED capture for this order",
+      "correct_flow": [
+        "paid only if PayPal shows one COMPLETED capture for this order"
+      ],
+      "counter_examples": [
+        "A run violating: paid only if PayPal shows one COMPLETED capture for this order"
+      ],
+      "predicate": "SHOP_PAID(o) ⇒ ∃! LEDGER CAPTURE(o, COMPLETED)",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "HAPPY",
+          "PENDING"
+        ],
+        "mutants": [
+          "M02",
+          "M09"
+        ],
+        "killed": true
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R02",
+      "title": "captured amount = order total",
+      "correct_flow": [
+        "captured amount = order total"
+      ],
+      "counter_examples": [
+        "A run violating: captured amount = order total"
+      ],
+      "predicate": "CAPTURE.money.minor = INTENT(o).money.minor",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [],
+        "mutants": [],
+        "killed": false
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R03",
+      "title": "captured currency = order currency",
+      "correct_flow": [
+        "captured currency = order currency"
+      ],
+      "counter_examples": [
+        "A run violating: captured currency = order currency"
+      ],
+      "predicate": "CAPTURE.money.currency = INTENT(o).money.currency",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "HAPPY"
+        ],
+        "mutants": [
+          "M01"
+        ],
+        "killed": false
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R04",
+      "title": "not paid ⇒ no completed capture",
+      "correct_flow": [
+        "not paid ⇒ no completed capture"
+      ],
+      "counter_examples": [
+        "A run violating: not paid ⇒ no completed capture"
+      ],
+      "predicate": "¬SHOP_PAID(o) ⇒ ¬∃ CAPTURE(o, COMPLETED)",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [],
+        "mutants": [],
+        "killed": false
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R05",
+      "title": "retries/double clicks ⇒ ≤1 capture, no 5xx",
+      "correct_flow": [
+        "retries/double clicks ⇒ ≤1 capture, no 5xx"
+      ],
+      "counter_examples": [
+        "A run violating: retries/double clicks ⇒ ≤1 capture, no 5xx"
+      ],
+      "predicate": "count(CAPTURE COMPLETED, o) ≤ 1",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "DOUBLE"
+        ],
+        "mutants": [
+          "M04"
+        ],
+        "killed": false
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R06",
+      "title": "unapproved order never confirmed",
+      "correct_flow": [
+        "unapproved order never confirmed"
+      ],
+      "counter_examples": [
+        "A run violating: unapproved order never confirmed"
+      ],
+      "predicate": "SHOP_PAID(o) ⇒ ∃ APPROVE(o)",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "NOTIFY_FORGED"
+        ],
+        "mutants": [
+          "M03"
+        ],
+        "killed": false
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R07",
+      "title": "pending capture ≠ paid",
+      "correct_flow": [
+        "pending capture ≠ paid"
+      ],
+      "counter_examples": [
+        "A run violating: pending capture ≠ paid"
+      ],
+      "predicate": "CAPTURE(PENDING) ⇒ SHOP_PENDING, not SHOP_PAID",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [],
+        "mutants": [],
+        "killed": false
+      },
+      "severity": "MAJOR"
+    },
+    {
+      "id": "R08",
+      "title": "notification acted on only if verified",
+      "correct_flow": [
+        "notification acted on only if verified"
+      ],
+      "counter_examples": [
+        "A run violating: notification acted on only if verified"
+      ],
+      "predicate": "NOTIFY ⇒ NOTIFY_VERIFIED before any SHOP_PAID it causes",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "NOTIFY_FORGED"
+        ],
+        "mutants": [
+          "M08",
+          "M10"
+        ],
+        "killed": true
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R09",
+      "title": "duplicate notifications are harmless",
+      "correct_flow": [
+        "duplicate notifications are harmless"
+      ],
+      "counter_examples": [
+        "A run violating: duplicate notifications are harmless"
+      ],
+      "predicate": "same txn/event id twice ⇒ no second state change",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [],
+        "mutants": [],
+        "killed": false
+      },
+      "severity": "MAJOR"
+    },
+    {
+      "id": "R10",
+      "title": "replayed confirmation returns the same result, no second charge",
+      "correct_flow": [
+        "replayed confirmation returns the same result, no second charge"
+      ],
+      "counter_examples": [
+        "A run violating: replayed confirmation returns the same result, no second charge"
+      ],
+      "predicate": "replay(confirm) ⇒ same capture id",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "DOUBLE"
+        ],
+        "mutants": [
+          "M05"
+        ],
+        "killed": false
+      },
+      "severity": "MAJOR"
+    },
+    {
+      "id": "R11",
+      "title": "refunds ≤ captured; second full refund refused",
+      "correct_flow": [
+        "refunds ≤ captured; second full refund refused"
+      ],
+      "counter_examples": [
+        "A run violating: refunds ≤ captured; second full refund refused"
+      ],
+      "predicate": "Σ REFUND ≤ CAPTURE",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "REFUND_TWICE"
+        ],
+        "mutants": [
+          "M12"
+        ],
+        "killed": false
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R12",
+      "title": "amounts never from the browser",
+      "correct_flow": [
+        "amounts never from the browser"
+      ],
+      "counter_examples": [
+        "A run violating: amounts never from the browser"
+      ],
+      "predicate": "INTENT.money derived server-side (static + mutant M7)",
+      "sources": {
+        "code": [
+          "src/api/create-payment.php:10-24"
+        ],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "CODE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "HAPPY"
+        ],
+        "mutants": [
+          "M07"
+        ],
+        "killed": true
+      },
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "R13",
+      "title": "no callback ⇒ backend asks PayPal",
+      "correct_flow": [
+        "no callback ⇒ backend asks PayPal"
+      ],
+      "counter_examples": [
+        "A run violating: no callback ⇒ backend asks PayPal"
+      ],
+      "predicate": "missing NOTIFY within T ⇒ ledger lookup by shop",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [],
+        "mutants": [],
+        "killed": false
+      },
+      "severity": "MAJOR"
+    },
+    {
+      "id": "R14",
+      "title": "restart mid-payment loses nothing",
+      "correct_flow": [
+        "restart mid-payment loses nothing"
+      ],
+      "counter_examples": [
+        "A run violating: restart mid-payment loses nothing"
+      ],
+      "predicate": "restart between APPROVE and CAPTURE ⇒ eventual single CAPTURE + SHOP_PAID",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "HAPPY"
+        ],
+        "mutants": [
+          "M11"
+        ],
+        "killed": false
+      },
+      "severity": "MAJOR"
+    },
+    {
+      "id": "R15",
+      "title": "old objects stay on old rails",
+      "correct_flow": [
+        "old objects stay on old rails"
+      ],
+      "counter_examples": [
+        "A run violating: old objects stay on old rails"
+      ],
+      "predicate": "REFUND of a legacy txn uses the legacy path (or a proven REST equivalent)",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [],
+        "mutants": [],
+        "killed": false
+      },
+      "severity": "MAJOR"
+    },
+    {
+      "id": "R16",
+      "title": "money as integers",
+      "correct_flow": [
+        "money as integers"
+      ],
+      "counter_examples": [
+        "A run violating: money as integers"
+      ],
+      "predicate": "static check + mutant M6",
+      "sources": {
+        "code": [],
+        "traces": [
+          "synthetic-c4/HAPPY.OLD",
+          "synthetic-c4/PENDING.OLD",
+          "synthetic-c4/REFUND.OLD",
+          "synthetic-c4/REFUND_TWICE.OLD",
+          "synthetic-c4/DOUBLE.OLD",
+          "synthetic-c4/DECLINE.OLD",
+          "synthetic-c4/NOTIFY_FORGED.OLD",
+          "synthetic-c4/NOTIFY_DUP.OLD",
+          "synthetic-c4/PARITY_EXTRA.OLD"
+        ]
+      },
+      "agreement": "TRACE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "HAPPY"
+        ],
+        "mutants": [
+          "M06"
+        ],
+        "killed": true
+      },
+      "severity": "MINOR"
+    },
+    {
+      "id": "R17",
+      "title": "Only catalogue SKUs contribute server catalogue prices to the total",
+      "correct_flow": [
+        "Ignore unknown SKUs; sum catalogue price times integer quantity for known SKUs; use SHOP_CURRENCY USD."
+      ],
+      "counter_examples": [
+        "Use a browser unit price or count an unknown SKU."
+      ],
+      "predicate": "INTENT.minor = sum(catalogue[sku].minor * int(qty) for sku in cart if sku in catalogue)",
+      "sources": {
+        "code": [
+          "src/api/create-payment.php:10-16",
+          "src/config.php:10",
+          "src/config.php:14-17"
+        ],
+        "traces": []
+      },
+      "agreement": "CODE_ONLY",
+      "triangle": {
+        "scenarios": [
+          "HAPPY"
+        ],
+        "mutants": [
+          "M07"
+        ],
+        "killed": true
+      },
+      "severity": "CRITICAL"
+    }
+  ]
+}

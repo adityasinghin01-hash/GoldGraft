@@ -1,0 +1,41 @@
+name: goldgraft-reference-lab
+services:
+  shop:
+    image: goldgraft/reference-lab:local
+    platform: linux/amd64
+    build:
+      context: .
+    ports:
+      - "127.0.0.1:8081:8080"
+    read_only: true
+    user: "33:33"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 256m
+    cpus: 1
+    init: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m,mode=1777
+    secrets:
+      - lab_key
+    volumes:
+      - shop_state:/opt/shop/src/data
+    networks:
+      - offline
+    healthcheck:
+      test: ["CMD", "php", "/opt/shop/lab/healthcheck.php"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+secrets:
+  lab_key:
+    file: ${GOLDGRAFT_LAB_KEY_FILE:?Run scripts/reference_lab.py first}
+volumes:
+  shop_state:
+networks:
+  offline:
+    internal: true

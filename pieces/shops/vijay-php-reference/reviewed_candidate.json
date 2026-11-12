@@ -1,0 +1,7 @@
+{
+  "ipn.php": "f3b7cb73175d632e7f03ac85e5a67aefc518f875ccd7459b22dd546cbe16616c",
+  "api/create-payment.php": "32b376c294ec39fda99cdc5d382d0453fb6b8ea41c2543b48ae7ebc56b898ac4",
+  "api/execute-payment.php": "ecb67899a6efbb22456c07d0c5e5a1e0205334e8a9e52e41572699dd2b26df7e",
+  "api/refund.php": "debf5808d09c8d11403d6f28f3c021835ebd7fea485113eacbd39022dc36774e",
+  "lib/paypal_orders.php": "101a6d84ba59c08f2174a04f23e7bf7a0407a6cbae9826cce85b882c9fe4d388"
+}

@@ -1,0 +1,87 @@
+{
+  "document_kind": "REDACTED_LOCAL_HANDOFF_RESULTS_NOT_PAYMENT_QUALIFICATION",
+  "summary_generated_at": "2026-11-12T14:49:52.210597+00:00",
+  "implementation_checked_on": "2026-11-12",
+  "team_commit": "9968f9b17327f7e424e8d202c7402b1d90c6036b",
+  "local_groups": [
+    {
+      "name": "python_unit_tests",
+      "status": "PASS"
+    },
+    {
+      "name": "switch_libraries",
+      "status": "PASS"
+    },
+    {
+      "name": "rollout_decision_consumer",
+      "status": "PASS"
+    },
+    {
+      "name": "sponsor_asset_scope",
+      "status": "PASS"
+    },
+    {
+      "name": "usd_cart_domain",
+      "status": "PASS"
+    },
+    {
+      "name": "new_php_candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate_browser_lifecycle",
+      "status": "PASS"
+    },
+    {
+      "name": "shop_pack_contract",
+      "status": "PASS"
+    },
+    {
+      "name": "shop_start_buyer_stop",
+      "status": "PASS"
+    },
+    {
+      "name": "read_only_state_inventory",
+      "status": "PASS"
+    }
+  ],
+  "python_unit_tests": 55,
+  "php_candidate_checks": 108,
+  "switch_checks": 768,
+  "counterpart_tests": 17,
+  "counterpart_skipped": 0,
+  "unique_reference_shops": 1,
+  "role_scenarios": 14,
+  "socket_scenarios": 9,
+  "local_recordings": 27,
+  "scenario_grades": {
+    "PASS": 8,
+    "PASS_FIXED": 1
+  },
+  "mutations_rejudged": {
+    "PHP-PENDING": "PROBLEM",
+    "PHP-CURRENCY": "PROBLEM"
+  },
+  "connected_verified": 29,
+  "connected_held": [
+    "domain_rule:R02",
+    "domain_rule:R04",
+    "domain_rule:R05",
+    "domain_rule:R06",
+    "domain_rule:R08",
+    "domain_rule:R11",
+    "domain_rule:R12",
+    "domain_rule:R17",
+    "payment:shop-checkout-paypal",
+    "isolation:runner"
+  ],
+  "promotion": "HOLD",
+  "certificate_issued": false,
+  "real_provider_calls_in_these_checks": 0,
+  "model_calls_in_these_checks": 0,
+  "real_payment_qualified": false,
+  "isolation_qualified": false,
+  "merchant_delivery_qualified": false,
+  "handoff_status": "READY_FOR_TEAM_INTEGRATION_WITH_LISTED_GATES",
+  "cold_clone_contract_bootstrap": "prepare_local_contracts.py verified five exact Git blobs and ShopPack validation passed"
+}
