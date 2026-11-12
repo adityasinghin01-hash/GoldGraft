@@ -15,7 +15,7 @@ spec.loader.exec_module(state)
 class StateRecipeTests(unittest.TestCase):
     def inspect(self, content):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "orders.json"
+            path = Path(directory).resolve() / "orders.json"  # macOS: /var is a symlink
             path.write_text(content, encoding="utf-8")
             before = path.read_bytes()
             result = state.report(path)

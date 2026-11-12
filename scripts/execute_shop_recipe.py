@@ -10,12 +10,17 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from unittest.mock import patch
 
 from check_team_boundaries import team_revision
 
 ROOT = Path(__file__).resolve().parents[1]
+# Run as a child process by recipe.py: make the team packages importable without
+# relying on the caller's PYTHONPATH (pytest, CI and the API do not set it).
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 PACK = ROOT / "pieces/shops/vijay-php-reference"
 
 

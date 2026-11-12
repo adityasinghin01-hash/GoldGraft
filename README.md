@@ -9,6 +9,7 @@
 | Executed planted bugs | 6/10 caught; four remain unverified |
 | PayPal sandbox | AI-written PHP checkout's HAPPY flow independently verified against real sandbox; additional refund/duplicate flows recorded separately |
 | E2B sandbox runner | Live-tested on 3 real E2B VMs (normal run, deliberate failure, timeout), internet off, each VM confirmed killed. The PHP proof does not run inside it yet, so runner isolation stays held |
+| Vijay's shop recipe | Plugs into the shop socket. With his hand-reviewed candidate, all 9 scenarios are judged (8 PASS, 1 PASS_FIXED) and the full connected run verifies 30/39 checks with his state, final-setup and exit-check recipes attached. AI-written code is refused until it can run in a protected sandbox (`plugtests/test_vijay_recipe_socket.py`) |
 | Proof signature | ProofResult signed by the GitHub workflow; public Rekor entry **3833925707** |
 | Qualification certificate | **Not issued**; a signed held result is not a qualification certificate |
 

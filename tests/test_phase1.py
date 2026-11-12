@@ -26,7 +26,7 @@ class SourceReviewTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()  # macOS: /var is a symlink
         self.data = b"<?php echo 'synthetic offline test';\n"
         (self.root / "index.php").write_bytes(self.data)
         digest = hashlib.sha1(

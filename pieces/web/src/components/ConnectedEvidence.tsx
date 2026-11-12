@@ -26,9 +26,9 @@ export function holdText(hold: string): string {
   if (hold.startsWith('image:')) return 'No container image was built, so the exact-image review waits';
   if (hold.startsWith('promotion:')) return 'No real buyers yet, so going live stays at 0%';
   if (hold.startsWith('signer:')) return 'No certificate is issued while checks are on hold';
-  if (hold.startsWith('state_recipe:')) return "The shop's state-keeping recipe is not plugged in yet (Vijay's piece)";
-  if (hold.startsWith('finalisation_recipe:')) return "The shop's final-setup recipe is not plugged in yet (Vijay's piece)";
-  if (hold.startsWith('exit_check_recipe:')) return "The shop's exit-check recipe is not plugged in yet (Vijay's piece)";
+  if (hold.startsWith('state_recipe:')) return "This run used the stand-in shop. Vijay's state-keeping recipe now plugs in, but no real shop has been checked with it yet";
+  if (hold.startsWith('finalisation_recipe:')) return "This run used the stand-in shop. Vijay's final-setup recipe now plugs in, but no real shop has been checked with it yet";
+  if (hold.startsWith('exit_check_recipe:')) return "This run used the stand-in shop. Vijay's exit-check recipe now plugs in, but no real shop has been checked with it yet";
   return hold;
 }
 
