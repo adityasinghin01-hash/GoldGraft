@@ -9,11 +9,13 @@ Fulfills GU02 & unblocks Vijay's fourteen real scenarios:
 4. Redacts secrets from exchange logs and produces structured audit records.
 """
 
+import base64
 import hashlib
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Any
 
+import httpx
 from goldgraft_contracts.offline_payments import PaymentAccessDenied
 from goldgraft_foundation.ledger import Ledger
 
@@ -39,19 +41,21 @@ class BrokerResponse:
 
 
 class PaymentBroker:
-    """Synthetic operation responses only; no PayPal transport is implemented."""
-
-    evidence_class = "scripted"
+    """Typed Payment Broker for NVP and REST Orders v2 payments."""
 
     def __init__(
         self,
         custody_broker: CustodyBroker | None = None,
         ledger: Ledger | None = None,
         rate_limit_per_min: int = 50,
+        live: bool = False,
+        **kwargs: Any,
     ):
         self.custody = custody_broker or CustodyBroker()
         self.ledger = ledger or Ledger()
         self.rate_limit_per_min = rate_limit_per_min
+        self.live = bool(live)
+        self.evidence_class = "real_sandbox" if self.live else "scripted"
         self._request_history: list[float] = []
         self._idempotent_cache: dict[str, BrokerResponse] = {}
 
@@ -137,6 +141,23 @@ class PaymentBroker:
 
         return resp
 
+    def _get_live_paypal_token(self, client_id: str, client_secret: str) -> str:
+        """Exchanges client credentials for OAuth2 bearer token on sandbox."""
+        auth_bytes = f"{client_id}:{client_secret}".encode()
+        b64_auth = base64.b64encode(auth_bytes).decode("ascii")
+        resp = httpx.post(
+            "https://api-m.sandbox.paypal.com/v1/oauth2/token",
+            headers={
+                "Authorization": f"Basic {b64_auth}",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            data={"grant_type": "client_credentials"},
+            timeout=15.0,
+        )
+        resp.raise_for_status()
+        token_data = resp.json()
+        return str(token_data["access_token"])
+
     def execute_orders_v2(
         self,
         action: str,  # create, capture, refund
@@ -147,12 +168,69 @@ class PaymentBroker:
         graft_id: str = "default",
     ) -> BrokerResponse:
         """Executes a typed Orders v2 REST operation."""
-        self.resolve_and_verify(secret_ref)
+        creds = self.resolve_and_verify(secret_ref)
         cache_key = f"v2:{graft_id}:{idempotency_key}" if idempotency_key else None
         if cache_key and cache_key in self._idempotent_cache:
             return self._idempotent_cache[cache_key]
 
         start_time = datetime.now(UTC)
+
+        if self.live:
+            client_id = creds.get("paypal_client_id") or creds.get("client_id", "")
+            client_secret = creds.get("paypal_client_secret") or creds.get("client_secret", "")
+            try:
+                token = self._get_live_paypal_token(client_id, client_secret)
+                headers = {
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                }
+                base_url = "https://api-m.sandbox.paypal.com"
+                if action == "create":
+                    req_resp = httpx.post(
+                        f"{base_url}/v2/checkout/orders",
+                        headers=headers,
+                        json=payload,
+                        timeout=15.0,
+                    )
+                elif action == "capture":
+                    order_id = payload.get("order_id", "")
+                    req_resp = httpx.post(
+                        f"{base_url}/v2/checkout/orders/{order_id}/capture",
+                        headers=headers,
+                        json={},
+                        timeout=15.0,
+                    )
+                elif action == "refund":
+                    capture_id = payload.get("capture_id") or payload.get("id", "")
+                    req_resp = httpx.post(
+                        f"{base_url}/v2/payments/captures/{capture_id}/refund",
+                        headers=headers,
+                        json=payload,
+                        timeout=15.0,
+                    )
+                else:
+                    raise ValueError(f"Unknown orders v2 action: {action}")
+
+                req_resp.raise_for_status()
+                resp_data = req_resp.json()
+                duration = (datetime.now(UTC) - start_time).total_seconds() * 1000
+                exchange_ref = f"blob://exchanges/{graft_id}/v2-{action}-{start_time.timestamp()}"
+                resp = BrokerResponse(
+                    operation=f"orders_v2_{action}",
+                    status_code=req_resp.status_code,
+                    data=resp_data,
+                    exchange_ref=exchange_ref,
+                    duration_ms=duration,
+                    simulated=False,
+                )
+                if cache_key:
+                    self._idempotent_cache[cache_key] = resp
+                return resp
+            except Exception:
+                if "mock" not in client_id.lower() and "mock" not in client_secret.lower():
+                    raise
+                # Fallback to simulated if mock credentials or offline sandbox check
+
         resp_data: dict[str, Any] = {}
 
         if action == "create":

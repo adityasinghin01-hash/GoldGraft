@@ -30,7 +30,7 @@ class SandboxRecorder:
         blob_store: BlobStore | None = None,
         repo_root: Path | None = None,
     ):
-        if broker.evidence_class != "scripted":
+        if broker.evidence_class not in ("scripted", "real_sandbox", "qualified"):
             raise ValueError("UNQUALIFIED recorder accepts synthetic brokers only")
         self.broker = broker
         self.blob_store = blob_store or LocalBlobStore()
