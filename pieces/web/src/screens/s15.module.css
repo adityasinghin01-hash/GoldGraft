@@ -1,0 +1,38 @@
+.screen { display: grid; gap: var(--gg-s-5); animation: in 0.6s var(--gg-ease-out); }
+@keyframes in { from { opacity: 0; transform: translateY(10px); } }
+.muted { color: var(--gg-mute); font-size: 13.5px; }
+
+.status { display: grid; grid-template-columns: auto 1fr; gap: var(--gg-s-5); padding: var(--gg-s-6); align-items: start; }
+.statusIcon {
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; color: var(--gg-warn);
+  background: rgb(221 180 110 / 0.08); box-shadow: 0 0 0 1px rgb(221 180 110 / 0.3) inset;
+}
+.statusTitle { display: inline-flex; align-items: center; font-family: var(--gg-font-display); font-size: clamp(1.25rem, 1rem + 0.6vw, 1.65rem); color: var(--gg-ivory); }
+.statusSub { margin-top: 6px; font-size: 14.5px; color: var(--gg-body); }
+.needs { margin-top: 12px; display: grid; gap: 6px; padding-left: 18px; list-style: disc; font-size: 14px; color: var(--gg-body); }
+
+.signed { display: grid; gap: var(--gg-s-4); padding: var(--gg-s-6); }
+.signedHead { display: flex; align-items: center; justify-content: space-between; gap: var(--gg-s-5); }
+
+.ticks { display: grid; gap: 8px; }
+.ticks li {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 12px 14px;
+  border-radius: var(--gg-r-sm); box-shadow: 0 0 0 1px var(--gg-line) inset; opacity: 0; translate: 0 6px;
+  transition: opacity 0.35s var(--gg-ease-out), translate 0.35s var(--gg-ease-out);
+}
+.ticks li[data-on] { opacity: 1; translate: 0 0; }
+.tickIcon { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: var(--gg-bad); background: rgb(224 144 124 / 0.1); }
+.ticks li[data-ok] .tickIcon { color: var(--gg-good); background: rgb(159 184 148 / 0.12); }
+.tickName { display: inline-flex; align-items: center; font-size: 14.5px; color: var(--gg-ivory); }
+.tickDetail { font: 13px var(--gg-font-mono); color: var(--gg-mute); text-align: right; }
+.verdict { font-family: var(--gg-font-display); font-size: 1.3rem; color: var(--gg-good); }
+
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 13.5px; color: var(--gg-body); }
+.kv dt { color: var(--gg-mute); }
+.kv dd { overflow-wrap: anywhere; }
+
+@media (max-width: 900px) {
+  .signedHead { flex-direction: column; align-items: flex-start; }
+  .ticks li { grid-template-columns: auto 1fr; }
+  .tickDetail { grid-column: 2; text-align: left; }
+}

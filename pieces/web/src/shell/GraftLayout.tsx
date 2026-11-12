@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import { ArrowUpRightIcon, SealCheckIcon } from '@phosphor-icons/react';
-import { useGraft } from '../api/queries';
+import { useConnected, useGraft } from '../api/queries';
 import type { Graft } from '../api/types';
 import { GRAFT_TABS, PHASES, STAGE } from '../copy/words';
 import { config } from '../config';
@@ -41,6 +41,7 @@ export function GraftLayout() {
   const q = useGraft(graftId);
   const [reviewOpen, setReviewOpen] = useState(false);
   const certId = certFor(graftId);
+  const connected = useConnected(graftId);
 
   useEffect(() => { document.title = 'GoldGraft · Progress'; }, []);
 
@@ -60,7 +61,9 @@ export function GraftLayout() {
           <div className={s.statusExtra}>
             {st === 'PR_OPEN' && <button className="gg-btn gg-btn--gold gg-btn--sm" onClick={() => setReviewOpen(true)}>Review</button>}
             {st === 'CUTBACK' && <Link className="gg-link" to={`/g/${graftId}/heal`}>Go-live</Link>}
-            {st === 'DONE' && certId && <Link className="gg-btn gg-btn--ghost gg-btn--sm" to={`/c/${certId}`}><SealCheckIcon size={15} weight="duotone" /> Certificate <ArrowUpRightIcon size={12} /></Link>}
+            {st === 'DONE' && (connected.data
+              ? <Link className="gg-btn gg-btn--ghost gg-btn--sm" to={`/g/${graftId}/certificate`}><SealCheckIcon size={15} weight="duotone" /> Certificate status</Link>
+              : certId && <Link className="gg-btn gg-btn--ghost gg-btn--sm" to={`/c/${certId}`}><SealCheckIcon size={15} weight="duotone" /> Certificate <ArrowUpRightIcon size={12} /></Link>)}
           </div>
         </div>
         <nav className={s.tabs} aria-label="This upgrade">
@@ -69,9 +72,11 @@ export function GraftLayout() {
               {t.label}
             </NavLink>
           ))}
-          {certId
-            ? <Link className={s.tab} to={`/c/${certId}`}>Certificate ↗</Link>
-            : <span className={s.tab} aria-disabled="true" data-off>Certificate ↗ <Explain text="Certificate link: not in the API yet (G7)" /></span>}
+          {connected.data
+            ? <NavLink end to={`/g/${graftId}/certificate`} className={({ isActive }) => `${s.tab} ${isActive ? s.tabOn : ''}`}>Certificate</NavLink>
+            : certId
+              ? <Link className={s.tab} to={`/c/${certId}`}>Certificate ↗</Link>
+              : <span className={s.tab} aria-disabled="true" data-off>Certificate ↗ <Explain text="Certificate link: not in the API yet (G7)" /></span>}
         </nav>
         <Outlet />
       </div>
