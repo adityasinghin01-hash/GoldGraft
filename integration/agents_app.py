@@ -332,6 +332,9 @@ def create_app(
                         for entry in fresh(seq):
                             seq = entry.seq
                             yield frame(entry)
+                        if live_stream:
+                            # Tell the browser the run is over, so it stops reconnecting.
+                            yield "event: end\ndata: {}\n\n"
                         return
                     if await request.is_disconnected():
                         return

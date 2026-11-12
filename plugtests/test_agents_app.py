@@ -102,6 +102,9 @@ def test_graft_rootmap_and_sse_reconnect(runs):
             "Alert/1",
         }
         assert entries[-1]["entry_hash"] == graft.ledger_root
+        browser = client.get("/grafts/sample-1/events", headers={"Accept": "text/event-stream"})
+        assert browser.text.endswith("event: end\ndata: {}\n\n")  # finished run: stop reconnecting
+        assert "event: end" not in feed.text  # plain GET keeps ledger frames only
         replay = client.get("/grafts/sample-1/events", headers={"Last-Event-ID": "2"})
         assert [
             json.loads(line[6:])["seq"]
