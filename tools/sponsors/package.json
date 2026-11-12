@@ -1,0 +1,10 @@
+{
+  "name": "goldgraft-local-sponsor-tools",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "newman": "6.2.3",
+    "@paypal/paypal-server-sdk": "2.5.0",
+    "typescript": "5.9.3"
+  }
+}

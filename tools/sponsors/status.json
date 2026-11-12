@@ -1,0 +1,92 @@
+{
+  "document_kind": "local_vijay_sponsor_preparation_register_not_vendor_approval",
+  "checked_on": "2026-11-12",
+  "team_revision": "25e21594841ae527024854a7267dd707d37584ea",
+  "artifact_revision": "LOCAL_UNCOMMITTED_NOT_UPLOADED",
+  "published_integrations_claimed": 0,
+  "tools": [
+    {
+      "tool": "APIMatic",
+      "owner": "Vijay VJ01/VJ02",
+      "status": "IN_PROGRESS",
+      "versions": {
+        "context_plugin": "0.1.0 source reference",
+        "context_revision": "6aa057126f0d4709a42e15002aab832a94935d92",
+        "paypal_sdk": "2.5.0",
+        "typescript": "5.9.3"
+      },
+      "actual_check": "Positive example compiled; three deliberate SDK errors rejected",
+      "plugin_installed": false,
+      "local_artifacts": [
+        "apimatic/payment_recipe.ts",
+        "apimatic/operation-map.json"
+      ],
+      "route": "Public PayPal context source; event Basic subscription offer only if qualified usage and claim approval",
+      "account_approval": "NOT_REQUESTED",
+      "credit_expiry": null,
+      "team_seat_rights": "UNKNOWN",
+      "remaining": [
+        "active IDE/plugin setup not verified",
+        "qualified broker/recorder and real payment integration"
+      ]
+    },
+    {
+      "tool": "Postman",
+      "owner": "Vijay VJ02",
+      "status": "IN_PROGRESS",
+      "versions": {
+        "newman": "6.2.3",
+        "collection": "v2.1"
+      },
+      "actual_check": "Five local requests and ten assertions passed; fourteen payment folders remain nonexecutable",
+      "local_artifacts": [
+        "postman/offline-shop.postman_collection.json",
+        "postman/payment-plan.postman_collection.json"
+      ],
+      "route": "Local open-source Newman; no cloud account or paid plan used",
+      "account_approval": "NO_CLOUD_ACCOUNT_USED",
+      "credit_expiry": null,
+      "team_seat_rights": "NOT_ASSUMED",
+      "remaining": [
+        "fourteen genuine payment results",
+        "actual counterpart contract and runtime qualification"
+      ]
+    },
+    {
+      "tool": "Kernel",
+      "owner": "Vijay VJ02 with Gupta GU02/GU03",
+      "status": "BLOCKED",
+      "versions": {
+        "sdk": "NOT_INSTALLED",
+        "browser_profile": "UNQUALIFIED"
+      },
+      "actual_check": "Fourteen-scenario plan prepared; zero vendor sessions executed",
+      "local_artifacts": [
+        "kernel/scenario-plan.json"
+      ],
+      "route": "Advertised no-card free credits and event credit offer; neither redemption nor account balance verified",
+      "account_approval": "NOT_ESTABLISHED",
+      "credit_expiry": null,
+      "team_seat_rights": "UNKNOWN",
+      "remaining": [
+        "approved account/budget and credit expiry",
+        "incident/security/browser profile qualification",
+        "guarded backend session and recorder integration"
+      ]
+    },
+    {
+      "tool": "Channel3",
+      "owner": "Vijay conditional assessment",
+      "status": "NOT_JUSTIFIED",
+      "actual_check": "No demonstrated fixture gap or dataset redistribution rights established; no data fetched",
+      "route": "Conditional only; keep current licensed catalogue",
+      "account_approval": "NOT_REQUESTED",
+      "credit_expiry": null,
+      "remaining": [
+        "demonstrated incremental regression value",
+        "specific storage/sharing rights"
+      ]
+    }
+  ],
+  "private_values_included": false
+}

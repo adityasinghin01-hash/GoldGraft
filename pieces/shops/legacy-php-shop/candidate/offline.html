@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>GoldGraft candidate — offline lab</title>
+<style>body{font:18px system-ui;max-width:750px;margin:60px auto;padding:0 24px;color:#18312d;background:#f5f4ee}aside{padding:18px;border:2px solid #b47115;background:#fff4d7}button{font:inherit;padding:12px;margin:12px 8px 12px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:24px;border-radius:10px}</style>
+<h1>PHP candidate checkout</h1>
+<aside><strong>Offline scripted lab.</strong> This uses synthetic orders. No PayPal account, buyer approval or real payment is involved.</aside>
+<h2>Cutover Tee · USD 25.00</h2>
+<p>This separate candidate exercises the shop's order lifecycle. The original reference stays frozen.</p>
+<button id="create">Create order</button><button id="capture">Script capture</button><button id="cancel">Cancel</button><button id="refund">Script refund</button><button id="reconcile">Read back</button>
+<p id="status" role="status">OPEN</p><pre id="result">No order yet.</pre>
+<script>
+const id = 'browser-' + crypto.randomUUID();
+for (const button of document.querySelectorAll('button')) button.addEventListener('click', async () => {
+  try {
+    const response = await fetch('/__candidate/action', {method:'POST', headers:{'Content-Type':'application/json'},body:JSON.stringify({id,action:button.id})});
+    const value = await response.json();
+    document.querySelector('#status').textContent = value.order?.state ?? 'HOLD';
+    document.querySelector('#result').textContent = JSON.stringify(value,null,2);
+  } catch { document.querySelector('#status').textContent = 'HOLD'; }
+});
+</script></html>

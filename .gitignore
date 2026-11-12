@@ -17,3 +17,9 @@ build/
 .npm-cache/
 .hypothesis/
 .goldgraft/
+.context/
+.secrets/
+playwright/.auth/
+playwright-report/
+test-results/
+artifacts/

@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "GoldGraft fourteen payment scenarios \u2014 planning only",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "No executable requests. Qualified broker/runner/callback and accepted interfaces required before adding any payment operations."
+  },
+  "item": [
+    {
+      "name": "S01 Create, approve, capture and return",
+      "description": "Reconcile shop order, provider capture and amounts; HTTP success alone is insufficient.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC04, AC19",
+      "item": []
+    },
+    {
+      "name": "S02 Buyer cancellation",
+      "description": "No paid/fulfilled state or replacement payment inferred from browser cancellation.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC04, LC17",
+      "item": []
+    },
+    {
+      "name": "S03 Declined payment",
+      "description": "No fulfillment; preserve observed provider outcome and associated intent.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC03, LC04",
+      "item": []
+    },
+    {
+      "name": "S04 Pending then completed",
+      "description": "Pending is not paid; later verified completion produces one transition.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC03, LC18",
+      "item": []
+    },
+    {
+      "name": "S05 Payer action when supported",
+      "description": "Record actual account/product support; unavailable required flow is a hold, not a silent skip.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC04, LC07",
+      "item": []
+    },
+    {
+      "name": "S06 Duplicate submit / two tabs",
+      "description": "One logical payment intent and one economic effect; losing response cannot overwrite winner.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC17, LC30",
+      "item": []
+    },
+    {
+      "name": "S07 Lost response / restart / retry",
+      "description": "Preserve original API-specific idempotency identity; reconcile unknown effects without fresh-key retry.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC17, LC30",
+      "item": []
+    },
+    {
+      "name": "S08 Full refund / repeated refund",
+      "description": "Use original API/account/object IDs; check remaining amount; distinguish pending and completed; no excess refund.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC17, LC22",
+      "item": []
+    },
+    {
+      "name": "S09 IPN authenticity and business checks",
+      "description": "Preserve raw bytes; verified identity, recipient, amount and currency before financial effects.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC18, LC37",
+      "item": []
+    },
+    {
+      "name": "S10 IPN pending/completed/duplicate/late pending",
+      "description": "State-aware dedupe; one fulfillment; no state regression; later legitimate financial events retained.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC18",
+      "item": []
+    },
+    {
+      "name": "S11 Webhook authenticity / duplicate / wrong listener",
+      "description": "Bind raw-body verification to sandbox app/listener; mock simulator evidence stays separate.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC18, LC19",
+      "item": []
+    },
+    {
+      "name": "S12 Callback outage / reconciliation",
+      "description": "Durable receipt before acknowledgement; no effect before verification; absent reporting is not proof of no charge.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC19, LC37",
+      "item": []
+    },
+    {
+      "name": "S13 Order persistence and restart",
+      "description": "Retain order/payment correspondence and state; no concurrent flat-file writers or restoration over new payments.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC20, LC34",
+      "item": []
+    },
+    {
+      "name": "S14 Amount / currency tampering",
+      "description": "USD shop charge must equal trusted order amount and intended recipient; no multicurrency support inferred.\nStatus: BLOCKED for genuine payment execution. Acceptance: LC03, LC04",
+      "item": []
+    }
+  ]
+}

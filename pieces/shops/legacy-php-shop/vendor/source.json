@@ -1,0 +1,83 @@
+{
+  "upstream": "https://github.com/jeretc/cutover",
+  "upstream_revision": "aedc11dde1a8793285665ca2188aff62ab5aab65",
+  "team_revision": "da2b5f02d5559c510de6b3b9d81e58400bdf6c89",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "src/api/create-payment.php",
+      "git_blob_sha1": "e37f64eb7e8622c5fc2754ad437918dceeb14501",
+      "sha256": "8ad700b4922af1a41790e40e67da4e54bc6933391f2c63819bf73b5659557037"
+    },
+    {
+      "path": "src/api/execute-payment.php",
+      "git_blob_sha1": "eae5a43e6ad33817385103a3b8c51bc009df89c7",
+      "sha256": "5fbda1245e68eab8660ec86720fe82df0c50c1e61c16dcddf914ee98a2fc22f0"
+    },
+    {
+      "path": "src/api/orders.php",
+      "git_blob_sha1": "1daebafcad1a0becc923d931c63826441d4d2fdd",
+      "sha256": "74da414bd8673f2b7c7628cf036b05085c0802769b4ae71fbe4a13036c7fe926"
+    },
+    {
+      "path": "src/api/refund.php",
+      "git_blob_sha1": "7f2df35896981fc0d7b37dee1290062ff62cb981",
+      "sha256": "c365d7f92c3d2becfc4778675f199b6f8c51293b618f027c5b3cf8ce47a6b00b"
+    },
+    {
+      "path": "src/assets/mug.svg",
+      "git_blob_sha1": "faaa3cc550f1c9009699c8520e016b7b020d0a81",
+      "sha256": "740211a96255a8a826ede3330a3cdff6217d1ed72a2b91ab21eef64d7499ce24"
+    },
+    {
+      "path": "src/assets/poster.svg",
+      "git_blob_sha1": "fce6697aaeff18b7f42df5ba51fa61c3890c0f19",
+      "sha256": "daea7cee79c9bbef99aad4b52793689230a603b821cddc066ce1bbca2ea8fef2"
+    },
+    {
+      "path": "src/assets/shop.css",
+      "git_blob_sha1": "126cf3dc6c870b9f665b11628b269b28e9ef9041",
+      "sha256": "66b7200f7a856b4e131ea5f52eeaec50a9363d090e08b2736b5d12b5ee8bc663"
+    },
+    {
+      "path": "src/assets/tee.svg",
+      "git_blob_sha1": "ee0cfee99f9ceef2868dab72d2549707644e19c6",
+      "sha256": "1b5a52be3908914573ad9b42d850075eb932a45a5b75bc300c93a1414e57110a"
+    },
+    {
+      "path": "src/cancel.php",
+      "git_blob_sha1": "0f1aa1dc1aee1f2ce5889ec9106bd42f0b424714",
+      "sha256": "97b6d67e58a51deea53579720f192123371d8b9dfe9c486c835d9aba2badfeea"
+    },
+    {
+      "path": "src/config.php",
+      "git_blob_sha1": "64a2d28f6057deb5330c6fb2aac7b44fcb531f91",
+      "sha256": "c986e59337c22f59aa32fb226f60dca190ebea9a7d7f2dc31bd6cbe91ccea30d"
+    },
+    {
+      "path": "src/index.php",
+      "git_blob_sha1": "ae311ef5b66bafe630eb65d92b821fd9680e712b",
+      "sha256": "98baf5b2203d25bc53e4c9de3a6a96d1a0a963d92f8b4c50c99c110450be1700"
+    },
+    {
+      "path": "src/ipn.php",
+      "git_blob_sha1": "224e8587c128b234604090c57131ed3bcee391ed",
+      "sha256": "cb6cf995c0cf80f7bbc149714ea4f4403c98ad534d9a508845fbc1a51580ec10"
+    },
+    {
+      "path": "src/lib/orders_store.php",
+      "git_blob_sha1": "0c2a2f5d054216d0ad305f6aafc595920eaaf152",
+      "sha256": "ae79f3a45d160b3c3a560a1b90c0c3cd1672015e2bef8623741c8ed954048e25"
+    },
+    {
+      "path": "src/lib/paypal_nvp.php",
+      "git_blob_sha1": "2eba11c21dc2bb238e2de4cfb8ea389ab33d5651",
+      "sha256": "e85df1202064f9e8310075fb6892b3a0c4c45384f5a532fce84629b0e38b01da"
+    },
+    {
+      "path": "src/success.php",
+      "git_blob_sha1": "140acadf3dc6aac72f358c2b946e6985852203f7",
+      "sha256": "1c627d36c51e44ebc16f28a5fa99de4da601cf98bb6a304a33e49152e002c39a"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "document_kind": "local_dependency_register_not_shared_wire_contract",
+  "team_revision": "25e21594841ae527024854a7267dd707d37584ea",
+  "checked_on": "2026-11-12",
+  "sources": [
+    "docs/START_Aditya_Vijay_paypal_shops.md: VJ01 and VJ02",
+    "docs/engineering/work/SHARED_INTERFACES_AND_DEPENDENCIES.md",
+    "contracts/src/goldgraft_contracts/interfaces.py: Runner and PayPalClient",
+    "contracts/src/goldgraft_contracts/runner.py: JobSpec, JobResult, RawCapture",
+    "docs/engineering/lifecycle/BASELINE_REPRODUCTION.md"
+  ],
+  "observations": [
+    "Backend and runner contributions are merged; the older .gitkeep-only finding is historical",
+    "Current ContainerRunner explicitly replays saved fixture captures",
+    "CustodyBroker uses an in-memory _vault; callback route checks header presence without full qualification",
+    "Proof PR1 merged on 11 November at 4f9bf0c7f88dd811ba58cba856ff91ae226db172; current proof handoff is ready for fixture replay only",
+    "No accepted implemented new SI01 bootstrap is established by the inspected coordination reply"
+  ],
+  "required": [
+    {
+      "id": "SI01",
+      "owner": "Aditya Singh",
+      "status": "PENDING",
+      "needed": "Approved new shared evidence/authority/runtime bootstrap where current models do not fit"
+    },
+    {
+      "id": "GU02",
+      "owner": "Aditya Gupta",
+      "status": "CUSTODY_PRESENT_REAL_PAYMENT_BROKER_UNQUALIFIED",
+      "needed": "Qualified sandbox broker with account/environment/run binding and narrow allowed effects"
+    },
+    {
+      "id": "GU03",
+      "owner": "Aditya Gupta",
+      "status": "FIXTURE_REPLAY_PRESENT_REAL_RECORDER_CALLBACK_UNQUALIFIED",
+      "needed": "Protected runner, trusted callback gateway, real recorder and current operation receipts"
+    },
+    {
+      "id": "SH01",
+      "owner": "Aditya Singhal",
+      "status": "MERGED_FIXTURE_ADAPTER_LIVE_QUALIFICATION_PENDING",
+      "needed": "Actual capture-to-money mapping and deterministic verdict integration"
+    },
+    {
+      "id": "VJ01_RUNTIME",
+      "owner": "Vijay with Gupta",
+      "status": "NOT_QUALIFIED",
+      "needed": "Exact protected Linux source/image/runtime identity; Windows component checks are insufficient"
+    }
+  ],
+  "payment_execution_allowed_by_this_file": false,
+  "historical_team_revision": "da2b5f02d5559c510de6b3b9d81e58400bdf6c89"
+}

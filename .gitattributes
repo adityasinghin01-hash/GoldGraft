@@ -1,0 +1,3 @@
+# Preserve the exact upstream bytes used by source_inventory.json on every OS.
+pieces/shops/legacy-php-shop/vendor/** -text
+pieces/shops/vijay-php-reference/source/** -text

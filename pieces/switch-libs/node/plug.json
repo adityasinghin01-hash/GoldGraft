@@ -1,5 +1,1 @@
-{
-  "language": "node",
-  "test": "node run_cases.mjs ../../../plugtests/switch_cases.json"
-}
-
+{"language":"node","test":"node run_cases.mjs ../../../plugtests/switch_cases.json && node test_compat.mjs"}

@@ -1,0 +1,185 @@
+{
+  "document_kind": "local_scenario_worksheet_not_shared_scenario_schema",
+  "source": "docs/engineering/connection/SUPPORTED_FIRST_PATH.md; lifecycle/BASELINE_REPRODUCTION.md",
+  "team_revision": "da2b5f02d5559c510de6b3b9d81e58400bdf6c89",
+  "scope": {
+    "shop": "legacy-php-shop",
+    "currency": "USD",
+    "environment": "sandbox",
+    "variants": [
+      "OLD",
+      "OLD_TWIN",
+      "NEW"
+    ],
+    "production_authority": false
+  },
+  "scenarios": [
+    {
+      "id": "S01",
+      "title": "Create, approve, capture and return",
+      "expected": "Reconcile shop order, provider capture and amounts; HTTP success alone is insufficient.",
+      "acceptance": [
+        "LC04",
+        "AC19"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S02",
+      "title": "Buyer cancellation",
+      "expected": "No paid/fulfilled state or replacement payment inferred from browser cancellation.",
+      "acceptance": [
+        "LC04",
+        "LC17"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S03",
+      "title": "Declined payment",
+      "expected": "No fulfillment; preserve observed provider outcome and associated intent.",
+      "acceptance": [
+        "LC03",
+        "LC04"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S04",
+      "title": "Pending then completed",
+      "expected": "Pending is not paid; later verified completion produces one transition.",
+      "acceptance": [
+        "LC03",
+        "LC18"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S05",
+      "title": "Payer action when supported",
+      "expected": "Record actual account/product support; unavailable required flow is a hold, not a silent skip.",
+      "acceptance": [
+        "LC04",
+        "LC07"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S06",
+      "title": "Duplicate submit / two tabs",
+      "expected": "One logical payment intent and one economic effect; losing response cannot overwrite winner.",
+      "acceptance": [
+        "LC17",
+        "LC30"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S07",
+      "title": "Lost response / restart / retry",
+      "expected": "Preserve original API-specific idempotency identity; reconcile unknown effects without fresh-key retry.",
+      "acceptance": [
+        "LC17",
+        "LC30"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S08",
+      "title": "Full refund / repeated refund",
+      "expected": "Use original API/account/object IDs; check remaining amount; distinguish pending and completed; no excess refund.",
+      "acceptance": [
+        "LC17",
+        "LC22"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S09",
+      "title": "IPN authenticity and business checks",
+      "expected": "Preserve raw bytes; verified identity, recipient, amount and currency before financial effects.",
+      "acceptance": [
+        "LC18",
+        "LC37"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S10",
+      "title": "IPN pending/completed/duplicate/late pending",
+      "expected": "State-aware dedupe; one fulfillment; no state regression; later legitimate financial events retained.",
+      "acceptance": [
+        "LC18"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S11",
+      "title": "Webhook authenticity / duplicate / wrong listener",
+      "expected": "Bind raw-body verification to sandbox app/listener; mock simulator evidence stays separate.",
+      "acceptance": [
+        "LC18",
+        "LC19"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S12",
+      "title": "Callback outage / reconciliation",
+      "expected": "Durable receipt before acknowledgement; no effect before verification; absent reporting is not proof of no charge.",
+      "acceptance": [
+        "LC19",
+        "LC37"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S13",
+      "title": "Order persistence and restart",
+      "expected": "Retain order/payment correspondence and state; no concurrent flat-file writers or restoration over new payments.",
+      "acceptance": [
+        "LC20",
+        "LC34"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    },
+    {
+      "id": "S14",
+      "title": "Amount / currency tampering",
+      "expected": "USD shop charge must equal trusted order amount and intended recipient; no multicurrency support inferred.",
+      "acceptance": [
+        "LC03",
+        "LC04"
+      ],
+      "status": "UNVERIFIED",
+      "evidence_refs": [],
+      "required_scope": true
+    }
+  ]
+}
