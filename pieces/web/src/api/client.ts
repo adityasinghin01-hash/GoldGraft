@@ -102,6 +102,8 @@ function openFeed<T extends { seq: number }>(path: string, event: string, onData
     onData(d);
     if (isEnd?.(d)) end();
   });
+  // The API sends `end` when a finished run's stream closes: stop instead of reconnecting.
+  es.addEventListener('end', end);
   es.onerror = () => {
     if (closed) return;
     if (!gotSinceError) emptyReconnects++;

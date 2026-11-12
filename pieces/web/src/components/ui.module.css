@@ -30,6 +30,8 @@
 .statLink:hover { box-shadow: 0 0 0 1px var(--gg-line-gold) inset; background: rgb(205 190 156 / 0.05); }
 .statLabel { display: inline-flex; align-items: center; font-size: 13px; color: var(--gg-mute); }
 .statValue { font-family: var(--gg-font-display); font-size: clamp(1.75rem, 1.3rem + 0.9vw, 2.4rem); line-height: 1.05; color: var(--gg-ivory); letter-spacing: -0.02em; }
+/* Word values ("not measured yet") use the body face so they fit inside the card. */
+.statValue[data-words] { font-family: var(--gg-font-ui); font-size: 17px; line-height: 1.35; letter-spacing: 0; color: var(--gg-mute); padding-top: 6px; }
 .statValue[data-tone='bad'] { color: var(--gg-bad); }
 .statValue[data-tone='good'] { color: var(--gg-good); }
 .statValue[data-tone='gold'] { color: var(--gg-gold); }

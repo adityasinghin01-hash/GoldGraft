@@ -17,7 +17,7 @@ export function formatMoney(m: Money | null | undefined): string {
   return `${minor < 0 ? '-' : ''}${whole}${frac} ${cur}`;
 }
 
-export const formatUsd = (n: number | null | undefined) => (n == null ? '' : `$${n.toFixed(2)}`);
+export const formatUsd = (n: number | null | undefined) => (n == null ? '' : n > 0 && n < 0.005 ? '<$0.01' : `$${n.toFixed(2)}`);
 export const formatPct = (p: number | null | undefined) => (p == null ? '' : `${Math.round(p * 100)}%`);
 
 export function formatMinutes(n: number | null | undefined): string {
