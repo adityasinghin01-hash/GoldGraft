@@ -5,6 +5,7 @@ All other requests retain the strictly offline fixture application's behaviour.
 """
 
 import argparse
+import asyncio
 import json
 import logging
 import os
@@ -292,11 +293,52 @@ def create_app(
             after = request.headers.get("Last-Event-ID", "0")
             if not after.isascii() or not after.isdecimal():
                 return _problem(400, "Last-Event-ID must be a nonnegative sequence")
-            entries = get_view(run_id).events(int(after))
 
-            def stream():
-                for entry in entries:
-                    yield f"id: {entry.seq}\nevent: ledger\ndata: {entry.model_dump_json()}\n\n"
+            def still_running():
+                with lock:
+                    record = live.get(run_id)
+                if record is not None and record.status not in {"finished", "failed"}:
+                    return True
+                result = path / "RESULT.json"
+                if not result.exists():
+                    return False
+                try:
+                    return json.loads(result.read_text()).get("status") == "running"
+                except ValueError:
+                    return True  # being rewritten right now
+
+            def fresh(seq):
+                try:
+                    return get_view(run_id).events(seq)
+                except ValueError:
+                    return []  # evidence mid-write; the next poll picks it up
+
+            # Browsers (EventSource) ask for text/event-stream and get a live stream;
+            # plain GETs get the ledger so far, once.
+            live_stream = "text/event-stream" in request.headers.get("accept", "")
+
+            def frame(entry):
+                return f"id: {entry.seq}\nevent: ledger\ndata: {entry.model_dump_json()}\n\n"
+
+            async def stream():
+                # A running run keeps the stream open and pushes each step as it lands;
+                # a finished run sends its ledger and closes.
+                seq, polls = int(after), 0
+                while True:
+                    for entry in fresh(seq):
+                        seq = entry.seq
+                        yield frame(entry)
+                    if not live_stream or not still_running():
+                        for entry in fresh(seq):
+                            seq = entry.seq
+                            yield frame(entry)
+                        return
+                    if await request.is_disconnected():
+                        return
+                    polls += 1
+                    if polls % 10 == 0:
+                        yield ": still running\n\n"
+                    await asyncio.sleep(1.5)
 
             return StreamingResponse(stream(), media_type="text/event-stream")
         view = get_view(run_id)
