@@ -339,7 +339,11 @@ def advance(run_ref, p):
                 and task_id + RETRY not in tasks
                 and tasks[task_id].state == "held"
                 and tasks[task_id].issue is not None
-                and tasks[task_id].issue.code in MODEL_FAILURES
+                and (
+                    tasks[task_id].issue.code in MODEL_FAILURES
+                    # held for missing evidence after the model really ran (driver marks it)
+                    or task_id in run.get("model_ran_holds", ())
+                )
             )
             if not retryable:
                 continue

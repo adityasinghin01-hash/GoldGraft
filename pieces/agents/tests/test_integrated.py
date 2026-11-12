@@ -227,3 +227,20 @@ def test_deterministic_holds_are_never_retried(tmp_path):
     _, tasks = _run(tmp_path / "b.sqlite", run)
     assert tasks["librarian-recipe"].state == "held"
     assert "librarian-recipe" + integrated.RETRY not in tasks
+
+
+def test_missing_evidence_after_the_model_ran_is_retried_once(tmp_path, monkeypatch):
+    from pieces.agents.component_agents import grafter
+
+    real_review = grafter.review
+
+    def flaky(task, data, packet, outputs, observations):
+        if task.task.task_id == "grafter":
+            raise ValueError("MISSING_EVIDENCE simulated incomplete reading")
+        return real_review(task, data, packet, outputs, observations)
+
+    monkeypatch.setattr(grafter, "review", flaky)
+    run = dict(_real_run(), model_ran_holds={"grafter"})  # the driver marks model-ran holds
+    _, tasks = _run(tmp_path / "b.sqlite", run)
+    assert tasks["grafter"].issue.code == "MISSING_EVIDENCE"
+    assert tasks["grafter" + integrated.RETRY].state == "succeeded"
