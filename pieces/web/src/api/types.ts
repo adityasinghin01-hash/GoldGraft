@@ -82,3 +82,28 @@ export type AgentRun = {
   spent_usd: number;
   finished_at: string | null;
 };
+
+/** One connected local run: Gupta's control → executed PHP → Singhal's proof → SI01 records. */
+export type ConnectedCheck = {
+  check_id: string;
+  kind: 'baseline' | 'candidate' | 'scenario' | 'domain_rule' | 'security' | 'mutation' | 'payment' | 'isolation' | 'exit';
+  critical: boolean;
+  evidence_class: string;
+  state: 'verified' | 'missing' | 'failed' | 'unknown' | 'unsupported' | 'excluded';
+  reason: string;
+};
+export type ConnectedRun = {
+  profile: string;
+  evidence_run: string;
+  gupta_control: { case_id: string; work_id: string; generation: number; baseline_read_accepted: string; status: string };
+  proof_plan: { checks: number; critical: number; digest: string };
+  proof_result: { outcome: 'ready' | 'partial' | 'hold'; reason_codes: string[]; by_state: Record<string, string[]> };
+  mutations_rejudged: Record<string, string>;
+  provider_checks: { paypal_sandbox?: { run_id: string; evidence_class: string; reverified_from_recording: boolean; exchanges: number; ids: string[]; scope: string } };
+  promotion: { action: 'STEP_UP' | 'HOLD' | 'CUTBACK'; reason: string; advice: string; advice_reason: string };
+  lifecycle_review: { disposition: string; gaps: [string, string][] };
+  public_view: { integrity: string; metrics: Record<string, string> };
+  certificate: { issued: boolean; held_at?: string };
+  holds: string[];
+  checks: ConnectedCheck[];
+};

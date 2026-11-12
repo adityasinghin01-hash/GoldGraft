@@ -11,6 +11,8 @@ import rootmap from './data/GET_rootmap.json';
 import scenarios from './data/GET_scenarios.json';
 import cmelPending from './data/GET_cmel_pending.json';
 import proof from './data/GET_proof.json';
+// A real recording (12 Nov 2026, this Mac): not invented sample numbers.
+import connected from './data/GET_connected.json';
 import certificate from './data/GET_certificate.json';
 import verifyOk from './data/POST_certificate_verify_ok.json';
 import verifyTampered from './data/POST_certificate_verify_tampered.json';
@@ -120,6 +122,7 @@ export const mockApi: GoldGraftApi = {
   changes: async (id) => { await requireDemo(id); return get(changes); },
   runs: async () => get(runs),
   agents: async (id) => { await requireDemo(id); return get(agents); },
+  connected: async (id) => { await requireDemo(id); return get(connected) as never; },
 
   ledgerFeed: (_id, onEvent, onStatus: (s: FeedStatus) => void) => {
     let i = 0;
