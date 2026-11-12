@@ -278,7 +278,10 @@ def create_app(
 
     def read_run(request, run_id, suffix):
         path = directory(run_id)
-        if suffix in {"scenarios", "cmel", "proof"}:
+        if suffix == "scenarios":
+            # Honest and quiet: no payment scenarios have run on real agent code yet.
+            return JSONResponse({"graft_id": run_id, "scenarios": []})
+        if suffix in {"cmel", "proof"}:
             return _problem(404, NO_PROOF)
         if suffix == "changes":
             changes = path / "CHANGES.json"

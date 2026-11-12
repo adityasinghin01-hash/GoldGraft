@@ -119,7 +119,14 @@ def test_graft_rootmap_and_sse_reconnect(runs):
     assert {p.name for p in (runs / "sample-1").iterdir()} == {"RESULT.json", "OUTPUTS.json"}
 
 
-@pytest.mark.parametrize("suffix", ["scenarios", "cmel", "proof"])
+def test_real_runs_list_no_payment_scenarios_yet(runs):
+    with TestClient(create_app(runs_dir=runs)) as client:
+        response = client.get("/grafts/sample-1/scenarios")
+        assert response.status_code == 200
+        assert response.json() == {"graft_id": "sample-1", "scenarios": []}
+
+
+@pytest.mark.parametrize("suffix", ["cmel", "proof"])
 def test_independent_proof_is_not_claimed(runs, suffix):
     with TestClient(create_app(runs_dir=runs)) as client:
         response = client.get(f"/grafts/sample-1/{suffix}")
