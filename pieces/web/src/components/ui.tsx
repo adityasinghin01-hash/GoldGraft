@@ -33,7 +33,7 @@ export function Stat({ label, value, note, to, tone, sub }: { label: string; val
   const body = (
     <>
       <span className={s.statLabel}>{label}{note && <Explain text={note} />}</span>
-      <span className={`gg-num ${s.statValue}`} data-tone={tone}>{value}</span>
+      <span className={`gg-num ${s.statValue}`} data-tone={tone} data-words={(typeof value === 'string' && /[a-z]{3,} [a-z]{3,}/.test(value)) || undefined}>{value}</span>
       {sub && <span className={s.statSub}>{sub}</span>}
     </>
   );
