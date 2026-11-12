@@ -1,0 +1,21 @@
+.screen { display: grid; gap: var(--gg-s-5); animation: screenIn 0.6s var(--gg-ease-out); }
+@keyframes screenIn { from { opacity: 0; transform: translateY(10px); } }
+.legend { color: var(--gg-body); font-size: 14px; line-height: 1.6; max-width: 72ch; }
+.legend b { color: var(--gg-ivory); font-weight: 500; }
+.list { display: grid; gap: var(--gg-s-3); list-style: none; margin: 0; padding: 0; }
+.step { display: grid; gap: 10px; padding: 16px 20px; }
+.step[data-held] { box-shadow: 0 0 0 1px rgb(224 144 124 / 0.28) inset; }
+.head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mark { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: var(--gg-good); background: rgb(159 184 148 / 0.14); flex: none; }
+.step[data-held] .mark { color: var(--gg-bad); background: rgb(224 144 124 / 0.14); }
+.role { font-family: var(--gg-font-display); font-size: 20px; font-weight: 420; color: var(--gg-ivory); margin-right: 4px; }
+.cost { margin-left: auto; font-family: var(--gg-font-mono); font-size: 13px; color: var(--gg-mute); }
+.made { color: var(--gg-body); font-size: 15px; line-height: 1.6; max-width: 90ch; overflow-wrap: anywhere; }
+.issue { color: var(--gg-bad); font-size: 14px; }
+.foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.note { color: var(--gg-mute); font-size: 13px; }
+.see { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--gg-gold); text-decoration: none; }
+.see:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 560px) {
+  .cost, .see { margin-left: 0; }
+}

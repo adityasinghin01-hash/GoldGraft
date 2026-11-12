@@ -40,6 +40,29 @@ export type ChangeSet = {
   /** Sample mode: the real run this recording comes from. */
   recorded_from?: string;
 };
+/** One agent step of an integrated run, with an honest label for what its input was. */
+export type AgentStep = {
+  task: string;
+  attempt: number;
+  role: string;
+  operation: string | null;
+  model: string | null;
+  escalated: boolean;
+  passed: boolean;
+  issue: string | null;
+  cost_usd: number;
+  seconds: number | null;
+  input: 'real' | 'mixed' | 'sample';
+  input_note: string;
+  outputs: { schema: string; summary: string }[];
+};
+export type AgentsView = {
+  graft_id: string;
+  status: string | null;
+  agents: AgentStep[];
+  /** Sample mode: the real run this recording comes from. */
+  recorded_from?: string;
+};
 export type AgentRun = {
   run_id: string;
   shop: string;
