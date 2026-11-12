@@ -1,7 +1,17 @@
 # GoldGraft agents — handoff (12 Nov 2026, morning)
 
 Owner of this work: Aditya (built by Claude overnight; Codex built the API layer `integration/agents_app.py`).
-Main branch: `a290a56` → merge `dc6aeff` (frontend `aditya/web` merged into main) → this handoff. See `git log`.
+Local main: `a290a56` → merge `dc6aeff` (frontend `aditya/web` merged into main) → this handoff. See `git log`.
+
+**On GitHub this work is on branch `integration/agents-12-nov`, not on `main`.** GitHub `main` got Gupta's
+PR #13 (live providers and recovery, 12 Nov 02:31) overnight. Merging it into this work conflicts in 4 backend
+files that Singhal's proof commits also changed (`4925491`, `952cbcc`, `b25ce0a`, already in local main):
+`pieces/backend/connection/upload_sessions.py`, `pieces/backend/lifecycle/effects.py`,
+`plugtests/test_connection_and_providers.py`, `scripts/live_paypal_sandbox_payment.py` (10 conflict blocks;
+Singhal stores uploads durably in SQLite, Gupta adds size limits and filename checks in memory). That is a
+design choice between two owners, so it was not resolved overnight. Next: Gupta and Singhal merge
+`origin/main` into `integration/agents-12-nov` (keep both: durable store + limits/sanitising), run the full
+regression, then open the PR to `main`. None of the agent or frontend files conflict.
 
 ## What works now
 
@@ -58,6 +68,7 @@ With $1.91 left under the active cap, about 4 more full legacy runs fit before t
 | PHP syntax check of the AI-written files | The new code has not been run against PayPal's sandbox |
 | Budget, receipts, two-strike Sonnet escalation, bounded retries | Librarian learns from its qualified de-identified template (consent recorded as an assumption for the MIT sample shop) |
 | | One code-fixing profile: plain PHP with Express Checkout NVP + IPN (`legacy-php-shop`, `eval-nvp`) |
+| | Progress "last step" time for a finished run is when the API server last rebuilt its view (the foundation ledger stamps entries when written); runs watched live show real times |
 
 ## For the team today
 
