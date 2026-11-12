@@ -6,6 +6,7 @@ All other requests retain the strictly offline fixture application's behaviour.
 
 import argparse
 import asyncio
+import hashlib
 import json
 import logging
 import os
@@ -43,7 +44,7 @@ GATEWAY_PYTHON = Path("/Users/aditya/reports/goldgraft-model-gateway-20261111/ve
 EVIDENCE_CLASS = "real-models-scripted-runner"
 NO_PROOF = (
     "Money events here come from the recorded runner and are not served for real agent runs; "
-    "the independent proof has not run on AI-written code yet"
+    "the independent proof has not run on this run's AI-written code yet"
 )
 NO_ASK = (
     "New questions would each run a paid Orchard Analyst call, which this local service does not "
@@ -414,6 +415,13 @@ def create_app(
                 or summary["proof_result"]["outcome"] != result.outcome
             ):
                 raise ValueError("connected run summary does not match its records")
+            signing_file = connected / "SIGNING.json"
+            if signing_file.is_file():
+                signing = json.loads(signing_file.read_bytes())
+                signed = hashlib.sha256((connected / "ProofResult.json").read_bytes()).hexdigest()
+                if signing.get("payload_sha256") != signed:
+                    raise ValueError("signature record does not match this proof result")
+                summary["signing"] = signing
             summary["checks"] = [
                 {
                     "check_id": c.check_id,
@@ -443,6 +451,13 @@ def create_app(
                 listed = ScenarioList(graft_id=run_id, scenarios=[])
             return JSONResponse(listed.model_dump(mode="json"))
         if suffix in {"cmel", "proof"}:
+            if (path / "connected-run/CONNECTED_RUN.json").is_file():
+                return _problem(
+                    404,
+                    "This run's independent proof is its connected run: the AI-written code was "
+                    "executed and judged there. The planted-bug replay view is not produced for it",
+                    NOT_YET,
+                )
             if has_local_proof:
                 return _problem(
                     404,

@@ -1,0 +1,4 @@
+
+> check:types
+> tsc --project contracts/tsconfig.json
+

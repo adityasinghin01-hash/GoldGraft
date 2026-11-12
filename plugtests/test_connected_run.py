@@ -181,3 +181,22 @@ def test_app_serves_connected_run_and_fails_closed_on_edits(agent_run, tmp_path)
     edited["outcome"] = "ready"
     result.write_text(json.dumps(edited))
     assert client.get("/grafts/sample-1/connected").status_code == 503
+
+
+def test_signature_record_must_match_the_served_proof_result(agent_run, tmp_path):
+    from fastapi.testclient import TestClient
+
+    from integration.agents_app import create_app
+
+    runs = tmp_path / "runs"
+    run = runs / "sample-1"
+    run.mkdir(parents=True)
+    (run / "RESULT.json").write_bytes((agent_run / "RESULT.json").read_bytes())
+    connect_run(agent_run, run / "connected-run", execute=fixture_execute())
+    proof_bytes = (run / "connected-run/ProofResult.json").read_bytes()
+    signing = run / "connected-run/SIGNING.json"
+    signing.write_text(json.dumps({"payload_sha256": hashlib.sha256(proof_bytes).hexdigest()}))
+    client = TestClient(create_app(runs_dir=runs))
+    assert "signing" in client.get("/grafts/sample-1/connected").json()
+    signing.write_text(json.dumps({"payload_sha256": "0" * 64}))
+    assert client.get("/grafts/sample-1/connected").status_code == 503

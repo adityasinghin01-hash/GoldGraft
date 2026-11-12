@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/ruff",
+    "check",
+    "."
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {},
+  "exit_code": 0,
+  "seconds": 0.06,
+  "output": "docs/engineering/plan5/checks/SG01_01-lint.log",
+  "output_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+}

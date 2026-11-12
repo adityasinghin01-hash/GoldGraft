@@ -1,0 +1,12 @@
+{
+  "command": [
+    "node",
+    "pieces/switch-libs/node/run_cases.mjs"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {},
+  "exit_code": 0,
+  "seconds": 0.057,
+  "output": "docs/engineering/plan5/checks/SG01_03-node-switch.log",
+  "output_sha256": "7e3219bc1e3c25eede0715cf3fd38ab59ca6d503a0f30eb954c0e62578298bf8"
+}
