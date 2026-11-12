@@ -1869,6 +1869,16 @@ by derived invariants in tests. No invented registry keys or schema changes.
                 "[C2 demo](../scripts/demo_graft.py); "
                 "[PayPal sandbox](https://developer.paypal.com/tools/sandbox/)"
             )
+        if name.startswith("socket-candidate/"):
+            purpose = (
+                "Vijay's reviewed shop-socket candidate (team-authored, MIT); "
+                "the only candidate his trusted-host recipe executes"
+            )
+            consumer = "shops (vijay-php-reference), plugtests"
+            source = (
+                "[PayPal Orders v2](https://developer.paypal.com/api/orders/v2/); "
+                "[reviewed hashes](../pieces/shops/vijay-php-reference/reviewed_candidate.json)"
+            )
         if name.endswith("vendor_hashes.json"):
             source = f"[Pinned Git tree]({REPO}/tree/{COMMIT})"
         label = "R — REAL source" if real else "S — SYNTHETIC"

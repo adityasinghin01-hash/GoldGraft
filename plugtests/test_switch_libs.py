@@ -42,6 +42,12 @@ def test_library_passes_shared_cases(plug):
     tool = spec["test"].split()[0]
     if shutil.which(tool) is None:
         pytest.skip(f"{tool} not installed here (CI runs it)")
+    if tool == "php" and subprocess.run(
+        ["php", "-r", 'exit(function_exists("sodium_crypto_sign_verify_detached") ? 0 : 1);'],
+        capture_output=True,
+    ).returncode:
+        # Without sodium the PHP switch fails closed to OLD (correct), so the NEW cases cannot pass.
+        pytest.skip("PHP here lacks the sodium extension (CI's PHP has it)")
     result = subprocess.run(spec["test"], shell=True, cwd=plug.parent, capture_output=True,
                             text=True, timeout=120)
     assert result.returncode == 0, result.stdout[-2000:] + result.stderr[-2000:]
