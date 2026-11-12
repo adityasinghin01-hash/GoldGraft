@@ -4,6 +4,7 @@ import builtins
 import os
 import shlex
 from datetime import UTC, datetime, timedelta
+from enum import Enum
 from types import SimpleNamespace
 
 import pytest
@@ -28,6 +29,33 @@ class CommandTimeout(Exception):
 
 class Unreachable(CommandTimeout):
     pass
+
+
+class RpcCode(Enum):
+    DEADLINE_EXCEEDED = 1
+    CANCELED = 2
+
+
+class RpcError(Exception):
+    def __init__(self, code):
+        self.code = code
+
+
+def deadline_timeout(message=""):
+    error = CommandTimeout(message)
+    error.__cause__ = RpcError(RpcCode.DEADLINE_EXCEEDED)
+    return error
+
+
+def fake_is_command_deadline(error):
+    from pieces.runner.e2b_backend import _is_rpc_deadline
+
+    return _is_rpc_deadline(
+        error,
+        timeout_type=CommandTimeout,
+        rpc_error_type=RpcError,
+        deadline_code=RpcCode.DEADLINE_EXCEEDED,
+    )
 
 
 class FakeSandbox:
@@ -100,7 +128,7 @@ def setup(tmp_path):
         create=create,
         command_exit=CommandExit,
         command_timeout=CommandTimeout,
-        transport_errors=(Unreachable,),
+        is_command_deadline=fake_is_command_deadline,
     )
     backend = E2BIsolationBackend(api_key=KEY, authorize_remote=True, sdk_factory=lambda: sdk)
     return SimpleNamespace(source=source, box=box, creates=creates, backend=backend, sdk=sdk)
@@ -287,7 +315,7 @@ def test_command_nonzero_preserves_actual_outputs_redacted(setup):
 
 
 def test_command_timeout_has_unknown_exit_and_partial_output_then_kills(setup):
-    setup.box.outcome = CommandTimeout(KEY)
+    setup.box.outcome = deadline_timeout(KEY)
     result = run(setup)
     assert result["timed_out"] is True
     assert result["exit_code"] is None
@@ -477,7 +505,7 @@ def test_cli_smoke_writes_fresh_reports_for_three_verified_cases(tmp_path, capsy
         box.outcome = [
             SimpleNamespace(exit_code=0, stdout="goldgraft-e2b-smoke\n", stderr=""),
             CommandExit(7, "", "deliberate-failure"),
-            CommandTimeout(),
+            deadline_timeout(),
         ][len(boxes) % 3]
         boxes.append(box)
         return box
@@ -487,6 +515,7 @@ def test_cli_smoke_writes_fresh_reports_for_three_verified_cases(tmp_path, capsy
             create=create,
             command_exit=CommandExit,
             command_timeout=CommandTimeout,
+            is_command_deadline=fake_is_command_deadline,
         )
 
     for _ in range(2):
@@ -551,3 +580,132 @@ def test_factory_error_diagnostic_traceback_does_not_expose_key(setup):
         run(setup)
     assert KEY not in "".join(traceback.format_exception(exc.value))
     assert not setup.creates
+
+
+@pytest.mark.parametrize("code_name", ["CANCELED", "DEADLINE_EXCEEDED", "UNKNOWN"])
+def test_real_sdk_timeout_mapping_requires_typed_deadline(setup, code_name):
+    import traceback
+
+    pytest.importorskip("e2b")
+    from connectrpc.code import Code
+    from connectrpc.errors import ConnectError
+    from e2b.envd.rpc import handle_rpc_exception
+    from e2b.exceptions import TimeoutException
+
+    from pieces.runner.e2b_backend import _sdk
+
+    sdk = _sdk()
+    sdk.create = setup.sdk.create
+    setup.backend.sdk_factory = lambda: sdk
+    # Preserve original typed RPC context exactly as the SDK's except/raise does.
+    try:
+        try:
+            raise ConnectError(Code[code_name], KEY)
+        except ConnectError as exc:
+            raise handle_rpc_exception(exc)  # noqa: B904 - reproduce SDK implicit context
+    except Exception as mapped:
+        setup.box.outcome = mapped
+    if code_name == "DEADLINE_EXCEEDED":
+        result = run(setup)
+        assert result["timed_out"] is True
+        assert result["exit_code"] is None
+        assert result["stdout"] == "partial"
+        assert result["termination_confirmed"] is True
+    else:
+        if code_name == "CANCELED":
+            assert type(setup.box.outcome) is TimeoutException
+        with pytest.raises(IsolationNotEstablished) as exc:
+            run(setup)
+        assert KEY not in "".join(traceback.format_exception(exc.value))
+        assert exc.value.termination_confirmed is True
+    assert setup.box.killed
+
+
+def test_real_sdk_unknown_exact_timeout_fails_closed(setup):
+    pytest.importorskip("e2b")
+    from e2b.exceptions import TimeoutException
+
+    from pieces.runner.e2b_backend import _sdk
+
+    sdk = _sdk()
+    sdk.create = setup.sdk.create
+    setup.backend.sdk_factory = lambda: sdk
+    setup.box.outcome = TimeoutException("deadline exceeded " + KEY)
+    with pytest.raises(IsolationNotEstablished):
+        run(setup)
+    assert setup.box.killed
+
+
+def test_cli_does_not_accept_real_sdk_cancellation_as_timeout():
+    pytest.importorskip("e2b")
+    from connectrpc.code import Code
+    from connectrpc.errors import ConnectError
+    from e2b.envd.rpc import handle_rpc_exception
+
+    from pieces.runner.e2b_backend import _sdk
+    from scripts.live_e2b_runner import smoke
+
+    boxes = []
+    sdk = _sdk()
+
+    def create(**kwargs):
+        box = FakeSandbox()
+        if len(boxes) == 0:
+            box.outcome = SimpleNamespace(exit_code=0, stdout="goldgraft-e2b-smoke\n", stderr="")
+        elif len(boxes) == 1:
+            box.outcome = SimpleNamespace(exit_code=7, stdout="", stderr="deliberate-failure")
+        else:
+            try:
+                try:
+                    raise ConnectError(Code.CANCELED, KEY)
+                except ConnectError as exc:
+                    raise handle_rpc_exception(exc)  # noqa: B904 - reproduce SDK implicit context
+            except Exception as mapped:
+                box.outcome = mapped
+        boxes.append(box)
+        return box
+
+    sdk.create = create
+    report = smoke(KEY, sandbox_factory=lambda: sdk)
+    assert not report["passed"]
+    assert len(report["cases"]) == len(boxes) == 3
+    assert not report["cases"][-1]["passed"]
+    assert report["cases"][-1]["termination_confirmed"] is True
+    assert "result" not in report["cases"][-1]
+    assert all(box.killed for box in boxes)
+    assert KEY not in repr(report)
+
+
+@pytest.mark.parametrize("mode", ["unknown", "canceled", "conflicting", "cycle", "deep"])
+def test_timeout_provenance_fails_closed_offline(setup, mode):
+    error = CommandTimeout("deadline exceeded")
+    if mode == "canceled":
+        error.__context__ = RpcError(RpcCode.CANCELED)
+    elif mode == "conflicting":
+        error.__cause__ = RpcError(RpcCode.DEADLINE_EXCEEDED)
+        error.__context__ = RpcError(RpcCode.CANCELED)
+    elif mode == "cycle":
+        error.__cause__ = RpcError(RpcCode.DEADLINE_EXCEEDED)
+        error.__context__ = error
+    elif mode == "deep":
+        tail = error
+        for _ in range(16):
+            tail.__cause__ = RuntimeError()
+            tail = tail.__cause__
+        tail.__cause__ = RpcError(RpcCode.DEADLINE_EXCEEDED)
+    setup.box.outcome = error
+    with pytest.raises(IsolationNotEstablished):
+        run(setup)
+    assert setup.box.killed
+
+
+def test_deadline_provenance_accepts_bounded_wrappers_and_shared_chain(setup):
+    error = CommandTimeout()
+    wrapper = RuntimeError()
+    wrapper.__cause__ = RpcError(RpcCode.DEADLINE_EXCEEDED)
+    error.__cause__ = error.__context__ = wrapper
+    setup.box.outcome = error
+    result = run(setup)
+    assert result["timed_out"] is True
+    assert result["exit_code"] is None
+    assert result["termination_confirmed"] is True

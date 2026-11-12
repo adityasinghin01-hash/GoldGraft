@@ -95,11 +95,16 @@ or external-service access is supported by this primitive.
 The command timeout must be finite, positive and **at most 120 seconds**. The
 SDK receives it as `commands.run(timeout=...)`; the identity probe has ten seconds.
 SDK control/file requests have a 15-second request timeout. Actual nonzero command
-exit codes and stdout/stderr are preserved. Exact SDK `TimeoutException` returns
-`timed_out=True`, unknown `exit_code=None` and any streamed partial output. This
-means the SDK command stream deadline expired; it does not infer a process exit
-or prove why the stream timed out. Timeout subclasses (including a vanished VM)
-and other provider failures raise fixed diagnostics. API-key values are redacted
+exit codes and stdout/stderr are preserved. Only an exact SDK `TimeoutException` with positively identified typed
+`ConnectError` / `Code.DEADLINE_EXCEEDED` provenance returns `timed_out=True`,
+unknown `exit_code=None` and any streamed partial output. The classifier traverses
+both cause and context, bounded to 16 distinct exceptions. Missing provenance,
+cycles, excessive depth or conflicting RPC codes fail closed. The SDK also maps
+server/proxy `CANCELED` to the same timeout class; cancellation must hold the job
+and cannot pass the smoke timeout case. No exception-message matching is used.
+A classified timeout means the SDK command stream deadline expired; it does not
+infer a process exit. Timeout subclasses (including a vanished VM) and other
+provider failures raise fixed diagnostics. API-key values are redacted
 from returned outputs and never interpolated into error diagnostics.
 
 A `finally` block kills the owned VM and requires `is_running() is False` before
@@ -126,9 +131,12 @@ honest qualification behaviour.
 ```
 
 The injectable `sdk_factory` (CLI test hook: `sandbox_factory`) returns an object
-with `create`, `command_exit` and `command_timeout`. Test fakes implement the
+with `create`, `command_exit`, `command_timeout` and an explicit
+`is_command_deadline(exception)` predicate. Test fakes implement the
 SDK's info, command, file-write, kill and running-state interfaces. No test
-requires the SDK installed or a live account.
+requires a live account. Core fake tests do not require the SDK; optional
+compatibility regressions use installed SDK error mapping (with no network) and
+are skipped when that optional dependency is absent.
 
 Implementation was checked against the official 2.63.0 SDK source and these
 provider references: [sandbox lifecycle](https://docs.e2b.dev/sandbox.md),

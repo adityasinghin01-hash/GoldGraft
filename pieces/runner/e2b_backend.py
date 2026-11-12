@@ -71,6 +71,8 @@ class IsolationNotEstablished(RuntimeError):
 
 def _sdk():
     try:
+        from connectrpc.code import Code
+        from connectrpc.errors import ConnectError
         from e2b import CommandExitException, Sandbox, TimeoutException
     except ImportError:
         raise IsolationNotEstablished(
@@ -80,7 +82,45 @@ def _sdk():
         create=Sandbox.create,
         command_exit=CommandExitException,
         command_timeout=TimeoutException,
+        is_command_deadline=lambda exc: _is_rpc_deadline(
+            exc,
+            timeout_type=TimeoutException,
+            rpc_error_type=ConnectError,
+            deadline_code=Code.DEADLINE_EXCEEDED,
+        ),
     )
+
+
+def _is_rpc_deadline(error, *, timeout_type, rpc_error_type, deadline_code):
+    """Require positive typed deadline provenance; cycles, ambiguity and depth fail closed."""
+    if type(error) is not timeout_type:
+        return False
+    visited, active = set(), set()
+    found_deadline = False
+
+    def visit(exc):
+        nonlocal found_deadline
+        if exc is None:
+            return True
+        identity = id(exc)
+        if identity in active:
+            return False
+        if identity in visited:
+            return True
+        if len(visited) >= 16:
+            return False
+        visited.add(identity)
+        active.add(identity)
+        if isinstance(exc, rpc_error_type):
+            if exc.code is not deadline_code:
+                return False
+            found_deadline = True
+        if not visit(exc.__cause__) or not visit(exc.__context__):
+            return False
+        active.remove(identity)
+        return True
+
+    return visit(error) and found_deadline
 
 
 def _refuse(message):
@@ -290,9 +330,9 @@ class E2BIsolationBackend:
             except sdk.command_exit as exc:
                 outcome = exc
             except Exception as exc:
-                # SandboxNotRunningException and unknown provider failures must not
-                # masquerade as an ordinary command deadline (they may subclass TimeoutException).
-                if type(exc) is not sdk.command_timeout:
+                # The exact SDK timeout class also represents server/proxy cancellation.
+                # Require typed RPC deadline provenance, never exception-message matching.
+                if type(exc) is not sdk.command_timeout or not sdk.is_command_deadline(exc):
                     raise
                 outcome = SimpleNamespace(
                     exit_code=None, stdout="".join(stdout), stderr="".join(stderr)
