@@ -105,7 +105,7 @@ def issue_certificate(
     critical = {rule.id: rule for rule in contract.rules if rule.severity == Severity.CRITICAL}
     passing = {Grade.PASS, Grade.PASS_FIXED}
     if Grade.PROBLEM in grades.values() or any(
-        grades[scenario] == Grade.UNVERIFIED and critical.keys() & rules
+        grades[scenario] not in passing and critical.keys() & rules
         for scenario, rules in scenario_rules.items()
     ):
         raise ValueError("Certificate requires resolved critical proof and no problem verdicts")

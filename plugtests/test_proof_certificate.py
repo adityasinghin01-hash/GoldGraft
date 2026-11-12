@@ -335,3 +335,33 @@ def test_conflicting_paypal_capture_observations_cannot_be_selected_by_debug_id(
     repeated.money.minor += 1
     with pytest.raises(ValueError, match="Conflicting PayPal ledger observations"):
         capture_evidence([first, repeated])
+
+
+def test_critical_planned_flow_cannot_be_certified_as_not_applicable(issuance):
+    scenario = issuance["scenarios"][0].model_copy(deep=True)
+    scenario.id = "skipped-critical-checkout"
+    issuance["scenarios"].append(scenario)
+    verdict = issuance["verdicts"][0].model_copy(deep=True)
+    verdict.scenario_id = scenario.id
+    verdict.grade = Grade.NOT_APPLICABLE
+    issuance["verdicts"].append(verdict)
+    with pytest.raises(ValueError, match="resolved critical proof"):
+        issue_certificate(read("certificate/valid.json"),
+                          signer=lambda _: pytest.fail("Must not sign skipped critical proof"),
+                          **issuance)
+
+
+@pytest.mark.parametrize("missing", ["debug_id", "capture_id", "order_id"])
+def test_incomplete_payment_witness_cannot_be_omitted_from_signed_set(missing):
+    from pieces.proof.evidence import _payment_witnesses
+
+    raw = next(event for event in read("cmel/HAPPY.NEW.json")
+               if event["source"] == "PAYPAL_LEDGER" and event["kind"] == "CAPTURE")
+    complete = validate("CMEL/1", raw)
+    incomplete = complete.model_copy(deep=True)
+    incomplete.order_ref = "another-order"
+    incomplete.pp.capture_id = "AnotherCapture"
+    setattr(incomplete.pp, missing, None)
+    verdict = validate("Verdict/1", read("expected/HAPPY.verdict.json"))
+    with pytest.raises(ValueError, match="complete payment witnesses"):
+        _payment_witnesses([complete, incomplete], {verdict.scenario_id: verdict})

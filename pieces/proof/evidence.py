@@ -113,7 +113,19 @@ def _payment_witnesses(
     rows = capture_evidence(eligible)
     by_key = {}
     for event in eligible:
-        for row in capture_evidence((event,)):
+        selected = capture_evidence((event,))
+        if (
+            event.variant == "NEW"
+            and event.kind == "CAPTURE"
+            and event.status_norm == "COMPLETED"
+        ):
+            key = event.scenario_id, event.pp.order_id, event.pp.capture_id
+            if (
+                (event.source == "PAYPAL_LEDGER" and not selected)
+                or key not in {(row.scenario, row.order_id, row.capture_id) for row in rows}
+            ):
+                raise ValueError("Certificate requires complete payment witnesses")
+        for row in selected:
             by_key[row.scenario, row.order_id, row.capture_id, row.debug_id] = event
     return [
         (row, by_key[row.scenario, row.order_id, row.capture_id, row.debug_id])
