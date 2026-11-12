@@ -1,0 +1,229 @@
+{
+  "graft_id": "work-9eaa8440c75346bf9ee6cd4abcd9ac05",
+  "run_id": "work-9eaa8440c75346bf9ee6cd4abcd9ac05-local-php",
+  "variant": "NEW",
+  "scenario_id": "DECLINE",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 63,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62411/api/create-payment.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "tee": 1,
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 66,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62410/v2/checkout/orders",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "order-f5b5b487b7354872:create",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "intent": "CAPTURE",
+        "purchase_units": [
+          {
+            "reference_id": "order-f5b5b487b7354872",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            },
+            "items": [
+              {
+                "name": "Cutover Tee",
+                "quantity": "1",
+                "unit_amount": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            ]
+          }
+        ],
+        "application_context": {
+          "return_url": "http://127.0.0.1:62411/success.php",
+          "cancel_url": "http://127.0.0.1:62411/cancel.php",
+          "shipping_preference": "NO_SHIPPING"
+        }
+      }
+    },
+    {
+      "seq": 2,
+      "t_ms": 66,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62410/v2/checkout/orders",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standind855d53",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "id": "2B0883E5D0784DD7A",
+        "intent": "CAPTURE",
+        "status": "APPROVED",
+        "purchase_units": [
+          {
+            "reference_id": "order-f5b5b487b7354872",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "status": 201
+    },
+    {
+      "seq": 3,
+      "t_ms": 67,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://legacy-php-shop/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-DECLINE"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 0,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "t_ms": 67,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62411/api/execute-payment.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "token": "2B0883E5D0784DD7A",
+        "orderId": "2B0883E5D0784DD7A",
+        "payerID": "FAKEPAYER0001"
+      }
+    },
+    {
+      "seq": 5,
+      "t_ms": 69,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62410/v2/checkout/orders/2B0883E5D0784DD7A/capture",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "[REDACTED]",
+        "PayPal-Request-Id": "capture-2B0883E5D0784DD7A",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 6,
+      "t_ms": 69,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62410/v2/checkout/orders/2B0883E5D0784DD7A/capture",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standinda4bd47",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "name": "UNPROCESSABLE_ENTITY",
+        "details": [
+          {
+            "issue": "INSTRUMENT_DECLINED"
+          }
+        ]
+      },
+      "status": 422
+    },
+    {
+      "seq": 7,
+      "t_ms": 70,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "GET",
+      "url": "http://127.0.0.1:62410/v2/checkout/orders/2B0883E5D0784DD7A",
+      "headers": {
+        "X-Goldgraft-Ledger": "order",
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {}
+    },
+    {
+      "seq": 8,
+      "t_ms": 70,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "GET",
+      "url": "http://127.0.0.1:62410/v2/checkout/orders/2B0883E5D0784DD7A",
+      "headers": {
+        "Content-Type": "application/json",
+        "PayPal-Debug-Id": "standin6123185",
+        "X-GoldGraft-Ledger": "order",
+        "X-GoldGraft-Order-Ref": "SHOP-DECLINE"
+      },
+      "body_json": {
+        "id": "2B0883E5D0784DD7A",
+        "intent": "CAPTURE",
+        "status": "APPROVED",
+        "purchase_units": [
+          {
+            "reference_id": "order-f5b5b487b7354872",
+            "amount": {
+              "currency_code": "USD",
+              "value": "25.00",
+              "breakdown": {
+                "item_total": {
+                  "currency_code": "USD",
+                  "value": "25.00"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "status": 200
+    }
+  ]
+}

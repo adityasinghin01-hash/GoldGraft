@@ -5,13 +5,13 @@
 | Recorded evidence (`r9-final-connected`) | Result |
 |---|---|
 | Agents on real models | 13/13 roles passed |
-| Connected backend → PHP execution → independent proof | 33/39 critical checks verified; result **HOLD** |
+| Connected backend → PHP execution → independent proof | 34/39 critical checks verified; result **HOLD** |
 | Executed planted bugs | 6/10 caught; four remain unverified |
-| PayPal sandbox | Separate order/capture/refund evidence, rechecked from its recording; the shop checkout still uses simulated PayPal |
-| Proof signature | ProofResult signed by the GitHub workflow; public Rekor entry **3832763566** |
+| PayPal sandbox | AI-written PHP checkout's HAPPY flow independently verified against real sandbox; additional refund/duplicate flows recorded separately |
+| Proof signature | ProofResult signed by the GitHub workflow; public Rekor entry **3833925707** |
 | Qualification certificate | **Not issued**; a signed held result is not a qualification certificate |
 
-These are the checked-in [connected-run records](deploy/runs/r9-final-connected/connected-run/). They describe the recorded run, not a new execution when a visitor opens the app. The six open checks are four planted-bug gaps, real shop-checkout payment evidence and runner isolation. Merchant deployment, state transfer and independent exit remain separate qualification work. Work in progress on other branches is not included in these results.
+These are the checked-in [connected-run records](deploy/runs/r9-final-connected/connected-run/). They describe recorded evidence, not a new execution when a visitor opens the app. The real-provider gate covers **HAPPY only**. The five open checks are four planted-bug gaps and runner isolation. Merchant deployment, state transfer and independent exit remain separate qualification work. See the [live-check scope and limitations](docs/engineering/work/SANDBOX_LIVE_CHECKS_2026-11-12.md).
 
 GoldGraft is being designed as a browser connector service that upgrades a shop's older PayPal integration and leaves the approved upgraded shop running under the merchant's control. The service obtains authorised code/context, verifies the actual shop, reproduces an unchanged baseline, tests an isolated upgrade, obtains separate publication/deployment approval and verifies handover/recovery/exit. A PR or sandbox pass alone is not completion.
 

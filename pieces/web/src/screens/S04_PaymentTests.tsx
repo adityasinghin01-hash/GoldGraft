@@ -74,6 +74,7 @@ export default function S04_PaymentTests() {
   const [params, setParams] = useSearchParams();
   const [twin, setTwin] = useState(false);
   const list = useMemo(() => (q.data?.scenarios ?? []) as ScenarioRow[], [q.data]);
+  const simulatedPayPal = list.some((r) => String(r.scenario.expect.evidence_class ?? '').includes('simulated-paypal'));
 
   const fallbackId = useMemo(() => {
     const by = (g: string) => list.find((r) => r.verdict?.grade === g)?.scenario.id;
@@ -118,6 +119,7 @@ export default function S04_PaymentTests() {
   return (
     <div className={s.screen}>
       <PageHead title="Payment tests" sub={<span className={s.chips}>{counts.map((c, i) => <span key={c.k} data-tone={GRADE[c.k].tone}>{i > 0 && <i aria-hidden>·</i>}{c.n} {c.word}</span>)}</span>} aside={isMock ? <SampleChip /> : undefined} />
+      {simulatedPayPal && <p className={s.lanesNote}>Executed PHP recordings · simulated PayPal. The Proof page lists separately verified real sandbox checkout evidence.</p>}
       {unknown && <ProblemBanner error={{ message: `No payment test called ${wanted}. Showing the first one instead.` }} />}
 
       <div className={s.layout}>

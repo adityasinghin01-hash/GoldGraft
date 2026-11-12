@@ -1,6 +1,6 @@
 {
-  "case_id": "case-fd37f36776cf4229b7f4b1540d0ed193",
-  "run_id": "work-4b430af27d534d82933b4dd6d0c04be8-local-php",
+  "case_id": "case-23dbeb0df28d464f9252ae05845d69f7",
+  "run_id": "work-9eaa8440c75346bf9ee6cd4abcd9ac05-local-php",
   "generation": 1,
   "resource_epochs": {
     "local-shop": 1
@@ -8,9 +8,9 @@
   "scope_digest": "a9e20b3a6467736abccf77bd2251475d4430ef7f777433dba6c5b084ca266326",
   "work_package_digest": "a5ab88d3902d25fff2fdea86e2408ba34f12abe2c0e20c02e2c2f3baba9abe31",
   "policy_digest": "85a0f2f8c4a4e410f3fff86ba56d027cfabe21290d2a6163515b7a6f3dcef763",
-  "result_id": "proof-7ba01b0a925a789b212b3bd2954f0b3d",
-  "plan_ref": "plan-work-4b430af27d534d82933b4dd6d0c04be8-local-php",
-  "plan_digest": "82481c38c1484f32f715108be751cec210f660d12f254570aff353e08e1ce420",
+  "result_id": "proof-85b5eee0f89dd80aa2d0a3d0a3b573d0",
+  "plan_ref": "plan-work-9eaa8440c75346bf9ee6cd4abcd9ac05-local-php",
+  "plan_digest": "51ec2d3cc91f5ccd8167bef5de5b29b7881062f405d520137cebbab7b627f89f",
   "results": [
     {
       "check_id": "baseline:HAPPY",
@@ -375,12 +375,14 @@
       "reason_code": "VERIFIED"
     },
     {
-      "check_id": "payment:shop-checkout-paypal",
+      "check_id": "payment:shop-checkout-paypal-sandbox",
       "subject_manifest_ref": "local:subject",
       "subject_manifest_digest": "88913f2b285667311eff5a743bdc34bdeea0bd02d6935b5cb110fc58c0102def",
-      "state": "missing",
-      "evidence_refs": [],
-      "reason_code": "MISSING"
+      "state": "verified",
+      "evidence_refs": [
+        "payment:shop-checkout-paypal-sandbox"
+      ],
+      "reason_code": "VERIFIED"
     },
     {
       "check_id": "isolation:runner",
@@ -397,6 +399,6 @@
     "MISSING",
     "VERIFIED"
   ],
-  "checked_at": "2026-11-12T12:52:02Z",
-  "result_digest": "6f18357b953f8bbf45341ecf0bd5c04c536962596bffa67cf7af09b20945ce43"
+  "checked_at": "2026-11-12T14:02:41Z",
+  "result_digest": "fd6308d9b8e088fc47554a2b6708e5a7a20f06ce8f9f23c6fd4921aaadfed9d3"
 }

@@ -1,0 +1,272 @@
+{
+  "graft_id": "work-9eaa8440c75346bf9ee6cd4abcd9ac05",
+  "run_id": "work-9eaa8440c75346bf9ee6cd4abcd9ac05-local-php",
+  "variant": "OLD_TWIN",
+  "scenario_id": "NOTIFY_DUP",
+  "exchanges": [
+    {
+      "seq": 0,
+      "t_ms": 64,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62592/api/create-payment.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_json": {
+        "tee": 1,
+        "minor": 1,
+        "currency": "EUR"
+      }
+    },
+    {
+      "seq": 1,
+      "t_ms": 66,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&VERSION=204.0&METHOD=SetExpressCheckout&PAYMENTREQUEST_0_PAYMENTACTION=Sale&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_ITEMAMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD&RETURNURL=http%3A%2F%2F127.0.0.1%3A62592%2Fsuccess.php&CANCELURL=http%3A%2F%2F127.0.0.1%3A62592%2Fcancel.php&NOSHIPPING=1&LOCALECODE=en_US&L_PAYMENTREQUEST_0_NAME0=Cutover+Tee&L_PAYMENTREQUEST_0_AMT0=25.00&L_PAYMENTREQUEST_0_QTY0=1"
+    },
+    {
+      "seq": 2,
+      "t_ms": 66,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&CORRELATIONID=99f38105b1af4&TOKEN=EC-738D7B9D08894DB9A",
+      "status": 200
+    },
+    {
+      "seq": 3,
+      "t_ms": 67,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://legacy-php-shop/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-NOTIFY_DUP"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 0,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 4,
+      "t_ms": 67,
+      "direction": "BROWSER_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62592/api/execute-payment.php",
+      "headers": {
+        "Content-Type": "application/json",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_json": {
+        "token": "EC-738D7B9D08894DB9A",
+        "orderId": "EC-738D7B9D08894DB9A",
+        "payerID": "FAKEPAYER0001"
+      }
+    },
+    {
+      "seq": 5,
+      "t_ms": 68,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&VERSION=204.0&METHOD=GetExpressCheckoutDetails&TOKEN=EC-738D7B9D08894DB9A"
+    },
+    {
+      "seq": 6,
+      "t_ms": 68,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&CORRELATIONID=fa904d7a21be4&TOKEN=EC-738D7B9D08894DB9A&PAYERID=FAKEPAYER0001&EMAIL=buyer%40example.invalid&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD",
+      "status": 200
+    },
+    {
+      "seq": 7,
+      "t_ms": 68,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&VERSION=204.0&METHOD=DoExpressCheckoutPayment&TOKEN=EC-738D7B9D08894DB9A&PAYERID=FAKEPAYER0001&PAYMENTREQUEST_0_PAYMENTACTION=Sale&PAYMENTREQUEST_0_AMT=25.00&PAYMENTREQUEST_0_CURRENCYCODE=USD"
+    },
+    {
+      "seq": 8,
+      "t_ms": 68,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&CORRELATIONID=c71ac0825e8b4&TOKEN=EC-738D7B9D08894DB9A&PAYMENTINFO_0_TRANSACTIONID=279DA71D60114C8B8&PAYMENTINFO_0_AMT=25.00&PAYMENTINFO_0_CURRENCYCODE=USD&PAYMENTINFO_0_PAYMENTSTATUS=Completed",
+      "status": 200
+    },
+    {
+      "seq": 9,
+      "t_ms": 69,
+      "direction": "SHOP_DB_WRITE",
+      "method": "UPDATE",
+      "url": "db://legacy-php-shop/orders",
+      "headers": {
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "db_change": {
+        "table": "orders",
+        "key": {
+          "order_ref": "SHOP-NOTIFY_DUP"
+        },
+        "before": {
+          "status": "unpaid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        },
+        "after": {
+          "status": "paid",
+          "total_minor": 2500,
+          "currency": "USD",
+          "refunded_minor": 0
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "t_ms": 69,
+      "direction": "PAYPAL_NOTIFY_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62592/ipn.php",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "txn_type=express_checkout&payment_status=Completed&mc_gross=25.00&mc_currency=USD&txn_id=279DA71D60114C8B8&invoice=SHOP-NOTIFY_DUP&receiver_email=sb-business%40business.example.com"
+    },
+    {
+      "seq": 11,
+      "t_ms": 70,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/cgi-bin/webscr",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "cmd=_notify-validate&txn_type=express_checkout&payment_status=Completed&mc_gross=25.00&mc_currency=USD&txn_id=279DA71D60114C8B8&invoice=SHOP-NOTIFY_DUP&receiver_email=sb-business%40business.example.com"
+    },
+    {
+      "seq": 12,
+      "t_ms": 70,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/cgi-bin/webscr",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "VERIFIED",
+      "status": 200
+    },
+    {
+      "seq": 13,
+      "t_ms": 70,
+      "direction": "PAYPAL_NOTIFY_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62592/ipn.php",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "txn_type=express_checkout&payment_status=Completed&mc_gross=25.00&mc_currency=USD&txn_id=279DA71D60114C8B8&invoice=SHOP-NOTIFY_DUP&receiver_email=sb-business%40business.example.com"
+    },
+    {
+      "seq": 14,
+      "t_ms": 71,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/cgi-bin/webscr",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "cmd=_notify-validate&txn_type=express_checkout&payment_status=Completed&mc_gross=25.00&mc_currency=USD&txn_id=279DA71D60114C8B8&invoice=SHOP-NOTIFY_DUP&receiver_email=sb-business%40business.example.com"
+    },
+    {
+      "seq": 15,
+      "t_ms": 71,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/cgi-bin/webscr",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "VERIFIED",
+      "status": 200
+    },
+    {
+      "seq": 16,
+      "t_ms": 72,
+      "direction": "SHOP_TO_PAYPAL",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "X-Goldgraft-Ledger": "capture",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "USER=%5BREDACTED%5D&PWD=%5BREDACTED%5D&SIGNATURE=%5BREDACTED%5D&VERSION=204.0&METHOD=GetTransactionDetails&TRANSACTIONID=279DA71D60114C8B8"
+    },
+    {
+      "seq": 17,
+      "t_ms": 72,
+      "direction": "PAYPAL_TO_SHOP",
+      "method": "POST",
+      "url": "http://127.0.0.1:62591/nvp",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-GoldGraft-Ledger": "capture",
+        "X-GoldGraft-Order-Ref": "SHOP-NOTIFY_DUP"
+      },
+      "body_text": "ACK=Success&VERSION=204.0&CORRELATIONID=90173da0e4a44&TRANSACTIONID=279DA71D60114C8B8&AMT=25.00&CURRENCYCODE=USD&PAYMENTSTATUS=Completed",
+      "status": 200
+    }
+  ]
+}

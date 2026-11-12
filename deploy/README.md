@@ -7,8 +7,10 @@ ProofResult bytes. There is no `/health` route in this app.
 
 `deploy/runs/` holds two real recorded runs served by the hosted API (Render):
 
-- `r9-final-connected`: 13/13 agents on real models; connected run 33/39 verified;
-  ProofResult signed (Rekor #3832763566).
+- `r9-final-connected`: 13/13 agents on real models; connected run 34/39 verified;
+  real sandbox HAPPY checkout independently verified; ProofResult signed
+  (Rekor #3833925707). Other real flow recordings are described in the live-check
+  report; they are not added to the HAPPY-only qualification scope.
 - `r8b-proof-legacy`: 13/13 agents; local PHP proof.
 
 Only the files the API reads are copied (no control ledgers, no secrets; scanned).

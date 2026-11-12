@@ -1,18 +1,19 @@
 {
-  "what_was_signed": "ProofResult/1 of this connected run (outcome HOLD, 10 planted bugs)",
-  "payload_path": "docs/engineering/plan5/signing/r9-final-connected.v2.ProofResult.json",
-  "payload_sha256": "f2f3a8a4172ff74a3a18a06281edb5ab53c48c1a6413a44210507f446ea715bc",
-  "signed_commit": "5bebb2ff349894a1b97c1be6f0d081e7cbe76326",
+  "what_was_signed": "ProofResult/1 with real sandbox HAPPY checkout (outcome HOLD)",
+  "payload_path": "docs/engineering/plan5/signing/r9-final-connected.v3.shop-sandbox.ProofResult.json",
+  "payload_sha256": "818190d46f9247013326af4e62b58dc9facfd1dc4be469e420a3245c1019566a",
+  "signed_commit": "93dac5c468cabb7cbfb37cf7516eb19f20739fdc",
   "signer_identity": "https://github.com/adityasinghin01-hash/GoldGraft/.github/workflows/sign-proof.yml@refs/heads/main",
-  "workflow_run": "https://github.com/adityasinghin01-hash/GoldGraft/actions/runs/43222414186",
-  "rekor_log_index": 3832763566,
-  "rekor_entry_uuid": "108e9186e8c5677a240704141b234f3109699543a6f59876107bdb69a353ea0ab0e2330cc270b42c",
-  "rekor_search": "https://search.sigstore.dev/?logIndex=3832763566",
+  "workflow_run": "https://github.com/adityasinghin01-hash/GoldGraft/actions/runs/43235563902",
+  "rekor_log_index": 3833925707,
+  "rekor_entry_uuid": "108e9186e8c5677a9ea9d6f54effb43faad0ae7d85adfbf7d71a262a311cc67982e0214fc500827d",
+  "rekor_search": "https://search.sigstore.dev/?logIndex=3833925707",
   "checks": {
     "workflow_verified_identity": true,
     "workflow_rejected_changed_copy": true,
     "independent_rekor_hash_match": true,
-    "independent_identity_in_certificate": true
+    "independent_identity_in_certificate": true,
+    "signature_bytes_valid": true
   },
-  "scope": "The signature proves who signed these exact bytes and when. The result inside is HOLD, so no certificate is issued."
+  "scope": "The signature binds this exact held result. The real-provider checkout check covers HAPPY only; no qualification certificate is issued."
 }

@@ -9,10 +9,10 @@
       "exit_check_recipe: not supplied by this recipe"
     ]
   },
-  "evidence_run": "work-4b430af27d534d82933b4dd6d0c04be8",
+  "evidence_run": "work-9eaa8440c75346bf9ee6cd4abcd9ac05",
   "gupta_control": {
-    "case_id": "case-fd37f36776cf4229b7f4b1540d0ed193",
-    "work_id": "work-4b430af27d534d82933b4dd6d0c04be8",
+    "case_id": "case-23dbeb0df28d464f9252ae05845d69f7",
+    "work_id": "work-9eaa8440c75346bf9ee6cd4abcd9ac05",
     "generation": 1,
     "baseline_read_accepted": "baseline-read",
     "status": "operation_started"
@@ -20,7 +20,7 @@
   "proof_plan": {
     "checks": 39,
     "critical": 39,
-    "digest": "82481c38c1484f32f715108be751cec210f660d12f254570aff353e08e1ce420"
+    "digest": "51ec2d3cc91f5ccd8167bef5de5b29b7881062f405d520137cebbab7b627f89f"
   },
   "proof_result": {
     "outcome": "hold",
@@ -63,7 +63,8 @@
         "mutation:PHP-AMOUNT",
         "mutation:PHP-NOTPAID",
         "mutation:PHP-BROWSER-AMOUNT",
-        "mutation:PHP-UNKNOWN-SKU"
+        "mutation:PHP-UNKNOWN-SKU",
+        "payment:shop-checkout-paypal-sandbox"
       ],
       "unknown": [
         "mutation:PHP-RECAPTURE",
@@ -72,7 +73,6 @@
         "mutation:PHP-REFUND-AGAIN"
       ],
       "missing": [
-        "payment:shop-checkout-paypal",
         "isolation:runner"
       ]
     }
@@ -90,17 +90,20 @@
     "PHP-UNKNOWN-SKU": "PROBLEM"
   },
   "provider_checks": {
-    "paypal_sandbox": {
-      "run_id": "run-bd9dd40e1e79",
-      "evidence_class": "real_provider",
-      "reverified_from_recording": true,
-      "exchanges": 12,
-      "ids": [
-        "4HP47932H07497904",
-        "4JN01011WL703525P",
-        "89784014675460948"
+    "shop_checkout_paypal_sandbox": {
+      "state": "verified",
+      "reason": "VERIFIED",
+      "evidence_refs": [
+        "local:shop-sandbox/REPORT.json#sha256:286ed3ca3af07f4a8c9ef019fb64e1b53fb652ea49b8ac854a8bf26f631506dd",
+        "local:shop-sandbox/REFETCH.json#sha256:cf14e904b9b64cca442d1b3b4081656cac138b984f8791c60039754c70fad7e4",
+        "local:shop-sandbox/HAPPY.NEW.json#sha256:a637ec318b8dea99fad261e330277a69b6f64885b1a3e5d8557df524e7cd4dc6"
       ],
-      "scope": "GoldGraft sandbox app; not this shop's checkout"
+      "evidence_class": "real_provider",
+      "real_money": false,
+      "scope": "reference NEW checkout; separately recorded exact candidate",
+      "scenarios": [
+        "HAPPY"
+      ]
     }
   },
   "promotion": {
@@ -135,7 +138,6 @@
     "held_at": "EVIDENCE_HOLD"
   },
   "holds": [
-    "payment:shop-checkout-paypal: no evidence on this host",
     "isolation:runner: no evidence on this host",
     "mutation:PHP-RECAPTURE:R05: planted bug was not caught",
     "mutation:PHP-UNAPPROVED:R06: planted bug was not caught",
