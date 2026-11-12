@@ -6,6 +6,7 @@ import { useGraftCtx } from '../shell/GraftLayout';
 import { MEANING, MUTANT, ruleText } from '../copy/words';
 import { Details, Explain, PageHead, ProblemBanner, SampleChip, Tag } from '../components/ui';
 import { Skeleton } from '../components/Loaders';
+import { ConnectedEvidence } from '../components/ConnectedEvidence';
 import { formatPct } from '../lib/format';
 import { config, isMock } from '../config';
 import { reducedMotion } from '../motion/scroll';
@@ -39,7 +40,7 @@ export default function S05_Proof() {
   };
 
   if (q.isPending) return <div className={s.screen}><PageHead title="Proof" /><Skeleton what="proof" lines={4} /></div>;
-  if (q.isError || !ps) return <div className={s.screen}><PageHead title="Proof" /><ProblemBanner error={q.error} onRetry={() => q.refetch()} /></div>;
+  if (q.isError || !ps) return <div className={s.screen}><PageHead title="Proof" /><ConnectedEvidence graftId={graftId} /><ProblemBanner error={q.error} onRetry={() => q.refetch()} /></div>;
 
   const denom = ps.total - ps.equivalent_dropped;
   const caughtSoFar = replaying ? mutants.slice(0, shown!).filter((m) => m.killed_by.length > 0).length : ps.killed;
@@ -50,6 +51,8 @@ export default function S05_Proof() {
   return (
     <div className={s.screen}>
       <PageHead title="Proof" sub={<span className={s.top}>Caught {ps.killed} of {denom} planted bugs · needs 95%</span>} aside={isMock ? <SampleChip /> : undefined} />
+
+      <ConnectedEvidence graftId={graftId} />
 
       <section className={`gg-glass ${s.barPanel}`}>
         <p className={s.barTitle}>Our tests caught {formatPct(pctShown)} of planted bugs <Explain text="We plant money bugs in a test copy; strong tests catch them." /></p>

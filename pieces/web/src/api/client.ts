@@ -2,7 +2,7 @@ import { config, isMock } from '../config';
 import type {
   CertificateVerifyResult, Certificate, CmelView, Comparison, Connection, GauntletRun, Graft, HealFrame, HealState,
   InjectFaultResult, LearningCurve, LedgerEntry, OrchardAnswer, OrchardView, Problem, ProbeResult, ProofView,
-  RecipeList, RootMap, ScenarioList, Shop, ChangeSet, AgentRun, AgentsView,
+  RecipeList, RootMap, ScenarioList, Shop, ChangeSet, AgentRun, AgentsView, ConnectedRun,
 } from './types';
 import { mockApi } from './mock/mockApi';
 
@@ -38,6 +38,8 @@ export interface GoldGraftApi {
   runs(): Promise<AgentRun[]>;
   /** Integrated agent runs: every agent step, its model, cost, input label and output. */
   agents(id: string): Promise<AgentsView>;
+  /** One connected run across Gupta's control, the executed PHP, Singhal's proof and the SI01 records. */
+  connected(id: string): Promise<ConnectedRun>;
   ledgerFeed(id: string, onEvent: (e: LedgerEntry) => void, onStatus: (s: FeedStatus) => void): Feed;
   healFeed(id: string, onFrame: (f: HealFrame) => void, onStatus: (s: FeedStatus) => void): Feed;
 }
@@ -138,6 +140,7 @@ const liveApi: GoldGraftApi = {
   changes: (id) => request('GET', `/grafts/${enc(id)}/changes`),
   runs: () => request('GET', '/runs'),
   agents: (id) => request('GET', `/grafts/${enc(id)}/agents`),
+  connected: (id) => request('GET', `/grafts/${enc(id)}/connected`),
   ledgerFeed: (id, onEvent, onStatus) =>
     openFeed<LedgerEntry>(`/grafts/${enc(id)}/events`, 'ledger', onEvent, onStatus,
       (e) => e.type === 'STAGE' && (e.payload as { to_stage?: string } | undefined)?.to_stage === 'DONE'),

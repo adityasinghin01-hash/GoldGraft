@@ -9,6 +9,7 @@ export const useScenarios = (id: string) => useQuery({ queryKey: ['scenarios', i
 export const useCmel = (id: string, scenario: string | null) =>
   useQuery({ queryKey: ['cmel', id, scenario], queryFn: () => api.cmel(id, scenario!), enabled: !!scenario, retry, staleTime: Infinity });
 export const useProof = (id: string) => useQuery({ queryKey: ['proof', id], queryFn: () => api.proof(id), retry });
+export const useConnected = (id: string) => useQuery({ queryKey: ['connected', id], queryFn: () => api.connected(id), retry: false });
 export const useCertificate = (id: string) => useQuery({ queryKey: ['cert', id], queryFn: () => api.certificate(id), retry });
 export const useHealSnapshot = (id: string) => useQuery({ queryKey: ['heal', id], queryFn: () => api.heal(id), retry });
 export const useRecipes = () => useQuery({ queryKey: ['recipes'], queryFn: () => api.recipes(), retry });

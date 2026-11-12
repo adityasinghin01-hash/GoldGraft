@@ -1,0 +1,40 @@
+.panel { padding: var(--gg-s-6); display: grid; gap: var(--gg-s-5); }
+.head { display: flex; align-items: center; justify-content: space-between; gap: var(--gg-s-4); }
+.note { margin-top: -12px; font-size: 13px; color: var(--gg-mute); }
+.title { display: inline-flex; align-items: center; font-family: var(--gg-font-display); font-size: clamp(1.3rem, 1.05rem + 0.7vw, 1.8rem); color: var(--gg-ivory); }
+
+.chain { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; counter-reset: step; }
+.step {
+  position: relative; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: center;
+  padding: 14px 16px; border-radius: var(--gg-r-md);
+  background: rgb(221 180 110 / 0.06); box-shadow: 0 0 0 1px rgb(221 180 110 / 0.28) inset;
+}
+.step[data-ok] { background: rgb(159 184 148 / 0.06); box-shadow: 0 0 0 1px rgb(159 184 148 / 0.28) inset; }
+.step:not(:last-child)::after {
+  content: ''; position: absolute; right: -8px; top: 50%; width: 6px; height: 1px; background: var(--gg-line-strong);
+}
+.stepIcon { grid-row: 1 / 3; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; color: var(--gg-warn); background: rgb(245 243 239 / 0.05); }
+.step[data-ok] .stepIcon { color: var(--gg-good); }
+.stepWho { font: 500 12px var(--gg-font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--gg-mute); }
+.stepWhat { display: inline-flex; align-items: center; font-size: 14.5px; color: var(--gg-ivory); line-height: 1.35; }
+
+.kinds { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+.kind {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--gg-r-sm);
+  box-shadow: 0 0 0 1px var(--gg-line) inset;
+}
+.kindCount { min-width: 44px; font: 500 15px var(--gg-font-mono); color: var(--gg-warn); }
+.kind[data-done] .kindCount { color: var(--gg-good); }
+.kindName { display: inline-flex; align-items: center; font-size: 14px; color: var(--gg-body); }
+
+.sandbox { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gg-mute); }
+.sandbox[data-ok] { color: var(--gg-good); }
+
+.holds { display: grid; gap: 8px; }
+.holdsTitle { display: inline-flex; align-items: center; font: 500 13px var(--gg-font-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--gg-mute); }
+.holds ul { display: grid; gap: 6px; padding-left: 18px; font-size: 14px; color: var(--gg-body); list-style: disc; }
+
+@media (max-width: 900px) {
+  .chain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step::after { display: none; }
+}
