@@ -19,6 +19,26 @@ GoldGraft is being designed as a browser connector service that upgrades a shop'
 
 **Current scope:** an implemented reference demo with real model runs, executed PHP checks and a signed held proof result. The complete merchant delivery service is not operationally qualified. The [engineering baseline](docs/engineering/START_HERE.md), [inspected support](docs/engineering/BASELINE_AND_STATUS.md) and [current versus proposed contracts](docs/engineering/CURRENT_VS_PROPOSED.md) contain dated design snapshots; current code and run records establish what is implemented. MIT licence.
 
+## How GoldGraft uses PayPal and AI
+
+| Tool | What it does in GoldGraft |
+|---|---|
+| **PayPal Orders v2 API (Sandbox)** | The upgrade target. The AI-written PHP checkout creates an order, the buyer approves it, the shop captures it, and refunds use the Payments v2 refund call. Every result is independently re-fetched from PayPal before it counts. Live script: [`scripts/live_shop_sandbox.py`](scripts/live_shop_sandbox.py); scope in [SANDBOX_LIVE_CHECKS](docs/engineering/work/SANDBOX_LIVE_CHECKS_2026-11-12.md). |
+| **Legacy PayPal integrations** (Express Checkout NVP, checkout.js, IPN) | What GoldGraft finds and replaces: `SetExpressCheckout`, `DoExpressCheckoutPayment`, `RefundTransaction`, `paypal.Button.render` and IPN validation in the reference shop. |
+| **Anthropic Claude** (Haiku first, Sonnet fallback) | Powers 13 role agents (Surveyor maps the shop, Grafter rewrites the checkout, Adversary hunts for weaknesses, plus scenario, diagnosis, notification, learning and reporting roles) through a model gateway with a cost ledger and a hard per-run budget cap ([`pieces/agents`](pieces/agents), [`pieces/backend/model_gateway`](pieces/backend/model_gateway)). Recorded run `r9-final-connected`: 13/13 roles passed, $0.48. |
+
+### Sponsor and supporting tools
+
+| Tool | Use |
+|---|---|
+| **Render** | Hosts the public read-only API that serves the recorded runs ([deploy/README.md](deploy/README.md)). |
+| **E2B** | Optional isolated command runner ([`pieces/runner/e2b_backend.py`](pieces/runner/e2b_backend.py), [docs/E2B_RUNNER.md](docs/E2B_RUNNER.md)); live-tested on three VMs. |
+| **Zapier** | The Herald agent can send upgrade notifications to a Zapier webhook ([`scripts/live_herald_zapier_send.py`](scripts/live_herald_zapier_send.py)). |
+| **Sigstore / Rekor + GitHub Actions** | Keyless signing of the proof result; public Rekor entry #3833925707 ([`.github/workflows/sign-proof.yml`](.github/workflows/sign-proof.yml)). |
+| **Vercel** | Hosts the web app at https://goldgraft.vercel.app. |
+
+Setup instructions are under [Local development](#local-development).
+
 ## Fixed journey, variable connections
 
 Enter shop → Sign in → obtain the actual maintainer/controller's permission → Connect code (GitHub by default, with separately qualified local/cloud/host alternatives) → connect required running components → automatic static preparation → review and Start → truthful durable progress → isolated work/proof → separate approved apply → verified merchant-owned operation.
