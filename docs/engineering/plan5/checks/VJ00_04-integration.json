@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Users/aditya/dev/GoldGraft-plan5-build/.venv/bin/python",
+    "-m",
+    "integration.check",
+    "--state-dir",
+    ".goldgraft/pushed-integration-ci"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {},
+  "exit_code": 0,
+  "seconds": 2.471,
+  "output": "docs/engineering/plan5/checks/VJ00_04-integration.log",
+  "output_sha256": "1073717791baac6beb11453ac8cbbb359c124fd2616f93496da753ab023dde22"
+}

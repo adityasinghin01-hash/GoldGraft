@@ -1,0 +1,12 @@
+{
+  "command": [
+    "sh",
+    "scripts/check_generated.sh"
+  ],
+  "cwd": "/Users/aditya/dev/GoldGraft-plan5-build",
+  "env": {},
+  "exit_code": 0,
+  "seconds": 3.454,
+  "output": "docs/engineering/plan5/checks/VJ00_07-generated.log",
+  "output_sha256": "ace28d9647ed11dcf45104cb6af8b82535562082bb067812f5cfdd64f1413974"
+}

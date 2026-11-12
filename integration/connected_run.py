@@ -38,11 +38,10 @@ from goldgraft_contracts.proof_evidence import ProofCheck, ProofPlan
 from goldgraft_contracts.registry import validate
 from goldgraft_foundation.ledger import Ledger
 
-from integration.local_proof import LocalProof
-from integration.local_shop import ROOT, SCENARIOS
 from integration.private_certificates import issue_private_certificate
 from integration.promotion import gate_promotion
 from integration.proof_evidence import EvidenceContext, StoredArtifact, evaluate_plan
+from integration.shop_socket import RecipeProof, ShopRecipe, reference_recipe
 from pieces.backend.connection.service import CaseService, Principal
 from pieces.backend.connection.work import WorkControl
 from pieces.proof.lifecycle_evidence import (
@@ -55,7 +54,6 @@ from pieces.proof.lifecycle_evidence import (
 from pieces.proof.proof import Proof
 from pieces.proof.review_projection import public_proof_view
 
-SHOP_DIR = ROOT / "fixtures/shops/legacy-php-shop"
 PROFILE = "local_component_this_mac"
 ACCEPTED = {"PASS", "PASS_FIXED"}
 PRODUCERS = {
@@ -171,37 +169,41 @@ def connect_run(
     *,
     sandbox_capture: Path | None = None,
     php: str = "php",
+    recipe: ShopRecipe | None = None,
     execute=None,
     now=None,
 ):
-    """agent_run_dir holds the agents' candidate (RESULT/CHANGES/OUTPUTS); it is
-    executed again here, under the work id Gupta's control issues."""
+    """agent_run_dir holds the agents' candidate (RESULT/CHANGES/OUTPUTS); the shop
+    recipe (the socket Vijay's piece plugs into) executes it under the work id
+    Gupta's control issues. Default recipe: the reference PHP shop stand-in."""
     agent_run_dir, state_dir = Path(agent_run_dir), Path(state_dir)
     now = now or datetime.now(UTC).replace(microsecond=0)
     state_dir.mkdir(parents=True, exist_ok=True)
     if (state_dir / "control.sqlite").exists():
         raise ValueError(f"{state_dir} already holds a control ledger; use a new folder")
-    if execute is None:
-        from scripts.live_local_shop_proof import check as execute
-    reference = ROOT / "fixtures/proof/legacy-php-shop"
+    recipe = recipe or reference_recipe()
+    execute = execute or recipe.execute
+    scenarios = list(recipe.scenarios)
 
     # --- Gupta: case, readiness from actual digests, start, claim, operation ----------
     tenant = "local-tenant"
     host = LocalHost(tenant, now)
-    source = tree_digest(SHOP_DIR)
+    source = tree_digest(recipe.source_dir)
     work_package = content_digest(
         {
             name: hashlib.sha256((agent_run_dir / name).read_bytes()).hexdigest()
             for name in ("CHANGES.json", "OUTPUTS.json")
         }
     )
-    scope = hashlib.sha256((reference / "contract.json").read_bytes()).hexdigest()
+    scope = hashlib.sha256(recipe.contract_bytes).hexdigest()
     runtime = content_digest({"profile": PROFILE, "paypal": "local simulator"})
     epochs = {"local-shop": 1}
     ledger = Ledger(f"sqlite:///{state_dir / 'control.sqlite'}")
     cases = CaseService(ledger, clock=lambda: now)
     owner = Principal("operator", tenant, now + timedelta(hours=1), "csrf")
-    case = cases.create_case(owner, CreateCase(shop_url="https://legacy-php-shop.example"), "case")
+    case = cases.create_case(
+        owner, CreateCase(shop_url=f"https://{recipe.shop_id}.example"), "case"
+    )
     ready_fields = dict(
         readiness_id="local-readiness",
         case_id=case.case_id,
@@ -216,7 +218,7 @@ def connect_run(
         scope_digest=scope,
         processing_policy_digest=content_digest("no-model-calls-in-proof"),
         runtime_profile_digest=runtime,
-        fixture_profile_digest=content_digest(list(SCENARIOS)),
+        fixture_profile_digest=content_digest(scenarios),
         checks=[
             CheckResult(
                 check_id="operator_authority",
@@ -282,7 +284,7 @@ def connect_run(
         resource_graph_digest=readiness.resource_graph_digest,
         source_manifest_digest=source,
         scope_digest=scope,
-        observed_digest=tree_digest(SHOP_DIR),  # The worker re-reads the source now.
+        observed_digest=tree_digest(recipe.source_dir),  # The worker re-reads the source now.
         runtime_profile_digest=runtime,
         started_at=now,
         finished_at=now,
@@ -303,9 +305,15 @@ def connect_run(
     for name in AGENT_FILES:
         if (agent_run_dir / name).exists():
             (run_dir / name).write_bytes((agent_run_dir / name).read_bytes())
-    report = execute(run_dir, run_dir / "local-proof", php=php)  # Real PHP execution.
-    local = LocalProof(run_dir)  # Re-checks every capture digest and re-runs the judge.
-    evidence_run = report["run_id"] + "-local-php"
+    report = execute(run_dir, run_dir / "local-proof", php=php)  # Real execution.
+    outputs = json.loads((run_dir / "OUTPUTS.json").read_bytes())
+    target_plan = validate(
+        "TargetPlan/1",
+        next(o["payload"] for o in outputs["architect"] if o["schema"] == "TargetPlan/1"),
+    )
+    # Re-checks every recorded byte against the report and re-runs Singhal's judge.
+    local = RecipeProof(run_dir, recipe, plan=target_plan)
+    evidence_run = local.capture_run_id
 
     # --- Evidence: subject + every check's bytes, sealed by this host ---------------
     binding = dict(
@@ -340,16 +348,8 @@ def connect_run(
     common = dict(subject_ref=sref, sd=sd, wp=work_package)
     checks = []
     proof = Proof()
-    contract = validate(
-        "Contract/1",
-        json.loads((ROOT / "fixtures/proof/legacy-php-shop/contract.json").read_bytes()),
-    )
-    outputs = json.loads((run_dir / "OUTPUTS.json").read_bytes())
-    target_plan = validate(
-        "TargetPlan/1",
-        next(o["payload"] for o in outputs["architect"] if o["schema"] == "TargetPlan/1"),
-    )
-    for scenario in SCENARIOS:
+    contract = recipe.contract
+    for scenario in scenarios:
         for kind, variant in (("baseline", "OLD"), ("candidate", "NEW")):
             ref = f"{kind}:{scenario}"
             name = f"{scenario}.{variant}.json"
@@ -375,7 +375,7 @@ def connect_run(
                     **common,
                 )
             )
-        verdict = local.rows[SCENARIOS.index(scenario)]["verdict"]
+        verdict = local.rows[scenarios.index(scenario)]["verdict"]
         ref = f"scenario:{scenario}"
         host.put(
             ref,
@@ -537,7 +537,7 @@ def connect_run(
             image_digest="",
             config_digest="",  # No image/config identity exists here.
             runtime_identity=PROFILE,
-            origin="legacy-php-shop",
+            origin=recipe.shop_id,
         )
 
     states = {r.check_id: r for r in result.results}
@@ -617,6 +617,11 @@ def connect_run(
         (state_dir / name).write_text(record.model_dump_json(indent=2, by_alias=True) + "\n")
     summary = {
         "profile": PROFILE,
+        "shop": {
+            "shop_id": recipe.shop_id,
+            "recipe": recipe.provenance,
+            "later_gates": recipe.holds(),
+        },
         "evidence_run": report["run_id"],
         "gupta_control": {
             "case_id": case.case_id,
@@ -657,6 +662,7 @@ def connect_run(
             "image: no OCI image built (Docker not on this host), so the lifecycle review holds",
             "promotion: no live buyer traffic, so the rollout advice is HOLD",
             "signer: no qualified signer attached to this run",
+            *recipe.holds(),
         ],
     }
     (state_dir / "CONNECTED_RUN.json").write_text(json.dumps(summary, indent=2) + "\n")
