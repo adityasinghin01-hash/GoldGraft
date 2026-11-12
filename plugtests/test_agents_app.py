@@ -146,6 +146,8 @@ def test_real_agent_outputs_reach_their_screens(runs):
         assert by_role["Surveyor"]["model"] == "claude-haiku-5-5"
         # Go-live never shows the sample's data for a real run.
         assert_problem(client.get("/heal/sample-1"), 404)
+        feed = client.get("/heal/sample-1", headers={"Accept": "text/event-stream"})
+        assert feed.text == "event: end\ndata: {}\n\n"
         assert client.get("/heal/demo-1").status_code == 200
         # Security: Sentinel's real alerts for a real run; the stand-in says it is a sample.
         gauntlet = client.get("/security/gauntlet/sample-1").json()
@@ -159,6 +161,8 @@ def test_real_agent_outputs_reach_their_screens(runs):
         assert [s["shop_id"] for s in orchard["shops"]] == ["legacy-php-shop"]
         assert orchard["dashboards"] == [data.example("DashboardSpec")]
         assert orchard["label"].startswith("Real Orchard Analyst output")
+        asked = client.post("/orchard/ask", json={"question": "Which shops?"})
+        assert_problem(asked, 501)
 
 
 @pytest.mark.parametrize("suffix", ["cmel", "proof"])

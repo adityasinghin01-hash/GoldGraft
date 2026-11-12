@@ -42,6 +42,10 @@ NO_PROOF = (
     "Money events here come from the recorded runner and are not served for real agent runs; "
     "the independent proof has not run on AI-written code yet"
 )
+NO_ASK = (
+    "New questions would each run a paid Orchard Analyst call, which this local service does not "
+    "do; the dashboards below are the ones the agent already built from real runs"
+)
 NO_GOLIVE = (
     "Go-live has not run for this upgrade. The Healer's diagnosis of a controlled fault is on "
     "the Agents tab"
@@ -61,9 +65,12 @@ def _shop_label(body):
     return host or None
 
 
-def _problem(status, detail):
+NOT_YET = "Not available yet"  # the app shows these as a calm note, not an error
+
+
+def _problem(status, detail, title="Request Failed"):
     return JSONResponse(
-        {"type": "about:blank", "title": "Request Failed", "status": status, "detail": detail},
+        {"type": "about:blank", "title": title, "status": status, "detail": detail},
         status_code=status,
         media_type="application/problem+json",
     )
@@ -383,11 +390,11 @@ def create_app(
                 listed = ScenarioList(graft_id=run_id, scenarios=[])
             return JSONResponse(listed.model_dump(mode="json"))
         if suffix in {"cmel", "proof"}:
-            return _problem(404, NO_PROOF)
+            return _problem(404, NO_PROOF, NOT_YET)
         if suffix == "changes":
             changes = path / "CHANGES.json"
             if not changes.is_file():
-                return _problem(404, "No committed CHANGES.json for this run yet")
+                return _problem(404, "The Grafter has not written code for this run yet", NOT_YET)
             return Response(changes.read_bytes(), media_type="application/json")
         if suffix == "events":
             after = request.headers.get("Last-Event-ID", "0")
@@ -449,7 +456,7 @@ def create_app(
             try:
                 return JSONResponse(view.rootmap())
             except LookupError:
-                return _problem(404, "No committed RootMap yet")
+                return _problem(404, "The Surveyor has not finished mapping this shop yet", NOT_YET)
         graft = view.graft()
         with lock:
             record = live.get(run_id)
@@ -515,13 +522,22 @@ def create_app(
         gauntlet_match = re.fullmatch(r"/security/gauntlet/([^/]+)", path)
         special = None
         if heal_match and is_run(heal_match[1]):
-            special = lambda: _problem(404, NO_GOLIVE)  # noqa: E731
+            if "text/event-stream" in request.headers.get("accept", ""):
+                # The browser's go-live feed: nothing to stream, so end it instead of retrying.
+                special = lambda: Response(  # noqa: E731
+                    "event: end\ndata: {}\n\n", media_type="text/event-stream"
+                )
+            else:
+                special = lambda: _problem(404, NO_GOLIVE, NOT_YET)  # noqa: E731
         elif request.method == "GET" and gauntlet_match and is_run(gauntlet_match[1]):
             special = lambda: JSONResponse(gauntlet(gauntlet_match[1]))  # noqa: E731
         elif request.method == "GET" and path == "/recipes":
             special = lambda: JSONResponse(fleet_recipes())  # noqa: E731
         elif request.method == "GET" and path == "/orchard":
             special = lambda: JSONResponse(fleet_orchard())  # noqa: E731
+        elif request.method == "POST" and path == "/orchard/ask":
+            # The stand-in would answer about invented shops beside the real table.
+            special = lambda: _problem(501, NO_ASK, NOT_YET)  # noqa: E731
         elif request.method == "GET" and gauntlet_match:
             # The stand-in security test stays, but says it is a sample in live mode.
             response = await call_next(request)
